@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ретриты с Максом — Возвращение к себе</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Spectral', serif;
+            background: #0A0A08;
+            color: #E5E0D8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            mix-blend-mode: overlay;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 3rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(10,10,8,0.95) 0%, rgba(10,10,8,0) 100%);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            color: #C9A961;
+        }
+
+        .nav-link {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #E5E0D8;
+            text-decoration: none;
+            padding: 0.9rem 2.2rem;
+            border: 1px solid rgba(201, 169, 97, 0.25);
+            background: rgba(201, 169, 97, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:active {
+            background: rgba(201, 169, 97, 0.12);
+            border-color: rgba(201, 169, 97, 0.4);
+        }
+
+        /* Screen 1: Opening */
+        .screen-1 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+            position: relative;
+            text-align: center;
+        }
+
+        .screen-1::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(201,169,97,0.06) 0%, transparent 70%);
+            filter: blur(100px);
+        }
+
+        .hero-pretitle {
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #C9A961;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 11vw, 9rem);
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-weight: 300;
+            color: #9A8B72;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        /* Screen 2: The Weight */
+        .screen-2 {
+            background: #0A0A08;
+        }
+
+        .pain-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pain-item {
+            text-align: center;
+        }
+
+        .pain-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.6;
+        }
+
+        .pain-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #9A8B72;
+            font-style: italic;
+        }
+
+        /* Screen 3: The Mask */
+        .screen-3 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+            text-align: center;
+        }
+
+        .mask-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+        }
+
+        .mask-subtext {
+            font-size: 1.1rem;
+            color: #6B6355;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Screen 4: The Exhaustion */
+        .screen-4 {
+            background: #0A0A08;
+        }
+
+        .exhaustion-list {
+            list-style: none;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .exhaustion-list li {
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            font-weight: 300;
+            line-height: 1.8;
+            color: #6B6355;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.08);
+            font-style: italic;
+        }
+
+        .exhaustion-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Screen 5: The Question */
+        .screen-5 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+            text-align: center;
+        }
+
+        .question {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+        }
+
+        .question em {
+            color: #C9A961;
+            font-style: italic;
+        }
+
+        /* Screen 6: The Permission */
+        .screen-6 {
+            background: #0A0A08;
+        }
+
+        .permission-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.3;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+
+        .permission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .permission-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(201, 169, 97, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .permission-card:active {
+            border-color: rgba(201, 169, 97, 0.25);
+            background: rgba(201, 169, 97, 0.06);
+        }
+
+        .permission-word {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #C9A961;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .permission-desc {
+            font-size: 1rem;
+            color: #9A8B72;
+            line-height: 1.7;
+        }
+
+        /* Screen 7: The Return */
+        .screen-7 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+            text-align: center;
+        }
+
+        .return-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #E5E0D8 0%, #C9A961 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .return-subtitle {
+            font-size: 1.3rem;
+            color: #9A8B72;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Screen 8: The Space */
+        .screen-8 {
+            background: #0A0A08;
+        }
+
+        .space-intro {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .space-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .space-desc {
+            font-size: 1.2rem;
+            color: #9A8B72;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .space-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .feature-block {
+            padding: 3rem;
+            background: rgba(201, 169, 97, 0.02);
+            border-left: 2px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .feature-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #C9A961;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .feature-text {
+            font-size: 1.05rem;
+            color: #9A8B72;
+            line-height: 1.8;
+        }
+
+        /* Screen 9: The Guide */
+        .screen-9 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+        }
+
+        .guide-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .guide-image {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.1) 0%, rgba(201, 169, 97, 0.03) 100%);
+            border: 1px solid rgba(201, 169, 97, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: rgba(201, 169, 97, 0.3);
+        }
+
+        .guide-content {
+        }
+
+        .guide-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #C9A961;
+        }
+
+        .guide-bio {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #9A8B72;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Screen 10: The Formats */
+        .screen-10 {
+            background: #0A0A08;
+        }
+
+        .formats-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 5rem;
+            font-style: italic;
+        }
+
+        .format-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .format-card {
+            padding: 4rem 3rem;
+            background: rgba(201, 169, 97, 0.03);
+            border: 1px solid rgba(201, 169, 97, 0.15);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .format-card:active {
+            border-color: rgba(201, 169, 97, 0.3);
+            background: rgba(201, 169, 97, 0.06);
+        }
+
+        .format-type {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: #C9A961;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .format-details {
+            font-size: 1.05rem;
+            color: #9A8B72;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .format-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: #E5E0D8;
+            letter-spacing: 0.1em;
+        }
+
+        /* Screen 11: The Invitation */
+        .screen-11 {
+            background: radial-gradient(ellipse at center, #151410 0%, #0A0A08 70%);
+            text-align: center;
+        }
+
+        .final-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .final-text {
+            font-size: 1.2rem;
+            color: #9A8B72;
+            max-width: 650px;
+            margin: 0 auto 4rem;
+            line-height: 1.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #0A0A08;
+            background: linear-gradient(135deg, #C9A961 0%, #E5D5A6 100%);
+            padding: 1.6rem 5rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        .contact-details {
+            margin-top: 4rem;
+            font-size: 0.95rem;
+            color: #6B6355;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-details a {
+            color: #C9A961;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 3rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.08);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.25em;
+            color: #C9A961;
+            margin-bottom: 2rem;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #6B6355;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            section {
+                padding: 4rem 2rem;
+            }
+
+            .pain-grid,
+            .space-features,
+            .format-cards {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .permission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <nav>
+        <div class="logo">РЕТРИТЫ С МАКСОМ</div>
+        <a href="#apply" class="nav-link">Подать заявку</a>
+    </nav>
+
+    <!-- Screen 1: Opening -->
+    <section class="screen-1">
+        <div class="container">
+            <p class="hero-pretitle">Персональные и групповые ретриты</p>
+            <h1 class="hero-title">Возвращение<br>к себе</h1>
+            <p class="hero-subtitle">Пространство для тех, кто устал быть сильной<br>и готова вспомнить, кто она на самом деле</p>
+        </div>
+    </section>
+
+    <!-- Screen 2: The Weight -->
+    <section class="screen-2">
+        <div class="container">
+            <h2 class="pain-title">Ты несёшь так много</h2>
+            <div class="pain-grid">
+                <div class="pain-item">
+                    <div class="pain-icon">♀</div>
+                    <p class="pain-text">"Я успешна, но потеряла себя в этом успехе"</p>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-icon">◇</div>
+                    <p class="pain-text">"Я даю всем, но кто даёт мне?"</p>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-icon">✧</div>
+                    <p class="pain-text">"Я сильная, но устала быть сильной"</p>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-icon">○</div>
+                    <p class="pain-text">"Я знаю, что нужно другим, но не знаю, что нужно мне"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 3: The Mask -->
+    <section class="screen-3">
+        <div class="container">
+            <h2 class="mask-quote">«Когда я последний раз<br>была собой?»</h2>
+            <p class="mask-subtext">Ты играешь роли. Идеальная партнёрша. Успешная женщина. Заботливая мать. Профессионал своего дела. И где-то в этом всём потерялась ты.</p>
+        </div>
+    </section>
+
+    <!-- Screen 4: The Exhaustion -->
+    <section class="screen-4">
+        <div class="container">
+            <ul class="exhaustion-list">
+                <li>Ты устала от перфекционизма</li>
+                <li>Устала оправдывать ожидания</li>
+                <li>Устала быть "на высоте"</li>
+                <li>Устала не чувствовать</li>
+                <li>Устала быть одной, даже в окружении людей</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Screen 5: The Question -->
+    <section class="screen-5">
+        <div class="container">
+            <h2 class="question">
+                А что если можно<br>
+                <em>опустить маску</em>?
+            </h2>
+        </div>
+    </section>
+
+    <!-- Screen 6: The Permission -->
+    <section class="screen-6">
+        <div class="container">
+            <h2 class="permission-title">Здесь тебе можно</h2>
+            <div class="permission-grid">
+                <div class="permission-card">
+                    <p class="permission-word">Плакать</p>
+                    <p class="permission-desc">Без объяснений. Без стыда. Просто быть с тем, что есть.</p>
+                </div>
+                <div class="permission-card">
+                    <p class="permission-word">Молчать</p>
+                    <p class="permission-desc">Не заполнять пустоту словами. Встретиться с тишиной внутри.</p>
+                </div>
+                <div class="permission-card">
+                    <p class="permission-word">Чувствовать</p>
+                    <p class="permission-desc">Всё. Без фильтров. Без контроля. Без страха "быть слишком".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 7: The Return -->
+    <section class="screen-7">
+        <div class="container">
+            <h1 class="return-title">Возвращение<br>к себе</h1>
+            <p class="return-subtitle">Это не терапия. Не коучинг. Не "работа над собой".<br>Это пространство, где ты можешь просто быть.</p>
+        </div>
+    </section>
+
+    <!-- Screen 8: The Space -->
+    <section class="screen-8">
+        <div class="container">
+            <div class="space-intro">
+                <h2 class="space-title">Что происходит на ретрите</h2>
+                <p class="space-desc">Каждый день — это возвращение. К телу. К чувствам. К интуиции. К той, которой ты была до того, как научилась "быть правильной".</p>
+            </div>
+            <div class="space-features">
+                <div class="feature-block">
+                    <h3 class="feature-name">Глубинная работа</h3>
+                    <p class="feature-text">Персональные сессии, где мы идём в корень. Не симптомы — причины. Не поверхность — глубину.</p>
+                </div>
+                <div class="feature-block">
+                    <h3 class="feature-name">Embodiment</h3>
+                    <p class="feature-text">Возвращение в тело через движение, дыхание, практики. Не умом — телом.</p>
+                </div>
+                <div class="feature-block">
+                    <h3 class="feature-name">Silence</h3>
+                    <p class="feature-text">Дни тишины. Без телефонов. Без разговоров. Только ты и пространство внутри.</p>
+                </div>
+                <div class="feature-block">
+                    <h3 class="feature-name">Integration</h3>
+                    <p class="feature-text">Это не про "вау-эффект". Это про настоящее изменение, которое ты заберёшь в жизнь.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 9: The Guide -->
+    <section class="screen-9">
+        <div class="container">
+            <div class="guide-layout">
+                <div class="guide-image">M</div>
+                <div class="guide-content">
+                    <h2 class="guide-name">Макс</h2>
+                    <p class="guide-bio">Психолог. Spiritual guide. Тот, кто держит пространство.</p>
+                    <p class="guide-bio">10+ лет работы с глубинной трансформацией. Обучение у мастеров по всему миру. Более 10,000 людей прошли через мои программы.</p>
+                    <p class="guide-bio">Но самое важное: я знаю, что такое потерять себя. И что такое вернуться.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 10: The Formats -->
+    <section class="screen-10">
+        <div class="container">
+            <h2 class="formats-title">Форматы</h2>
+            <div class="format-cards">
+                <div class="format-card">
+                    <h3 class="format-type">Персональный ретрит</h3>
+                    <p class="format-details">7 дней. Один на один. Полная фокусировка на твоей трансформации. Индивидуальная программа под твой запрос.</p>
+                    <p class="format-price">По запросу</p>
+                </div>
+                <div class="format-card">
+                    <h3 class="format-type">Групповой ретрит</h3>
+                    <p class="format-details">5-7 дней. До 8 участниц. Сила группового поля. Общие практики + персональные сессии.</p>
+                    <p class="format-price">По запросу</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 11: The Invitation -->
+    <section class="screen-11" id="apply">
+        <div class="container">
+            <h2 class="final-title">Ты готова<br>вернуться домой?</h2>
+            <p class="final-text">Места ограничены. Каждый ретрит — это глубокая персональная работа, поэтому я беру только тех, кто действительно готова.</p>
+            <a href="mailto:retreats@maxguru.io" class="cta-button">Подать заявку</a>
+            <p class="contact-details">Вопросы: <a href="mailto:retreats@maxguru.io">retreats@maxguru.io</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">РЕТРИТЫ С МАКСОМ</div>
+        <p class="footer-note">© 2025 — Возвращение к себе</p>
+    </footer>
+</body>
+</html>
