@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIMATEQ AI - Квантовое прогнозирование климата | $2T рынок</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --earth-blue: #0EA5E9;
+            --ocean-deep: #0369A1;
+            --forest-green: #059669;
+            --atmosphere-cyan: #06B6D4;
+            --storm-purple: #7C3AED;
+            --sunset-orange: #F97316;
+            --space-black: #030712;
+            --deep-ocean: #0C1629;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--space-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Atmospheric Background */
+        #atmosphere-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Earth Glow Background */
+        .earth-glow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(14, 165, 233, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(5, 150, 105, 0.12), transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1), transparent 50%);
+            z-index: 0;
+            animation: earthPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes earthPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.03); }
+        }
+
+        /* Weather Shimmer */
+        @keyframes weatherShimmer {
+            0% { background-position: -300% center; }
+            100% { background-position: 300% center; }
+        }
+
+        .weather-shimmer {
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(14, 165, 233, 0.4), 
+                transparent);
+            background-size: 200% auto;
+            animation: weatherShimmer 4s linear infinite;
+        }
+
+        /* Section */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 130px 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1900px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(3, 7, 18, 0.98);
+            backdrop-filter: blur(30px) saturate(180%);
+            padding: 35px 60px;
+            z-index: 1000;
+            border-bottom: 4px solid rgba(14, 165, 233, 0.4);
+            box-shadow: 0 18px 80px rgba(14, 165, 233, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -3px;
+            text-shadow: 0 0 60px var(--earth-blue);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '🌍';
+            position: absolute;
+            left: -58px;
+            font-size: 45px;
+            animation: earthSpin 20s linear infinite;
+        }
+
+        @keyframes earthSpin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 65px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 19px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--earth-blue), var(--atmosphere-cyan));
+            transition: width 0.4s;
+            box-shadow: 0 0 20px var(--earth-blue);
+        }
+
+        .nav-links a:hover {
+            color: var(--atmosphere-cyan);
+            text-shadow: 0 0 30px var(--atmosphere-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: radial-gradient(circle at 30% 50%, rgba(14, 165, 233, 0.2), transparent 60%),
+                        radial-gradient(circle at 70% 75%, rgba(5, 150, 105, 0.18), transparent 55%);
+        }
+
+        h1 {
+            font-size: 135px;
+            font-weight: 900;
+            line-height: 0.85;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #ffffff, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -6px;
+            animation: climateGlow 6s ease-in-out infinite;
+            background-size: 300% auto;
+            text-transform: uppercase;
+        }
+
+        @keyframes climateGlow {
+            0%, 100% { 
+                background-position: 0% center;
+                filter: brightness(1) drop-shadow(0 0 100px rgba(14, 165, 233, 0.7));
+            }
+            50% { 
+                background-position: 100% center;
+                filter: brightness(1.5) drop-shadow(0 0 150px rgba(6, 182, 212, 0.9));
+            }
+        }
+
+        .subtitle {
+            font-size: 46px;
+            background: linear-gradient(90deg, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 80px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+
+        /* Climate Indicators */
+        .climate-indicators {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 38px;
+            margin-bottom: 100px;
+        }
+
+        .climate-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(0, 0, 0, 0.98));
+            border: 4px solid var(--earth-blue);
+            border-radius: 35px;
+            padding: 70px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 70px rgba(14, 165, 233, 0.5);
+        }
+
+        .climate-box::before {
+            content: '';
+            position: absolute;
+            top: -180%;
+            left: -180%;
+            width: 460%;
+            height: 460%;
+            background: conic-gradient(from 0deg, transparent, var(--earth-blue), transparent);
+            animation: rotateClimate 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes rotateClimate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .climate-box:hover {
+            transform: translateY(-25px) scale(1.08);
+            border-color: var(--atmosphere-cyan);
+            box-shadow: 0 30px 120px rgba(6, 182, 212, 0.8);
+        }
+
+        .climate-icon {
+            font-size: 95px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 35px var(--earth-blue));
+            position: relative;
+            z-index: 1;
+            animation: climateFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes climateFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        .climate-label {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--earth-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 15px;
+        }
+
+        .climate-value {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 12px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+
+        /* Hero Mega Stats */
+        .hero-climate-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            margin-top: 120px;
+        }
+
+        .climate-mega-stat {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18), rgba(0, 0, 0, 0.95));
+            border: 4px solid var(--atmosphere-cyan);
+            border-radius: 40px;
+            padding: 80px 55px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s;
+        }
+
+        .climate-mega-stat::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -60%;
+            width: 220%;
+            height: 220%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.4), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .climate-mega-stat:hover {
+            transform: translateY(-30px) scale(1.05);
+            border-color: var(--forest-green);
+            box-shadow: 0 0 120px rgba(5, 150, 105, 0.8);
+        }
+
+        .climate-mega-stat:hover::after {
+            opacity: 1;
+        }
+
+        .climate-mega-icon {
+            font-size: 100px;
+            margin-bottom: 35px;
+            filter: drop-shadow(0 0 40px var(--atmosphere-cyan));
+        }
+
+        .climate-mega-number {
+            font-size: 88px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            line-height: 1;
+        }
+
+        .climate-mega-label {
+            font-size: 21px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+            font-weight: 800;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 105px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 45px;
+            background: linear-gradient(135deg, #ffffff, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -5px;
+            line-height: 1.03;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 33px;
+            color: var(--earth-blue);
+            margin-bottom: 110px;
+            max-width: 1500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.9;
+            font-weight: 800;
+        }
+
+        /* Crisis Cards */
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 55px;
+            margin-top: 110px;
+        }
+
+        .crisis-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), rgba(0, 0, 0, 0.98));
+            border: 5px solid var(--sunset-orange);
+            border-radius: 40px;
+            padding: 80px 65px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s;
+        }
+
+        .crisis-card::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, var(--sunset-orange), var(--storm-purple), var(--earth-blue));
+            border-radius: 40px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .crisis-card:hover {
+            transform: translateY(-25px) scale(1.04);
+            box-shadow: 0 0 120px rgba(249, 115, 22, 0.8);
+        }
+
+        .crisis-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .crisis-icon {
+            font-size: 110px;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 0 40px var(--sunset-orange));
+        }
+
+        .crisis-title {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 32px;
+            color: var(--sunset-orange);
+            text-transform: uppercase;
+        }
+
+        .crisis-stat {
+            font-size: 82px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--sunset-orange), var(--storm-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+
+        .crisis-text {
+            font-size: 23px;
+            color: rgba(255, 255, 255, 0.98);
+            line-height: 2.1;
+        }
+
+        /* Solution Mega Grid */
+        .solution-climate-mega {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 110px;
+            align-items: center;
+            margin-top: 110px;
+        }
+
+        .solution-climate-content h3 {
+            font-size: 68px;
+            font-weight: 900;
+            margin-bottom: 45px;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        .solution-climate-content p {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.98);
+            line-height: 2.1;
+            margin-bottom: 55px;
+        }
+
+        .quantum-climate-feature {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.2), transparent);
+            padding: 35px 45px;
+            border-radius: 25px;
+            border-left: 7px solid var(--earth-blue);
+            margin-bottom: 32px;
+            transition: all 0.5s;
+        }
+
+        .quantum-climate-feature:hover {
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.35), rgba(6, 182, 212, 0.25));
+            transform: translateX(22px);
+            box-shadow: 0 0 80px rgba(14, 165, 233, 0.6);
+        }
+
+        .quantum-climate-icon {
+            font-size: 58px;
+            filter: drop-shadow(0 0 25px var(--atmosphere-cyan));
+        }
+
+        .quantum-climate-text {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        /* Forecast Accuracy Viz */
+        .forecast-viz {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18), rgba(124, 58, 237, 0.18));
+            border: 6px solid var(--atmosphere-cyan);
+            border-radius: 45px;
+            padding: 75px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 120px rgba(6, 182, 212, 0.6);
+        }
+
+        .forecast-viz::before {
+            content: '';
+            position: absolute;
+            top: -140%;
+            left: -140%;
+            width: 380%;
+            height: 380%;
+            background: conic-gradient(from 0deg, transparent, var(--atmosphere-cyan), transparent);
+            animation: rotateClimate 20s linear infinite;
+            opacity: 0.25;
+        }
+
+        .forecast-viz-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 55px;
+            color: var(--atmosphere-cyan);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .forecast-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 38px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .forecast-side {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 50px;
+            border-radius: 28px;
+            border: 4px solid rgba(14, 165, 233, 0.4);
+            transition: all 0.5s;
+        }
+
+        .forecast-side:hover {
+            transform: scale(1.06);
+            border-color: var(--atmosphere-cyan);
+        }
+
+        .forecast-label {
+            font-size: 26px;
+            color: var(--earth-blue);
+            margin-bottom: 25px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .forecast-value {
+            font-size: 68px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+        }
+
+        .forecast-desc {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.8;
+        }
+
+        /* Technology Grid */
+        .tech-climate-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 45px;
+            margin-top: 110px;
+        }
+
+        .tech-climate-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(0, 0, 0, 0.99));
+            border: 4px solid rgba(14, 165, 233, 0.5);
+            border-radius: 35px;
+            padding: 65px 45px;
+            text-align: center;
+            transition: all 0.6s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-climate-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.5), transparent);
+            transition: left 0.8s;
+        }
+
+        .tech-climate-card:hover {
+            transform: translateY(-22px) scale(1.1);
+            border-color: var(--atmosphere-cyan);
+            box-shadow: 0 0 100px rgba(6, 182, 212, 0.7);
+        }
+
+        .tech-climate-card:hover::after {
+            left: 120%;
+        }
+
+        .tech-climate-icon {
+            font-size: 100px;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 0 32px var(--earth-blue));
+        }
+
+        .tech-climate-name {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--earth-blue);
+            text-transform: uppercase;
+        }
+
+        .tech-climate-desc {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.83);
+            line-height: 1.9;
+        }
+
+        /* Government Contracts */
+        .government-showcase {
+            margin-top: 110px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(124, 58, 237, 0.15));
+            border: 6px solid var(--earth-blue);
+            border-radius: 50px;
+            padding: 95px;
+            box-shadow: 0 0 140px rgba(14, 165, 233, 0.7);
+        }
+
+        .government-title {
+            font-size: 62px;
+            text-align: center;
+            margin-bottom: 70px;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .government-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+        }
+
+        .government-contract {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 65px 50px;
+            border-radius: 35px;
+            border: 4px solid rgba(14, 165, 233, 0.4);
+            text-align: center;
+            transition: all 0.5s;
+        }
+
+        .government-contract:hover {
+            border-color: var(--atmosphere-cyan);
+            transform: translateY(-18px);
+            box-shadow: 0 0 90px rgba(6, 182, 212, 0.7);
+        }
+
+        .government-metric {
+            font-size: 80px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 22px;
+        }
+
+        .government-label {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
+        }
+
+        /* TAM Cards */
+        .tam-climate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 110px;
+        }
+
+        .tam-climate-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99));
+            border: 6px solid var(--earth-blue);
+            border-radius: 48px;
+            padding: 95px 75px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.7s;
+        }
+
+        .tam-climate-card::before {
+            content: '';
+            position: absolute;
+            top: -140%;
+            left: -140%;
+            width: 380%;
+            height: 380%;
+            background: radial-gradient(circle, var(--earth-blue), transparent 60%);
+            opacity: 0;
+            transition: all 0.7s;
+        }
+
+        .tam-climate-card:hover {
+            transform: scale(1.12) translateY(-18px);
+            box-shadow: 0 0 160px rgba(14, 165, 233, 1);
+        }
+
+        .tam-climate-card:hover::before {
+            opacity: 0.3;
+            top: -70%;
+            left: -70%;
+        }
+
+        .tam-climate-label {
+            font-size: 26px;
+            color: var(--atmosphere-cyan);
+            margin-bottom: 40px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .tam-climate-value {
+            font-size: 130px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+
+        .tam-climate-desc {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.98);
+            line-height: 2;
+        }
+
+        /* Pricing */
+        .climate-pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 55px;
+            margin-top: 110px;
+        }
+
+        .climate-pricing-tier {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(0, 0, 0, 0.99));
+            border: 5px solid rgba(14, 165, 233, 0.55);
+            border-radius: 42px;
+            padding: 85px 70px;
+            position: relative;
+            transition: all 0.6s;
+        }
+
+        .climate-pricing-tier.mega {
+            border-width: 7px;
+            border-color: var(--atmosphere-cyan);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(124, 58, 237, 0.18));
+            transform: scale(1.12);
+        }
+
+        .climate-pricing-tier:hover {
+            transform: translateY(-30px) scale(1.06);
+            box-shadow: 0 0 140px rgba(14, 165, 233, 0.9);
+        }
+
+        .climate-pricing-badge {
+            position: absolute;
+            top: 38px;
+            right: 38px;
+            background: linear-gradient(135deg, var(--sunset-orange), var(--storm-purple));
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 38px;
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            box-shadow: 0 0 40px var(--storm-purple);
+        }
+
+        .climate-pricing-name {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 38px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .climate-pricing-price {
+            font-size: 105px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--atmosphere-cyan), var(--earth-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            line-height: 1;
+        }
+
+        .climate-pricing-period {
+            font-size: 25px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 55px;
+        }
+
+        .climate-pricing-features {
+            list-style: none;
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .climate-pricing-features li {
+            padding: 25px 0;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.3);
+            font-size: 21px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .climate-pricing-features li::before {
+            content: '🌍';
+            color: var(--earth-blue);
+            font-size: 34px;
+        }
+
+        /* Revenue Mega */
+        .revenue-climate-mega {
+            margin-top: 130px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(5, 150, 105, 0.18));
+            border: 6px solid var(--earth-blue);
+            border-radius: 55px;
+            padding: 105px;
+            box-shadow: 0 0 160px rgba(14, 165, 233, 0.8);
+        }
+
+        .revenue-climate-title {
+            font-size: 70px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 90px;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .revenue-climate-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            margin-bottom: 90px;
+        }
+
+        .revenue-climate-milestone {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 70px 50px;
+            border-radius: 38px;
+            border: 5px solid rgba(14, 165, 233, 0.45);
+            transition: all 0.6s;
+        }
+
+        .revenue-climate-milestone:hover {
+            border-color: var(--atmosphere-cyan);
+            transform: translateY(-22px);
+            box-shadow: 0 0 100px rgba(6, 182, 212, 0.7);
+        }
+
+        .revenue-climate-year {
+            font-size: 32px;
+            color: var(--earth-blue);
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .revenue-climate-amount {
+            font-size: 82px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--atmosphere-cyan), var(--sunset-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 22px;
+        }
+
+        .revenue-climate-desc {
+            font-size: 21px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Competition Table */
+        .comp-climate-table {
+            margin-top: 110px;
+            background: rgba(0, 0, 0, 0.98);
+            border: 6px solid var(--earth-blue);
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .comp-climate-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comp-climate-table th,
+        .comp-climate-table td {
+            padding: 50px;
+            text-align: left;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.3);
+            font-size: 22px;
+        }
+
+        .comp-climate-table th {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(6, 182, 212, 0.25));
+            font-weight: 900;
+            font-size: 29px;
+            color: var(--earth-blue);
+            text-transform: uppercase;
+        }
+
+        .comp-climate-table .climateq-col {
+            background: rgba(14, 165, 233, 0.18);
+            font-weight: 900;
+        }
+
+        .check-climate {
+            color: var(--forest-green);
+            font-size: 42px;
+            font-weight: 900;
+        }
+
+        .cross-climate {
+            color: var(--sunset-orange);
+            font-size: 42px;
+            font-weight: 900;
+        }
+
+        /* Team */
+        .team-climate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 110px;
+        }
+
+        .team-climate-card {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(0, 0, 0, 0.99));
+            border: 5px solid rgba(14, 165, 233, 0.45);
+            border-radius: 40px;
+            padding: 80px 70px;
+            text-align: center;
+            transition: all 0.6s;
+        }
+
+        .team-climate-card:hover {
+            transform: translateY(-30px);
+            border-color: var(--atmosphere-cyan);
+            box-shadow: 0 0 120px rgba(6, 182, 212, 0.8);
+        }
+
+        .team-climate-avatar {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            margin: 0 auto 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            border: 7px solid rgba(14, 165, 233, 0.7);
+            box-shadow: 0 0 80px rgba(14, 165, 233, 0.8);
+        }
+
+        .team-climate-name {
+            font-size: 45px;
+            font-weight: 900;
+            margin-bottom: 22px;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-climate-role {
+            font-size: 27px;
+            color: var(--earth-blue);
+            margin-bottom: 35px;
+            font-weight: 900;
+        }
+
+        .team-climate-bio {
+            font-size: 21px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 2;
+        }
+
+        /* CTA */
+        #cta {
+            background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.35), transparent 80%);
+        }
+
+        .cta-climate-content {
+            text-align: center;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+
+        .cta-climate-title {
+            font-size: 125px;
+            font-weight: 900;
+            margin-bottom: 55px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-climate-text {
+            font-size: 38px;
+            color: rgba(255, 255, 255, 0.99);
+            margin-bottom: 90px;
+            line-height: 1.9;
+        }
+
+        .cta-climate-buttons {
+            display: flex;
+            gap: 55px;
+            justify-content: center;
+            margin-bottom: 110px;
+        }
+
+        .btn {
+            padding: 42px 105px;
+            font-size: 31px;
+            font-weight: 900;
+            border: none;
+            border-radius: 90px;
+            cursor: pointer;
+            transition: all 0.6s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .btn:hover::after {
+            width: 800px;
+            height: 800px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            color: #fff;
+            box-shadow: 0 0 90px rgba(14, 165, 233, 0.8);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-18px);
+            box-shadow: 0 0 160px rgba(6, 182, 212, 1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 6px solid var(--earth-blue);
+            color: var(--earth-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(14, 165, 233, 0.3);
+            transform: translateY(-18px);
+            box-shadow: 0 0 90px rgba(14, 165, 233, 0.7);
+        }
+
+        .investment-climate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 55px;
+            margin-top: 110px;
+        }
+
+        .investment-climate-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(6, 182, 212, 0.18));
+            border: 6px solid var(--earth-blue);
+            border-radius: 42px;
+            padding: 80px 70px;
+            text-align: center;
+            box-shadow: 0 0 120px rgba(14, 165, 233, 0.8);
+        }
+
+        .investment-climate-label {
+            font-size: 27px;
+            color: var(--atmosphere-cyan);
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 3.5px;
+            font-weight: 900;
+        }
+
+        .investment-climate-value {
+            font-size: 105px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 95px 35px;
+            text-align: center;
+            border-top: 6px solid var(--earth-blue);
+            box-shadow: 0 -18px 90px rgba(14, 165, 233, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            h1 { font-size: 100px; }
+            .section-title { font-size: 80px; }
+            .tech-climate-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            h1 { font-size: 85px; }
+            .section-title { font-size: 68px; }
+            .climate-indicators,
+            .hero-climate-stats,
+            .tam-climate-grid,
+            .climate-pricing-grid,
+            .team-climate-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tech-climate-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 58px; }
+            .section-title { font-size: 48px; }
+            .climate-indicators,
+            .hero-climate-stats,
+            .crisis-grid,
+            .tam-climate-grid,
+            .climate-pricing-grid,
+            .team-climate-grid,
+            .tech-climate-grid,
+            .solution-climate-mega {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Atmosphere Canvas -->
+    <canvas id="atmosphere-canvas"></canvas>
+
+    <!-- Earth Glow Background -->
+    <div class="earth-glow-bg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">CLIMATEQ AI</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#crisis">Кризис</a></li>
+                <li><a href="#solution">Решение</a></li>
+                <li><a href="#tam">Рынок</a></li>
+                <li><a href="#pricing">Цены</a></li>
+                <li><a href="#cta">Инвестиции</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="container">
+            <div style="text-align: center;">
+                <h1>КВАНТОВОЕ<br>ПРОГНОЗИРОВАНИЕ<br>КЛИМАТА</h1>
+                <p class="subtitle">ТОЧНОСТЬ 95% НА 50 ЛЕТ ВПЕРЁД • СПАСАЕМ ПЛАНЕТУ ЧЕРЕЗ AI • $2T РЫНОК • НЕИЗБЕЖНАЯ ТЕХНОЛОГИЯ</p>
+                
+                <div class="climate-indicators">
+                    <div class="climate-box">
+                        <div class="climate-icon">🌡️</div>
+                        <div class="climate-label">TEMPERATURE</div>
+                        <div class="climate-value">95% accuracy 50 years</div>
+                    </div>
+                    <div class="climate-box">
+                        <div class="climate-icon">🌊</div>
+                        <div class="climate-label">SEA LEVEL</div>
+                        <div class="climate-value">Molecular simulation</div>
+                    </div>
+                    <div class="climate-box">
+                        <div class="climate-icon">🌪️</div>
+                        <div class="climate-label">STORMS</div>
+                        <div class="climate-value">3 months early warning</div>
+                    </div>
+                    <div class="climate-box">
+                        <div class="climate-icon">⚛️</div>
+                        <div class="climate-label">QUANTUM QPU</div>
+                        <div class="climate-value">10^15 calculations/sec</div>
+                    </div>
+                    <div class="climate-box">
+                        <div class="climate-icon">🌿</div>
+                        <div class="climate-label">CARBON</div>
+                        <div class="climate-value">Capture optimization</div>
+                    </div>
+                </div>
+                
+                <div class="hero-climate-stats">
+                    <div class="climate-mega-stat">
+                        <div class="climate-mega-icon">💰</div>
+                        <div class="climate-mega-number">$2T</div>
+                        <div class="climate-mega-label">Рынок climate tech к 2030<br>$6T к 2040</div>
+                    </div>
+                    <div class="climate-mega-stat">
+                        <div class="climate-mega-icon">🏛️</div>
+                        <div class="climate-mega-number">$4T</div>
+                        <div class="climate-mega-label">Government climate budgets<br>ежегодно</div>
+                    </div>
+                    <div class="climate-mega-stat">
+                        <div class="climate-mega-icon">📊</div>
+                        <div class="climate-mega-number">95%</div>
+                        <div class="climate-mega-label">Точность прогноза<br>на 50 лет вперёд</div>
+                    </div>
+                    <div class="climate-mega-stat">
+                        <div class="climate-mega-icon">⚡</div>
+                        <div class="climate-mega-number">$300B</div>
+                        <div class="climate-mega-label">Потери от катастроф<br>ежегодно</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crisis Section -->
+    <section id="crisis" class="section">
+        <div class="container">
+            <h2 class="section-title">Климатический кризис ускоряется</h2>
+            <p class="section-subtitle">Современные суперкомпьютеры НЕ МОГУТ точно моделировать климат. Квантовые системы — единственная технология, способная спасти планету</p>
+            
+            <div class="crisis-grid">
+                <div class="crisis-card">
+                    <div class="crisis-icon">🔥</div>
+                    <div class="crisis-title">КАТАСТРОФЫ</div>
+                    <div class="crisis-stat">$300B</div>
+                    <div class="crisis-text">Ежегодные потери от климатических катастроф. Ураганы, наводнения, засухи, пожары — всё это можно ПРЕДОТВРАТИТЬ с точным прогнозом. Страховые компании теряют $100B+/год из-за неточных моделей.</div>
+                </div>
+                
+                <div class="crisis-card">
+                    <div class="crisis-icon">🌡️</div>
+                    <div class="crisis-title">WARMING</div>
+                    <div class="crisis-stat">+1.5°C</div>
+                    <div class="crisis-text">Потепление уже сейчас. К 2030 — +2°C, к 2050 — +3°C без действий. Современные climate models ошибаются на ±30% в долгосрочных прогнозах. Квантовые симуляции дают 95% accuracy молекулярного уровня.</div>
+                </div>
+                
+                <div class="crisis-card">
+                    <div class="crisis-icon">💸</div>
+                    <div class="crisis-title">ECONOMICS</div>
+                    <div class="crisis-stat">$23T</div>
+                    <div class="crisis-text">Потенциальный ущерб мировой экономике к 2050 от climate change (McKinsey). Governments тратят $4T/год на climate action, но НЕ ЗНАЮТ куда инвестировать из-за неточных прогнозов. Нужна КВАНТОВАЯ ТОЧНОСТЬ.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 110px; text-align: center; background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(124, 58, 237, 0.2)); border: 6px solid var(--sunset-orange); border-radius: 50px; padding: 95px; box-shadow: 0 0 140px rgba(249, 115, 22, 0.8);">
+                <h3 style="font-size: 70px; margin-bottom: 45px; background: linear-gradient(135deg, var(--sunset-orange), var(--storm-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚠️ СУПЕРКОМПЬЮТЕРЫ НЕ СПРАВЛЯЮТСЯ</h3>
+                <p style="font-size: 31px; color: rgba(255, 255, 255, 0.99); line-height: 2.1;">Frontier (fastest supercomputer) моделирует климат с точностью 65-70% на 10 лет. Квантовые компьютеры моделируют atmospheric chemistry на МОЛЕКУЛЯРНОМ УРОВНЕ с точностью 95%+ на 50 лет. Это не улучшение — это ПАРАДИГМАЛЬНЫЙ СДВИГ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section" style="background: radial-gradient(circle at 78% 55%, rgba(6, 182, 212, 0.18), transparent);">
+        <div class="container">
+            <h2 class="section-title">CLIMATEQ AI: Квантовая климатология</h2>
+            <p class="section-subtitle">Первая в мире квантовая платформа для прогнозирования климата с молекулярной точностью на 50 лет вперёд</p>
+            
+            <div class="solution-climate-mega">
+                <div class="solution-climate-content">
+                    <h3>От 65% Точности к 95% Через Квантовые QPU</h3>
+                    <p>CLIMATEQ AI использует квантовые процессоры для симуляции atmospheric chemistry, ocean currents, carbon cycle на молекулярном уровне. Мы моделируем 10^15 переменных одновременно — в миллионы раз больше классических суперкомпьютеров.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 30px;">
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">⚛️</div>
+                            <div class="quantum-climate-text">QUANTUM ATMOSPHERIC CHEMISTRY SIMULATION</div>
+                        </div>
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">🌊</div>
+                            <div class="quantum-climate-text">OCEAN CURRENT MODELING 10^12 MOLECULES</div>
+                        </div>
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">🌿</div>
+                            <div class="quantum-climate-text">CARBON CYCLE AI OPTIMIZATION</div>
+                        </div>
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">🌪️</div>
+                            <div class="quantum-climate-text">EXTREME WEATHER 3 MONTHS EARLY WARNING</div>
+                        </div>
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">📡</div>
+                            <div class="quantum-climate-text">SATELLITE DATA INTEGRATION REAL-TIME</div>
+                        </div>
+                        <div class="quantum-climate-feature">
+                            <div class="quantum-climate-icon">🎯</div>
+                            <div class="quantum-climate-text">95% ACCURACY 50 YEARS FORECAST</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="forecast-viz">
+                    <h4 class="forecast-viz-title">⚡ КЛАССИКА VS КВАНТУМ</h4>
+                    <div class="forecast-comparison">
+                        <div class="forecast-side">
+                            <div class="forecast-label">🖥️ SUPERCOMPUTERS</div>
+                            <div class="forecast-value">65%</div>
+                            <div class="forecast-desc">Точность на 10 лет</div>
+                        </div>
+                        <div class="forecast-side">
+                            <div class="forecast-label">⚛️ CLIMATEQ QPU</div>
+                            <div class="forecast-value">95%</div>
+                            <div class="forecast-desc">Точность на 50 лет!</div>
+                        </div>
+                    </div>
+                    <div class="forecast-comparison" style="margin-top: 32px;">
+                        <div class="forecast-side">
+                            <div class="forecast-label">💾 VARIABLES</div>
+                            <div class="forecast-value">10^9</div>
+                            <div class="forecast-desc">Классический предел</div>
+                        </div>
+                        <div class="forecast-side">
+                            <div class="forecast-label">⚛️ QUANTUM</div>
+                            <div class="forecast-value">10^15</div>
+                            <div class="forecast-desc">Миллионы x больше!</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 45px; padding: 38px; background: rgba(6, 182, 212, 0.18); border-left: 7px solid var(--atmosphere-cyan); border-radius: 18px;">
+                        <div style="font-size: 22px; color: var(--forest-green); font-family: 'Courier New', monospace; line-height: 2.1;">
+                            ⚡ Partnership NASA + NOAA verified<br>
+                            💰 EU Climate Agency pilot $50M contract<br>
+                            🎯 Hurricane prediction 3 months early (tested)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech" class="section">
+        <div class="container">
+            <h2 class="section-title">6 Квантовых Технологий</h2>
+            <p class="section-subtitle">Каждая технология атакует один аспект climate modeling</p>
+            
+            <div class="tech-climate-grid">
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">⚛️</div>
+                    <div class="tech-climate-name">QPU CORE</div>
+                    <div class="tech-climate-desc">Ion trap quantum processors 10^15 calc/sec</div>
+                </div>
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">🌡️</div>
+                    <div class="tech-climate-name">ATMOSPHERE</div>
+                    <div class="tech-climate-desc">Molecular-level chemistry simulation</div>
+                </div>
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">🌊</div>
+                    <div class="tech-climate-name">OCEAN AI</div>
+                    <div class="tech-climate-desc">Current modeling 10^12 molecules</div>
+                </div>
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">🌿</div>
+                    <div class="tech-climate-name">CARBON ML</div>
+                    <div class="tech-climate-desc">AI carbon capture optimization</div>
+                </div>
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">📡</div>
+                    <div class="tech-climate-name">SATELLITE</div>
+                    <div class="tech-climate-desc">Real-time data integration API</div>
+                </div>
+                <div class="tech-climate-card">
+                    <div class="tech-climate-icon">🌪️</div>
+                    <div class="tech-climate-name">WEATHER AI</div>
+                    <div class="tech-climate-desc">Extreme events early warning</div>
+                </div>
+            </div>
+            
+            <div class="government-showcase">
+                <h3 class="government-title">🏛️ GOVERNMENT PARTNERSHIPS</h3>
+                <div class="government-grid">
+                    <div class="government-contract">
+                        <div class="government-metric">$500M</div>
+                        <div class="government-label">EU Climate Agency contract pending</div>
+                    </div>
+                    <div class="government-contract">
+                        <div class="government-metric">$200M</div>
+                        <div class="government-label">NASA partnership 5-year program</div>
+                    </div>
+                    <div class="government-contract">
+                        <div class="government-metric">$150M</div>
+                        <div class="government-label">NOAA weather forecasting upgrade</div>
+                    </div>
+                    <div class="government-contract">
+                        <div class="government-metric">$100M</div>
+                        <div class="government-label">UK Met Office quantum pilot</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM Section -->
+    <section id="tam" class="section" style="background: radial-gradient(circle at 38% 65%, rgba(14, 165, 233, 0.15), transparent);">
+        <div class="container">
+            <h2 class="section-title">Рынок $2 триллиона к 2030</h2>
+            <p class="section-subtitle">Climate tech — самый быстрорастущий сектор экономики. Governments тратят триллионы. КТО ПЕРВЫЙ — ТОТ И БОГАТЫЙ!</p>
+            
+            <div class="tam-climate-grid">
+                <div class="tam-climate-card">
+                    <div class="tam-climate-label">TAM (GLOBAL)</div>
+                    <div class="tam-climate-value">$2T</div>
+                    <div class="tam-climate-desc">Мировой рынок climate tech к 2030 году. Растёт до $6T к 2040 при CAGR 62%</div>
+                </div>
+                
+                <div class="tam-climate-card">
+                    <div class="tam-climate-label">GOVERNMENT</div>
+                    <div class="tam-climate-value">$4T</div>
+                    <div class="tam-climate-desc">Ежегодные climate budgets правительств мира. Нужен точный прогноз куда инвестировать</div>
+                </div>
+                
+                <div class="tam-climate-card">
+                    <div class="tam-climate-label">INSURANCE</div>
+                    <div class="tam-climate-value">$850B</div>
+                    <div class="tam-climate-desc">Рынок climate risk insurance. Точный прогноз = правильный pricing = огромная прибыль</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 130px;">
+                <h3 style="font-size: 70px; text-align: center; margin-bottom: 75px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💎 СЕГМЕНТЫ КЛИЕНТОВ</h3>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 52px;">
+                    <div style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99)); border: 5px solid var(--earth-blue); border-radius: 35px; padding: 70px 55px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: 900; margin-bottom: 20px; color: var(--atmosphere-cyan);">GOVERNMENTS</div>
+                        <div style="font-size: 78px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$4T</div>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 20px;">Climate policy planning</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99)); border: 5px solid var(--earth-blue); border-radius: 35px; padding: 70px 55px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: 900; margin-bottom: 20px; color: var(--atmosphere-cyan);">INSURANCE</div>
+                        <div style="font-size: 78px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$850B</div>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 20px;">Risk modeling</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99)); border: 5px solid var(--earth-blue); border-radius: 35px; padding: 70px 55px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: 900; margin-bottom: 20px; color: var(--atmosphere-cyan);">ENERGY</div>
+                        <div style="font-size: 78px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$500B</div>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 20px;">Renewable optimization</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99)); border: 5px solid var(--earth-blue); border-radius: 35px; padding: 70px 55px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: 900; margin-bottom: 20px; color: var(--atmosphere-cyan);">AGRICULTURE</div>
+                        <div style="font-size: 78px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$300B</div>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 20px;">Crop planning</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0, 0, 0, 0.99)); border: 5px solid var(--earth-blue); border-radius: 35px; padding: 70px 55px; text-align: center;">
+                        <div style="font-size: 36px; font-weight: 900; margin-bottom: 20px; color: var(--atmosphere-cyan);">CITIES</div>
+                        <div style="font-size: 78px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$200B</div>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 20px;">Infrastructure planning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Enterprise Climate Modeling</h2>
+            <p class="section-subtitle">Три уровня доступа к квантовому climate forecasting для governments, enterprise и research</p>
+            
+            <div class="climate-pricing-grid">
+                <div class="climate-pricing-tier">
+                    <div class="climate-pricing-name">Research</div>
+                    <div class="climate-pricing-price">$500K</div>
+                    <div class="climate-pricing-period">в год</div>
+                    <ul class="climate-pricing-features">
+                        <li>Regional climate modeling</li>
+                        <li>10-year forecast accuracy 90%</li>
+                        <li>Monthly data updates</li>
+                        <li>API access 100K calls/month</li>
+                        <li>Basic extreme weather alerts</li>
+                        <li>Email support</li>
+                    </ul>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.7); margin-top: 28px;">Для universities & research</div>
+                </div>
+                
+                <div class="climate-pricing-tier mega">
+                    <div class="climate-pricing-badge">🔥 GOVERNMENTS</div>
+                    <div class="climate-pricing-name">National</div>
+                    <div class="climate-pricing-price">$10M</div>
+                    <div class="climate-pricing-period">в год</div>
+                    <ul class="climate-pricing-features">
+                        <li>National climate modeling</li>
+                        <li>50-year forecast accuracy 95%</li>
+                        <li>Real-time satellite integration</li>
+                        <li>API unlimited calls</li>
+                        <li>3-month early extreme weather</li>
+                        <li>Carbon capture optimization</li>
+                        <li>24/7 dedicated team</li>
+                    </ul>
+                    <div style="font-size: 19px; color: var(--atmosphere-cyan); font-weight: 900; margin-top: 28px;">Для national governments</div>
+                </div>
+                
+                <div class="climate-pricing-tier">
+                    <div class="climate-pricing-name">Global</div>
+                    <div class="climate-pricing-price">$100M</div>
+                    <div class="climate-pricing-period">в год</div>
+                    <ul class="climate-pricing-features">
+                        <li>Global climate modeling</li>
+                        <li>100-year scenarios multiple paths</li>
+                        <li>Custom QPU allocation</li>
+                        <li>Policy impact simulation</li>
+                        <li>Geoengineering modeling</li>
+                        <li>White-label deployment</li>
+                        <li>On-premise option</li>
+                    </ul>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.7); margin-top: 28px;">Для UN, World Bank, G20</div>
+                </div>
+            </div>
+            
+            <div class="revenue-climate-mega">
+                <div class="revenue-climate-title">📊 ПРОГНОЗ ВЫРУЧКИ (CONSERVATIVE)</div>
+                <div class="revenue-climate-timeline">
+                    <div class="revenue-climate-milestone">
+                        <div class="revenue-climate-year">2026</div>
+                        <div class="revenue-climate-amount">$100M</div>
+                        <div class="revenue-climate-desc">5 gov contracts, 20 enterprise</div>
+                    </div>
+                    <div class="revenue-climate-milestone">
+                        <div class="revenue-climate-year">2027</div>
+                        <div class="revenue-climate-amount">$1B</div>
+                        <div class="revenue-climate-desc">50 governments, 200 enterprise</div>
+                    </div>
+                    <div class="revenue-climate-milestone">
+                        <div class="revenue-climate-year">2028</div>
+                        <div class="revenue-climate-amount">$5B</div>
+                        <div class="revenue-climate-desc">Critical mass adoption</div>
+                    </div>
+                    <div class="revenue-climate-milestone">
+                        <div class="revenue-climate-year">2029</div>
+                        <div class="revenue-climate-amount">$10B</div>
+                        <div class="revenue-climate-desc">Industry standard</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 45px;">
+                    <div style="text-align: center; padding: 50px; background: rgba(0, 0, 0, 0.8); border: 4px solid rgba(14, 165, 233, 0.45); border-radius: 25px;">
+                        <div style="font-size: 25px; color: var(--earth-blue); margin-bottom: 18px; text-transform: uppercase;">AVG CONTRACT</div>
+                        <div style="font-size: 68px; font-weight: 900; background: linear-gradient(135deg, var(--atmosphere-cyan), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$20M</div>
+                    </div>
+                    <div style="text-align: center; padding: 50px; background: rgba(0, 0, 0, 0.8); border: 4px solid rgba(14, 165, 233, 0.45); border-radius: 25px;">
+                        <div style="font-size: 25px; color: var(--earth-blue); margin-bottom: 18px; text-transform: uppercase;">LTV</div>
+                        <div style="font-size: 68px; font-weight: 900; background: linear-gradient(135deg, var(--atmosphere-cyan), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$200M</div>
+                    </div>
+                    <div style="text-align: center; padding: 50px; background: rgba(0, 0, 0, 0.8); border: 4px solid rgba(14, 165, 233, 0.45); border-radius: 25px;">
+                        <div style="font-size: 25px; color: var(--earth-blue); margin-bottom: 18px; text-transform: uppercase;">LTV/CAC</div>
+                        <div style="font-size: 68px; font-weight: 900; background: linear-gradient(135deg, var(--atmosphere-cyan), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">100x</div>
+                    </div>
+                    <div style="text-align: center; padding: 50px; background: rgba(0, 0, 0, 0.8); border: 4px solid rgba(14, 165, 233, 0.45); border-radius: 25px;">
+                        <div style="font-size: 25px; color: var(--earth-blue); margin-bottom: 18px; text-transform: uppercase;">GROSS MARGIN</div>
+                        <div style="font-size: 68px; font-weight: 900; background: linear-gradient(135deg, var(--atmosphere-cyan), var(--sunset-orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">97%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section id="traction" class="section" style="background: radial-gradient(circle at 88% 28%, rgba(5, 150, 105, 0.15), transparent);">
+        <div class="container">
+            <h2 class="section-title">Traction: Governments Ждут</h2>
+            <p class="section-subtitle">$950M в government contracts pending. Climate tech — неизбежная технология для выживания</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 55px; margin-top: 110px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 115px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;">$950M</div>
+                    <div style="font-size: 25px; color: rgba(255,255,255,0.95);">GOVERNMENT CONTRACTS<br>PENDING APPROVAL</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 115px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;">95%</div>
+                    <div style="font-size: 25px; color: rgba(255,255,255,0.95);">ACCURACY 50 YEARS<br>VERIFIED BY NASA</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 115px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;">23</div>
+                    <div style="font-size: 25px; color: rgba(255,255,255,0.95);">ПАТЕНТОВ<br>QUANTUM CLIMATE AI</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 115px; font-weight: 900; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;">100%</div>
+                    <div style="font-size: 25px; color: rgba(255,255,255,0.95);">HURRICANE PREDICTION<br>3 MONTHS EARLY (TESTED)</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 130px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(124, 58, 237, 0.18)); border: 6px solid var(--atmosphere-cyan); border-radius: 50px; padding: 95px; box-shadow: 0 0 140px rgba(6, 182, 212, 0.8);">
+                <h3 style="font-size: 60px; text-align: center; margin-bottom: 75px; color: var(--atmosphere-cyan); font-weight: 900;">🏛️ GOVERNMENT PILOTS (NDA)</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; text-align: center;">
+                    <div>
+                        <div style="font-size: 85px; margin-bottom: 22px;">🇪🇺</div>
+                        <div style="font-size: 27px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EU CLIMATE</div>
+                        <div style="font-size: 19px; color: rgba(255,255,255,0.8);">$500M contract pending</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 85px; margin-bottom: 22px;">🚀</div>
+                        <div style="font-size: 27px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NASA</div>
+                        <div style="font-size: 19px; color: rgba(255,255,255,0.8);">$200M 5-year partnership</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 85px; margin-bottom: 22px;">🌊</div>
+                        <div style="font-size: 27px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">NOAA</div>
+                        <div style="font-size: 19px; color: rgba(255,255,255,0.8);">$150M weather upgrade</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 85px; margin-bottom: 22px;">🇬🇧</div>
+                        <div style="font-size: 27px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">UK MET OFFICE</div>
+                        <div style="font-size: 19px; color: rgba(255,255,255,0.8);">$100M pilot program</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition -->
+    <section id="competition" class="section">
+        <div class="container">
+            <h2 class="section-title">Конкуренция: Мы на годы впереди</h2>
+            <p class="section-subtitle">Единственная платформа с quantum + AI + real-time satellite integration</p>
+            
+            <div class="comp-climate-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Supercomputers</th>
+                            <th>Classical AI</th>
+                            <th class="climateq-col">CLIMATEQ AI (МЫ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Forecast accuracy</td>
+                            <td>65% (10 years)</td>
+                            <td>75% (10 years)</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> 95% (50 years)</td>
+                        </tr>
+                        <tr>
+                            <td>Molecular simulation</td>
+                            <td><span class="cross-climate">✗</span> Impossible</td>
+                            <td><span class="cross-climate">✗</span> Impossible</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> 10^15 molecules</td>
+                        </tr>
+                        <tr>
+                            <td>Early extreme weather</td>
+                            <td>7-14 days</td>
+                            <td>14-30 days</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> 90 days (3 months)</td>
+                        </tr>
+                        <tr>
+                            <td>Government deployments</td>
+                            <td><span class="check-climate">✓</span> 50+ countries</td>
+                            <td><span class="check-climate">✓</span> 20+ countries</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> $950M pending</td>
+                        </tr>
+                        <tr>
+                            <td>Carbon optimization</td>
+                            <td><span class="cross-climate">✗</span> Нет</td>
+                            <td><span class="check-climate">✓</span> Basic</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> AI quantum optimized</td>
+                        </tr>
+                        <tr>
+                            <td>Real-time satellite</td>
+                            <td><span class="check-climate">✓</span> Да</td>
+                            <td><span class="check-climate">✓</span> Да</td>
+                            <td class="climateq-col"><span class="check-climate">✓</span> + QPU processing</td>
+                        </tr>
+                        <tr>
+                            <td>Computational cost</td>
+                            <td>$500M/year</td>
+                            <td>$100M/year</td>
+                            <td class="climateq-col">$50M/year (10x cheaper)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 110px; text-align: center;">
+                <h3 style="font-size: 70px; margin-bottom: 45px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🛡️ НЕИЗБЕЖНАЯ ТЕХНОЛОГИЯ</h3>
+                <p style="font-size: 31px; color: rgba(255, 255, 255, 0.98); line-height: 2.1; max-width: 1500px; margin: 0 auto;">Climate change — экзистенциальная угроза. Governments ОБЯЗАНЫ иметь точный прогноз. Классические системы дают 65-75% accuracy — это НЕ достаточно для трилионных решений. Квантовые компьютеры — единственная технология с 95%+ accuracy. КТО ПЕРВЫЙ ЗАХВАТИТ РЫНОК — ТОТ И ПОБЕДИТ. Winner takes all.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section" style="background: radial-gradient(circle at 48% 78%, rgba(124, 58, 237, 0.12), transparent);">
+        <div class="container">
+            <h2 class="section-title">Команда: Climate × Quantum × AI</h2>
+            <p class="section-subtitle">Уникальная экспертиза в climatology, quantum computing и government relations</p>
+            
+            <div class="team-climate-grid">
+                <div class="team-climate-card">
+                    <div class="team-climate-avatar">🌍</div>
+                    <div class="team-climate-name">DR. ЕЛЕНА КЛИМОВА</div>
+                    <div class="team-climate-role">CEO / Co-Founder</div>
+                    <div class="team-climate-bio">Ex-Lead Climate Scientist @ NASA. Создавала GISS climate models. PhD Atmospheric Physics MIT. 25 лет в climate science. Автор 83 peer-reviewed papers. Advisor UN IPCC.</div>
+                </div>
+                
+                <div class="team-climate-card">
+                    <div class="team-climate-avatar">⚛️</div>
+                    <div class="team-climate-name">DR. ИГОРЬ КВАНТОВ</div>
+                    <div class="team-climate-role">CTO / Co-Founder</div>
+                    <div class="team-climate-bio">Ex-Chief Quantum Architect @ IBM Quantum. Создавал Qiskit для climate simulations. PhD Quantum Computing Caltech. Эксперт в atmospheric chemistry QPU applications.</div>
+                </div>
+                
+                <div class="team-climate-card">
+                    <div class="team-climate-avatar">🏛️</div>
+                    <div class="team-climate-name">АЛЕКСАНДРА ДИПЛОМАТОВА</div>
+                    <div class="team-climate-role">CGO / Co-Founder</div>
+                    <div class="team-climate-bio">Ex-Director Government Relations @ Palantir. Закрыла $5B в government contracts. Нетворк в EU, NASA, NOAA, UN. Эксперт в climate policy и international relations.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 110px;">
+                <h3 style="font-size: 60px; text-align: center; margin-bottom: 70px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎯 ADVISORY COUNCIL</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 52px; max-width: 1600px; margin: 0 auto;">
+                    <div style="background: rgba(0,0,0,0.88); padding: 70px; border: 5px solid rgba(14, 165, 233, 0.55); border-radius: 38px;">
+                        <div style="font-size: 38px; font-weight: 900; margin-bottom: 22px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">DR. MICHAEL MANN</div>
+                        <div style="font-size: 27px; color: var(--earth-blue); margin-bottom: 25px; font-weight: 900;">CLIMATE SCIENTIST, PENN STATE</div>
+                        <p style="font-size: 21px; color: rgba(255,255,255,0.95);">Автор "hockey stick" climate graph. Lead author IPCC reports. Advisor в нашем scientific council. Валидирует все climate models.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.88); padding: 70px; border: 5px solid rgba(14, 165, 233, 0.55); border-radius: 38px;">
+                        <div style="font-size: 38px; font-weight: 900; margin-bottom: 22px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">JOHN KERRY</div>
+                        <div style="font-size: 27px; color: var(--earth-blue); margin-bottom: 25px; font-weight: 900;">EX-US CLIMATE ENVOY</div>
+                        <p style="font-size: 21px; color: rgba(255,255,255,0.95);">Ex-Secretary of State. Architect Paris Climate Agreement. Открывает двери к всем governments worldwide. Strategic advisor CLIMATEQ AI.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-climate-content">
+                <h2 class="cta-climate-title">СПАСИТЕ<br>ПЛАНЕТУ<br>И РАЗБОГАТЕЙТЕ</h2>
+                <p class="cta-climate-text">Мы привлекаем Series B раунд <strong>$500 000 000</strong> для масштабирования квантовой платформы, заключения contracts с 50+ governments и opening climate prediction centers worldwide.<br><br>$950M в government contracts pending + неизбежная технология + winner-takes-all market = **x1000 ROI** при exit к 2030.</p>
+                
+                <div class="cta-climate-buttons">
+                    <a href="mailto:invest@climateq.ai" class="btn btn-primary">🌍 ОБСУДИТЬ ИНВЕСТИЦИИ</a>
+                    <a href="#" class="btn btn-secondary">📊 СКАЧАТЬ PITCH DECK</a>
+                </div>
+                
+                <div class="investment-climate-grid">
+                    <div class="investment-climate-box">
+                        <div class="investment-climate-label">ПРИВЛЕКАЕМ</div>
+                        <div class="investment-climate-value">$500M</div>
+                    </div>
+                    <div class="investment-climate-box">
+                        <div class="investment-climate-label">ОЦЕНКА PRE-MONEY</div>
+                        <div class="investment-climate-value">$2B</div>
+                    </div>
+                    <div class="investment-climate-box">
+                        <div class="investment-climate-label">МИНИМАЛЬНЫЙ ЧЕК</div>
+                        <div class="investment-climate-value">$5M</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 110px; padding: 95px; background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(6, 182, 212, 0.2)); border: 6px solid var(--earth-blue); border-radius: 50px; box-shadow: 0 0 160px rgba(14, 165, 233, 0.9);">
+                    <h3 style="font-size: 55px; margin-bottom: 70px; background: linear-gradient(135deg, var(--earth-blue), var(--atmosphere-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">🎁 INVESTOR TERMS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 52px; text-align: center;">
+                        <div>
+                            <div style="font-size: 85px; margin-bottom: 25px;">📈</div>
+                            <div style="font-size: 32px; font-weight: 900; margin-bottom: 18px; color: var(--atmosphere-cyan);">EQUITY 20%</div>
+                            <div style="font-size: 21px; color: rgba(255,255,255,0.85);">За $500M инвестиций</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 85px; margin-bottom: 25px;">🎯</div>
+                            <div style="font-size: 32px; font-weight: 900; margin-bottom: 18px; color: var(--atmosphere-cyan);">3 BOARD SEATS</div>
+                            <div style="font-size: 21px; color: rgba(255,255,255,0.85);">Полный контроль</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 85px; margin-bottom: 25px;">💰</div>
+                            <div style="font-size: 32px; font-weight: 900; margin-bottom: 18px; color: var(--atmosphere-cyan);">EXIT 5 ЛЕТ</div>
+                            <div style="font-size: 21px; color: rgba(255,255,255,0.85);">IPO 2030 или acquisition</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 85px; margin-bottom: 25px;">🚀</div>
+                            <div style="font-size: 32px; font-weight: 900; margin-bottom: 18px; color: var(--atmosphere-cyan);">x500-1000</div>
+                            <div style="font-size: 21px; color: rgba(255,255,255,0.85);">ROI при successful IPO</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 90px; text-align: center;">
+                    <p style="font-size: 29px; color: rgba(255,255,255,0.85); line-height: 2.1;">
+                        🔒 FULL NDA + DATA ROOM ACCESS<br>
+                        📊 GOVERNMENT CONTRACTS DETAILS<br>
+                        ⚡ РАУНД ЗАКРЫВАЕТСЯ ЧЕРЕЗ 180 ДНЕЙ — ОСТАЛОСЬ $200M
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 45px;">🌍 CLIMATEQ AI</div>
+            <p style="color: rgba(255,255,255,0.85); margin-bottom: 45px; font-size: 29px;">КВАНТОВОЕ ПРОГНОЗИРОВАНИЕ КЛИМАТА • 95% ТОЧНОСТЬ 50 ЛЕТ</p>
+            <div style="display: flex; justify-content: center; gap: 80px; margin-bottom: 55px; flex-wrap: wrap;">
+                <a href="mailto:hello@climateq.ai" style="color: rgba(255,255,255,0.98); text-decoration: none; font-size: 22px;">📧 hello@climateq.ai</a>
+                <a href="tel:+14155551234" style="color: rgba(255,255,255,0.98); text-decoration: none; font-size: 22px;">📱 +1 (415) 555-1234</a>
+                <a href="#" style="color: rgba(255,255,255,0.98); text-decoration: none; font-size: 22px;">💼 LinkedIn</a>
+            </div>
+            <div style="color: rgba(255,255,255,0.55); font-size: 19px;">
+                © 2025 CLIMATEQ AI. QUANTUM CLIMATE FORECASTING PLATFORM | SERIES B $500M
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Atmosphere Animation
+        const canvas = document.getElementById('atmosphere-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class AtmosphereParticle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+                this.size = Math.random() * 3.5 + 1.5;
+                const colors = ['#0EA5E9', '#06B6D4', '#059669', '#7C3AED'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 25;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const atmosphereParticles = Array(150).fill().map(() => new AtmosphereParticle());
+
+        function animateAtmosphere() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            atmosphereParticles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateAtmosphere);
+        }
+
+        animateAtmosphere();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(3, 7, 18, 1)';
+                nav.style.boxShadow = '0 18px 120px rgba(14, 165, 233, 0.7)';
+            } else {
+                nav.style.background = 'rgba(3, 7, 18, 0.98)';
+                nav.style.boxShadow = '0 18px 80px rgba(14, 165, 233, 0.3)';
+            }
+        });
+    </script>
+</body>
+</html>

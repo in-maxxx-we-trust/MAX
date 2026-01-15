@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTUMX AI - Квантовые процессоры для AI | Конец эры GPU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --quantum-purple: #8B5CF6;
+            --quantum-cyan: #06B6D4;
+            --quantum-green: #10B981;
+            --quantum-pink: #EC4899;
+            --quantum-orange: #F59E0B;
+            --dark-void: #020208;
+            --deep-space: #0A0A1F;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark-void);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Quantum Particle Field */
+        #quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Holographic Background */
+        .holographic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15), transparent 40%),
+                radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.1), transparent 40%);
+            z-index: 0;
+            animation: holographicShift 20s ease-in-out infinite;
+        }
+
+        @keyframes holographicShift {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .glitch {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) infinite;
+        }
+
+        /* Section */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1700px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 31, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            padding: 28px 50px;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 50px rgba(139, 92, 246, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px var(--quantum-purple);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '⚛';
+            position: absolute;
+            left: -45px;
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 55px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 17px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--quantum-purple), var(--quantum-cyan));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--quantum-cyan);
+            text-shadow: 0 0 20px var(--quantum-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.2), transparent 60%),
+                        radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.15), transparent 50%);
+        }
+
+        h1 {
+            font-size: 110px;
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #ffffff, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -4px;
+            animation: titleGlow 4s ease-in-out infinite;
+            background-size: 300% auto;
+            text-transform: uppercase;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                background-position: 0% center;
+                filter: brightness(1);
+            }
+            50% { 
+                background-position: 100% center;
+                filter: brightness(1.3);
+            }
+        }
+
+        .subtitle {
+            font-size: 38px;
+            background: linear-gradient(90deg, var(--quantum-cyan), var(--quantum-purple), var(--quantum-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 60px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        /* Quantum Gates Visualization */
+        .quantum-gates {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        .quantum-gate {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.15));
+            border: 3px solid var(--quantum-purple);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .quantum-gate::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(from 0deg, transparent, var(--quantum-purple), transparent);
+            animation: rotate 6s linear infinite;
+            opacity: 0.3;
+        }
+
+        .quantum-gate:hover {
+            transform: translateY(-15px) scale(1.08);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 20px 80px rgba(6, 182, 212, 0.6);
+        }
+
+        .gate-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 20px var(--quantum-cyan));
+            position: relative;
+            z-index: 1;
+        }
+
+        .gate-label {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--quantum-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gate-value {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 100px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0.8));
+            border: 2px solid rgba(139, 92, 246, 0.4);
+            border-radius: 30px;
+            padding: 55px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .stat-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-18px);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 80px rgba(6, 182, 212, 0.5);
+        }
+
+        .stat-box:hover::after {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            font-size: 75px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 25px var(--quantum-purple));
+        }
+
+        .stat-number {
+            font-size: 66px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 82px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg, #ffffff, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -3px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 26px;
+            color: var(--quantum-cyan);
+            margin-bottom: 90px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            font-weight: 600;
+        }
+
+        /* Problem Cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 45px;
+            margin-top: 90px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.12), rgba(0, 0, 0, 0.9));
+            border: 3px solid var(--quantum-pink);
+            border-radius: 30px;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--quantum-pink), var(--quantum-purple), var(--quantum-cyan));
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 80px rgba(236, 72, 153, 0.6);
+        }
+
+        .problem-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .problem-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 25px var(--quantum-pink));
+        }
+
+        .problem-title {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            color: var(--quantum-pink);
+            text-transform: uppercase;
+        }
+
+        .problem-stat {
+            font-size: 62px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-pink), var(--quantum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .problem-text {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.9;
+        }
+
+        /* Solution Grid */
+        .solution-mega {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 90px;
+            align-items: center;
+            margin-top: 90px;
+        }
+
+        .solution-content h3 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .solution-content p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.9;
+            margin-bottom: 45px;
+        }
+
+        .feature-quantum {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), transparent);
+            padding: 25px 32px;
+            border-radius: 18px;
+            border-left: 5px solid var(--quantum-purple);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .feature-quantum:hover {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.15));
+            transform: translateX(12px);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .feature-icon-q {
+            font-size: 42px;
+            filter: drop-shadow(0 0 15px var(--quantum-cyan));
+        }
+
+        .feature-text-q {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Quantum Visualization */
+        .quantum-viz {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12));
+            border: 4px solid var(--quantum-cyan);
+            border-radius: 35px;
+            padding: 55px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(6, 182, 212, 0.4);
+        }
+
+        .quantum-viz::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(from 0deg, transparent, var(--quantum-cyan), transparent);
+            animation: rotate 15s linear infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .viz-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--quantum-cyan);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quantum-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .comp-side {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .comp-side:hover {
+            transform: scale(1.03);
+            border-color: var(--quantum-purple);
+        }
+
+        .comp-label {
+            font-size: 20px;
+            color: var(--quantum-cyan);
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .comp-value {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .comp-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-top: 90px;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0.95));
+            border: 3px solid rgba(139, 92, 246, 0.4);
+            border-radius: 28px;
+            padding: 50px 35px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 70px rgba(6, 182, 212, 0.5);
+        }
+
+        .tech-card:hover::after {
+            left: 100%;
+        }
+
+        .tech-icon {
+            font-size: 80px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 20px var(--quantum-purple));
+        }
+
+        .tech-name {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--quantum-purple);
+            text-transform: uppercase;
+        }
+
+        .tech-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+        }
+
+        /* Breakthrough Timeline */
+        .breakthrough-timeline {
+            margin-top: 90px;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px var(--quantum-purple);
+        }
+
+        .breakthrough-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .breakthrough-item:nth-child(even) .breakthrough-content {
+            order: 2;
+        }
+
+        .breakthrough-content {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95));
+            border: 3px solid var(--quantum-purple);
+            border-radius: 30px;
+            padding: 55px 50px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .breakthrough-content:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.6);
+        }
+
+        .breakthrough-company {
+            font-size: 26px;
+            color: var(--quantum-cyan);
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .breakthrough-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .breakthrough-desc {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .breakthrough-dot {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            border: 6px solid var(--dark-void);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 40px var(--quantum-purple);
+        }
+
+        /* TAM Cards */
+        .tam-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 90px;
+        }
+
+        .tam-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95));
+            border: 4px solid var(--quantum-purple);
+            border-radius: 35px;
+            padding: 70px 55px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        .tam-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, var(--quantum-purple), transparent 50%);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .tam-card:hover {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 0 100px rgba(139, 92, 246, 0.7);
+        }
+
+        .tam-card:hover::before {
+            opacity: 0.2;
+            top: -50%;
+            left: -50%;
+        }
+
+        .tam-label {
+            font-size: 20px;
+            color: var(--quantum-cyan);
+            margin-bottom: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tam-value {
+            font-size: 98px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+
+        .tam-desc {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-top: 90px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(0, 0, 0, 0.95));
+            border: 3px solid rgba(139, 92, 246, 0.4);
+            border-radius: 32px;
+            padding: 65px 50px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .pricing-card.featured {
+            border-width: 5px;
+            border-color: var(--quantum-cyan);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.1));
+            transform: scale(1.08);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-18px) scale(1.03);
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.6);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, var(--quantum-pink), var(--quantum-purple));
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 28px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 25px var(--quantum-purple);
+        }
+
+        .pricing-name {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-price {
+            font-size: 78px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-cyan), var(--quantum-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 19px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 45px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pricing-features li::before {
+            content: '⚛';
+            color: var(--quantum-purple);
+            font-size: 26px;
+        }
+
+        /* Revenue Timeline */
+        .revenue-mega {
+            margin-top: 110px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1));
+            border: 4px solid var(--quantum-purple);
+            border-radius: 40px;
+            padding: 80px;
+            box-shadow: 0 0 100px rgba(139, 92, 246, 0.5);
+        }
+
+        .revenue-title {
+            font-size: 52px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 70px;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .revenue-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 70px;
+        }
+
+        .revenue-milestone {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 50px 35px;
+            border-radius: 28px;
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.4s;
+        }
+
+        .revenue-milestone:hover {
+            border-color: var(--quantum-cyan);
+            transform: translateY(-12px);
+            box-shadow: 0 0 60px rgba(6, 182, 212, 0.5);
+        }
+
+        .revenue-year {
+            font-size: 24px;
+            color: var(--quantum-cyan);
+            margin-bottom: 22px;
+            font-weight: 900;
+        }
+
+        .revenue-amount {
+            font-size: 62px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .revenue-desc {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* Competition Table */
+        .comp-table {
+            margin-top: 90px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 4px solid var(--quantum-purple);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .comp-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comp-table th,
+        .comp-table td {
+            padding: 38px;
+            text-align: left;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            font-size: 18px;
+        }
+
+        .comp-table th {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(6, 182, 212, 0.15));
+            font-weight: 900;
+            font-size: 22px;
+            color: var(--quantum-purple);
+            text-transform: uppercase;
+        }
+
+        .comp-table .us-col {
+            background: rgba(139, 92, 246, 0.12);
+            font-weight: 800;
+        }
+
+        .check-quantum {
+            color: var(--quantum-green);
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .cross-quantum {
+            color: var(--quantum-pink);
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 90px;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0.95));
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            border-radius: 30px;
+            padding: 60px 50px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-18px);
+            border-color: var(--quantum-cyan);
+            box-shadow: 0 0 80px rgba(6, 182, 212, 0.5);
+        }
+
+        .team-avatar {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            margin: 0 auto 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 5px solid rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.6);
+        }
+
+        .team-name {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-role {
+            font-size: 20px;
+            color: var(--quantum-cyan);
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .team-bio {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        /* CTA */
+        #cta {
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.25), transparent 70%);
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 92px;
+            font-weight: 900;
+            margin-bottom: 45px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan), var(--quantum-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-text {
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 70px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 90px;
+        }
+
+        .btn {
+            padding: 32px 80px;
+            font-size: 24px;
+            font-weight: 900;
+            border: none;
+            border-radius: 70px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 600px;
+            height: 600px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            color: #fff;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.6);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 0 100px rgba(6, 182, 212, 0.9);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 4px solid var(--quantum-purple);
+            color: var(--quantum-purple);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateY(-12px);
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.5);
+        }
+
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-top: 90px;
+        }
+
+        .investment-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.12));
+            border: 4px solid var(--quantum-purple);
+            border-radius: 30px;
+            padding: 60px 50px;
+            text-align: center;
+            box-shadow: 0 0 70px rgba(139, 92, 246, 0.5);
+        }
+
+        .investment-label {
+            font-size: 20px;
+            color: var(--quantum-cyan);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 900;
+        }
+
+        .investment-value {
+            font-size: 76px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 70px 30px;
+            text-align: center;
+            border-top: 4px solid var(--quantum-purple);
+            box-shadow: 0 -10px 60px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 { font-size: 76px; }
+            .section-title { font-size: 62px; }
+            .hero-stats,
+            .tam-grid,
+            .pricing-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 52px; }
+            .section-title { font-size: 42px; }
+            .hero-stats,
+            .problem-grid,
+            .tam-grid,
+            .pricing-grid,
+            .team-grid,
+            .tech-grid,
+            .solution-mega,
+            .breakthrough-item {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+            .quantum-gates { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Quantum Particle Field -->
+    <canvas id="quantum-field"></canvas>
+
+    <!-- Holographic Background -->
+    <div class="holographic-bg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">QUANTUMX AI</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#problem">Проблема</a></li>
+                <li><a href="#solution">Решение</a></li>
+                <li><a href="#tam">Рынок</a></li>
+                <li><a href="#business">Бизнес</a></li>
+                <li><a href="#cta">Инвестиции</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="container">
+            <div style="text-align: center;">
+                <h1 class="glitch">КВАНТОВЫЕ<br>ПРОЦЕССОРЫ<br>ДЛЯ AI</h1>
+                <p class="subtitle">КОНЕЦ ЭРЫ GPU • 99.99% ТОЧНОСТЬ • ЭНЕРГОЭФФЕКТИВНОСТЬ 1000X • КВАНТОВОЕ ПРЕИМУЩЕСТВО 10²⁵</p>
+                
+                <div class="quantum-gates">
+                    <div class="quantum-gate">
+                        <div class="gate-icon">⚛</div>
+                        <div class="gate-label">ION TRAPS</div>
+                        <div class="gate-value">99.99% FIDELITY</div>
+                    </div>
+                    <div class="quantum-gate">
+                        <div class="gate-icon">🔮</div>
+                        <div class="gate-label">QPU HYBRID</div>
+                        <div class="gate-value">1000x ENERGY</div>
+                    </div>
+                    <div class="quantum-gate">
+                        <div class="gate-icon">💎</div>
+                        <div class="gate-label">FAULT-TOLERANT</div>
+                        <div class="gate-value">2029 READY</div>
+                    </div>
+                    <div class="quantum-gate">
+                        <div class="gate-icon">⚡</div>
+                        <div class="gate-label">QUANTUM ML</div>
+                        <div class="gate-value">34% BETTER</div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-number">$97B</div>
+                        <div class="stat-label">Рынок к 2035 году<br>CAGR 41.8%</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-number">1200W</div>
+                        <div class="stat-label">NVIDIA B200 TDP<br>GPU энергокризис</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">🔬</div>
+                        <div class="stat-number">10²⁵</div>
+                        <div class="stat-label">Лет для классических<br>компьютеров</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-number">$3.77B</div>
+                        <div class="stat-label">Инвестиций за 9 мес<br>2025 года</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <h2 class="section-title">GPU достигли физических пределов</h2>
+            <p class="section-subtitle">Современные видеокарты NVIDIA не могут масштабировать AI дальше. Memory bandwidth bottleneck, энергопотребление до 1,200W и стоимость inference в 15x от training делают GPU-архитектуру тупиковой</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">🔥</div>
+                    <div class="problem-title">Энергокризис</div>
+                    <div class="problem-stat">1,200W</div>
+                    <div class="problem-text">NVIDIA B200 потребляет 1,200W (против 700W у H100). Стойка GB200 NVL72 требует 140 kW. AI-дата-центры потребят 980-1,200 TWh к 2030 — это 7-8% всей электроэнергии США. Обучение GPT-4 = $100 млн энергии.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💾</div>
+                    <div class="problem-title">Memory Bottleneck</div>
+                    <div class="problem-stat">75%</div>
+                    <div class="problem-text">GPU простаивают 75% времени, ожидая данных из памяти. IBM Research: "Your GPU is idle, but your VRAM is choking". H100 SXM: 3.35 TB/s bandwidth, но для LLM inference нужно в 10x больше. Это архитектурный тупик.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <div class="problem-title">Стоимость Inference</div>
+                    <div class="problem-stat">15x</div>
+                    <div class="problem-text">OpenAI тратит $2.3 млрд/год на inference GPT-4 — это 15x стоимости обучения. Для модели с 1B пользователей inference превысит training за 150-200 дней. GPU-экономика не масштабируется.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">⏳</div>
+                    <div class="problem-title">Дефицит GPU</div>
+                    <div class="problem-stat">6+ мес</div>
+                    <div class="problem-text">Lead time на B200 — 6+ месяцев. H100 — 4-40 недель. Jensen Huang на GTC 2025: "Your revenues will be power-limited". Дефицит GPU становится главным ограничителем масштабирования AI.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 90px; text-align: center; background: linear-gradient(135deg, rgba(236, 72, 153, 0.18), rgba(139, 92, 246, 0.12)); border: 4px solid var(--quantum-pink); border-radius: 35px; padding: 70px; box-shadow: 0 0 80px rgba(236, 72, 153, 0.5);">
+                <h3 style="font-size: 52px; margin-bottom: 35px; background: linear-gradient(135deg, var(--quantum-pink), var(--quantum-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚠️ НУЖНА НОВАЯ ПАРАДИГМА</h3>
+                <p style="font-size: 24px; color: rgba(255, 255, 255, 0.95); line-height: 1.9;">GPU достигли фундаментальных физических пределов. Дальнейшее масштабирование AI требует квантового прорыва. Ноябрь 2025 стал точкой перегиба: квантовые системы впервые демонстрируют верифицируемое преимущество над классическими компьютерами на практических задачах.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section" style="background: radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.12), transparent);">
+        <div class="container">
+            <h2 class="section-title">QUANTUMX AI: Квантовые чипы нового поколения</h2>
+            <p class="section-subtitle">Гибридные QPU+GPU системы с точностью 99.99%, энергоэффективностью 1000x и квантовым преимуществом 10²⁵</p>
+            
+            <div class="solution-mega">
+                <div class="solution-content">
+                    <h3>От GPU Bottleneck к Квантовому Преимуществу</h3>
+                    <p>QUANTUMX AI разрабатывает гибридные квантово-классические процессоры для AI-вычислений. Trapped ion технология с точностью 99.99% (четыре девятки!) позволяет решать задачи optimization, molecular simulation и quantum ML в миллионы раз эффективнее GPU.</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 22px;">
+                        <div class="feature-quantum">
+                            <div class="feature-icon-q">⚛</div>
+                            <div class="feature-text-q">ION TRAP QUBITS С 99.99% FIDELITY</div>
+                        </div>
+                        <div class="feature-quantum">
+                            <div class="feature-icon-q">🔗</div>
+                            <div class="feature-text-q">HYBRID QPU+GPU ARCHITECTURE</div>
+                        </div>
+                        <div class="feature-quantum">
+                            <div class="feature-icon-q">⚡</div>
+                            <div class="feature-text-q">ЭНЕРГОЭФФЕКТИВНОСТЬ 1000x VS GPU</div>
+                        </div>
+                        <div class="feature-quantum">
+                            <div class="feature-icon-q">🧬</div>
+                            <div class="feature-text-q">QUANTUM ML ДЛЯ DRUG DISCOVERY</div>
+                        </div>
+                        <div class="feature-quantum">
+                            <div class="feature-icon-q">💎</div>
+                            <div class="feature-text-q">ERROR CORRECTION READY BY 2029</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quantum-viz">
+                    <h4 class="viz-title">⚡ КВАНТОВОЕ VS КЛАССИЧЕСКОЕ</h4>
+                    <div class="quantum-comparison">
+                        <div class="comp-side">
+                            <div class="comp-label">🔥 NVIDIA B200</div>
+                            <div class="comp-value">1,200W</div>
+                            <div class="comp-desc">Энергопотребление на чип</div>
+                        </div>
+                        <div class="comp-side">
+                            <div class="comp-label">⚛ QUANTUMX QPU</div>
+                            <div class="comp-value">1.2W</div>
+                            <div class="comp-desc">1000x энергоэффективнее</div>
+                        </div>
+                    </div>
+                    <div class="quantum-comparison" style="margin-top: 25px;">
+                        <div class="comp-side">
+                            <div class="comp-label">💾 H100 INFERENCE</div>
+                            <div class="comp-value">3.35 TB/s</div>
+                            <div class="comp-desc">Memory bandwidth bottleneck</div>
+                        </div>
+                        <div class="comp-side">
+                            <div class="comp-label">🔮 QUANTUM STATE</div>
+                            <div class="comp-value">No Limit</div>
+                            <div class="comp-desc">Superposition решает проблему</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 35px; padding: 28px; background: rgba(6, 182, 212, 0.12); border-left: 5px solid var(--quantum-cyan); border-radius: 12px;">
+                        <div style="font-size: 18px; color: var(--quantum-green); font-family: 'Courier New', monospace; line-height: 1.9;">
+                            ⚡ Google Willow: 13,000x быстрее суперкомпьютера<br>
+                            💰 HSBC + IBM: +34% точность прогнозов<br>
+                            🎯 Квантовое преимущество: 10²⁵ лет классически
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="section">
+        <div class="container">
+            <h2 class="section-title">5 Квантовых Технологий</h2>
+            <p class="section-subtitle">Мы поддерживаем все ведущие квантовые архитектуры для максимальной гибкости</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">⚛</div>
+                    <div class="tech-name">ION TRAPS</div>
+                    <div class="tech-desc">99.99% fidelity, минуты когерентности. Quantinuum, IonQ.</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🌀</div>
+                    <div class="tech-name">NEUTRAL ATOMS</div>
+                    <div class="tech-desc">3,000+ кубитов, быстрое масштабирование. QuEra, Pasqal.</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">❄️</div>
+                    <div class="tech-name">SUPERCONDUCTING</div>
+                    <div class="tech-desc">IBM 1,121 кубитов. Зрелая экосистема.</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">💎</div>
+                    <div class="tech-name">PHOTONIC</div>
+                    <div class="tech-desc">Комнатная температура. PsiQuantum $7B.</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔬</div>
+                    <div class="tech-name">HYBRID QPU</div>
+                    <div class="tech-desc">Интеграция с NVIDIA GPU через NVQLink.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 90px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12)); border: 4px solid var(--quantum-cyan); border-radius: 35px; padding: 70px; box-shadow: 0 0 80px rgba(6, 182, 212, 0.5);">
+                <h3 style="font-size: 48px; text-align: center; margin-bottom: 50px; color: var(--quantum-cyan); font-weight: 900;">🚀 ПРОРЫВЫ 2025 ГОДА</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 45px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 18px;">⚛</div>
+                        <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-purple);">QUANTINUUM HELIOS</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.85);">98 кубитов, 99.92% точность, $10B оценка</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 18px;">🎯</div>
+                        <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-purple);">IONQ TEMPO</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.85);">99.99% fidelity — четыре девятки!</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 18px;">🌟</div>
+                        <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-purple);">GOOGLE WILLOW</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.85);">Error correction: ошибки уменьшаются!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breakthrough Timeline -->
+    <section id="breakthrough" class="section" style="background: radial-gradient(circle at 40% 70%, rgba(139, 92, 246, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">Квантовые прорывы ноября 2025</h2>
+            <p class="section-subtitle">Точка перегиба: квантовое преимущество верифицировано на практических задачах</p>
+            
+            <div class="breakthrough-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="breakthrough-item">
+                    <div class="breakthrough-content">
+                        <div class="breakthrough-company">QUANTINUUM</div>
+                        <div class="breakthrough-title">Helios — 98 Кубитов</div>
+                        <div class="breakthrough-desc">5 ноября представлен самый точный квантовый компьютер: 98 физических кубитов, 48 логических, точность 99.921%. Клиенты: JPMorgan, BMW, Amgen. Оценка $10 млрд. Первый коммерческий GenQAI.</div>
+                    </div>
+                    <div></div>
+                    <div class="breakthrough-dot"></div>
+                </div>
+                
+                <div class="breakthrough-item">
+                    <div></div>
+                    <div class="breakthrough-content">
+                        <div class="breakthrough-company">IONQ</div>
+                        <div class="breakthrough-title">99.99% Точность</div>
+                        <div class="breakthrough-desc">21 октября установлен мировой рекорд: первая компания с 99.99% fidelity двухкубитных операций. Система Tempo (#AQ 64) превосходит сверхпроводящие в 36 квадриллионов раз по вычислительному пространству.</div>
+                    </div>
+                    <div class="breakthrough-dot"></div>
+                </div>
+                
+                <div class="breakthrough-item">
+                    <div class="breakthrough-content">
+                        <div class="breakthrough-company">GOOGLE QUANTUM AI</div>
+                        <div class="breakthrough-title">Willow — Error Correction</div>
+                        <div class="breakthrough-desc">Прорыв в коррекции ошибок: увеличение кубитов (3×3→7×7) УМЕНЬШАЕТ ошибки. Quantum Echoes работает в 13,000 раз быстрее суперкомпьютера. Фундаментальный переход к fault-tolerant системам.</div>
+                    </div>
+                    <div></div>
+                    <div class="breakthrough-dot"></div>
+                </div>
+                
+                <div class="breakthrough-item">
+                    <div></div>
+                    <div class="breakthrough-content">
+                        <div class="breakthrough-company">D-WAVE</div>
+                        <div class="breakthrough-title">Quantum Advantage Verified</div>
+                        <div class="breakthrough-desc">Март 2025, публикация в Science: Advantage2 (4,400+ кубитов) решает задачу спиновых стёкол за минуты. Суперкомпьютер Frontier потребовал бы ~1 млн лет и энергию больше годового мирового потребления.</div>
+                    </div>
+                    <div class="breakthrough-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM Section -->
+    <section id="tam" class="section" style="background: radial-gradient(circle at 30% 50%, rgba(236, 72, 153, 0.1), transparent);">
+        <div class="container">
+            <h2 class="section-title">Рынок $97 млрд к 2035</h2>
+            <p class="section-subtitle">Квантовые вычисления — самая быстрорастущая технологическая ниша. CAGR 41.8% до 2035 года</p>
+            
+            <div class="tam-grid">
+                <div class="tam-card">
+                    <div class="tam-label">TAM (GLOBAL)</div>
+                    <div class="tam-value">$97B</div>
+                    <div class="tam-desc">Мировой рынок квантовых технологий к 2035 (McKinsey). Растёт с $1.4-2.7B (2024) до $20-28B к 2030 при CAGR 32-42%</div>
+                </div>
+                
+                <div class="tam-card">
+                    <div class="tam-label">ИНВЕСТИЦИИ 2025</div>
+                    <div class="tam-value">$3.77B</div>
+                    <div class="tam-desc">За первые 9 месяцев 2025 года — втрое больше всего 2024. Государственные инвестиции взлетели с $1.8B до $10B. Акции +3,000%</div>
+                </div>
+                
+                <div class="tam-card">
+                    <div class="tam-label">ECONOMIC IMPACT</div>
+                    <div class="tam-value">$850B</div>
+                    <div class="tam-desc">Экономическое влияние квантовых вычислений к 2040 году (BCG). Рынок к 2040 — $198B. Timing идеален</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 110px;">
+                <h3 style="font-size: 52px; text-align: center; margin-bottom: 55px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💎 КРУПНЕЙШИЕ РАУНДЫ 2025</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
+                    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95)); border: 3px solid var(--quantum-purple); border-radius: 25px; padding: 50px 40px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; color: var(--quantum-cyan);">PSIQUANTUM</div>
+                        <div style="font-size: 58px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">$7B</div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 16px;">Series E $1B, BlackRock + Temasek</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95)); border: 3px solid var(--quantum-purple); border-radius: 25px; padding: 50px 40px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; color: var(--quantum-cyan);">QUANTINUUM</div>
+                        <div style="font-size: 58px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">$10B</div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 16px;">Series B $600M, JPMorgan + NVIDIA</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95)); border: 3px solid var(--quantum-purple); border-radius: 25px; padding: 50px 40px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; color: var(--quantum-cyan);">IONQ</div>
+                        <div style="font-size: 58px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">$24.5B</div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 16px;">Public, M&A $1.6B наличности</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(0, 0, 0, 0.95)); border: 3px solid var(--quantum-purple); border-radius: 25px; padding: 50px 40px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; color: var(--quantum-cyan);">QUERA</div>
+                        <div style="font-size: 58px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;">$1B</div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 16px;">Convertible $230M, Google + SoftBank</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title">Бизнес-модель: Cloud QPU</h2>
+            <p class="section-subtitle">Три тарифа для стартапов, enterprise и research институтов</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Research</div>
+                    <div class="pricing-price">$499</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>1,000 QPU часов</li>
+                        <li>До 32 кубитов</li>
+                        <li>Базовые квантовые алгоритмы</li>
+                        <li>Cloud доступ 24/7</li>
+                        <li>Email поддержка</li>
+                        <li>Документация</li>
+                    </ul>
+                    <div style="font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 20px;">Для стартапов и research</div>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">🔥 ПОПУЛЯРНО</div>
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-price">$4,999</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>10,000 QPU часов</li>
+                        <li>До 98 кубитов</li>
+                        <li>Advanced quantum ML</li>
+                        <li>Hybrid QPU+GPU</li>
+                        <li>Приоритет поддержка</li>
+                        <li>99.99% fidelity гарантия</li>
+                        <li>API интеграция</li>
+                    </ul>
+                    <div style="font-size: 15px; color: var(--quantum-purple); font-weight: 900; margin-top: 20px;">Для enterprise 100-1000 сотрудников</div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-name">Unlimited</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">индивидуальный</div>
+                    <ul class="pricing-features">
+                        <li>Безлимит QPU часов</li>
+                        <li>Все доступные кубиты</li>
+                        <li>On-premise deployment</li>
+                        <li>Кастомные алгоритмы</li>
+                        <li>Dedicated team</li>
+                        <li>SLA 99.99%</li>
+                        <li>White-label опция</li>
+                    </ul>
+                    <div style="font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 20px;">Для корпораций 1000+ сотрудников</div>
+                </div>
+            </div>
+            
+            <div class="revenue-mega">
+                <div class="revenue-title">📊 ПРОГНОЗ ВЫРУЧКИ (КОНСЕРВАТИВНЫЙ)</div>
+                <div class="revenue-timeline">
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2026</div>
+                        <div class="revenue-amount">$5M</div>
+                        <div class="revenue-desc">500 клиентов, beta</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2027</div>
+                        <div class="revenue-amount">$50M</div>
+                        <div class="revenue-desc">5,000 клиентов, масштаб</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2028</div>
+                        <div class="revenue-amount">$200M</div>
+                        <div class="revenue-desc">Enterprise прорыв</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2029</div>
+                        <div class="revenue-amount">$500M</div>
+                        <div class="revenue-desc">Fault-tolerant era</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px;">
+                    <div style="text-align: center; padding: 35px; background: rgba(0, 0, 0, 0.6); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 18px;">
+                        <div style="font-size: 18px; color: var(--quantum-cyan); margin-bottom: 12px; text-transform: uppercase;">CAC</div>
+                        <div style="font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$250</div>
+                    </div>
+                    <div style="text-align: center; padding: 35px; background: rgba(0, 0, 0, 0.6); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 18px;">
+                        <div style="font-size: 18px; color: var(--quantum-cyan); margin-bottom: 12px; text-transform: uppercase;">LTV</div>
+                        <div style="font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$10K</div>
+                    </div>
+                    <div style="text-align: center; padding: 35px; background: rgba(0, 0, 0, 0.6); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 18px;">
+                        <div style="font-size: 18px; color: var(--quantum-cyan); margin-bottom: 12px; text-transform: uppercase;">LTV/CAC</div>
+                        <div style="font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">40x</div>
+                    </div>
+                    <div style="text-align: center; padding: 35px; background: rgba(0, 0, 0, 0.6); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 18px;">
+                        <div style="font-size: 18px; color: var(--quantum-cyan); margin-bottom: 12px; text-transform: uppercase;">GROSS MARGIN</div>
+                        <div style="font-size: 48px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">92%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section id="traction" class="section" style="background: radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1), transparent);">
+        <div class="container">
+            <h2 class="section-title">Traction: Реальные результаты</h2>
+            <p class="section-subtitle">Quantum ML уже работает на практике — HSBC, Ford, AstraZeneca подтверждают</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 45px; margin-top: 90px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 88px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">$3.77B</div>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.85);">ИНВЕСТИЦИЙ ЗА 9 МЕС<br>2025 ГОДА</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 88px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">99.99%</div>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.85);">FIDELITY<br>ЧЕТЫРЕ ДЕВЯТКИ!</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 88px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">+34%</div>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.85);">HSBC ACCURACY<br>VS КЛАССИКА</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 88px; font-weight: 900; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px;">20x</div>
+                    <div style="font-size: 19px; color: rgba(255,255,255,0.85);">ASTRAZENECA SPEEDUP<br>DRUG DISCOVERY</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 110px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12)); border: 4px solid var(--quantum-cyan); border-radius: 35px; padding: 70px; box-shadow: 0 0 80px rgba(6, 182, 212, 0.5);">
+                <h3 style="font-size: 44px; text-align: center; margin-bottom: 55px; color: var(--quantum-cyan); font-weight: 900;">💼 ENTERPRISE КЛИЕНТЫ (NDA)</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; text-align: center;">
+                    <div>
+                        <div style="font-size: 64px; margin-bottom: 15px;">🏦</div>
+                        <div style="font-size: 20px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ФИНТЕХ</div>
+                        <div style="font-size: 15px; color: rgba(255,255,255,0.7);">Trading optimization</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 64px; margin-bottom: 15px;">🏭</div>
+                        <div style="font-size: 20px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ПРОИЗВОДСТВО</div>
+                        <div style="font-size: 15px; color: rgba(255,255,255,0.7);">Supply chain</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 64px; margin-bottom: 15px;">💊</div>
+                        <div style="font-size: 20px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">PHARMA</div>
+                        <div style="font-size: 15px; color: rgba(255,255,255,0.7);">Drug discovery</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 64px; margin-bottom: 15px;">🚗</div>
+                        <div style="font-size: 20px; font-weight: 800; margin-bottom: 10px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AUTOMOTIVE</div>
+                        <div style="font-size: 15px; color: rgba(255,255,255,0.7);">Materials design</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition -->
+    <section id="competition" class="section">
+        <div class="container">
+            <h2 class="section-title">Конкуренция: Квантовое преимущество</h2>
+            <p class="section-subtitle">GPU достигли пределов — квантовые процессоры решают задачи, невозможные для классических систем</p>
+            
+            <div class="comp-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>NVIDIA GPU</th>
+                            <th>Классические TPU</th>
+                            <th class="us-col">QUANTUMX AI (МЫ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Энергопотребление</td>
+                            <td>700-1,200W</td>
+                            <td>450W</td>
+                            <td class="us-col">1.2W (1000x эффективнее)</td>
+                        </tr>
+                        <tr>
+                            <td>Memory Bottleneck</td>
+                            <td><span class="cross-quantum">✗</span> Есть (3.35 TB/s)</td>
+                            <td><span class="cross-quantum">✗</span> Есть</td>
+                            <td class="us-col"><span class="check-quantum">✓</span> Нет (superposition)</td>
+                        </tr>
+                        <tr>
+                            <td>Квантовое преимущество</td>
+                            <td><span class="cross-quantum">✗</span> Невозможно</td>
+                            <td><span class="cross-quantum">✗</span> Невозможно</td>
+                            <td class="us-col"><span class="check-quantum">✓</span> 10²⁵ лет классически</td>
+                        </tr>
+                        <tr>
+                            <td>Точность вычислений</td>
+                            <td>Float32/64</td>
+                            <td>Float32/64</td>
+                            <td class="us-col">99.99% fidelity</td>
+                        </tr>
+                        <tr>
+                            <td>Molecular simulation</td>
+                            <td><span class="cross-quantum">✗</span> Ограниченно</td>
+                            <td><span class="cross-quantum">✗</span> Ограниченно</td>
+                            <td class="us-col"><span class="check-quantum">✓</span> Native квантовая химия</td>
+                        </tr>
+                        <tr>
+                            <td>Optimization задачи</td>
+                            <td>Heuristic</td>
+                            <td>Heuristic</td>
+                            <td class="us-col">Exact quantum annealing</td>
+                        </tr>
+                        <tr>
+                            <td>Стоимость inference</td>
+                            <td>$2.3B/год (OpenAI)</td>
+                            <td>$1.8B/год</td>
+                            <td class="us-col">$200M/год (10x экономия)</td>
+                        </tr>
+                        <tr>
+                            <td>Fault-tolerant</td>
+                            <td><span class="cross-quantum">✗</span> N/A</td>
+                            <td><span class="cross-quantum">✗</span> N/A</td>
+                            <td class="us-col"><span class="check-quantum">✓</span> Roadmap 2029</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 90px; text-align: center;">
+                <h3 style="font-size: 52px; margin-bottom: 35px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🛡️ NVIDIA ИНВЕСТИРУЕТ В КВАНТОВЫЕ СТАРТАПЫ</h3>
+                <p style="font-size: 24px; color: rgba(255, 255, 255, 0.9); line-height: 1.9; max-width: 1100px; margin: 0 auto;">Сентябрь 2025: NVentures инвестировал в Quantinuum, PsiQuantum и QuEra за одну неделю. Платформа NVQLink объединяет 17 производителей QPU для гибридных систем — признание того, что будущее за квантовыми вычислениями, а не GPU.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section" style="background: radial-gradient(circle at 40% 70%, rgba(139, 92, 246, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">Команда: Quantum × AI × Enterprise</h2>
+            <p class="section-subtitle">Уникальная экспертиза в квантовых вычислениях, AI и enterprise продажах</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🔬</div>
+                    <div class="team-name">АЛЕКСЕЙ ВОЛКОВ</div>
+                    <div class="team-role">CEO / Co-Founder</div>
+                    <div class="team-bio">Ex-Lead Quantum Engineer @ IBM Quantum. Создавал Qiskit и IBM Quantum Network. PhD квантовая физика MIT. 12 лет в quantum computing. Нетворк: Quantinuum, Google, IonQ.</div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">👩‍💻</div>
+                    <div class="team-name">МАРИЯ ПЕТРОВА</div>
+                    <div class="team-role">CTO / Co-Founder</div>
+                    <div class="team-bio">Ex-Senior Research Scientist @ Google Quantum AI. Работала над Willow и error correction. PhD ML Stanford. Автор 15 патентов в quantum ML. Эксперт в hybrid QPU+GPU.</div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">💼</div>
+                    <div class="team-name">ДМИТРИЙ СОКОЛОВ</div>
+                    <div class="team-role">CRO / Co-Founder</div>
+                    <div class="team-bio">Ex-VP Enterprise Sales @ Quantinuum. Закрыл deals с JPMorgan, BMW, Amgen. Построил продажи от $0 до $50M ARR за 3 года. MBA Wharton. Нетворк в Fortune 500.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 90px;">
+                <h3 style="font-size: 44px; text-align: center; margin-bottom: 50px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎯 СОВЕТНИКИ МИРОВОГО УРОВНЯ</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
+                    <div style="background: rgba(0,0,0,0.8); padding: 50px; border: 3px solid rgba(139, 92, 246, 0.4); border-radius: 28px;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ИГОРЬ ИВАНОВ</div>
+                        <div style="font-size: 20px; color: var(--quantum-cyan); margin-bottom: 18px; font-weight: 800;">PARTNER @ ANDREESSEN HOROWITZ</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.85);">Lead investor в нашем Series A. Портфель: IonQ ($24B), Rigetti ($3B). Открывает двери к enterprise и venture.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.8); padding: 50px; border: 3px solid rgba(139, 92, 246, 0.4); border-radius: 28px;">
+                        <div style="font-size: 28px; font-weight: 900; margin-bottom: 15px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">АННА БЕЛОВА</div>
+                        <div style="font-size: 20px; color: var(--quantum-cyan); margin-bottom: 18px; font-weight: 800;">CTO @ NVIDIA QUANTUM PLATFORMS</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.85);">Создала NVQLink — hybrid quantum-GPU. Обеспечивает доступ к 17 QPU производителям и partnership с NVIDIA.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">ИНВЕСТИРУЙТЕ<br>В КВАНТОВОЕ<br>БУДУЩЕЕ</h2>
+                <p class="cta-text">Мы привлекаем Series A раунд <strong>$50 000 000</strong> для создания первой коммерческой hybrid QPU+GPU платформы.<br>Уникальная команда, прорывная технология, рынок $97B — всё для x100 возврата.</p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:invest@quantumx.ai" class="btn btn-primary">⚛ ОБСУДИТЬ ИНВЕСТИЦИИ</a>
+                    <a href="#" class="btn btn-secondary">📊 СКАЧАТЬ PITCH DECK</a>
+                </div>
+                
+                <div class="investment-grid">
+                    <div class="investment-box">
+                        <div class="investment-label">ПРИВЛЕКАЕМ</div>
+                        <div class="investment-value">$50M</div>
+                    </div>
+                    <div class="investment-box">
+                        <div class="investment-label">ОЦЕНКА PRE-MONEY</div>
+                        <div class="investment-value">$200M</div>
+                    </div>
+                    <div class="investment-box">
+                        <div class="investment-label">МИНИМАЛЬНЫЙ ЧЕК</div>
+                        <div class="investment-value">$500K</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 90px; padding: 70px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.12)); border: 4px solid var(--quantum-purple); border-radius: 35px; box-shadow: 0 0 100px rgba(139, 92, 246, 0.6);">
+                    <h3 style="font-size: 40px; margin-bottom: 50px; background: linear-gradient(135deg, var(--quantum-purple), var(--quantum-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">🎁 ЧТО ВЫ ПОЛУЧИТЕ</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
+                        <div>
+                            <div style="font-size: 64px; margin-bottom: 20px;">📈</div>
+                            <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-cyan);">EQUITY 20%</div>
+                            <div style="font-size: 17px; color: rgba(255,255,255,0.75);">За $50M инвестиций</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 64px; margin-bottom: 20px;">🎯</div>
+                            <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-cyan);">BOARD SEAT</div>
+                            <div style="font-size: 17px; color: rgba(255,255,255,0.75);">Прямой контроль</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 64px; margin-bottom: 20px;">💰</div>
+                            <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-cyan);">EXIT 5-7 ЛЕТ</div>
+                            <div style="font-size: 17px; color: rgba(255,255,255,0.75);">IPO или M&A</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 64px; margin-bottom: 20px;">🚀</div>
+                            <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; color: var(--quantum-cyan);">x50-100 ROI</div>
+                            <div style="font-size: 17px; color: rgba(255,255,255,0.75);">При успешном exit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 70px; text-align: center;">
+                    <p style="font-size: 22px; color: rgba(255,255,255,0.75); line-height: 1.9;">
+                        🔒 КОНФИДЕНЦИАЛЬНОСТЬ ГАРАНТИРОВАНА NDA<br>
+                        📊 FULL DATA ROOM ДЛЯ DUE DILIGENCE<br>
+                        ⚡ РАУНД ЗАКРЫВАЕТСЯ ЧЕРЕЗ 90 ДНЕЙ
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 35px;">⚛ QUANTUMX AI</div>
+            <p style="color: rgba(255,255,255,0.75); margin-bottom: 35px; font-size: 22px;">КВАНТОВЫЕ ПРОЦЕССОРЫ ДЛЯ AI • КОНЕЦ ЭРЫ GPU</p>
+            <div style="display: flex; justify-content: center; gap: 60px; margin-bottom: 45px; flex-wrap: wrap;">
+                <a href="mailto:hello@quantumx.ai" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 18px;">📧 hello@quantumx.ai</a>
+                <a href="tel:+79991234567" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 18px;">📱 +7 (999) 123-45-67</a>
+                <a href="#" style="color: rgba(255,255,255,0.9); text-decoration: none; font-size: 18px;">💼 LinkedIn</a>
+            </div>
+            <div style="color: rgba(255,255,255,0.45); font-size: 15px;">
+                © 2025 QUANTUMX AI. POWERED BY 99.99% FIDELITY ION TRAP QUBITS | SERIES A FUNDING ROUND
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quantum Particle Field
+        const canvas = document.getElementById('quantum-field');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = ['#8B5CF6', '#06B6D4', '#10B981'][Math.floor(Math.random() * 3)];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = Array(100).fill().map(() => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 10, 31, 1)';
+                nav.style.boxShadow = '0 10px 80px rgba(139, 92, 246, 0.5)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 31, 0.95)';
+                nav.style.boxShadow = '0 10px 50px rgba(139, 92, 246, 0.2)';
+            }
+        });
+    </script>
+</body>
+</html>

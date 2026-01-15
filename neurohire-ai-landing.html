@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEUROHIRE AI - Автономный AI-Рекрутер | Замена HR-Отдела</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #B026FF;
+            --neon-blue: #00F0FF;
+            --neon-pink: #FF0099;
+            --neon-green: #00FF88;
+            --dark: #0A0A1E;
+            --darker: #050510;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+            background: var(--darker);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1650px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Gradient Background */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue), var(--neon-pink), var(--neon-purple));
+            background-size: 400% 400%;
+            opacity: 0.05;
+            animation: gradientShift 15s ease infinite;
+            z-index: 0;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 20s infinite;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100vh) translateX(50px); }
+            50% { transform: translateY(-200vh) translateX(-50px); }
+            75% { transform: translateY(-300vh) translateX(100px); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 30, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 25px 50px;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(176, 38, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        #hero {
+            background: radial-gradient(circle at 30% 50%, rgba(176, 38, 255, 0.15), transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 240, 255, 0.15), transparent 50%);
+        }
+
+        h1 {
+            font-size: 98px;
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -3px;
+            animation: textShine 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .subtitle {
+            font-size: 34px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 70px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.2), rgba(255, 0, 153, 0.2));
+            border: 2px solid var(--neon-purple);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.4);
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.6);
+        }
+
+        .hero-demo {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 240, 255, 0.1));
+            border: 3px solid var(--neon-purple);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 1000px;
+            margin: 0 auto 70px;
+            box-shadow: 0 0 60px rgba(176, 38, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-demo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--neon-purple), transparent);
+            opacity: 0.1;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .demo-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--neon-purple);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .demo-status {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--neon-green);
+            color: #000;
+            font-weight: 900;
+            border-radius: 25px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .demo-content {
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .demo-line {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .demo-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 0 10px var(--neon-purple));
+        }
+
+        .demo-text {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .demo-value {
+            color: var(--neon-purple);
+            font-weight: 900;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.6));
+            border: 2px solid rgba(176, 38, 255, 0.4);
+            border-radius: 25px;
+            padding: 50px 40px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(176, 38, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 25px 60px rgba(176, 38, 255, 0.4);
+        }
+
+        .stat-icon {
+            font-size: 64px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 20px var(--neon-purple));
+        }
+
+        .stat-number {
+            font-size: 58px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 74px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 24px;
+            color: var(--neon-blue);
+            margin-bottom: 80px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Problem Cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, rgba(255, 0, 153, 0.1), rgba(0, 0, 0, 0.8));
+            border: 2px solid var(--neon-pink);
+            border-radius: 25px;
+            padding: 55px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::after {
+            content: '⚠';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 120px;
+            opacity: 0.05;
+            color: var(--neon-pink);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 0 60px rgba(255, 0, 153, 0.5);
+        }
+
+        .problem-icon {
+            font-size: 72px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 20px var(--neon-pink));
+        }
+
+        .problem-title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--neon-pink);
+        }
+
+        .problem-stat {
+            font-size: 54px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+        }
+
+        .problem-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        /* Solution Grid */
+        .solution-mega-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .solution-content h3 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .solution-content p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .feature-list-neuro {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .feature-neuro {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(90deg, rgba(176, 38, 255, 0.1), transparent);
+            padding: 22px 28px;
+            border-radius: 15px;
+            border-left: 4px solid var(--neon-purple);
+            transition: all 0.3s;
+        }
+
+        .feature-neuro:hover {
+            background: linear-gradient(90deg, rgba(176, 38, 255, 0.2), rgba(0, 240, 255, 0.1));
+            transform: translateX(10px);
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.4);
+        }
+
+        .feature-icon-neuro {
+            font-size: 36px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 10px var(--neon-purple));
+        }
+
+        .feature-text-neuro {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* AI Process Visual */
+        .ai-process {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1));
+            border: 3px solid var(--neon-blue);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.3);
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .process-step {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(176, 38, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover {
+            border-color: var(--neon-purple);
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(176, 38, 255, 0.4);
+        }
+
+        .process-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: #000;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .process-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+        }
+
+        .process-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* TAM Cards */
+        .tam-neuro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-top: 80px;
+        }
+
+        .tam-neuro-card {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9));
+            border: 3px solid var(--neon-purple);
+            border-radius: 30px;
+            padding: 65px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .tam-neuro-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, var(--neon-purple), transparent 40%);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .tam-neuro-card:hover::before {
+            opacity: 0.2;
+            top: -50%;
+            left: -50%;
+        }
+
+        .tam-neuro-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 80px rgba(176, 38, 255, 0.6);
+        }
+
+        .tam-label {
+            font-size: 18px;
+            color: var(--neon-blue);
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tam-value {
+            font-size: 88px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            line-height: 1;
+        }
+
+        .tam-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        /* Pricing */
+        .pricing-neuro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .pricing-neuro-card {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.05), rgba(0, 0, 0, 0.9));
+            border: 2px solid rgba(176, 38, 255, 0.4);
+            border-radius: 30px;
+            padding: 60px 50px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .pricing-neuro-card.featured {
+            border-width: 4px;
+            border-color: var(--neon-purple);
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.15), rgba(0, 240, 255, 0.1));
+            transform: scale(1.05);
+        }
+
+        .pricing-neuro-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 0 60px rgba(176, 38, 255, 0.5);
+        }
+
+        .pricing-badge-neuro {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+
+        .pricing-name {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-price {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 45px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(176, 38, 255, 0.2);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--neon-purple);
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        /* Revenue */
+        .revenue-neuro-mega {
+            margin-top: 100px;
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.12), rgba(0, 240, 255, 0.08));
+            border: 3px solid var(--neon-purple);
+            border-radius: 35px;
+            padding: 75px;
+            box-shadow: 0 0 80px rgba(176, 38, 255, 0.4);
+        }
+
+        .revenue-neuro-title {
+            font-size: 48px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .revenue-timeline-neuro {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .revenue-milestone-neuro {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 45px 30px;
+            border-radius: 25px;
+            border: 2px solid rgba(176, 38, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .revenue-milestone-neuro:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-10px);
+            box-shadow: 0 0 50px rgba(176, 38, 255, 0.5);
+        }
+
+        .revenue-year {
+            font-size: 22px;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .revenue-amount {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .revenue-customers {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Competition Table */
+        .competition-neuro-table {
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--neon-purple);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .competition-neuro-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .competition-neuro-table th,
+        .competition-neuro-table td {
+            padding: 32px;
+            text-align: left;
+            border-bottom: 1px solid rgba(176, 38, 255, 0.2);
+            font-size: 17px;
+        }
+
+        .competition-neuro-table th {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.2), rgba(0, 240, 255, 0.1));
+            font-weight: 900;
+            font-size: 20px;
+            color: var(--neon-purple);
+        }
+
+        .competition-neuro-table .us-column {
+            background: rgba(176, 38, 255, 0.1);
+            font-weight: 700;
+        }
+
+        .check-neuro {
+            color: var(--neon-green);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .cross-neuro {
+            color: var(--neon-pink);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        /* Team */
+        .team-neuro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-top: 80px;
+        }
+
+        .team-neuro-card {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.9));
+            border: 2px solid rgba(176, 38, 255, 0.3);
+            border-radius: 25px;
+            padding: 55px 45px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .team-neuro-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 60px rgba(176, 38, 255, 0.5);
+        }
+
+        .team-avatar-neuro {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            border: 4px solid rgba(176, 38, 255, 0.5);
+            box-shadow: 0 0 40px rgba(176, 38, 255, 0.5);
+        }
+
+        .team-name {
+            font-size: 30px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-role {
+            font-size: 18px;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .team-bio {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        /* Roadmap */
+        .roadmap-neuro {
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .roadmap-line-neuro {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            transform: translateX(-50%);
+            box-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        .roadmap-item-neuro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .roadmap-item-neuro:nth-child(even) .roadmap-content-neuro {
+            order: 2;
+        }
+
+        .roadmap-content-neuro {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--neon-purple);
+            border-radius: 25px;
+            padding: 50px;
+            transition: all 0.3s;
+        }
+
+        .roadmap-content-neuro:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 60px rgba(176, 38, 255, 0.5);
+        }
+
+        .roadmap-quarter {
+            font-size: 24px;
+            color: var(--neon-blue);
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .roadmap-title-neuro {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .roadmap-description-neuro {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        .roadmap-dot-neuro {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border: 6px solid var(--darker);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        /* CTA */
+        #cta {
+            background: radial-gradient(circle at 50% 50%, rgba(176, 38, 255, 0.2), transparent 70%);
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 84px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-text {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 35px;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .btn {
+            padding: 28px 70px;
+            font-size: 22px;
+            font-weight: 900;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 500px;
+            height: 500px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: #fff;
+            box-shadow: 0 0 50px rgba(176, 38, 255, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 80px rgba(176, 38, 255, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 3px solid var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(176, 38, 255, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .investment-neuro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .investment-neuro-box {
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.15), rgba(0, 240, 255, 0.1));
+            border: 3px solid var(--neon-purple);
+            border-radius: 25px;
+            padding: 55px 45px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(176, 38, 255, 0.4);
+        }
+
+        .investment-label {
+            font-size: 18px;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .investment-value {
+            font-size: 68px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 3px solid var(--neon-purple);
+            box-shadow: 0 -10px 50px rgba(176, 38, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 { font-size: 68px; }
+            .section-title { font-size: 56px; }
+            .hero-stats,
+            .tam-neuro-grid,
+            .pricing-neuro-grid,
+            .team-neuro-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .section-title { font-size: 38px; }
+            .hero-stats,
+            .problem-grid,
+            .tam-neuro-grid,
+            .pricing-neuro-grid,
+            .team-neuro-grid,
+            .solution-mega-grid,
+            .roadmap-item-neuro {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles -->
+    <div class="particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🧠 NEUROHIRE AI</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#problem">Проблема</a></li>
+                <li><a href="#solution">Решение</a></li>
+                <li><a href="#tam">Рынок</a></li>
+                <li><a href="#business">Бизнес</a></li>
+                <li><a href="#cta">Инвестиции</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="bg-gradient"></div>
+        <div class="container">
+            <div style="text-align: center;">
+                <h1>АВТОНОМНЫЙ<br>AI-РЕКРУТЕР</h1>
+                <p class="subtitle">ЗАМЕНА ВСЕГО HR-ОТДЕЛА • НАЙМ ЗА 7 ДНЕЙ ВМЕСТО 42 • ЭКОНОМИЯ 5.4M ₽/ГОД</p>
+                
+                <div class="hero-badges">
+                    <div class="badge">🧠 GIGACHAT 2.0 AI</div>
+                    <div class="badge">🎤 SALUTESPEECH VOICE</div>
+                    <div class="badge">🤖 AUTONOMOUS AGENT</div>
+                    <div class="badge">📊 ATS ИНТЕГРАЦИЯ</div>
+                </div>
+                
+                <div class="hero-demo">
+                    <div class="demo-header">
+                        <div class="demo-title">⚡ AI В ДЕЙСТВИИ: ОБРАБОТКА КАНДИДАТА</div>
+                        <div class="demo-status">● АКТИВНО</div>
+                    </div>
+                    <div class="demo-content">
+                        <div class="demo-line">
+                            <span class="demo-icon">📄</span>
+                            <span class="demo-text">Резюме получено: <span class="demo-value">Иванов Алексей, Senior Python Dev</span></span>
+                        </div>
+                        <div class="demo-line">
+                            <span class="demo-icon">🧠</span>
+                            <span class="demo-text">AI-анализ (GigaChat): <span class="demo-value">8.7/10 match</span> • 5 лет опыта • Django, FastAPI, PostgreSQL</span>
+                        </div>
+                        <div class="demo-line">
+                            <span class="demo-icon">📞</span>
+                            <span class="demo-text">Автозвонок (SaluteSpeech): <span class="demo-value">Завершён успешно</span> • Подтверждена зарплата 280K</span>
+                        </div>
+                        <div class="demo-line">
+                            <span class="demo-icon">🎯</span>
+                            <span class="demo-text">AI-скоринг: <span class="demo-value">ИДЕАЛЬНЫЙ КАНДИДАТ</span> • Отправлен менеджеру на финальное интервью</span>
+                        </div>
+                        <div class="demo-line">
+                            <span class="demo-icon">⏱️</span>
+                            <span class="demo-text">Время обработки: <span class="demo-value">3 минуты</span> (vs 2 часа вручную)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-number">$30B</div>
+                        <div class="stat-label">Мировой рынок AI-рекрутинга к 2030</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-number">42 дня</div>
+                        <div class="stat-label">Среднее время найма без AI</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💸</div>
+                        <div class="stat-number">$4 700</div>
+                        <div class="stat-label">Средняя цена одного найма</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-number">87%</div>
+                        <div class="stat-label">Компаний испытывают проблемы с наймом</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <h2 class="section-title">HR-Отделы тонут в рутине</h2>
+            <p class="section-subtitle">87% компаний жалуются на сложность и дороговизну найма. Средний time-to-hire = 42 дня и $4,700 на кандидата</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <div class="problem-title">Долгий найм</div>
+                    <div class="problem-stat">42 дня</div>
+                    <div class="problem-text">Среднее время от публикации вакансии до оффера — 42 дня. За это время компания теряет выручку, а лучшие кандидаты уходят к конкурентам. 58% кандидатов получают оффер от другой компании, пока вы думаете.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <div class="problem-title">Дорогой cost per hire</div>
+                    <div class="problem-stat">$4 700</div>
+                    <div class="problem-text">Средняя цена найма одного сотрудника — $4,700 (HeadHunter, LinkedIn, агентства, время HR-менеджеров). Для компании из 100 человек с turnover 20% = $94K ежегодно только на рекрутинг!</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📄</div>
+                    <div class="problem-title">Завал резюме</div>
+                    <div class="problem-stat">75%</div>
+                    <div class="problem-text">75% всех резюме — неподходящие кандидаты. HR тратит 23 часа в неделю на скрининг резюме вручную. Это 50% рабочего времени на рутину! А качественных кандидатов пропускают из-за усталости.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">😫</div>
+                    <div class="problem-title">Выгорание HR</div>
+                    <div class="problem-stat">68%</div>
+                    <div class="problem-text">68% HR-специалистов испытывают burnout. Главная причина — монотонная работа: скрининг 200+ резюме, 50+ звонков в день, ведение ATS. Текучка в HR — 35% ежегодно. HR стоит 150-250K₽/мес.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; text-align: center; background: linear-gradient(135deg, rgba(255, 0, 153, 0.15), rgba(176, 38, 255, 0.1)); border: 3px solid var(--neon-pink); border-radius: 30px; padding: 60px; box-shadow: 0 0 60px rgba(255, 0, 153, 0.4);">
+                <h3 style="font-size: 48px; margin-bottom: 30px;">💔 ИТОГО: $500K ПОТЕРЬ НА ПЛОХИХ НАЙМАХ</h3>
+                <p style="font-size: 22px; color: rgba(255, 255, 255, 0.9); line-height: 1.8;">Неправильный найм стоит 3× годовую зарплату (увольнение, переобучение, потеря производительности). Для компании из 100 человек с 5 плохими наймами в год = $500K прямых потерь. Плюс упущенная выручка из-за незакрытых вакансий.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section" style="background: radial-gradient(circle at 70% 50%, rgba(0, 240, 255, 0.1), transparent);">
+        <div class="container">
+            <h2 class="section-title">NEUROHIRE AI: От 42 дней к 7</h2>
+            <p class="section-subtitle">Автономный AI-агент, который заменяет 3 HR-менеджеров и ускоряет найм в 6 раз</p>
+            
+            <div class="solution-mega-grid">
+                <div class="solution-content">
+                    <h3>От 5.4M ₽/год на HR к 600K ₽/год</h3>
+                    <p>Традиционный HR-отдел: 3 менеджера × 180K₽ = 5.4M₽/год + HeadHunter Premium 500K₽ + LinkedIn Recruiter 300K₽. NEUROHIRE AI — автономный агент за 50K₽/мес, который работает 24/7, обрабатывает 1000+ резюме в час и никогда не выгорает.</p>
+                    
+                    <div class="feature-list-neuro">
+                        <div class="feature-neuro">
+                            <div class="feature-icon-neuro">🧠</div>
+                            <div class="feature-text-neuro">AI-СКРИНИНГ РЕЗЮМЕ НА GIGACHAT 2.0</div>
+                        </div>
+                        <div class="feature-neuro">
+                            <div class="feature-icon-neuro">📞</div>
+                            <div class="feature-text-neuro">АВТОЗВОНКИ КАНДИДАТАМ (SALUTESPEECH)</div>
+                        </div>
+                        <div class="feature-neuro">
+                            <div class="feature-icon-neuro">🎯</div>
+                            <div class="feature-text-neuro">СКОРИНГ КАНДИДАТОВ ПО 50+ ПАРАМЕТРАМ</div>
+                        </div>
+                        <div class="feature-neuro">
+                            <div class="feature-icon-neuro">📊</div>
+                            <div class="feature-text-neuro">ИНТЕГРАЦИЯ С ATS (HH, LINKEDIN, TALANTIX)</div>
+                        </div>
+                        <div class="feature-neuro">
+                            <div class="feature-icon-neuro">🤖</div>
+                            <div class="feature-text-neuro">AI-ИНТЕРВЬЮ С ВИДЕОАНАЛИЗОМ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-process">
+                    <h4 style="font-size: 26px; text-align: center; margin-bottom: 35px; color: var(--neon-blue); font-weight: 900;">⚡ ПРОЦЕСС НАЙМА С AI</h4>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="process-number">1</div>
+                                <div>
+                                    <div class="process-title">ПАРСИНГ РЕЗЮМЕ</div>
+                                    <div class="process-desc">AI собирает резюме с HH, LinkedIn, Telegram-каналов. 1000+ резюме/час.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="process-number">2</div>
+                                <div>
+                                    <div class="process-title">AI-СКРИНИНГ</div>
+                                    <div class="process-desc">GigaChat анализирует навыки, опыт, культурный fit. Скоринг 0-10.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="process-number">3</div>
+                                <div>
+                                    <div class="process-title">АВТОЗВОНКИ</div>
+                                    <div class="process-desc">SaluteSpeech звонит топ-кандидатам. Проверяет мотивацию, зарплату, релокацию.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="process-number">4</div>
+                                <div>
+                                    <div class="process-title">AI-ИНТЕРВЬЮ</div>
+                                    <div class="process-desc">Видеоинтервью с анализом речи и эмоций. Технические вопросы адаптируются.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div class="process-number">5</div>
+                                <div>
+                                    <div class="process-title">ФИНАЛЬНАЯ РЕКОМЕНДАЦИЯ</div>
+                                    <div class="process-desc">3-5 лучших кандидатов с полным досье для hiring manager.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; padding: 25px; background: rgba(176, 38, 255, 0.1); border-left: 4px solid var(--neon-purple); border-radius: 10px;">
+                        <div style="font-size: 16px; color: var(--neon-green); font-family: 'Courier New', monospace;">
+                            ⏱️ Время найма: 7 ДНЕЙ (vs 42 без AI)<br>
+                            💰 Экономия: 5.4M ₽/год → 600K ₽/год<br>
+                            🎯 Качество: 92% кандидатов проходят испытательный срок
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="section">
+        <div class="container">
+            <h2 class="section-title">Технологический стек</h2>
+            <p class="section-subtitle">Передовой AI + интеграции с топ HR-платформами</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; margin-top: 80px;">
+                <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.9)); border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px; padding: 40px 30px; text-align: center; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='var(--neon-purple)'; this.style.boxShadow='0 0 40px rgba(176,38,255,0.5)';" onmouseout="this.style.transform=''; this.style.borderColor='rgba(176,38,255,0.4)'; this.style.boxShadow='';">
+                    <div style="font-size: 72px; margin-bottom: 20px;">🧠</div>
+                    <div style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--neon-purple);">GigaChat 2.0</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.7);">NLP для анализа резюме, генерация вопросов для интервью, 11M токенов от Sber500</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.9)); border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px; padding: 40px 30px; text-align: center; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='var(--neon-purple)'; this.style.boxShadow='0 0 40px rgba(176,38,255,0.5)';" onmouseout="this.style.transform=''; this.style.borderColor='rgba(176,38,255,0.4)'; this.style.boxShadow='';">
+                    <div style="font-size: 72px; margin-bottom: 20px;">🎤</div>
+                    <div style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--neon-purple);">SaluteSpeech</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.7);">STT/TTS для автозвонков кандидатам, распознавание эмоций в голосе</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.9)); border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px; padding: 40px 30px; text-align: center; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='var(--neon-purple)'; this.style.boxShadow='0 0 40px rgba(176,38,255,0.5)';" onmouseout="this.style.transform=''; this.style.borderColor='rgba(176,38,255,0.4)'; this.style.boxShadow='';">
+                    <div style="font-size: 72px; margin-bottom: 20px;">📊</div>
+                    <div style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--neon-purple);">ATS API</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.7);">Интеграция с HeadHunter, LinkedIn, Talantix, Хантфлоу — все вакансии в одном месте</div>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(0, 0, 0, 0.9)); border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px; padding: 40px 30px; text-align: center; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.borderColor='var(--neon-purple)'; this.style.boxShadow='0 0 40px rgba(176,38,255,0.5)';" onmouseout="this.style.transform=''; this.style.borderColor='rgba(176,38,255,0.4)'; this.style.boxShadow='';">
+                    <div style="font-size: 72px; margin-bottom: 20px;">🎥</div>
+                    <div style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--neon-purple);">CV Video AI</div>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.7);">Анализ видеоинтервью: микровыражения, речевые паттерны, честность ответов</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 3px solid var(--neon-blue); border-radius: 30px; padding: 60px; box-shadow: 0 0 60px rgba(0, 240, 255, 0.4);">
+                <h3 style="font-size: 42px; text-align: center; margin-bottom: 40px; color: var(--neon-blue);">⚡ УНИКАЛЬНЫЕ ФИШКИ</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 15px;">🤖</div>
+                        <div style="font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--neon-purple);">AUTONOMOUS AGENT</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.8);">Не просто ATS, а полноценный AI-агент, который сам ищет, звонит и отбирает</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 15px;">🎯</div>
+                        <div style="font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--neon-purple);">92% ТОЧНОСТЬ</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.8);">92% кандидатов, отобранных AI, проходят испытательный срок (vs 67% без AI)</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 15px;">⚡</div>
+                        <div style="font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--neon-purple);">6X БЫСТРЕЕ</div>
+                        <p style="font-size: 17px; color: rgba(255,255,255,0.8);">Найм за 7 дней вместо 42. Лучшие кандидаты не успевают уйти к конкурентам</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM Section -->
+    <section id="tam" class="section" style="background: radial-gradient(circle at 30% 50%, rgba(255, 0, 153, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">Рынок: $30 млрд возможностей</h2>
+            <p class="section-subtitle">AI-рекрутинг — один из самых быстрорастущих сегментов HR Tech, +35% CAGR</p>
+            
+            <div class="tam-neuro-grid">
+                <div class="tam-neuro-card">
+                    <div class="tam-label">TAM (GLOBAL)</div>
+                    <div class="tam-value">$30B</div>
+                    <div class="tam-description">Мировой рынок AI-рекрутинга к 2030. HR Tech в целом — $90B. Россия — $2.4B (8% глобального, растёт быстрее из-за дефицита HR)</div>
+                </div>
+                
+                <div class="tam-neuro-card">
+                    <div class="tam-label">SAM (РОССИЯ)</div>
+                    <div class="tam-value">$1.2B</div>
+                    <div class="tam-description">500 000 компаний в РФ нуждаются в рекрутинге. 200K активно нанимают. Средний чек $500/мес × 200K = $100M MRR → $1.2B ARR</div>
+                </div>
+                
+                <div class="tam-neuro-card">
+                    <div class="tam-label">SOM (ЗАХВАТ 5 ЛЕТ)</div>
+                    <div class="tam-value">$200M</div>
+                    <div class="tam-description">100 000 клиентов к 2030 (50% SAM) × $165/мес средний чек = $16.5M MRR → $200M ARR. Реалистичный сценарий с viral growth</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 100px;">
+                <h3 style="font-size: 48px; text-align: center; margin-bottom: 50px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ПОЧЕМУ СЕЙЧАС ИДЕАЛЬНОЕ ВРЕМЯ?</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-purple); border-radius: 25px; padding: 45px; text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 20px;">💰</div>
+                        <h4 style="font-size: 26px; margin-bottom: 15px; color: var(--neon-purple);">ИНВЕСТБУМ В HR TECH</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 17px;">$15B венчурных инвестиций в HR Tech за 2024. AI-рекрутинг — самая горячая ниша</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-purple); border-radius: 25px; padding: 45px; text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 20px;">😫</div>
+                        <h4 style="font-size: 26px; margin-bottom: 15px; color: var(--neon-purple);">ДЕФИЦИТ HR</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 17px;">87% компаний испытывают проблемы с наймом. Дефицит HR-специалистов — 2.5M глобально</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-purple); border-radius: 25px; padding: 45px; text-align: center;">
+                        <div style="font-size: 64px; margin-bottom: 20px;">🚀</div>
+                        <h4 style="font-size: 26px; margin-bottom: 15px; color: var(--neon-purple);">AI ГОТОВ</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 17px;">GigaChat 2.0 и голосовые модели достигли качества, достаточного для автономной работы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title">Бизнес-модель: B2B SaaS</h2>
+            <p class="section-subtitle">Три тарифа для разных сегментов • Sticky product • NRR 150%+</p>
+            
+            <div class="pricing-neuro-grid">
+                <div class="pricing-neuro-card">
+                    <div class="pricing-name">Стартап</div>
+                    <div class="pricing-price">19 990₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>До 10 вакансий</li>
+                        <li>AI-скрининг резюме</li>
+                        <li>Автозвонки (100/мес)</li>
+                        <li>Базовая ATS</li>
+                        <li>Email поддержка</li>
+                        <li>HeadHunter интеграция</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.6);">Для компаний 10-50 сотрудников</div>
+                </div>
+                
+                <div class="pricing-neuro-card featured">
+                    <div class="pricing-badge-neuro">🔥 ТОП</div>
+                    <div class="pricing-name">Бизнес</div>
+                    <div class="pricing-price">49 990₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>До 50 вакансий</li>
+                        <li>Advanced AI-agent</li>
+                        <li>Безлимит автозвонков</li>
+                        <li>AI-интервью</li>
+                        <li>Все ATS интеграции</li>
+                        <li>Видеоанализ</li>
+                        <li>Приоритет поддержка</li>
+                    </ul>
+                    <div style="font-size: 14px; color: var(--neon-purple); font-weight: 800;">Для средних компаний 50-500 сотрудников</div>
+                </div>
+                
+                <div class="pricing-neuro-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-price">от 199K</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>Безлимит вакансий</li>
+                        <li>On-premise deploy</li>
+                        <li>Кастомизация AI</li>
+                        <li>Выделенный CSM</li>
+                        <li>SLA 99.9%</li>
+                        <li>API для интеграций</li>
+                        <li>White-label опция</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.6);">Для корпораций 500+ сотрудников</div>
+                </div>
+            </div>
+            
+            <div class="revenue-neuro-mega">
+                <div class="revenue-neuro-title">📊 ПРОГНОЗ ВЫРУЧКИ (КОНСЕРВАТИВНЫЙ)</div>
+                <div class="revenue-timeline-neuro">
+                    <div class="revenue-milestone-neuro">
+                        <div class="revenue-year">2026</div>
+                        <div class="revenue-amount">$2.4M</div>
+                        <div class="revenue-customers">2 000 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone-neuro">
+                        <div class="revenue-year">2027</div>
+                        <div class="revenue-amount">$24M</div>
+                        <div class="revenue-customers">20 000 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone-neuro">
+                        <div class="revenue-year">2028</div>
+                        <div class="revenue-amount">$72M</div>
+                        <div class="revenue-customers">50 000 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone-neuro">
+                        <div class="revenue-year">2029</div>
+                        <div class="revenue-amount">$200M</div>
+                        <div class="revenue-customers">100 000 клиентов</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+                    <div style="text-align: center; padding: 30px; background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(176, 38, 255, 0.3); border-radius: 15px;">
+                        <div style="font-size: 16px; color: var(--neon-blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">CAC</div>
+                        <div style="font-size: 42px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$120</div>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(176, 38, 255, 0.3); border-radius: 15px;">
+                        <div style="font-size: 16px; color: var(--neon-blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">LTV</div>
+                        <div style="font-size: 42px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">$1 800</div>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(176, 38, 255, 0.3); border-radius: 15px;">
+                        <div style="font-size: 16px; color: var(--neon-blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">LTV/CAC</div>
+                        <div style="font-size: 42px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">15x</div>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(176, 38, 255, 0.3); border-radius: 15px;">
+                        <div style="font-size: 16px; color: var(--neon-blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">PAYBACK</div>
+                        <div style="font-size: 42px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">2 МЕС</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px; text-align: center;">
+                    <h4 style="font-size: 32px; margin-bottom: 20px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💎 UNIT ECONOMICS МЕЧТЫ</h4>
+                    <p style="font-size: 20px; color: rgba(255,255,255,0.9);">GROSS MARGIN 92% | CHURN 1% МЕС | NRR 150% | RULE OF 40: 180+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section id="traction" class="section" style="background: radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">Traction: Реальный спрос</h2>
+            <p class="section-subtitle">Мы уже в диалоге с 8 Enterprise-клиентами и имеем LOI на $480K ARR</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 80px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 82px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">11M</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.8);">ТОКЕНОВ GIGACHAT<br>ОТ SBER500</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 82px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">8</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.8);">ENTERPRISE<br>В ПИЛОТЕ</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 82px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">$480K</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.8);">ARR В ПИСЬМАХ<br>О НАМЕРЕНИЯХ</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 82px; font-weight: 900; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">92%</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.8);">КАНДИДАТЫ ПРОХОДЯТ<br>ИСПЫТАТЕЛЬНЫЙ СРОК</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 100px; background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 3px solid var(--neon-blue); border-radius: 30px; padding: 60px; box-shadow: 0 0 60px rgba(0, 240, 255, 0.4);">
+                <h3 style="font-size: 40px; text-align: center; margin-bottom: 50px; color: var(--neon-blue);">💼 ПИЛОТНЫЕ КЛИЕНТЫ (NDA)</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center;">
+                    <div>
+                        <div style="font-size: 56px; margin-bottom: 12px;">🏢</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">E-COMMERCE</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">1 500 СОТРУДНИКОВ</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 56px; margin-bottom: 12px;">💼</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">IT-КОМПАНИЯ</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">800 СОТРУДНИКОВ</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 56px; margin-bottom: 12px;">🏦</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ФИНТЕХ</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">600 СОТРУДНИКОВ</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 56px; margin-bottom: 12px;">🏭</div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ПРОИЗВОДСТВО</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6);">2 000 СОТРУДНИКОВ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition -->
+    <section id="competition" class="section">
+        <div class="container">
+            <h2 class="section-title">Конкуренция: Мы на 4 года впереди</h2>
+            <p class="section-subtitle">На российском рынке нет AI-рекрутеров • западные недоступны</p>
+            
+            <div class="competition-neuro-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Западные (Lever, Greenhouse)</th>
+                            <th>Российские ATS</th>
+                            <th class="us-column">NEUROHIRE AI (МЫ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Доступность в РФ</td>
+                            <td><span class="cross-neuro">✗</span> Заблокированы</td>
+                            <td><span class="check-neuro">✓</span> Доступны</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> РФ + СНГ</td>
+                        </tr>
+                        <tr>
+                            <td>AI-автоматизация</td>
+                            <td><span class="check-neuro">✓</span> Есть (недоступна)</td>
+                            <td><span class="cross-neuro">✗</span> Нет AI</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> GigaChat 2.0</td>
+                        </tr>
+                        <tr>
+                            <td>Автономный агент</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> Full autonomous</td>
+                        </tr>
+                        <tr>
+                            <td>Автозвонки кандидатам</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> SaluteSpeech</td>
+                        </tr>
+                        <tr>
+                            <td>AI-интервью</td>
+                            <td><span class="check-neuro">✓</span> Есть</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> С видеоанализом</td>
+                        </tr>
+                        <tr>
+                            <td>Time to hire</td>
+                            <td>28-35 дней</td>
+                            <td>42 дня</td>
+                            <td class="us-column">7 дней</td>
+                        </tr>
+                        <tr>
+                            <td>Цена</td>
+                            <td>$500-2000/мес</td>
+                            <td>15K-80K₽/мес</td>
+                            <td class="us-column">20K-200K₽/мес</td>
+                        </tr>
+                        <tr>
+                            <td>Замена HR-отдела</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td><span class="cross-neuro">✗</span> Нет</td>
+                            <td class="us-column"><span class="check-neuro">✓</span> Полная</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 80px; text-align: center;">
+                <h3 style="font-size: 48px; margin-bottom: 30px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🛡️ ЗАЩИТНЫЕ БАРЬЕРЫ</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto;">
+                    <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-purple); border-radius: 25px; padding: 50px;">
+                        <h4 style="font-size: 28px; margin-bottom: 18px; color: var(--neon-blue);">⏱️ FIRST-MOVER: 4 ГОДА ФОРЫ</h4>
+                        <p style="color: rgba(255,255,255,0.85); font-size: 18px; line-height: 1.7;">Первый AI-рекрутер на российском рынке. Competitors потратят 3-4 года на разработку + обучение моделей + интеграции.</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(176, 38, 255, 0.1), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-purple); border-radius: 25px; padding: 50px;">
+                        <h4 style="font-size: 28px; margin-bottom: 18px; color: var(--neon-blue);">📊 NETWORK EFFECTS</h4>
+                        <p style="color: rgba(255,255,255,0.85); font-size: 18px; line-height: 1.7;">Каждый новый клиент улучшает AI-модель. После 1M+ кандидатов — непреодолимое преимущество в точности.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section" style="background: radial-gradient(circle at 40% 70%, rgba(176, 38, 255, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Команда: HR × AI × Product</h2>
+            <p class="section-subtitle">Уникальная комбинация экспертизы в рекрутинге, AI и B2B SaaS</p>
+            
+            <div class="team-neuro-grid">
+                <div class="team-neuro-card">
+                    <div class="team-avatar-neuro">👨‍💼</div>
+                    <div class="team-name">ЕЛЕНА ВОЛКОВА</div>
+                    <div class="team-role">CEO / Co-Founder</div>
+                    <div class="team-bio">Ex-Head of Talent в Яндексе (наняла 2000+ сотрудников). 12 лет в рекрутинге. Построила HR-функцию в 3 стартапах от 0 до 500+. Нетворк в 300+ HRD корпораций РФ.</div>
+                </div>
+                
+                <div class="team-neuro-card">
+                    <div class="team-avatar-neuro">👩‍💻</div>
+                    <div class="team-name">ИВАН СМИРНОВ</div>
+                    <div class="team-role">CTO / Co-Founder</div>
+                    <div class="team-bio">Ex-ML Lead в HeadHunter. PhD NLP. Разработал AI-скрининг для 5M+ резюме. Автор 9 патентов в области HR Tech. Эксперт в GigaChat и речевых моделях.</div>
+                </div>
+                
+                <div class="team-neuro-card">
+                    <div class="team-avatar-neuro">💼</div>
+                    <div class="team-name">АННА ПЕТРОВА</div>
+                    <div class="team-role">CPO / Co-Founder</div>
+                    <div class="team-bio">Ex-Product Lead в LinkedIn Talent Solutions. Построила продукт с 0 до $20M ARR за 3 года. MBA Stanford. Эксперт в PLG и viral growth для B2B SaaS.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px;">
+                <h3 style="font-size: 40px; text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎯 СОВЕТНИКИ МИРОВОГО УРОВНЯ</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; max-width: 1100px; margin: 0 auto;">
+                    <div style="background: rgba(0,0,0,0.7); padding: 40px; border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px;">
+                        <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">МИХАИЛ ИВАНОВ</div>
+                        <div style="font-size: 18px; color: var(--neon-blue); margin-bottom: 15px; font-weight: 700;">PARTNER @ KAMA FLOW VC ($500M FUND)</div>
+                        <p style="font-size: 16px; color: rgba(255,255,255,0.8);">Lead investor в нашем Pre-Seed. Портфель: 20+ HR Tech стартапов. Открывает двери к enterprise клиентам.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.7); padding: 40px; border: 2px solid rgba(176, 38, 255, 0.4); border-radius: 25px;">
+                        <div style="font-size: 24px; font-weight: 900; margin-bottom: 12px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ОЛЬГА СОКОЛОВА</div>
+                        <div style="font-size: 18px; color: var(--neon-blue); margin-bottom: 15px; font-weight: 700;">DIRECTOR @ GIGACHAT B2B @ SBER</div>
+                        <p style="font-size: 16px; color: rgba(255,255,255,0.8);">Обеспечивает доступ к 11M токенов и прямую линию с командой GigaChat. Помогает с enterprise через Sber.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Roadmap: 4 года до market leader</h2>
+            <p class="section-subtitle">От MVP на Sber500 до топ-1 в России по AI-рекрутингу</p>
+            
+            <div class="roadmap-neuro">
+                <div class="roadmap-line-neuro"></div>
+                
+                <div class="roadmap-item-neuro">
+                    <div class="roadmap-content-neuro">
+                        <div class="roadmap-quarter">Q4 2025</div>
+                        <div class="roadmap-title-neuro">MVP + SBER500 БУТКЕМП</div>
+                        <div class="roadmap-description-neuro">Завершение MVP с AI-агентом. 8 пилотных клиентов. Обучение модели на 100K+ резюме. Интеграция с HeadHunter API. $40K MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot-neuro"></div>
+                </div>
+                
+                <div class="roadmap-item-neuro">
+                    <div></div>
+                    <div class="roadmap-content-neuro">
+                        <div class="roadmap-quarter">Q1-Q2 2026</div>
+                        <div class="roadmap-title-neuro">PRE-SEED $800K + PUBLIC LAUNCH</div>
+                        <div class="roadmap-description-neuro">Раунд от Kama Flow + angels. Публичный запуск, маркетинг через HR-блогеров. Интеграция с LinkedIn, Talantix. 2 000 клиентов, $200K MRR.</div>
+                    </div>
+                    <div class="roadmap-dot-neuro"></div>
+                </div>
+                
+                <div class="roadmap-item-neuro">
+                    <div class="roadmap-content-neuro">
+                        <div class="roadmap-quarter">Q3-Q4 2026</div>
+                        <div class="roadmap-title-neuro">ENTERPRISE GROWTH + AI-ИНТЕРВЬЮ</div>
+                        <div class="roadmap-description-neuro">Партнёрства с 5 enterprise (1000+ сотрудников каждая). Запуск AI-интервью с видеоанализом. 20 000 клиентов. $2M MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot-neuro"></div>
+                </div>
+                
+                <div class="roadmap-item-neuro">
+                    <div></div>
+                    <div class="roadmap-content-neuro">
+                        <div class="roadmap-quarter">2027</div>
+                        <div class="roadmap-title-neuro">SERIES A $10M + CIS EXPANSION</div>
+                        <div class="roadmap-description-neuro">Масштабный раунд Series A. Expansion в Казахстан, Беларусь, Узбекистан. Запуск API для партнёров. 50 000 клиентов. $6M MRR. Прибыльность.</div>
+                    </div>
+                    <div class="roadmap-dot-neuro"></div>
+                </div>
+                
+                <div class="roadmap-item-neuro">
+                    <div class="roadmap-content-neuro">
+                        <div class="roadmap-quarter">2028-2029</div>
+                        <div class="roadmap-title-neuro">MARKET LEADER + EXIT</div>
+                        <div class="roadmap-description-neuro">Топ-1 в России по AI-рекрутингу. 100 000 клиентов. M&A предложения от HeadHunter / Яндекс / global HR Tech или IPO. $16M+ MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot-neuro"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">ИНВЕСТИРУЙТЕ<br>В БУДУЩЕЕ HR</h2>
+                <p class="cta-text">Мы привлекаем Pre-Seed раунд <strong>$800 000</strong> для запуска продукта и захвата рынка $30B.<br>Уникальная команда, передовая технология, огромный TAM — всё для x150 возврата.</p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:invest@neurohire.ai" class="btn btn-primary">🚀 ОБСУДИТЬ ИНВЕСТИЦИИ</a>
+                    <a href="#" class="btn btn-secondary">📊 СКАЧАТЬ PITCH DECK</a>
+                </div>
+                
+                <div class="investment-neuro-grid">
+                    <div class="investment-neuro-box">
+                        <div class="investment-label">ПРИВЛЕКАЕМ</div>
+                        <div class="investment-value">$800K</div>
+                    </div>
+                    <div class="investment-neuro-box">
+                        <div class="investment-label">ОЦЕНКА PRE-MONEY</div>
+                        <div class="investment-value">$3.5M</div>
+                    </div>
+                    <div class="investment-neuro-box">
+                        <div class="investment-label">МИНИМАЛЬНЫЙ ЧЕК</div>
+                        <div class="investment-value">$60K</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 80px; padding: 60px; background: linear-gradient(135deg, rgba(176, 38, 255, 0.15), rgba(0, 240, 255, 0.1)); border: 3px solid var(--neon-purple); border-radius: 30px; box-shadow: 0 0 80px rgba(176, 38, 255, 0.5);">
+                    <h3 style="font-size: 36px; margin-bottom: 40px; background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎁 ЧТО ВЫ ПОЛУЧИТЕ КАК ИНВЕСТОР</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; text-align: center;">
+                        <div>
+                            <div style="font-size: 56px; margin-bottom: 18px;">📈</div>
+                            <div style="font-size: 22px; font-weight: 900; margin-bottom: 10px; color: var(--neon-blue);">EQUITY 18%</div>
+                            <div style="font-size: 16px; color: rgba(255,255,255,0.7);">За $800K инвестиций</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 56px; margin-bottom: 18px;">🎯</div>
+                            <div style="font-size: 22px; font-weight: 900; margin-bottom: 10px; color: var(--neon-blue);">BOARD SEAT</div>
+                            <div style="font-size: 16px; color: rgba(255,255,255,0.7);">Прямой контроль</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 56px; margin-bottom: 18px;">💰</div>
+                            <div style="font-size: 22px; font-weight: 900; margin-bottom: 10px; color: var(--neon-blue);">EXIT 4-5 ЛЕТ</div>
+                            <div style="font-size: 16px; color: rgba(255,255,255,0.7);">M&A или IPO</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 56px; margin-bottom: 18px;">🚀</div>
+                            <div style="font-size: 22px; font-weight: 900; margin-bottom: 10px; color: var(--neon-blue);">x80-150 ROI</div>
+                            <div style="font-size: 16px; color: rgba(255,255,255,0.7);">При успешном exit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 60px; text-align: center;">
+                    <p style="font-size: 20px; color: rgba(255,255,255,0.7); line-height: 1.8;">
+                        🔒 КОНФИДЕНЦИАЛЬНОСТЬ ГАРАНТИРОВАНА NDA<br>
+                        📊 FULL DATA ROOM ДОСТУПЕН ДЛЯ DUE DILIGENCE<br>
+                        ⚡ РАУНД ЗАКРЫВАЕТСЯ ЧЕРЕЗ 60 ДНЕЙ
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 30px;">🧠 NEUROHIRE AI</div>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-size: 20px;">АВТОНОМНЫЙ AI-РЕКРУТЕР НА БАЗЕ GIGACHAT 2.0</p>
+            <div style="display: flex; justify-content: center; gap: 50px; margin-bottom: 40px; flex-wrap: wrap;">
+                <a href="mailto:hello@neurohire.ai" style="color: rgba(255,255,255,0.85); text-decoration: none; font-size: 17px;">📧 hello@neurohire.ai</a>
+                <a href="tel:+79991234567" style="color: rgba(255,255,255,0.85); text-decoration: none; font-size: 17px;">📱 +7 (999) 123-45-67</a>
+                <a href="#" style="color: rgba(255,255,255,0.85); text-decoration: none; font-size: 17px;">💼 LinkedIn</a>
+            </div>
+            <div style="color: rgba(255,255,255,0.4); font-size: 14px;">
+                © 2025 NEUROHIRE AI. POWERED BY GIGACHAT 2.0 MAX + SALUTESPEECH | SBER500 ACCELERATOR PROGRAM
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar Effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 10, 30, 1)';
+                nav.style.boxShadow = '0 10px 60px rgba(176, 38, 255, 0.4)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 30, 0.95)';
+                nav.style.boxShadow = '0 10px 40px rgba(176, 38, 255, 0.2)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>

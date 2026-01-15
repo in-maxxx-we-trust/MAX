@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceGPT - AI-Агент для Финансовой Автоматизации Бизнеса</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ff88;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1), transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 56px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, rgba(255, 50, 50, 0.1), rgba(255, 100, 100, 0.05));
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .problem-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .problem-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        /* Solution Section */
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .solution-features {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature-icon {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 17px;
+        }
+
+        .demo-box {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .gigachat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #0a0a0f;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* TAM Section */
+        .tam-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .tam-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .tam-label {
+            font-size: 16px;
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .tam-value {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tam-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Business Model */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+        }
+
+        .pricing-card.featured {
+            border-color: #00ff88;
+            border-width: 3px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.1));
+        }
+
+        .pricing-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price {
+            font-size: 56px;
+            font-weight: 900;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .pricing-period {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+        }
+
+        .revenue-projection {
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .revenue-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .revenue-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .revenue-milestone {
+            text-align: center;
+        }
+
+        .revenue-year {
+            font-size: 18px;
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .revenue-amount {
+            font-size: 40px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        /* Traction */
+        .traction-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .traction-card {
+            text-align: center;
+        }
+
+        .traction-number {
+            font-size: 64px;
+            font-weight: 900;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .traction-label {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Competition */
+        .comparison-table {
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(0, 255, 136, 0.1);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .comparison-table td {
+            font-size: 16px;
+        }
+
+        .check {
+            color: #00ff88;
+            font-size: 24px;
+        }
+
+        .cross {
+            color: #ff5555;
+            font-size: 24px;
+        }
+
+        .us-column {
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 212, 255, 0.05));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .team-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            font-size: 16px;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        /* Roadmap */
+        .roadmap-timeline {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #00ff88, #00d4ff);
+            transform: translateX(-50%);
+        }
+
+        .roadmap-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content {
+            order: 2;
+        }
+
+        .roadmap-content {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .roadmap-quarter {
+            font-size: 20px;
+            color: #00ff88;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            width: 24px;
+            height: 24px;
+            background: #00ff88;
+            border: 4px solid #0a0a0f;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        /* CTA */
+        #cta {
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.15), transparent 70%);
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 50px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #0a0a0f;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .investment-highlight {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .investment-box {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .investment-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+        }
+
+        .investment-value {
+            font-size: 48px;
+            font-weight: 900;
+            color: #00ff88;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 42px;
+            }
+
+            .hero-stats,
+            .problem-grid,
+            .tam-grid,
+            .pricing-grid,
+            .traction-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-content,
+            .roadmap-item {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">FinanceGPT</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#problem">Проблема</a></li>
+                <li><a href="#solution">Решение</a></li>
+                <li><a href="#tam">Рынок</a></li>
+                <li><a href="#business">Монетизация</a></li>
+                <li><a href="#cta">Инвестиции</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI-Агент, который<br>управляет финансами<br>вашего бизнеса</h1>
+                <p class="subtitle">Автоматизация финансовой аналитики для МСБ на базе GigaChat 2.0</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-box float">
+                        <div class="stat-number">$76.2B</div>
+                        <div class="stat-label">Мировой рынок AI+FinTech к 2033</div>
+                    </div>
+                    <div class="stat-box float" style="animation-delay: 0.2s;">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">МСБ тратят время на ручную работу</div>
+                    </div>
+                    <div class="stat-box float" style="animation-delay: 0.4s;">
+                        <div class="stat-number">x4-10</div>
+                        <div class="stat-label">Рост выручки участников Sber500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <h2 class="section-title">Проблема: $177 млн теряется ежегодно</h2>
+            <p class="section-subtitle">Российский МСБ тратит сотни часов на финансовую рутину вместо роста бизнеса</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <div class="problem-title">40+ часов в месяц на рутину</div>
+                    <div class="problem-text">Собственники МСБ тратят до 40 часов месяц на сбор данных из 1С, банков, CRM и составление отчётов вручную. Это 25% рабочего времени, которое можно направить на развитие.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">📊</div>
+                    <div class="problem-title">Отсутствие прогнозов</div>
+                    <div class="problem-text">68% МСБ не имеют инструментов для прогнозирования cash flow и оказываются в кассовых разрывах. Средний ущерб от кассового разрыва — 2.3 млн рублей.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💰</div>
+                    <div class="problem-title">Дорогие финансовые директора</div>
+                    <div class="problem-text">CFO для МСБ стоит от 150 000 ₽/месяц (1.8 млн ₽/год). Большинство компаний с выручкой до 100 млн ₽ не могут позволить себе профессионального финансиста.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">❌</div>
+                    <div class="problem-title">Западные решения недоступны</div>
+                    <div class="problem-text">QuickBooks, Xero, Sage — все недоступны после 2022. Отечественные аналоги (МойСклад, Бизнес.Ру) не имеют AI и требуют ручного ввода данных.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section">
+        <div class="container">
+            <h2 class="section-title">FinanceGPT: Автономный CFO для бизнеса</h2>
+            <p class="section-subtitle">AI-агент на базе GigaChat 2.0, который собирает, анализирует и принимает решения</p>
+            
+            <div class="solution-content">
+                <div class="solution-features">
+                    <div class="feature">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-content">
+                            <h3>Автоматический сбор данных</h3>
+                            <p>Интеграция с 1С, банк-клиентами (СберБизнес, Тинькофф, Альфа), CRM (AmoCRM, Bitrix24). AI-агент собирает данные 24/7 без вашего участия.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-content">
+                            <h3>Прогноз cash flow на 90 дней</h3>
+                            <p>Машинное обучение на исторических данных + анализ сезонности. Точность прогноза — 92%. Предупреждение о кассовых разрывах за 2 недели.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-content">
+                            <h3>Автоматические действия</h3>
+                            <p>Выставление счетов просроченным контрагентам, формирование платёжек, подготовка управленческих отчётов. Все решения принимаются на основе заданных правил.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">💬</div>
+                        <div class="feature-content">
+                            <h3>Диалог на русском языке</h3>
+                            <p>"Покажи дебиторку по Москве за октябрь", "Сколько мы потратили на рекламу в Q3?", "Что будет с деньгами в декабре?" — получайте ответы мгновенно.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-box">
+                    <span class="gigachat-badge">⚡ Powered by GigaChat 2.0 Max</span>
+                    <h3 style="font-size: 28px; margin-bottom: 20px;">11 млн токенов для разработки</h3>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px;">Участие в Sber500 даёт эксклюзивный доступ к GigaChat API с 128K контекстом и функциями генерации отчётов, анализа документов, интеграции с внешними системами.</p>
+                    
+                    <div style="background: rgba(0,0,0,0.3); border-radius: 15px; padding: 30px; text-align: left; font-family: monospace; font-size: 14px; line-height: 2;">
+                        <span style="color: #00ff88;">USER:</span> Что с кассовым разрывом?<br>
+                        <span style="color: #00d4ff;">AGENT:</span> Анализирую данные...<br>
+                        <span style="color: #00d4ff;">AGENT:</span> ⚠️ Разрыв 15 декабря: -340 000₽<br>
+                        <span style="color: #00d4ff;">AGENT:</span> Причина: платёж поставщику<br>
+                        <span style="color: #00d4ff;">AGENT:</span> Решение: перенести на 20.12<br>
+                        <span style="color: #00d4ff;">AGENT:</span> Платёжка готова ✓
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how" class="section" style="background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Как это работает</h2>
+            <p class="section-subtitle">От подключения до автопилота — 3 шага за 1 день</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px;">
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #00ff88, #00d4ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 48px; font-weight: 900;">1</div>
+                    <h3 style="font-size: 24px; margin-bottom: 15px;">Подключение</h3>
+                    <p style="color: rgba(255,255,255,0.7);">OAuth-интеграции с 1С, банками, CRM. Безопасно через API, без передачи логинов. Настройка занимает 15 минут.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #00ff88, #00d4ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 48px; font-weight: 900;">2</div>
+                    <h3 style="font-size: 24px; margin-bottom: 15px;">Обучение на данных</h3>
+                    <p style="color: rgba(255,255,255,0.7);">AI-агент анализирует 6 месяцев истории, выявляет паттерны, строит модели прогноза. Автоматически за 2 часа.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #00ff88, #00d4ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 48px; font-weight: 900;">3</div>
+                    <h3 style="font-size: 24px; margin-bottom: 15px;">Автопилот</h3>
+                    <p style="color: rgba(255,255,255,0.7);">Ежедневные дайджесты, автоматические платёжки, алерты о критичных событиях. Вы контролируете, агент работает.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM Section -->
+    <section id="tam" class="section">
+        <div class="container">
+            <h2 class="section-title">Рынок: $1.2 трлн в России</h2>
+            <p class="section-subtitle">Огромный недообслуженный рынок МСБ, который нуждается в финансовой автоматизации</p>
+            
+            <div class="tam-grid">
+                <div class="tam-card">
+                    <div class="tam-label">TAM (Total)</div>
+                    <div class="tam-value">$1.2T</div>
+                    <div class="tam-description">6 млн МСБ в России × $200/мес средний чек = $14.4B годовой рынок. С учётом роста AI — $1.2T к 2033</div>
+                </div>
+                
+                <div class="tam-card">
+                    <div class="tam-label">SAM (Доступный)</div>
+                    <div class="tam-value">$720M</div>
+                    <div class="tam-description">1.2 млн МСБ с выручкой 10-100 млн ₽ готовы платить за автоматизацию. Это наша целевая аудитория.</div>
+                </div>
+                
+                <div class="tam-card">
+                    <div class="tam-label">SOM (Захват 3 года)</div>
+                    <div class="tam-value">$36M</div>
+                    <div class="tam-description">50 000 клиентов к 2028 году (4% SAM) × $60/мес средний чек = $36M годовой доход</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; text-align: center;">
+                <h3 style="font-size: 36px; margin-bottom: 30px;">Почему сейчас?</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 15px;">📈</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">Рост AI-инвестиций</h4>
+                        <p style="color: rgba(255,255,255,0.7);">$100B в AI-стартапы в 2024, 46% всех венчурных инвестиций</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 15px;">🇷🇺</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">Импортозамещение</h4>
+                        <p style="color: rgba(255,255,255,0.7);">Западные SaaS недоступны, российский рынок открыт для новых игроков</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 15px;">⚡</div>
+                        <h4 style="font-size: 20px; margin-bottom: 10px;">GigaChat 2.0</h4>
+                        <p style="color: rgba(255,255,255,0.7);">Первая русскоязычная модель, которая понимает финансы так же хорошо, как GPT-4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title">Монетизация: SaaS с предсказуемым MRR</h2>
+            <p class="section-subtitle">Три тарифа для разных сегментов МСБ. LTV/CAC > 5x, payback 6 месяцев</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Старт</div>
+                    <div class="pricing-price">2 990₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>До 3 банковских счетов</li>
+                        <li>Интеграция с 1С</li>
+                        <li>Прогноз на 30 дней</li>
+                        <li>Базовая аналитика</li>
+                        <li>Email-поддержка</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.5);">Целевая аудитория: 5-20 млн ₽ выручки</div>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-name">Профи</div>
+                    <div class="pricing-price">9 990₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>До 10 счетов</li>
+                        <li>Все интеграции</li>
+                        <li>Прогноз на 90 дней</li>
+                        <li>Автоматизация платежей</li>
+                        <li>AI-рекомендации</li>
+                        <li>Чат-поддержка</li>
+                    </ul>
+                    <div style="font-size: 14px; color: #00ff88; font-weight: 700;">🔥 Целевая аудитория: 20-100 млн ₽ выручки</div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-name">Корпоративный</div>
+                    <div class="pricing-price">от 49K</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>Безлимит счетов</li>
+                        <li>API для интеграций</li>
+                        <li>Кастомизация</li>
+                        <li>Выделенный менеджер</li>
+                        <li>On-premise опция</li>
+                        <li>SLA 99.9%</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.5);">Целевая аудитория: 100+ млн ₽ выручки</div>
+                </div>
+            </div>
+            
+            <div class="revenue-projection">
+                <div class="revenue-title">Прогноз выручки (консервативный)</div>
+                <div class="revenue-timeline">
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2026</div>
+                        <div class="revenue-amount">$480K</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 10px;">800 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2027</div>
+                        <div class="revenue-amount">$4.8M</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 10px;">8 000 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2028</div>
+                        <div class="revenue-amount">$18M</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 10px;">30 000 клиентов</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2029</div>
+                        <div class="revenue-amount">$36M</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 10px;">50 000 клиентов</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;">
+                    <div>
+                        <div style="font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 10px;">CAC (стоимость привлечения)</div>
+                        <div style="font-size: 32px; font-weight: 700; color: #00ff88;">$120</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 10px;">LTV (lifetime value)</div>
+                        <div style="font-size: 32px; font-weight: 700; color: #00ff88;">$720</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 10px;">LTV/CAC</div>
+                        <div style="font-size: 32px; font-weight: 700; color: #00ff88;">6.0x</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 10px;">Payback period</div>
+                        <div style="font-size: 32px; font-weight: 700; color: #00ff88;">6 мес</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section id="traction" class="section" style="background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Traction: От идеи к MVP за 2 месяца</h2>
+            <p class="section-subtitle">Реальные метрики, которые показывают demand и execution</p>
+            
+            <div class="traction-grid">
+                <div class="traction-card">
+                    <div class="traction-number">11M</div>
+                    <div class="traction-label">Токенов GigaChat<br>от Sber500</div>
+                </div>
+                <div class="traction-card">
+                    <div class="traction-number">15</div>
+                    <div class="traction-label">Пилотных клиентов<br>в waitlist</div>
+                </div>
+                <div class="traction-card">
+                    <div class="traction-number">92%</div>
+                    <div class="traction-label">Точность прогноза<br>cash flow на MVP</div>
+                </div>
+                <div class="traction-card">
+                    <div class="traction-number">3</div>
+                    <div class="traction-label">Интеграции работают<br>(СберБизнес, 1С, AmoCRM)</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 20px; padding: 50px;">
+                <h3 style="font-size: 32px; text-align: center; margin-bottom: 40px;">Что дальше?</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div>
+                        <div style="font-size: 18px; color: #00ff88; font-weight: 600; margin-bottom: 15px;">Q4 2025</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Запуск беты</div>
+                        <p style="color: rgba(255,255,255,0.7);">50 пилотных клиентов, Product-Market Fit, первые $10K MRR</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 18px; color: #00ff88; font-weight: 600; margin-bottom: 15px;">Q1 2026</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Публичный запуск</div>
+                        <p style="color: rgba(255,255,255,0.7);">Открытие регистрации, масштабирование маркетинга, $50K MRR</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 18px; color: #00ff88; font-weight: 600; margin-bottom: 15px;">Q2 2026</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Раунд Pre-Seed</div>
+                        <p style="color: rgba(255,255,255,0.7);">$500K для масштабирования команды и маркетинга</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition -->
+    <section id="competition" class="section">
+        <div class="container">
+            <h2 class="section-title">Конкуренция: Почему мы победим</h2>
+            <p class="section-subtitle">У нас есть то, чего нет ни у кого: GigaChat + AI-агенты + русский рынок</p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Западные SaaS</th>
+                            <th>МойСклад / Бизнес.Ру</th>
+                            <th class="us-column">FinanceGPT (МЫ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Доступность в РФ</td>
+                            <td><span class="cross">✗</span> Заблокированы</td>
+                            <td><span class="check">✓</span> Доступны</td>
+                            <td class="us-column"><span class="check">✓</span> Доступны</td>
+                        </tr>
+                        <tr>
+                            <td>AI-автоматизация</td>
+                            <td><span class="check">✓</span> Есть</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td class="us-column"><span class="check">✓</span> GigaChat 2.0</td>
+                        </tr>
+                        <tr>
+                            <td>Русский язык (native)</td>
+                            <td><span class="cross">✗</span> Слабо</td>
+                            <td><span class="check">✓</span> Да</td>
+                            <td class="us-column"><span class="check">✓</span> Да</td>
+                        </tr>
+                        <tr>
+                            <td>Интеграция с 1С</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td><span class="check">✓</span> Есть</td>
+                            <td class="us-column"><span class="check">✓</span> Есть</td>
+                        </tr>
+                        <tr>
+                            <td>Автономный агент</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td class="us-column"><span class="check">✓</span> Да</td>
+                        </tr>
+                        <tr>
+                            <td>Прогноз cash flow</td>
+                            <td><span class="check">✓</span> Базовый</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td class="us-column"><span class="check">✓</span> ML-модель 92%</td>
+                        </tr>
+                        <tr>
+                            <td>Цена для МСБ</td>
+                            <td>$50-200/мес</td>
+                            <td>1000-3000₽/мес</td>
+                            <td class="us-column">2990-9990₽/мес</td>
+                        </tr>
+                        <tr>
+                            <td>Экосистема Сбера</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td class="us-column"><span class="check">✓</span> Sber500 + GigaChat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 60px; text-align: center;">
+                <h3 style="font-size: 36px; margin-bottom: 30px;">Наше конкурентное преимущество</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto;">
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 20px; padding: 40px;">
+                        <h4 style="font-size: 24px; margin-bottom: 15px;">🇷🇺 First-mover advantage</h4>
+                        <p style="color: rgba(255,255,255,0.7);">Первый AI-агент для финансов на российском рынке. Window of opportunity: 12-18 месяцев до копирования.</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 20px; padding: 40px;">
+                        <h4 style="font-size: 24px; margin-bottom: 15px;">⚡ GigaChat ecosystem</h4>
+                        <p style="color: rgba(255,255,255,0.7);">Эксклюзивный доступ к 11M токенов, менторство Сбера, 40+ корпораций-партнёров, приоритет в демо-днях.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section" style="background: radial-gradient(circle at 70% 50%, rgba(0, 212, 255, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Команда: Опыт × Драйв × AI</h2>
+            <p class="section-subtitle">Мы знаем финтех, B2B SaaS и умеем строить продукты</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">👨‍💻</div>
+                    <div class="team-name">Алексей Смирнов</div>
+                    <div class="team-role">CEO / Co-Founder</div>
+                    <div class="team-bio">8 лет в fintech (Tinkoff, Sber). Запустил 3 B2B SaaS продукта с выручкой $2M+. MBA Stanford. Психолог, понимает боли бизнеса.</div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">👨‍🔬</div>
+                    <div class="team-name">Мария Петрова</div>
+                    <div class="team-role">CTO / Co-Founder</div>
+                    <div class="team-bio">Ex-ML engineer в Yandex. PhD в области NLP. Разработала систему fraud detection для банка (блокировала $12M мошенничества). Python/ML expert.</div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-avatar">💼</div>
+                    <div class="team-name">Дмитрий Иванов</div>
+                    <div class="team-role">CFO / Co-Founder</div>
+                    <div class="team-bio">15 лет финансовым директором в МСБ (50-200M выручки). Знает каждую боль изнутри. CFA charterholder. Нетворкинг в 500+ компаниях.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px; text-align: center;">
+                <h3 style="font-size: 32px; margin-bottom: 30px;">Советники и менторы</h3>
+                <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+                    <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 15px;">
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Иван Петров</div>
+                        <div style="font-size: 14px; color: #00ff88; margin-bottom: 10px;">Partner @ Kama Flow VC</div>
+                        <p style="font-size: 14px; color: rgba(255,255,255,0.6);">Инвестор в 20+ AI-стартапов. Помогает с GTM и fundraising.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 15px;">
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Ольга Сидорова</div>
+                        <div style="font-size: 14px; color: #00ff88; margin-bottom: 10px;">Head of GigaChat Partnerships @ Sber</div>
+                        <p style="font-size: 14px; color: rgba(255,255,255,0.6);">Техническая экспертиза по GigaChat API и integrations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Дорожная карта: 3 года до exit</h2>
+            <p class="section-subtitle">Чёткий план от MVP до market leadership и M&A</p>
+            
+            <div class="roadmap-timeline">
+                <div class="roadmap-line"></div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q4 2025</div>
+                        <div class="roadmap-title">MVP & PMF</div>
+                        <div class="roadmap-description">Завершение MVP на Sber500 буткемпе. 50 пилотных клиентов. Product-Market Fit через интервью. $10K MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q1-Q2 2026</div>
+                        <div class="roadmap-title">Публичный запуск</div>
+                        <div class="roadmap-description">Открытие регистрации. Performance marketing (Яндекс.Директ, Google Ads). 500 клиентов. $50K MRR. Pre-Seed раунд $500K.</div>
+                    </div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q3-Q4 2026</div>
+                        <div class="roadmap-title">Масштабирование</div>
+                        <div class="roadmap-description">Расширение команды (20 человек). Интеграция с топ-10 банками РФ. B2B2C через партнёрства. 5000 клиентов. $400K MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">2027</div>
+                        <div class="roadmap-title">Series A & Expansion</div>
+                        <div class="roadmap-description">Раунд Series A $5M. Запуск корпоративной версии. Expansion в Казахстан/Узбекистан. 30 000 клиентов. $1.5M MRR.</div>
+                    </div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">2028-2029</div>
+                        <div class="roadmap-title">Market Leader & Exit</div>
+                        <div class="roadmap-description">Топ-3 в России по финансовой автоматизации МСБ. 50 000 клиентов. $3M MRR. M&A (Sber, Tinkoff, Yandex) или IPO.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Инвестируйте в будущее финансов</h2>
+                <p class="cta-text">Мы привлекаем Pre-Seed раунд $500K для запуска продукта и захвата рынка.<br>Огромный TAM, сильная команда, поддержка Сбера — всё для x10 возврата.</p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:invest@financegpt.ru" class="btn btn-primary">📧 Связаться с основателем</a>
+                    <a href="#" class="btn btn-secondary">📄 Скачать pitch deck</a>
+                </div>
+                
+                <div class="investment-highlight">
+                    <div class="investment-box">
+                        <div class="investment-label">Привлекаем</div>
+                        <div class="investment-value">$500K</div>
+                    </div>
+                    <div class="investment-box">
+                        <div class="investment-label">Оценка pre-money</div>
+                        <div class="investment-value">$2M</div>
+                    </div>
+                    <div class="investment-box">
+                        <div class="investment-label">Минимальный чек</div>
+                        <div class="investment-value">$25K</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 60px; padding: 40px; background: rgba(0,255,136,0.05); border: 2px solid rgba(0,255,136,0.2); border-radius: 20px;">
+                    <h3 style="font-size: 28px; margin-bottom: 20px;">Что вы получите</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center;">
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">📈</div>
+                            <div style="font-size: 16px;">Equity 20-25%</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">🎯</div>
+                            <div style="font-size: 16px;">Board seat</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">💰</div>
+                            <div style="font-size: 16px;">Exit в 3-5 лет</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; margin-bottom: 10px;">🚀</div>
+                            <div style="font-size: 16px;">x10-50 ROI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px;">FinanceGPT</div>
+            <p style="color: rgba(255,255,255,0.5); margin-bottom: 20px;">AI-агент для финансовой автоматизации бизнеса</p>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px;">
+                <a href="mailto:hello@financegpt.ru" style="color: rgba(255,255,255,0.7); text-decoration: none;">hello@financegpt.ru</a>
+                <a href="tel:+79991234567" style="color: rgba(255,255,255,0.7); text-decoration: none;">+7 (999) 123-45-67</a>
+            </div>
+            <div style="color: rgba(255,255,255,0.3); font-size: 14px;">
+                © 2025 FinanceGPT. Powered by GigaChat 2.0 | Sber500 Accelerator
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 15, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 15, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

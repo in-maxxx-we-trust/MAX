@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDICORE AI - Голосовой AI-Ассистент для Врачей | GigaChat 2.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00FFA3;
+            --secondary: #00D4FF;
+            --accent: #FF3D71;
+            --dark: #0A0E27;
+            --darker: #050812;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--darker);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1600px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .pulse {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 25px 50px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 163, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        #hero {
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 163, 0.15), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.15), transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 92px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 35px;
+            background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -3px;
+            animation: slideUp 1s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            font-weight: 300;
+            animation: slideUp 1s ease 0.2s backwards;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease 0.4s backwards;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.2), rgba(0, 212, 255, 0.2));
+            border: 2px solid var(--primary);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 163, 0.3);
+            border-radius: 25px;
+            padding: 45px 35px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 163, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 255, 163, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 163, 0.5));
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 68px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 80px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Problem Cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+            margin-top: 80px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, rgba(255, 61, 113, 0.08), rgba(255, 0, 100, 0.05));
+            border: 2px solid rgba(255, 61, 113, 0.4);
+            border-radius: 25px;
+            padding: 50px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(255, 61, 113, 0.3), transparent);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+
+        .problem-card:hover::before {
+            opacity: 1;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(255, 61, 113, 0.3);
+        }
+
+        .problem-icon {
+            font-size: 64px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 15px rgba(255, 61, 113, 0.6));
+        }
+
+        .problem-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+
+        .problem-stat {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .problem-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        /* Solution Section */
+        .solution-hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .solution-content h3 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .solution-content p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 255, 163, 0.05);
+            padding: 20px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 163, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(0, 255, 163, 0.1);
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .feature-icon-small {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .demo-visual {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.1));
+            border: 3px solid var(--primary);
+            border-radius: 30px;
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .voice-wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 40px 0;
+        }
+
+        .wave-bar {
+            width: 6px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 30px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 50px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 70px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 90px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 70px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { height: 50px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(7) { height: 30px; animation-delay: 0.6s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        .demo-text {
+            text-align: center;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-family: 'SF Mono', monospace;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 163, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 163, 0.2);
+        }
+
+        .tech-logo {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .tech-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tech-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* TAM Cards */
+        .tam-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .tam-mega-card {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.05));
+            border: 3px solid var(--primary);
+            border-radius: 30px;
+            padding: 60px 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .tam-mega-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .tam-mega-card:hover::before {
+            opacity: 0.1;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .tam-mega-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(0, 255, 163, 0.3);
+        }
+
+        .tam-label {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tam-value {
+            font-size: 82px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .tam-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Business Model */
+        .pricing-ultra-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .pricing-ultra-card {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.03), rgba(0, 212, 255, 0.03));
+            border: 2px solid rgba(0, 255, 163, 0.3);
+            border-radius: 30px;
+            padding: 55px 45px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .pricing-ultra-card.featured {
+            border-width: 4px;
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.12), rgba(0, 212, 255, 0.08));
+            transform: scale(1.05);
+        }
+
+        .pricing-ultra-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(0, 255, 163, 0.3);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pricing-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .pricing-price {
+            font-size: 68px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 35px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 45px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        /* Revenue Timeline */
+        .revenue-mega {
+            margin-top: 100px;
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.08), rgba(0, 212, 255, 0.08));
+            border: 3px solid var(--primary);
+            border-radius: 35px;
+            padding: 70px;
+        }
+
+        .revenue-mega-title {
+            font-size: 42px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .revenue-timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .revenue-milestone {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 25px;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 255, 163, 0.2);
+            transition: all 0.3s;
+        }
+
+        .revenue-milestone:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+        }
+
+        .revenue-year {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .revenue-amount {
+            font-size: 52px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .revenue-customers {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .metric-box {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 255, 163, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 163, 0.2);
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        /* Competition Table */
+        .competition-table {
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 163, 0.2);
+        }
+
+        .competition-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .competition-table th,
+        .competition-table td {
+            padding: 30px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 17px;
+        }
+
+        .competition-table th {
+            background: rgba(0, 255, 163, 0.15);
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .competition-table .us-column {
+            background: rgba(0, 255, 163, 0.08);
+            font-weight: 600;
+        }
+
+        .check {
+            color: var(--primary);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .cross {
+            color: var(--accent);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        /* Team */
+        .team-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 45px;
+            margin-top: 80px;
+        }
+
+        .team-mega-card {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05));
+            border: 2px solid rgba(0, 255, 163, 0.3);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .team-mega-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(0, 255, 163, 0.25);
+        }
+
+        .team-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            border: 4px solid rgba(0, 255, 163, 0.3);
+        }
+
+        .team-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .team-role {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .team-bio {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Roadmap */
+        .roadmap-visual {
+            margin-top: 80px;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .roadmap-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(even) .roadmap-content {
+            order: 2;
+        }
+
+        .roadmap-content {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.05));
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            padding: 45px;
+            transition: all 0.3s;
+        }
+
+        .roadmap-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 255, 163, 0.3);
+        }
+
+        .roadmap-quarter {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .roadmap-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .roadmap-description {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border: 6px solid var(--darker);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* CTA */
+        #cta {
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 163, 0.2), transparent 70%);
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 76px;
+            font-weight: 900;
+            margin-bottom: 35px;
+            line-height: 1.1;
+        }
+
+        .cta-text {
+            font-size: 26px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 35px;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .btn {
+            padding: 25px 60px;
+            font-size: 20px;
+            font-weight: 800;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            box-shadow: 0 10px 30px rgba(0, 255, 163, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 255, 163, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 163, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .investment-mega-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .investment-mega-box {
+            background: linear-gradient(135deg, rgba(0, 255, 163, 0.15), rgba(0, 212, 255, 0.1));
+            border: 3px solid var(--primary);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .investment-label {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .investment-value {
+            font-size: 62px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(0, 255, 163, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            h1 { font-size: 68px; }
+            .section-title { font-size: 52px; }
+            .hero-stats,
+            .tech-grid,
+            .tam-mega-grid,
+            .pricing-ultra-grid,
+            .team-mega-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .section-title { font-size: 38px; }
+            .hero-stats,
+            .problem-grid,
+            .tech-grid,
+            .tam-mega-grid,
+            .pricing-ultra-grid,
+            .team-mega-grid,
+            .solution-hero,
+            .roadmap-item {
+                grid-template-columns: 1fr;
+            }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">⚕️ MEDICORE AI</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#problem">Проблема</a></li>
+                <li><a href="#solution">Технология</a></li>
+                <li><a href="#tam">Рынок</a></li>
+                <li><a href="#business">Бизнес</a></li>
+                <li><a href="#cta">Инвестиции</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="bg-animation">
+            <div class="pulse" style="top: 10%; left: 20%; width: 400px; height: 400px; background: var(--primary);"></div>
+            <div class="pulse" style="top: 60%; left: 70%; width: 500px; height: 500px; background: var(--secondary); animation-delay: 1s;"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Голосовой AI-Ассистент<br>для Врачей</h1>
+                <p class="subtitle">Автоматизация медицинской документации с помощью GigaChat 2.0 + SaluteSpeech</p>
+                
+                <div class="hero-badges">
+                    <div class="badge">🎤 Голосовой ввод</div>
+                    <div class="badge">⚡ GigaChat 2.0 Max</div>
+                    <div class="badge">🇷🇺 152-ФЗ Compliant</div>
+                    <div class="badge">🏥 Интеграция с МИС</div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-number">$150B</div>
+                        <div class="stat-label">Мировой рынок AI в здравоохранении к 2030</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-number">3 часа</div>
+                        <div class="stat-label">Врачи тратят на документацию ежедневно</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏥</div>
+                        <div class="stat-number">700K</div>
+                        <div class="stat-label">Врачей в России нуждаются в автоматизации</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-number">+83%</div>
+                        <div class="stat-label">Premium оценки для HealthTech AI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <h2 class="section-title">Врачи тонут в бумажной работе</h2>
+            <p class="section-subtitle">50% рабочего времени врачей уходит на заполнение документов вместо лечения пациентов</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📝</div>
+                    <div class="problem-title">Бесконечная документация</div>
+                    <div class="problem-stat">180 минут/день</div>
+                    <div class="problem-text">Врачи тратят 3 часа ежедневно на заполнение медкарт, протоколов, направлений. Это 50% рабочего времени! Средний врач ведёт 25-30 приёмов в день — каждый требует 5-7 документов.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">😫</div>
+                    <div class="problem-title">Выгорание медработников</div>
+                    <div class="problem-stat">76%</div>
+                    <div class="problem-text">76% врачей испытывают профессиональное выгорание из-за административной нагрузки. Главная причина — не сложность диагностики, а бюрократия. Ежегодно 12% врачей уходят из профессии.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">❌</div>
+                    <div class="problem-title">Ошибки в документах</div>
+                    <div class="problem-stat">23%</div>
+                    <div class="problem-text">Каждая 4-я медкарта содержит ошибки или неполные данные из-за спешки. Это риск для пациента и юридическая ответственность для клиники. Судебные иски по медкартам — $2.8 млрд ежегодно в мире.</div>
+                </div>
+                
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <div class="problem-title">Упущенный доход клиник</div>
+                    <div class="problem-stat">-30%</div>
+                    <div class="problem-text">Клиники теряют 30% потенциального дохода из-за низкой пропускной способности врачей. Если бы врачи тратили на документы не 3 часа, а 30 минут — они могли бы принять на 40% больше пациентов.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; text-align: center; background: linear-gradient(135deg, rgba(255, 61, 113, 0.1), rgba(255, 0, 100, 0.05)); border: 2px solid rgba(255, 61, 113, 0.4); border-radius: 25px; padding: 50px;">
+                <h3 style="font-size: 42px; margin-bottom: 25px;">💔 Итого: $87 млрд теряется ежегодно</h3>
+                <p style="font-size: 20px; color: rgba(255, 255, 255, 0.8); line-height: 1.7;">Глобально здравоохранение тратит $87 млрд на административную работу врачей, которую можно автоматизировать. В России — $1.2 млрд. Время врача стоит дорого, но оно уходит на рутину.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="section" style="background: radial-gradient(circle at 70% 50%, rgba(0, 212, 255, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">MEDICORE AI: Врач диктует — AI пишет</h2>
+            <p class="section-subtitle">Голосовой AI-ассистент на базе GigaChat 2.0 Max + SaluteSpeech, который превращает речь врача в идеальную медицинскую документацию за секунды</p>
+            
+            <div class="solution-hero">
+                <div class="solution-content">
+                    <h3>От 3 часов документации к 30 минутам голосового ввода</h3>
+                    <p>Врач проводит приём и просто говорит вслух: "Пациент Иванов, жалобы на боль в правом подреберье...". AI в реальном времени транскрибирует речь, структурирует по стандартам МЗ РФ и заполняет медкарту в МИС.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon-small">🎤</div>
+                            <div class="feature-text">Распознавание медицинской терминологии с точностью 98%</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">🧠</div>
+                            <div class="feature-text">Автоматическое структурирование по разделам медкарты</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">⚡</div>
+                            <div class="feature-text">Мгновенная интеграция с МИС (БАРС, МЕДИАЛОГ, 1С:Медицина)</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">🔒</div>
+                            <div class="feature-text">Полное соответствие 152-ФЗ и HIPAA — данные не покидают РФ</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon-small">📊</div>
+                            <div class="feature-text">AI-подсказки по диагнозам на основе симптомов</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-visual">
+                    <h4 style="font-size: 24px; text-align: center; margin-bottom: 30px; color: var(--primary);">🎙️ Голосовой ввод в реальном времени</h4>
+                    <div class="voice-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <div class="demo-text">
+                        <div style="color: var(--primary); font-weight: 700; margin-bottom: 15px;">ВРАЧ ГОВОРИТ:</div>
+                        "Пациент жалуется на острую боль в эпигастрии, тошноту. Анамнез: гастрит в 2020. Назначить ФГДС, анализ крови..."<br><br>
+                        <div style="color: var(--secondary); font-weight: 700; margin-bottom: 15px;">AI ЗАПОЛНЯЕТ:</div>
+                        ✓ Жалобы<br>
+                        ✓ Анамнез<br>
+                        ✓ Назначения<br>
+                        ✓ Направления<br><br>
+                        <div style="color: var(--primary); font-weight: 900; font-size: 24px;">ГОТОВО ЗА 15 СЕКУНД!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="section">
+        <div class="container">
+            <h2 class="section-title">Технологический стек мирового уровня</h2>
+            <p class="section-subtitle">Мы используем самые передовые российские AI-технологии от Сбера + мировые стандарты медицины</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-logo">🧠</div>
+                    <div class="tech-name">GigaChat 2.0 Max</div>
+                    <div class="tech-desc">128K контекст, понимание медтерминов, структурирование документов, 11M токенов от Sber500</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🎤</div>
+                    <div class="tech-name">SaluteSpeech</div>
+                    <div class="tech-desc">STT 98% точность для медицины, работает офлайн, 20+ языков, понимает акценты</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🏥</div>
+                    <div class="tech-name">HL7 FHIR</div>
+                    <div class="tech-desc">Международный стандарт обмена медданными, интеграция с любой МИС</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-logo">🔐</div>
+                    <div class="tech-name">ГосСОПКА</div>
+                    <div class="tech-desc">Шифрование по ГОСТ, соответствие 152-ФЗ, сертификация ФСТЭК</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px; background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.05)); border: 3px solid var(--primary); border-radius: 30px; padding: 60px;">
+                <h3 style="font-size: 38px; text-align: center; margin-bottom: 40px;">🚀 Уникальные преимущества GigaChat для медицины</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">🇷🇺</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Нативный русский</div>
+                        <p style="font-size: 16px; color: rgba(255,255,255,0.7);">Превосходит GPT-3.5 в медтерминологии на русском</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">📊</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Structured Output</div>
+                        <p style="font-size: 16px; color: rgba(255,255,255,0.7);">Выдаёт данные в формате МЗ РФ без дополнительной обработки</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">🏥</div>
+                        <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Medical Fine-tune</div>
+                        <p style="font-size: 16px; color: rgba(255,255,255,0.7);">Дообучаем на 500K российских медкарт</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAM Section -->
+    <section id="tam" class="section" style="background: radial-gradient(circle at 30% 50%, rgba(0, 255, 163, 0.08), transparent);">
+        <div class="container">
+            <h2 class="section-title">Рынок: $150 млрд возможностей</h2>
+            <p class="section-subtitle">Мировой рынок AI в здравоохранении — самый быстрорастущий сегмент, +37% CAGR до 2030</p>
+            
+            <div class="tam-mega-grid">
+                <div class="tam-mega-card">
+                    <div class="tam-label">TAM (Global)</div>
+                    <div class="tam-value">$150B</div>
+                    <div class="tam-description">Мировой рынок AI в healthcare к 2030 году. AI-документация — $12B сегмент. Россия — $1.2B (1% глобального)</div>
+                </div>
+                
+                <div class="tam-mega-card">
+                    <div class="tam-label">SAM (Россия)</div>
+                    <div class="tam-value">$840M</div>
+                    <div class="tam-description">700 000 врачей × $100/мес средний чек = $8.4M MRR → $100M ARR. 10-летний рынок с учётом клиник — $840M</div>
+                </div>
+                
+                <div class="tam-mega-card">
+                    <div class="tam-label">SOM (Захват 5 лет)</div>
+                    <div class="tam-value">$120M</div>
+                    <div class="tam-description">100 000 врачей к 2030 (14% SAM) × $100/мес = $10M MRR → $120M ARR. Реалистичный сценарий с viral growth</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 100px;">
+                <h3 style="font-size: 42px; text-align: center; margin-bottom: 50px;">Почему СЕЙЧАС идеальное время?</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 163, 0.3); border-radius: 20px; padding: 40px; text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 20px;">💰</div>
+                        <h4 style="font-size: 24px; margin-bottom: 15px;">$6.4B в H1 2025</h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 16px;">HealthTech AI получил 62% всех венчурных инвестиций в AI — абсолютный рекорд</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 163, 0.3); border-radius: 20px; padding: 40px; text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 20px;">🏥</div>
+                        <h4 style="font-size: 24px; margin-bottom: 15px;">Дефицит врачей</h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 16px;">В РФ нехватка 180 000 врачей. AI-автоматизация = единственный способ закрыть gap</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 255, 163, 0.3); border-radius: 20px; padding: 40px; text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 20px;">🇷🇺</div>
+                        <h4 style="font-size: 24px; margin-bottom: 15px;">Цифровизация медицины</h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 16px;">Нацпроект "Здравоохранение" — 100% клиник в МИС к 2025. Готовая инфраструктура для AI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section id="business" class="section">
+        <div class="container">
+            <h2 class="section-title">Бизнес-модель: B2B SaaS + B2B2C</h2>
+            <p class="section-subtitle">Монетизация через клиники (B2B) и напрямую врачам (B2C). Sticky product с NRR 130%+</p>
+            
+            <div class="pricing-ultra-grid">
+                <div class="pricing-ultra-card">
+                    <div class="pricing-name">Врач</div>
+                    <div class="pricing-price">1 990₽</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>1 врач, безлимит пациентов</li>
+                        <li>Голосовой ввод 98%</li>
+                        <li>Интеграция с МИС</li>
+                        <li>Шаблоны документов</li>
+                        <li>Мобильное приложение</li>
+                        <li>Email поддержка</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.5);">Для частнопрактикующих врачей</div>
+                </div>
+                
+                <div class="pricing-ultra-card featured">
+                    <div class="pricing-badge">🔥 ТОП</div>
+                    <div class="pricing-name">Клиника</div>
+                    <div class="pricing-price">19 990₽</div>
+                    <div class="pricing-period">за 10 врачей/мес</div>
+                    <ul class="pricing-features">
+                        <li>До 50 врачей</li>
+                        <li>Корпоративная МИС</li>
+                        <li>Аналитика по клинике</li>
+                        <li>API для интеграций</li>
+                        <li>AI-подсказки диагнозов</li>
+                        <li>Приоритетная поддержка</li>
+                        <li>Обучение персонала</li>
+                    </ul>
+                    <div style="font-size: 14px; color: var(--primary); font-weight: 700;">Средняя клиника 15-30 врачей</div>
+                </div>
+                
+                <div class="pricing-ultra-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-price">от 149K</div>
+                    <div class="pricing-period">в месяц</div>
+                    <ul class="pricing-features">
+                        <li>Безлимит врачей</li>
+                        <li>On-premise deployment</li>
+                        <li>Кастомизация под сеть</li>
+                        <li>Выделенный CSM</li>
+                        <li>SLA 99.99%</li>
+                        <li>Интеграция с ERP</li>
+                        <li>White-label опция</li>
+                    </ul>
+                    <div style="font-size: 14px; color: rgba(255,255,255,0.5);">Сети клиник, больницы</div>
+                </div>
+            </div>
+            
+            <div class="revenue-mega">
+                <div class="revenue-mega-title">📈 Прогноз выручки (консервативный сценарий)</div>
+                <div class="revenue-timeline-grid">
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2026</div>
+                        <div class="revenue-amount">$720K</div>
+                        <div class="revenue-customers">3 000 врачей<br>50 клиник</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2027</div>
+                        <div class="revenue-amount">$8.4M</div>
+                        <div class="revenue-customers">20 000 врачей<br>400 клиник</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2028</div>
+                        <div class="revenue-amount">$36M</div>
+                        <div class="revenue-customers">60 000 врачей<br>1 500 клиник</div>
+                    </div>
+                    <div class="revenue-milestone">
+                        <div class="revenue-year">2029</div>
+                        <div class="revenue-amount">$120M</div>
+                        <div class="revenue-customers">100 000 врачей<br>3 000 клиник</div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-label">CAC</div>
+                        <div class="metric-value">$80</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">LTV</div>
+                        <div class="metric-value">$960</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">LTV/CAC</div>
+                        <div class="metric-value">12x</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Payback</div>
+                        <div class="metric-value">3 мес</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px; text-align: center;">
+                    <h4 style="font-size: 28px; margin-bottom: 20px;">💎 Unit Economics мечты</h4>
+                    <p style="font-size: 18px; color: rgba(255,255,255,0.8);">Gross Margin 85% | Churn 2% мес | NRR 130% | Rule of 40: 120+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction -->
+    <section id="traction" class="section" style="background: radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Traction: Реальный спрос есть</h2>
+            <p class="section-subtitle">Мы уже в диалоге с 5 клиниками-пилотами и имеем письма о намерениях на $180K ARR</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 80px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 72px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">11M</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.7);">Токенов GigaChat<br>от Sber500</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 72px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">5</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.7);">Клиник в пилоте<br>(250 врачей)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 72px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">$180K</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.7);">ARR в письмах<br>о намерениях</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 72px; font-weight: 900; color: var(--primary); margin-bottom: 15px;">98%</div>
+                    <div style="font-size: 18px; color: rgba(255,255,255,0.7);">Точность STT<br>на медтерминах</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 100px; background: linear-gradient(135deg, rgba(0, 255, 163, 0.08), rgba(0, 212, 255, 0.05)); border: 2px solid var(--primary); border-radius: 25px; padding: 60px;">
+                <h3 style="font-size: 36px; text-align: center; margin-bottom: 50px;">🏥 Пилотные клиники (NDA)</h3>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 30px; text-align: center;">
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 10px;">🏥</div>
+                        <div style="font-size: 16px; font-weight: 600;">Сеть клиник<br>Москва</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px;">80 врачей</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 10px;">⚕️</div>
+                        <div style="font-size: 16px; font-weight: 600;">Частная<br>больница СПб</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px;">120 врачей</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 10px;">🏨</div>
+                        <div style="font-size: 16px; font-weight: 600;">Стоматология<br>Казань</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px;">15 врачей</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 10px;">💉</div>
+                        <div style="font-size: 16px; font-weight: 600;">Лабораторная<br>диагностика</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px;">25 врачей</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; margin-bottom: 10px;">🩺</div>
+                        <div style="font-size: 16px; font-weight: 600;">Педиатрия<br>Новосибирск</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 5px;">10 врачей</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition -->
+    <section id="competition" class="section">
+        <div class="container">
+            <h2 class="section-title">Конкуренция: Мы на 3 года впереди</h2>
+            <p class="section-subtitle">На российском рынке нет AI-решений для медицинской документации. Западные — недоступны</p>
+            
+            <div class="competition-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Западные AI (Nuance, Suki)</th>
+                            <th>Российские МИС</th>
+                            <th class="us-column">MEDICORE AI (МЫ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Доступность в РФ</td>
+                            <td><span class="cross">✗</span> Заблокированы / санкции</td>
+                            <td><span class="check">✓</span> Доступны</td>
+                            <td class="us-column"><span class="check">✓</span> РФ + экспорт СНГ</td>
+                        </tr>
+                        <tr>
+                            <td>Голосовой AI-ввод</td>
+                            <td><span class="check">✓</span> Есть (английский)</td>
+                            <td><span class="cross">✗</span> Нет AI</td>
+                            <td class="us-column"><span class="check">✓</span> GigaChat 2.0 + SaluteSpeech</td>
+                        </tr>
+                        <tr>
+                            <td>Русский язык + медтермины</td>
+                            <td><span class="cross">✗</span> Слабо (токенизация)</td>
+                            <td><span class="check">✓</span> Да (ручной ввод)</td>
+                            <td class="us-column"><span class="check">✓</span> 98% точность STT</td>
+                        </tr>
+                        <tr>
+                            <td>Стандарты МЗ РФ</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td><span class="check">✓</span> Да</td>
+                            <td class="us-column"><span class="check">✓</span> Нативная поддержка</td>
+                        </tr>
+                        <tr>
+                            <td>152-ФЗ compliance</td>
+                            <td><span class="cross">✗</span> Данные за рубежом</td>
+                            <td><span class="check">✓</span> Да</td>
+                            <td class="us-column"><span class="check">✓</span> ГосСОПКА + ФСТЭК</td>
+                        </tr>
+                        <tr>
+                            <td>Интеграция с МИС РФ</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td><span class="check">✓</span> Встроено</td>
+                            <td class="us-column"><span class="check">✓</span> API ко всем топ МИС</td>
+                        </tr>
+                        <tr>
+                            <td>AI-подсказки диагнозов</td>
+                            <td><span class="check">✓</span> Есть</td>
+                            <td><span class="cross">✗</span> Нет</td>
+                            <td class="us-column"><span class="check">✓</span> ML на 500K медкарт</td>
+                        </tr>
+                        <tr>
+                            <td>Цена</td>
+                            <td>$200-500/мес</td>
+                            <td>0₽ (ручной ввод)</td>
+                            <td class="us-column">1990-19990₽/мес</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 80px; text-align: center;">
+                <h3 style="font-size: 42px; margin-bottom: 30px;">🛡️ Защитные барьеры</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto;">
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid var(--primary); border-radius: 20px; padding: 45px;">
+                        <h4 style="font-size: 26px; margin-bottom: 18px;">⏱️ First-mover: 3 года форы</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 17px; line-height: 1.6;">Мы первые AI-решение для медицины на русском. Competitors потратят 2-3 года на разработку + fine-tuning + сертификацию.</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid var(--primary); border-radius: 20px; padding: 45px;">
+                        <h4 style="font-size: 26px; margin-bottom: 18px;">📊 Network effects</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 17px; line-height: 1.6;">Каждая новая медкарта улучшает AI-модель. После 1M карт — непреодолимое преимущество в точности.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section" style="background: radial-gradient(circle at 40% 70%, rgba(0, 255, 163, 0.05), transparent);">
+        <div class="container">
+            <h2 class="section-title">Команда: MedTech × AI × Product</h2>
+            <p class="section-subtitle">Уникальная комбинация медицинской экспертизы, AI-разработки и опыта построения SaaS</p>
+            
+            <div class="team-mega-grid">
+                <div class="team-mega-card">
+                    <div class="team-avatar">👨‍⚕️</div>
+                    <div class="team-name">Андрей Кузнецов</div>
+                    <div class="team-role">CEO / Co-Founder</div>
+                    <div class="team-bio">Врач-терапевт, 12 лет практики. Ex-главврач сети клиник (1200 врачей). Знает каждую боль изнутри. MBA Stanford Healthcare. Нетворк в 500+ клиниках РФ.</div>
+                </div>
+                
+                <div class="team-mega-card">
+                    <div class="team-avatar">👩‍💻</div>
+                    <div class="team-name">Екатерина Волкова</div>
+                    <div class="team-role">CTO / Co-Founder</div>
+                    <div class="team-bio">Ex-ML Lead в Yandex Health. PhD NLP/Speech Recognition. Разработала voice assistant для 2M+ пользователей. Автор 8 патентов в области medical AI.</div>
+                </div>
+                
+                <div class="team-mega-card">
+                    <div class="team-avatar">💼</div>
+                    <div class="team-name">Михаил Соколов</div>
+                    <div class="team-role">CPO / Co-Founder</div>
+                    <div class="team-bio">Ex-Head of Product в DocDoc (Exit $50M). Построил 3 B2B SaaS от 0 до $5M ARR. Эксперт в PLG и viral growth в healthcare. Y Combinator alumni.</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 80px;">
+                <h3 style="font-size: 36px; text-align: center; margin-bottom: 40px;">🎯 Советники и менторы мирового уровня</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; max-width: 1000px; margin: 0 auto;">
+                    <div style="background: rgba(0,0,0,0.3); padding: 35px; border-radius: 20px; border: 1px solid rgba(0, 255, 163, 0.2);">
+                        <div style="font-size: 22px; font-weight: 800; margin-bottom: 10px;">Дмитрий Петров</div>
+                        <div style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Partner @ Kama Flow VC (портфель $10B)</div>
+                        <p style="font-size: 15px; color: rgba(255,255,255,0.7);">Инвестор в 30+ HealthTech стартапов. Lead investor в нашем Pre-Seed. Открывает двери к клиникам и фондам.</p>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); padding: 35px; border-radius: 20px; border: 1px solid rgba(0, 255, 163, 0.2);">
+                        <div style="font-size: 22px; font-weight: 800; margin-bottom: 10px;">Ирина Белова</div>
+                        <div style="font-size: 16px; color: var(--primary); margin-bottom: 12px;">Director @ GigaChat Healthcare @ Sber</div>
+                        <p style="font-size: 15px; color: rgba(255,255,255,0.7);">Курирует medical use cases GigaChat. Обеспечивает доступ к 11M токенов и прямую линию с командой разработки.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Roadmap: 4 года до market leadership</h2>
+            <p class="section-subtitle">От MVP на Sber500 до топ-1 решения в российском рынке medical AI</p>
+            
+            <div class="roadmap-visual">
+                <div class="roadmap-line"></div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q4 2025</div>
+                        <div class="roadmap-title">MVP + Sber500 буткемп</div>
+                        <div class="roadmap-description">Завершение MVP с голосовым вводом. 5 пилотных клиник, 250 врачей. Fine-tuning на реальных медкартах. Получение сертификации Росздравнадзора. $15K MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q1-Q2 2026</div>
+                        <div class="roadmap-title">Pre-Seed $750K + Public Launch</div>
+                        <div class="roadmap-description">Раунд от Kama Flow + angels. Публичный запуск, маркетинг через КОЛы-врачей. Интеграция с топ-5 МИС России. 3 000 врачей, $60K MRR.</div>
+                    </div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">Q3-Q4 2026</div>
+                        <div class="roadmap-title">B2B Growth + AI Diagnostics</div>
+                        <div class="roadmap-description">Партнёрства с 3 сетями клиник (500+ врачей каждая). Запуск AI-подсказок диагнозов. 20 000 врачей, 400 клиник. $700K MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">2027</div>
+                        <div class="roadmap-title">Series A $8M + CIS Expansion</div>
+                        <div class="roadmap-description">Масштабный раунд Series A. Expansion в Казахстан, Узбекистан, Беларусь. Запуск API для pharma. 60 000 врачей. $3M MRR. Прибыльность.</div>
+                    </div>
+                    <div class="roadmap-dot"></div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-quarter">2028-2029</div>
+                        <div class="roadmap-title">Market Leader + Exit</div>
+                        <div class="roadmap-description">Топ-1 в России по medical AI. 100 000 врачей, 3 000 клиник. M&A предложения от Sber / Yandex / global players или подготовка к IPO. $10M MRR.</div>
+                    </div>
+                    <div></div>
+                    <div class="roadmap-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Инвестируйте в будущее<br>медицины прямо сейчас</h2>
+                <p class="cta-text">Мы привлекаем Pre-Seed раунд <strong>$750K</strong> для запуска продукта и захвата рынка $150B.<br>Уникальная команда, передовые технологии, огромный TAM — идеальный шторм для x100 возврата.</p>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:invest@medicore.ai" class="btn btn-primary">📧 Обсудить инвестиции</a>
+                    <a href="#" class="btn btn-secondary">📊 Скачать pitch deck</a>
+                </div>
+                
+                <div class="investment-mega-grid">
+                    <div class="investment-mega-box">
+                        <div class="investment-label">Привлекаем</div>
+                        <div class="investment-value">$750K</div>
+                    </div>
+                    <div class="investment-mega-box">
+                        <div class="investment-label">Оценка pre-money</div>
+                        <div class="investment-value">$3M</div>
+                    </div>
+                    <div class="investment-mega-box">
+                        <div class="investment-label">Минимальный чек</div>
+                        <div class="investment-value">$50K</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 80px; padding: 50px; background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.08)); border: 3px solid var(--primary); border-radius: 30px;">
+                    <h3 style="font-size: 32px; margin-bottom: 35px;">🎁 Что вы получите как инвестор</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; text-align: center;">
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 15px;">📈</div>
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Equity 20%</div>
+                            <div style="font-size: 15px; color: rgba(255,255,255,0.7);">За $750K инвестиций</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 15px;">🎯</div>
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Board seat</div>
+                            <div style="font-size: 15px; color: rgba(255,255,255,0.7);">Прямой контроль</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 15px;">💰</div>
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Exit 4-5 лет</div>
+                            <div style="font-size: 15px; color: rgba(255,255,255,0.7);">M&A или IPO</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 48px; margin-bottom: 15px;">🚀</div>
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">x50-100 ROI</div>
+                            <div style="font-size: 15px; color: rgba(255,255,255,0.7);">При успешном exit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 60px; text-align: center;">
+                    <p style="font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                        🔒 Конфиденциальность гарантирована NDA<br>
+                        📊 Full data room доступен для due diligence<br>
+                        ⚡ Раунд закрывается через 60 дней
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 25px;">⚕️ MEDICORE AI</div>
+            <p style="color: rgba(255,255,255,0.6); margin-bottom: 25px; font-size: 18px;">Голосовой AI-ассистент для врачей на базе GigaChat 2.0</p>
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 35px; flex-wrap: wrap;">
+                <a href="mailto:hello@medicore.ai" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 16px;">📧 hello@medicore.ai</a>
+                <a href="tel:+79991234567" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 16px;">📱 +7 (999) 123-45-67</a>
+                <a href="#" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 16px;">💼 LinkedIn</a>
+            </div>
+            <div style="color: rgba(255,255,255,0.4); font-size: 14px;">
+                © 2025 MEDICORE AI. Powered by GigaChat 2.0 Max + SaluteSpeech | Sber500 Accelerator Program
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 14, 39, 1)';
+                nav.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.5)';
+            } else {
+                nav.style.background = 'rgba(10, 14, 39, 0.98)';
+                nav.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.3)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Animated counters on scroll
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value + (element.dataset.suffix || '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target;
+                    const endValue = parseInt(statNumber.dataset.value);
+                    animateValue(statNumber, 0, endValue, 2000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+        });
+    </script>
+</body>
+</html>
