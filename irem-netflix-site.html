@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindset Therapy Academy - Transform Your Mind</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a78bfa;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            width: 15%;
+            transition: width 0.3s ease;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 24px 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .course-overview {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .course-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .course-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .modules-nav {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .module-nav-item {
+            display: block;
+            padding: 12px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .module-nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .module-nav-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .module-progress {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        .module-progress-bar {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            border-radius: 1px;
+        }
+
+        .module-progress-fill {
+            height: 100%;
+            background: var(--success);
+            border-radius: 1px;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 600px;
+        }
+
+        .welcome-banner {
+            background: var(--gradient);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Modules Grid */
+        .modules-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .toggle-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .modules-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .module-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-color: var(--primary);
+        }
+
+        .module-header {
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .module-number {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .module-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .module-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .module-content {
+            padding: 24px;
+        }
+
+        .lesson-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .lesson-item:hover {
+            background: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        .lesson-item.completed {
+            opacity: 0.7;
+        }
+
+        .lesson-item.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .lesson-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 18px;
+        }
+
+        .lesson-item.completed .lesson-icon {
+            background: var(--success);
+        }
+
+        .lesson-item.locked .lesson-icon {
+            background: var(--border);
+        }
+
+        .lesson-info {
+            flex: 1;
+        }
+
+        .lesson-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .lesson-duration {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .lesson-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .price-tag {
+            padding: 4px 8px;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .unlock-btn {
+            padding: 6px 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .unlock-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .module-footer {
+            padding: 16px 24px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .stat {
+            color: var(--text-secondary);
+        }
+
+        .stat strong {
+            color: var(--text-primary);
+        }
+
+        .unlock-module-btn {
+            padding: 8px 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .unlock-module-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Pricing Options */
+        .pricing-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .pricing-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pricing-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .pricing-card {
+            background: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .plan-price {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .plan-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check-icon {
+            color: var(--success);
+        }
+
+        .plan-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .plan-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pricing-card.featured .plan-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pricing-card.featured .plan-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-banner {
+                padding: 24px;
+            }
+            
+            .welcome-title {
+                font-size: 24px;
+            }
+            
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Mindset Therapy Academy</div>
+            <div class="user-menu">
+                <div class="progress-indicator">
+                    <span>5 of 32 completed</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="user-avatar">I</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="course-overview">
+                <h3 class="course-title">Course Overview</h3>
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Lessons</span>
+                        <span>32 videos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Duration</span>
+                        <span>12+ hours</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Your Progress</span>
+                        <span>15%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Unlocked</span>
+                        <span>5 lessons</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="modules-nav">
+                <a href="#module1" class="module-nav-item active">
+                    Module 1: Awareness
+                    <div class="module-progress">
+                        <div class="module-progress-bar">
+                            <div class="module-progress-fill" style="width: 60%"></div>
+                        </div>
+                        <span>3/5</span>
+                    </div>
+                </a>
+                <a href="#module2" class="module-nav-item">
+                    Module 2: Acceptance
+                    <div class="module-progress">
+                        <div class="module-progress-bar">
+                            <div class="module-progress-fill" style="width: 25%"></div>
+                        </div>
+                        <span>2/8</span>
+                    </div>
+                </a>
+                <a href="#module3" class="module-nav-item">
+                    Module 3: Reconstruction
+                    <div class="module-progress">
+                        <div class="module-progress-bar">
+                            <div class="module-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span>0/10</span>
+                    </div>
+                </a>
+                <a href="#module4" class="module-nav-item">
+                    Module 4: Integration
+                    <div class="module-progress">
+                        <div class="module-progress-bar">
+                            <div class="module-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span>0/9</span>
+                    </div>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome back, Irem!</h1>
+                    <p class="welcome-subtitle">Continue your transformation journey</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary">
+                            ▶ Continue Learning
+                        </button>
+                        <button class="btn btn-secondary">
+                            🎁 Unlock All Videos - Save 60%
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modules Section -->
+            <section class="modules-section">
+                <div class="section-header">
+                    <h2 class="section-title">Your Learning Path</h2>
+                    <div class="view-toggle">
+                        <button class="toggle-btn active">Detailed</button>
+                        <button class="toggle-btn">Compact</button>
+                    </div>
+                </div>
+
+                <div class="modules-grid">
+                    <!-- Module 1 -->
+                    <div class="module-card" id="module1">
+                        <div class="module-header">
+                            <span class="module-number">MODULE 1</span>
+                            <h3 class="module-title">Awareness & Inner Observation</h3>
+                            <p class="module-description">
+                                Learn to observe your thoughts, emotions, and patterns without judgment. 
+                                Discover the power of breath and presence.
+                            </p>
+                        </div>
+                        <div class="module-content">
+                            <div class="lesson-list">
+                                <a href="#" class="lesson-item completed">
+                                    <div class="lesson-icon">✓</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Introduction: The Journey Begins</div>
+                                        <div class="lesson-duration">12 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Completed</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item completed">
+                                    <div class="lesson-icon">✓</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Understanding Your Mind Structure</div>
+                                        <div class="lesson-duration">18 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Completed</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item completed">
+                                    <div class="lesson-icon">✓</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Breath: The Smallest Unit of Life</div>
+                                        <div class="lesson-duration">15 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Completed</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item">
+                                    <div class="lesson-icon">▶</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Body Scanning Technique</div>
+                                        <div class="lesson-duration">22 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Mind Observation Practice</div>
+                                        <div class="lesson-duration">25 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <div class="module-stats">
+                                <span class="stat"><strong>5</strong> lessons</span>
+                                <span class="stat"><strong>92</strong> minutes</span>
+                            </div>
+                            <button class="unlock-module-btn">Unlock Module €19.99</button>
+                        </div>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="module-card" id="module2">
+                        <div class="module-header">
+                            <span class="module-number">MODULE 2</span>
+                            <h3 class="module-title">Acceptance & Breaking Resistance</h3>
+                            <p class="module-description">
+                                Release judgment and resistance. Learn to accept what you discover about yourself 
+                                and open the door to genuine transformation.
+                            </p>
+                        </div>
+                        <div class="module-content">
+                            <div class="lesson-list">
+                                <a href="#" class="lesson-item completed">
+                                    <div class="lesson-icon">✓</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">The Power of Non-Judgment</div>
+                                        <div class="lesson-duration">20 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Completed</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item completed">
+                                    <div class="lesson-icon">✓</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Breaking the Easy-Hard Perception</div>
+                                        <div class="lesson-duration">16 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Completed</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item">
+                                    <div class="lesson-icon">▶</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Emotional Freedom Technique</div>
+                                        <div class="lesson-duration">18 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Releasing Past Patterns</div>
+                                        <div class="lesson-duration">24 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">The Art of Letting Go</div>
+                                        <div class="lesson-duration">19 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">3 more lessons...</div>
+                                        <div class="lesson-duration">65 min total</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Locked</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <div class="module-stats">
+                                <span class="stat"><strong>8</strong> lessons</span>
+                                <span class="stat"><strong>162</strong> minutes</span>
+                            </div>
+                            <button class="unlock-module-btn">Unlock Module €34.99</button>
+                        </div>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="module-card" id="module3">
+                        <div class="module-header">
+                            <span class="module-number">MODULE 3</span>
+                            <h3 class="module-title">Conscious Reconstruction</h3>
+                            <p class="module-description">
+                                Design your new mental architecture. Create empowering beliefs and patterns 
+                                aligned with your authentic self.
+                            </p>
+                        </div>
+                        <div class="module-content">
+                            <div class="lesson-list">
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Defining Your Life Purpose</div>
+                                        <div class="lesson-duration">28 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Creating New Neural Pathways</div>
+                                        <div class="lesson-duration">32 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">The Power of Visualization</div>
+                                        <div class="lesson-duration">26 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">7 more lessons...</div>
+                                        <div class="lesson-duration">184 min total</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Locked</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <div class="module-stats">
+                                <span class="stat"><strong>10</strong> lessons</span>
+                                <span class="stat"><strong>270</strong> minutes</span>
+                            </div>
+                            <button class="unlock-module-btn">Unlock Module €44.99</button>
+                        </div>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="module-card" id="module4">
+                        <div class="module-header">
+                            <span class="module-number">MODULE 4</span>
+                            <h3 class="module-title">Integration & Automatic Living</h3>
+                            <p class="module-description">
+                                Make your new patterns automatic. Live with clarity, balance, and conscious choice 
+                                as your natural state of being.
+                            </p>
+                        </div>
+                        <div class="module-content">
+                            <div class="lesson-list">
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Daily Practice Rituals</div>
+                                        <div class="lesson-duration">24 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">Maintaining Your Transformation</div>
+                                        <div class="lesson-duration">30 min</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <button class="unlock-btn">Unlock €4.99</button>
+                                    </div>
+                                </a>
+                                <a href="#" class="lesson-item locked">
+                                    <div class="lesson-icon">🔒</div>
+                                    <div class="lesson-info">
+                                        <div class="lesson-title">7 more lessons...</div>
+                                        <div class="lesson-duration">198 min total</div>
+                                    </div>
+                                    <div class="lesson-price">
+                                        <span class="price-tag">Locked</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="module-footer">
+                            <div class="module-stats">
+                                <span class="stat"><strong>9</strong> lessons</span>
+                                <span class="stat"><strong>252</strong> minutes</span>
+                            </div>
+                            <button class="unlock-module-btn">Unlock Module €39.99</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="pricing-section">
+                <div class="pricing-header">
+                    <h2 class="pricing-title">Choose Your Path</h2>
+                    <p class="pricing-subtitle">Unlock videos individually or save with bundles</p>
+                </div>
+                <div class="pricing-options">
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Pay Per Video</h3>
+                        <div class="plan-price">€4.99</div>
+                        <p class="plan-description">per video</p>
+                        <ul class="plan-features">
+                            <li><span class="check-icon">✓</span> Lifetime access to purchased videos</li>
+                            <li><span class="check-icon">✓</span> Learn at your own pace</li>
+                            <li><span class="check-icon">✓</span> Download for offline viewing</li>
+                        </ul>
+                        <button class="plan-btn">Continue</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <h3 class="plan-name">Complete Course</h3>
+                        <div class="plan-price">€97</div>
+                        <p class="plan-description">one-time payment</p>
+                        <ul class="plan-features">
+                            <li><span class="check-icon">✓</span> All 32 videos instantly</li>
+                            <li><span class="check-icon">✓</span> Save €62.68 (60% off)</li>
+                            <li><span class="check-icon">✓</span> Bonus materials included</li>
+                            <li><span class="check-icon">✓</span> Priority support</li>
+                            <li><span class="check-icon">✓</span> Future updates free</li>
+                        </ul>
+                        <button class="plan-btn">Get Full Access</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3 class="plan-name">Module Bundle</h3>
+                        <div class="plan-price">€34.99</div>
+                        <p class="plan-description">per module</p>
+                        <ul class="plan-features">
+                            <li><span class="check-icon">✓</span> All videos in module</li>
+                            <li><span class="check-icon">✓</span> Save 30% vs individual</li>
+                            <li><span class="check-icon">✓</span> Module workbook</li>
+                        </ul>
+                        <button class="plan-btn">Choose Module</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.unlock-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Payment gateway would open here. This video would then be unlocked for lifetime access.');
+            });
+        });
+
+        document.querySelectorAll('.unlock-module-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Unlock entire module with 30% discount. All videos in this module would become available.');
+            });
+        });
+
+        document.querySelectorAll('.plan-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const planName = e.target.closest('.pricing-card').querySelector('.plan-name').textContent;
+                alert(`${planName} selected. Payment processing would happen here.`);
+            });
+        });
+
+        // Module navigation
+        document.querySelectorAll('.module-nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.module-nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                const target = document.querySelector(item.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // View toggle
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
