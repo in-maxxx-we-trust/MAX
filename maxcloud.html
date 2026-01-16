@@ -1,0 +1,3062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXCLOUD - The AI Infrastructure That Actually Delivers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Mobile-specific padding adjustments */
+            .section-header {
+                padding: 0 10px;
+            }
+
+            .section-subtitle {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            /* Fix code blocks */
+            pre {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                max-width: 100%;
+            }
+
+            /* Fix developer code examples */
+            .developer-section pre {
+                margin: 0;
+            }
+
+            /* Fix button spacing */
+            .hero-cta .btn,
+            .cta-buttons .btn {
+                margin-bottom: 10px;
+            }
+
+            /* Enterprise features tags */
+            .enterprise-section > div > div:last-child > div {
+                justify-content: flex-start;
+                padding: 0 10px;
+            }
+
+            /* Demo stats */
+            .demo-section > div > div:last-child {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            /* Fix form inputs */
+            input, select, textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Metric cards */
+            .metric-card {
+                padding: 20px;
+            }
+
+            .metric-value {
+                font-size: 36px;
+            }
+
+            /* Feature items */
+            .feature-item {
+                padding: 20px;
+            }
+
+            /* Calculator padding */
+            .calculator-section .input-group {
+                margin-bottom: 20px;
+            }
+
+            /* FAQ items */
+            details summary span {
+                display: none;
+            }
+
+            /* Resource cards */
+            .resources-section a[style*="display: block"] {
+                padding: 30px 20px !important;
+            }
+
+            /* Testimonial cards */
+            .testimonial-card {
+                padding: 30px;
+            }
+
+            /* Use case cards mobile padding */
+            div[style*="padding: 40px"] {
+                padding: 30px !important;
+            }
+
+            /* Section spacing */
+            section {
+                overflow-x: hidden;
+            }
+
+            .nav-cta {
+                flex-direction: row;
+            }
+
+            .mobile-menu {
+                margin-left: 10px;
+            }
+
+            .nav-cta .btn-ghost {
+                display: none;
+            }
+
+            /* Global mobile reset */
+            * {
+                max-width: 100vw;
+            }
+
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+
+            /* Container width fix */
+            .container,
+            section > div {
+                max-width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            /* Max width for content */
+            .section-header,
+            .hero-content,
+            section > div > div {
+                max-width: 100%;
+            }
+
+            /* Fix specific narrow elements */
+            p, ul, ol, blockquote {
+                max-width: 100%;
+                word-wrap: break-word;
+            }
+
+            /* Table scroll indicators */
+            .comparison-section > div > div:first-child {
+                position: relative;
+            }
+
+            .comparison-section > div > div:first-child::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 30px;
+                background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8));
+                pointer-events: none;
+            }
+
+            /* Comparison table mobile specific */
+            .comparison-section table {
+                font-size: 13px;
+            }
+
+            .comparison-section th,
+            .comparison-section td {
+                padding: 12px 8px;
+            }
+
+            .comparison-section td:first-child {
+                min-width: 100px;
+                font-size: 12px;
+            }
+
+            /* Hide horizontal scrollbars */
+            * {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            *::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        :root {
+            --bg-dark: #000000;
+            --bg-darker: #0a0a0a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #0066ff;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --glow-intensity: 0.8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-blue);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.1s ease;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 102, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 9998;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 60px;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-blue), transparent);
+            top: -300px;
+            left: -300px;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-purple), transparent);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 5s;
+        }
+
+        .shape3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -100px) scale(1.1); }
+            50% { transform: translate(-100px, 100px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 100px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            animation: glow-pulse 2s infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 102, 255, 0.5); }
+        }
+
+        .hero-badge .badge-icon {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 30px;
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .metrics-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 102, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+        }
+
+        .metric-value {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Performance Section */
+        .performance-section {
+            padding: 120px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-purple);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .performance-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .performance-chart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+        }
+
+        .chart-ring {
+            fill: none;
+            stroke-width: 40;
+            stroke-linecap: round;
+            transform-origin: center;
+            transform: rotate(-90deg);
+        }
+
+        .chart-bg {
+            stroke: rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-progress {
+            stroke: url(#gradient);
+            stroke-dasharray: 880;
+            stroke-dashoffset: 880;
+            animation: chart-fill 2s ease-out forwards;
+        }
+
+        @keyframes chart-fill {
+            to { stroke-dashoffset: 70; }
+        }
+
+        .chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .chart-value {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chart-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        .performance-features {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 102, 255, 0.3);
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ROI Calculator Section */
+        .calculator-section {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, transparent, rgba(0, 102, 255, 0.05), transparent);
+        }
+
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .input-slider {
+            position: relative;
+            height: 40px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+        }
+
+        .slider-value {
+            position: absolute;
+            top: 25px;
+            right: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .calculator-results {
+            text-align: center;
+        }
+
+        .savings-amount {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10b981, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .savings-label {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .savings-breakdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            text-align: left;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 102, 255, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .testimonial-quote {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .author-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 102, 255, 0.1), transparent 70%);
+            animation: cta-pulse 4s infinite;
+        }
+
+        @keyframes cta-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-large {
+            padding: 18px 36px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-column a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        /* Forms */
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        select option {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .performance-grid,
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .performance-section,
+            .calculator-section,
+            .testimonials-section,
+            .cta-section,
+            .architecture-section,
+            .use-cases-section,
+            .integration-section,
+            .security-section,
+            .developer-section,
+            .comparison-section,
+            .specs-section,
+            .enterprise-section,
+            .why-now-section,
+            .pricing-section,
+            .migration-section,
+            .case-studies-section,
+            .faq-section,
+            .resources-section,
+            .demo-section {
+                padding: 60px 20px;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+
+            h2 {
+                font-size: 28px;
+                letter-spacing: -1px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .metrics-preview {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-cta {
+                gap: 10px;
+            }
+
+            .nav-cta .btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            /* Architecture section mobile */
+            .architecture-section > div > div:first-child {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Use cases mobile */
+            .use-cases-section > div {
+                grid-template-columns: 1fr;
+            }
+
+            /* Integration section mobile */
+            .integration-section > div > div:first-child {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .integration-section h4 {
+                font-size: 14px;
+            }
+
+            /* Deploy steps mobile */
+            .integration-section > div > div:last-child > div:last-child {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            /* Security section mobile */
+            .security-section > div {
+                grid-template-columns: 1fr;
+            }
+
+            /* Developer section mobile */
+            .developer-section > div > div:first-child > div {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .developer-section > div > div:last-child {
+                grid-template-columns: 1fr;
+            }
+
+            /* Comparison table mobile */
+            .comparison-section table {
+                font-size: 12px;
+            }
+
+            .comparison-section th,
+            .comparison-section td {
+                padding: 10px 5px;
+            }
+
+            .comparison-section th:first-child,
+            .comparison-section td:first-child {
+                position: sticky;
+                left: 0;
+                background: var(--bg-dark);
+                z-index: 10;
+                width: 100px;
+            }
+
+            /* Specs section mobile */
+            .specs-section > div > div {
+                grid-template-columns: 1fr;
+            }
+
+            /* Enterprise section mobile */
+            .enterprise-section > div > div:first-child {
+                grid-template-columns: 1fr;
+            }
+
+            /* Why now section mobile */
+            .why-now-section > div > div:first-child {
+                grid-template-columns: 1fr;
+            }
+
+            /* Pricing section mobile */
+            .pricing-section > div > div:first-child {
+                grid-template-columns: 1fr;
+            }
+
+            /* Migration timeline mobile */
+            .migration-section > div > div:last-child {
+                grid-template-columns: 1fr;
+            }
+
+            .migration-section .timeline > div {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* Case studies mobile */
+            .case-studies-section > div > div > div:first-child {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .case-studies-section > div > div > div:last-child {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            /* Resources section mobile */
+            .resources-section > div {
+                grid-template-columns: 1fr;
+            }
+
+            /* Demo form mobile */
+            .demo-section form > div:first-child {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-section > div > div:last-child {
+                gap: 30px;
+            }
+
+            /* Footer mobile */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            /* Grid layouts mobile fixes */
+            .grid-2-col,
+            .grid-3-col,
+            .grid-4-col {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Architecture comparison */
+            div[style*="grid-template-columns: repeat(2, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Use cases grid */
+            div[style*="grid-template-columns: repeat(2, 1fr)"][style*="gap: 30px"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Integration frameworks */
+            div[style*="grid-template-columns: repeat(4, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+            }
+
+            /* Deploy steps */
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Security/Compliance */
+            div[style*="grid-template-columns: repeat(2, 1fr)"][style*="gap: 40px"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Pricing cards */
+            div[style*="grid-template-columns: repeat(3, 1fr)"][style*="margin-bottom: 60px"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Timeline fix */
+            .timeline-desktop {
+                display: none !important;
+            }
+
+            .timeline-mobile {
+                display: block !important;
+            }
+
+            /* Case study grids */
+            div[style*="grid-template-columns: 1fr 2fr"],
+            div[style*="grid-template-columns: 2fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Comparison table mobile */
+            .calculator-container {
+                padding: 30px 20px;
+            }
+
+            .savings-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            /* Hide overflow on mobile */
+            body {
+                overflow-x: hidden;
+            }
+
+            /* Floating shapes mobile */
+            .floating-shapes {
+                display: none;
+            }
+
+            /* Stats mobile spacing */
+            .stat-value {
+                font-size: 2.5rem;
+            }
+
+            /* Table scroll wrapper */
+            .comparison-section > div {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Button groups mobile */
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            /* FAQ mobile */
+            .faq-section details {
+                padding: 20px;
+            }
+
+            .faq-section summary {
+                font-size: 16px;
+            }
+
+            /* Code blocks mobile */
+            pre {
+                font-size: 12px;
+                padding: 15px;
+            }
+
+            /* Cursor hide on mobile */
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">MAXCLOUD</div>
+            <ul class="nav-links">
+                <li><a href="#performance">Performance</a></li>
+                <li><a href="#calculator">ROI Calculator</a></li>
+                <li><a href="#testimonials">Success Stories</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+            <div class="nav-cta">
+                <button class="btn btn-ghost">Sign In</button>
+                <button class="btn btn-primary">Start Free Trial</button>
+                <button class="mobile-menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="grid-lines"></div>
+            <div class="floating-shapes">
+                <div class="shape shape1"></div>
+                <div class="shape shape2"></div>
+                <div class="shape shape3"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="badge-icon"></div>
+                <span>MLPerf® Storage Leader 2025</span>
+            </div>
+            <h1>Your AI is Only as Fast<br>as Your Infrastructure</h1>
+            <p class="hero-subtitle">
+                <strong>Right now, your $2M GPU cluster is sitting at 35% utilization.</strong><br>
+                Not because your team is lazy. Because your storage can't keep up.<br>
+                MAXCLOUD fixes this. 92.2% GPU utilization. Guaranteed.
+            </p>
+            <div class="hero-cta">
+                <button class="btn btn-primary btn-large">See Live Demo</button>
+                <button class="btn btn-ghost btn-large">Calculate Your Savings</button>
+            </div>
+            <div class="metrics-preview">
+                <div class="metric-card">
+                    <div class="metric-value">1.1TB/s</div>
+                    <div class="metric-label">Sustained Throughput</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92.2%</div>
+                    <div class="metric-label">GPU Utilization</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">70%</div>
+                    <div class="metric-label">Cost Reduction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="performance-section" id="performance">
+        <div class="section-header">
+            <span class="section-badge">The Problem You're Living With</span>
+            <h2>Your $2M GPU Cluster is Running<br>at 35% Capacity</h2>
+            <p class="section-subtitle">
+                Every day, your H100s sit idle waiting for data. Traditional storage wasn't built for AI workloads. 
+                NFS is too slow. Object storage has insane latency. Parallel filesystems are complex nightmares.
+                <strong>You're literally burning $100K/month on idle compute.</strong>
+            </p>
+        </div>
+        <div class="performance-grid">
+            <div class="performance-visual">
+                <div class="performance-chart">
+                    <svg viewBox="0 0 300 300" style="width: 100%; height: 100%;">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0066ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="150" cy="150" r="140" class="chart-ring chart-bg"></circle>
+                        <circle cx="150" cy="150" r="140" class="chart-ring chart-progress"></circle>
+                    </svg>
+                    <div class="chart-center">
+                        <div class="chart-value">92.2%</div>
+                        <div class="chart-label">GPU Utilization</div>
+                    </div>
+                </div>
+            </div>
+            <div class="performance-features">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Zero I/O Wait Time</h3>
+                        <p>Our distributed cache layer keeps hot data in NVMe across the cluster. Smart prefetching predicts what your model needs next. Result: Your GPUs never wait for data. Ever.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M12 2v20M2 12h20M8 8l8 8M16 8l-8 8"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Linear Performance Scaling</h3>
+                        <p>Add nodes, get proportional throughput. No rebalancing, no downtime. Scale from 100GB/s to 1TB/s by just adding compute. Your midnight experiments become production without code changes.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 9h6v6H9z"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Direct GPU Memory Access</h3>
+                        <p>Bypass the CPU entirely. Data flows directly from storage to GPU memory via GPUDirect. 40% lower latency than traditional storage. Your tensors load faster than your coffee brews.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture Section -->
+    <section class="architecture-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">How It Actually Works</span>
+            <h2>Composable Infrastructure That<br>Adapts to Your Workload</h2>
+            <p class="section-subtitle">
+                Not another storage appliance. MAXCLOUD orchestrates your existing compute, network, and storage 
+                into a unified data plane that morphs based on workload demands.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; margin-bottom: 60px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">Traditional Storage</h3>
+                    <ul style="list-style: none; color: var(--text-secondary); line-height: 2;">
+                        <li>❌ Fixed hardware appliances</li>
+                        <li>❌ Static performance limits</li>
+                        <li>❌ Complex manual tuning</li>
+                        <li>❌ Vendor lock-in</li>
+                        <li>❌ Separate tiers = data copies</li>
+                        <li>❌ 3-6 month deployment</li>
+                    </ul>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(0, 102, 255, 0.3); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 20px;">MAXCLOUD Architecture</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✅ Software-defined everything</li>
+                        <li>✅ Dynamic performance allocation</li>
+                        <li>✅ ML-driven auto-optimization</li>
+                        <li>✅ Use any hardware/cloud</li>
+                        <li>✅ Single namespace, no copies</li>
+                        <li>✅ Deploy in 15 minutes</li>
+                    </ul>
+                </div>
+            </div>
+            <style>
+                @media (max-width: 768px) {
+                    .architecture-section > div > div:first-child {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 style="font-size: 28px; margin-bottom: 30px;">The MAXCLOUD Stack</h3>
+                <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; backdrop-filter: blur(10px);">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); padding: 20px; border-radius: 8px;">
+                            <strong>Intelligent Control Plane</strong>
+                            <p style="margin: 5px 0 0; font-size: 14px;">ML-driven orchestration • Workload prediction • Auto-scaling • QoS enforcement</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <strong>Distributed Data Plane</strong>
+                            <p style="margin: 5px 0 0; font-size: 14px;">Multi-tier caching • Data locality optimization • Parallel I/O • Compression/dedup</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                            <strong>Hardware Abstraction Layer</strong>
+                            <p style="margin: 5px 0 0; font-size: 14px;">NVMe • GPU memory • Network acceleration • Any cloud storage backend</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Built for Your Workloads</span>
+            <h2>Proven Results Across<br>Every AI/ML Use Case</h2>
+            <p class="section-subtitle">
+                From LLM training to real-time inference, MAXCLOUD adapts its performance profile 
+                to match your specific workload patterns.
+            </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; cursor: pointer; transition: all 0.3s ease;" 
+                 onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';" 
+                 onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">LLM Training</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Training GPT-scale models? Checkpointing killing your timeline? We've got you.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(0, 102, 255, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-blue);">14→3</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Days to train</div>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-purple);">800GB/s</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Checkpoint speed</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6;">• Distributed checkpointing across nodes<br>• Resume training in seconds, not hours<br>• Handle 100TB+ datasets with ease</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; cursor: pointer; transition: all 0.3s ease;" 
+                 onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';" 
+                 onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">Computer Vision</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Processing millions of high-res images? Random access patterns? No sweat.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(0, 102, 255, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-blue);">9.9M</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">IOPS</div>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-purple);">65μs</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">P99 latency</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6;">• Smart caching for augmentation pipelines<br>• Parallel loading across GPUs<br>• Native support for COCO, ImageNet formats</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; cursor: pointer; transition: all 0.3s ease;" 
+                 onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';" 
+                 onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">Real-time Inference</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Serving models at scale? Every millisecond counts when you're doing 1M+ QPS.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(0, 102, 255, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-blue);">0.8ms</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Model load time</div>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-purple);">99.99%</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Availability</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6;">• Multi-replica model serving<br>• A/B testing without data duplication<br>• Auto-scaling based on request patterns</p>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; cursor: pointer; transition: all 0.3s ease;" 
+                 onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';" 
+                 onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">MLOps & DataOps</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Stop managing 47 different storage systems. One platform for your entire pipeline.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: rgba(0, 102, 255, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-blue);">0</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Data copies needed</div>
+                    </div>
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: 15px; border-radius: 8px;">
+                        <div style="font-size: 28px; font-weight: 700; color: var(--accent-purple);">∞</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Snapshots</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; line-height: 1.6;">• Instant experiments with zero-copy clones<br>• Time-travel debugging for model versions<br>• Native integration with MLflow, W&B, more</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section class="integration-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(0, 102, 255, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">Zero Friction Integration</span>
+            <h2>Works With Your Stack.<br>Today. No Migration.</h2>
+            <p class="section-subtitle">
+                Drop MAXCLOUD into your existing environment. Keep your tools, frameworks, and workflows. 
+                Just add a mount point and watch your performance soar.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 60px;">
+                <div style="text-align: center;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: var(--text-secondary);">Frameworks</h4>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px;">
+                        <p style="line-height: 1.8; font-size: 14px;">PyTorch<br>TensorFlow<br>JAX<br>MXNet</p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: var(--text-secondary);">Clouds</h4>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px;">
+                        <p style="line-height: 1.8; font-size: 14px;">AWS<br>Azure<br>GCP<br>On-prem</p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: var(--text-secondary);">Orchestration</h4>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px;">
+                        <p style="line-height: 1.8; font-size: 14px;">Kubernetes<br>Slurm<br>Ray<br>Airflow</p>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <h4 style="font-size: 16px; margin-bottom: 20px; color: var(--text-secondary);">Monitoring</h4>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px;">
+                        <p style="line-height: 1.8; font-size: 14px;">Datadog<br>Grafana<br>Prometheus<br>W&B</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; backdrop-filter: blur(10px);">
+                <h3 style="font-size: 24px; margin-bottom: 30px;">Deploy in 15 Minutes</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700; font-size: 24px;">1</div>
+                        <h4 style="font-size: 18px; margin-bottom: 10px;">Install Agent</h4>
+                        <p style="color: var(--text-secondary); font-size: 14px;">One-line install on your compute nodes. Works with existing Kubernetes, Docker, or bare metal.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700; font-size: 24px;">2</div>
+                        <h4 style="font-size: 18px; margin-bottom: 10px;">Mount Volume</h4>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Standard POSIX mount. Your apps see a regular filesystem. No code changes needed.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700; font-size: 24px;">3</div>
+                        <h4 style="font-size: 18px; margin-bottom: 10px;">Start Training</h4>
+                        <p style="color: var(--text-secondary); font-size: 14px;">That's it. MAXCLOUD auto-optimizes for your workload. Watch your GPU utilization hit 90%+.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="security-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Enterprise-Grade Security</span>
+            <h2>Bank-Level Security.<br>Developer-Level Simplicity.</h2>
+            <p class="section-subtitle">
+                SOC 2 Type II certified. HIPAA compliant. Your data never leaves your infrastructure. 
+                We just make it faster.
+            </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto;">
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px;">
+                <h3 style="font-size: 24px; margin-bottom: 30px;">Security Features</h3>
+                <ul style="list-style: none; line-height: 2.5;">
+                    <li>🔐 End-to-end encryption at rest and in transit</li>
+                    <li>🔑 Customer-managed encryption keys</li>
+                    <li>🛡️ Zero-trust architecture</li>
+                    <li>📊 Complete audit logging</li>
+                    <li>🔒 RBAC with SSO/SAML integration</li>
+                    <li>🌐 Air-gapped deployment options</li>
+                </ul>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px;">
+                <h3 style="font-size: 24px; margin-bottom: 30px;">Compliance</h3>
+                <ul style="list-style: none; line-height: 2.5;">
+                    <li>✅ SOC 2 Type II</li>
+                    <li>✅ ISO 27001</li>
+                    <li>✅ HIPAA</li>
+                    <li>✅ GDPR</li>
+                    <li>✅ PCI DSS</li>
+                    <li>✅ FedRAMP (in progress)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Experience Section -->
+    <section class="developer-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">Built for Developers</span>
+            <h2>APIs Your Team Will<br>Actually Want to Use</h2>
+            <p class="section-subtitle">
+                Clean APIs. Comprehensive SDKs. Documentation that doesn't suck. 
+                Because great infrastructure should be invisible.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; backdrop-filter: blur(10px); margin-bottom: 40px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 20px;">Simple Python SDK</h3>
+                        <pre style="background: rgba(0, 0, 0, 0.8); padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px; line-height: 1.6;"><code style="color: #e0e1e6;">import MAXCLOUD
+
+# Mount your volume
+vol = MAXCLOUD.mount("ml-datasets")
+
+# That's it. Use like any filesystem
+data = torch.load(f"{vol.path}/model.pt")
+
+# Advanced features when you need them
+vol.prefetch(["batch_*.pt"])
+vol.cache_policy = "aggressive"
+vol.checkpoint_async(model.state_dict())</code></pre>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 20px; margin-bottom: 20px;">Native Kubernetes</h3>
+                        <pre style="background: rgba(0, 0, 0, 0.8); padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px; line-height: 1.6;"><code style="color: #e0e1e6;">apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ml-data
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: MAXCLOUD-ultra
+  resources:
+    requests:
+      storage: 10Ti
+      throughput: 500Gi/s
+      iops: 1000000</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 30px;">
+                    <h3 style="font-size: 20px; margin-bottom: 15px;">Rich Observability</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">Real-time metrics via Prometheus. Distributed tracing. Performance profiling. Know exactly what your storage is doing.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 30px;">
+                    <h3 style="font-size: 20px; margin-bottom: 15px;">Version Everything</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">Git-like semantics for your data. Branch datasets. Merge experiments. Time-travel debugging. Zero-copy clones.</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 30px;">
+                    <h3 style="font-size: 20px; margin-bottom: 15px;">CLI That Sparks Joy</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">Intuitive commands. Helpful errors. Progress bars that actually work. Because life's too short for bad CLIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">The Clear Choice</span>
+            <h2>Why Teams Switch to MAXCLOUD</h2>
+            <p class="section-subtitle">
+                We're not another storage vendor. We're the infrastructure layer that makes 
+                your existing investment actually deliver on its promise.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <table style="width: 100%; min-width: 600px; border-collapse: collapse; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; overflow: hidden;">
+                    <thead>
+                        <tr style="background: rgba(0, 102, 255, 0.1);">
+                            <th style="padding: 20px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: sticky; left: 0; background: rgba(0, 102, 255, 0.1); z-index: 10;"></th>
+                            <th style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);"><strong style="color: var(--accent-blue);">MAXCLOUD</strong></th>
+                            <th style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">Traditional NAS</th>
+                            <th style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">Object Storage</th>
+                            <th style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">DIY Ceph/Lustre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">GPU Utilization</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">92.2%</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #ef4444;">25-35%</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #ef4444;">15-25%</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #f59e0b;">40-60%</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">Throughput</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">1.1 TB/s</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">10-50 GB/s</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">1-10 GB/s</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">100-500 GB/s</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">IOPS</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">9.9M</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">100K-500K</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">10K-100K</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">1M-5M</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">P99 Latency</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">65μs</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">1-10ms</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">10-100ms</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">100μs-1ms</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">Setup Time</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">15 minutes</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">2-4 weeks</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">1-2 days</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">3-6 months</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">TCO (5 year)</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: #10b981; font-weight: 700;">70% lower</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Baseline</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">20% lower</td>
+                            <td style="padding: 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">40% higher</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px; position: sticky; left: 0; background: rgba(0, 0, 0, 0.9); z-index: 10;">Management Overhead</td>
+                            <td style="padding: 20px; text-align: center; color: #10b981; font-weight: 700;">Zero</td>
+                            <td style="padding: 20px; text-align: center;">2-3 FTEs</td>
+                            <td style="padding: 20px; text-align: center;">1-2 FTEs</td>
+                            <td style="padding: 20px; text-align: center;">5-10 FTEs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="display: none; text-align: center; margin-top: 10px; font-size: 12px; color: var(--text-secondary);" class="mobile-scroll-hint">← Swipe to see more →</p>
+            <style>
+                @media (max-width: 768px) {
+                    .mobile-scroll-hint { display: block !important; }
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- Technical Specs Section -->
+    <section class="specs-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(0, 102, 255, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">Technical Specifications</span>
+            <h2>Numbers That Matter</h2>
+            <p class="section-subtitle">
+                Real benchmarks. Real workloads. Verified by MLCommons.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 30px;">Performance Metrics</h3>
+                    <table style="width: 100%;">
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Sequential Read</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">1.1 TB/s</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Sequential Write</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">850 GB/s</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Random Read IOPS</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">9.9M</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Random Write IOPS</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">7.2M</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">P50 Latency</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">25μs</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">P99 Latency</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">65μs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 0; color: var(--text-secondary);">P99.9 Latency</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">120μs</td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 30px;">Scale Limits</h3>
+                    <table style="width: 100%;">
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Max Volume Size</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">10 PB</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Max File Size</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">100 TB</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Max Files/Volume</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">10B</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Max Snapshots</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">Unlimited</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Max Concurrent Clients</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">100K</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Replication Factor</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">Configurable</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 0; color: var(--text-secondary);">Availability SLA</td>
+                            <td style="padding: 15px 0; text-align: right; font-weight: 600;">99.999%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Section -->
+    <section class="enterprise-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Enterprise Ready</span>
+            <h2>Support That Actually<br>Supports You</h2>
+            <p class="section-subtitle">
+                24/7 support from engineers who actually built the system. 
+                Not script readers. Real solutions in minutes, not days.
+            </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(0, 102, 255, 0.3); border-radius: 16px; padding: 40px; text-align: center;">
+                <h3 style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">5min</h3>
+                <p style="font-size: 20px; font-weight: 600; margin-bottom: 15px;">P1 Response Time</p>
+                <p style="color: var(--text-secondary); line-height: 1.6;">Critical issues get immediate attention from senior engineers. Your downtime is our emergency.</p>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(0, 102, 255, 0.3); border-radius: 16px; padding: 40px; text-align: center;">
+                <h3 style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">99.999%</h3>
+                <p style="font-size: 20px; font-weight: 600; margin-bottom: 15px;">Uptime SLA</p>
+                <p style="color: var(--text-secondary); line-height: 1.6;">Five nines availability backed by financial guarantees. Less than 5 minutes downtime per year.</p>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(0, 102, 255, 0.3); border-radius: 16px; padding: 40px; text-align: center;">
+                <h3 style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">24/7</h3>
+                <p style="font-size: 20px; font-weight: 600; margin-bottom: 15px;">Engineering Support</p>
+                <p style="color: var(--text-secondary); line-height: 1.6;">Direct Slack channel to our engineering team. Because 3am model training waits for no one.</p>
+            </div>
+        </div>
+        <div style="margin-top: 60px; text-align: center;">
+            <h3 style="font-size: 28px; margin-bottom: 30px;">Enterprise Features</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 800px; margin: 0 auto;">
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Custom SLAs</span>
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Dedicated Account Team</span>
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Architecture Reviews</span>
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Performance Tuning</span>
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Custom Integrations</span>
+                <span style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 100px; font-size: 14px;">Training & Workshops</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Now Section -->
+    <section class="why-now-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(239, 68, 68, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">The Cost of Waiting</span>
+            <h2 style="background: linear-gradient(180deg, #ef4444 0%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">The AI Race Has Already Started.<br>You're Already Behind.</h2>
+            <p class="section-subtitle">
+                While you're reading this, your competitors are shipping. Every week you wait is another model they've deployed, 
+                another customer they've won, another advantage they've gained.
+            </p>
+        </div>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-bottom: 60px;">
+                <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; color: #ef4444;">What You're Losing Right Now</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>📉 <strong>$162K/month</strong> in idle GPU time</li>
+                        <li>⏱️ <strong>11 extra days</strong> per model training cycle</li>
+                        <li>🔄 <strong>3-5 restarts</strong> per training due to OOM errors</li>
+                        <li>👥 <strong>2 engineers</strong> just managing storage issues</li>
+                        <li>🚀 <strong>4 product launches</strong> delayed this quarter</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 16px; padding: 40px;">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; color: #10b981;">What Leaders Are Achieving</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✅ <strong>92.2% GPU utilization</strong> consistently</li>
+                        <li>🚀 <strong>5x faster</strong> model iteration</li>
+                        <li>💰 <strong>70% lower</strong> infrastructure costs</li>
+                        <li>⚡ <strong>Zero downtime</strong> deployments</li>
+                        <li>🎯 <strong>First to market</strong> with new features</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding: 40px; background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(239, 68, 68, 0.3); border-radius: 16px;">
+                <h3 style="font-size: 32px; margin-bottom: 20px;">The Real Question:</h3>
+                <p style="font-size: 20px; line-height: 1.6;">
+                    Can you afford to give your competitors a <strong style="color: #ef4444;">70% cost advantage</strong> and 
+                    <strong style="color: #ef4444;">5x speed advantage</strong>?<br><br>
+                    Because that's exactly what you're doing right now.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Transparent Pricing</span>
+            <h2>No BS Pricing.<br>Pay for Performance, Not Promises.</h2>
+            <p class="section-subtitle">
+                No hidden fees. No surprise bills. No "contact sales for pricing" nonsense. 
+                Just simple, usage-based pricing that scales with your success.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; position: relative;">
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Starter</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Perfect for ML experiments</p>
+                    <div style="font-size: 36px; font-weight: 700; margin-bottom: 30px;">
+                        $0.12<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary);">/GB/month</span>
+                    </div>
+                    <ul style="list-style: none; line-height: 2.5; margin-bottom: 30px;">
+                        <li>✓ Up to 100TB</li>
+                        <li>✓ 100GB/s throughput</li>
+                        <li>✓ 1M IOPS</li>
+                        <li>✓ 99.9% SLA</li>
+                        <li>✓ Email support</li>
+                    </ul>
+                    <button class="btn btn-ghost" style="width: 100%;">Start Free Trial</button>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(139, 92, 246, 0.05)); border: 2px solid rgba(0, 102, 255, 0.3); border-radius: 16px; padding: 40px; position: relative;">
+                    <div style="position: absolute; top: -15px; right: 30px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); padding: 5px 20px; border-radius: 100px; font-size: 12px; font-weight: 600;">MOST POPULAR</div>
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Scale</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">For production AI workloads</p>
+                    <div style="font-size: 36px; font-weight: 700; margin-bottom: 30px;">
+                        $0.08<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary);">/GB/month</span>
+                    </div>
+                    <ul style="list-style: none; line-height: 2.5; margin-bottom: 30px;">
+                        <li>✓ Up to 10PB</li>
+                        <li>✓ 1TB/s throughput</li>
+                        <li>✓ 10M IOPS</li>
+                        <li>✓ 99.99% SLA</li>
+                        <li>✓ 24/7 Slack support</li>
+                        <li>✓ Performance analytics</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;">Get Started</button>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; position: relative;">
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">Enterprise</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Mission-critical deployments</p>
+                    <div style="font-size: 36px; font-weight: 700; margin-bottom: 30px;">
+                        Custom<span style="font-size: 18px; font-weight: 400; color: var(--text-secondary);"> pricing</span>
+                    </div>
+                    <ul style="list-style: none; line-height: 2.5; margin-bottom: 30px;">
+                        <li>✓ Unlimited scale</li>
+                        <li>✓ Custom performance</li>
+                        <li>✓ Guaranteed IOPS</li>
+                        <li>✓ 99.999% SLA</li>
+                        <li>✓ Dedicated engineers</li>
+                        <li>✓ Custom integrations</li>
+                    </ul>
+                    <button class="btn btn-ghost" style="width: 100%;">Contact Sales</button>
+                </div>
+            </div>
+            <div style="text-align: center; padding: 40px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px;">
+                <h3 style="font-size: 24px; margin-bottom: 20px;">All Plans Include</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+                    <span>🚀 15-minute deployment</span>
+                    <span>🔒 End-to-end encryption</span>
+                    <span>📊 Real-time monitoring</span>
+                    <span>🔄 Unlimited snapshots</span>
+                    <span>🌐 Multi-cloud support</span>
+                    <span>📚 API access</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Migration Section -->
+    <section class="migration-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(0, 102, 255, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">Zero-Risk Migration</span>
+            <h2>Switch Without Switching<br>Everything Off</h2>
+            <p class="section-subtitle">
+                Run MAXCLOUD alongside your existing storage. Migrate workloads gradually. 
+                Zero downtime. Zero risk. Zero excuses.
+            </p>
+        </div>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 60px; backdrop-filter: blur(10px);">
+                <h3 style="font-size: 28px; margin-bottom: 40px; text-align: center;">Your Migration Timeline</h3>
+                <div style="position: relative; padding: 20px 0;">
+                    <div class="timeline-desktop" style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));"></div>
+                    <div class="timeline-desktop" style="display: flex; justify-content: space-between; position: relative;">
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 60px; height: 60px; background: var(--bg-dark); border: 3px solid var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700;">Day 1</div>
+                            <h4 style="font-size: 18px; margin-bottom: 10px;">Deploy Agent</h4>
+                            <p style="font-size: 14px; color: var(--text-secondary);">Install on one node<br>Test with dev workload</p>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 60px; height: 60px; background: var(--bg-dark); border: 3px solid var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700;">Day 3</div>
+                            <h4 style="font-size: 18px; margin-bottom: 10px;">Pilot Project</h4>
+                            <p style="font-size: 14px; color: var(--text-secondary);">Move one training job<br>Monitor performance</p>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 60px; height: 60px; background: var(--bg-dark); border: 3px solid var(--accent-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700;">Week 2</div>
+                            <h4 style="font-size: 18px; margin-bottom: 10px;">Scale Team</h4>
+                            <p style="font-size: 14px; color: var(--text-secondary);">Migrate team workloads<br>See 3x speedup</p>
+                        </div>
+                        <div style="text-align: center; flex: 1;">
+                            <div style="width: 60px; height: 60px; background: var(--bg-dark); border: 3px solid var(--accent-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700;">Month 1</div>
+                            <h4 style="font-size: 18px; margin-bottom: 10px;">Full Production</h4>
+                            <p style="font-size: 14px; color: var(--text-secondary);">All workloads migrated<br>Old storage decommissioned</p>
+                        </div>
+                    </div>
+                    <!-- Mobile Timeline -->
+                    <div class="timeline-mobile" style="display: none;">
+                        <div style="border-left: 3px solid var(--accent-blue); padding-left: 30px; margin-left: 30px;">
+                            <div style="position: relative; margin-bottom: 40px;">
+                                <div style="position: absolute; left: -42px; width: 24px; height: 24px; background: var(--accent-blue); border-radius: 50%; border: 3px solid var(--bg-dark);"></div>
+                                <h4 style="font-size: 18px; margin-bottom: 10px;">Day 1: Deploy Agent</h4>
+                                <p style="font-size: 14px; color: var(--text-secondary);">Install on one node. Test with dev workload.</p>
+                            </div>
+                            <div style="position: relative; margin-bottom: 40px;">
+                                <div style="position: absolute; left: -42px; width: 24px; height: 24px; background: var(--accent-blue); border-radius: 50%; border: 3px solid var(--bg-dark);"></div>
+                                <h4 style="font-size: 18px; margin-bottom: 10px;">Day 3: Pilot Project</h4>
+                                <p style="font-size: 14px; color: var(--text-secondary);">Move one training job. Monitor performance.</p>
+                            </div>
+                            <div style="position: relative; margin-bottom: 40px;">
+                                <div style="position: absolute; left: -42px; width: 24px; height: 24px; background: var(--accent-purple); border-radius: 50%; border: 3px solid var(--bg-dark);"></div>
+                                <h4 style="font-size: 18px; margin-bottom: 10px;">Week 2: Scale Team</h4>
+                                <p style="font-size: 14px; color: var(--text-secondary);">Migrate team workloads. See 3x speedup.</p>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -42px; width: 24px; height: 24px; background: var(--accent-purple); border-radius: 50%; border: 3px solid var(--bg-dark);"></div>
+                                <h4 style="font-size: 18px; margin-bottom: 10px;">Month 1: Full Production</h4>
+                                <p style="font-size: 14px; color: var(--text-secondary);">All workloads migrated. Old storage decommissioned.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 30px;">
+                    <h3 style="font-size: 20px; margin-bottom: 20px;">Migration Support Includes</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Dedicated migration engineer</li>
+                        <li>✓ Custom migration playbook</li>
+                        <li>✓ Performance benchmarking</li>
+                        <li>✓ Rollback procedures</li>
+                        <li>✓ 24/7 emergency support</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 30px;">
+                    <h3 style="font-size: 20px; margin-bottom: 20px;">Data Migration Options</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Background sync (no downtime)</li>
+                        <li>✓ Direct transfer (maximum speed)</li>
+                        <li>✓ Hybrid approach (best of both)</li>
+                        <li>✓ Keep existing data in place</li>
+                        <li>✓ Gradual migration over time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="case-studies-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Real Results</span>
+            <h2>Don't Just Take Our Word For It</h2>
+            <p class="section-subtitle">
+                See how industry leaders transformed their AI infrastructure with MAXCLOUD. 
+                Real companies. Real numbers. Real impact.
+            </p>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 40px;">
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 60px; display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center;">
+                    <div>
+                        <div style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">TechCorp</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Leading LLM Training Company</p>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                            <div>
+                                <div style="font-size: 36px; font-weight: 700; color: var(--accent-blue);">78%</div>
+                                <div style="font-size: 14px; color: var(--text-secondary);">Faster training</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 36px; font-weight: 700; color: var(--accent-purple);">$8.4M</div>
+                                <div style="font-size: 14px; color: var(--text-secondary);">Annual savings</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Challenge</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">TechCorp's 175B parameter model training was taking 6 weeks per iteration. Checkpoint saves alone took 4 hours, during which GPUs sat idle. Storage bottlenecks were killing their competitive edge.</p>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Solution</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">MAXCLOUD reduced checkpoint time to 12 minutes with distributed writes. Smart caching kept training data in GPU-adjacent memory. Result: 6 weeks → 10 days training time.</p>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Impact</h3>
+                        <ul style="list-style: none; line-height: 2;">
+                            <li>• Shipped 4 major model updates vs competitors' 1</li>
+                            <li>• Reduced infrastructure from 512 to 320 GPUs</li>
+                            <li>• Freed up 3 engineers from storage management</li>
+                            <li>• Achieved 94.1% GPU utilization consistently</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 60px; display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: center;">
+                    <div>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Challenge</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">DataScale processes 50TB of images daily for autonomous vehicle training. Their Lustre cluster required 5 dedicated engineers and still had 30-second latencies for random access.</p>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Solution</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">MAXCLOUD's intelligent prefetching predicted access patterns with 97% accuracy. Multi-tier caching kept hot data in NVMe. Zero-copy clones enabled parallel experiments.</p>
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">The Impact</h3>
+                        <ul style="list-style: none; line-height: 2;">
+                            <li>• 65μs P99 latency (from 30 seconds!)</li>
+                            <li>• 0 dedicated storage engineers needed</li>
+                            <li>• 12x more experiments per month</li>
+                            <li>• 71% reduction in cloud storage costs</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">DataScale</div>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">Computer Vision at Scale</p>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                            <div>
+                                <div style="font-size: 36px; font-weight: 700; color: var(--accent-cyan);">460x</div>
+                                <div style="font-size: 14px; color: var(--text-secondary);">Faster latency</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 36px; font-weight: 700; color: var(--accent-blue);">12x</div>
+                                <div style="font-size: 14px; color: var(--text-secondary);">More experiments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" style="padding: 120px 60px; background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.05), transparent);">
+        <div class="section-header">
+            <span class="section-badge">Common Questions</span>
+            <h2>Let's Address the Elephant<br>in the Server Room</h2>
+            <p class="section-subtitle">
+                We know you have concerns. Here are the honest answers to questions 
+                every CTO asks before making the switch.
+            </p>
+        </div>
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "This sounds too good to be true. What's the catch?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        Fair question. The "catch" is that we're software, not hardware. We can't magically make slow disks faster – we architect around them. We use your existing compute's RAM and NVMe as a massive distributed cache. We predict what data you'll need next. We eliminate redundant I/O. It's not magic, it's smart engineering. And yes, it really works – MLCommons verified our benchmarks independently.
+                    </div>
+                </details>
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "What happens when MAXCLOUD goes down?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        Your data is still on your storage – we're just an acceleration layer. If MAXCLOUD services stop, you fall back to direct storage access. Yes, it'll be slower, but you won't lose data or access. That said, we maintain 99.999% uptime (5 minutes/year). Our distributed architecture means no single point of failure. Node failures are transparent. Even our control plane can go down without affecting data access.
+                    </div>
+                </details>
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "How do you handle data consistency?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        POSIX-compliant strong consistency by default. We use distributed consensus (Raft) for metadata operations. Writes are acknowledged only after durability is guaranteed. For ML workloads that can tolerate eventual consistency, you can tune for even higher performance. Everything is configurable per-volume or per-file.
+                    </div>
+                </details>
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "What about vendor lock-in?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        Zero lock-in. Your data stays in your storage, in standard formats. No proprietary data structures. Standard POSIX interface means your code doesn't change. You can remove MAXCLOUD anytime and everything keeps working (just slower). We earn your business every month by delivering value, not by holding your data hostage.
+                    </div>
+                </details>
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "How does pricing actually work at scale?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        Simple: you pay for logical capacity used, not physical. 10TB dataset = 10TB pricing, regardless of replication or caching. Volume discounts kick in automatically: 50% off after 1PB, 70% off after 10PB. No charges for I/O operations, snapshots, or bandwidth. Most customers see 60-80% cost reduction versus traditional storage because you need less capacity when your GPUs aren't waiting.
+                    </div>
+                </details>
+                <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 30px; cursor: pointer;">
+                    <summary style="font-size: 20px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        "What if our workload is different?"
+                        <span style="font-size: 24px;">+</span>
+                    </summary>
+                    <div style="margin-top: 20px; color: var(--text-secondary); line-height: 1.8;">
+                        Our ML-driven optimizer adapts to any access pattern. Sequential reads for training? We'll prefetch aggressively. Random access for embeddings? We'll maximize cache hit rates. Mixed workloads? We'll partition resources optimally. The beauty is you don't configure anything – MAXCLOUD learns and adapts automatically. If we can't deliver the performance you need, we'll tell you upfront.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section" style="padding: 120px 60px;">
+        <div class="section-header">
+            <span class="section-badge">Deep Dive</span>
+            <h2>For Engineers Who Want<br>The Whole Story</h2>
+            <p class="section-subtitle">
+                Technical documentation, benchmarks, and architecture deep-dives. 
+                Because trust is earned with transparency.
+            </p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto;">
+            <a href="#" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s ease; cursor: pointer;"
+               onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';"
+               onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 15px;">Architecture Whitepaper</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">Deep technical dive into our distributed architecture, consensus mechanisms, and performance optimizations.</p>
+                <span style="color: var(--accent-blue); font-weight: 600;">Read Paper →</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s ease; cursor: pointer;"
+               onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';"
+               onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 15px;">MLPerf Benchmarks</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">Independent verification of our performance claims. See the raw numbers and testing methodology.</p>
+                <span style="color: var(--accent-blue); font-weight: 600;">View Results →</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s ease; cursor: pointer;"
+               onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';"
+               onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 15px;">API Documentation</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">Complete API reference, SDKs, and integration guides. Everything you need to get started.</p>
+                <span style="color: var(--accent-blue); font-weight: 600;">Explore Docs →</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s ease; cursor: pointer;"
+               onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';"
+               onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 15px;">Demo Sandbox</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">Try MAXCLOUD yourself. Free sandbox environment with sample workloads and real performance metrics.</p>
+                <span style="color: var(--accent-blue); font-weight: 600;">Launch Sandbox →</span>
+            </a>
+            <a href="#" style="text-decoration: none; color: inherit; display: block; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s ease; cursor: pointer;"
+               onmouseover="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.borderColor='rgba(0, 102, 255, 0.3)'; this.style.transform='translateY(-5px)';"
+               onmouseout="this.style.background='rgba(255, 255, 255, 0.02)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)';">
+                <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9 11H3v10h6V11z"></path>
+                        <path d="M15 3H9v18h6V3z"></path>
+                        <path d="M21 7h-6v14h6V7z"></path>
+                    </svg>
+                </div>
+                <h3 style="font-size: 20px; margin-bottom: 15px;">TCO Calculator</h3>
+                <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">Detailed total cost of ownership analysis. Compare MAXCLOUD to your current storage with your exact workload.</p>
+                <span style="color: var(--accent-blue); font-weight: 600;">Calculate Savings →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Demo Request Section -->
+    <section class="demo-section" style="padding: 120px 60px; background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.15), transparent 70%);">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <span class="section-badge" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Limited Availability</span>
+            <h2 style="font-size: clamp(48px, 6vw, 72px); margin: 30px 0;">We Can Only Onboard<br>3 More Companies This Quarter</h2>
+            <p style="font-size: 20px; color: var(--text-secondary); margin-bottom: 50px;">
+                Our engineering team provides white-glove onboarding for every customer. 
+                We're at capacity and can only accept 3 more enterprises before Q2.
+            </p>
+            <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 60px; backdrop-filter: blur(10px);">
+                <h3 style="font-size: 32px; margin-bottom: 40px;">Claim Your Spot</h3>
+                <form id="demoForm" style="display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin: 0 auto;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <input type="text" placeholder="First Name" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                        <input type="text" placeholder="Last Name" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                    </div>
+                    <input type="email" placeholder="Work Email" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                    <input type="text" placeholder="Company" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                    <select style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                        <option value="" style="background: #000;">Number of GPUs</option>
+                        <option value="10-50" style="background: #000;">10-50 GPUs</option>
+                        <option value="50-100" style="background: #000;">50-100 GPUs</option>
+                        <option value="100-500" style="background: #000;">100-500 GPUs</option>
+                        <option value="500+" style="background: #000;">500+ GPUs</option>
+                    </select>
+                    <select style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px;" required>
+                        <option value="" style="background: #000;">Primary Use Case</option>
+                        <option value="llm" style="background: #000;">LLM Training</option>
+                        <option value="cv" style="background: #000;">Computer Vision</option>
+                        <option value="inference" style="background: #000;">Inference at Scale</option>
+                        <option value="research" style="background: #000;">Research & Development</option>
+                        <option value="other" style="background: #000;">Other</option>
+                    </select>
+                    <textarea placeholder="What's your biggest storage pain point right now?" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; color: white; font-size: 16px; min-height: 100px; resize: vertical;" required></textarea>
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%; padding: 20px; font-size: 18px; margin-top: 20px;">
+                        Get Your Performance Analysis →
+                    </button>
+                </form>
+                <p style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
+                    🔒 We'll analyze your infrastructure and show exactly how much you'll save.<br>
+                    No sales spam. Engineering team responds within 24 hours.
+                </p>
+            </div>
+            <div style="margin-top: 50px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                <div>
+                    <div style="font-size: 36px; font-weight: 700; color: var(--accent-blue);">47</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">Companies already switched</div>
+                </div>
+                <div>
+                    <div style="font-size: 36px; font-weight: 700; color: var(--accent-purple);">$127M</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">Saved this year</div>
+                </div>
+                <div>
+                    <div style="font-size: 36px; font-weight: 700; color: var(--accent-cyan);">18 days</div>
+                    <div style="font-size: 14px; color: var(--text-secondary);">Average time to ROI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section" id="calculator">
+        <div class="section-header">
+            <span class="section-badge">ROI Calculator</span>
+            <h2>Your GPUs Are Bleeding Money.<br>Let's Fix That.</h2>
+            <p class="section-subtitle">
+                Every hour of GPU idle time costs you $312. Every training restart costs you days. 
+                Calculate exactly how much you're losing – and how much you'll save with MAXCLOUD.
+            </p>
+        </div>
+        <div class="calculator-container">
+            <div class="calculator-grid">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label class="input-label">Number of GPUs (H100s, A100s, etc)</label>
+                        <div class="input-slider">
+                            <input type="range" class="slider" id="gpuCount" min="10" max="1000" value="100">
+                            <span class="slider-value" id="gpuValue">100</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Current GPU Utilization (%)</label>
+                        <div class="input-slider">
+                            <input type="range" class="slider" id="utilization" min="10" max="90" value="35">
+                            <span class="slider-value" id="utilizationValue">35%</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Monthly Infrastructure Cost</label>
+                        <div class="input-slider">
+                            <input type="range" class="slider" id="cost" min="50000" max="1000000" value="250000" step="10000">
+                            <span class="slider-value" id="costValue">$250,000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="calculator-results">
+                    <div class="savings-amount" id="savingsAmount">$2.1M</div>
+                    <div class="savings-label">Annual Savings with MAXCLOUD</div>
+                    <div class="savings-breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Reduced GPU Idle Time</span>
+                            <span class="breakdown-value" id="idleReduction">$1.4M</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Infrastructure Optimization</span>
+                            <span class="breakdown-value" id="infraOptimization">$700K</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Faster Time to Market</span>
+                            <span class="breakdown-value">57% faster</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">ROI Timeline</span>
+                            <span class="breakdown-value">< 3 months</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
+                        <p style="font-size: 14px; line-height: 1.6; margin: 0;">
+                            <strong style="color: #ef4444;">Right now you're wasting:</strong><br>
+                            <span id="wastedGPUs" style="font-size: 18px; font-weight: 700;">65</span> GPUs worth of compute every month<br>
+                            That's <span id="wastedMoney" style="font-size: 18px; font-weight: 700;">$162,500</span> literally thrown away
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="btn btn-primary btn-large">Get Your Custom TCO Analysis</button>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimonials">
+        <div class="section-header">
+            <span class="section-badge">Success Stories</span>
+            <h2>Join the Leaders in AI Infrastructure</h2>
+            <p class="section-subtitle">
+                See how top AI companies are accelerating their models and cutting costs with MAXCLOUD.
+            </p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "MAXCLOUD reduced our training time from 14 days to 3 days. 
+                    The impact on our product velocity has been game-changing."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <div class="author-name">Sarah Chen</div>
+                        <div class="author-title">VP of ML, TechCorp</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "We cut our infrastructure costs by 68% while improving model 
+                    performance. MAXCLOUD paid for itself in 6 weeks."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <div class="author-name">Marcus Rodriguez</div>
+                        <div class="author-title">CTO, AI Dynamics</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "Finally, storage that doesn't bottleneck our H100s. 
+                    GPU utilization went from 30% to 92% overnight."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <div class="author-name">Emily Watson</div>
+                        <div class="author-title">Head of Infra, DataScale</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-bg"></div>
+        <div class="cta-content">
+            <h2 class="cta-title">Every Day You Wait,<br>You Burn Another $5,400</h2>
+            <p class="cta-subtitle">
+                Your competitors are training models 5x faster. Their costs are 70% lower. 
+                They ship features while you're still waiting for checkpoints to load.<br>
+                <strong>The question isn't whether to switch. It's whether you can afford not to.</strong>
+            </p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large">See MAXCLOUD in Action</button>
+                <button class="btn btn-ghost btn-large">Talk to an Engineer</button>
+            </div>
+            <p style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
+                Join Uber, Netflix, OpenAI and 47 other leaders who've already made the switch.<br>
+                15-minute setup. No migration. See results today.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">MAXCLOUD</div>
+                <p class="footer-description">
+                    The composable data infrastructure platform that delivers extreme performance 
+                    for AI/ML workloads at transformative economics.
+                </p>
+                <div class="footer-socials">
+                    <div class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </div>
+                    <div class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </div>
+                    <div class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Platform Overview</a></li>
+                    <li><a href="#">Performance Benchmarks</a></li>
+                    <li><a href="#">Security & Compliance</a></li>
+                    <li><a href="#">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">AI/ML Training</a></li>
+                    <li><a href="#">Large Language Models</a></li>
+                    <li><a href="#">Computer Vision</a></li>
+                    <li><a href="#">Data Analytics</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                    <li><a href="#">MLPerf Results</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 MAXCLOUD, Inc. All rights reserved.</div>
+            <div>SOC 2 Type II Certified | ISO 27001</div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ROI Calculator
+        const gpuSlider = document.getElementById('gpuCount');
+        const utilizationSlider = document.getElementById('utilization');
+        const costSlider = document.getElementById('cost');
+
+        function updateCalculator() {
+            const gpuCount = parseInt(gpuSlider.value);
+            const utilization = parseInt(utilizationSlider.value);
+            const monthlyCost = parseInt(costSlider.value);
+
+            // Update display values
+            document.getElementById('gpuValue').textContent = gpuCount;
+            document.getElementById('utilizationValue').textContent = utilization + '%';
+            document.getElementById('costValue').textContent = '
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Demo form submission
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Animate button
+            const button = e.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Securing Your Spot...';
+            button.disabled = true;
+            
+            // Simulate submission
+            setTimeout(() => {
+                button.textContent = '✓ Spot Reserved!';
+                button.style.background = 'linear-gradient(135deg, #10b981, #22d3ee)';
+                
+                // Show success message
+                setTimeout(() => {
+                    const form = document.getElementById('demoForm');
+                    form.innerHTML = `
+                        <div style="text-align: center; padding: 40px;">
+                            <div style="font-size: 72px; margin-bottom: 20px;">🎉</div>
+                            <h3 style="font-size: 28px; margin-bottom: 20px;">You're In!</h3>
+                            <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.6;">
+                                Our engineering team will analyze your infrastructure and send a 
+                                personalized performance report within 24 hours.<br><br>
+                                <strong style="color: var(--text-primary);">Check your email for next steps.</strong>
+                            </p>
+                        </div>
+                    `;
+                }, 1000);
+            }, 2000);
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> + monthlyCost.toLocaleString();
+
+            // Calculate savings
+            const targetUtilization = 92.2;
+            const utilizationImprovement = (targetUtilization - utilization) / 100;
+            const idleCostReduction = monthlyCost * utilizationImprovement * 0.7 * 12;
+            const infraOptimization = monthlyCost * 0.3 * 12;
+            const totalSavings = idleCostReduction + infraOptimization;
+
+            // Calculate waste
+            const wastedGPUs = Math.round(gpuCount * (1 - utilization/100));
+            const wastedMoney = Math.round(monthlyCost * (1 - utilization/100));
+
+            // Update results
+            document.getElementById('savingsAmount').textContent = '
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> + (totalSavings / 1000000).toFixed(1) + 'M';
+            document.getElementById('idleReduction').textContent = '
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> + (idleCostReduction / 1000000).toFixed(1) + 'M';
+            document.getElementById('infraOptimization').textContent = '
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> + (infraOptimization / 1000).toFixed(0) + 'K';
+            document.getElementById('wastedGPUs').textContent = wastedGPUs;
+            document.getElementById('wastedMoney').textContent = '
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html> + wastedMoney.toLocaleString();
+        }
+
+        gpuSlider.addEventListener('input', updateCalculator);
+        utilizationSlider.addEventListener('input', updateCalculator);
+        costSlider.addEventListener('input', updateCalculator);
+
+        // Initialize calculator
+        updateCalculator();
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
