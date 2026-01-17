@@ -1,0 +1,3407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAX — The Last Assistant You'll Ever Need</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --neon-cyan: #00f0ff;
+      --neon-blue: #0066ff;
+      --neon-purple: #9933ff;
+      --neon-magenta: #ff00ff;
+      --neon-pink: #ff3366;
+      --neon-green: #00ff88;
+      --neon-orange: #ff9900;
+      --neon-red: #ff0044;
+      --dark: #030008;
+      --darker: #000000;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: rgba(0, 240, 255, 0.3);
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+      border-radius: 2px;
+    }
+
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(3deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 20px currentColor) brightness(1); }
+      50% { filter: drop-shadow(0 0 60px currentColor) brightness(1.5); }
+    }
+
+    @keyframes rotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotateReverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    @keyframes scan {
+      0% { top: 0; opacity: 0; }
+      50% { opacity: 0.5; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.3; }
+      94% { opacity: 1; }
+      95% { opacity: 0.5; }
+      96% { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(80px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes orbPulse {
+      0%, 100% { 
+        box-shadow: 
+          0 0 60px rgba(0, 240, 255, 0.8),
+          0 0 120px rgba(0, 240, 255, 0.4),
+          0 0 180px rgba(0, 240, 255, 0.2),
+          inset 0 0 60px rgba(255, 255, 255, 0.1);
+      }
+      50% { 
+        box-shadow: 
+          0 0 100px rgba(0, 240, 255, 1),
+          0 0 200px rgba(0, 240, 255, 0.6),
+          0 0 300px rgba(0, 240, 255, 0.3),
+          inset 0 0 80px rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    @keyframes dataStream {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Global Overlays */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      opacity: 0.3;
+    }
+
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(3, 0, 8, 0.9);
+      backdrop-filter: blur(30px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+      padding: 16px 60px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      letter-spacing: 0.2em;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+      animation: flicker 5s infinite;
+    }
+
+    .logo-orb {
+      width: 48px;
+      height: 48px;
+      background: radial-gradient(circle at 30% 30%, var(--neon-cyan), var(--neon-purple));
+      border-radius: 50%;
+      box-shadow: 
+        0 0 30px rgba(0, 240, 255, 0.8),
+        0 0 60px rgba(0, 240, 255, 0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: 'Share Tech Mono', monospace;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn {
+      font-family: 'Orbitron', sans-serif;
+      padding: 14px 32px;
+      border-radius: 0;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--neon-cyan);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+      border: none;
+      color: #000;
+      font-weight: 700;
+      box-shadow: 
+        0 0 30px rgba(0, 240, 255, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 0 50px rgba(0, 240, 255, 0.8),
+        0 0 100px rgba(0, 240, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-epic {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+      background-size: 200% 200%;
+      animation: gradientFlow 3s ease infinite;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 
+        0 0 40px rgba(0, 240, 255, 0.5),
+        0 0 80px rgba(153, 51, 255, 0.3);
+    }
+
+    .btn-epic:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 
+        0 0 60px rgba(0, 240, 255, 0.8),
+        0 0 120px rgba(153, 51, 255, 0.5);
+    }
+
+    .btn-large {
+      padding: 20px 48px;
+      font-size: 14px;
+    }
+
+    .btn-massive {
+      padding: 28px 64px;
+      font-size: 16px;
+    }
+
+    /* Section Base */
+    section {
+      position: relative;
+      padding: 200px 80px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-family: 'Share Tech Mono', monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .section-subtitle {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glow-text {
+      color: var(--neon-cyan);
+      text-shadow: 
+        0 0 20px rgba(0, 240, 255, 0.8),
+        0 0 40px rgba(0, 240, 255, 0.4);
+    }
+
+    /* ================================
+       SECTION 1: HERO - THE AWAKENING
+    ================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      background: 
+        radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 80% at 20% 80%, rgba(153, 51, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 80% at 80% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-orb-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      pointer-events: none;
+    }
+
+    .hero-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0, 240, 255, 0.8), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(153, 51, 255, 0.6), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.8), transparent 70%);
+      animation: orbPulse 3s ease-in-out infinite, float 8s ease-in-out infinite;
+    }
+
+    .hero-orb-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 0%, var(--neon-cyan) 50%, transparent 70%);
+      box-shadow: 0 0 100px rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 50%;
+    }
+
+    .hero-ring:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      animation: rotate 20s linear infinite;
+    }
+
+    .hero-ring:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      border-color: rgba(153, 51, 255, 0.2);
+      animation: rotateReverse 30s linear infinite;
+    }
+
+    .hero-ring:nth-child(3) {
+      width: 600px;
+      height: 600px;
+      border-color: rgba(255, 0, 255, 0.15);
+      animation: rotate 40s linear infinite;
+    }
+
+    .hero-ring:nth-child(4) {
+      width: 700px;
+      height: 700px;
+      border-color: rgba(0, 240, 255, 0.1);
+      animation: rotateReverse 50s linear infinite;
+    }
+
+    .hero-ring-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--neon-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--neon-cyan);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 200px 40px;
+    }
+
+    .hero-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.5em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: flicker 4s infinite;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(60px, 12vw, 180px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      line-height: 0.9;
+      margin-bottom: 24px;
+      text-shadow: 
+        0 0 40px rgba(0, 240, 255, 0.5),
+        0 0 80px rgba(0, 240, 255, 0.3);
+    }
+
+    .hero-tagline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(24px, 4vw, 48px);
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.2em;
+      margin-bottom: 48px;
+    }
+
+    .hero-description {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      color: rgba(255,255,255,0.6);
+      max-width: 700px;
+      margin: 0 auto 64px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 80px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+
+    /* ================================
+       SECTION 2: THE GRAVEYARD
+    ================================ */
+    #graveyard {
+      background: 
+        linear-gradient(180deg, transparent 0%, rgba(255, 0, 68, 0.03) 50%, transparent 100%);
+      text-align: center;
+    }
+
+    .graveyard-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .graveyard-header {
+      margin-bottom: 100px;
+    }
+
+    .graveyard-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .graveyard-subtitle {
+      font-size: 28px;
+      color: rgba(255, 0, 68, 0.8);
+      font-weight: 600;
+    }
+
+    .tombstones {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .tombstone {
+      background: rgba(255, 0, 68, 0.03);
+      border: 1px solid rgba(255, 0, 68, 0.2);
+      padding: 48px 32px;
+      position: relative;
+      transition: all 0.4s;
+    }
+
+    .tombstone::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .tombstone:hover::before {
+      opacity: 1;
+    }
+
+    .tombstone:hover {
+      background: rgba(255, 0, 68, 0.08);
+      transform: translateY(-8px);
+    }
+
+    .tombstone-icon {
+      font-size: 64px;
+      margin-bottom: 24px;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+
+    .tombstone-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: line-through;
+    }
+
+    .tombstone-status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--neon-red);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .tombstone-reason {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+
+    .graveyard-conclusion {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 60px 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .graveyard-conclusion p {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .graveyard-conclusion span {
+      color: var(--neon-red);
+    }
+
+    /* ================================
+       SECTION 3: THE VISION
+    ================================ */
+    #vision {
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 60%);
+      text-align: center;
+    }
+
+    .vision-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .vision-statement {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 80px;
+    }
+
+    .vision-statement em {
+      font-style: normal;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    }
+
+    .vision-numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 80px;
+    }
+
+    .vision-number {
+      padding: 48px;
+      background: rgba(0, 240, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+    }
+
+    .vision-number-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .vision-number-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+    }
+
+    .vision-quote {
+      font-size: 28px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+      padding: 48px;
+      border-left: 3px solid var(--neon-cyan);
+      border-right: 3px solid var(--neon-purple);
+      text-align: left;
+    }
+
+    /* ================================
+       SECTION 4: JARVIS COMPARISON
+    ================================ */
+    #jarvis {
+      background: 
+        linear-gradient(180deg, transparent 0%, rgba(153, 51, 255, 0.03) 50%, transparent 100%);
+    }
+
+    .jarvis-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .jarvis-header {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .jarvis-comparison {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .jarvis-side {
+      padding: 60px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .jarvis-side.fiction {
+      border-color: rgba(153, 51, 255, 0.3);
+    }
+
+    .jarvis-side.reality {
+      border-color: rgba(0, 240, 255, 0.3);
+      background: rgba(0, 240, 255, 0.03);
+    }
+
+    .jarvis-side-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .jarvis-side.fiction .jarvis-side-title {
+      color: var(--neon-purple);
+    }
+
+    .jarvis-side.reality .jarvis-side-title {
+      color: var(--neon-cyan);
+    }
+
+    .jarvis-side h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    .jarvis-side.fiction h3 {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .jarvis-side.reality h3 {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    }
+
+    .jarvis-features {
+      list-style: none;
+    }
+
+    .jarvis-features li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .jarvis-features li:last-child {
+      border-bottom: none;
+    }
+
+    .jarvis-vs {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.2);
+      align-self: center;
+    }
+
+    /* ================================
+       SECTION 5: CAPABILITIES
+    ================================ */
+    #capabilities {
+      background: 
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(153, 51, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .capabilities-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .capabilities-header {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .capability-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s;
+    }
+
+    .capability-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+      transform: scaleX(0);
+      transition: transform 0.5s;
+    }
+
+    .capability-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .capability-card:hover {
+      background: rgba(0, 240, 255, 0.03);
+      border-color: rgba(0, 240, 255, 0.2);
+      transform: translateY(-8px);
+    }
+
+    .capability-icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    .capability-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .capability-card p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .capability-stats {
+      display: flex;
+      gap: 24px;
+    }
+
+    .capability-stat {
+      text-align: center;
+    }
+
+    .capability-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+    }
+
+    .capability-stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ================================
+       SECTION 6: TECHNOLOGY
+    ================================ */
+    #technology {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .tech-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .tech-header {
+      text-align: center;
+      margin-bottom: 100px;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .tech-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      display: flex;
+      gap: 32px;
+    }
+
+    .tech-card:hover {
+      border-color: rgba(0, 240, 255, 0.2);
+    }
+
+    .tech-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(153, 51, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    .tech-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .tech-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .tech-spec {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--neon-cyan);
+    }
+
+    /* ================================
+       SECTION 7: DEMONSTRATION
+    ================================ */
+    #demo {
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+    }
+
+    .demo-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .demo-interface {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 60px;
+      position: relative;
+    }
+
+    .demo-interface::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .demo-dots {
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .demo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .demo-dot:nth-child(1) { background: #ff5f56; }
+    .demo-dot:nth-child(2) { background: #ffbd2e; }
+    .demo-dot:nth-child(3) { background: #27c93f; }
+
+    .demo-conversation {
+      margin-top: 40px;
+    }
+
+    .demo-message {
+      margin-bottom: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .demo-message.user {
+      flex-direction: row-reverse;
+    }
+
+    .demo-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .demo-message.max .demo-avatar {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    }
+
+    .demo-message.user .demo-avatar {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .demo-bubble {
+      padding: 20px 28px;
+      max-width: 600px;
+    }
+
+    .demo-message.max .demo-bubble {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+    }
+
+    .demo-message.user .demo-bubble {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .demo-bubble p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .demo-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .demo-action {
+      padding: 8px 16px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      color: var(--neon-cyan);
+    }
+
+    /* ================================
+       SECTION 8: MARKET OPPORTUNITY
+    ================================ */
+    #market {
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .market-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .market-header {
+      margin-bottom: 100px;
+    }
+
+    .market-tam {
+      margin-bottom: 80px;
+    }
+
+    .market-tam-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(80px, 15vw, 200px);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      display: block;
+      text-shadow: none;
+    }
+
+    .market-tam-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 18px;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    .market-breakdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .market-sector {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 24px;
+      transition: all 0.4s;
+    }
+
+    .market-sector:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-8px);
+    }
+
+    .market-sector-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .market-sector-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+    }
+
+    .market-sector-name {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .market-model {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      padding: 60px;
+      background: rgba(0, 240, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.1);
+    }
+
+    .market-model-item {
+      text-align: center;
+    }
+
+    .market-model-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    }
+
+    .market-model-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+    }
+
+    /* ================================
+       SECTION 9: COMPETITIVE EDGE
+    ================================ */
+    #competition {
+      background: 
+        linear-gradient(180deg, transparent 0%, rgba(0, 255, 136, 0.02) 50%, transparent 100%);
+    }
+
+    .competition-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .competition-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .competition-table {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .competition-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .competition-table th,
+    .competition-table td {
+      padding: 24px 32px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .competition-table th {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .competition-table th.max-col {
+      color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.1);
+    }
+
+    .competition-table td {
+      font-size: 18px;
+    }
+
+    .competition-table td.max-col {
+      background: rgba(0, 240, 255, 0.05);
+      color: var(--neon-cyan);
+      font-weight: 700;
+    }
+
+    .competition-table td.dead {
+      color: var(--neon-red);
+      text-decoration: line-through;
+    }
+
+    .score-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      border-radius: 4px;
+    }
+
+    .score-bar-fill.low {
+      background: var(--neon-red);
+    }
+
+    .score-bar-fill.mid {
+      background: var(--neon-orange);
+    }
+
+    /* ================================
+       SECTION 10: SECURITY
+    ================================ */
+    #security {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .security-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .security-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    .security-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      display: flex;
+      gap: 24px;
+    }
+
+    .security-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(153, 51, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .security-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .security-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+
+    .certifications {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .cert-badge {
+      padding: 32px 48px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .cert-badge:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+
+    .cert-badge span {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .cert-badge p {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ================================
+       SECTION 11: TEAM
+    ================================ */
+    #team {
+      background: 
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(153, 51, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .team-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .team-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .team-member {
+      text-align: center;
+      padding: 48px 32px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s;
+    }
+
+    .team-member:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-8px);
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(153, 51, 255, 0.3));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .team-member h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .team-member .role {
+      font-size: 14px;
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+    }
+
+    .team-member .bio {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .investors-section {
+      text-align: center;
+    }
+
+    .investors-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .investors-logos {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .investor-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+
+    .investor-logo:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    }
+
+    /* ================================
+       SECTION 12: ROADMAP
+    ================================ */
+    #roadmap {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .roadmap-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .roadmap-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .roadmap-timeline {
+      position: relative;
+      padding-left: 100px;
+    }
+
+    .roadmap-line {
+      position: absolute;
+      left: 40px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
+    }
+
+    .roadmap-item {
+      position: relative;
+      padding: 32px 0 60px;
+    }
+
+    .roadmap-dot {
+      position: absolute;
+      left: -68px;
+      top: 36px;
+      width: 20px;
+      height: 20px;
+      background: var(--dark);
+      border: 3px solid var(--neon-cyan);
+      border-radius: 50%;
+    }
+
+    .roadmap-item.completed .roadmap-dot {
+      background: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+    }
+
+    .roadmap-item.current .roadmap-dot {
+      background: var(--neon-purple);
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 20px rgba(153, 51, 255, 0.8);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .roadmap-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      color: var(--neon-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .roadmap-item h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .roadmap-item p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+
+    /* ================================
+       SECTION 13: PRICING
+    ================================ */
+    #pricing {
+      background: 
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .pricing-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      position: relative;
+      transition: all 0.4s;
+    }
+
+    .pricing-card.featured {
+      background: rgba(0, 240, 255, 0.03);
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .pricing-card.featured::before {
+      content: 'RECOMMENDED';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 24px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+
+    .pricing-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pricing-price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card.featured .pricing-price {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    }
+
+    .pricing-period {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 40px;
+    }
+
+    .pricing-features li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--neon-green);
+      font-weight: 700;
+    }
+
+    /* ================================
+       SECTION 14: TESTIMONIALS
+    ================================ */
+    #testimonials {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .testimonials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .testimonial {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 60px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 120px;
+      color: rgba(0, 240, 255, 0.1);
+      line-height: 1;
+    }
+
+    .testimonial-quote {
+      font-size: 24px;
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .testimonial-avatar {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .testimonial-info h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .testimonial-info p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ================================
+       SECTION 15: USE CASES
+    ================================ */
+    #use-cases {
+      background: 
+        radial-gradient(ellipse 60% 40% at 80% 50%, rgba(153, 51, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .use-cases-container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .use-cases-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .use-case-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 32px;
+      text-align: center;
+      transition: all 0.4s;
+    }
+
+    .use-case-card:hover {
+      background: rgba(0, 240, 255, 0.03);
+      border-color: rgba(0, 240, 255, 0.2);
+      transform: translateY(-8px);
+    }
+
+    .use-case-icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    .use-case-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .use-case-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* ================================
+       SECTION 16: FAQ
+    ================================ */
+    #faq {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 16px;
+    }
+
+    .faq-question {
+      padding: 28px 32px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .faq-question:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 24px;
+      color: var(--neon-cyan);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding: 0 32px 28px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* ================================
+       SECTION 17: MEDIA
+    ================================ */
+    #media {
+      background: 
+        radial-gradient(ellipse 60% 40% at 20% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .media-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .media-header {
+      margin-bottom: 60px;
+    }
+
+    .media-logos {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .media-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+
+    .media-logo:hover {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .media-quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .media-quote {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 40px;
+      text-align: left;
+    }
+
+    .media-quote p {
+      font-size: 18px;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .media-quote cite {
+      font-size: 14px;
+      color: var(--neon-cyan);
+      font-style: normal;
+    }
+
+    /* ================================
+       SECTION 18: CONTACT
+    ================================ */
+    #contact {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .contact-info p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-method-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(0, 240, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .contact-method h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .contact-method p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+
+    .contact-form {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+    }
+
+    .contact-form h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ================================
+       SECTION 19: WAITLIST
+    ================================ */
+    #waitlist {
+      background: 
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 30% 0%, rgba(153, 51, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 70% 0%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+    }
+
+    .waitlist-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .waitlist-counter {
+      margin-bottom: 48px;
+    }
+
+    .waitlist-counter-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 80px;
+      font-weight: 800;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
+    }
+
+    .waitlist-counter-label {
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .waitlist-form {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .waitlist-form input {
+      width: 400px;
+      padding: 20px 28px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .waitlist-form input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    .waitlist-features {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+    }
+
+    .waitlist-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .waitlist-feature span {
+      color: var(--neon-green);
+    }
+
+    /* ================================
+       SECTION 20: FINAL CTA
+    ================================ */
+    #final-cta {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .final-cta-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .final-cta-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0, 240, 255, 0.3), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(153, 51, 255, 0.3), transparent 50%);
+      filter: blur(100px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .final-cta-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(48px, 10vw, 120px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .final-cta-subtitle {
+      font-size: 28px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 64px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    /* ================================
+       FOOTER
+    ================================ */
+    footer {
+      background: rgba(0,0,0,0.6);
+      padding: 80px 80px 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 0;
+      transition: all 0.3s;
+    }
+
+    .footer-col a:hover {
+      color: var(--neon-cyan);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-bottom p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-social a {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      section { padding: 120px 40px; }
+      .tombstones { grid-template-columns: repeat(3, 1fr); }
+      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform: none; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      section { padding: 80px 24px; }
+      .nav-links { display: none; }
+      .tombstones { grid-template-columns: 1fr; }
+      .jarvis-comparison { grid-template-columns: 1fr; }
+      .jarvis-vs { display: none; }
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .use-cases-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="logo">
+      <div class="logo-orb"></div>
+      MAX
+    </div>
+    <div class="nav-links">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#technology">Technology</a>
+      <a href="#market">Market</a>
+      <a href="#team">Team</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Contact</a>
+      <a href="#waitlist" class="btn btn-primary">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section id="hero">
+    <div class="hero-orb-container">
+      <div class="hero-ring"><div class="hero-ring-dot" style="top: 0; left: 50%;"></div></div>
+      <div class="hero-ring"><div class="hero-ring-dot" style="top: 50%; right: 0;"></div></div>
+      <div class="hero-ring"><div class="hero-ring-dot" style="bottom: 0; left: 50%;"></div></div>
+      <div class="hero-ring"><div class="hero-ring-dot" style="top: 50%; left: 0;"></div></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb-core"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label">[ SYSTEM ONLINE ]</div>
+      <h1 class="hero-title">
+        <span class="gradient-text">MAX</span>
+      </h1>
+      <p class="hero-tagline">THE LAST ASSISTANT YOU'LL EVER NEED</p>
+      <p class="hero-description">
+        Not another voice assistant. Not another chatbot. MAX is the first <strong style="color: var(--neon-cyan);">autonomous AI interface</strong> 
+        that understands, anticipates, and executes. We're not competing with Siri. We're replacing the entire paradigm.
+      </p>
+      <div class="hero-cta">
+        <a href="#waitlist" class="btn btn-massive btn-epic">Request Early Access</a>
+        <a href="#demo" class="btn btn-massive btn-ghost">See It In Action ▶</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-value">50ms</span>
+          <span class="hero-stat-label">Response Time</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">94%</span>
+          <span class="hero-stat-label">Intent Accuracy</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">∞</span>
+          <span class="hero-stat-label">Context Memory</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">50K+</span>
+          <span class="hero-stat-label">API Integrations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: The Graveyard -->
+  <section id="graveyard">
+    <div class="graveyard-container">
+      <div class="graveyard-header animate-on-scroll">
+        <span class="section-label" style="border-color: rgba(255, 0, 68, 0.3); color: var(--neon-red);">☠️ R.I.P.</span>
+        <h2 class="graveyard-title">13 Years of <span style="color: var(--neon-red);">FAILURE</span></h2>
+        <p class="graveyard-subtitle">Every voice assistant promised to change your life. None delivered.</p>
+      </div>
+      <div class="tombstones">
+        <div class="tombstone animate-on-scroll">
+          <div class="tombstone-icon">🍎</div>
+          <div class="tombstone-name">SIRI</div>
+          <div class="tombstone-status">FAILED</div>
+          <p class="tombstone-reason">13 years. Still can't set two timers. Apple gave up and pivoted to "Apple Intelligence."</p>
+        </div>
+        <div class="tombstone animate-on-scroll">
+          <div class="tombstone-icon">📦</div>
+          <div class="tombstone-name">ALEXA</div>
+          <div class="tombstone-status">DYING</div>
+          <p class="tombstone-reason">$25B loss. 10,000 layoffs. Can tell you the weather. Can't book a restaurant.</p>
+        </div>
+        <div class="tombstone animate-on-scroll">
+          <div class="tombstone-icon">🔍</div>
+          <div class="tombstone-name">GOOGLE ASSISTANT</div>
+          <div class="tombstone-status">ABANDONED</div>
+          <p class="tombstone-reason">Entire team dissolved. Google pivoted to Gemini. Assistant left to rot.</p>
+        </div>
+        <div class="tombstone animate-on-scroll">
+          <div class="tombstone-icon">🪟</div>
+          <div class="tombstone-name">CORTANA</div>
+          <div class="tombstone-status">DEAD</div>
+          <p class="tombstone-reason">Officially killed in 2024. Microsoft erased it from existence.</p>
+        </div>
+        <div class="tombstone animate-on-scroll">
+          <div class="tombstone-icon">📱</div>
+          <div class="tombstone-name">BIXBY</div>
+          <div class="tombstone-status">JOKE</div>
+          <p class="tombstone-reason">A meme. Users physically disable the Bixby button. Samsung's embarrassment.</p>
+        </div>
+      </div>
+      <div class="graveyard-conclusion animate-on-scroll">
+        <p>The combined market cap of these companies: <span>$10+ TRILLION.</span><br>Years of development: <span>50+.</span><br>Result: <span>You still type your own Google searches.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Vision -->
+  <section id="vision">
+    <div class="vision-container animate-on-scroll">
+      <span class="section-label">🎯 The Vision</span>
+      <p class="vision-statement">
+        "This isn't the market for <em>assistants</em>.<br>
+        This is the market for <em>everything</em>."
+      </p>
+      <div class="vision-numbers">
+        <div class="vision-number">
+          <span class="vision-number-value">$150T</span>
+          <span class="vision-number-label">Global Economy</span>
+        </div>
+        <div class="vision-number">
+          <span class="vision-number-value">100%</span>
+          <span class="vision-number-label">Addressable</span>
+        </div>
+        <div class="vision-number">
+          <span class="vision-number-value">1</span>
+          <span class="vision-number-label">Winner Takes All</span>
+        </div>
+      </div>
+      <blockquote class="vision-quote">
+        "The company that becomes the primary interface between humans and the digital world 
+        will be the most valuable company ever created. That company will be MAX."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Section 4: JARVIS Comparison -->
+  <section id="jarvis">
+    <div class="jarvis-container">
+      <div class="jarvis-header animate-on-scroll">
+        <span class="section-label">🎬 Fiction vs Reality</span>
+        <h2 class="section-title">JARVIS Was a Movie.<br><span class="gradient-text">MAX Is Real.</span></h2>
+      </div>
+      <div class="jarvis-comparison animate-on-scroll">
+        <div class="jarvis-side fiction">
+          <div class="jarvis-side-title">Marvel Fiction</div>
+          <h3>J.A.R.V.I.S.</h3>
+          <ul class="jarvis-features">
+            <li>🎬 Runs Tony Stark's life</li>
+            <li>🎬 Controls smart home</li>
+            <li>🎬 Manages calendar & travel</li>
+            <li>🎬 Executes financial trades</li>
+            <li>🎬 Anticipates needs</li>
+            <li>🎬 Natural conversation</li>
+            <li>🎬 Infinite memory</li>
+          </ul>
+        </div>
+        <div class="jarvis-vs">VS</div>
+        <div class="jarvis-side reality">
+          <div class="jarvis-side-title">2025 Reality</div>
+          <h3>MAX</h3>
+          <ul class="jarvis-features">
+            <li>✓ Runs your entire life</li>
+            <li>✓ Controls 50,000+ devices & services</li>
+            <li>✓ Books, rebooks, cancels autonomously</li>
+            <li>✓ Executes trades with your permission</li>
+            <li>✓ 94% prediction accuracy</li>
+            <li>✓ Indistinguishable from human</li>
+            <li>✓ Perfect recall of every interaction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Capabilities -->
+  <section id="capabilities">
+    <div class="capabilities-container">
+      <div class="capabilities-header animate-on-scroll">
+        <span class="section-label">⚡ Core Capabilities</span>
+        <h2 class="section-title">What MAX Can Do<br><span style="color: rgba(255,255,255,0.3);">(That No One Else Can)</span></h2>
+      </div>
+      <div class="capabilities-grid">
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">🧠</div>
+          <h3>Anticipatory Intelligence</h3>
+          <p>MAX doesn't wait for commands. It predicts what you need before you ask. Leave for work late? MAX already rescheduled your morning meeting.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">94%</div>
+              <div class="capability-stat-label">Prediction Accuracy</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">2.3s</div>
+              <div class="capability-stat-label">Avg Anticipation</div>
+            </div>
+          </div>
+        </div>
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">🚀</div>
+          <h3>Autonomous Execution</h3>
+          <p>Say "I need groceries" — MAX checks your fridge camera, creates a list, compares prices, orders delivery, and schedules around your calendar.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">50K+</div>
+              <div class="capability-stat-label">Services</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">12 steps</div>
+              <div class="capability-stat-label">Avg Chain</div>
+            </div>
+          </div>
+        </div>
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">🔗</div>
+          <h3>Universal Integration</h3>
+          <p>Every app, every service, every device. MAX doesn't need special APIs. It interacts with software like a human would — but infinitely faster.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">50,000+</div>
+              <div class="capability-stat-label">APIs</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">&lt;100ms</div>
+              <div class="capability-stat-label">Integration</div>
+            </div>
+          </div>
+        </div>
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">💝</div>
+          <h3>Emotional Intelligence</h3>
+          <p>MAX reads tone, context, and subtext. It knows when you're stressed, tired, or need space. It adapts its personality to match your state.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">98%</div>
+              <div class="capability-stat-label">Sentiment Accuracy</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">7</div>
+              <div class="capability-stat-label">Emotion States</div>
+            </div>
+          </div>
+        </div>
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">💰</div>
+          <h3>Financial Optimization</h3>
+          <p>MAX monitors your subscriptions, finds better rates, negotiates bills, and moves money to maximize returns. Average user saves $4,200/year.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">$4,200</div>
+              <div class="capability-stat-label">Avg Savings/Yr</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">23%</div>
+              <div class="capability-stat-label">Bill Reduction</div>
+            </div>
+          </div>
+        </div>
+        <div class="capability-card animate-on-scroll">
+          <div class="capability-icon">🧬</div>
+          <h3>Infinite Context Memory</h3>
+          <p>MAX remembers everything. That restaurant you mentioned 3 years ago? That promise you made to call your mom? It's all there, perfectly indexed.</p>
+          <div class="capability-stats">
+            <div class="capability-stat">
+              <div class="capability-stat-value">∞</div>
+              <div class="capability-stat-label">Memory</div>
+            </div>
+            <div class="capability-stat">
+              <div class="capability-stat-value">&lt;50ms</div>
+              <div class="capability-stat-label">Recall Time</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Technology -->
+  <section id="technology">
+    <div class="tech-container">
+      <div class="tech-header animate-on-scroll">
+        <span class="section-label">🔬 Technology Stack</span>
+        <h2 class="section-title">The Engine Behind<br><span class="gradient-text">The Intelligence</span></h2>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">🧠</div>
+          <div class="tech-content">
+            <h3>Neural Reasoning Engine</h3>
+            <p>Custom transformer architecture with 10T parameters, trained on human behavioral data. Not just language — understanding.</p>
+            <span class="tech-spec">10T PARAMS • 128K CONTEXT • MULTIMODAL</span>
+          </div>
+        </div>
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">📊</div>
+          <div class="tech-content">
+            <h3>Real-time Context Graph</h3>
+            <p>Your digital life as a living, breathing knowledge graph. Updated in real-time from 500+ data sources.</p>
+            <span class="tech-spec">&lt;50MS SYNC • 500+ SOURCES • ENCRYPTED</span>
+          </div>
+        </div>
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">🔌</div>
+          <div class="tech-content">
+            <h3>Universal API Layer</h3>
+            <p>We don't wait for integrations. Our AI learns to use any software interface, just like you would.</p>
+            <span class="tech-spec">50,000+ APIS • AUTO-DISCOVERY • SELF-HEALING</span>
+          </div>
+        </div>
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">⚡</div>
+          <div class="tech-content">
+            <h3>Edge Computing Network</h3>
+            <p>200+ edge nodes globally. Your MAX instance runs locally for instant response and complete privacy.</p>
+            <span class="tech-spec">&lt;100MS LATENCY • ON-DEVICE • PRIVATE</span>
+          </div>
+        </div>
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">👁️</div>
+          <div class="tech-content">
+            <h3>Multimodal Fusion</h3>
+            <p>Voice, vision, text, gesture — all unified in a single understanding model. See, hear, read, and feel.</p>
+            <span class="tech-spec">4 MODALITIES • REAL-TIME • CONTEXTUAL</span>
+          </div>
+        </div>
+        <div class="tech-card animate-on-scroll">
+          <div class="tech-icon">🔮</div>
+          <div class="tech-content">
+            <h3>Predictive Modeling</h3>
+            <p>Machine learning on your behavioral patterns to anticipate needs before they arise.</p>
+            <span class="tech-spec">94% ACCURACY • PERSONALIZED • ADAPTIVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Demo -->
+  <section id="demo">
+    <div class="demo-container">
+      <div class="demo-header animate-on-scroll">
+        <span class="section-label">🎬 Live Demo</span>
+        <h2 class="section-title">See MAX In Action</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">A typical morning interaction. No scripts. No cherry-picking.</p>
+      </div>
+      <div class="demo-interface animate-on-scroll">
+        <div class="demo-dots">
+          <div class="demo-dot"></div>
+          <div class="demo-dot"></div>
+          <div class="demo-dot"></div>
+        </div>
+        <div class="demo-conversation">
+          <div class="demo-message user">
+            <div class="demo-avatar">👤</div>
+            <div class="demo-bubble">
+              <p>"MAX, I need to get to San Francisco tomorrow for a meeting."</p>
+            </div>
+          </div>
+          <div class="demo-message max">
+            <div class="demo-avatar">M</div>
+            <div class="demo-bubble">
+              <p>I see you have a 2pm meeting with Sarah Chen at Sequoia Capital. Given traffic patterns and your preference for window seats, I recommend the 9:15am United flight from JFK. I found a seat in 3A available for $487 — $156 less than average for this route. Your hotel from last trip, The Marker, has availability. Should I book this itinerary?</p>
+              <div class="demo-actions">
+                <span class="demo-action">✈️ FLIGHT FOUND</span>
+                <span class="demo-action">🏨 HOTEL MATCHED</span>
+                <span class="demo-action">💰 $156 SAVED</span>
+              </div>
+            </div>
+          </div>
+          <div class="demo-message user">
+            <div class="demo-avatar">👤</div>
+            <div class="demo-bubble">
+              <p>"Yes, and remind me to prep for the meeting."</p>
+            </div>
+          </div>
+          <div class="demo-message max">
+            <div class="demo-avatar">M</div>
+            <div class="demo-bubble">
+              <p>Done. Flight, hotel, and ground transportation booked. I've set a prep reminder for 8pm tonight. I've also pulled Sarah's recent Medium posts, Sequoia's latest investments, and your previous correspondence. Anything else for the trip?</p>
+              <div class="demo-actions">
+                <span class="demo-action">✅ BOOKED</span>
+                <span class="demo-action">⏰ REMINDER SET</span>
+                <span class="demo-action">📋 RESEARCH READY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Market -->
+  <section id="market">
+    <div class="market-container">
+      <div class="market-header animate-on-scroll">
+        <span class="section-label">📈 Market Opportunity</span>
+        <h2 class="section-title">The Biggest TAM<br><span style="color: rgba(255,255,255,0.3);">In History</span></h2>
+      </div>
+      <div class="market-tam animate-on-scroll">
+        <span class="market-tam-value">$150T</span>
+        <p class="market-tam-label">Total Addressable Market — The Global Economy</p>
+      </div>
+      <div class="market-breakdown animate-on-scroll">
+        <div class="market-sector">
+          <div class="market-sector-icon">🛒</div>
+          <div class="market-sector-value">$6.3T</div>
+          <div class="market-sector-name">E-Commerce</div>
+        </div>
+        <div class="market-sector">
+          <div class="market-sector-icon">💳</div>
+          <div class="market-sector-value">$28.5T</div>
+          <div class="market-sector-name">Financial Services</div>
+        </div>
+        <div class="market-sector">
+          <div class="market-sector-icon">🏥</div>
+          <div class="market-sector-value">$12T</div>
+          <div class="market-sector-name">Healthcare</div>
+        </div>
+        <div class="market-sector">
+          <div class="market-sector-icon">✈️</div>
+          <div class="market-sector-value">$9.5T</div>
+          <div class="market-sector-name">Travel & Hospitality</div>
+        </div>
+      </div>
+      <div class="market-model animate-on-scroll">
+        <div class="market-model-item">
+          <div class="market-model-value">2.5%</div>
+          <div class="market-model-label">Transaction Fee Model</div>
+        </div>
+        <div class="market-model-item">
+          <div class="market-model-value">8B</div>
+          <div class="market-model-label">Potential Users</div>
+        </div>
+        <div class="market-model-item">
+          <div class="market-model-value">$3.75T</div>
+          <div class="market-model-label">Annual Revenue Potential</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Competition -->
+  <section id="competition">
+    <div class="competition-container">
+      <div class="competition-header animate-on-scroll">
+        <span class="section-label">⚔️ Competitive Analysis</span>
+        <h2 class="section-title">There Is No<br><span class="gradient-text">Competition</span></h2>
+      </div>
+      <div class="competition-table animate-on-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th class="max-col">MAX</th>
+              <th>Siri</th>
+              <th>Alexa</th>
+              <th>Google</th>
+              <th>ChatGPT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Natural Language Understanding</td>
+              <td class="max-col">98%</td>
+              <td class="dead">62%</td>
+              <td>71%</td>
+              <td>85%</td>
+              <td>89%</td>
+            </tr>
+            <tr>
+              <td>Task Execution</td>
+              <td class="max-col">95%</td>
+              <td class="dead">23%</td>
+              <td>31%</td>
+              <td>45%</td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>Service Integration</td>
+              <td class="max-col">50,000+</td>
+              <td class="dead">~200</td>
+              <td>~5,000</td>
+              <td>~1,000</td>
+              <td>~50</td>
+            </tr>
+            <tr>
+              <td>Proactive Actions</td>
+              <td class="max-col">Yes</td>
+              <td class="dead">No</td>
+              <td>Limited</td>
+              <td>Limited</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Commerce Enabled</td>
+              <td class="max-col">Full</td>
+              <td class="dead">No</td>
+              <td>Amazon Only</td>
+              <td>Limited</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Privacy-First</td>
+              <td class="max-col">Yes</td>
+              <td class="dead">No</td>
+              <td>No</td>
+              <td>No</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 10: Security -->
+  <section id="security">
+    <div class="security-container">
+      <div class="security-header animate-on-scroll">
+        <span class="section-label">🛡️ Security & Privacy</span>
+        <h2 class="section-title">Your Data Is<br><span class="gradient-text">Yours. Period.</span></h2>
+      </div>
+      <div class="security-grid">
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">🔐</div>
+          <div>
+            <h3>End-to-End Encryption</h3>
+            <p>Every interaction encrypted with military-grade AES-256. Not even we can read your data.</p>
+          </div>
+        </div>
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">📱</div>
+          <div>
+            <h3>On-Device Processing</h3>
+            <p>MAX runs locally on your devices. Your personal data never leaves your hardware.</p>
+          </div>
+        </div>
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">🌍</div>
+          <div>
+            <h3>Data Sovereignty</h3>
+            <p>You own your data. Export or delete everything with one command. We store nothing.</p>
+          </div>
+        </div>
+        <div class="security-card animate-on-scroll">
+          <div class="security-icon">👁️</div>
+          <div>
+            <h3>Transparent Algorithms</h3>
+            <p>See exactly why MAX made every decision. Full explainability, no black boxes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="certifications animate-on-scroll">
+        <div class="cert-badge"><span>🛡️</span><p>SOC2 Type II</p></div>
+        <div class="cert-badge"><span>🏥</span><p>HIPAA</p></div>
+        <div class="cert-badge"><span>🇪🇺</span><p>GDPR</p></div>
+        <div class="cert-badge"><span>🏛️</span><p>FedRAMP</p></div>
+        <div class="cert-badge"><span>💳</span><p>PCI DSS</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 11: Team -->
+  <section id="team">
+    <div class="team-container">
+      <div class="team-header animate-on-scroll">
+        <span class="section-label">👥 Leadership</span>
+        <h2 class="section-title">Built by the Best<br><span style="color: rgba(255,255,255,0.3);">In the World</span></h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-member animate-on-scroll">
+          <div class="team-avatar">👩‍💼</div>
+          <h3>Alexandra Chen</h3>
+          <p class="role">CEO & Co-founder</p>
+          <p class="bio">Ex-Google AI • VP Engineering<br>Stanford CS PhD</p>
+        </div>
+        <div class="team-member animate-on-scroll">
+          <div class="team-avatar">👨‍💻</div>
+          <h3>Marcus Williams</h3>
+          <p class="role">CTO & Co-founder</p>
+          <p class="bio">Ex-OpenAI • Infrastructure Lead<br>MIT AI Lab</p>
+        </div>
+        <div class="team-member animate-on-scroll">
+          <div class="team-avatar">👩‍🔬</div>
+          <h3>Dr. Sarah Park</h3>
+          <p class="role">Chief Scientist</p>
+          <p class="bio">Ex-DeepMind • Research Lead<br>50+ Papers</p>
+        </div>
+        <div class="team-member animate-on-scroll">
+          <div class="team-avatar">👨‍💼</div>
+          <h3>David Okonkwo</h3>
+          <p class="role">Chief Product Officer</p>
+          <p class="bio">Ex-Apple Siri • Product Lead<br>15 Years AI/ML</p>
+        </div>
+      </div>
+      <div class="investors-section animate-on-scroll">
+        <p class="investors-label">Backed by World-Class Investors</p>
+        <div class="investors-logos">
+          <span class="investor-logo">Sequoia</span>
+          <span class="investor-logo">a16z</span>
+          <span class="investor-logo">Founders Fund</span>
+          <span class="investor-logo">Khosla</span>
+          <span class="investor-logo">Y Combinator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 12: Roadmap -->
+  <section id="roadmap">
+    <div class="roadmap-container">
+      <div class="roadmap-header animate-on-scroll">
+        <span class="section-label">🗺️ Roadmap</span>
+        <h2 class="section-title">The Path to<br><span class="gradient-text">World Domination</span></h2>
+      </div>
+      <div class="roadmap-timeline">
+        <div class="roadmap-line"></div>
+        <div class="roadmap-item completed animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">Q4 2024</div>
+          <h3>Private Beta ✓</h3>
+          <p>1,000 early adopters. 99.9% uptime. Core intelligence validated.</p>
+        </div>
+        <div class="roadmap-item completed animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">Q1 2025</div>
+          <h3>Series A — $100M ✓</h3>
+          <p>Led by Sequoia. $850M valuation. Team grew to 120.</p>
+        </div>
+        <div class="roadmap-item current animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">Q2 2025</div>
+          <h3>Public Beta</h3>
+          <p>50,000 users. Commerce integration. iOS and Android launch.</p>
+        </div>
+        <div class="roadmap-item animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">Q4 2025</div>
+          <h3>Commerce Integration</h3>
+          <p>Full transaction capability. Partner with 10,000+ merchants.</p>
+        </div>
+        <div class="roadmap-item animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">2026</div>
+          <h3>Global Expansion</h3>
+          <p>50+ countries. 10+ languages. Enterprise offering.</p>
+        </div>
+        <div class="roadmap-item animate-on-scroll">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-date">2027</div>
+          <h3>IPO</h3>
+          <p>Public markets. 100M+ users. $50B+ valuation target.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 13: Pricing -->
+  <section id="pricing">
+    <div class="pricing-container">
+      <div class="pricing-header animate-on-scroll">
+        <span class="section-label">💎 Pricing</span>
+        <h2 class="section-title">Free Forever.<br><span style="color: rgba(255,255,255,0.3);">Premium Optional.</span></h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card animate-on-scroll">
+          <div class="pricing-name">Personal</div>
+          <div class="pricing-price">$0</div>
+          <div class="pricing-period">Forever free</div>
+          <ul class="pricing-features">
+            <li>Full AI assistant capabilities</li>
+            <li>1,000 API integrations</li>
+            <li>Basic automation</li>
+            <li>Community support</li>
+          </ul>
+          <a href="#waitlist" class="btn btn-large btn-ghost" style="width: 100%;">Join Waitlist</a>
+        </div>
+        <div class="pricing-card featured animate-on-scroll">
+          <div class="pricing-name">Pro</div>
+          <div class="pricing-price">$29</div>
+          <div class="pricing-period">per month</div>
+          <ul class="pricing-features">
+            <li>Everything in Personal</li>
+            <li>50,000+ API integrations</li>
+            <li>Advanced automation chains</li>
+            <li>Priority support</li>
+            <li>Commerce transactions</li>
+            <li>Custom voice & personality</li>
+          </ul>
+          <a href="#waitlist" class="btn btn-large btn-epic" style="width: 100%;">Get Early Access</a>
+        </div>
+        <div class="pricing-card animate-on-scroll">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-price">Custom</div>
+          <div class="pricing-period">contact sales</div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>On-premise deployment</li>
+            <li>Custom integrations</li>
+            <li>Dedicated support team</li>
+            <li>SLA guarantees</li>
+            <li>White-label options</li>
+          </ul>
+          <a href="#contact" class="btn btn-large btn-ghost" style="width: 100%;">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 14: Testimonials -->
+  <section id="testimonials">
+    <div class="testimonials-container">
+      <div class="testimonials-header animate-on-scroll">
+        <span class="section-label">💬 Early Adopters</span>
+        <h2 class="section-title">What Beta Users<br><span class="gradient-text">Are Saying</span></h2>
+      </div>
+      <div class="testimonial animate-on-scroll">
+        <p class="testimonial-quote">"I haven't typed a Google search in 3 months. I haven't manually booked a flight. I haven't called a restaurant. MAX does everything. It's not an assistant — it's a lifestyle upgrade."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JK</div>
+          <div class="testimonial-info">
+            <h4>James Kim</h4>
+            <p>VP Engineering, Stripe • Beta User Since Day 1</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial animate-on-scroll">
+        <p class="testimonial-quote">"As a CEO, my time is my most valuable asset. MAX gave me back 3 hours a day. Scheduling, research, expense reports — all handled. I just make decisions now."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RL</div>
+          <div class="testimonial-info">
+            <h4>Rachel Liu</h4>
+            <p>CEO, TechFlow (YC W23) • Beta User</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 15: Use Cases -->
+  <section id="use-cases">
+    <div class="use-cases-container">
+      <div class="use-cases-header animate-on-scroll">
+        <span class="section-label">🎯 Use Cases</span>
+        <h2 class="section-title">MAX Handles<br><span style="color: rgba(255,255,255,0.3);">Everything</span></h2>
+      </div>
+      <div class="use-cases-grid">
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">✈️</div>
+          <h3>Travel</h3>
+          <p>Book flights, hotels, restaurants. Manage itineraries. Handle delays automatically.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">💰</div>
+          <h3>Finance</h3>
+          <p>Track spending. Optimize bills. Move money. Tax preparation.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">🏠</div>
+          <h3>Smart Home</h3>
+          <p>Control every device. Automate routines. Optimize energy.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">📅</div>
+          <h3>Scheduling</h3>
+          <p>Manage calendar. Schedule meetings. Send reminders.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">🛒</div>
+          <h3>Shopping</h3>
+          <p>Find best prices. Reorder essentials. Track packages.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">🏥</div>
+          <h3>Health</h3>
+          <p>Track metrics. Schedule appointments. Medication reminders.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">📧</div>
+          <h3>Communication</h3>
+          <p>Draft emails. Manage inbox. Schedule messages.</p>
+        </div>
+        <div class="use-case-card animate-on-scroll">
+          <div class="use-case-icon">🎓</div>
+          <h3>Learning</h3>
+          <p>Research topics. Summarize content. Learn new skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 16: FAQ -->
+  <section id="faq">
+    <div class="faq-container">
+      <div class="faq-header animate-on-scroll">
+        <span class="section-label">❓ FAQ</span>
+        <h2 class="section-title">Questions? Answered.</h2>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">How is MAX different from Siri or Alexa?</div>
+        <div class="faq-answer">Siri and Alexa are voice interfaces to limited functions. MAX is an autonomous agent that understands context, executes multi-step tasks, and integrates with 50,000+ services. It doesn't just respond — it acts.</div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">Is my data safe?</div>
+        <div class="faq-answer">Yes. MAX processes data on-device with end-to-end encryption. We never see your personal information. You can export or delete all data anytime. We're SOC2, HIPAA, and GDPR compliant.</div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">Can MAX access my bank accounts?</div>
+        <div class="faq-answer">Only with your explicit permission. MAX uses read-only access by default. Transaction capabilities require additional authentication and can be limited to specific actions.</div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">What devices does MAX work on?</div>
+        <div class="faq-answer">iOS, Android, Web, Desktop (Mac/Windows), smart speakers, smart watches, and car systems. MAX syncs seamlessly across all devices.</div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">When can I get access?</div>
+        <div class="faq-answer">Public beta launches Q2 2025. Join the waitlist for early access. Current waitlist: 127,000+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 17: Media -->
+  <section id="media">
+    <div class="media-container">
+      <div class="media-header animate-on-scroll">
+        <span class="section-label">📰 Press</span>
+        <h2 class="section-title">What They're Saying</h2>
+      </div>
+      <div class="media-logos animate-on-scroll">
+        <span class="media-logo">TechCrunch</span>
+        <span class="media-logo">The Verge</span>
+        <span class="media-logo">Wired</span>
+        <span class="media-logo">Forbes</span>
+        <span class="media-logo">Bloomberg</span>
+      </div>
+      <div class="media-quotes">
+        <div class="media-quote animate-on-scroll">
+          <p>"The first AI assistant that actually does things. This could be bigger than the smartphone."</p>
+          <cite>— TechCrunch</cite>
+        </div>
+        <div class="media-quote animate-on-scroll">
+          <p>"MAX makes Siri look like a calculator. The technology gap is staggering."</p>
+          <cite>— The Verge</cite>
+        </div>
+        <div class="media-quote animate-on-scroll">
+          <p>"If MAX delivers on its promise, it will fundamentally change how humans interact with technology."</p>
+          <cite>— Wired</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 18: Contact -->
+  <section id="contact">
+    <div class="contact-container">
+      <div class="contact-grid">
+        <div class="contact-info animate-on-scroll">
+          <span class="section-label">📞 Contact</span>
+          <h2>Let's Talk<br><span class="gradient-text">About the Future</span></h2>
+          <p>Interested in enterprise deployment, partnerships, or investment? Our team is ready to discuss how MAX can transform your organization.</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-method-icon">📧</div>
+              <div>
+                <h4>Email</h4>
+                <p>hello@max.ai</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">💼</div>
+              <div>
+                <h4>Enterprise</h4>
+                <p>enterprise@max.ai</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-method-icon">💰</div>
+              <div>
+                <h4>Investors</h4>
+                <p>investors@max.ai</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form animate-on-scroll">
+          <h3>Get In Touch</h3>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" placeholder="Your company">
+          </div>
+          <div class="form-group">
+            <label>Interest</label>
+            <select>
+              <option>Enterprise Deployment</option>
+              <option>Partnership</option>
+              <option>Investment</option>
+              <option>Press Inquiry</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us more..."></textarea>
+          </div>
+          <button class="btn btn-large btn-epic" style="width: 100%;">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 19: Waitlist -->
+  <section id="waitlist">
+    <div class="waitlist-container animate-on-scroll">
+      <span class="section-label">🚀 Early Access</span>
+      <h2 class="section-title">Join the Waitlist</h2>
+      <div class="waitlist-counter">
+        <span class="waitlist-counter-value">127,483</span>
+        <p class="waitlist-counter-label">people waiting for the future</p>
+      </div>
+      <div class="waitlist-form">
+        <input type="email" placeholder="Enter your email">
+        <button class="btn btn-large btn-epic">Get Early Access</button>
+      </div>
+      <div class="waitlist-features">
+        <div class="waitlist-feature"><span>✓</span> First access to beta</div>
+        <div class="waitlist-feature"><span>✓</span> Lifetime Pro discount</div>
+        <div class="waitlist-feature"><span>✓</span> Exclusive updates</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 20: Final CTA -->
+  <section id="final-cta">
+    <div class="final-cta-orb"></div>
+    <div class="final-cta-container animate-on-scroll">
+      <h2 class="final-cta-title">
+        The Future<br>
+        <span class="gradient-text">Is Calling.</span>
+      </h2>
+      <p class="final-cta-subtitle">
+        13 years of broken promises end here. MAX is the assistant we were always promised. 
+        Join 127,000+ visionaries who refuse to wait any longer.
+      </p>
+      <div class="final-cta-buttons">
+        <a href="#waitlist" class="btn btn-massive btn-epic">Request Early Access</a>
+        <a href="#demo" class="btn btn-massive btn-ghost">Watch Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-orb"></div>
+            MAX
+          </div>
+          <p>The last assistant you'll ever need. Autonomous. Intelligent. Yours.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#">Features</a>
+          <a href="#">Pricing</a>
+          <a href="#">Roadmap</a>
+          <a href="#">Beta Access</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Team</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">API</a>
+          <a href="#">Blog</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Security</a>
+          <a href="#">GDPR</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 MAX AI, Inc. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#">𝕏</a>
+          <a href="#">in</a>
+          <a href="#">GH</a>
+          <a href="#">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('open');
+      });
+    });
+
+    // Particle effect for hero
+    const heroContainer = document.querySelector('.hero-orb-container');
+    for (let i = 0; i < 30; i++) {
+      const particle = document.createElement('div');
+      particle.style.cssText = `
+        position: absolute;
+        width: ${Math.random() * 4 + 2}px;
+        height: ${Math.random() * 4 + 2}px;
+        background: var(--neon-cyan);
+        border-radius: 50%;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        opacity: ${Math.random() * 0.5 + 0.2};
+        animation: float ${Math.random() * 5 + 5}s ease-in-out infinite;
+        animation-delay: ${Math.random() * 5}s;
+        box-shadow: 0 0 10px var(--neon-cyan);
+      `;
+      heroContainer.appendChild(particle);
+    }
+
+    // Waitlist counter animation
+    const counterEl = document.querySelector('.waitlist-counter-value');
+    if (counterEl) {
+      let count = 127483;
+      setInterval(() => {
+        count += Math.floor(Math.random() * 3);
+        counterEl.textContent = count.toLocaleString();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
