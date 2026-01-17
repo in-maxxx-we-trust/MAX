@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXMUSK.WTF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1a1a1a;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .masthead {
+            text-align: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #000;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .masthead h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #000;
+            margin: 0;
+        }
+
+        .masthead .tagline {
+            display: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .book-title {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #000;
+        }
+
+        .book-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .book-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 400;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .book-title .author {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 60px 0;
+            color: #000;
+            font-size: 24px;
+            letter-spacing: 20px;
+        }
+
+        .part-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #000;
+            margin: 100px 0 60px;
+            padding-top: 60px;
+            border-top: 2px solid #000;
+            text-align: center;
+        }
+
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 60px 0 40px;
+            color: #000;
+        }
+
+        .chapter-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 30px;
+            text-indent: 2em;
+            hyphens: auto;
+        }
+
+        p:first-of-type,
+        .chapter-title + p,
+        .divider + p {
+            text-indent: 0;
+        }
+
+        p:first-of-type::first-letter {
+            font-size: 72px;
+            line-height: 0.85;
+            float: left;
+            margin: 8px 12px 0 0;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            color: #000;
+        }
+
+        em {
+            font-style: italic;
+            color: #000;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .pull-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-style: italic;
+            line-height: 1.5;
+            margin: 60px 0;
+            padding: 40px 60px;
+            border-left: 4px solid #000;
+            color: #000;
+            text-indent: 0 !important;
+        }
+
+        .tbc {
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            margin: 100px 0;
+            padding: 40px 0;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+        }
+
+        @media (max-width: 768px) {
+            .masthead h1 {
+                font-size: 42px;
+                letter-spacing: 4px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .book-title h1 {
+                font-size: 36px;
+            }
+
+            .book-title h2 {
+                font-size: 20px;
+            }
+
+            .chapter-title {
+                font-size: 32px;
+            }
+
+            body {
+                font-size: 18px;
+            }
+
+            .pull-quote {
+                font-size: 24px;
+                padding: 30px 30px;
+            }
+        }
+
+        ::selection {
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="masthead">
+        <h1>MAXMUSK.WTF</h1>
+        <div class="tagline">Premium Digital Magazine</div>
+    </div>
+
+    <div class="container">
+        <div class="book-title">
+            <h1>WHERE IS MY JETPACK?</h1>
+            <h2>How Big Tech Stole the Future and Sold Us Surveillance</h2>
+            <div class="author">A Book by Someone Who's Had Enough</div>
+        </div>
+
+        <div class="divider">* * *</div>
+
+        <div class="part-title">PART I: THE FUTURE THEY PROMISED US</div>
+
+        <div class="chapter-number">Chapter 1</div>
+        <h2 class="chapter-title">The Boy Who Believed in Tomorrow</h2>
+
+        <p>I was twelve years old the first time I saw the future.</p>
+
+        <p>Not in a vision. Not in a dream. On a screen in a darkened theater in 1999, watching Neo wake up from the Matrix. My mind exploded. The world around me—the sticky floor, the smell of popcorn, my dad snoring two seats over—all of it fell away. Because what I was seeing was <em>real</em>. Not the movie. The future it promised.</p>
+
+        <p>By the time the credits rolled, I knew with absolute certainty what the year 2020 would look like. We'd have AI that could think. Virtual reality that was indistinguishable from reality. Technology so advanced it would be indistinguishable from magic.</p>
+
+        <p>I believed this the way other kids believed in Santa Claus. Except I was old enough to know better, and I believed anyway.</p>
+
+        <p>2004, I'm seventeen. <em>I, Robot</em> comes out. There's Will Smith, and there's VIKI, and there's this vision of 2035 where personal robots are as common as smartphones (which don't exist yet, but we know they're coming). I watch Sonny—the robot with a soul—and I think: yes. This. Twenty years and we'll have this.</p>
+
+        <p>2008. I'm in college. <em>Iron Man</em> changes everything. Not because of the suit, though holy fuck, the suit. Because of JARVIS. An AI assistant that actually <em>assists</em>. That manages Tony Stark's life. That helps him invent new technology. That has a personality, intelligence, agency. That's actually useful, not just a gimmick.</p>
+
+        <p>I remember sitting in my dorm room after that movie, looking at my laptop—a clunky Dell that took five minutes to boot up—and thinking: we're so close. Five years. Maybe ten. But we're going to have this.</p>
+
+        <p>The future wasn't just coming. It was inevitable.</p>
+
+        <p>I grew up in that sliver of time when it really felt like anything was possible. The internet was new enough to be exciting, old enough to be real. Every year brought something that felt like science fiction made real. WiFi. Google. GPS. The iPod. YouTube. The iPhone.</p>
+
+        <p>The future was happening. We could feel it accelerating.</p>
+
+        <p>And everyone—everyone who mattered, everyone who was building the future—told us what was coming:</p>
+
+        <p>Bill Gates said computers would unlock human potential. Information would be free. Education democratized.</p>
+
+        <p>Steve Jobs said technology would be so intuitive it would disappear. It would empower creativity.</p>
+
+        <p>Larry Page and Sergey Brin said Google would be the third half of our brain, organizing all human knowledge.</p>
+
+        <p>Mark Zuckerberg said Facebook would connect humanity, make us more open, bring us together.</p>
+
+        <p>Elon Musk said we'd be on Mars. Electric cars for everyone. Clean energy. AI that benefits humanity.</p>
+
+        <p>These weren't random predictions. These were <em>promises</em> from the people building the future. And we believed them.</p>
+
+        <p>Why wouldn't we? Every year proved them right. Technology was getting better, faster, more amazing.</p>
+
+        <p>The trajectory was clear. By 2020, we'd have:</p>
+
+        <p>Flying cars. Obviously. Every sci-fi movie had them. We had the technology—helicopters existed, drones existed, computer control existed. It was just a matter of time.</p>
+
+        <p>Personal AI assistants. JARVIS-level. Actually intelligent. Actually helpful. Not asking you to repeat yourself three times before giving up and googling it for you.</p>
+
+        <p>Virtual reality. Real virtual reality. Not the janky headsets of the 90s, but actual Matrix-level immersion. We'd work in VR. Play in VR. Maybe live in VR.</p>
+
+        <p>Space travel. Not just for astronauts. For us. Moon bases. Mars colonies. The beginning of humanity as a multiplanetary species.</p>
+
+        <p>Clean energy. Solar panels on every roof. Electric cars that didn't cost six figures. Battery technology that actually worked. Climate change being addressed, not ignored.</p>
+
+        <p>Medical miracles. AI diagnosis better than doctors. Personalized medicine. Gene therapy. Cancer cures. Longer, healthier lives.</p>
+
+        <p>And underlying all of it: the assumption that technology would make life <em>better</em>. Easier. More free. More human.</p>
+
+        <p>That's what we were promised.</p>
+
+        <p>That's what we believed.</p>
+
+        <div class="divider">* * *</div>
+
+        <p>It's 2026 now.</p>
+
+        <p>I'm writing this on a laptop that's somehow worse than the one I had in 2015. It's thinner, sure. Sleeker. But the keyboard is shit, it overheats if I run too many browser tabs, and I can't upgrade the RAM because Apple soldered it to the motherboard. It cost $2,400. It'll be obsolete in three years, not because technology advanced, but because Apple will slow it down with software updates until I'm forced to buy another one.</p>
+
+        <p>My phone listens to my conversations and shows me ads for things I mentioned out loud. My smart speaker records everything I say and sends it to strangers at Amazon who listen to my private moments for $12 an hour. My social media feeds are designed by PhDs in psychology to keep me angry and scrolling. My apps are designed to be addictive. My devices are designed to break.</p>
+
+        <p>I don't have JARVIS. I have Alexa, who can't understand the question "what's the weather" half the time.</p>
+
+        <p>I don't have a flying car. I have a Tesla that kills people on Autopilot while Elon Musk tweets memes.</p>
+
+        <p>I don't have VR that changes the world. I have a Meta Quest that makes me nauseous and a Metaverse that's a ghost town despite Zuckerberg burning $100 billion on it.</p>
+
+        <p>I don't have clean energy everywhere. I have oil companies still dominant, the planet on fire, and billionaires racing to Mars like rats fleeing a sinking ship they set on fire themselves.</p>
+
+        <p>I don't have medical AI that saves lives. I have AI that writes marketing copy and generates fake images and helps corporations fire people more efficiently.</p>
+
+        <p>I don't have democratized knowledge. I have Google search results that are 50% ads, social media platforms that spread misinformation faster than truth, and algorithms designed to radicalize people because outrage drives engagement.</p>
+
+        <div class="pull-quote">
+            The future didn't just fail to arrive. Something worse happened. The future was stolen.
+        </div>
+
+        <p>And in its place, we got a dystopia with better graphics. We got surveillance with a friendly UI. We got exploitation with next-day shipping. We got the death of the planet, the corruption of democracy, the loneliness epidemic, the mental health crisis, the wealth inequality, the gig economy, the subscription hellscape, the ads, the ads, the endless fucking ads.</p>
+
+        <p>We got technology that serves corporations, not people. That extracts value instead of creating it. That surveils instead of empowers. That manipulates instead of informs. That isolates instead of connects.</p>
+
+        <p>This book is about what happened.</p>
+
+        <p>How the companies that promised us the future deliberately chose profits over progress. How innovation died and was replaced by optimization. How the people who said they wanted to change the world decided it was more profitable to just exploit the one we have.</p>
+
+        <p>It's about Apple, Google, Amazon, Facebook, Microsoft, Tesla, Samsung, and every other tech giant that promised us tomorrow and gave us a worse today.</p>
+
+        <p>But more than that—and this is important—it's about what the future could still be.</p>
+
+        <p>Because here's the thing they don't want you to know:</p>
+
+        <p>The technology for JARVIS exists. Today. Right now. The AI models are there. The speech recognition is there. The integration is there. We have everything we need to build a truly useful AI assistant that works for <em>you</em>, not for advertisers.</p>
+
+        <p>We don't have it because it's not profitable to give you control.</p>
+
+        <p>The technology for devices that last 10+ years exists. Modular design works—Framework Laptop proves it. Repairable phones are possible—Fairphone does it. Long software support is feasible—Google gives Pixel 8 years of updates.</p>
+
+        <p>We don't have it because planned obsolescence makes more money.</p>
+
+        <p>The technology for clean energy exists. Solar works. Wind works. Batteries work. We could transition off fossil fuels.</p>
+
+        <p>We don't because oil companies are more powerful than physics, and tech companies are too busy building data centers to optimize ads to care about building a sustainable future.</p>
+
+        <p>Every promise they made could still be kept.</p>
+
+        <p>Every vision of the future we were sold could still be real.</p>
+
+        <p>The technology isn't the problem.</p>
+
+        <p>The business model is the problem. The monopolies are the problem. The incentive structures are the problem.</p>
+
+        <p>And problems can be solved.</p>
+
+        <p>But first, you have to understand what happened. You have to see how we got here. You have to know who stole the future and why.</p>
+
+        <p>That's what this book is.</p>
+
+        <p>It's the story of how we went from <em>The Jetsons</em> to <em>Black Mirror</em>.</p>
+
+        <p>And more importantly, how we get back.</p>
+
+        <div class="divider">* * *</div>
+
+        <div class="chapter-number">Chapter 2</div>
+        <h2 class="chapter-title">When the Future Stopped</h2>
+
+        <p>There's a moment. You don't notice it when it happens, but looking back, you can pinpoint exactly when things changed.</p>
+
+        <p>For me, it was 2014.</p>
+
+        <p>That was the year I realized my iPhone 6 was basically the same as my iPhone 5. Better camera, sure. Bigger screen, fine. But fundamentally? The same device. The same experience. The same operating system with a new coat of paint.</p>
+
+        <p>I remember being in the Apple Store, holding the iPhone 6, trying to justify the $649. The guy next to me was upgrading from a 4S. He asked the employee what was new. The employee went into this rehearsed spiel about the processor being faster, the camera being better, blah blah blah.</p>
+
+        <p>"But what can it <em>do</em> that my 4S can't?" the guy asked.</p>
+
+        <p>The employee paused. "It's... faster."</p>
+
+        <p>"At what?"</p>
+
+        <p>Another pause. "Everything."</p>
+
+        <p>The guy bought it anyway. We all did. Because that's what you did. That's what we'd been trained to do. New iPhone comes out, you buy it. Not because you need it. Because it's new, and new means better, and better means progress, and progress means the future.</p>
+
+        <p>Except it wasn't the future. It was just iteration.</p>
+
+        <p>I started paying attention after that. Really paying attention.</p>
+
+        <p>2015: iPhone 6S. The same phone. But now with "3D Touch" that nobody used and Apple discontinued five years later.</p>
+
+        <p>2016: iPhone 7. The same phone. But they removed the headphone jack. Not because it improved the phone. Because they wanted to sell you AirPods.</p>
+
+        <p>2017: iPhone 8 and X. Okay, Face ID was cool. Genuinely new. Finally. But the X cost $1,000. A thousand fucking dollars for a phone.</p>
+
+        <p>2018: iPhone XS. The same phone as the X. Slightly faster. Slightly better camera. $1,000 again.</p>
+
+        <p>This is when I started noticing the pattern everywhere.</p>
+
+        <p>MacBooks were getting thinner and more expensive and <em>worse</em>. The keyboards broke. The Touch Bar nobody wanted. Everything soldered so you couldn't upgrade. Fewer ports. More dongles. Higher prices.</p>
+
+        <p>Google was killing products left and right. Google Reader—dead. Google+—dead. Inbox—dead. They'd launch something, get people dependent on it, then kill it because some MBA decided it wasn't strategic enough.</p>
+
+        <p>Facebook was... well, Facebook was destroying democracy, but we didn't fully understand that yet. We just knew it felt different. Less about connecting with friends. More about arguing with strangers and seeing ads.</p>
+
+        <p>Amazon was becoming less of a store and more of a counterfeit marketplace. Same product would have twenty listings from companies with names like "JOYUS TECH" and "BESTEK ULTRA" with clearly fake reviews.</p>
+
+        <p>And none of them were doing anything <em>new</em>.</p>
+
+        <p>They were all just optimizing. Iterating. Squeezing more money out of the same products.</p>
+
+        <p>Where was the revolution? Where was the next iPhone-level disruption?</p>
+
+        <p>I remember having this conversation with my friend Marcus in 2016. We were both in tech. Both believers. Both increasingly disillusioned.</p>
+
+        <p>"When's the last time you saw something that made you go 'holy shit, the future'?" I asked him.</p>
+
+        <p>He thought about it. "The iPhone. 2007."</p>
+
+        <p>"That was nine years ago."</p>
+
+        <p>"I know."</p>
+
+        <p>"So where's the next one?"</p>
+
+        <p>He didn't have an answer.</p>
+
+        <p>Neither did I.</p>
+
+        <p>But I started looking for one.</p>
+
+        <div class="divider">* * *</div>
+
+        <p>The thing about working in tech is you hear things. You see internal memos. You know people at other companies. You piece together a picture that the public doesn't see.</p>
+
+        <p>And the picture I pieced together was this:</p>
+
+        <p>Around 2010, something fundamental changed in Silicon Valley.</p>
+
+        <p>The founders—the engineers, the dreamers, the people who actually built things—started retiring or getting pushed out. Steve Jobs died. The Google founders stepped back. The original PayPal mafia cashed out.</p>
+
+        <p>They were replaced by MBAs. Professional managers. People who'd never written a line of code, never designed a product, never invented anything.</p>
+
+        <p>Their job wasn't to create the future. Their job was to maximize shareholder value.</p>
+
+        <p>And you know what maximizes shareholder value?</p>
+
+        <p>Not innovation. Innovation is risky. Innovation might fail. Innovation requires R&D spending and long-term thinking.</p>
+
+        <p>What maximizes shareholder value is:</p>
+
+        <p><strong>Iteration.</strong> Take the iPhone. Make it slightly better. Charge the same price. Repeat annually. Guaranteed revenue stream.</p>
+
+        <p><strong>Planned obsolescence.</strong> Make the new phone faster and the old phone slower (through software updates). Force the upgrade cycle. More devices sold.</p>
+
+        <p><strong>Lock-in.</strong> Build an ecosystem. Make it painful to leave. Charge subscriptions for services. iCloud, Google Drive, Amazon Prime. Forever revenue.</p>
+
+        <p><strong>Extraction.</strong> Use your monopoly position to squeeze more money from users. 30% App Store tax. Amazon marketplace fees. Google search ads.</p>
+
+        <p><strong>Acquisition.</strong> Buy any potential competitor before they become a threat. Instagram, WhatsApp, Waze, Fitbit, hundreds of others. Kill innovation before it challenges you.</p>
+
+        <div class="pull-quote">
+            Innovation died because it became more profitable to not innovate.
+        </div>
+
+        <p>Think about it. Apple sells 200 million iPhones a year. If they made iPhones that lasted 10 years instead of 3, they'd sell 60 million a year. They'd lose 140 million sales. At $1,000 per phone, that's $140 billion in revenue. Gone.</p>
+
+        <p>Why would they choose that?</p>
+
+        <p>They wouldn't. They don't. They won't.</p>
+
+        <p>Same logic everywhere. Google doesn't want to make search better if it means showing fewer ads. Amazon doesn't want independent sellers to succeed if they can copy their products and sell them cheaper. Facebook doesn't want to show you posts from your friends if enraging political content keeps you scrolling longer.</p>
+
+        <p>The incentive structure is broken.</p>
+
+        <p>And once I saw it, I couldn't unsee it.</p>
+
+        <p>Every product announcement. Every keynote. Every "revolutionary" new feature. It was all bullshit. All iteration pretending to be innovation. All planned obsolescence disguised as progress.</p>
+
+        <p>The Emperor had no clothes.</p>
+
+        <p>The future wasn't coming.</p>
+
+        <p>It had been cancelled. Indefinitely. Because quarterly earnings mattered more than jetpacks.</p>
+
+        <div class="divider">* * *</div>
+
+        <p>I think the moment I really, truly understood this—not intellectually, but in my bones—was 2018.</p>
+
+        <p>I was watching the Apple keynote. They were announcing the iPhone XS. Same phone as the X from the year before. Slightly faster processor. Slightly better camera. Same design. Same price.</p>
+
+        <p>Tim Cook got on stage and said—I'm paraphrasing, but barely—"This is the best iPhone we've ever made."</p>
+
+        <p>Well, no shit. It's the newest one. Of course it's the best. That's how time works.</p>
+
+        <p>But then he said: "We're so excited about what this technology enables."</p>
+
+        <p>And I realized: he didn't say what it enables. He just said it enables... things. Unspecified things. Because there wasn't anything new it enabled. It was just a faster version of the same thing.</p>
+
+        <p>This was the moment I understood that tech keynotes had become something else entirely. They weren't about showing us the future anymore. They were about convincing us that iteration was innovation. That "better" was the same as "new." That we should be excited to buy the same thing we bought last year, but faster.</p>
+
+        <p>Steve Jobs used to show you something and your mind would explode. The iPod. The iPhone. The iPad. Things you didn't know you needed until you saw them.</p>
+
+        <p>Tim Cook shows you a faster processor and expects applause.</p>
+
+        <p>And we applaud. Because we've been trained to.</p>
+
+        <p>But inside, I felt something break.</p>
+
+        <p>Not anger. Not yet.</p>
+
+        <p>Grief.</p>
+
+        <p>Grief for the future we were promised. The one where technology made us more free, more creative, more human. The one where we got jetpacks and AI assistants and Mars colonies and clean energy and medical miracles.</p>
+
+        <p>We got an iPhone XS instead.</p>
+
+        <p>Slightly faster than the iPhone X.</p>
+
+        <p>Pre-order starts Friday.</p>
+
+        <div class="divider">* * *</div>
+
+        <p>That night, I went down a rabbit hole.</p>
+
+        <p>Started reading everything I could find about where the innovation went. Why tech companies stopped trying to change the world and started just trying to extract maximum value from the world as it is.</p>
+
+        <p>What I found was worse than I expected.</p>
+
+        <p>It wasn't just about profit maximization. It was systematic. It was deliberate. It was coordinated.</p>
+
+        <p>The patent hoarding. Tech giants sitting on thousands of patents they never use, just to prevent competitors from using them.</p>
+
+        <p>The startup acquisitions. Buying every company that might become a competitor, not to use their technology, but to kill it.</p>
+
+        <p>The monopolization. Using dominant market positions to crush competition. Amazon copying successful products from their own sellers. Google prioritizing their own services in search results. Apple banning apps that compete with built-in features.</p>
+
+        <p>The planned obsolescence. Not just accidental. Designed. Engineered. With internal emails proving they knew exactly what they were doing.</p>
+
+        <p>The more I learned, the angrier I got.</p>
+
+        <p>These companies didn't just fail to deliver the future.</p>
+
+        <p>They actively prevented it.</p>
+
+        <p>Because the future—the real future, the one we were promised—would have meant:</p>
+
+        <p>Devices that last forever. No more hardware sales.</p>
+
+        <p>AI that works for users. No more data collection for ads.</p>
+
+        <p>Open platforms. No more 30% app store taxes.</p>
+
+        <p>Actual competition. No more monopoly profits.</p>
+
+        <p>The future was bad for business.</p>
+
+        <p>So they killed it.</p>
+
+        <p>And sold us iteration instead.</p>
+
+        <div class="tbc">
+            TO BE CONTINUED IN CHAPTER 3...
+        </div>
+    </div>
+</body>
+</html>
