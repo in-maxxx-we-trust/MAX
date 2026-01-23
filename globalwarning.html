@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINTER IS COMING — The Truth About Climate Change</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blood: #8B0000;
+            --crimson: #DC143C;
+            --ice: #B4D7E8;
+            --frost: #E8F4F8;
+            --deep: #0a0a12;
+            --abyss: #050508;
+            --smoke: #1a1a24;
+            --ash: #888899;
+            --bone: #f5f5f0;
+            --gold: #D4AF37;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: var(--abyss);
+            color: var(--bone);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* GRAIN OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(5,5,8,0.95) 0%, rgba(5,5,8,0) 100%);
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            color: var(--crimson);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--ash);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--bone);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(139,0,0,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(180,215,232,0.08) 0%, transparent 40%),
+                linear-gradient(180deg, var(--abyss) 0%, var(--deep) 100%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(0deg, var(--deep) 0%, transparent 100%);
+        }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.5em;
+            color: var(--crimson);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-title .highlight {
+            display: block;
+            background: linear-gradient(135deg, var(--ice) 0%, var(--frost) 50%, var(--ice) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--ash);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--ash);
+            background: transparent;
+            color: var(--bone);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--bone);
+            color: var(--abyss);
+            border-color: var(--bone);
+        }
+
+        .btn-primary {
+            background: var(--crimson);
+            border-color: var(--crimson);
+        }
+
+        .btn-primary:hover {
+            background: var(--blood);
+            border-color: var(--blood);
+            color: var(--bone);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .container-narrow {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* TWEET SECTION */
+        .tweet-section {
+            background: var(--deep);
+            padding: 6rem 2rem;
+        }
+
+        .tweet-box {
+            background: var(--smoke);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tweet-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--crimson), var(--blood));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .tweet-name {
+            font-weight: 700;
+            color: var(--bone);
+        }
+
+        .tweet-handle {
+            font-size: 0.9rem;
+            color: var(--ash);
+        }
+
+        .tweet-content {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .tweet-date {
+            font-size: 0.85rem;
+            color: var(--ash);
+        }
+
+        .tweet-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--crimson);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .response-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .response-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .response-intro p {
+            font-size: 1.2rem;
+            color: var(--ash);
+        }
+
+        /* BIG NUMBER SECTIONS */
+        .big-stat {
+            text-align: center;
+            padding: 10rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big-stat::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139,0,0,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .big-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(5rem, 20vw, 18rem);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--crimson);
+            text-shadow: 0 0 100px rgba(220,20,60,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .big-number.ice {
+            color: var(--ice);
+            text-shadow: 0 0 100px rgba(180,215,232,0.3);
+        }
+
+        .big-unit {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 400;
+            color: var(--ash);
+            margin-left: 0.5rem;
+        }
+
+        .big-label {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--bone);
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .big-context {
+            font-size: 1.1rem;
+            color: var(--ash);
+            margin-top: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* EXPLANATION SECTION */
+        .explain-section {
+            background: var(--smoke);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            color: var(--crimson);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--ash);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* SIMPLE EXPLANATION */
+        .simple-explain {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .explain-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .explain-step {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 5rem;
+            font-weight: 700;
+            color: rgba(220,20,60,0.15);
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+        }
+
+        .explain-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--ice);
+        }
+
+        .explain-card p {
+            color: var(--ash);
+            font-size: 1.1rem;
+        }
+
+        /* COMPARISON */
+        .comparison-section {
+            padding: 10rem 2rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-location {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-temp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .comparison-temp.cold {
+            color: var(--ice);
+        }
+
+        .comparison-temp.hot {
+            color: var(--crimson);
+        }
+
+        .comparison-date {
+            font-size: 1rem;
+            color: var(--ash);
+            margin-top: 1rem;
+        }
+
+        .comparison-vs {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--ash);
+        }
+
+        /* DOMINO EFFECT */
+        .domino-section {
+            background: linear-gradient(180deg, var(--deep) 0%, var(--smoke) 50%, var(--deep) 100%);
+            padding: 10rem 2rem;
+        }
+
+        .domino-chain {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+
+        .domino-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            align-items: start;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .domino-item::before {
+            content: '';
+            position: absolute;
+            left: 39px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--crimson) 0%, rgba(220,20,60,0.2) 100%);
+        }
+
+        .domino-item:last-child::before {
+            display: none;
+        }
+
+        .domino-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--crimson);
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--crimson);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--deep);
+            position: relative;
+            z-index: 1;
+        }
+
+        .domino-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            color: var(--bone);
+        }
+
+        .domino-content p {
+            color: var(--ash);
+            font-size: 1.05rem;
+        }
+
+        .domino-arrow {
+            font-size: 2rem;
+            color: var(--crimson);
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* TIMELINE */
+        .timeline-section {
+            background: var(--smoke);
+            padding: 10rem 2rem;
+        }
+
+        .timeline {
+            max-width: 1000px;
+            margin: 5rem auto 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--ice), var(--crimson));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--crimson);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(220,20,60,0.5);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--ice);
+            text-align: right;
+            padding-right: 3rem;
+        }
+
+        .timeline-content {
+            padding-left: 3rem;
+        }
+
+        .timeline-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content p {
+            color: var(--ash);
+        }
+
+        /* STAT GRID */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(220,20,60,0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-card.danger {
+            border-color: rgba(220,20,60,0.2);
+            background: rgba(220,20,60,0.03);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--crimson);
+            line-height: 1;
+        }
+
+        .stat-card.ice .stat-value {
+            color: var(--ice);
+        }
+
+        .stat-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--bone);
+            margin-top: 1rem;
+        }
+
+        .stat-context {
+            font-size: 0.95rem;
+            color: var(--ash);
+            margin-top: 0.75rem;
+        }
+
+        /* QUOTE */
+        .quote-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--deep) 0%, rgba(139,0,0,0.1) 50%, var(--deep) 100%);
+        }
+
+        .quote-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--crimson);
+            line-height: 0.5;
+            opacity: 0.5;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+            margin: 2rem 0;
+        }
+
+        .quote-author {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--ice);
+            text-transform: uppercase;
+        }
+
+        .quote-role {
+            font-size: 0.95rem;
+            color: var(--ash);
+            margin-top: 0.5rem;
+        }
+
+        /* AI SECTION */
+        .ai-section {
+            background: var(--smoke);
+            padding: 10rem 2rem;
+        }
+
+        .ai-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .ai-card {
+            background: var(--deep);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .ai-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-action {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .ai-energy {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--crimson);
+        }
+
+        .ai-unit {
+            font-size: 1rem;
+            color: var(--ash);
+        }
+
+        .ai-equiv {
+            font-size: 0.95rem;
+            color: var(--ash);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* FUTURE SECTION */
+        .future-section {
+            padding: 10rem 2rem;
+            background: 
+                radial-gradient(ellipse at 30% 70%, rgba(139,0,0,0.15) 0%, transparent 50%),
+                var(--deep);
+        }
+
+        .future-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+
+        .future-card {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--crimson), var(--ice));
+        }
+
+        .future-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--crimson);
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .future-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--ice);
+        }
+
+        .future-card ul {
+            list-style: none;
+        }
+
+        .future-card li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--ash);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .future-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--crimson);
+        }
+
+        /* RESPONSE SECTION */
+        .response-section {
+            background: var(--blood);
+            padding: 10rem 2rem;
+            text-align: center;
+        }
+
+        .response-to {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        .response-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+
+        .response-message {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--abyss);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--ash);
+            margin-bottom: 3rem;
+        }
+
+        .footer-sources {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-sources h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-sources p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.3);
+            line-height: 1.8;
+        }
+
+        .footer-copy {
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .comparison-vs {
+                transform: rotate(90deg);
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding-left: 50px;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .timeline-year {
+                text-align: left;
+                padding-right: 0;
+            }
+
+            .timeline-content {
+                padding-left: 0;
+            }
+
+            .domino-item {
+                grid-template-columns: 60px 1fr;
+                gap: 1.5rem;
+            }
+
+            .domino-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .domino-item::before {
+                left: 29px;
+            }
+        }
+
+        /* SCROLL ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SPECIAL EFFECTS */
+        .glitch {
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); }
+            94% { transform: translate(2px, -2px); }
+            96% { transform: translate(-2px, -2px); }
+            98% { transform: translate(2px, 2px); }
+        }
+
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* TEMPERATURE TABLE */
+        .temp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3rem 0;
+        }
+
+        .temp-table th,
+        .temp-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .temp-table th {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--ash);
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .temp-table tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .temp-now {
+            color: var(--bone);
+        }
+
+        .temp-after {
+            color: var(--ice);
+            font-weight: 600;
+        }
+
+        .temp-extreme {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--crimson);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-logo">Climate Truth</div>
+    <div class="nav-links">
+        <a href="#why">Why Cold = Warming</a>
+        <a href="#amoc">The Collapse</a>
+        <a href="#future">What's Coming</a>
+        <a href="#ai">AI's Role</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <p class="hero-eyebrow">A Message to America</p>
+    <h1 class="hero-title">
+        <span class="highlight">Winter</span>
+        Is Coming
+    </h1>
+    <p class="hero-subtitle">
+        And it's not what you think. The coldest winters in American history 
+        are being caused by a planet that's getting too hot.
+    </p>
+    <div class="hero-cta">
+        <a href="#why" class="btn btn-primary">Understand Why</a>
+        <a href="#future" class="btn">See What's Coming</a>
+    </div>
+</section>
+
+<!-- LIVE COUNTERS -->
+<section style="background: var(--deep); padding: 4rem 2rem;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; text-align: center;">
+            <div class="stat-card danger">
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--crimson); margin-bottom: 0.5rem;">ATMOSPHERIC CO₂</p>
+                <div class="stat-value" style="font-size: 4rem;">426<span style="font-size: 1.5rem; color: var(--ash);"> ppm</span></div>
+                <p style="color: var(--ash); font-size: 0.9rem; margin-top: 0.5rem;">Pre-industrial: 280 ppm · +52% increase</p>
+                <p style="color: var(--crimson); font-size: 0.8rem; margin-top: 0.5rem;">Highest in 4 million years</p>
+            </div>
+            <div class="stat-card" style="border-color: rgba(180,215,232,0.3);">
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--ice); margin-bottom: 0.5rem;">GLOBAL TEMPERATURE</p>
+                <div class="stat-value ice" style="font-size: 4rem;">+1.35<span style="font-size: 1.5rem; color: var(--ash);">°C</span></div>
+                <p style="color: var(--ash); font-size: 0.9rem; margin-top: 0.5rem;">Above pre-industrial baseline</p>
+                <p style="color: var(--ice); font-size: 0.8rem; margin-top: 0.5rem;">1.5°C threshold: ~2030</p>
+            </div>
+            <div class="stat-card" style="border-color: rgba(212,175,55,0.3);">
+                <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.5rem;">CONSECUTIVE WARM YEARS</p>
+                <div class="stat-value" style="font-size: 4rem; color: var(--gold);">48</div>
+                <p style="color: var(--ash); font-size: 0.9rem; margin-top: 0.5rem;">Every year since 1977 above 20th century avg</p>
+                <p style="color: var(--gold); font-size: 0.8rem; margin-top: 0.5rem;">Not one exception. Forty-eight.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- USA MAP VISUALIZATION -->
+<section style="background: var(--smoke); padding: 6rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">Right Now · January 2026</p>
+            <h2 class="section-title">40+ States Under Siege</h2>
+        </div>
+        
+        <div style="position: relative; max-width: 1000px; margin: 3rem auto; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1);">
+            <!-- Proper US Map SVG -->
+            <svg viewBox="0 0 960 600" style="width: 100%; height: auto;">
+                <defs>
+                    <linearGradient id="severeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#DC143C;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#8B0000;stop-opacity:0.6" />
+                    </linearGradient>
+                    <linearGradient id="snowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#B4D7E8;stop-opacity:0.7" />
+                        <stop offset="100%" style="stop-color:#87CEEB;stop-opacity:0.5" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- State paths - simplified but recognizable shapes -->
+                <!-- Washington -->
+                <path d="M118,42 L205,42 L205,82 L175,100 L118,100 Z" fill="rgba(180,215,232,0.3)" stroke="rgba(180,215,232,0.5)" stroke-width="1"/>
+                
+                <!-- Oregon -->
+                <path d="M118,100 L175,100 L185,155 L118,170 Z" fill="rgba(180,215,232,0.3)" stroke="rgba(180,215,232,0.5)" stroke-width="1"/>
+                
+                <!-- California -->
+                <path d="M118,170 L185,155 L195,260 L160,320 L118,320 Z" fill="rgba(180,215,232,0.25)" stroke="rgba(180,215,232,0.4)" stroke-width="1"/>
+                
+                <!-- Nevada -->
+                <path d="M185,155 L230,150 L240,280 L195,260 Z" fill="rgba(180,215,232,0.2)" stroke="rgba(180,215,232,0.3)" stroke-width="1"/>
+                
+                <!-- Arizona - AFFECTED -->
+                <path d="M195,260 L240,280 L250,360 L180,360 L160,320 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2"/>
+                <text x="205" y="320" fill="var(--crimson)" font-size="11" font-weight="bold">AZ</text>
+                
+                <!-- Utah -->
+                <path d="M230,150 L290,145 L295,240 L240,280 Z" fill="rgba(220,20,60,0.3)" stroke="rgba(220,20,60,0.5)" stroke-width="1"/>
+                
+                <!-- Colorado -->
+                <path d="M290,185 L380,185 L380,265 L295,265 Z" fill="rgba(220,20,60,0.4)" stroke="var(--crimson)" stroke-width="1.5"/>
+                <text x="330" y="230" fill="var(--ash)" font-size="10">CO</text>
+                
+                <!-- New Mexico - AFFECTED -->
+                <path d="M250,360 L295,265 L380,265 L380,365 L250,365 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2"/>
+                <text x="310" y="320" fill="var(--crimson)" font-size="11" font-weight="bold">NM</text>
+                
+                <!-- Montana -->
+                <path d="M205,42 L340,35 L350,115 L205,82 Z" fill="rgba(180,215,232,0.3)" stroke="rgba(180,215,232,0.4)" stroke-width="1"/>
+                
+                <!-- Idaho -->
+                <path d="M205,82 L230,150 L290,145 L265,82 L205,82 Z" fill="rgba(180,215,232,0.3)" stroke="rgba(180,215,232,0.4)" stroke-width="1"/>
+                
+                <!-- Wyoming -->
+                <path d="M265,82 L290,145 L380,140 L380,82 L350,82 Z" fill="rgba(180,215,232,0.3)" stroke="rgba(180,215,232,0.4)" stroke-width="1"/>
+                
+                <!-- North Dakota -->
+                <path d="M340,35 L450,32 L450,80 L350,85 Z" fill="rgba(220,20,60,0.35)" stroke="rgba(220,20,60,0.5)" stroke-width="1"/>
+                
+                <!-- South Dakota -->
+                <path d="M350,85 L450,80 L450,130 L380,140 Z" fill="rgba(220,20,60,0.35)" stroke="rgba(220,20,60,0.5)" stroke-width="1"/>
+                
+                <!-- Nebraska -->
+                <path d="M380,140 L450,130 L480,135 L500,185 L380,185 Z" fill="rgba(220,20,60,0.4)" stroke="rgba(220,20,60,0.6)" stroke-width="1.5"/>
+                
+                <!-- Kansas - AFFECTED -->
+                <path d="M380,185 L500,185 L500,250 L380,265 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2"/>
+                <text x="435" y="220" fill="white" font-size="11" font-weight="bold">KS</text>
+                
+                <!-- Oklahoma - SEVERE -->
+                <path d="M380,265 L500,250 L500,320 L420,330 L380,365 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="440" y="295" fill="white" font-size="12" font-weight="bold">OK</text>
+                
+                <!-- TEXAS - EMERGENCY -->
+                <path d="M380,365 L420,330 L500,320 L510,380 L530,450 L480,500 L400,510 L340,460 L320,400 L380,365 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="3" filter="url(#glow)"/>
+                <text x="420" y="420" fill="white" font-size="16" font-weight="bold">TEXAS</text>
+                <text x="420" y="440" fill="#FF8888" font-size="9">130+ counties emergency</text>
+                
+                <!-- Minnesota -->
+                <path d="M450,32 L530,30 L545,120 L450,130 Z" fill="rgba(220,20,60,0.4)" stroke="rgba(220,20,60,0.6)" stroke-width="1.5"/>
+                
+                <!-- Iowa -->
+                <path d="M480,135 L545,120 L560,175 L500,185 Z" fill="rgba(220,20,60,0.45)" stroke="var(--crimson)" stroke-width="1.5"/>
+                
+                <!-- Missouri - AFFECTED -->
+                <path d="M500,185 L560,175 L580,250 L570,285 L500,285 L500,250 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2"/>
+                <text x="535" y="235" fill="white" font-size="10" font-weight="bold">MO</text>
+                
+                <!-- Arkansas - EMERGENCY -->
+                <path d="M500,285 L570,285 L575,360 L500,365 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="530" y="325" fill="white" font-size="11" font-weight="bold">AR</text>
+                
+                <!-- Louisiana - SEVERE ICE -->
+                <path d="M500,365 L575,360 L590,420 L570,450 L510,440 L500,400 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="540" y="405" fill="white" font-size="10" font-weight="bold">LA</text>
+                
+                <!-- Wisconsin -->
+                <path d="M545,80 L600,70 L620,140 L560,150 Z" fill="rgba(220,20,60,0.4)" stroke="rgba(220,20,60,0.6)" stroke-width="1.5"/>
+                
+                <!-- Illinois -->
+                <path d="M560,150 L600,145 L610,250 L580,250 L560,175 Z" fill="rgba(220,20,60,0.45)" stroke="var(--crimson)" stroke-width="1.5"/>
+                <text x="580" y="200" fill="var(--ash)" font-size="9">IL</text>
+                
+                <!-- Michigan -->
+                <path d="M600,70 L670,65 L680,140 L620,140 Z" fill="rgba(220,20,60,0.35)" stroke="rgba(220,20,60,0.5)" stroke-width="1"/>
+                
+                <!-- Indiana -->
+                <path d="M600,145 L640,140 L650,230 L610,250 Z" fill="rgba(220,20,60,0.45)" stroke="var(--crimson)" stroke-width="1.5"/>
+                
+                <!-- Kentucky - AFFECTED -->
+                <path d="M580,250 L650,230 L700,260 L680,290 L570,285 Z" fill="url(#severeGrad)" stroke="var(--crimson)" stroke-width="2"/>
+                <text x="620" y="270" fill="white" font-size="10" font-weight="bold">KY</text>
+                
+                <!-- Tennessee - EMERGENCY -->
+                <path d="M570,285 L680,290 L740,310 L740,340 L575,360 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="650" y="325" fill="white" font-size="11" font-weight="bold">TN</text>
+                
+                <!-- Mississippi - SEVERE ICE -->
+                <path d="M575,360 L620,355 L630,440 L590,420 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="600" y="400" fill="white" font-size="9" font-weight="bold">MS</text>
+                
+                <!-- Alabama - EMERGENCY -->
+                <path d="M620,355 L680,345 L695,440 L630,440 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="655" y="395" fill="white" font-size="10" font-weight="bold">AL</text>
+                
+                <!-- Ohio -->
+                <path d="M640,140 L700,130 L720,200 L700,230 L650,230 Z" fill="rgba(220,20,60,0.4)" stroke="rgba(220,20,60,0.6)" stroke-width="1.5"/>
+                <text x="675" y="180" fill="var(--ash)" font-size="9">OH</text>
+                
+                <!-- West Virginia -->
+                <path d="M700,200 L730,195 L745,250 L700,260 Z" fill="rgba(220,20,60,0.5)" stroke="var(--crimson)" stroke-width="1.5"/>
+                
+                <!-- Virginia - EMERGENCY -->
+                <path d="M700,260 L745,250 L800,240 L810,290 L740,310 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="760" y="275" fill="white" font-size="11" font-weight="bold">VA</text>
+                
+                <!-- North Carolina - EMERGENCY -->
+                <path d="M680,290 L740,310 L810,290 L850,320 L750,360 L680,345 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="3" filter="url(#glow)"/>
+                <text x="760" y="330" fill="white" font-size="11" font-weight="bold">NC</text>
+                <text x="760" y="345" fill="#FF8888" font-size="8">Catastrophic ice</text>
+                
+                <!-- South Carolina - EMERGENCY -->
+                <path d="M680,345 L750,360 L770,420 L695,440 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="720" y="390" fill="white" font-size="10" font-weight="bold">SC</text>
+                
+                <!-- Georgia - EMERGENCY -->
+                <path d="M695,345 L695,440 L770,420 L780,470 L700,480 L680,420 Z" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2.5" filter="url(#glow)"/>
+                <text x="725" y="430" fill="white" font-size="11" font-weight="bold">GA</text>
+                
+                <!-- Florida -->
+                <path d="M700,480 L780,470 L810,520 L770,580 L720,550 L700,500 Z" fill="rgba(220,20,60,0.25)" stroke="rgba(220,20,60,0.4)" stroke-width="1"/>
+                <text x="750" y="520" fill="var(--ash)" font-size="10">FL</text>
+                
+                <!-- Pennsylvania -->
+                <path d="M700,130 L780,120 L800,175 L720,200 Z" fill="rgba(220,20,60,0.45)" stroke="var(--crimson)" stroke-width="1.5"/>
+                <text x="750" y="160" fill="var(--ash)" font-size="9">PA</text>
+                
+                <!-- New York -->
+                <path d="M750,70 L820,55 L850,100 L830,140 L780,120 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="2"/>
+                <text x="800" y="100" fill="white" font-size="10" font-weight="bold">NY</text>
+                
+                <!-- New Jersey - HEAVY SNOW -->
+                <path d="M800,175 L820,165 L830,210 L810,220 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="2"/>
+                <text x="815" y="195" fill="white" font-size="8" font-weight="bold">NJ</text>
+                
+                <!-- Maryland -->
+                <path d="M745,220 L800,210 L810,245 L745,250 Z" fill="rgba(220,20,60,0.5)" stroke="var(--crimson)" stroke-width="1.5"/>
+                
+                <!-- Massachusetts -->
+                <path d="M850,100 L890,95 L895,115 L860,120 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="2"/>
+                
+                <!-- Connecticut / Rhode Island -->
+                <path d="M860,120 L890,115 L893,135 L865,140 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="1.5"/>
+                
+                <!-- Maine -->
+                <path d="M870,30 L910,15 L920,85 L890,95 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="2"/>
+                <text x="895" y="60" fill="white" font-size="10" font-weight="bold">ME</text>
+                
+                <!-- Vermont / New Hampshire -->
+                <path d="M850,55 L870,30 L890,95 L860,100 Z" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="1.5"/>
+                
+                <!-- Storm Path Arrow -->
+                <path d="M280,340 Q400,290 550,310 Q700,290 820,150" fill="none" stroke="var(--crimson)" stroke-width="4" stroke-dasharray="15,8" opacity="0.8"/>
+                <polygon points="820,150 835,175 810,165" fill="var(--crimson)"/>
+                <text x="580" y="270" fill="var(--crimson)" font-size="13" font-weight="bold" transform="rotate(-5, 580, 270)">STORM PATH →</text>
+                
+                <!-- Polar Vortex Indicator -->
+                <circle cx="500" cy="0" r="50" fill="none" stroke="var(--ice)" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+                <text x="500" y="-5" text-anchor="middle" fill="var(--ice)" font-size="11" font-weight="bold">POLAR VORTEX</text>
+                <path d="M500,50 L480,100 M500,50 L520,100 M500,50 L500,110" stroke="var(--ice)" stroke-width="2" opacity="0.7"/>
+                <text x="500" y="130" text-anchor="middle" fill="var(--ice)" font-size="10">Arctic air spilling south</text>
+                
+                <!-- Legend -->
+                <rect x="40" y="480" width="18" height="18" fill="url(#severeGrad)" stroke="#FF4444" stroke-width="2"/>
+                <text x="65" y="494" fill="var(--ash)" font-size="11">Emergency Declared / Severe Ice</text>
+                
+                <rect x="40" y="505" width="18" height="18" fill="url(#snowGrad)" stroke="var(--ice)" stroke-width="2"/>
+                <text x="65" y="519" fill="var(--ash)" font-size="11">Heavy Snow (12-16")</text>
+                
+                <rect x="40" y="530" width="18" height="18" fill="rgba(220,20,60,0.35)" stroke="rgba(220,20,60,0.6)" stroke-width="1"/>
+                <text x="65" y="544" fill="var(--ash)" font-size="11">Winter Weather Advisory</text>
+            </svg>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; text-align: center;">
+                <div style="background: rgba(220,20,60,0.2); padding: 1.2rem; border-radius: 10px; border: 1px solid rgba(220,20,60,0.3);">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.2rem; color: var(--crimson); font-weight: bold;">235M</div>
+                    <div style="color: var(--ash); font-size: 0.9rem;">People in path</div>
+                </div>
+                <div style="background: rgba(220,20,60,0.2); padding: 1.2rem; border-radius: 10px; border: 1px solid rgba(220,20,60,0.3);">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.2rem; color: var(--crimson); font-weight: bold;">2,000</div>
+                    <div style="color: var(--ash); font-size: 0.9rem;">Miles of impact</div>
+                </div>
+                <div style="background: rgba(255,68,68,0.2); padding: 1.2rem; border-radius: 10px; border: 1px solid rgba(255,68,68,0.4);">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.2rem; color: #FF4444; font-weight: bold;">9+</div>
+                    <div style="color: var(--ash); font-size: 0.9rem;">States of Emergency</div>
+                </div>
+                <div style="background: rgba(180,215,232,0.2); padding: 1.2rem; border-radius: 10px; border: 1px solid rgba(180,215,232,0.3);">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.2rem; color: var(--ice); font-weight: bold;">-30°F</div>
+                    <div style="color: var(--ash); font-size: 0.9rem;">Wind chill possible</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE TWEET -->
+<section class="tweet-section">
+    <div class="container-narrow">
+        <p class="tweet-label">This question deserves an answer</p>
+        
+        <div class="tweet-box">
+            <div class="tweet-header">
+                <div class="tweet-avatar">DT</div>
+                <div>
+                    <div class="tweet-name">Donald J. Trump</div>
+                    <div class="tweet-handle">@realDonaldTrump</div>
+                </div>
+            </div>
+            <p class="tweet-content">
+                "Record Cold Wave expected to hit 40 States. Rarely seen anything like it before. Could the Environmental Insurrectionists please explain — WHATEVER HAPPENED TO GLOBAL WARMING???"
+            </p>
+            <p class="tweet-date">January 2026 · During Current Polar Vortex</p>
+        </div>
+
+        <div class="response-intro">
+            <h2>Mr. President, here's your answer.</h2>
+            <p>
+                The extreme cold you're experiencing right now? <br>
+                <strong>It's proof that global warming is real.</strong> <br>
+                Let us explain.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- BIG STAT: DEATHS -->
+<section class="big-stat">
+    <span class="big-number glitch">246</span>
+    <p class="big-label">Americans died in Texas, February 2021</p>
+    <p class="big-context">
+        When the polar vortex brought Arctic temperatures to a state that wasn't prepared. 
+        This wasn't a freak accident. This is the new normal.
+    </p>
+</section>
+
+<!-- BIG STAT: DAMAGE -->
+<section class="big-stat" style="background: var(--smoke);">
+    <span class="big-number">$195,000,000,000<span class="big-unit">.00</span></span>
+    <p class="big-label">Total economic damage from one week of extreme cold</p>
+    <p class="big-context">
+        Texas Winter Storm Uri, February 2021. One hundred ninety-five BILLION dollars. 
+        The costliest disaster in Texas history. Some estimates reach $295 billion.
+    </p>
+</section>
+
+<!-- WHY COLD = WARMING -->
+<section id="why" class="explain-section">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Paradox Explained</p>
+            <h2 class="section-title">Why Extreme Cold<br>Proves Global Warming</h2>
+            <p class="section-subtitle">
+                It sounds backwards. But the science is simple.
+                Here's what's happening in plain English.
+            </p>
+        </div>
+
+        <div class="simple-explain">
+            <div class="explain-card fade-up">
+                <span class="explain-step">01</span>
+                <h3>The Arctic is warming 4x faster</h3>
+                <p>
+                    While the rest of the planet warms slowly, the Arctic is heating up 
+                    FOUR TIMES faster than anywhere else. The ice is melting. 
+                    The temperatures are rising.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">02</span>
+                <h3>The "wall" is breaking down</h3>
+                <p>
+                    Normally, there's a strong temperature difference between the Arctic 
+                    and the rest of the world. This difference creates a powerful wind barrier 
+                    called the Polar Vortex that keeps the cold air trapped up north.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">03</span>
+                <h3>When the wall weakens, cold escapes</h3>
+                <p>
+                    As the Arctic warms up, that temperature difference shrinks. 
+                    The wall weakens. And the bitter cold air that used to stay 
+                    locked at the North Pole? It spills out. All the way to Texas.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">04</span>
+                <h3>This is happening more often</h3>
+                <p>
+                    Polar vortex disruptions have become more frequent and intense in recent decades, 
+                    linked to Arctic warming. The science shows increased likelihood of these events — 
+                    what used to be rare is becoming <strong>the new normal</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison-section">
+    <div class="section-header">
+        <p class="section-eyebrow">The Same Week</p>
+        <h2 class="section-title">The World Turned Upside Down</h2>
+    </div>
+
+    <div class="comparison-grid fade-up">
+        <div class="comparison-item">
+            <p class="comparison-location">Dallas, Texas</p>
+            <p class="comparison-temp cold">-19°C</p>
+            <p class="comparison-date">February 2021</p>
+        </div>
+        
+        <span class="comparison-vs">while</span>
+        
+        <div class="comparison-item">
+            <p class="comparison-location">Arctic Circle</p>
+            <p class="comparison-temp hot">+30°C</p>
+            <p class="comparison-date">Above normal, same time</p>
+        </div>
+    </div>
+
+    <p style="text-align: center; max-width: 700px; margin: 3rem auto 0; color: var(--ash); font-size: 1.2rem;">
+        Dallas was colder than Alaska. While the Arctic was experiencing a heat wave.
+        <strong style="color: var(--bone);">This is what "global warming" looks like.</strong>
+    </p>
+</section>
+
+<!-- QUOTE: SCIENTIST -->
+<section class="quote-section">
+    <div class="quote-box fade-up">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">
+            It is counterintuitive that a rapidly warming Arctic can lead to an increase 
+            in extreme cold in a place as far south as Texas, but the lesson from our 
+            analysis is to expect the unexpected with climate change.
+        </p>
+        <p class="quote-author">Judah Cohen</p>
+        <p class="quote-role">Winter Storm Expert, Atmospheric Environmental Research</p>
+    </div>
+</section>
+
+<!-- DENIER COUNTER SECTION -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">For the Skeptics</p>
+            <h2 class="section-title">Why "It's Cold, So No Warming"<br>Is Dead Wrong</h2>
+            <p class="section-subtitle">
+                One cold snap doesn't disprove decades of data. Here's why.
+            </p>
+        </div>
+
+        <div class="simple-explain">
+            <div class="explain-card fade-up">
+                <span class="explain-step">01</span>
+                <h3>Weather ≠ Climate</h3>
+                <p>
+                    Weather is what happens today. Climate is the pattern over decades. 
+                    One cold week doesn't change the fact that <strong>48 consecutive years</strong> 
+                    have been warmer than the 20th century average. Not one. Forty-eight.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">02</span>
+                <h3>Global Average ≠ Local Temperature</h3>
+                <p>
+                    While Texas froze in 2021, the Arctic was <strong>+30°C above normal</strong>. 
+                    The planet's average temperature was still breaking records. 
+                    Cold in one place can mean heat somewhere else.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">03</span>
+                <h3>The Ratio Tells the Story</h3>
+                <p>
+                    Right now: record highs outnumber record lows <strong>2 to 1</strong>. 
+                    By 2100: projected to be <strong>50 to 1</strong>. 
+                    Cold records still happen — they're just becoming increasingly rare.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">04</span>
+                <h3>This IS Global Warming</h3>
+                <p>
+                    The extreme cold hitting 40 states <strong>is caused by</strong> global warming. 
+                    The Arctic heating up destabilizes the polar vortex. 
+                    The President's question proves the problem, not disproves it.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEMPERATURE GRAPH SECTION -->
+<section style="background: var(--deep); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">150 Years of Data</p>
+            <h2 class="section-title">The Hockey Stick Doesn't Lie</h2>
+            <p class="section-subtitle">
+                Global temperature anomaly relative to 1850-1900 baseline. 
+                Every bar is one year. The pattern is undeniable.
+            </p>
+        </div>
+        
+        <!-- Temperature Bar Chart -->
+        <div style="max-width: 1000px; margin: 3rem auto; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 10px;">
+            <div style="display: flex; align-items: flex-end; justify-content: center; height: 300px; gap: 2px; padding-bottom: 40px; position: relative;">
+                <!-- Baseline -->
+                <div style="position: absolute; left: 0; right: 0; bottom: 140px; height: 1px; background: rgba(255,255,255,0.2);"></div>
+                <div style="position: absolute; left: -60px; bottom: 135px; color: #888; font-size: 0.7rem; font-family: 'JetBrains Mono';">0°C</div>
+                
+                <!-- 0.5°C line -->
+                <div style="position: absolute; left: 0; right: 0; bottom: 190px; height: 1px; background: rgba(255,149,0,0.3); border-style: dashed;"></div>
+                <div style="position: absolute; left: -60px; bottom: 185px; color: #FF9500; font-size: 0.7rem; font-family: 'JetBrains Mono';">+0.5°C</div>
+                
+                <!-- 1.0°C line -->
+                <div style="position: absolute; left: 0; right: 0; bottom: 240px; height: 1px; background: rgba(220,20,60,0.3); border-style: dashed;"></div>
+                <div style="position: absolute; left: -60px; bottom: 235px; color: #DC143C; font-size: 0.7rem; font-family: 'JetBrains Mono';">+1.0°C</div>
+                
+                <!-- 1.5°C line - DANGER -->
+                <div style="position: absolute; left: 0; right: 0; bottom: 290px; height: 2px; background: #FF0000;"></div>
+                <div style="position: absolute; left: -60px; bottom: 285px; color: #FF0000; font-size: 0.7rem; font-family: 'JetBrains Mono'; font-weight: bold;">+1.5°C</div>
+                
+                <!-- Year bars - simplified representation -->
+                <!-- 1880-1920: Cool period -->
+                <div style="width: 4px; height: 5px; background: #4A90D9; margin-bottom: 135px;" title="1880: -0.1°C"></div>
+                <div style="width: 4px; height: 8px; background: #4A90D9; margin-bottom: 132px;" title="1885"></div>
+                <div style="width: 4px; height: 3px; background: #4A90D9; margin-bottom: 137px;" title="1890"></div>
+                <div style="width: 4px; height: 10px; background: #4A90D9; margin-bottom: 130px;" title="1895"></div>
+                <div style="width: 4px; height: 6px; background: #4A90D9; margin-bottom: 134px;" title="1900"></div>
+                <div style="width: 4px; height: 4px; background: #4A90D9; margin-bottom: 136px;" title="1905"></div>
+                <div style="width: 4px; height: 2px; background: #4A90D9; margin-bottom: 138px;" title="1910"></div>
+                <div style="width: 4px; height: 7px; background: #4A90D9; margin-bottom: 133px;" title="1915"></div>
+                <div style="width: 4px; height: 5px; background: #4A90D9; margin-bottom: 135px;" title="1920"></div>
+                
+                <!-- 1925-1945: Slight warming -->
+                <div style="width: 4px; height: 10px; background: #6BA3D9; margin-bottom: 140px;" title="1925"></div>
+                <div style="width: 4px; height: 15px; background: #6BA3D9; margin-bottom: 140px;" title="1930"></div>
+                <div style="width: 4px; height: 20px; background: #8BB8E0; margin-bottom: 140px;" title="1935"></div>
+                <div style="width: 4px; height: 25px; background: #FFA500; margin-bottom: 140px;" title="1940"></div>
+                <div style="width: 4px; height: 18px; background: #8BB8E0; margin-bottom: 140px;" title="1945"></div>
+                
+                <!-- 1950-1975: Plateau -->
+                <div style="width: 4px; height: 12px; background: #6BA3D9; margin-bottom: 140px;" title="1950"></div>
+                <div style="width: 4px; height: 8px; background: #6BA3D9; margin-bottom: 140px;" title="1955"></div>
+                <div style="width: 4px; height: 15px; background: #8BB8E0; margin-bottom: 140px;" title="1960"></div>
+                <div style="width: 4px; height: 10px; background: #6BA3D9; margin-bottom: 140px;" title="1965"></div>
+                <div style="width: 4px; height: 12px; background: #6BA3D9; margin-bottom: 140px;" title="1970"></div>
+                <div style="width: 4px; height: 8px; background: #4A90D9; margin-bottom: 140px;" title="1975"></div>
+                
+                <!-- 1980-2000: Rapid rise begins -->
+                <div style="width: 4px; height: 30px; background: #FFA500; margin-bottom: 140px;" title="1980: +0.3°C"></div>
+                <div style="width: 4px; height: 25px; background: #FFA500; margin-bottom: 140px;" title="1982"></div>
+                <div style="width: 4px; height: 35px; background: #FFA500; margin-bottom: 140px;" title="1985"></div>
+                <div style="width: 4px; height: 45px; background: #FF8C00; margin-bottom: 140px;" title="1988"></div>
+                <div style="width: 4px; height: 50px; background: #FF8C00; margin-bottom: 140px;" title="1990"></div>
+                <div style="width: 4px; height: 40px; background: #FF8C00; margin-bottom: 140px;" title="1992"></div>
+                <div style="width: 4px; height: 55px; background: #FF6B00; margin-bottom: 140px;" title="1995"></div>
+                <div style="width: 4px; height: 70px; background: #FF4500; margin-bottom: 140px;" title="1998: El Niño"></div>
+                <div style="width: 4px; height: 60px; background: #FF6B00; margin-bottom: 140px;" title="2000"></div>
+                
+                <!-- 2002-2015: Continued rise -->
+                <div style="width: 4px; height: 75px; background: #FF4500; margin-bottom: 140px;" title="2002"></div>
+                <div style="width: 4px; height: 80px; background: #FF3000; margin-bottom: 140px;" title="2005"></div>
+                <div style="width: 4px; height: 78px; background: #FF3000; margin-bottom: 140px;" title="2007"></div>
+                <div style="width: 4px; height: 85px; background: #FF2000; margin-bottom: 140px;" title="2010"></div>
+                <div style="width: 4px; height: 82px; background: #FF2000; margin-bottom: 140px;" title="2012"></div>
+                <div style="width: 4px; height: 90px; background: #FF1000; margin-bottom: 140px;" title="2014"></div>
+                <div style="width: 4px; height: 100px; background: #EE0000; margin-bottom: 140px;" title="2015"></div>
+                <div style="width: 4px; height: 110px; background: #DD0000; margin-bottom: 140px;" title="2016: Record"></div>
+                
+                <!-- 2017-2024: Acceleration -->
+                <div style="width: 4px; height: 105px; background: #DD0000; margin-bottom: 140px;" title="2017"></div>
+                <div style="width: 4px; height: 100px; background: #EE0000; margin-bottom: 140px;" title="2018"></div>
+                <div style="width: 4px; height: 108px; background: #DD0000; margin-bottom: 140px;" title="2019"></div>
+                <div style="width: 4px; height: 115px; background: #CC0000; margin-bottom: 140px;" title="2020"></div>
+                <div style="width: 4px; height: 105px; background: #DD0000; margin-bottom: 140px;" title="2021"></div>
+                <div style="width: 4px; height: 110px; background: #DD0000; margin-bottom: 140px;" title="2022"></div>
+                <div style="width: 6px; height: 130px; background: #BB0000; margin-bottom: 140px;" title="2023: +1.35°C"></div>
+                <div style="width: 8px; height: 145px; background: #AA0000; margin-bottom: 140px; box-shadow: 0 0 20px rgba(170,0,0,0.8);" title="2024: HOTTEST YEAR"></div>
+                <div style="width: 8px; height: 140px; background: #990000; margin-bottom: 140px; box-shadow: 0 0 20px rgba(153,0,0,0.8);" title="2025"></div>
+            </div>
+            
+            <!-- X-axis labels -->
+            <div style="display: flex; justify-content: space-between; padding: 0 20px; color: #666; font-size: 0.75rem; font-family: 'JetBrains Mono';">
+                <span>1880</span>
+                <span>1920</span>
+                <span>1960</span>
+                <span>2000</span>
+                <span style="color: #DC143C; font-weight: bold;">2024</span>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <p style="color: var(--crimson); font-size: 1.5rem; font-weight: 600;">
+                2024 was the hottest year in recorded human history.
+            </p>
+            <p style="color: var(--ash); margin-top: 1rem;">
+                48 consecutive years above the 20th century average. Not one cooler year since 1976.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- CO2 KEELING CURVE SECTION -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Root Cause</p>
+            <h2 class="section-title">CO₂: The Number That Matters Most</h2>
+            <p class="section-subtitle">
+                The Keeling Curve. The most important graph in human history.
+                Every climate disaster starts here.
+            </p>
+        </div>
+        
+        <!-- Keeling Curve Visualization -->
+        <div style="max-width: 900px; margin: 3rem auto; background: rgba(0,0,0,0.3); padding: 2rem; border-radius: 15px;">
+            <div style="position: relative; height: 350px; padding: 40px 60px 60px 80px;">
+                <!-- Y-axis labels -->
+                <div style="position: absolute; left: 20px; top: 40px; color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">450 ppm</div>
+                <div style="position: absolute; left: 20px; top: 120px; color: #FF0000; font-size: 0.75rem; font-family: 'JetBrains Mono'; font-weight: bold;">426 ppm ←</div>
+                <div style="position: absolute; left: 20px; top: 160px; color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">400 ppm</div>
+                <div style="position: absolute; left: 20px; top: 200px; color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">350 ppm</div>
+                <div style="position: absolute; left: 20px; top: 240px; color: #4CAF50; font-size: 0.75rem; font-family: 'JetBrains Mono';">Safe: 350</div>
+                <div style="position: absolute; left: 20px; top: 280px; color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">280 ppm</div>
+                
+                <!-- Graph area -->
+                <svg viewBox="0 0 700 250" style="width: 100%; height: 250px;">
+                    <!-- Grid lines -->
+                    <line x1="0" y1="50" x2="700" y2="50" stroke="rgba(255,255,255,0.1)" stroke-dasharray="5,5"/>
+                    <line x1="0" y1="100" x2="700" y2="100" stroke="rgba(255,255,255,0.1)" stroke-dasharray="5,5"/>
+                    <line x1="0" y1="150" x2="700" y2="150" stroke="rgba(76,175,80,0.3)" stroke-dasharray="5,5"/>
+                    <line x1="0" y1="200" x2="700" y2="200" stroke="rgba(255,255,255,0.1)" stroke-dasharray="5,5"/>
+                    
+                    <!-- Safe level zone -->
+                    <rect x="0" y="150" width="700" height="100" fill="rgba(76,175,80,0.05)"/>
+                    <text x="650" y="180" fill="rgba(76,175,80,0.5)" font-size="10">SAFE ZONE</text>
+                    
+                    <!-- Danger zone -->
+                    <rect x="0" y="0" width="700" height="100" fill="rgba(220,20,60,0.05)"/>
+                    <text x="650" y="30" fill="rgba(220,20,60,0.5)" font-size="10">DANGER ZONE</text>
+                    
+                    <!-- The Keeling Curve - simplified -->
+                    <path d="M 0 200 
+                             Q 50 200 100 198
+                             Q 150 196 200 192
+                             Q 250 185 300 170
+                             Q 350 150 400 125
+                             Q 450 100 500 75
+                             Q 550 55 600 40
+                             Q 650 25 700 15" 
+                          fill="none" stroke="var(--crimson)" stroke-width="4"/>
+                    
+                    <!-- Key points -->
+                    <circle cx="0" cy="200" r="5" fill="var(--ice)"/>
+                    <text x="10" y="215" fill="var(--ash)" font-size="9">1960: 315 ppm</text>
+                    
+                    <circle cx="350" cy="150" r="5" fill="var(--orange)"/>
+                    <text x="320" y="135" fill="var(--ash)" font-size="9">1990: 355 ppm</text>
+                    
+                    <circle cx="550" cy="55" r="5" fill="var(--crimson)"/>
+                    <text x="520" y="40" fill="var(--ash)" font-size="9">2015: 400 ppm</text>
+                    
+                    <circle cx="700" cy="15" r="8" fill="var(--crimson)"/>
+                    <circle cx="700" cy="15" r="12" fill="none" stroke="var(--crimson)" stroke-width="2" opacity="0.5">
+                        <animate attributeName="r" values="12;18;12" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="640" y="0" fill="#FF0000" font-size="11" font-weight="bold">NOW: 426 ppm</text>
+                </svg>
+                
+                <!-- X-axis labels -->
+                <div style="display: flex; justify-content: space-between; padding: 0 60px; margin-top: 10px;">
+                    <span style="color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">1960</span>
+                    <span style="color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">1980</span>
+                    <span style="color: var(--ash); font-size: 0.75rem; font-family: 'JetBrains Mono';">2000</span>
+                    <span style="color: var(--crimson); font-size: 0.75rem; font-family: 'JetBrains Mono'; font-weight: bold;">2025</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: var(--bone); font-size: 1.2rem;">
+                    <strong>Pre-industrial level: 280 ppm</strong> (stable for 10,000 years)
+                </p>
+                <p style="color: var(--crimson); font-size: 1.5rem; margin-top: 1rem; font-weight: 600;">
+                    We've increased it by 52% in just 150 years.
+                </p>
+                <p style="color: var(--ash); margin-top: 1rem;">
+                    This is the highest CO₂ level in <strong>4 million years</strong>. 
+                    Before humans existed. Before the Ice Ages.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HISTORICAL PRECEDENT: YOUNGER DRYAS -->
+<section style="background: var(--deep); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">Historical Precedent</p>
+            <h2 class="section-title">This Has Happened Before</h2>
+            <p class="section-subtitle">
+                12,800 years ago. The ocean circulation collapsed. 
+                The Northern Hemisphere plunged into an ice age. It lasted 1,300 years.
+            </p>
+        </div>
+        
+        <div style="max-width: 900px; margin: 4rem auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                
+                <!-- Younger Dryas -->
+                <div style="background: rgba(180,215,232,0.1); border: 1px solid rgba(180,215,232,0.3); padding: 2.5rem; border-radius: 15px;">
+                    <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--ice); margin-bottom: 1.5rem;">
+                        The Younger Dryas
+                    </h3>
+                    <p style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--ash); margin-bottom: 1rem;">12,800 YEARS AGO</p>
+                    <ul style="color: var(--ash); line-height: 2;">
+                        <li>Ocean circulation <strong style="color: var(--ice);">shut down</strong></li>
+                        <li>Temperature dropped <strong style="color: var(--ice);">10°C in decades</strong></li>
+                        <li>Northern Hemisphere frozen</li>
+                        <li>Lasted <strong style="color: var(--ice);">1,300 years</strong></li>
+                        <li>Triggered by freshwater pulse from melting glaciers</li>
+                        <li>Sound familiar?</li>
+                    </ul>
+                </div>
+                
+                <!-- Today -->
+                <div style="background: rgba(220,20,60,0.1); border: 1px solid rgba(220,20,60,0.3); padding: 2.5rem; border-radius: 15px;">
+                    <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; color: var(--crimson); margin-bottom: 1.5rem;">
+                        Today: 2026
+                    </h3>
+                    <p style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: var(--ash); margin-bottom: 1rem;">RIGHT NOW</p>
+                    <ul style="color: var(--ash); line-height: 2;">
+                        <li>AMOC <strong style="color: var(--crimson);">15% weakened</strong> since 1950s</li>
+                        <li>Greenland ice sheet melting <strong style="color: var(--crimson);">6x faster</strong> than in 1990s</li>
+                        <li>Freshwater pouring into North Atlantic</li>
+                        <li>Same mechanism as Younger Dryas</li>
+                        <li>44 scientists: <strong style="color: var(--crimson);">"Risk underestimated"</strong></li>
+                        <li>Collapse window: <strong style="color: var(--crimson);">2026-2095</strong></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div class="quote-box fade-up" style="margin-top: 3rem; border-color: var(--ice);">
+                <p class="quote-text" style="font-size: 1.2rem;">
+                    "The Younger Dryas shows us that the climate system can change 
+                    extremely abruptly. We're now pushing the system in ways 
+                    that could trigger similar responses."
+                </p>
+                <p class="quote-author">Richard Alley</p>
+                <p class="quote-role">Glaciologist, Penn State University</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COST OF ACTION VS INACTION -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Math Is Clear</p>
+            <h2 class="section-title">Action vs. Inaction</h2>
+            <p class="section-subtitle">
+                "We can't afford to fix climate change" is the most expensive lie ever told.
+            </p>
+        </div>
+        
+        <div style="max-width: 1000px; margin: 4rem auto;">
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 3rem; align-items: stretch;">
+                
+                <!-- Cost of ACTION -->
+                <div style="background: rgba(76,175,80,0.1); border: 2px solid rgba(76,175,80,0.3); padding: 2.5rem; border-radius: 15px; text-align: center;">
+                    <h3 style="font-family: 'JetBrains Mono'; font-size: 0.8rem; letter-spacing: 0.2em; color: #4CAF50; margin-bottom: 2rem;">COST OF ACTION</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 3.5rem; color: #4CAF50; font-weight: 700;">$4T</div>
+                    <div style="color: var(--ash); font-size: 0.9rem; margin-top: 0.5rem;">per year until 2050</div>
+                    <hr style="border: none; border-top: 1px solid rgba(76,175,80,0.3); margin: 2rem 0;">
+                    <ul style="text-align: left; color: var(--ash); line-height: 2; font-size: 0.95rem;">
+                        <li>Clean energy transition</li>
+                        <li>Grid modernization</li>
+                        <li>Electric vehicles</li>
+                        <li>Building efficiency</li>
+                        <li>Carbon capture</li>
+                    </ul>
+                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(76,175,80,0.2); border-radius: 10px;">
+                        <strong style="color: #4CAF50;">TOTAL BY 2050:</strong>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: #4CAF50;">~$100T</div>
+                    </div>
+                </div>
+                
+                <!-- VS -->
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div style="font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--ash); font-style: italic;">vs</div>
+                    <div style="margin-top: 2rem; padding: 1rem 1.5rem; background: var(--deep); border-radius: 10px; text-align: center;">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--ash); letter-spacing: 0.1em;">RATIO</div>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 1.8rem; color: var(--crimson); font-weight: 700;">1 : 6</div>
+                        <div style="font-size: 0.8rem; color: var(--ash);">Action costs 6× less</div>
+                    </div>
+                </div>
+                
+                <!-- Cost of INACTION -->
+                <div style="background: rgba(220,20,60,0.1); border: 2px solid rgba(220,20,60,0.3); padding: 2.5rem; border-radius: 15px; text-align: center;">
+                    <h3 style="font-family: 'JetBrains Mono'; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--crimson); margin-bottom: 2rem;">COST OF INACTION</h3>
+                    <div style="font-family: 'JetBrains Mono'; font-size: 3.5rem; color: var(--crimson); font-weight: 700;">$23T</div>
+                    <div style="color: var(--ash); font-size: 0.9rem; margin-top: 0.5rem;">per year by 2050</div>
+                    <hr style="border: none; border-top: 1px solid rgba(220,20,60,0.3); margin: 2rem 0;">
+                    <ul style="text-align: left; color: var(--ash); line-height: 2; font-size: 0.95rem;">
+                        <li>Storm damage</li>
+                        <li>Crop failure</li>
+                        <li>Health costs</li>
+                        <li>Infrastructure destruction</li>
+                        <li>Climate refugees</li>
+                    </ul>
+                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(220,20,60,0.2); border-radius: 10px;">
+                        <strong style="color: var(--crimson);">TOTAL BY 2100:</strong>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: var(--crimson);">$150-792T</div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <p style="font-size: 1.5rem; color: var(--bone);">
+                    <strong>We can't afford NOT to act.</strong>
+                </p>
+                <p style="color: var(--ash); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Every dollar invested in climate action returns $6 in avoided damages.
+                    The clean energy transition creates jobs, improves health, and strengthens energy security.
+                    Inaction is the most expensive choice.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="big-stat">
+    <p class="section-eyebrow pulse" style="color: var(--crimson); margin-bottom: 2rem;">RIGHT NOW · JANUARY 2026</p>
+    <span class="big-number ice">235,000,000</span>
+    <p class="big-label">Americans across 40+ states in the path of this storm</p>
+    <p class="big-context">
+        From Arizona to Maine — a 2,000-mile swath of dangerous snow, ice, and Arctic cold. 
+        Multiple states have declared emergencies. Texas Governor issued disaster declaration for 130+ counties.
+        <strong>This is not a once-in-a-lifetime event. This is the new pattern.</strong>
+    </p>
+</section>
+
+<!-- US MAP SECTION -->
+<section style="background: var(--smoke); padding: 6rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Scope</p>
+            <h2 class="section-title">40+ States. 2,000 Miles. One Storm.</h2>
+        </div>
+        
+        <div style="max-width: 900px; margin: 3rem auto; position: relative;">
+            <!-- Simplified US Map SVG -->
+            <svg viewBox="0 0 960 600" style="width: 100%; height: auto;">
+                <style>
+                    .state { fill: #2a2a3e; stroke: #3a3a4e; stroke-width: 1; transition: fill 0.3s; }
+                    .state.affected { fill: #8B0000; }
+                    .state.severe { fill: #DC143C; animation: pulse-state 2s infinite; }
+                    .state.emergency { fill: #FF4444; animation: pulse-state 1s infinite; }
+                    @keyframes pulse-state { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+                </style>
+                <!-- Simplified state shapes - key affected states -->
+                <g id="states">
+                    <!-- Texas - Emergency -->
+                    <path class="state emergency" d="M290,380 L380,380 L400,420 L420,480 L380,520 L320,520 L280,480 L250,420 Z" />
+                    <!-- Louisiana -->
+                    <path class="state severe" d="M420,420 L480,420 L490,480 L450,490 L420,480 Z" />
+                    <!-- Mississippi -->
+                    <path class="state severe" d="M480,380 L520,380 L520,480 L490,480 L480,420 Z" />
+                    <!-- Alabama -->
+                    <path class="state severe" d="M520,380 L560,380 L560,480 L520,480 Z" />
+                    <!-- Georgia -->
+                    <path class="state emergency" d="M560,360 L620,360 L630,460 L560,480 Z" />
+                    <!-- Tennessee -->
+                    <path class="state emergency" d="M480,340 L620,340 L620,380 L480,380 Z" />
+                    <!-- Kentucky -->
+                    <path class="state affected" d="M500,300 L620,300 L620,340 L480,340 Z" />
+                    <!-- Virginia -->
+                    <path class="state emergency" d="M620,300 L720,280 L730,340 L620,360 Z" />
+                    <!-- North Carolina - Emergency -->
+                    <path class="state emergency" d="M620,340 L750,320 L760,380 L620,400 Z" />
+                    <!-- South Carolina - Emergency -->
+                    <path class="state emergency" d="M620,400 L700,380 L710,440 L630,460 Z" />
+                    <!-- Arkansas -->
+                    <path class="state emergency" d="M380,340 L480,340 L480,420 L380,420 Z" />
+                    <!-- Oklahoma -->
+                    <path class="state affected" d="M290,320 L380,320 L380,380 L290,380 Z" />
+                    <!-- Kansas -->
+                    <path class="state affected" d="M290,260 L380,260 L380,320 L290,320 Z" />
+                    <!-- Missouri -->
+                    <path class="state affected" d="M380,280 L480,280 L480,360 L380,360 Z" />
+                    <!-- Illinois -->
+                    <path class="state affected" d="M480,240 L540,240 L540,340 L480,340 Z" />
+                    <!-- Indiana -->
+                    <path class="state affected" d="M540,260 L580,260 L580,340 L540,340 Z" />
+                    <!-- Ohio -->
+                    <path class="state affected" d="M580,260 L640,260 L640,320 L580,320 Z" />
+                    <!-- Pennsylvania -->
+                    <path class="state affected" d="M640,220 L740,220 L740,280 L640,280 Z" />
+                    <!-- New York -->
+                    <path class="state affected" d="M680,160 L780,140 L790,220 L680,220 Z" />
+                    <!-- New Jersey -->
+                    <path class="state severe" d="M740,240 L770,240 L775,290 L745,290 Z" />
+                    <!-- West Virginia -->
+                    <path class="state affected" d="M620,280 L680,280 L680,340 L620,340 Z" />
+                    <!-- Maryland -->
+                    <path class="state affected" d="M680,280 L750,270 L755,310 L685,320 Z" />
+                    <!-- Maine -->
+                    <path class="state affected" d="M820,80 L860,60 L870,140 L830,160 Z" />
+                    <!-- Other affected states (lighter) -->
+                    <path class="state affected" d="M200,200 L280,200 L280,260 L200,260 Z" /> <!-- Nebraska -->
+                    <path class="state affected" d="M140,200 L200,200 L200,280 L140,280 Z" /> <!-- Wyoming -->
+                    <path class="state affected" d="M60,300 L140,280 L160,380 L80,400 Z" /> <!-- Arizona -->
+                    <path class="state affected" d="M140,280 L200,260 L220,360 L160,380 Z" /> <!-- New Mexico -->
+                </g>
+                
+                <!-- Legend -->
+                <g transform="translate(60, 480)">
+                    <rect x="0" y="0" width="20" height="20" fill="#FF4444" />
+                    <text x="30" y="15" fill="#888" font-size="12" font-family="JetBrains Mono">State of Emergency Declared</text>
+                    
+                    <rect x="0" y="30" width="20" height="20" fill="#DC143C" />
+                    <text x="30" y="45" fill="#888" font-size="12" font-family="JetBrains Mono">Severe Ice/Snow Warning</text>
+                    
+                    <rect x="0" y="60" width="20" height="20" fill="#8B0000" />
+                    <text x="30" y="75" fill="#888" font-size="12" font-family="JetBrains Mono">Winter Weather Advisory</text>
+                </g>
+                
+                <!-- Title -->
+                <text x="480" y="40" text-anchor="middle" fill="#B4D7E8" font-size="18" font-family="Playfair Display">January 2026 Polar Vortex Impact Zone</text>
+            </svg>
+        </div>
+        
+        <div class="stat-grid" style="margin-top: 2rem;">
+            <div class="stat-card danger">
+                <div class="stat-value">7</div>
+                <div class="stat-label">States of Emergency</div>
+                <div class="stat-context">TX, AR, VA, GA, NC, SC, TN, AL</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">130+</div>
+                <div class="stat-label">Texas Counties</div>
+                <div class="stat-context">Under disaster declaration</div>
+            </div>
+            <div class="stat-card ice">
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Miles Wide</div>
+                <div class="stat-context">Arizona to Maine</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DOMINO EFFECT -->
+<section id="chain" class="domino-section">
+    <div class="container-narrow">
+        <div class="section-header">
+            <p class="section-eyebrow">The Chain Reaction</p>
+            <h2 class="section-title">One Thing Leads to Another</h2>
+            <p class="section-subtitle">
+                Climate change isn't one problem. It's a cascade of dominoes, 
+                each one knocking down the next.
+            </p>
+        </div>
+
+        <div class="domino-chain">
+            <div class="domino-item fade-up">
+                <div class="domino-number">1</div>
+                <div class="domino-content">
+                    <h4>We burn fossil fuels</h4>
+                    <p>Oil, gas, and coal release CO₂ into the atmosphere. We've increased atmospheric CO₂ by 50% since the Industrial Revolution.</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">2</div>
+                <div class="domino-content">
+                    <h4>The planet traps more heat</h4>
+                    <p>CO₂ acts like a blanket, trapping heat that would normally escape into space. Earth's temperature has risen 1.35°C above pre-industrial levels.</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">3</div>
+                <div class="domino-content">
+                    <h4>The Arctic heats up 4x faster</h4>
+                    <p>Ice reflects sunlight. When ice melts, dark ocean water absorbs more heat, which melts more ice. A vicious cycle.</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">4</div>
+                <div class="domino-content">
+                    <h4>The polar vortex destabilizes</h4>
+                    <p>The temperature difference that kept Arctic cold "locked up" is shrinking. The vortex wobbles, bulges, and breaks.</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">5</div>
+                <div class="domino-content">
+                    <h4>Arctic air floods into America</h4>
+                    <p>Cold that used to stay at the North Pole pours south. Texas sees temperatures of -19°C. Power grids fail. People die.</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">6</div>
+                <div class="domino-content">
+                    <h4>Meanwhile, the ocean currents weaken</h4>
+                    <p>Fresh water from melting Greenland ice disrupts the Atlantic current that keeps Europe warm. If it collapses...</p>
+                </div>
+            </div>
+
+            <div class="domino-item fade-up">
+                <div class="domino-number">7</div>
+                <div class="domino-content">
+                    <h4>Europe enters an ice age</h4>
+                    <p>London: -19°C. Oslo: -48°C. Sea ice reaches the coasts of Britain. This isn't science fiction. The models show it's possible within decades.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AMOC SECTION -->
+<section id="amoc" class="explain-section">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Atlantic Conveyor</p>
+            <h2 class="section-title">The Current That Keeps<br>Europe From Freezing</h2>
+            <p class="section-subtitle">
+                There's a massive ocean current called the AMOC. 
+                It carries warm water from the tropics to Europe. 
+                Without it, London would have the climate of Newfoundland. 
+                <strong>And it's slowing down.</strong>
+            </p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">15%</div>
+                <div class="stat-label">Already Weakened</div>
+                <div class="stat-context">The AMOC has slowed by 15% since the 1950s. Scientists can measure it directly.</div>
+            </div>
+
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">2026–2095</div>
+                <div class="stat-label">Risk Window</div>
+                <div class="stat-context">When collapse COULD begin. Not certain, but probability increasing. 44 scientists: "Risk greatly underestimated."</div>
+            </div>
+
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">44</div>
+                <div class="stat-label">Scientists Warned</div>
+                <div class="stat-context">44 top climate scientists signed an open letter (Oct 2024): "The risk has been greatly underestimated."</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TEMPERATURE TABLE -->
+<section style="background: var(--deep); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">If the Current Collapses</p>
+            <h2 class="section-title">Europe Enters an Ice Age</h2>
+            <p class="section-subtitle">
+                These are the projected temperatures if the AMOC shuts down. 
+                This is based on peer-reviewed climate models.
+            </p>
+        </div>
+
+        <table class="temp-table fade-up">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Current Winter Avg</th>
+                    <th>After AMOC Collapse</th>
+                    <th>Once-per-Decade Extreme</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Oslo, Norway</strong></td>
+                    <td class="temp-now">-5°C / 23°F</td>
+                    <td class="temp-after">-16.5°C / 2°F average</td>
+                    <td class="temp-extreme">-48°C / -54°F</td>
+                </tr>
+                <tr>
+                    <td><strong>London, UK</strong></td>
+                    <td class="temp-now">+5°C / 41°F</td>
+                    <td class="temp-after">+1.9°C / 35°F average</td>
+                    <td class="temp-extreme">-19°C / -2°F</td>
+                </tr>
+                <tr>
+                    <td><strong>Edinburgh, Scotland</strong></td>
+                    <td class="temp-now">+3°C / 37°F</td>
+                    <td class="temp-after">Significantly colder</td>
+                    <td class="temp-extreme">-30°C / -22°F</td>
+                </tr>
+                <tr>
+                    <td><strong>Scandinavia</strong></td>
+                    <td class="temp-now">Variable</td>
+                    <td class="temp-after">10-15°C / 18-27°F colder</td>
+                    <td class="temp-extreme">-50°C / -58°F</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="text-align: center; color: var(--ice); margin-top: 4rem;">Meanwhile in America: AMOC Collapse Effects</h3>
+        
+        <table class="temp-table fade-up" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th>US Region</th>
+                    <th>Current Winter Avg</th>
+                    <th>AMOC Collapse Impact</th>
+                    <th>Additional Effect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>East Coast (NYC, Boston)</strong></td>
+                    <td class="temp-now">0°C / 32°F</td>
+                    <td class="temp-after">More severe polar vortex events</td>
+                    <td class="temp-extreme">+0.5-1m sea level rise</td>
+                </tr>
+                <tr>
+                    <td><strong>Florida / Gulf Coast</strong></td>
+                    <td class="temp-now">15°C / 59°F</td>
+                    <td class="temp-after">Disrupted hurricane patterns</td>
+                    <td class="temp-extreme">Major coastal flooding</td>
+                </tr>
+                <tr>
+                    <td><strong>Midwest (Chicago)</strong></td>
+                    <td class="temp-now">-5°C / 23°F</td>
+                    <td class="temp-after">Increased cold extremes</td>
+                    <td class="temp-extreme">Agricultural disruption</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="text-align: center; color: var(--ash); font-size: 1.1rem; margin-top: 2rem;">
+            "The extreme winters would be like living in an ice age." — <em>Tim Lenton, University of Exeter</em>
+        </p>
+    </div>
+</section>
+
+<!-- JET STREAM VISUALIZATION -->
+<section style="background: var(--deep); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Mechanism</p>
+            <h2 class="section-title">How the Wall Breaks Down</h2>
+            <p class="section-subtitle">
+                The jet stream is supposed to keep Arctic cold locked at the poles.
+                Here's what happens when the temperature difference shrinks.
+            </p>
+        </div>
+        
+        <div style="max-width: 900px; margin: 4rem auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                
+                <!-- Normal Jet Stream -->
+                <div style="background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3); padding: 2rem; border-radius: 15px;">
+                    <h4 style="text-align: center; color: #4CAF50; margin-bottom: 1rem; font-family: 'JetBrains Mono'; font-size: 0.8rem; letter-spacing: 0.2em;">NORMAL · BEFORE</h4>
+                    
+                    <svg viewBox="0 0 300 200" style="width: 100%; height: 180px;">
+                        <!-- Arctic circle -->
+                        <circle cx="150" cy="30" r="25" fill="rgba(180,215,232,0.3)" stroke="var(--ice)" stroke-width="2"/>
+                        <text x="150" y="35" text-anchor="middle" fill="var(--ice)" font-size="10">ARCTIC</text>
+                        <text x="150" y="50" text-anchor="middle" fill="var(--ice)" font-size="8">-30°C</text>
+                        
+                        <!-- Strong jet stream - relatively straight -->
+                        <path d="M 20 80 Q 75 85 150 80 Q 225 75 280 80" fill="none" stroke="#4CAF50" stroke-width="6"/>
+                        <text x="150" y="100" text-anchor="middle" fill="#4CAF50" font-size="9" font-weight="bold">STRONG JET STREAM</text>
+                        
+                        <!-- USA -->
+                        <rect x="50" y="130" width="200" height="50" fill="rgba(180,215,232,0.2)" stroke="rgba(180,215,232,0.3)" stroke-width="1" rx="5"/>
+                        <text x="150" y="160" text-anchor="middle" fill="var(--ash)" font-size="11">USA · Mild winters</text>
+                        
+                        <!-- Temperature difference indicator -->
+                        <text x="280" y="55" fill="var(--ash)" font-size="8">ΔT = 50°C</text>
+                        <line x1="260" y1="40" x2="260" y2="75" stroke="var(--ash)" stroke-width="2"/>
+                        <text x="280" y="80" fill="var(--ash)" font-size="8">Strong gradient</text>
+                    </svg>
+                    
+                    <p style="text-align: center; color: var(--ash); font-size: 0.9rem; margin-top: 1rem;">
+                        Cold stays north. Winter is predictable.
+                    </p>
+                </div>
+                
+                <!-- Disrupted Jet Stream -->
+                <div style="background: rgba(220,20,60,0.1); border: 1px solid rgba(220,20,60,0.3); padding: 2rem; border-radius: 15px;">
+                    <h4 style="text-align: center; color: var(--crimson); margin-bottom: 1rem; font-family: 'JetBrains Mono'; font-size: 0.8rem; letter-spacing: 0.2em;">DISRUPTED · NOW</h4>
+                    
+                    <svg viewBox="0 0 300 200" style="width: 100%; height: 180px;">
+                        <!-- Warming Arctic -->
+                        <circle cx="150" cy="30" r="25" fill="rgba(220,20,60,0.3)" stroke="var(--crimson)" stroke-width="2"/>
+                        <text x="150" y="30" text-anchor="middle" fill="var(--crimson)" font-size="10">WARMING</text>
+                        <text x="150" y="45" text-anchor="middle" fill="var(--crimson)" font-size="8">+30°C above normal!</text>
+                        
+                        <!-- Weak, wavy jet stream -->
+                        <path d="M 20 70 Q 50 120 100 60 Q 150 20 200 100 Q 250 160 280 90" fill="none" stroke="var(--crimson)" stroke-width="4" stroke-dasharray="5,3">
+                            <animate attributeName="d" 
+                                values="M 20 70 Q 50 120 100 60 Q 150 20 200 100 Q 250 160 280 90;
+                                        M 20 80 Q 50 110 100 70 Q 150 30 200 90 Q 250 150 280 100;
+                                        M 20 70 Q 50 120 100 60 Q 150 20 200 100 Q 250 160 280 90" 
+                                dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <text x="150" y="140" text-anchor="middle" fill="var(--crimson)" font-size="9" font-weight="bold">WEAK, WAVY JET</text>
+                        
+                        <!-- Cold air blob spilling south -->
+                        <ellipse cx="120" cy="100" rx="40" ry="30" fill="rgba(180,215,232,0.4)" stroke="var(--ice)" stroke-width="2">
+                            <animate attributeName="cy" values="100;130;100" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <text x="120" y="105" text-anchor="middle" fill="white" font-size="8" font-weight="bold">COLD</text>
+                        <text x="120" y="115" text-anchor="middle" fill="white" font-size="8">SPILLS</text>
+                        
+                        <!-- USA affected -->
+                        <rect x="50" y="150" width="200" height="40" fill="rgba(180,215,232,0.4)" stroke="var(--ice)" stroke-width="2" rx="5"/>
+                        <text x="150" y="175" text-anchor="middle" fill="white" font-size="10" font-weight="bold">TEXAS: -19°C</text>
+                        
+                        <!-- Temperature difference indicator -->
+                        <text x="280" y="55" fill="var(--crimson)" font-size="8">ΔT = 30°C</text>
+                        <line x1="260" y1="40" x2="260" y2="75" stroke="var(--crimson)" stroke-width="2" stroke-dasharray="3,3"/>
+                        <text x="280" y="80" fill="var(--crimson)" font-size="8">Weak gradient</text>
+                    </svg>
+                    
+                    <p style="text-align: center; color: var(--crimson); font-size: 0.9rem; margin-top: 1rem;">
+                        Cold escapes south. Chaos ensues.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: var(--bone);">
+                <strong>This is not a theory. This is physics.</strong>
+            </p>
+            <p style="color: var(--ash); margin-top: 1rem;">
+                When the Arctic warms faster than the rest of the planet (it's warming 4× faster),
+                the temperature difference that powers the jet stream weakens.
+                A weaker jet stream wobbles. When it wobbles, Arctic air spills into places like Texas.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- 36 YEARS OF WARNINGS TIMELINE -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">We Were Warned</p>
+            <h2 class="section-title">36 Years of Ignored Warnings</h2>
+            <p class="section-subtitle">
+                Scientists have been screaming into the void since 1988.
+                Here's what they said — and when they said it.
+            </p>
+        </div>
+        
+        <div style="max-width: 900px; margin: 4rem auto; position: relative;">
+            <!-- Timeline line -->
+            <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--ice), var(--crimson)); transform: translateX(-50%);"></div>
+            
+            <!-- 1988 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; position: relative;">
+                <div style="text-align: right; padding-right: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--ice); font-weight: bold;">1988</div>
+                    <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin: 0.5rem 0;">James Hansen testifies to Congress</h4>
+                    <p style="color: var(--ash); font-size: 0.95rem;">"Global warming is real and is happening now."</p>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <div style="background: rgba(180,215,232,0.1); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--ice);">
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--ice);">CO₂ at time:</strong> 350 ppm</p>
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--ice);">Temperature:</strong> +0.4°C</p>
+                    </div>
+                </div>
+                <div style="position: absolute; left: 50%; top: 1rem; width: 20px; height: 20px; background: var(--ice); border-radius: 50%; transform: translateX(-50%);"></div>
+            </div>
+            
+            <!-- 1990 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; position: relative;">
+                <div style="text-align: right; padding-right: 2rem;">
+                    <div style="background: rgba(255,149,0,0.1); padding: 1rem; border-radius: 10px; border-right: 3px solid var(--orange);">
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--orange);">CO₂ at time:</strong> 355 ppm</p>
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--orange);">Temperature:</strong> +0.45°C</p>
+                    </div>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--orange); font-weight: bold;">1990</div>
+                    <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin: 0.5rem 0;">First IPCC Report</h4>
+                    <p style="color: var(--ash); font-size: 0.95rem;">"Emissions resulting from human activities are substantially increasing greenhouse gases."</p>
+                </div>
+                <div style="position: absolute; left: 50%; top: 1rem; width: 20px; height: 20px; background: var(--orange); border-radius: 50%; transform: translateX(-50%);"></div>
+            </div>
+            
+            <!-- 2006 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; position: relative;">
+                <div style="text-align: right; padding-right: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--orange); font-weight: bold;">2006</div>
+                    <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin: 0.5rem 0;">An Inconvenient Truth</h4>
+                    <p style="color: var(--ash); font-size: 0.95rem;">Al Gore brings climate to mainstream. Called "alarmist."</p>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <div style="background: rgba(255,149,0,0.1); padding: 1rem; border-radius: 10px; border-left: 3px solid var(--orange);">
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--orange);">CO₂ at time:</strong> 380 ppm</p>
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--orange);">Temperature:</strong> +0.65°C</p>
+                    </div>
+                </div>
+                <div style="position: absolute; left: 50%; top: 1rem; width: 20px; height: 20px; background: var(--orange); border-radius: 50%; transform: translateX(-50%);"></div>
+            </div>
+            
+            <!-- 2015 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; position: relative;">
+                <div style="text-align: right; padding-right: 2rem;">
+                    <div style="background: rgba(220,20,60,0.1); padding: 1rem; border-radius: 10px; border-right: 3px solid var(--crimson);">
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--crimson);">CO₂ at time:</strong> 400 ppm</p>
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: var(--crimson);">Temperature:</strong> +1.0°C</p>
+                    </div>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--crimson); font-weight: bold;">2015</div>
+                    <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin: 0.5rem 0;">Paris Agreement</h4>
+                    <p style="color: var(--ash); font-size: 0.95rem;">195 nations agree to limit warming to 1.5°C. Then do almost nothing.</p>
+                </div>
+                <div style="position: absolute; left: 50%; top: 1rem; width: 20px; height: 20px; background: var(--crimson); border-radius: 50%; transform: translateX(-50%);"></div>
+            </div>
+            
+            <!-- 2026 -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; position: relative;">
+                <div style="text-align: right; padding-right: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: #FF0000; font-weight: bold;">2026</div>
+                    <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin: 0.5rem 0;">NOW</h4>
+                    <p style="color: var(--ash); font-size: 0.95rem;">235 million Americans under polar vortex. President asks "what happened to global warming?"</p>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <div style="background: rgba(255,0,0,0.2); padding: 1rem; border-radius: 10px; border-left: 3px solid #FF0000; animation: pulse 2s infinite;">
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: #FF0000;">CO₂ NOW:</strong> 426 ppm</p>
+                        <p style="color: var(--ash); font-size: 0.85rem;"><strong style="color: #FF0000;">Temperature:</strong> +1.35°C</p>
+                        <p style="color: #FF0000; font-size: 0.85rem; margin-top: 0.5rem;"><strong>This is your answer.</strong></p>
+                    </div>
+                </div>
+                <div style="position: absolute; left: 50%; top: 1rem; width: 24px; height: 24px; background: #FF0000; border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 20px rgba(255,0,0,0.5);"></div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 4rem;">
+            <p style="font-size: 1.5rem; color: var(--crimson); font-weight: 600;">
+                36 years. 76 ppm CO₂ added. +0.95°C warmer.
+            </p>
+            <p style="color: var(--ash); margin-top: 1rem; font-size: 1.1rem;">
+                Everything they predicted came true. Everything.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- QUOTE: HANSEN -->
+<section class="quote-section">
+    <div class="quote-box fade-up">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">
+            Global warming isn't a prediction. It is happening.
+        </p>
+        <p class="quote-author">James Hansen</p>
+        <p class="quote-role">Former NASA scientist who first warned Congress about climate change in 1988</p>
+    </div>
+</section>
+
+<!-- TIPPING POINTS -->
+<section style="background: var(--smoke); padding: 10rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">Points of No Return</p>
+            <h2 class="section-title">The First Domino Has Fallen</h2>
+            <p class="section-subtitle">
+                Scientists have identified points where climate change becomes irreversible. 
+                Self-reinforcing. Unstoppable. <strong>We just crossed the first one.</strong>
+            </p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card danger fade-up">
+                <div class="stat-value" style="font-size: 4rem;">84%</div>
+                <div class="stat-label">Coral Reefs Affected</div>
+                <div class="stat-context">The world's coral reefs have hit their tipping point. Mass bleaching 2023-2025. The first climate tipping point has been crossed.</div>
+            </div>
+
+            <div class="stat-card fade-up">
+                <div class="stat-value">⅓</div>
+                <div class="stat-label">of 3 Million Simulations</div>
+                <div class="stat-context">Showed cascading "domino effect" at just 2°C warming. One tipping point triggering another.</div>
+            </div>
+
+            <div class="stat-card ice fade-up">
+                <div class="stat-value">16</div>
+                <div class="stat-label">Tipping Points Identified</div>
+                <div class="stat-context">Nine of them have a >50% chance of being crossed on our current path.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BIG STAT: ECONOMIC -->
+<section class="big-stat" style="background: var(--deep);">
+    <p class="section-eyebrow" style="margin-bottom: 2rem;">The Cost of Doing Nothing</p>
+    <span class="big-number">$23,000,000,000,000<span class="big-unit">/year</span></span>
+    <p class="big-label">Annual global economic loss by 2050</p>
+    <p class="big-context">
+        Swiss Re Institute projection. Twenty-three TRILLION dollars. Every single year.
+        And that's the conservative estimate — some models show losses of $150-792 trillion cumulative by 2100.
+    </p>
+</section>
+
+<!-- US DISASTERS -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Price America Is Already Paying</p>
+            <h2 class="section-title">$3,100,000,000,000.00</h2>
+            <p class="section-subtitle">
+                That's how much the United States has lost to 426 billion-dollar climate disasters since 1980. 
+                Three trillion, one hundred billion dollars.
+            </p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card fade-up">
+                <div class="stat-value">$16,000,000</div>
+                <div class="stat-label">Every Hour</div>
+                <div class="stat-context">The global cost of climate damage. Sixteen million dollars. Every single hour. (Nature Communications)</div>
+            </div>
+
+            <div class="stat-card fade-up">
+                <div class="stat-value">2025</div>
+                <div class="stat-label">Third-Worst Year</div>
+                <div class="stat-context">For billion-dollar climate disasters in U.S. history. And it's only getting worse.</div>
+            </div>
+
+            <div class="stat-card fade-up">
+                <div class="stat-value">10-23%</div>
+                <div class="stat-label">Global GDP at Risk</div>
+                <div class="stat-context">By 2100 under high emissions. IPCC and Swiss Re projections converge on catastrophic losses.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI SECTION -->
+<section id="ai" class="ai-section">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Irony</p>
+            <h2 class="section-title">AI Is Making It Worse</h2>
+            <p class="section-subtitle">
+                Every ChatGPT query, every AI-generated image, every video — 
+                uses massive amounts of electricity. Here's what your AI habit costs the planet.
+            </p>
+        </div>
+
+        <div class="ai-comparison">
+            <div class="ai-card fade-up">
+                <div class="ai-icon">💬</div>
+                <div class="ai-action">One ChatGPT Query</div>
+                <div class="ai-energy">0.3 <span class="ai-unit">Wh</span></div>
+                <div class="ai-equiv">10× more than a Google search</div>
+            </div>
+
+            <div class="ai-card fade-up">
+                <div class="ai-icon">🖼️</div>
+                <div class="ai-action">One AI Image</div>
+                <div class="ai-energy">1.2 <span class="ai-unit">Wh</span></div>
+                <div class="ai-equiv">= LED bulb for 7 minutes</div>
+            </div>
+
+            <div class="ai-card fade-up">
+                <div class="ai-icon">🎬</div>
+                <div class="ai-action">5-Second AI Video</div>
+                <div class="ai-energy">950 <span class="ai-unit">Wh</span></div>
+                <div class="ai-equiv">= LED bulb for 4 DAYS straight</div>
+            </div>
+
+            <div class="ai-card fade-up">
+                <div class="ai-icon">🧠</div>
+                <div class="ai-action">Advanced Reasoning Query</div>
+                <div class="ai-energy">7-40 <span class="ai-unit">Wh</span></div>
+                <div class="ai-equiv">100× more than basic models</div>
+            </div>
+        </div>
+
+        <div class="stat-grid" style="margin-top: 4rem;">
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">17,228 GWh</div>
+                <div class="stat-label">ChatGPT Annual Use</div>
+                <div class="stat-context">More electricity than entire countries like Slovenia or Puerto Rico.</div>
+            </div>
+
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">12%</div>
+                <div class="stat-label">of US Electricity by 2030</div>
+                <div class="stat-context">Data centers will consume 12% of all American electricity. Up from 4% today.</div>
+            </div>
+
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">$500B</div>
+                <div class="stat-label">Stargate Project</div>
+                <div class="stat-context">OpenAI's plan to build 10 new data centers. Each one needs as much power as New Hampshire.</div>
+            </div>
+        </div>
+
+        <p style="text-align: center; font-size: 1.3rem; margin-top: 4rem; color: var(--ash);">
+            The technology you're using to read this is part of the problem.<br>
+            <strong style="color: var(--crimson);">We're burning the planet to ask computers questions.</strong>
+        </p>
+
+        <div class="quote-box fade-up" style="margin-top: 3rem; border-color: var(--ash);">
+            <p class="quote-text" style="font-size: 1.2rem;">
+                The ultimate irony: People use AI to generate arguments denying climate change — 
+                while AI's massive energy appetite accelerates the very problem they're denying.
+                <br><br>
+                The Stargate Project plans to build data centers that need more power than entire states.
+                <br>
+                Every AI video you generate is like leaving a light on for 4 days.
+                <br><br>
+                <strong>If you care about the climate, demand green data centers. Use AI efficiently. 
+                Or at least be aware of the cost.</strong>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Long View</p>
+            <h2 class="section-title">History Is Repeating Itself</h2>
+            <p class="section-subtitle">
+                This has happened before. But never this fast.
+            </p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">56 Million Years Ago</div>
+                <div class="timeline-content">
+                    <h4>The Last Time CO₂ Spiked</h4>
+                    <p>A massive release of carbon caused temperatures to rise 5-8°C. Mass extinctions followed. It took 200,000 years for the planet to recover.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">12,800 Years Ago</div>
+                <div class="timeline-content">
+                    <h4>The Younger Dryas</h4>
+                    <p>Ocean circulation collapsed. Northern Hemisphere plunged into ice age conditions while the rest of the planet warmed. Sound familiar?</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">1988</div>
+                <div class="timeline-content">
+                    <h4>James Hansen Warns Congress</h4>
+                    <p>"Global warming is real and is happening now." America's top climate scientist testified. We had 36 years to act.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-content">
+                    <h4>Texas Freezes</h4>
+                    <p>246 dead. $27.5 billion in damage. Polar vortex proves that "global warming" means extreme weather in both directions.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">
+                    <h4>First Tipping Point Crossed</h4>
+                    <p>Coral reefs globally hit their tipping point. 84% affected by mass bleaching. The first domino has fallen.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">2030–2032</div>
+                <div class="timeline-content">
+                    <h4>1.5°C Threshold Crossed</h4>
+                    <p>Virtually inevitable. The Paris Agreement target will be passed. "Deader than a doornail," says James Hansen.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">2040–2060</div>
+                <div class="timeline-content">
+                    <h4>AMOC Critically Weakens</h4>
+                    <p>50/50 chance the Atlantic current is critically weakened. Europe begins to cool even as the rest of the world heats up.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up">
+                <div class="timeline-year">2055–2095</div>
+                <div class="timeline-content">
+                    <h4>Possible AMOC Collapse</h4>
+                    <p>If it collapses: London at -19°C. Oslo at -48°C. Sea ice reaching British coasts. A regional ice age in a warming world.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COUNTDOWN SECTION -->
+<section style="background: linear-gradient(180deg, var(--abyss) 0%, rgba(139,0,0,0.2) 50%, var(--abyss) 100%); padding: 8rem 2rem; text-align: center;">
+    <div class="container-narrow">
+        <p class="section-eyebrow" style="color: var(--crimson);">The Clock Is Ticking</p>
+        <h2 class="section-title">Time Until 1.5°C Threshold</h2>
+        
+        <div style="display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap;">
+            <div style="background: rgba(220,20,60,0.1); border: 2px solid var(--crimson); padding: 2rem 3rem; border-radius: 10px;">
+                <div style="font-family: 'JetBrains Mono'; font-size: 4rem; font-weight: 700; color: var(--crimson);">4-6</div>
+                <div style="color: var(--ash); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.2em;">Years</div>
+            </div>
+            <div style="background: rgba(220,20,60,0.05); border: 1px solid rgba(220,20,60,0.3); padding: 2rem 3rem; border-radius: 10px;">
+                <div style="font-family: 'JetBrains Mono'; font-size: 4rem; font-weight: 700; color: var(--ash);">2030</div>
+                <div style="color: var(--ash); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.2em;">Target Date</div>
+            </div>
+        </div>
+        
+        <p style="color: var(--ice); font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
+            James Hansen called the 1.5°C goal "deader than a doornail."<br>
+            We're currently at <strong>1.35°C</strong> and accelerating.
+        </p>
+        
+        <div class="quote-box fade-up" style="margin-top: 3rem; border-color: var(--crimson);">
+            <p class="quote-text" style="font-size: 1.2rem;">
+                "To keep within 1.5°C, emissions need to be reduced by at least 43% by 2030. 
+                This is the decisive decade."
+            </p>
+            <p class="quote-author">IPCC AR6</p>
+        </div>
+    </div>
+</section>
+
+<!-- SEA LEVEL RISE SECTION -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">Rising Waters</p>
+            <h2 class="section-title">Cities That Will Drown</h2>
+            <p class="section-subtitle">
+                Sea levels have already risen 8-9 inches since 1900. By 2100, we're looking at 1-3+ feet more.
+                Here's what that means for American cities.
+            </p>
+        </div>
+        
+        <!-- Sea Level Visual -->
+        <div style="max-width: 900px; margin: 4rem auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                
+                <div style="background: linear-gradient(180deg, var(--deep) 0%, rgba(0,122,255,0.3) 100%); border: 1px solid rgba(0,122,255,0.3); padding: 2rem; text-align: center; border-radius: 10px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background: linear-gradient(180deg, transparent, rgba(0,122,255,0.5)); z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏙️</div>
+                        <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin-bottom: 0.5rem;">Miami, FL</h4>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: var(--crimson); font-weight: 700;">2060</div>
+                        <p style="font-size: 0.85rem; color: var(--ash);">Regular flooding. $3.5 trillion in property at risk.</p>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(180deg, var(--deep) 0%, rgba(0,122,255,0.25) 100%); border: 1px solid rgba(0,122,255,0.3); padding: 2rem; text-align: center; border-radius: 10px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 25%; background: linear-gradient(180deg, transparent, rgba(0,122,255,0.4)); z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗽</div>
+                        <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin-bottom: 0.5rem;">New York City</h4>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: var(--orange); font-weight: 700;">2070</div>
+                        <p style="font-size: 0.85rem; color: var(--ash);">Lower Manhattan floods. JFK underwater.</p>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(180deg, var(--deep) 0%, rgba(0,122,255,0.2) 100%); border: 1px solid rgba(0,122,255,0.3); padding: 2rem; text-align: center; border-radius: 10px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 20%; background: linear-gradient(180deg, transparent, rgba(0,122,255,0.35)); z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌴</div>
+                        <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin-bottom: 0.5rem;">New Orleans</h4>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: var(--crimson); font-weight: 700;">2050</div>
+                        <p style="font-size: 0.85rem; color: var(--ash);">Already sinking. Levees at capacity.</p>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(180deg, var(--deep) 0%, rgba(0,122,255,0.15) 100%); border: 1px solid rgba(0,122,255,0.3); padding: 2rem; text-align: center; border-radius: 10px; position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 15%; background: linear-gradient(180deg, transparent, rgba(0,122,255,0.3)); z-index: 0;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌉</div>
+                        <h4 style="font-family: 'Playfair Display'; font-size: 1.3rem; margin-bottom: 0.5rem;">San Francisco</h4>
+                        <div style="font-family: 'JetBrains Mono'; font-size: 2rem; color: var(--orange); font-weight: 700;">2080</div>
+                        <p style="font-size: 0.85rem; color: var(--ash);">Airport, Bay Area infrastructure at risk.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="stat-grid">
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">$1 Trillion+</div>
+                <div class="stat-label">US Coastal Property</div>
+                <div class="stat-context">At risk from sea level rise by 2050</div>
+            </div>
+            <div class="stat-card fade-up">
+                <div class="stat-value">13 Million</div>
+                <div class="stat-label">Americans</div>
+                <div class="stat-context">May need to relocate from coasts by 2100</div>
+            </div>
+            <div class="stat-card ice fade-up">
+                <div class="stat-value">5.9mm/year</div>
+                <div class="stat-label">Current Rise Rate</div>
+                <div class="stat-context">Doubled since 1993. Accelerating.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CLIMATE REFUGEES SECTION -->
+<section style="background: var(--deep); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Human Cost</p>
+            <h2 class="section-title">1,000,000,000 Climate Refugees</h2>
+            <p class="section-subtitle">
+                By 2100, up to ONE BILLION people will be forced to leave their homes 
+                due to rising seas, drought, heat, and crop failure.
+            </p>
+        </div>
+        
+        <div style="max-width: 800px; margin: 4rem auto;">
+            <!-- Migration flow visual -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 3rem; border-radius: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 3rem; color: var(--crimson);">216M</div>
+                        <div style="color: var(--ash); font-size: 0.9rem;">Internal migrants by 2050</div>
+                        <div style="color: #666; font-size: 0.8rem;">(World Bank estimate)</div>
+                    </div>
+                    <div style="font-size: 3rem; color: var(--ash);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 3rem; color: var(--orange);">1.2B</div>
+                        <div style="color: var(--ash); font-size: 0.9rem;">Displaced by 2050</div>
+                        <div style="color: #666; font-size: 0.8rem;">(Institute for Economics & Peace)</div>
+                    </div>
+                    <div style="font-size: 3rem; color: var(--ash);">→</div>
+                    <div style="text-align: center;">
+                        <div style="font-family: 'JetBrains Mono'; font-size: 3rem; color: var(--ice);">?</div>
+                        <div style="color: var(--ash); font-size: 0.9rem;">By 2100</div>
+                        <div style="color: #666; font-size: 0.8rem;">(Could exceed 1 billion)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: var(--ash); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+            Where will they go? The countries least responsible for climate change 
+            will suffer the most. The countries most responsible will face waves of migration 
+            they're not prepared for. <strong style="color: var(--bone);">This is not a future problem. It's already happening.</strong>
+        </p>
+    </div>
+</section>
+
+<!-- PERMAFROST SECTION -->
+<section style="background: linear-gradient(180deg, var(--smoke) 0%, var(--deep) 100%); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Carbon Bomb</p>
+            <h2 class="section-title">1,500,000,000,000 Tons of Carbon</h2>
+            <p class="section-subtitle">
+                Frozen in permafrost. Twice what's currently in the atmosphere. 
+                And it's starting to thaw.
+            </p>
+        </div>
+        
+        <!-- Permafrost visual -->
+        <div style="max-width: 700px; margin: 4rem auto;">
+            <div style="background: linear-gradient(180deg, #2a3a4a 0%, #1a2a3a 30%, #0a1a2a 100%); border-radius: 20px; overflow: hidden; position: relative;">
+                <!-- Surface layer -->
+                <div style="height: 60px; background: linear-gradient(180deg, #4a5a3a 0%, #3a4a2a 100%); display: flex; align-items: center; justify-content: center;">
+                    <span style="color: #8a9a7a; font-size: 0.8rem;">SURFACE · Tundra & Forests</span>
+                </div>
+                
+                <!-- Active layer -->
+                <div style="height: 40px; background: linear-gradient(180deg, #3a4a5a 0%, #2a3a4a 100%); display: flex; align-items: center; justify-content: center; border-top: 2px dashed rgba(255,149,0,0.5);">
+                    <span style="color: #FF9500; font-size: 0.75rem; font-family: 'JetBrains Mono';">← THAW LINE (moving deeper) →</span>
+                </div>
+                
+                <!-- Permafrost layer -->
+                <div style="height: 200px; background: linear-gradient(180deg, #1a3a5a 0%, #0a2a4a 50%, #001a3a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem;">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 2.5rem; color: var(--ice); font-weight: 700;">1.5 TRILLION TONS</div>
+                    <div style="color: #6a8aaa; font-size: 1rem; margin-top: 0.5rem;">Frozen organic carbon</div>
+                    <div style="color: #4a6a8a; font-size: 0.85rem; margin-top: 1rem;">Methane · CO₂ · Ancient biomass</div>
+                    
+                    <!-- Bubbles representing methane release -->
+                    <div style="position: absolute; width: 100%; height: 100%;">
+                        <div style="position: absolute; top: 80px; left: 20%; width: 8px; height: 8px; background: rgba(255,149,0,0.6); border-radius: 50%; animation: rise 3s infinite;"></div>
+                        <div style="position: absolute; top: 100px; left: 40%; width: 6px; height: 6px; background: rgba(255,149,0,0.4); border-radius: 50%; animation: rise 4s infinite 1s;"></div>
+                        <div style="position: absolute; top: 90px; left: 60%; width: 10px; height: 10px; background: rgba(255,149,0,0.5); border-radius: 50%; animation: rise 3.5s infinite 0.5s;"></div>
+                        <div style="position: absolute; top: 110px; left: 75%; width: 5px; height: 5px; background: rgba(255,149,0,0.3); border-radius: 50%; animation: rise 4.5s infinite 2s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                @keyframes rise {
+                    0% { transform: translateY(0); opacity: 0.8; }
+                    100% { transform: translateY(-150px); opacity: 0; }
+                }
+            </style>
+        </div>
+        
+        <div class="stat-grid">
+            <div class="stat-card danger fade-up">
+                <div class="stat-value">120×</div>
+                <div class="stat-label">Methane Potency</div>
+                <div class="stat-context">More powerful than CO₂ over 20 years</div>
+            </div>
+            <div class="stat-card fade-up">
+                <div class="stat-value">+0.5°C</div>
+                <div class="stat-label">Additional Warming</div>
+                <div class="stat-context">Possible from permafrost alone by 2100</div>
+            </div>
+            <div class="stat-card ice fade-up">
+                <div class="stat-value">24%</div>
+                <div class="stat-label">Northern Hemisphere</div>
+                <div class="stat-context">Covered by permafrost — now thawing</div>
+            </div>
+        </div>
+        
+        <div class="quote-box fade-up" style="margin-top: 3rem;">
+            <p class="quote-text" style="font-size: 1.2rem;">
+                "Within my lifetime, within my children's lifetimes, this should intensify. 
+                It's already happening, but within a few decades it should reach peak emissions."
+            </p>
+            <p class="quote-author">Katey Walter Anthony</p>
+            <p class="quote-role">Permafrost Researcher, University of Alaska / NASA ABoVE</p>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON WITH OTHER DISASTERS -->
+<section style="background: var(--smoke); padding: 8rem 2rem;">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">For Perspective</p>
+            <h2 class="section-title">How Climate Compares</h2>
+        </div>
+        
+        <div style="max-width: 800px; margin: 3rem auto;">
+            <!-- Comparison bars -->
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--bone);">COVID-19 Pandemic (Global GDP Loss 2020)</span>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--ash);">$4.5T</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); height: 30px; border-radius: 5px; overflow: hidden;">
+                    <div style="background: var(--ash); height: 100%; width: 5%; border-radius: 5px;"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--bone);">World War II (Total Cost, Adjusted)</span>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--ash);">$4.7T</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); height: 30px; border-radius: 5px; overflow: hidden;">
+                    <div style="background: var(--ash); height: 100%; width: 5%; border-radius: 5px;"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--bone);">US Military Budget (Annual)</span>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--ash);">$0.9T</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); height: 30px; border-radius: 5px; overflow: hidden;">
+                    <div style="background: var(--ash); height: 100%; width: 1%; border-radius: 5px;"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--ice); font-weight: 600;">Climate Damage by 2050 (Annual)</span>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--ice); font-weight: 700;">$23T</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); height: 30px; border-radius: 5px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, var(--ice), var(--crimson)); height: 100%; width: 25%; border-radius: 5px;"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="color: var(--crimson); font-weight: 600;">Climate Damage by 2100 (Cumulative)</span>
+                    <span style="font-family: 'JetBrains Mono'; color: var(--crimson); font-weight: 700;">$150-792T</span>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); height: 30px; border-radius: 5px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, var(--crimson), #FF0000); height: 100%; width: 85%; border-radius: 5px; animation: pulse 2s infinite;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.3rem; color: var(--ash); max-width: 700px; margin: 0 auto;">
+            Climate change is not just an environmental issue.<br>
+            <strong style="color: var(--crimson);">It's the largest economic threat in human history.</strong>
+        </p>
+    </div>
+</section>
+<section id="future" class="future-section">
+    <div class="container">
+        <div class="section-header">
+            <p class="section-eyebrow">The Coming Decades</p>
+            <h2 class="section-title">What Your Children Will Face</h2>
+        </div>
+
+        <div class="future-grid">
+            <div class="future-card fade-up">
+                <span class="future-year">2030</span>
+                <h4>The Near Future</h4>
+                <ul>
+                    <li>Cross 1.5°C warming threshold</li>
+                    <li>Polar vortex disruptions become annual events</li>
+                    <li>Florida coastal flooding accelerates</li>
+                    <li>AI energy consumption triples</li>
+                    <li>Water shortages in American Southwest</li>
+                </ul>
+            </div>
+
+            <div class="future-card fade-up">
+                <span class="future-year">2050</span>
+                <h4>Mid-Century</h4>
+                <ul>
+                    <li>Cross 2°C threshold</li>
+                    <li>10-12 inches sea level rise in US</li>
+                    <li>100+ million climate refugees globally</li>
+                    <li>$38 trillion annual climate damage</li>
+                    <li>AMOC significantly weakened</li>
+                </ul>
+            </div>
+
+            <div class="future-card fade-up">
+                <span class="future-year">2100</span>
+                <h4>End of Century</h4>
+                <ul>
+                    <li>2-3+ feet sea level rise</li>
+                    <li>Parts of tropics uninhabitable</li>
+                    <li>1+ billion climate refugees</li>
+                    <li>25%+ species extinct</li>
+                    <li>Possible AMOC collapse: Europe freezes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL QUOTE -->
+<section class="quote-section" style="background: linear-gradient(180deg, var(--deep) 0%, rgba(139,0,0,0.2) 100%);">
+    <div class="quote-box fade-up">
+        <span class="quote-mark">"</span>
+        <p class="quote-text">
+            We are on the precipice of climate system tipping points beyond which there is no redemption.
+        </p>
+        <p class="quote-author">James Hansen</p>
+        <p class="quote-role">The scientist who started this warning 36 years ago</p>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section style="background: linear-gradient(180deg, var(--deep) 0%, var(--smoke) 100%); padding: 8rem 2rem;">
+    <div class="container-narrow">
+        <div class="section-header">
+            <p class="section-eyebrow">What Now?</p>
+            <h2 class="section-title">Trump Asked. Here's the Answer.</h2>
+            <p class="section-subtitle">
+                "Whatever happened to global warming?" — It's happening. Right now. Outside your window.
+                <br>The question is: what are we going to do about it?
+            </p>
+        </div>
+
+        <div class="simple-explain">
+            <div class="explain-card fade-up">
+                <span class="explain-step">⚡</span>
+                <h3>Winterize the Grid</h3>
+                <p>
+                    Texas 2021 proved our infrastructure isn't ready. 246 dead. $195 billion gone. 
+                    Winterization costs a fraction of disaster recovery. Do the math.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">🌊</span>
+                <h3>Cut Methane Emissions</h3>
+                <p>
+                    Permafrost is thawing. The "carbon bomb" is ticking. Methane is 120x more potent than CO₂ 
+                    in the short term. We can slow this feedback loop — if we act now.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">☀️</span>
+                <h3>Accelerate Clean Energy</h3>
+                <p>
+                    Solar and wind are already cheaper than fossil fuels in most of the world. 
+                    The transition isn't just about climate — it's about energy independence and jobs.
+                </p>
+            </div>
+
+            <div class="explain-card fade-up">
+                <span class="explain-step">🗳️</span>
+                <h3>Demand Action</h3>
+                <p>
+                    Politicians respond to pressure. Call your representatives. 
+                    Vote for climate-aware candidates. Make this issue impossible to ignore.
+                </p>
+            </div>
+        </div>
+
+        <div class="quote-box fade-up" style="margin-top: 4rem; border-color: var(--gold);">
+            <p class="quote-text" style="font-size: 1.3rem;">
+                "We can still limit warming to 1.5-2°C — but the window is closing fast. 
+                Every fraction of a degree matters. Every year of delay costs lives and trillions."
+            </p>
+            <p class="quote-author">IPCC AR6 Synthesis Report</p>
+            <p class="quote-role">The world's most comprehensive climate assessment, 2023</p>
+        </div>
+    </div>
+</section>
+
+<!-- RESPONSE TO PRESIDENT -->
+<section class="response-section">
+    <p class="response-to">A Response to the President's Question</p>
+    <h2 class="response-title">
+        Mr. President, global warming didn't go away.<br>
+        It's why you're freezing right now.
+    </h2>
+    <p class="response-message">
+        The extreme cold hitting America is not proof that climate change is fake.<br>
+        It's proof that climate change is real, accelerating, and far more dangerous than most people understand.<br><br>
+        
+        The Arctic is heating up so fast that it's breaking the systems that kept cold air locked at the poles.<br>
+        Now that cold air pours into your country. Kills your citizens. Destroys your infrastructure.<br><br>
+        
+        <strong>This is not the last day of summer.</strong><br>
+        <strong>Winter is coming.</strong><br>
+        <strong>And it's never felt so cold.</strong><br><br>
+        
+        The question is not whether this will get worse.<br>
+        <em>The question is whether we'll do anything about it.</em>
+    </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p class="footer-tagline">"The climate dice are now loaded."<br>— James Hansen</p>
+    
+    <div class="footer-sources">
+        <h4>Sources</h4>
+        <p>
+            <strong>Polar Vortex Science:</strong> IPCC AR6 Chapter 11 · Judah Cohen et al. (Science, 2021) · NOAA Climate.gov<br>
+            <strong>Texas 2021 Damage:</strong> Federal Reserve Bank of Dallas ($80-130B) · Perryman Group ($195-295B) · Texas Comptroller<br>
+            <strong>AMOC Research:</strong> van Westen et al. (2025) · Potsdam Institute · Nature (multiple studies) · Stefan Rahmstorf<br>
+            <strong>Economic Projections:</strong> Swiss Re Institute · IPCC WGII · Nature Communications (2023) · Climate Policy Initiative<br>
+            <strong>Current Weather:</strong> NOAA/NWS · FOX Weather · AccuWeather · Severe Weather Europe<br>
+            <strong>Scientist Quotes:</strong> James Hansen (Columbia) · Tim Lenton (Exeter) · Judah Cohen (AER) — peer-reviewed publications
+        </p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: rgba(255,255,255,0.2);">
+            Note: The $38T/year figure from Kotz et al. (2024) was retracted by Nature in December 2025. 
+            This site uses the Swiss Re estimate ($23T/year) and IPCC projections instead.
+        </p>
+    </div>
+
+    <p class="footer-copy">
+        Built to spread the truth about climate change · 2026<br>
+        Share this. The planet depends on it.
+    </p>
+</footer>
+
+<script>
+// Scroll animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-up').forEach(el => {
+    observer.observe(el);
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Parallax effect for big numbers
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    document.querySelectorAll('.big-number').forEach(el => {
+        const speed = 0.1;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+</script>
+
+</body>
+</html>
