@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>humans& — AI for humans</title>
+    <meta name="description" content="Building the future of human-AI collaboration">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --red: #DC0000;
+            --dark-red: #8B0000;
+            --gray: #1a1a1a;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           HERO SECTION - LOOKS LEGIT AS FUCK
+           ============================================ */
+        
+        .fake-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fake-logo {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+
+        .fake-menu {
+            display: flex;
+            gap: 40px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .fake-menu a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .fake-menu a:hover {
+            color: var(--white);
+        }
+
+        .hero-legit {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* Animated gradient background */
+        .hero-legit::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1400px;
+            padding: 0 60px;
+        }
+
+        .hero-title {
+            font-size: clamp(60px, 12vw, 180px);
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title-bold {
+            font-weight: 800;
+            display: block;
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 32px);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 60px;
+            opacity: 0.7;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .scroll-indicator-legit {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.4;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Floating elements */
+        .float-element {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: floatAround 30s ease-in-out infinite;
+        }
+
+        .float-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, 50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Stats section - looks legit */
+        .stats-legit {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-top: 100px;
+            padding: 80px 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-legit {
+            text-align: center;
+        }
+
+        .stat-number-legit {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label-legit {
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ============================================
+           TRANSITION SECTION - THE REVEAL
+           ============================================ */
+        
+        .transition {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+            padding: 100px 60px;
+        }
+
+        .transition-text {
+            font-size: clamp(40px, 8vw, 120px);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .transition-wait {
+            animation: fadeInScale 1s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ============================================
+           EXPOSE SECTION - MAXIMUM DESTRUCTION
+           ============================================ */
+        
+        .expose {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        h2 {
+            font-size: clamp(50px, 8vw, 120px);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 60px;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 60px 0 30px;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .mega-number {
+            font-size: clamp(80px, 15vw, 200px);
+            font-weight: 900;
+            line-height: 0.9;
+            margin: 60px 0;
+            text-align: center;
+            letter-spacing: -0.04em;
+        }
+
+        /* Black sections for contrast */
+        .black-section {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .white-section {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .red-box {
+            background: var(--black);
+            padding: 60px;
+            margin: 60px 0;
+            border: 5px solid var(--white);
+        }
+
+        .investor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .investor-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border: 2px solid var(--white);
+        }
+
+        .investor-name {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .investor-role {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .investor-crime {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .quote {
+            background: var(--black);
+            padding: 60px;
+            margin: 60px 0;
+            border-left: 10px solid var(--white);
+            font-size: 24px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            font-style: normal;
+            font-size: 16px;
+            margin-top: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        .climate-box {
+            background: var(--black);
+            padding: 80px 60px;
+            margin: 80px 0;
+            border: 5px solid var(--white);
+        }
+
+        .climate-stat {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid var(--white);
+        }
+
+        ul, ol {
+            margin: 40px 0;
+            padding-left: 40px;
+        }
+
+        li {
+            font-size: 20px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        strong {
+            font-weight: 900;
+        }
+
+        em {
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .table {
+            width: 100%;
+            margin: 60px 0;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 30px;
+            text-align: left;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 18px;
+        }
+
+        .table th {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .scream {
+            font-size: clamp(40px, 8vw, 100px);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.1;
+            margin: 100px 0;
+            text-transform: uppercase;
+        }
+
+        footer {
+            background: var(--black);
+            padding: 100px 60px;
+            text-align: center;
+            border-top: 5px solid var(--red);
+        }
+
+        footer p {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        hr {
+            border: none;
+            border-top: 3px solid currentColor;
+            margin: 100px 0;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 1200px) {
+            .fake-nav {
+                padding: 20px 30px;
+            }
+            
+            .hero-content {
+                padding: 0 30px;
+            }
+
+            .stats-legit {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+                padding: 60px 30px;
+            }
+
+            .container {
+                padding: 0 30px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .investor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FAKE NAVIGATION -->
+    <nav class="fake-nav">
+        <div class="fake-logo">humans&</div>
+        <div class="fake-menu">
+            <a href="#about">About</a>
+            <a href="#research">Research</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO - LOOKS 100% LEGIT -->
+    <section class="hero-legit">
+        <div class="float-element float-1"></div>
+        <div class="float-element float-2"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                AI for<br>
+                <span class="hero-title-bold">collaboration</span>
+            </h1>
+            <p class="hero-subtitle">
+                Building the next generation of human-centric AI that empowers people to work together, understand each other, and solve humanity's greatest challenges.
+            </p>
+            <a href="#" class="hero-cta">
+                Learn More
+                <span>→</span>
+            </a>
+        </div>
+
+        <div class="scroll-indicator-legit">Scroll to explore</div>
+    </section>
+
+    <!-- STATS SECTION - LOOKS LEGIT -->
+    <div class="stats-legit">
+        <div class="stat-legit">
+            <div class="stat-number-legit">$480M</div>
+            <div class="stat-label-legit">Seed Funding</div>
+        </div>
+        <div class="stat-legit">
+            <div class="stat-number-legit">$4.48B</div>
+            <div class="stat-label-legit">Valuation</div>
+        </div>
+        <div class="stat-legit">
+            <div class="stat-number-legit">20+</div>
+            <div class="stat-label-legit">World-Class Team</div>
+        </div>
+        <div class="stat-legit">
+            <div class="stat-number-legit">2026</div>
+            <div class="stat-label-legit">Product Launch</div>
+        </div>
+    </div>
+
+    <!-- TRANSITION - THE REVEAL -->
+    <section class="transition">
+        <h2 class="transition-text transition-wait">
+            Wait.
+        </h2>
+    </section>
+
+    <!-- THE EXPOSE BEGINS -->
+    <section class="expose">
+        <div class="container">
+            <h2 style="color: var(--white); margin-top: 80px;">LET'S TALK ABOUT THOSE NUMBERS</h2>
+            
+            <div class="mega-number">$4,480,000,000</div>
+            
+            <p style="font-size: 28px; text-align: center; font-weight: 700;">
+                FOR A COMPANY THAT IS<br>
+                <span style="font-size: 48px;">THREE MONTHS OLD</span><br>
+                WITH ZERO FUCKING PRODUCT
+            </p>
+        </div>
+    </section>
+
+    <!-- BLACK SECTION - THE BREAKDOWN -->
+    <section class="black-section">
+        <div class="container">
+            <h2>THE MATH</h2>
+            
+            <p style="font-size: 32px; font-weight: 700; line-height: 1.4;">
+                $480,000,000 raised<br>
+                ÷ 20 employees<br>
+                = <span style="font-size: 48px; color: var(--red);">$24,000,000 PER PERSON</span>
+            </p>
+
+            <div class="red-box">
+                <h3>WHAT $24 MILLION COULD BUY:</h3>
+                <ul>
+                    <li>480 houses ($50k each)</li>
+                    <li>2,400 full college scholarships ($10k each)</li>
+                    <li>24,000 high-end Nvidia H100 GPUs</li>
+                    <li>Clean water for 480,000 people</li>
+                    <li>Or apparently: ONE EMPLOYEE WITH A GOOD RESUME</li>
+                </ul>
+            </div>
+
+            <h3>The Valuation Insanity</h3>
+            <table class="table">
+                <tr>
+                    <th>Company</th>
+                    <th>Valuation</th>
+                    <th>Users</th>
+                    <th>Revenue</th>
+                </tr>
+                <tr>
+                    <td><strong>Spotify</strong></td>
+                    <td>$75B</td>
+                    <td>400M users</td>
+                    <td>$13B/year</td>
+                </tr>
+                <tr>
+                    <td><strong>Humans&</strong></td>
+                    <td>$4.48B</td>
+                    <td>0 users</td>
+                    <td>$0</td>
+                </tr>
+            </table>
+
+            <p style="font-size: 28px; font-weight: 700; margin-top: 60px;">
+                They're valued at <span style="color: var(--red);">TWO-THIRDS OF MONTENEGRO'S ENTIRE GDP.</span>
+            </p>
+
+            <p style="font-size: 24px; margin-top: 30px;">
+                Montenegro has roads, hospitals, schools, infrastructure.<br>
+                Humans& has a website and some blog posts.
+            </p>
+        </div>
+    </section>
+
+    <!-- RED SECTION - THE INVESTORS -->
+    <section class="expose">
+        <div class="container">
+            <h2>THE INVESTORS</h2>
+            
+            <p style="font-size: 24px; font-weight: 700;">
+                Let's name the people who looked at "three months old, zero product" and said "yeah, $4.48 billion seems reasonable."
+            </p>
+
+            <div class="investor-grid">
+                <div class="investor-card">
+                    <div class="investor-name">NVIDIA</div>
+                    <div class="investor-role">Lead Investor</div>
+                    <p>They invest in startups who then buy their GPUs. It's not venture capital—it's financing your own sales.</p>
+                    <div class="investor-crime">
+                        <strong>2024:</strong> Invested $1B in AI startups. Gets back $3.5B in GPU sales. Circular financing at its finest.
+                    </div>
+                </div>
+
+                <div class="investor-card">
+                    <div class="investor-name">JEFF BEZOS</div>
+                    <div class="investor-role">Individual Investor</div>
+                    <p>Net worth: $200B+. Could solve actual problems. Chose chatbot vibes instead.</p>
+                    <div class="investor-crime">
+                        This is pocket change to him. That's exactly the problem.
+                    </div>
+                </div>
+
+                <div class="investor-card">
+                    <div class="investor-name">SV ANGEL</div>
+                    <div class="investor-role">Ron Conway</div>
+                    <p>Early investor in Google, Facebook, Twitter. Incredible track record. Which makes this even more baffling.</p>
+                    <div class="investor-crime">
+                        Led the round alongside co-founder Georges Harik.
+                    </div>
+                </div>
+
+                <div class="investor-card">
+                    <div class="investor-name">GV (GOOGLE VENTURES)</div>
+                    <div class="investor-role">Corporate VC</div>
+                    <p>Google's VC arm. Parent company market cap: $2 trillion. Still betting on seed-stage vaporware.</p>
+                    <div class="investor-crime">
+                        Because Google clearly doesn't have enough AI projects already.
+                    </div>
+                </div>
+
+                <div class="investor-card">
+                    <div class="investor-name">EMERSON COLLECTIVE</div>
+                    <div class="investor-role">Laurene Powell Jobs</div>
+                    <p>Net worth: $12B+. Mission: "education, immigration, environment."</p>
+                    <div class="investor-crime">
+                        Apparently chatbots count as environmental work now.
+                    </div>
+                </div>
+
+                <div class="investor-card">
+                    <div class="investor-name">20+ MORE VCs</div>
+                    <div class="investor-role">Institutional + Angels</div>
+                    <p>Forerunner, S32, DCVC, Felicis, CRV, Bloomberg Beta, and dozens more.</p>
+                    <div class="investor-crime">
+                        All looked at this and said "yes."
+                    </div>
+                </div>
+            </div>
+
+            <div class="red-box" style="background: var(--black); border-color: var(--white);">
+                <h3 style="font-size: 40px;">WHERE THIS MONEY COMES FROM</h3>
+                <p style="font-size: 22px; line-height: 1.7;">
+                    This isn't just "VC money." It's:
+                </p>
+                <ul style="font-size: 20px;">
+                    <li><strong>Pension funds</strong> (teachers' retirements)</li>
+                    <li><strong>University endowments</strong> (students' tuition)</li>
+                    <li><strong>401(k) accounts</strong> (your retirement)</li>
+                    <li><strong>Insurance companies</strong> (your premiums)</li>
+                </ul>
+                <p style="font-size: 28px; font-weight: 900; margin-top: 40px; color: var(--red);">
+                    YOUR MONEY IS BEING GAMBLED ON CHATBOT VIBES.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHITE SECTION - AI WRAPPER ECONOMY -->
+    <section class="white-section">
+        <div class="container">
+            <h2 style="color: var(--black);">THE AI WRAPPER ECONOMY</h2>
+            
+            <p style="font-size: 28px; font-weight: 700; color: var(--black);">
+                In 2025, approximately <span style="color: var(--red);">95% of "AI companies"</span> are just wrappers around OpenAI or Claude.
+            </p>
+
+            <h3 style="color: var(--black);">How the scam works:</h3>
+            <ol style="color: var(--black); font-size: 22px;">
+                <li>Take OpenAI API (or Claude, or Gemini)</li>
+                <li>Add some basic UI</li>
+                <li>Write a prompt</li>
+                <li>Call it "AI-powered [X]"</li>
+                <li>Raise $50M+</li>
+                <li>Hope someone acquires you before reality hits</li>
+            </ol>
+
+            <div style="background: var(--red); color: var(--white); padding: 60px; margin: 60px 0;">
+                <h3>2025 AI Funding Insanity:</h3>
+                <ul style="font-size: 20px; line-height: 1.8;">
+                    <li><strong>70% of US VC funding</strong> went to rounds of $100M+</li>
+                    <li><strong>52.5% of ALL venture capital</strong> went to AI</li>
+                    <li><strong>18 companies</strong> captured 1/3 of all funding globally</li>
+                    <li><strong>$2 billion seed rounds</strong> are now "normal"</li>
+                </ul>
+            </div>
+
+            <h3 style="color: var(--black);">What $4.48 Billion Could Actually Do:</h3>
+            <ul style="color: var(--black); font-size: 20px;">
+                <li>Plant <strong>4.48 billion trees</strong> ($1 each)</li>
+                <li>Provide clean water to <strong>89 million people</strong> ($50 each)</li>
+                <li>Fund <strong>44,800 full MIT scholarships</strong> ($100k each)</li>
+                <li>Build <strong>22,400 schools</strong> in developing countries ($200k each)</li>
+                <li>Install solar panels on <strong>448,000 homes</strong> ($10k each)</li>
+                <li>Fund malaria vaccines for <strong>448 million children</strong> ($10 each)</li>
+            </ul>
+
+            <p style="font-size: 32px; font-weight: 900; margin-top: 60px; color: var(--red);">
+                But no. Chatbot vibes > solving human suffering.
+            </p>
+        </div>
+    </section>
+
+    <!-- RED SECTION - CLIMATE CRISIS -->
+    <section class="expose">
+        <div class="container">
+            <h2>WHILE THE PLANET BURNS</h2>
+            
+            <p style="font-size: 24px; font-weight: 700;">
+                Since Humans& was founded in September 2025, here's what happened to Earth:
+            </p>
+
+            <div class="climate-box">
+                <h3 style="font-size: 48px;">THE LAST 5 MONTHS</h3>
+                
+                <div class="climate-stat">
+                    <strong>Global temperature:</strong> +1.48°C above pre-industrial<br>
+                    0.02°C from catastrophic +1.5°C threshold
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Arctic sea ice:</strong> 13.2% below historical average<br>
+                    Lowest winter maximum on record
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Coral bleaching:</strong> 73% of Great Barrier Reef dying<br>
+                    Fifth major event since 1998, most severe ever
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Sea level rise:</strong> 4.5mm in 5 months<br>
+                    Miami, NYC, SF experiencing record flooding
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Wildfires:</strong> 12 million acres burned (US)<br>
+                    150% above historical average
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Species extinction:</strong> 200+ species extinct<br>
+                    Rate: 1,000x faster than natural
+                </div>
+
+                <div class="climate-stat">
+                    <strong>Climate refugees:</strong> 3.2 million displaced<br>
+                    Just in the last 5 months
+                </div>
+            </div>
+
+            <p class="scream">
+                AND THEY INVESTED $4.48 BILLION IN A CHATBOT
+            </p>
+
+            <h3>Florida & New York: Drowning in Real-Time</h3>
+            
+            <p style="font-size: 20px;"><strong>Miami:</strong></p>
+            <ul>
+                <li>Sea levels risen 8 inches since 1950</li>
+                <li>Miami Beach floods during normal high tides</li>
+                <li>$400 billion in real estate at risk</li>
+                <li>King tide flooding: 6-8 times per year</li>
+            </ul>
+
+            <p style="font-size: 20px; margin-top: 30px;"><strong>New York:</strong></p>
+            <ul>
+                <li>100-year floods now happen every 4-5 years</li>
+                <li>$2.1 trillion in assets exposed to flooding</li>
+                <li>Subway system floods regularly</li>
+                <li>By 2100: 20-75% underwater</li>
+            </ul>
+
+            <p style="font-size: 28px; font-weight: 700; margin-top: 60px;">
+                But sure, let's build <span style="color: var(--black); background: var(--white); padding: 5px 15px;">"AI that understands collaboration."</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- BLACK SECTION - RECEIPTS -->
+    <section class="black-section">
+        <div class="container">
+            <h2>INSIDERS CALLING BULLSHIT</h2>
+            
+            <div class="quote">
+                "Yes, we're in an AI bubble. Much of the startup funding environment is not rational."
+                <div class="quote-author">— Sam Altman, CEO of OpenAI</div>
+            </div>
+
+            <div class="quote">
+                "It feels like there's obviously a bubble in the private market. You look at seed rounds with just nothing being tens of billions of dollars. That seems a little unsustainable."
+                <div class="quote-author">— Demis Hassabis, CEO of Google DeepMind</div>
+            </div>
+
+            <div class="quote">
+                "On the economic side, I have my concerns where, even if the technology fulfills all its promises, I think there are players in the ecosystem who, if they just make a timing error, bad things could happen."
+                <div class="quote-author">— Dario Amodei, CEO of Anthropic</div>
+            </div>
+
+            <div class="quote">
+                "This is worse than the dot-com bubble. The investments are larger, the contagion is wider, and the basic unit economics are magnitudes more horrifying."
+                <div class="quote-author">— Edward Zitron, Tech Analyst</div>
+            </div>
+
+            <p style="font-size: 28px; font-weight: 700; margin-top: 80px;">
+                When the CEOs of OpenAI, DeepMind, and Anthropic say <span style="color: var(--red);">"this is unsustainable,"</span> MAYBE FUCKING LISTEN.
+            </p>
+        </div>
+    </section>
+
+    <!-- FINAL SECTION -->
+    <section class="expose">
+        <div class="container">
+            <h2>IN CONCLUSION</h2>
+            
+            <p style="font-size: 28px; font-weight: 700; line-height: 1.5;">
+                Humans& raised $480 million at a $4.48 billion valuation after three months with ZERO PRODUCT.
+            </p>
+
+            <p style="font-size: 24px; margin-top: 40px;">
+                While they raised that money:
+            </p>
+
+            <ul style="font-size: 22px;">
+                <li>Coral reefs died</li>
+                <li>Cities flooded</li>
+                <li>Wildfires raged</li>
+                <li>Species went extinct</li>
+                <li>3.2 million became climate refugees</li>
+            </ul>
+
+            <p style="font-size: 24px; margin-top: 40px;">
+                Their investors include some of the richest people on Earth.
+            </p>
+
+            <p style="font-size: 24px;">
+                They could solve actual problems.
+            </p>
+
+            <p style="font-size: 48px; font-weight: 900; margin-top: 40px;">
+                They chose vibes.
+            </p>
+
+            <p class="scream" style="margin: 120px 0;">
+                THIS IS WHAT COLLAPSE LOOKS LIKE
+            </p>
+
+            <hr style="border-color: var(--white);">
+
+            <p style="font-size: 18px; text-align: center; margin-top: 80px; opacity: 0.7;">
+                This site will be updated when Humans& will be destroyed.<br>
+                Until then, the receipts speak for themselves.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 20px; font-weight: 700; margin-bottom: 40px;">
+                ALL DATA SOURCED FROM PUBLIC REPORTING
+            </p>
+            <p style="font-size: 14px; opacity: 0.6;">
+                The New York Times | TechCrunch | Reuters | Bloomberg | Forbes<br>
+                Financial Times | NOAA | NASA | IPCC | Public filings
+            </p>
+            <p style="font-size: 16px; margin-top: 60px;">
+                This is protected speech. All claims are fact-checkable.<br>
+                All opinions clearly labeled. Errors corrected immediately.
+            </p>
+            <p style="font-size: 20px; font-weight: 700; color: var(--red); margin-top: 60px;">
+                by Max.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
