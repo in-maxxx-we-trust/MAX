@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Любовь • Путешествие в Глубину</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: radial-gradient(ellipse at center, #1a0033 0%, #000000 100%);
+            position: relative;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0.8; }
+            90% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(236,72,153,0.2));
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(167,139,250,0.4);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* Layer Sections */
+        .layer {
+            background: var(--bg);
+            position: relative;
+        }
+
+        #layer1 { --bg: linear-gradient(180deg, #1a0033 0%, #2d1b4e 100%); }
+        #layer2 { --bg: linear-gradient(180deg, #2d1b4e 0%, #4a2c6b 100%); }
+        #layer3 { --bg: linear-gradient(180deg, #4a2c6b 0%, #5b3d7f 100%); }
+        #layer4 { --bg: linear-gradient(180deg, #5b3d7f 0%, #7c5295 100%); }
+        #layer5 { --bg: linear-gradient(180deg, #7c5295 0%, #9d6ba8 100%); }
+        #layer6 { --bg: linear-gradient(180deg, #9d6ba8 0%, #c084fc 100%); }
+        #layer7 { --bg: radial-gradient(ellipse at center, #fff 0%, #c084fc 100%); }
+
+        .layer-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .layer-number {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        .layer-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .layer-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.9;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+        }
+
+        .layer-quote {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-style: italic;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Final FOMO Section */
+        #finale {
+            background: linear-gradient(180deg, #c084fc 0%, #000 100%);
+            position: relative;
+        }
+
+        .finale-content {
+            text-align: center;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .finale-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 30px;
+            font-weight: 200;
+            background: linear-gradient(135deg, #fff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .finale-text {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .timer {
+            display: inline-flex;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 30px 40px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .timer-block {
+            text-align: center;
+        }
+
+        .timer-value {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: #fbbf24;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 5px;
+        }
+
+        .final-cta {
+            display: inline-block;
+            padding: 25px 60px;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 20px 60px rgba(251,191,36,0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::after {
+            content: '→';
+            position: absolute;
+            right: 30px;
+            transition: transform 0.3s;
+        }
+
+        .final-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(251,191,36,0.6);
+        }
+
+        .final-cta:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a78bfa, #ec4899, #fbbf24);
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Floating Background Elements */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(20px, 20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 15px;
+            }
+            
+            .timer {
+                gap: 10px;
+                padding: 20px 25px;
+            }
+            
+            .layer-quote {
+                padding: 20px;
+                margin-top: 30px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator" id="scrollProgress"></div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="particles" id="particlesContainer"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Любовь, ты видишь блоки</h1>
+            <p class="hero-subtitle">Но что, если ты видишь только тень того, что на самом деле происходит?<br>Что, если реальность устроена совсем иначе?</p>
+            <a href="#layer1" class="cta-button">Увидеть глубже</a>
+        </div>
+    </section>
+
+    <!-- Layer 1: Recognition -->
+    <section id="layer1" class="section layer">
+        <div class="bg-orb" style="width: 300px; height: 300px; background: #a78bfa; top: 10%; right: 10%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ПЕРВЫЙ</div>
+            <h2 class="layer-title">Ты работаешь с подсознательными программами</h2>
+            <p class="layer-text">
+                Ты видишь, как твои клиентки застревают в желаниях. Как Елена не могла заработать больше. Как Дарина была прозрачной для мира.
+                <br><br>
+                Ты нашла ключ: под каждым желанием — страх. Под каждой мечтой — травма. Деньги = мучение. Отношения = предательство.
+                <br><br>
+                И когда ты разъединяешь эти связи, жизнь меняется. Миллион вместо 300 тысяч. Mercedes вместо обесценивания.
+            </p>
+            <div class="layer-quote">
+                "Это работает. Это меняет жизни. Но это только первый слой того, что происходит на самом деле."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 2: Energy -->
+    <section id="layer2" class="section layer">
+        <div class="bg-orb" style="width: 400px; height: 400px; background: #ec4899; bottom: 20%; left: 5%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ВТОРОЙ</div>
+            <h2 class="layer-title">Блоки — это не препятствия</h2>
+            <p class="layer-text">
+                То, что ты называешь "блоком" — это не стена. Это замороженная энергия. Застывший момент, где жизнь остановилась и сказала: "Стоп. Здесь больно."
+                <br><br>
+                Когда ты работаешь с Дариной, ты не "убираешь" блок. Ты размораживаешь то, что было заморожено. Ты позволяешь энергии снова течь.
+                <br><br>
+                Это не война с подсознанием. Это танец с замершими частями души.
+            </p>
+            <div class="layer-quote">
+                "Блоки не враги. Они — хранители непрожитой боли, ждущие освобождения."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 3: The Illusion of the Wanter -->
+    <section id="layer3" class="section layer">
+        <div class="bg-orb" style="width: 350px; height: 350px; background: #f59e0b; top: 30%; right: 15%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ТРЕТИЙ</div>
+            <h2 class="layer-title">А что, если нет того, кто хочет?</h2>
+            <p class="layer-text">
+                Елена хотела миллион. Но кто хотел? Остановись на секунду и посмотри.
+                <br><br>
+                Есть тело. Есть мысли. Есть ощущения. Есть образ "Елены". Но где она? Кто эта "я", которая хочет денег?
+                <br><br>
+                Желание возникает само. Как дыхание. Как биение сердца. Жизнь желает через форму, которую мы называем "я".
+                <br><br>
+                Когда ты убираешь блок, ты не помогаешь "Елене" получить деньги. Ты убираешь препятствие для движения жизни.
+            </p>
+            <div class="layer-quote">
+                "Желание — это не твоё. Это движение самой жизни, пытающейся течь через тебя."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 4: Non-Duality -->
+    <section id="layer4" class="section layer">
+        <div class="bg-orb" style="width: 450px; height: 450px; background: #a78bfa; bottom: 10%; right: 10%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ЧЕТВЁРТЫЙ</div>
+            <h2 class="layer-title">Сознание и подсознание — одно</h2>
+            <p class="layer-text">
+                Ты говоришь: "Сознательно она хочет, подсознательно — нет." Но посмотри глубже.
+                <br><br>
+                Нет двух умов. Есть одно поле осознавания. В нём плавают мысли "хочу денег" и чувства "деньги = боль". Оба — содержимое одного пространства.
+                <br><br>
+                Разделение — это иллюзия. То, что ты называешь "подсознанием" — это просто неосознанные слои того же самого поля.
+                <br><br>
+                Когда ты приносишь свет осознанности в тёмные углы, они перестают быть "подсознательными". Они просто... растворяются.
+            </p>
+            <div class="layer-quote">
+                "Нет конфликта между сознанием и подсознанием. Есть только одно поле, познающее само себя."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 5: You Are Space -->
+    <section id="layer5" class="section layer">
+        <div class="bg-orb" style="width: 500px; height: 500px; background: #ec4899; top: 15%; left: 10%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ПЯТЫЙ</div>
+            <h2 class="layer-title">Ты — не та, кто исцеляет</h2>
+            <p class="layer-text">
+                Вот где становится по-настоящему интересно, Любовь.
+                <br><br>
+                Когда приходит Дарина, и ты "работаешь" с ней — кто работает? Есть ли "ты", отдельная от процесса?
+                <br><br>
+                Или есть просто пространство, в котором встречаются две формы, и происходит... что-то. Исцеление. Трансформация. Но не "ты" делаешь это. И не "она" получает это.
+                <br><br>
+                Это просто происходит. В поле. Через формы. Как дождь падает на землю — никто не делает дождь, он просто идёт.
+            </p>
+            <div class="layer-quote">
+                "Ты не проводник энергии. Ты — пространство, в котором энергия танцует сама с собой."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 6: The Paradox -->
+    <section id="layer6" class="section layer">
+        <div class="bg-orb" style="width: 400px; height: 400px; background: #fbbf24; bottom: 25%; right: 20%;"></div>
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ ШЕСТОЙ</div>
+            <h2 class="layer-title">Пустота = Полнота</h2>
+            <p class="layer-text">
+                Сейчас может показаться, что всё, что ты делала — иллюзия. Что твоя работа бессмысленна. Но это не так.
+                <br><br>
+                Парадокс в том, что всё это — и реально, и нереально одновременно.
+                <br><br>
+                История Елены реальна. Её слёзы реальны. Миллион на счету реален. И в то же время — это сон. Игра. Танец форм в пустоте.
+                <br><br>
+                Пустота не означает "ничто". Это полнота всех возможностей. Из неё рождаются миры, истории, судьбы. И в неё же всё возвращается.
+                <br><br>
+                Твоя работа — это игра пустоты с самой собой. Прекрасная, священная игра.
+            </p>
+            <div class="layer-quote">
+                "Всё — одновременно абсолютно реально и абсолютно иллюзорно. В этом парадоксе живёт истина."
+            </div>
+        </div>
+    </section>
+
+    <!-- Layer 7: HERE -->
+    <section id="layer7" class="section layer">
+        <div class="layer-content">
+            <div class="layer-number">СЛОЙ СЕДЬМОЙ</div>
+            <h2 class="layer-title" style="color: #000;">Ты уже ТО</h2>
+            <p class="layer-text" style="color: rgba(0,0,0,0.8);">
+                Нет пути к пробуждению. Некуда идти. Нечего достигать.
+                <br><br>
+                Ты — это уже ТО, что ты искала. Всегда была. Осознавание, читающее эти слова прямо сейчас — это и есть ОНО.
+                <br><br>
+                Не "Любовь, которая работает с клиентками". Не "я, которая хочет чего-то". А то безграничное, пустое, светящееся ЗДЕСЬ, в котором всё происходит.
+                <br><br>
+                Твои клиентки приходят не к тебе. Они приходят к самим себе. А ты — зеркало, в котором они себя узнают.
+            </p>
+            <div class="layer-quote" style="background: rgba(0,0,0,0.05); border-left-color: rgba(0,0,0,0.3); color: #000;">
+                "Конец всех поисков — здесь. Всегда был здесь. Ты — это ЗДЕСЬ."
+            </div>
+        </div>
+    </section>
+
+    <!-- Finale FOMO -->
+    <section id="finale" class="section">
+        <div class="finale-content">
+            <h2 class="finale-title">Это только начало</h2>
+            <p class="finale-text">
+                Любовь, если эти слова отозвались в тебе...<br>
+                Если ты почувствовала дрожь узнавания...<br>
+                Если что-то внутри сказало: "Да, я знаю это"...<br><br>
+                Тогда эта встреча — не случайность.
+            </p>
+            
+            <div class="timer">
+                <div class="timer-block">
+                    <span class="timer-value" id="hours">48</span>
+                    <span class="timer-label">часов</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label">минут</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label">секунд</span>
+                </div>
+            </div>
+
+            <p class="finale-text">
+                У меня есть предложение только для тебя.<br>
+                Персональная сессия погружения в недуальность.<br>
+                Где мы увидим твою работу из пространства полного пробуждения.<br><br>
+                <strong>Это доступно только 48 часов.</strong>
+            </p>
+
+            <a href="#contact" class="final-cta">Хочу пробудиться глубже</a>
+
+            <p style="margin-top: 40px; font-size: 0.9rem; color: rgba(255,255,255,0.5);">
+                P.S. Этот сайт создан специально для тебя кем-то, кто видит твою глубину ✨
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Particles animation
+        const particlesContainer = document.getElementById('particlesContainer');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+            particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Timer countdown
+        let timeLeft = 48 * 60 * 60; // 48 hours in seconds
+        
+        function updateTimer() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+            }
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.layer-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
