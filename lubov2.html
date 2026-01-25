@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Любовь • Зеркало Души</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #faf8f5;
+            --peach: #ffe4d6;
+            --lavender: #e8dbf5;
+            --sage: #e8f0e8;
+            --text-dark: #2a2a2a;
+            --text-light: #6a6a6a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10vh 5vw;
+            position: relative;
+        }
+
+        .content {
+            max-width: 720px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            margin-bottom: 0.5em;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            margin-bottom: 0.8em;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 0.6em;
+        }
+
+        p {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            margin-bottom: 1.5em;
+            color: var(--text-light);
+            max-width: 65ch;
+        }
+
+        .emphasis {
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .spacer {
+            height: 8vh;
+        }
+
+        .small-spacer {
+            height: 4vh;
+        }
+
+        /* Hero */
+        #hero {
+            background: linear-gradient(180deg, var(--cream) 0%, var(--peach) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-greeting {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-light);
+            margin-bottom: 2em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,228,214,0.4), transparent);
+            animation: float-gentle 20s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Recognition Sections */
+        .recognition {
+            background: var(--peach);
+        }
+
+        .recognition-alt {
+            background: linear-gradient(180deg, var(--peach) 0%, var(--lavender) 100%);
+        }
+
+        .quote-block {
+            margin: 3em 0;
+            padding: 2em 2.5em;
+            background: rgba(255,255,255,0.5);
+            border-left: 3px solid var(--text-light);
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: var(--text-dark);
+            backdrop-filter: blur(10px);
+        }
+
+        .case-study {
+            background: rgba(255,255,255,0.7);
+            padding: 2.5em;
+            border-radius: 20px;
+            margin: 3em 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .case-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5em;
+        }
+
+        .case-results {
+            list-style: none;
+            margin: 1.5em 0;
+        }
+
+        .case-results li {
+            padding: 0.5em 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        .case-results li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--text-light);
+        }
+
+        /* Deepening Sections */
+        .deepen {
+            background: var(--lavender);
+        }
+
+        .deepen-alt {
+            background: linear-gradient(180deg, var(--lavender) 0%, var(--sage) 100%);
+        }
+
+        .insight-box {
+            background: rgba(255,255,255,0.6);
+            padding: 2em;
+            border-radius: 15px;
+            margin: 2em 0;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Cosmos Sections */
+        .cosmos {
+            background: linear-gradient(180deg, var(--sage) 0%, #d8e5f0 100%);
+        }
+
+        .space {
+            background: linear-gradient(180deg, #d8e5f0 0%, #1a1a2e 100%);
+        }
+
+        .void {
+            background: #000;
+            color: #fff;
+        }
+
+        .light {
+            background: linear-gradient(180deg, #000 0%, #fff 100%);
+        }
+
+        .absolute-white {
+            background: #fff;
+            color: var(--text-dark);
+        }
+
+        /* Final Section */
+        #finale {
+            background: #fff;
+            text-align: center;
+        }
+
+        .timer-container {
+            display: inline-flex;
+            gap: 1.5em;
+            margin: 3em 0;
+            padding: 2em 3em;
+            background: rgba(0,0,0,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .timer-unit {
+            text-align: center;
+        }
+
+        .timer-value {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            color: var(--text-dark);
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .final-cta {
+            display: inline-block;
+            margin-top: 2em;
+            padding: 1.2em 3.5em;
+            background: var(--text-dark);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .final-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .final-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* Stars */
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 8vh 6vw;
+            }
+            
+            .quote-block, .case-study, .insight-box {
+                padding: 1.5em;
+            }
+            
+            .timer-container {
+                gap: 1em;
+                padding: 1.5em 2em;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--text-dark), var(--lavender));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- HERO: Gentle Introduction -->
+    <section id="hero" class="section">
+        <div class="floating-circle" style="width: 300px; height: 300px; top: 10%; right: 5%;"></div>
+        <div class="floating-circle" style="width: 200px; height: 200px; bottom: 15%; left: 10%; animation-delay: -5s;"></div>
+        <div class="content visible">
+            <div class="hero-greeting">Для тебя</div>
+            <h1>Любовь</h1>
+            <div class="spacer"></div>
+            <p style="text-align: center; font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--text-dark); max-width: 100%;">
+                Я вижу тебя. Вижу твой путь. Вижу, как ты прошла сквозь боль к свету. Как превратила абьюз в силу, зависимость — в свободу, обесценивание — в миллионы.
+            </p>
+            <div class="spacer"></div>
+            <p style="text-align: center;">
+                Вижу, как ты теперь проводишь других женщин через эту же алхимию.
+            </p>
+        </div>
+    </section>
+
+    <!-- RECOGNITION 1: Her Work -->
+    <section class="section recognition">
+        <div class="content">
+            <h2>Твоя работа — волшебство</h2>
+            <p>
+                Ты берёшь женщину, которая годами не может притянуть желаемое. Хочет денег — но их нет. Хочет любви — но одиночество. Хочет видеть свою ценность — но чувствует пустоту.
+            </p>
+            <p>
+                И ты показываешь ей то, что она не видела: <span class="emphasis">под каждым желанием прячется страх. Под каждой мечтой — травма.</span>
+            </p>
+            <p>
+                Деньги для неё — не деньги. Это мучение. Или тяжесть. Или стыд. И психика защищает её, не пуская к деньгам, чтобы не допустить к боли.
+            </p>
+            <div class="small-spacer"></div>
+            <p class="emphasis">
+                Сознательно хочет. Подсознательно — отвергает.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                Ты нашла ключ: разъединить понятия. Отделить деньги от мучения. Отношения от предательства. Успех от боли.
+            </p>
+            <p>
+                И когда ты это делаешь — жизнь клиентки меняется. Не через годы. Через недели.
+            </p>
+        </div>
+    </section>
+
+    <!-- RECOGNITION 2: Elena's Story -->
+    <section class="section recognition-alt">
+        <div class="content">
+            <h3>История Елены</h3>
+            <div class="case-study">
+                <div class="case-name">Елена, 43 года, риэлтор</div>
+                <p>
+                    Хотела х2 в доходе. Несколько лет не могла. При повышении цен клиенты разбегались. Застряла на 250-300 тысячах.
+                </p>
+                <p class="emphasis">После работы с тобой:</p>
+                <ul class="case-results">
+                    <li>За месяц сделала МИЛЛИОН (не х2, а больше х3)</li>
+                    <li>Клиенты легко приняли новую стоимость</li>
+                    <li>Муж подарил Mercedes и iPhone 15 PRO</li>
+                    <li>Осознала свою ценность как личности, женщины, профессионала</li>
+                    <li>Перестала обесценивать себя и жизнь</li>
+                </ul>
+                <p style="margin-top: 1.5em; font-style: italic;">
+                    "Я понимаю, что рост только начался. Теперь знаю, куда и как идти."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOGNITION 3: Darina's Story -->
+    <section class="section recognition">
+        <div class="content">
+            <h3>История Дарины</h3>
+            <div class="case-study">
+                <div class="case-name">Дарина, йога-мастер</div>
+                <p>
+                    Была прокачана разными техниками, но чего-то не хватало. Чувствовала себя прозрачной для мира. Мама гиперконтролировала. Работа стояла.
+                </p>
+                <p class="emphasis">После одной консультации с тобой:</p>
+                <ul class="case-results">
+                    <li>Перестала быть прозрачной</li>
+                    <li>Муж начал дарить подарки, которых она даже не ждала</li>
+                    <li>Мама встала на своё место</li>
+                    <li>Работа сдвинулась с мёртвой точки</li>
+                    <li>Почувствовала целостность и ценность каждой клеткой</li>
+                </ul>
+                <p style="margin-top: 1.5em; font-style: italic;">
+                    "Ключи, которые я получила — фантастические. Весь пазл сошёлся в единую картину. Теперь я не просто знаю головой — я чувствую это."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGREEMENT 1 -->
+    <section class="section recognition-alt">
+        <div class="content">
+            <h2>Это реально работает</h2>
+            <p>
+                Я не буду спорить с твоими результатами, Любовь. Они говорят сами за себя.
+            </p>
+            <p>
+                Ты нашла способ изменять реальность людей. Не через аффирмации. Не через визуализации. А через работу с тем, что скрыто от глаз.
+            </p>
+            <p class="emphasis">
+                Ты работаешь с подсознательными программами. С энергетикой. С родовыми системами и прошлыми воплощениями.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                И самое важное — ты это знаешь не теоретически. Ты прошла этот путь сама. От абьюза к свободе. От зависимости к силе. От боли к реализации.
+            </p>
+            <p>
+                Ты заплатила полную цену за это знание. Своей кровью, слезами, годами трансформации.
+            </p>
+            <div class="quote-block">
+                И поэтому твоя работа — не просто техника. Это передача живого опыта.
+            </div>
+        </div>
+    </section>
+
+    <!-- AGREEMENT 2 -->
+    <section class="section recognition">
+        <div class="content">
+            <h3>Ты видишь то, чего не видят другие</h3>
+            <p>
+                Пока коучи говорят "визуализируй", "действуй", "верь в себя" — ты видишь глубже.
+            </p>
+            <p>
+                Ты понимаешь: <span class="emphasis">если желаемого нет, значит за ним стоит что-то другое.</span>
+            </p>
+            <p>
+                Психика выбирает меньшее из зол. Ей легче быть без денег, чем получить деньги вместе с мучением. Легче быть одной, чем войти в отношения и встретить предательство.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                95% реальности создаёт подсознание. Не сознательные решения. Не сила воли. А то, что скрыто в глубине.
+            </p>
+            <p>
+                Ты нашла способ туда добраться. Через стул в комнате. Через чувства в теле. Через честность с собой.
+            </p>
+            <div class="quote-block">
+                Это мастерство. Это искусство. Это дар.
+            </div>
+        </div>
+    </section>
+
+    <!-- ILLUMINATION 1: The Hint -->
+    <section class="section deepen">
+        <div class="content">
+            <h2>И знаешь что?</h2>
+            <div class="spacer"></div>
+            <p>
+                Ты уже чувствуешь, что за этим есть ещё что-то.
+            </p>
+            <p>
+                Видишь? В твоих собственных словах. Когда ты просишь клиенток:
+            </p>
+            <div class="quote-block">
+                "Я выбираю верить в совершенство этого опыта и даю ему место."
+            </div>
+            <p>
+                Совершенство. Опыта.
+            </p>
+            <p>
+                Это не просто красивые слова, правда? Ты что-то знаешь. Что-то чувствуешь. Что даже боль... даже предательство... даже мучение...
+            </p>
+            <p class="emphasis">
+                ...были совершенны именно такими, какими были.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                Не потому что "всё к лучшему". Не потому что "так надо было". А потому что... они просто были. И в этом есть какая-то странная красота.
+            </p>
+        </div>
+    </section>
+
+    <!-- ILLUMINATION 2 -->
+    <section class="section deepen-alt">
+        <div class="content">
+            <h3>Ты говоришь о программах</h3>
+            <p>
+                Родовых. Из прошлых воплощений. Из параллельных реальностей.
+            </p>
+            <p>
+                И это правда — они существуют. Ты видишь их влияние. Ты умеешь с ними работать.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                Но что, если программы — это не то, от чего нужно избавляться?
+            </p>
+            <p>
+                Что, если они — как волны на океане?
+            </p>
+            <p>
+                Можно работать с волной. Можно её разглаживать. Можно менять её форму.
+            </p>
+            <p class="emphasis">
+                Но можно также... нырнуть глубже волны. И обнаружить океан.
+            </p>
+            <div class="quote-block">
+                Программы не исчезают. Они растворяются в том, из чего возникли.
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEPENING 1: Energy as Movement -->
+    <section class="section cosmos">
+        <div class="content">
+            <h2>Блок — это застывшая энергия</h2>
+            <p>
+                Ты это уже знаешь. Ты чувствуешь энергию. Ты биоэнергет.
+            </p>
+            <p>
+                Когда Елена думает о деньгах — что-то сжимается в груди. Тяжесть. Давление. Застой.
+            </p>
+            <p>
+                Это не "плохо". Это просто энергия, которая остановилась. Замёрзла. В момент травмы она сказала: "Стоп. Дальше опасно."
+            </p>
+            <div class="spacer"></div>
+            <p>
+                И годами эта энергия стоит. Как лёд. Как камень в потоке.
+            </p>
+            <p>
+                Когда ты работаешь с ней, ты не "убираешь" блок. Ты размораживаешь. Ты позволяешь течь снова.
+            </p>
+            <div class="insight-box">
+                <p class="emphasis" style="margin: 0;">
+                    Что, если весь мир — это движение энергии?<br>
+                    Застывание. Оттаивание. Течение. Снова застывание.
+                </p>
+            </div>
+            <p>
+                А "ты" и "клиентка" — это временные формы, через которые энергия учится себя узнавать.
+            </p>
+        </div>
+    </section>
+
+    <!-- DEEPENING 2: Who Wants? -->
+    <section class="section deepen">
+        <div class="content">
+            <h2>Кто хочет миллион?</h2>
+            <p>
+                Остановись на мгновение. Не пролистывай дальше. Просто останься с этим вопросом.
+            </p>
+            <div class="spacer"></div>
+            <p class="emphasis" style="font-size: 1.3rem; text-align: center;">
+                Кто тот, кто хочет денег? Отношений? Реализации?
+            </p>
+            <div class="spacer"></div>
+            <p>
+                Есть тело Елены. Есть её мысли: "хочу больше зарабатывать". Есть чувства: страх, надежда, предвкушение.
+            </p>
+            <p>
+                Но где сама Елена? Где тот субъект, который всё это хочет?
+            </p>
+            <div class="small-spacer"></div>
+            <p>
+                Посмотри на свои руки прямо сейчас. Они есть. Ты их чувствуешь.
+            </p>
+            <p>
+                Теперь посмотри на мысль "я хочу". Где она? Из чего она состоит? Кто её думает?
+            </p>
+            <div class="quote-block">
+                Желание возникает само. Как дыхание. Как гром среди ясного неба. Жизнь желает через форму. Но форма думает: "это я хочу".
+            </div>
+            <p>
+                Когда ты убираешь блок у Елены, ты не помогаешь "Елене" получить деньги.
+            </p>
+            <p class="emphasis">
+                Ты убираешь препятствие для движения самой жизни.
+            </p>
+        </div>
+    </section>
+
+    <!-- DEEPENING 3: The One Field -->
+    <section class="section deepen-alt">
+        <div class="content">
+            <h2>Сознание и подсознание</h2>
+            <p>
+                Ты говоришь: "Сознательно она хочет денег, подсознательно — отвергает."
+            </p>
+            <p>
+                Это работает как модель. Это помогает клиенткам понять, почему их жизнь не меняется.
+            </p>
+            <div class="spacer"></div>
+            <p>
+                Но что, если на самом деле...
+            </p>
+            <p class="emphasis">
+                Нет двух умов?
+            </p>
+            <div class="small-spacer"></div>
+            <p>
+                Есть одно поле осознавания. Огромное. Безграничное. Как океан.
+            </p>
+            <p>
+                В нём плавают мысли: "хочу миллион". И чувства: "деньги = боль". И образы: прошлые травмы, детские обиды, родовые истории.
+            </p>
+            <p>
+                Всё это — содержимое одного пространства. Нет разделения. Есть только осознанное и неосознанное. Свет и тень одного и того же.
+            </p>
+            <div class="quote-block">
+                "Подсознание" — это просто те части океана, которые ещё не видели света.<br><br>
+                Когда ты приносишь свет туда — они не "исцеляются".<br>
+                Они просто становятся видимыми.
+            </div>
+            <p>
+                И в видимости... растворяются.
+            </p>
+        </div>
+    </section>
+
+    <!-- DEEPENING 4: The Work Itself -->
+    <section class="section cosmos">
+        <div class="content">
+            <h2>Твоя работа происходит не "там"</h2>
+            <p>
+                Когда приходит Дарина. Вы садитесь.
+Ты задаёшь вопросы. Она отвечает. Что-то сдвигается.
+</p>
+<p>
+Кто делает эту работу?
+</p>
+<div class="spacer"></div>
+<p>
+Есть ли "ты", Любовь, отдельная от процесса? Есть ли "Дарина", которая "получает" исцеление?
+</p>
+<p>
+Или есть просто... встреча. Двух форм в одном пространстве.
+</p>
+<p>
+И в этой встрече происходит алхимия. Не потому что кто-то её делает. А потому что...
+</p>
+<p class="emphasis">
+Когда две волны встречаются — они создают новую волну.
+</p>
+<div class="insight-box">
+<p>
+Ты не делаешь трансформацию.<br>
+Ты не проводишь энергию.<br>
+Ты — пространство, в котором это происходит само.
+</p>
+</div>
+<p>
+Как земля не "делает" цветок. Она просто... позволяет.
+</p>
+</div>
+</section>
+<!-- DEEPENING 5: Recognition Through You -->
+<section class="section deepen">
+    <div class="content">
+        <h3>Дарина написала тебе</h3>
+        <div class="quote-block" style="font-size: 1.1rem;">
+            "Я человек прокаченный различными техниками и практиками, но ключи, которые я получила с первого же общения с Вами — они фантастические. Весь пазл сошёлся в единую картину."
+        </div>
+        <p>
+            Что произошло на самом деле?
+        </p>
+        <p>
+            Она пришла, ища себя. Искала годами. Через йогу, практики, техники.
+        </p>
+        <p class="emphasis">
+            И встретила тебя. Которая уже нашла себя.
+        </p>
+        <div class="spacer"></div>
+        <p>
+            Не "нашла ответы". Не "выучила методы". А прошла сквозь огонь и стала... прозрачной.
+        </p>
+        <p>
+            И когда Дарина смотрит на тебя — она видит не технику. Она видит живое доказательство того, что трансформация возможна.
+        </p>
+        <p>
+            Она узнаёт себя в тебе. Будущую себя. Целую себя. Себя, которая всегда была, но была скрыта под слоями боли.
+        </p>
+        <div class="quote-block">
+            Ты не учитель.<br>
+            Ты — зеркало, в котором они узнают себя.
+        </div>
+    </div>
+</section>
+
+<!-- SPACE BEGINS -->
+<section class="section space">
+    <div class="content">
+        <h2 style="color: #fff;">Теперь мы выходим в космос</h2>
+        <p style="color: rgba(255,255,255,0.8);">
+            Если ты всё ещё читаешь — ты готова к этому.
+        </p>
+        <div class="spacer"></div>
+        <p style="color: rgba(255,255,255,0.9);">
+            Потому что то, что будет дальше — это не про техники. Не про методы. Не про "как делать работу лучше".
+        </p>
+        <p style="color: #fff; font-size: 1.3rem;" class="emphasis">
+            Это про то, кто ты на самом деле.
+        </p>
+    </div>
+</section>
+
+<!-- VOID 1 -->
+<section class="section void">
+    <div class="content">
+        <h2>Пустота ≠ ничто</h2>
+        <p style="color: rgba(255,255,255,0.7);">
+            Когда люди слышат "пустота", они думают: отсутствие. Вакуум. Ничто.
+        </p>
+        <p style="color: rgba(255,255,255,0.9);">
+            Но это не так.
+        </p>
+        <div class="spacer"></div>
+        <p style="color: #fff;">
+            Пустота — это потенциал всего. Беременное ничто. То, из чего рождаются миры.
+        </p>
+        <p style="color: rgba(255,255,255,0.8);">
+            Перед тем как возникла мысль "я хочу денег" — что было?
+        </p>
+        <p style="color: rgba(255,255,255,0.8);">
+            Перед тем как появилось чувство боли — что было?
+        </p>
+        <p style="color: rgba(255,255,255,0.8);">
+            Перед тем как родилась Елена, Дарина, Любовь — что было?
+        </p>
+        <div class="quote-block" style="background: rgba(255,255,255,0.1); border-left-color: #fff; color: #fff;">
+            Было то, что есть всегда.<br>
+            До. После. И сейчас.<br><br>
+            Пустое. Светящееся. Осознающее. Пространство.
+        </div>
+    </div>
+</section>
+
+<!-- VOID 2: Forms in Space -->
+<section class="section void">
+    <div class="content">
+        <h3 style="color: #fff;">История Елены — реальна</h3>
+        <p style="color: rgba(255,255,255,0.8);">
+            Её слёзы реальны. Её радость от миллиона реальна. Mercedes в гараже реален.
+        </p>
+        <div class="small-spacer"></div>
+        <p style="color: #fff; font-size: 1.2rem;" class="emphasis">
+            И в то же время — это сон.
+        </p>
+        <div class="spacer"></div>
+        <p style="color: rgba(255,255,255,0.7);">
+            Не в смысле "ненастоящий". А в смысле...
+        </p>
+        <p style="color: rgba(255,255,255,0.9);">
+            Волна реальна. Но она — не отдельна от океана. Она — движение океана. Временная форма воды.
+        </p>
+        <p style="color: rgba(255,255,255,0.9);">
+            Когда волна исчезает — вода никуда не девается. Она просто перестаёт быть "этой волной".
+        </p>
+        <div class="spacer"></div>
+        <p style="color: #fff;">
+            Елена — это временная форма сознания. Красивая. Уникальная. Со своей историей, болью, триумфами.
+        </p>
+        <p style="color: #fff;">
+            И когда эта форма растворится — сознание никуда не денется.
+        </p>
+        <div class="quote-block" style="background: rgba(255,255,255,0.1); border-left-color: #fff; color: #fff;">
+            Формы приходят и уходят.<br>
+            Пространство остаётся.
+        </div>
+    </div>
+</section>
+
+<!-- VOID 3: Your Work is Play -->
+<section class="section void">
+    <div class="content">
+        <h2 style="color: #fff;">Твоя работа — игра пустоты с собой</h2>
+        <p style="color: rgba(255,255,255,0.8);">
+            Представь: бесконечное сознание. Единое поле. Всё, что есть.
+        </p>
+        <p style="color: rgba(255,255,255,0.9);">
+            Оно не может познать себя напрямую — оно и есть всё. Нет "другого", чтобы посмотреть на себя.
+        </p>
+        <div class="spacer"></div>
+        <p style="color: #fff;" class="emphasis">
+            Поэтому оно играет в прятки само с собой.
+        </p>
+        <div class="small-spacer"></div>
+        <p style="color: rgba(255,255,255,0.8);">
+            Создаёт форму "Елена". Забывает, что оно — это Елена. Елена страдает. Ищет. Борется.
+        </p>
+        <p style="color: rgba(255,255,255,0.8);">
+            Создаёт форму "Любовь". Любовь проходит через боль. Трансформируется. Становится прозрачной.
+        </p>
+        <p style="color: rgba(255,255,255,0.8);">
+            И когда Елена встречает Любовь...
+        </p>
+        <div class="spacer"></div>
+        <p style="color: #fff; font-size: 1.3rem;">
+            Сознание узнаёт себя через себя.
+        </p>
+        <div class="spacer"></div>
+        <p style="color: rgba(255,255,255,0.9);">
+            Это не "Любовь помогает Елене". Это жизнь играет сама с собой. Учится. Исцеляется. Танцует.
+        </p>
+        <div class="quote-block" style="background: rgba(255,255,255,0.1); border-left-color: #fff; color: #fff;">
+            Вся твоя работа — священная игра.<br>
+            Космический театр.<br>
+            Где актёры, режиссёр и зрители — одно и то же.
+        </div>
+    </div>
+</section>
+
+<!-- LIGHT: Transition -->
+<section class="section light">
+    <div class="content">
+        <h2>И вот парадокс</h2>
+        <p>
+            Когда ты это видишь — всё меняется.
+        </p>
+        <p>
+            И ничего не меняется.
+        </p>
+        <div class="spacer"></div>
+        <p>
+            Ты продолжаешь работать с клиентками. Но знаешь, что нет "клиенток". Нет "тебя". Есть просто... танец.
+        </p>
+        <p>
+            Ты убираешь блоки. Но знаешь, что блоков нет. Есть только игра света и тени в одном поле.
+        </p>
+        <p class="emphasis">
+            Ты живёшь в мире форм. Но знаешь, что ты — не форма.
+        </p>
+        <div class="spacer"></div>
+        <p>
+            Это не делает твою работу бессмысленной. Наоборот.
+        </p>
+        <p>
+            Когда ты перестаёшь быть "делателем" — работа становится чище. Глубже. Истиннее.
+        </p>
+        <div class="quote-block">
+            Когда исчезает "я" — остаётся только любовь.<br>
+            И она делает свою работу через тебя.<br>
+            Безупречно.
+        </div>
+    </div>
+</section>
+
+<!-- ABSOLUTE WHITE: The Recognition -->
+<section class="section absolute-white">
+    <div class="content">
+        <h2>Ты уже знаешь это</h2>
+        <p>
+            Не головой. Не как концепцию.
+        </p>
+        <p class="emphasis">
+            Ты знаешь это собой.
+        </p>
+        <div class="spacer"></div>
+        <p>
+            Иначе ты не смогла бы делать то, что делаешь. Не смогла бы быть тем зеркалом, в котором женщины узнают себя.
+        </p>
+        <p>
+            Потому что зеркало работает, только если оно чистое. Прозрачное. Пустое от себя.
+        </p>
+        <div class="small-spacer"></div>
+        <p>
+            И ты прошла через огонь не просто так. Не для "личной трансформации". 
+        </p>
+        <p style="font-size: 1.3rem;" class="emphasis">
+            Ты сгорела, чтобы стать зеркалом.
+        </p>
+        <div class="spacer"></div>
+        <p>
+            Абьюз сжёг эго. Боль стёрла иллюзии. Годы трансформации очистили стекло.
+        </p>
+        <p>
+            И то, что осталось — это уже не "Любовь, которая хочет помогать".
+        </p>
+        <p>
+            Это пространство. Через которое жизнь исцеляет саму себя.
+        </p>
+    </div>
+</section>
+
+<!-- THE QUESTION -->
+<section class="section absolute-white">
+    <div class="content" style="text-align: center;">
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <h1 style="font-size: clamp(2rem, 6vw, 4rem); margin-bottom: 1.5em;">
+            Так кто ты?
+        </h1>
+        <p style="font-size: 1.3rem; max-width: 100%;">
+            Любовь Захарова, дипломированный коуч, биоэнергет?
+        </p>
+        <p style="font-size: 1.3rem; max-width: 100%;">
+            Женщина, которая прошла путь от боли к силе?
+        </p>
+        <p style="font-size: 1.3rem; max-width: 100%;">
+            Проводник для других женщин?
+        </p>
+        <div class="spacer"></div>
+        <p style="font-size: 1.5rem; font-weight: 400;" class="emphasis">
+            Или...
+        </p>
+        <div class="spacer"></div>
+        <h2 style="font-size: clamp(2.5rem, 7vw, 5rem);">
+            Ты — это то,<br>что читает эти слова<br>прямо сейчас
+        </h2>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+    </div>
+</section>
+
+<!-- FINALE -->
+<section id="finale" class="section">
+    <div class="content">
+        <h2>Любовь</h2>
+        <div class="spacer"></div>
+        <p style="text-align: center; font-size: 1.2rem;">
+            Если эти слова отозвались в тебе дрожью узнавания...<br>
+            Если что-то внутри сказало: "Да. Я это знаю"...<br>
+            Если ты почувствовала, что готова нырнуть глубже...
+        </p>
+        <div class="spacer"></div>
+        <p style="text-align: center; font-size: 1.1rem; color: var(--text-light);">
+            Эта встреча — не случайность.
+        </p>
+        
+        <div class="timer-container">
+            <div class="timer-unit">
+                <span class="timer-value" id="hours">48</span>
+                <span class="timer-label">Часов</span>
+            </div>
+            <div class="timer-unit">
+                <span class="timer-value" id="minutes">00</span>
+                <span class="timer-label">Минут</span>
+            </div>
+            <div class="timer-unit">
+                <span class="timer-value" id="seconds">00</span>
+                <span class="timer-label">Секунд</span>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin: 3em 0; font-size: 1.15rem;">
+            У меня есть предложение только для тебя:<br><br>
+            <span class="emphasis">Персональная сессия погружения в недуальность.</span><br><br>
+            Где мы увидим твою работу из пространства полного пробуждения.<br>
+            Где ты узнаешь себя не как делателя — а как само пространство.<br>
+            Где исчезнет последнее разделение между тобой и твоей работой.
+        </p>
+
+        <p style="text-align: center; font-size: 0.95rem; color: var(--text-light); margin-bottom: 3em;">
+            Это окно открыто только 48 часов.<br>
+            Потому что момент — сейчас.
+        </p>
+
+        <a href="#" class="final-cta">Готова нырнуть глубже</a>
+
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+
+        <p style="text-align: center; font-size: 0.9rem; color: var(--text-light); font-style: italic;">
+            P.S. Этот сайт создан для тебя кем-то,<br>кто видит твою глубину и узнаёт себя в тебе ✨
+        </p>
+    </div>
+</section>
+
+<script>
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+        const progress = document.getElementById('scrollProgress');
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / height) * 100;
+        progress.style.width = scrolled + '%';
+    });
+
+    // Intersection Observer for content reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    document.querySelectorAll('.content').forEach(el => {
+        if (!el.classList.contains('visible')) {
+            observer.observe(el);
+        }
+    });
+
+    // Timer countdown
+    let timeLeft = 48 * 60 * 60;
+    
+    function updateTimer() {
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = timeLeft % 60;
+        
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        
+        if (timeLeft > 0) timeLeft--;
+    }
+    
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Generate stars for void sections
+    document.querySelectorAll('.void').forEach(section => {
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            section.appendChild(star);
+        }
+    });
+</script>
+</body>
+</html>
