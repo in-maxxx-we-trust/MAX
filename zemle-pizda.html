@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квантовое Моделирование Климата 2026-3000 | ЭКСТРЕМАЛЬНЫЙ ПРОГНОЗ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg-dark: #0a0e1a;
+            --color-bg-medium: #12182b;
+            --color-bg-light: #1a2340;
+            --color-accent-hot: #ff4444;
+            --color-accent-warm: #ff8c42;
+            --color-accent-cool: #00d9ff;
+            --color-text-primary: #e8f0ff;
+            --color-text-secondary: #8ba3c7;
+            --color-grid: rgba(74, 144, 226, 0.15);
+            --color-warning: #ffb347;
+            --color-critical: #ff6b6b;
+            --color-success: #51cf66;
+            --color-apocalypse: #8b0000;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, #1a0a0a 50%, var(--color-bg-dark) 100%);
+            color: var(--color-text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, var(--color-grid) 2px, var(--color-grid) 3px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, var(--color-grid) 2px, var(--color-grid) 3px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.15; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 68, 68, 0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ff4444, #ff8c42, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            background-size: 200% 200%;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--color-critical);
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .apocalypse-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(139, 0, 0, 0.3));
+            border: 3px solid var(--color-critical);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            margin: 30px 0;
+            box-shadow: 0 0 40px rgba(255, 68, 68, 0.5);
+            animation: apocalypsePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes apocalypsePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 68, 68, 0.5); }
+            50% { transform: scale(1.08); box-shadow: 0 0 60px rgba(255, 68, 68, 0.8); }
+        }
+
+        .section {
+            margin: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--color-critical);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        h2::before {
+            content: '☠';
+            position: absolute;
+            left: 0;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 600;
+            margin: 40px 0 20px;
+            color: var(--color-accent-warm);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            color: var(--color-text-secondary);
+            line-height: 1.9;
+        }
+
+        .chart-container {
+            background: var(--color-bg-light);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            position: relative;
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4444, #ff8c42, #ffff00);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .timeline-card {
+            background: var(--color-bg-light);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .timeline-card.century22 {
+            border-left-color: #ff8c42;
+        }
+
+        .timeline-card.century23 {
+            border-left-color: #ff4444;
+        }
+
+        .timeline-card.century24 {
+            border-left-color: #8b0000;
+        }
+
+        .timeline-card.century25-30 {
+            border-left-color: #4a0000;
+            background: linear-gradient(135deg, #1a0a0a, var(--color-bg-light));
+        }
+
+        .timeline-year {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .timeline-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--color-text-primary);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .data-card {
+            background: linear-gradient(135deg, var(--color-bg-medium), var(--color-bg-light));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .data-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff4444, #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .data-label {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .apocalypse-box {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(255, 68, 68, 0.2));
+            border: 3px solid var(--color-apocalypse);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apocalypse-box::before {
+            content: '💀';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 80px;
+            opacity: 0.1;
+        }
+
+        .apocalypse-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--color-critical);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .stat-highlight {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-critical);
+            background: rgba(255, 68, 68, 0.2);
+            padding: 3px 10px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+            border-top: 2px solid var(--color-grid);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        ul {
+            margin: 20px 0 20px 30px;
+            color: var(--color-text-secondary);
+        }
+
+        li {
+            margin: 12px 0;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .chart-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Климатический Апокалипсис 🔥</h1>
+            <div class="subtitle">СЦЕНАРИЙ БЕЗДЕЙСТВИЯ: 2026-3000</div>
+            <div class="apocalypse-badge">☠️ ЭКСТРЕМАЛЬНОЕ МОДЕЛИРОВАНИЕ | 974 ГОДА ПИЗДЕЦА</div>
+        </header>
+
+        <div class="apocalypse-box">
+            <div class="apocalypse-title">⚠️ ПРЕДУПРЕЖДЕНИЕ: РЕАЛИСТИЧНЫЙ WORST-CASE СЦЕНАРИЙ</div>
+            <p>Это не фантастика. Это математическая экстраполяция текущих трендов на 974 года вперёд. Если человечество продолжит <strong>бездействовать</strong> — вот что произойдёт с планетой Земля. Добро пожаловать в ад.</p>
+            <p style="color: var(--color-critical); font-weight: bold; font-size: 1.2rem; margin-top: 20px;">Спойлер: к 3000 году Земля станет похожей на Венеру. Буквально.</p>
+        </div>
+
+        <section class="section">
+            <h2>Текущее Состояние (2026)</h2>
+            
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="data-label">Температура</div>
+                    <div class="data-value">+1.47°C</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0 0;">от доиндустриального уровня</p>
+                </div>
+                <div class="data-card">
+                    <div class="data-label">CO₂</div>
+                    <div class="data-value">427</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0 0;">ppm</p>
+                </div>
+                <div class="data-card">
+                    <div class="data-label">Население</div>
+                    <div class="data-value">8.1B</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0 0;">миллиардов человек</p>
+                </div>
+                <div class="data-card">
+                    <div class="data-label">Шансы избежать катастрофы</div>
+                    <div class="data-value">???</div>
+                    <p style="font-size: 0.9rem; margin: 10px 0 0;">зависит от нас</p>
+                </div>
+            </div>
+
+            <p>В январе 2026 года человечество стоит на краю пропасти. Выбросы CO₂ достигли рекордных 41.6 млрд тонн в год, температура выросла на +1.47°C, и мы продолжаем сжигать ископаемое топливо как будто завтра не наступит.</p>
+            <p style="color: var(--color-critical); font-weight: bold;">Спойлер: при таком раскладе для многих завтра действительно не наступит.</p>
+        </section>
+
+        <section class="section">
+            <h2>Долгосрочный Прогноз: 974 Года Пиздеца</h2>
+            
+            <div class="chart-container">
+                <h3 style="margin-top: 0;">Температура Планеты (2026-3000)</h3>
+                <canvas id="megaTempChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-top: 0;">Концентрация CO₂ (ppm)</h3>
+                <canvas id="co2Chart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-top: 0;">Уровень Океана (метры от 1900 года)</h3>
+                <canvas id="seaMegaChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-top: 0;">Население Земли (миллиардов)</h3>
+                <canvas id="populationChart"></canvas>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Временная Шкала Коллапса</h2>
+            
+            <div class="timeline">
+                <div class="timeline-card century22">
+                    <div class="timeline-year">2026-2100</div>
+                    <div class="timeline-title">XXI век: Начало Конца</div>
+                    <p><strong>Температура:</strong> +1.5°C → +5.5°C</p>
+                    <p><strong>События:</strong> Массовое вымирание коралловых рифов (99%), регулярные тепловые волны 50°C+, миллиарды климатических беженцев, коллапс Гренландии и Западной Антарктиды, исчезновение прибрежных городов, засухи и голод.</p>
+                    <p><strong>Население к 2100:</strong> 6-7 млрд (снижение из-за войн за ресурсы, голода, болезней)</p>
+                </div>
+
+                <div class="timeline-card century22">
+                    <div class="timeline-year">2100-2200</div>
+                    <div class="timeline-title">XXII век: Точки Невозврата</div>
+                    <p><strong>Температура:</strong> +5.5°C → +8.5°C</p>
+                    <p><strong>События:</strong> Полное таяние Гренландии (+7м океана), коллапс AMOC (Гольфстрим останавливается), превращение Амазонки в саванну, таяние всей вечной мерзлоты (массивный выброс метана), самоусиливающееся потепление.</p>
+                    <p><strong>Эффект домино:</strong> Планета переходит в режим неконтролируемого потепления. Человеческие выбросы уже не имеют значения — природные процессы берут верх.</p>
+                    <p><strong>Население к 2200:</strong> 3-4 млрд (коллапс цивилизации, массовый голод)</p>
+                </div>
+
+                <div class="timeline-card century23">
+                    <div class="timeline-year">2200-2300</div>
+                    <div class="timeline-title">XXIII век: Необратимая Катастрофа</div>
+                    <p><strong>Температура:</strong> +8.5°C → +11°C</p>
+                    <p><strong>События:</strong> Океан поднялся на 15-20 метров. Все прибрежные регионы под водой. Экваториальная зона необитаема (70°C+). Массовое вымирание 70-90% видов. Деградация почв. Закисление океана убивает планктон.</p>
+                    <p><strong>Где живут люди:</strong> Антарктида, север Канады, Сибирь, Скандинавия, Патагония. Все остальное — мертвая зона.</p>
+                    <p><strong>Население к 2300:</strong> 500 млн - 1 млрд (доиндустриальный уровень)</p>
+                </div>
+
+                <div class="timeline-card century24">
+                    <div class="timeline-year">2300-2500</div>
+                    <div class="timeline-title">XXIV-XXV века: Венерианский Сценарий</div>
+                    <p><strong>Температура:</strong> +11°C → +15°C</p>
+                    <p><strong>События:</strong> Океан практически мертв (отсутствие кислорода). Атмосфера насыщена CO₂ и метаном. Начало "runaway greenhouse effect" — самоусиливающегося парникового эффекта, как на Венере.</p>
+                    <p><strong>Уровень океана:</strong> +30-50 метров. Затоплено большинство континентов.</p>
+                    <p><strong>Биосфера:</strong> Коллапс. Выжили только экстремофилы и микроорганизмы.</p>
+                    <p><strong>Население к 2500:</strong> 100-300 млн (выживание в подземных городах)</p>
+                </div>
+
+                <div class="timeline-card century25-30">
+                    <div class="timeline-year">2500-2750</div>
+                    <div class="timeline-title">XXVI-XXVIII века: Агония Биосферы</div>
+                    <p><strong>Температура:</strong> +15°C → +18°C</p>
+                    <p><strong>События:</strong> Температура средняя глобальная достигает +33-35°C (против +15°C сейчас). На экваторе +80-90°C. Полярные регионы +40-50°C. Вся вода испаряется в атмосферу, усиливая парниковый эффект.</p>
+                    <p><strong>Океан:</strong> Верхние слои температурой +40-50°C. Массовая потеря кислорода.</p>
+                    <p><strong>Человечество:</strong> Остатки цивилизации в герметичных подземных куполах. Население менее 50 млн.</p>
+                </div>
+
+                <div class="timeline-card century25-30">
+                    <div class="timeline-year">2750-3000</div>
+                    <div class="timeline-title">XXVIII-XXX века: Земля-Венера</div>
+                    <p><strong>Температура:</strong> +18°C → +20-25°C</p>
+                    <p><strong>Финальное состояние:</strong></p>
+                    <ul>
+                        <li>Средняя температура: <span class="stat-highlight">+35-40°C</span></li>
+                        <li>CO₂ в атмосфере: <span class="stat-highlight">2000-3000 ppm</span></li>
+                        <li>Уровень океана: <span class="stat-highlight">+70-100 метров</span></li>
+                        <li>Океан: мертвый, кислотный, +50-60°C</li>
+                        <li>Атмосфера: плотная, влажная, токсичная</li>
+                        <li>Суша: пустыни, солончаки, ядовитые озера</li>
+                        <li>Жизнь: только бактерии-экстремофилы</li>
+                        <li>Человечество: вымерло или колонизировало космос</li>
+                    </ul>
+                    <p style="color: var(--color-critical); font-weight: bold; margin-top: 20px;">Земля превратилась в аналог Венеры. Планета мертва.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Детальный Анализ: Как Именно Всё Пошло По Пизде</h2>
+
+            <div class="apocalypse-box">
+                <div class="apocalypse-title">🌡️ ФИЗИКА КОЛЛАПСА</div>
+                
+                <h3>Почему нельзя просто "остановиться"?</h3>
+                <p>После определенного порога (~+2-3°C) климатическая система Земли входит в режим <strong>самоусиливающегося потепления</strong>. Даже если человечество полностью прекратит выбросы, процесс продолжится за счет природных факторов.</p>
+
+                <h3>Петли Положительной Обратной Связи:</h3>
+                <ul>
+                    <li><strong>Вечная мерзлота:</strong> Тает → высвобождает метан и CO₂ → ускоряет потепление → тает еще больше мерзлоты. К 2200 году все 1,500 млрд тонн углерода из мерзлоты в атмосфере.</li>
+                    <li><strong>Альбедо льда:</strong> Лёд тает → меньше отражения солнечного света → больше поглощения тепла → еще больше таяния. К 2150 году Арктика и Антарктика полностью черные летом.</li>
+                    <li><strong>Водяной пар:</strong> Теплее → больше испарения → водяной пар — мощный парниковый газ → еще теплее. К 2300 году атмосфера насыщена влагой.</li>
+                    <li><strong>Леса:</strong> Пожары и засухи → леса умирают → выделяют CO₂ вместо поглощения → ускоряется потепление. К 2200 году Амазонка — саванна, бореальные леса — степь.</li>
+                    <li><strong>Океан:</strong> Нагревается → поглощает меньше CO₂ → больше CO₂ в атмосфере. К 2250 году океан перестает быть поглотителем углерода.</li>
+                    <li><strong>Метангидраты:</strong> На дне океана и в мерзлоте хранятся триллионы тонн метана в виде льда. При +3-4°C начинается массовый выброс. К 2300 году большая часть в атмосфере.</li>
+                </ul>
+
+                <h3 style="margin-top: 40px;">Venusian Runaway Greenhouse Effect</h3>
+                <p>При достижении определенной температуры (+12-15°C) начинается <strong>неконтролируемый парниковый эффект</strong> по типу Венеры:</p>
+                <ol>
+                    <li>Океан нагревается настолько, что массово испаряется</li>
+                    <li>Водяной пар — мощнейший парниковый газ — насыщает атмосферу</li>
+                    <li>Температура растет еще быстрее, испаряется еще больше воды</li>
+                    <li>В верхних слоях атмосферы солнечная радиация разлагает водяной пар, водород уходит в космос</li>
+                    <li>Планета теряет воду навсегда и превращается в раскаленную пустыню</li>
+                </ol>
+                <p style="color: var(--color-critical); font-weight: bold; margin-top: 20px;">На Венере средняя температура +462°C, давление 92 атмосферы, атмосфера — 96% CO₂. Земля не дойдет до таких экстремумов, но к 3000 году станет необитаемой.</p>
+            </div>
+
+            <div class="apocalypse-box" style="margin-top: 40px;">
+                <div class="apocalypse-title">💀 СУДЬБА ЧЕЛОВЕЧЕСТВА</div>
+                
+                <h3>Демографический Коллапс</h3>
+                <p><strong>2026:</strong> 8.1 млрд</p>
+                <p><strong>2050:</strong> 9.5 млрд (пик)</p>
+                <p><strong>2100:</strong> 6-7 млрд (войны за воду и еду, массовый голод)</p>
+                <p><strong>2200:</strong> 3-4 млрд (коллапс сельского хозяйства, эпидемии)</p>
+                <p><strong>2300:</strong> 500 млн - 1 млрд (только полярные регионы пригодны для жизни)</p>
+                <p><strong>2500:</strong> 100-300 млн (выживание в подземных городах, экваториальные регионы мертвы)</p>
+                <p><strong>2750:</strong> 10-50 млн (остатки цивилизации в герметичных куполах)</p>
+                <p><strong>3000:</strong> <span class="stat-highlight">0 или колонизация космоса</span></p>
+
+                <h3 style="margin-top: 40px;">Три Возможных Исхода к 3000 году:</h3>
+                <ul>
+                    <li><strong>Вымирание:</strong> Человечество не смогло адаптироваться к экстремальным условиям. Последние колонии погибли к 2900 году.</li>
+                    <li><strong>Подземная цивилизация:</strong> Десятки миллионов выживают в гигантских подземных городах с искусственной атмосферой и гидропоникой. Технологическая регрессия.</li>
+                    <li><strong>Космическая экспансия:</strong> Человечество успело колонизировать Марс, Луну, спутники Юпитера и построить орбитальные станции. Земля осталась как напоминание о цене бездействия.</li>
+                </ul>
+            </div>
+
+            <div class="apocalypse-box" style="margin-top: 40px;">
+                <div class="apocalypse-title">🌊 ОКЕАНЫ: ОТ КОЛЫБЕЛИ ЖИЗНИ К КИСЛОТНОЙ МОГИЛЕ</div>
+                
+                <h3>2026-2100: Закисление и Нагрев</h3>
+                <p>pH падает с 8.1 до 7.7. Температура поверхности +3-4°C. Массовая гибель кораллов, моллюсков, планктона.</p>
+
+                <h3>2100-2200: Термоклин Коллапс</h3>
+                <p>Нарушается циркуляция океана. Глубинные воды перестают обновляться. Кислородные мертвые зоны расширяются до 50% океана.</p>
+
+                <h3>2200-2300: Океан Умирает</h3>
+                <p>Температура поверхности +8-10°C. pH = 7.3. Планктон погиб — основание пищевой цепи разрушено. Массовое вымирание рыб. Океан становится источником CO₂ вместо поглотителя.</p>
+
+                <h3>2300-2500: Токсичный Бульон</h3>
+                <p>Температура +15-20°C. Анаэробные бактерии доминируют, производят сероводород. Океан становится токсичным и смертельным для всей сложной жизни.</p>
+
+                <h3>2500-3000: Кипящий Ад</h3>
+                <p>Температура поверхности достигает +40-60°C. Верхние слои начинают массово испаряться. Океан теряет объем. Солёность удваивается. К 3000 году — раскалённое кислотное озеро на мёртвой планете.</p>
+            </div>
+
+            <div class="apocalypse-box" style="margin-top: 40px;">
+                <div class="apocalypse-title">🌳 БИОСФЕРА: ШЕСТОЕ МАССОВОЕ ВЫМИРАНИЕ</div>
+                
+                <h3>Скорость Вымирания</h3>
+                <p>Текущая скорость вымирания видов: <span class="stat-highlight">в 1000 раз выше фонового уровня</span>. К 2100 году — в 10,000 раз. К 2300 году большинство многоклеточной жизни исчезнет.</p>
+
+                <h3>2026-2100: Первая Волна (30%)</h3>
+                <p>Кораллы, амфибии, многие насекомые, млекопитающие тропиков, птицы, рыбы. Коллапс опыления растений.</p>
+
+                <h3>2100-2200: Вторая Волна (40%)</h3>
+                <p>Большинство крупных животных, леса, сложные экосистемы. Остаются только самые выносливые виды.</p>
+
+                <h3>2200-2500: Третья Волна (25%)</h3>
+                <p>Почти вся сложная жизнь. Выживают крысы, тараканы, некоторые бактерии, экстремофилы.</p>
+
+                <h3>2500-3000: Финальная Волна (5%)</h3>
+                <p>Только бактерии и археи-экстремофилы. Планета вернулась в состояние 3 миллиарда лет назад.</p>
+
+                <p style="margin-top: 30px; color: var(--color-critical); font-weight: bold; font-size: 1.2rem;">Итог: Исчезли 99.9% видов. Понадобится 10-20 миллионов лет эволюции, чтобы биосфера восстановилась до текущего уровня сложности.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Могли Ли Мы Это Предотвратить?</h2>
+            
+            <div class="apocalypse-box" style="border-color: var(--color-success); background: linear-gradient(135deg, rgba(81, 207, 102, 0.15), rgba(0, 217, 255, 0.15));">
+                <div class="apocalypse-title" style="color: var(--color-success);">✅ ДА, БЛЯТЬ, КОНЕЧНО ДА</div>
+                
+                <h3>Что нужно было сделать (2020-2030):</h3>
+                <ul>
+                    <li>Сократить выбросы на 50% к 2030 году</li>
+                    <li>Углеродная нейтральность к 2050 году</li>
+                    <li>Массовый переход на возобновляемую энергию</li>
+                    <li>Прекратить вырубку лесов, начать масштабное лесовосстановление</li>
+                    <li>Развитие технологий улавливания CO₂</li>
+                    <li>Электрификация транспорта и промышленности</li>
+                    <li>Изменение сельского хозяйства и питания</li>
+                    <li>Международное сотрудничество и триллионы инвестиций</li>
+                </ul>
+
+                <h3 style="margin-top: 40px;">Стоимость Действий vs Бездействия:</h3>
+                <p><strong>Стоимость предотвращения (2020-2050):</strong> ~$100-200 триллионов (2-3% мирового ВВП)</p>
+                <p><strong>Стоимость бездействия (2050-3000):</strong> Коллапс цивилизации, триллионы жизней, потеря планеты</p>
+
+                <h3 style="margin-top: 40px;">У нас были:</h3>
+                <ul>
+                    <li>✅ Технологии (солнечная, ветровая энергия, аккумуляторы, электромобили)</li>
+                    <li>✅ Наука (понимание проблемы с 1980-х годов)</li>
+                    <li>✅ Ресурсы (глобальная экономика $100+ триллионов/год)</li>
+                    <li>✅ Решения (конкретные планы действий от IPCC)</li>
+                    <li>❌ Политическую волю</li>
+                    <li>❌ Коллективное действие</li>
+                    <li>❌ Долгосрочное мышление</li>
+                </ul>
+
+                <p style="margin-top: 30px; font-size: 1.3rem; font-weight: bold;">Мы выбрали краткосрочную прибыль вместо долгосрочного выживания.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Послесловие: Ещё Не Поздно (Но Скоро Будет)</h2>
+            
+            <div class="apocalypse-box" style="border-color: var(--color-warning);">
+                <div class="apocalypse-title" style="color: var(--color-warning);">⏰ ВРЕМЕННОЕ ОКНО: 5-10 ЛЕТ</div>
+                <p>Этот сценарий — НЕ пророчество. Это предупреждение. Мы все ещё можем изменить курс, но временное окно быстро закрывается.</p>
+                
+                <h3>Что происходит ПРЯМО СЕЙЧАС (январь 2026):</h3>
+                <ul>
+                    <li>✅ 35 стран успешно снижают выбросы при росте экономики</li>
+                    <li>✅ Возобновляемая энергия дешевле ископаемого топлива</li>
+                    <li>✅ Электромобили становятся mainstream</li>
+                    <li>✅ Молодое поколение требует действий</li>
+                    <li>✅ Технологии существуют и работают</li>
+                    <li>❌ Выбросы все еще растут (+1.1% в 2025)</li>
+                    <li>❌ Углеродный бюджет почти исчерпан (~4 года)</li>
+                    <li>❌ Недостаточно политической воли</li>
+                </ul>
+
+                <h3 style="margin-top: 40px;">Каждая Десятая Градуса Имеет Значение:</h3>
+                <p>Разница между +1.5°C и +2°C — это миллионы жизней, целые экосистемы, прибрежные города.</p>
+                <p>Разница между +2°C и +3°C — это цивилизация vs коллапс.</p>
+                <p>Разница между +3°C и +5°C — это выживание vs вымирание.</p>
+
+                <p style="margin-top: 40px; font-size: 1.4rem; font-weight: bold; color: var(--color-text-primary);">Будущее не предопределено. Оно зависит от действий, которые мы предпримем СЕГОДНЯ.</p>
+
+                <p style="margin-top: 30px; font-size: 1.1rem;">Да, ситуация критическая. Да, времени мало. Да, это страшно.</p>
+                <p style="font-size: 1.1rem;">Но знаешь что? Мы — вид, который пережил ледниковый период, изобрел огонь, расщепил атом, высадился на Луне и создал интернет.</p>
+                <p style="font-size: 1.3rem; font-weight: bold; color: var(--color-success); margin-top: 20px;">Если мы смогли это — мы можем спасти нашу собственную планету.</p>
+                <p style="font-size: 1.3rem; font-weight: bold; color: var(--color-success);">Но только если ДЕЙСТВУЕМ. СЕЙЧАС.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p style="font-size: 1.2rem; font-weight: bold; color: var(--color-critical);">Климатический Апокалипсис v1.0 | Сценарий Бездействия 2026-3000</p>
+            <p style="margin-top: 20px;">Данные: NOAA, NASA, IPCC, Berkeley Earth, WMO, Global Carbon Project</p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Математическое моделирование на основе текущих трендов и физики климатической системы.</p>
+            <p style="margin-top: 30px; font-size: 1.1rem; color: var(--color-text-primary);">
+                Помни: это НЕ должно произойти. Это МОЖЕТ произойти, если мы не изменим курс.<br>
+                Выбор за нами. Выбор за тобой.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        Chart.defaults.color = '#8ba3c7';
+        Chart.defaults.borderColor = 'rgba(255, 68, 68, 0.3)';
+        Chart.defaults.font.family = "'Exo 2', sans-serif";
+
+        // Экстремальные данные на 974 года
+        const megaYears = [2026, 2050, 2100, 2150, 2200, 2300, 2500, 2750, 3000];
+        const megaTemp = [1.47, 2.8, 5.5, 7.2, 8.8, 11.2, 15.3, 18.5, 22.0];
+        const megaCO2 = [427, 550, 850, 1100, 1350, 1650, 2100, 2500, 2800];
+        const megaSeaLevel = [0.24, 0.65, 2.1, 4.5, 8.2, 15.5, 35, 55, 85];
+        const megaPopulation = [8.1, 9.5, 6.5, 4.8, 3.2, 0.8, 0.2, 0.03, 0.00];
+
+        // График температуры
+        const megaTempCtx = document.getElementById('megaTempChart').getContext('2d');
+        new Chart(megaTempCtx, {
+            type: 'line',
+            data: {
+                labels: megaYears,
+                datasets: [{
+                    label: 'Глобальная температура (°C от доиндустриального)',
+                    data: megaTemp,
+                    borderColor: '#ff4444',
+                    backgroundColor: 'rgba(255, 68, 68, 0.2)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#ff4444',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { font: { size: 14 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                        callbacks: {
+                            label: function(context) {
+                                return '+' + context.parsed.y + '°C (средняя температура планеты: +' + (context.parsed.y + 15) + '°C)';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 0,
+                        max: 25,
+                        ticks: {
+                            callback: function(value) {
+                                return '+' + value + '°C';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // График CO2
+        const co2Ctx = document.getElementById('co2Chart').getContext('2d');
+        new Chart(co2Ctx, {
+            type: 'line',
+            data: {
+                labels: megaYears,
+                datasets: [{
+                    label: 'Концентрация CO₂ (ppm)',
+                    data: megaCO2,
+                    borderColor: '#ff8c42',
+                    backgroundColor: 'rgba(255, 140, 66, 0.2)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { font: { size: 14 } } } },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' ppm';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // График уровня океана
+        const seaMegaCtx = document.getElementById('seaMegaChart').getContext('2d');
+        new Chart(seaMegaCtx, {
+            type: 'line',
+            data: {
+                labels: megaYears,
+                datasets: [{
+                    label: 'Уровень океана (метры)',
+                    data: megaSeaLevel,
+                    borderColor: '#00d9ff',
+                    backgroundColor: 'rgba(0, 217, 255, 0.2)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { font: { size: 14 } } } },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return '+' + value + ' м';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // График населения
+        const popCtx = document.getElementById('populationChart').getContext('2d');
+        new Chart(popCtx, {
+            type: 'line',
+            data: {
+                labels: megaYears,
+                datasets: [{
+                    label: 'Население Земли (млрд)',
+                    data: megaPopulation,
+                    borderColor: '#51cf66',
+                    backgroundColor: 'rgba(81, 207, 102, 0.2)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { 
+                    legend: { labels: { font: { size: 14 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const pop = context.parsed.y;
+                                if (pop === 0) return 'Вымерли или колонизировали космос';
+                                if (pop < 0.1) return (pop * 1000).toFixed(0) + ' миллионов';
+                                return pop.toFixed(1) + ' миллиардов';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' млрд';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
