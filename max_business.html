@@ -1,0 +1,3479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAX BUSINESS — Платформа будущего для бизнеса</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== QUANTUM DESIGN SYSTEM ===== */
+        :root {
+            /* Dark Theme Colors */
+            --black: #000000;
+            --gray-950: #0A0A0A;
+            --gray-900: #0F0F0F;
+            --gray-850: #1A1A1A;
+            --gray-800: #1F1F1F;
+            --gray-700: #2A2A2A;
+            --gray-600: #3F3F3F;
+            --gray-500: #6B6B6B;
+            --gray-400: #8F8F8F;
+            --gray-300: #B8B8B8;
+            --gray-200: #D4D4D4;
+            --gray-100: #E8E8E8;
+            --white: #FFFFFF;
+            
+            /* Accent Colors */
+            --blue-500: #0EA5E9;
+            --blue-400: #38BDF8;
+            --cyan-500: #06B6D4;
+            --purple-500: #A855F7;
+            --pink-500: #EC4899;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            --gradient-accent: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+            --gradient-mesh: radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                             radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
+                             radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+                             radial-gradient(at 0% 100%, rgba(236, 72, 153, 0.1) 0px, transparent 50%);
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --space-32: 8rem;
+            
+            /* Effects */
+            --blur-sm: blur(4px);
+            --blur-md: blur(12px);
+            --blur-lg: blur(24px);
+            --blur-xl: blur(40px);
+        }
+        
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* ===== BACKGROUND EFFECTS ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-mesh);
+            opacity: 1;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 2px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, transparent 1px, transparent 2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* ===== GLOW ORBS ===== */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .glow-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 70%);
+            top: -300px;
+            right: -300px;
+        }
+        
+        .glow-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+            bottom: -250px;
+            left: -250px;
+            animation-delay: -10s;
+        }
+        
+        .glow-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        
+        h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            background: linear-gradient(to bottom, var(--white) 30%, var(--gray-400) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h2 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+        }
+        
+        h3 {
+            font-size: clamp(1.75rem, 4vw, 3rem);
+        }
+        
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .lead {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            line-height: 1.7;
+            color: var(--gray-300);
+            font-weight: 400;
+        }
+        
+        /* ===== GLASS MORPHISM ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-6) 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-8);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--gray-300);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--blue-500);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--white);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: var(--black);
+            padding: 0.75rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9375rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+        }
+        
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-8);
+        }
+        
+        section {
+            padding: var(--space-32) 0;
+            position: relative;
+        }
+        
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding-top: calc(80px + var(--space-16));
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-200);
+            margin-bottom: var(--space-8);
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan-500);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+        
+        .hero-title {
+            margin-bottom: var(--space-8);
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto var(--space-12);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease 0.6s both;
+        }
+        
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.0625rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--black);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(14, 165, 233, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+            margin-top: var(--space-24);
+            animation: fadeInUp 1.4s ease 0.8s both;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: var(--space-8);
+            text-align: center;
+            transition: all 0.4s;
+        }
+        
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(14, 165, 233, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+        }
+        
+        /* ===== PLATFORM OVERVIEW ===== */
+        #platform {
+            background: var(--gray-950);
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto var(--space-24);
+        }
+        
+        .section-header h2 {
+            margin-bottom: var(--space-6);
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-8);
+        }
+        
+        .platform-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--space-12);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .platform-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .platform-card:hover {
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+        }
+        
+        .platform-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-6);
+            filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+        }
+        
+        .platform-card h3 {
+            margin-bottom: var(--space-4);
+        }
+        
+        .platform-card p {
+            color: var(--gray-400);
+            line-height: 1.8;
+            margin-bottom: var(--space-6);
+        }
+        
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: var(--space-3);
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--gray-300);
+            font-size: 0.9375rem;
+        }
+        
+        .feature-list li::before {
+            content: '→';
+            color: var(--cyan-500);
+            font-weight: 700;
+        }
+        
+        /* ===== BUSINESS PROCESS ===== */
+        #process {
+            background: var(--black);
+        }
+        
+        .process-flow {
+            position: relative;
+            margin-top: var(--space-24);
+        }
+        
+        .process-step {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+            align-items: center;
+        }
+        
+        .process-step:nth-child(even) {
+            grid-template-columns: 1fr 300px;
+        }
+        
+        .process-step:nth-child(even) .process-content {
+            order: -1;
+        }
+        
+        .process-visual {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .process-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(14, 165, 233, 0.2), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .process-number {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-500);
+        }
+        
+        .process-content h3 {
+            margin-bottom: var(--space-4);
+        }
+        
+        .process-content p {
+            color: var(--gray-400);
+            margin-bottom: var(--space-6);
+            line-height: 1.8;
+        }
+        
+        .process-features {
+            list-style: none;
+            display: grid;
+            gap: var(--space-4);
+        }
+        
+        .process-features li {
+            background: rgba(255, 255, 255, 0.03);
+            padding: var(--space-4);
+            border-radius: 12px;
+            border-left: 2px solid var(--cyan-500);
+        }
+        
+        .process-features strong {
+            color: var(--white);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+        
+        .process-features span {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+        }
+        
+        /* ===== COMPARISON ===== */
+        #comparison {
+            background: var(--gray-950);
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-12);
+            margin-top: var(--space-16);
+        }
+        
+        .comparison-side {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--space-12);
+        }
+        
+        .comparison-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        
+        .comparison-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .comparison-side.old .comparison-icon {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .comparison-side.new .comparison-icon {
+            background: rgba(6, 182, 212, 0.1);
+        }
+        
+        .comparison-list {
+            list-style: none;
+            display: grid;
+            gap: var(--space-6);
+        }
+        
+        .comparison-item {
+            display: flex;
+            gap: var(--space-3);
+            align-items: flex-start;
+        }
+        
+        .comparison-item-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+        
+        .comparison-side.old .comparison-item-icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: #DC2626;
+        }
+        
+        .comparison-side.new .comparison-item-icon {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--cyan-500);
+        }
+        
+        .comparison-item-content h4 {
+            font-size: 1.125rem;
+            margin-bottom: var(--space-2);
+        }
+        
+        .comparison-item-content p {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        
+        /* ===== MODULES ===== */
+        #modules {
+            background: var(--black);
+        }
+        
+        .modules-grid {
+            display: grid;
+            gap: var(--space-8);
+            margin-top: var(--space-16);
+        }
+        
+        .module-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--space-12);
+            transition: all 0.4s;
+        }
+        
+        .module-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateX(10px);
+        }
+        
+        .module-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+        
+        .module-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+        }
+        
+        .module-title h3 {
+            margin-bottom: var(--space-2);
+        }
+        
+        .module-title p {
+            color: var(--gray-400);
+            font-size: 1rem;
+        }
+        
+        .module-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+        
+        .module-feature {
+            background: rgba(255, 255, 255, 0.03);
+            padding: var(--space-4);
+            border-radius: 12px;
+            border-left: 2px solid var(--cyan-500);
+        }
+        
+        .module-feature strong {
+            display: block;
+            margin-bottom: var(--space-1);
+            color: var(--white);
+        }
+        
+        .module-feature span {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+        
+        /* ===== SPHERES ===== */
+        #spheres {
+            background: var(--gray-950);
+        }
+        
+        .spheres-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-8);
+            margin-top: var(--space-16);
+        }
+        
+        .sphere-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--space-8);
+            text-align: center;
+            transition: all 0.4s;
+        }
+        
+        .sphere-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+        }
+        
+        .sphere-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-6);
+            border-radius: 20px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .sphere-card h4 {
+            margin-bottom: var(--space-3);
+        }
+        
+        .sphere-card p {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        
+        /* ===== CASES ===== */
+        #cases {
+            background: var(--black);
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-8);
+            margin-top: var(--space-16);
+        }
+        
+        .case-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: var(--space-8);
+            transition: all 0.4s;
+        }
+        
+        .case-card:hover {
+            border-color: rgba(14, 165, 233, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.2);
+        }
+        
+        .case-category {
+            display: inline-block;
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--cyan-500);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+        }
+        
+        .case-card h4 {
+            margin-bottom: var(--space-2);
+        }
+        
+        .case-company {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+            margin-bottom: var(--space-6);
+        }
+        
+        .case-result {
+            background: rgba(6, 182, 212, 0.1);
+            border-left: 3px solid var(--cyan-500);
+            padding: var(--space-4);
+            border-radius: 8px;
+            margin: var(--space-6) 0;
+        }
+        
+        .case-result-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--cyan-500);
+            display: block;
+            margin-bottom: var(--space-1);
+        }
+        
+        .case-result-label {
+            font-size: 0.875rem;
+            color: var(--gray-300);
+        }
+        
+        .case-card p {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        
+        /* ===== FINAL CTA ===== */
+        #final-cta {
+            background: var(--gray-950);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #final-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            margin-bottom: var(--space-6);
+        }
+        
+        .cta-content .lead {
+            margin-bottom: var(--space-12);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--black);
+            padding: var(--space-24) 0 var(--space-8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-16);
+        }
+        
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-4);
+        }
+        
+        .footer-brand p {
+            color: var(--gray-400);
+            line-height: 1.7;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: var(--space-4);
+            font-size: 1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: var(--space-3);
+        }
+        
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .platform-grid,
+            .comparison-container,
+            .process-step,
+            .process-step:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step:nth-child(even) .process-content {
+                order: 0;
+            }
+            
+            .stats-grid,
+            .spheres-grid,
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Glow Orbs -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-glass">
+                <div class="logo">MAX BUSINESS</div>
+                <ul class="nav-links">
+                    <li><a href="#platform">Платформа</a></li>
+                    <li><a href="#process">Процессы</a></li>
+                    <li><a href="#modules">Модули</a></li>
+                    <li><a href="#spheres">Сферы</a></li>
+                    <li><a href="#cases">Кейсы</a></li>
+                </ul>
+            </div>
+            <a href="#final-cta" class="nav-cta">Начать</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Живая платформа • 5,500 компаний уже работают
+                </div>
+                
+                <h1>
+                    Платформа <span class="gradient-text">будущего</span><br>
+                    для бизнеса
+                </h1>
+                
+                <p class="lead hero-description">
+                    MAX BUSINESS — это не набор инструментов. Это единая платформа, где весь ваш бизнес 
+                    живёт, дышит и растёт. Маркетинг, продажи, продукт, финансы — всё в одном месте.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#final-cta" class="btn btn-primary">Начать бесплатно</a>
+                    <a href="#platform" class="btn btn-secondary">Как это работает</a>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value">6.8M</span>
+                        <span class="stat-label">Компаний МСП в России</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-label">Возможностей роста</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">1</span>
+                        <span class="stat-label">Платформа для всего</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">VK</span>
+                        <span class="stat-label">50M пользователей Max</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Overview -->
+    <section id="platform">
+        <div class="container">
+            <div class="section-header">
+                <h2>Не интеграции. <span class="gradient-text">Сама платформа.</span></h2>
+                <p class="lead">
+                    Забудьте про десятки сервисов и интеграций. MAX BUSINESS — это сама платформа, 
+                    где всё работает нативно, быстро и без костылей.
+                </p>
+            </div>
+            
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <div class="platform-icon">🎯</div>
+                    <h3>Единая экосистема</h3>
+                    <p>
+                        Все процессы бизнеса в одном месте. Данные синхронизируются автоматически. 
+                        Никаких API, никаких интеграций, никаких конфликтов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Нативные модули без стыков</li>
+                        <li>Общая база данных</li>
+                        <li>Мгновенная синхронизация</li>
+                        <li>Единый интерфейс для всего</li>
+                    </ul>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">⚡</div>
+                    <h3>AI везде</h3>
+                    <p>
+                        Искусственный интеллект не дополнение, а фундамент. Каждая функция усилена AI. 
+                        Платформа думает вместе с вами.
+                    </p>
+                    <ul class="feature-list">
+                        <li>AI-помощник для каждого модуля</li>
+                        <li>Предиктивная аналитика</li>
+                        <li>Автоматизация решений</li>
+                        <li>Обучение на ваших данных</li>
+                    </ul>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">📊</div>
+                    <h3>Полная прозрачность</h3>
+                    <p>
+                        Видите весь бизнес одним взглядом. Дашборды в реальном времени. 
+                        Метрики, которые действительно важны.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Единый дашборд для всего</li>
+                        <li>Кастомные отчёты</li>
+                        <li>Реал-тайм аналитика</li>
+                        <li>Прогнозы и тренды</li>
+                    </ul>
+                </div>
+                
+                <div class="platform-card">
+                    <div class="platform-icon">🔒</div>
+                    <h3>Ваши данные, ваш контроль</h3>
+                    <p>
+                        Всё хранится на российских серверах. Вы владеете своими данными. 
+                        Никаких утечек, никакой зависимости от западных сервисов.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Серверы в России</li>
+                        <li>Полное владение данными</li>
+                        <li>Шифрование всего</li>
+                        <li>Безопасность банковского уровня</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Process -->
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Весь процесс бизнеса. <span class="gradient-text">От идеи до прибыли.</span></h2>
+                <p class="lead">
+                    MAX BUSINESS покрывает все этапы вашего бизнеса. Каждый процесс оптимизирован, 
+                    автоматизирован и усилен AI.
+                </p>
+            </div>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">01</span>
+                        💡
+                    </div>
+                    <div class="process-content">
+                        <h3>Маркетинг</h3>
+                        <p>
+                            Привлекайте клиентов с минимальными затратами. AI настраивает рекламу, создаёт контент, 
+                            тестирует гипотезы и оптимизирует каждую копейку бюджета.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Умная реклама</strong>
+                                <span>Автоматическая настройка и оптимизация всех каналов</span>
+                            </li>
+                            <li>
+                                <strong>Генерация контента</strong>
+                                <span>Тексты, баннеры, видео — AI создаёт всё сам</span>
+                            </li>
+                            <li>
+                                <strong>A/B тестирование</strong>
+                                <span>Тысячи вариантов за секунды, лучший ROI</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">02</span>
+                        💰
+                    </div>
+                    <div class="process-content">
+                        <h3>Продажи</h3>
+                        <p>
+                            Конвертируйте лиды в деньги автоматически. AI ведёт клиента от первого касания 
+                            до оплаты счёта. Ваши менеджеры работают в 10 раз эффективнее.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Автоворонки</strong>
+                                <span>Клиент проходит весь путь сам, AI только помогает</span>
+                            </li>
+                            <li>
+                                <strong>Квалификация лидов</strong>
+                                <span>AI отсеивает холодных, оставляет горячих</span>
+                            </li>
+                            <li>
+                                <strong>Умные скрипты</strong>
+                                <span>AI подсказывает что сказать в каждый момент</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">03</span>
+                        🛠️
+                    </div>
+                    <div class="process-content">
+                        <h3>Продукт</h3>
+                        <p>
+                            Создавайте и улучшайте продукты на основе данных. AI анализирует отзывы, 
+                            находит проблемы, предлагает улучшения. Вы всегда на шаг впереди.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Анализ обратной связи</strong>
+                                <span>AI читает все отзывы и находит паттерны</span>
+                            </li>
+                            <li>
+                                <strong>Прогнозирование спроса</strong>
+                                <span>Знайте что будет востребовано завтра</span>
+                            </li>
+                            <li>
+                                <strong>Тестирование идей</strong>
+                                <span>AI моделирует успех до запуска</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">04</span>
+                        📦
+                    </div>
+                    <div class="process-content">
+                        <h3>Операции</h3>
+                        <p>
+                            Автоматизируйте всю рутину. Склад, логистика, документооборот — AI делает всё сам. 
+                            Вы фокусируетесь на росте, платформа на исполнении.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Умный склад</strong>
+                                <span>AI управляет запасами, минимизирует остатки</span>
+                            </li>
+                            <li>
+                                <strong>Автологистика</strong>
+                                <span>Оптимальные маршруты, минимальные затраты</span>
+                            </li>
+                            <li>
+                                <strong>Документы за секунды</strong>
+                                <span>Договоры, счета, акты — всё автоматически</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">05</span>
+                        💳
+                    </div>
+                    <div class="process-content">
+                        <h3>Финансы</h3>
+                        <p>
+                            Полный контроль денег. Бухгалтерия, налоги, прогнозы — всё в реальном времени. 
+                            AI следит чтобы вы не потеряли ни копейки.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Автобухгалтерия</strong>
+                                <span>Все проводки автоматически, отчёты одной кнопкой</span>
+                            </li>
+                            <li>
+                                <strong>Налоговая оптимизация</strong>
+                                <span>AI находит законные способы платить меньше</span>
+                            </li>
+                            <li>
+                                <strong>Финмоделирование</strong>
+                                <span>Прогнозы на год вперёд с точностью 95%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-visual">
+                        <span class="process-number">06</span>
+                        👥
+                    </div>
+                    <div class="process-content">
+                        <h3>Команда</h3>
+                        <p>
+                            Растите людей, а не заменяйте их. AI помогает нанимать, обучать, мотивировать. 
+                            Каждый сотрудник работает на 200%.
+                        </p>
+                        <ul class="process-features">
+                            <li>
+                                <strong>Подбор за 1 день</strong>
+                                <span>AI находит идеальных кандидатов из миллионов</span>
+                            </li>
+                            <li>
+                                <strong>Автоонбординг</strong>
+                                <span>Новички готовы работать с первого дня</span>
+                            </li>
+                            <li>
+                                <strong>Персональное развитие</strong>
+                                <span>AI создаёт план роста для каждого</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="comparison">
+        <div class="container">
+            <div class="section-header">
+                <h2>Как было. <span class="gradient-text">Как стало.</span></h2>
+                <p class="lead">
+                    Революция в том, как работает бизнес. То, что раньше требовало команд и месяцев, 
+                    теперь делается одним человеком за часы.
+                </p>
+            </div>
+            
+            <div class="comparison-container">
+                <div class="comparison-side old">
+                    <div class="comparison-header">
+                        <div class="comparison-icon">⏳</div>
+                        <div>
+                            <h3>Традиционный подход</h3>
+                            <p style="color: var(--gray-400); margin-top: 0.5rem;">Как было раньше</p>
+                        </div>
+                    </div>
+                    
+                    <ul class="comparison-list">
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">×</div>
+                            <div class="comparison-item-content">
+                                <h4>10+ инструментов</h4>
+                                <p>CRM, email, таргет, аналитика, бухгалтерия — каждый со своим логином, своим интерфейсом, своими багами.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">×</div>
+                            <div class="comparison-item-content">
+                                <h4>Интеграции-костыли</h4>
+                                <p>Zapier, API, вебхуки — всё это ломается, тормозит и стоит денег. Данные теряются между сервисами.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">×</div>
+                            <div class="comparison-item-content">
+                                <h4>Команда из 20+ человек</h4>
+                                <p>Зарплаты 500K+/мес, адаптация месяцами, текучка, конфликты. Половина времени уходит на координацию.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">×</div>
+                            <div class="comparison-item-content">
+                                <h4>Ручная работа везде</h4>
+                                <p>Каждый лид вручную, каждый отчёт вручную, каждое решение вручную. 12 часов в день на рутину.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-side new">
+                    <div class="comparison-header">
+                        <div class="comparison-icon">⚡</div>
+                        <div>
+                            <h3>MAX BUSINESS</h3>
+                            <p style="color: var(--gray-400); margin-top: 0.5rem;">Как стало с нами</p>
+                        </div>
+                    </div>
+                    
+                    <ul class="comparison-list">
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">✓</div>
+                            <div class="comparison-item-content">
+                                <h4>1 платформа для всего</h4>
+                                <p>Маркетинг, продажи, финансы, операции — всё в одном интерфейсе. Одна база данных. Одна подписка.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">✓</div>
+                            <div class="comparison-item-content">
+                                <h4>Никаких интеграций</h4>
+                                <p>Всё работает нативно. Данные синхронизируются мгновенно. Никаких костылей, никаких багов, никаких задержек.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">✓</div>
+                            <div class="comparison-item-content">
+                                <h4>AI вместо людей</h4>
+                                <p>10K₽/мес за функции 20 специалистов. Экономия 490K₽ каждый месяц. Работает 24/7 без отпусков и больничных.</p>
+                            </div>
+                        </li>
+                        
+                        <li class="comparison-item">
+                            <div class="comparison-item-icon">✓</div>
+                            <div class="comparison-item-content">
+                                <h4>Полная автоматизация</h4>
+                                <p>AI делает всё сам. Вы фокусируетесь на стратегии и росте. 2 часа в день на управление вместо 12.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Начните бесплатно. <span class="gradient-text">Масштабируйтесь легко.</span></h2>
+                <p class="lead">
+                    Freemium модель для старта. Платите только когда растёте. Никаких скрытых платежей.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; text-align: center;">
+                    <div style="background: rgba(100,100,100,0.2); width: 60px; height: 60px; border-radius: 12px; margin: 0 auto var(--space-6); display: flex; align-items: center; justify-content: center; font-size: 2rem;">🎯</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-2);">FREE</h3>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: var(--space-4) 0;">0₽</div>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">Навсегда</p>
+                    <ul style="list-style: none; text-align: left; margin-bottom: var(--space-6); display: grid; gap: var(--space-3);">
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> До 100 клиентов в CRM</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Базовая аналитика</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> AI-помощник (100 запросов/мес)</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Обучающие материалы</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">Начать</a>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; text-align: center;">
+                    <div style="background: rgba(14,165,233,0.2); width: 60px; height: 60px; border-radius: 12px; margin: 0 auto var(--space-6); display: flex; align-items: center; justify-content: center; font-size: 2rem;">🚀</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-2);">BASIC</h3>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: var(--space-4) 0;">10K₽</div>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">в месяц</p>
+                    <ul style="list-style: none; text-align: left; margin-bottom: var(--space-6); display: grid; gap: var(--space-3);">
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> До 1,000 клиентов</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Полная аналитика</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> AI без лимитов</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> 1 автоматизация</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">Выбрать</a>
+                </div>
+                
+                <div class="glass-strong" style="padding: var(--space-8); border-radius: 24px; text-align: center; border: 2px solid var(--cyan-500); position: relative; transform: scale(1.05);">
+                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gradient-primary); color: var(--black); padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: 0.875rem;">ПОПУЛЯРНЫЙ</div>
+                    <div style="background: var(--gradient-primary); width: 60px; height: 60px; border-radius: 12px; margin: 0 auto var(--space-6); display: flex; align-items: center; justify-content: center; font-size: 2rem;">💎</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-2);">PRO</h3>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: var(--space-4) 0;">50K₽</div>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">в месяц</p>
+                    <ul style="list-style: none; text-align: left; margin-bottom: var(--space-6); display: grid; gap: var(--space-3);">
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Без лимитов клиентов</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Расширенная аналитика</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> AI + приоритет</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> 5 автоматизаций</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Приоритетная поддержка</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%; justify-content: center;">Выбрать</a>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; text-align: center;">
+                    <div style="background: rgba(168,85,247,0.2); width: 60px; height: 60px; border-radius: 12px; margin: 0 auto var(--space-6); display: flex; align-items: center; justify-content: center; font-size: 2rem;">🏢</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-2);">ENTERPRISE</h3>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: var(--space-4) 0;">Custom</div>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">индивидуально</p>
+                    <ul style="list-style: none; text-align: left; margin-bottom: var(--space-6); display: grid; gap: var(--space-3);">
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Всё из PRO</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> On-premise опция</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Кастомизация</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Персональный менеджер</li>
+                        <li style="display: flex; align-items: center; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> SLA 99.9%</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%; justify-content: center;">Связаться</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VK Max Deep Dive -->
+    <section id="vk-max" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>VK Max — <span class="gradient-text">наша платформа</span></h2>
+                <p class="lead">
+                    50 миллионов пользователей. Поддержка государства. Обязательная предустановка. 
+                    MAX BUSINESS — первая enterprise-платформа на VK Max.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center; margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-16); border-radius: 32px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--gradient-primary);">
+                    <div style="font-size: 8rem; font-weight: 900; margin-bottom: var(--space-4); color: var(--black);">M</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--black);">VK Max</div>
+                    <div style="font-size: 1.25rem; color: rgba(0,0,0,0.7); margin-top: var(--space-2);">Национальный мессенджер</div>
+                </div>
+                
+                <div>
+                    <h3 style="font-size: 2rem; margin-bottom: var(--space-8);">Почему это важно</h3>
+                    <div style="display: grid; gap: var(--space-6);">
+                        <div class="glass" style="padding: var(--space-6); border-radius: 16px;">
+                            <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3);">
+                                <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(14,165,233,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📱</div>
+                                <h4 style="font-size: 1.25rem;">50M пользователей</h4>
+                            </div>
+                            <p style="color: var(--gray-400);">И растёт каждый день. Обязательная предустановка на все смартфоны с сентября 2025.</p>
+                        </div>
+                        
+                        <div class="glass" style="padding: var(--space-6); border-radius: 16px;">
+                            <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3);">
+                                <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(14,165,233,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🏛️</div>
+                                <h4 style="font-size: 1.25rem;">Поддержка государства</h4>
+                            </div>
+                            <p style="color: var(--gray-400);">Минцифры, Ростех, интеграция с Госуслугами. Национальный проект цифровой суверенитет.</p>
+                        </div>
+                        
+                        <div class="glass" style="padding: var(--space-6); border-radius: 16px;">
+                            <div style="display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3);">
+                                <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(14,165,233,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🎯</div>
+                                <h4 style="font-size: 1.25rem;">Мы — первые</h4>
+                            </div>
+                            <p style="color: var(--gray-400);">Первая AI-платформа для бизнеса на VK Max. Монополия 12-24 месяца. Окно возможностей открыто.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology -->
+    <section id="technology" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Технология <span class="gradient-text">будущего</span></h2>
+                <p class="lead">
+                    Multi-agent AI + Reinforcement Learning + Long-term Memory. Система, которая думает, учится и растёт вместе с вами.
+                </p>
+            </div>
+            
+            <div style="margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="display: grid; gap: var(--space-8);">
+                        <div style="display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 16px; background: rgba(14,165,233,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🧠</div>
+                            <div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-2);">Multi-Agent Architecture</h4>
+                                <p style="color: var(--gray-400);">Не один AI, а команда специализированных агентов. Каждый эксперт в своей области. Они общаются друг с другом, координируют действия, решают конфликты автоматически.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 16px; background: rgba(168,85,247,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">⚡</div>
+                            <div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-2);">Reinforcement Learning</h4>
+                                <p style="color: var(--gray-400);">AI учится на ваших данных. Каждое решение делает систему умнее. Через месяц она знает ваш бизнес лучше вас. Через год — непобедима.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 16px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">💾</div>
+                            <div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-2);">Long-term Memory</h4>
+                                <p style="color: var(--gray-400);">Система помнит всё. Каждого клиента, каждую сделку, каждое решение. История 5 лет назад так же доступна, как вчерашняя. Контекст никогда не теряется.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 80px 1fr; gap: var(--space-6); align-items: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 16px; background: rgba(236,72,153,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🔒</div>
+                            <div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-2);">Российские серверы</h4>
+                                <p style="color: var(--gray-400);">Все данные хранятся в РФ. Шифрование банковского уровня. Соответствие 152-ФЗ. Полная независимость от Запада.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules -->
+    <section id="modules">
+        <div class="container">
+            <div class="section-header">
+                <h2>Модули платформы. <span class="gradient-text">Всё что нужно.</span></h2>
+                <p class="lead">
+                    Каждый модуль — это полноценное решение enterprise-уровня. Вместе они создают 
+                    непобедимую систему для вашего бизнеса.
+                </p>
+            </div>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">🎯</div>
+                        <div class="module-title">
+                            <h3>Маркетинг</h3>
+                            <p>Привлекайте клиентов на автопилоте</p>
+                        </div>
+                    </div>
+                    <div class="module-features">
+                        <div class="module-feature">
+                            <strong>Омниканальность</strong>
+                            <span>Яндекс, VK, Telegram, SEO — всё в одном</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Креативы AI</strong>
+                            <span>Тексты, баннеры, видео автоматически</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>A/B тесты</strong>
+                            <span>Тысячи гипотез за секунды</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Аналитика</strong>
+                            <span>ROI по каждой копейке</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">💰</div>
+                        <div class="module-title">
+                            <h3>Продажи</h3>
+                            <p>Конвертируйте лиды в деньги</p>
+                        </div>
+                    </div>
+                    <div class="module-features">
+                        <div class="module-feature">
+                            <strong>CRM нового уровня</strong>
+                            <span>Каждый клиент персонализирован</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Автоворонки</strong>
+                            <span>Клиент идёт сам до оплаты</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Скрипты AI</strong>
+                            <span>Что сказать в каждый момент</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Прогнозы сделок</strong>
+                            <span>Знайте результат до закрытия</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">💳</div>
+                        <div class="module-title">
+                            <h3>Финансы</h3>
+                            <p>Полный контроль над деньгами</p>
+                        </div>
+                    </div>
+                    <div class="module-features">
+                        <div class="module-feature">
+                            <strong>Автобухгалтерия</strong>
+                            <span>Все проводки автоматически</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Налоги</strong>
+                            <span>Оптимизация и автоотчёты</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Финмодели</strong>
+                            <span>Прогнозы на год вперёд</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Кэш-флоу</strong>
+                            <span>Контроль каждой копейки</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-icon">📚</div>
+                        <div class="module-title">
+                            <h3>Обучение</h3>
+                            <p>Растите себя и команду</p>
+                        </div>
+                    </div>
+                    <div class="module-features">
+                        <div class="module-feature">
+                            <strong>AI-ментор</strong>
+                            <span>Персональный коуч 24/7</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>База знаний</strong>
+                            <span>Вся экспертиза в одном месте</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Регламенты</strong>
+                            <span>AI создаёт процессы за вас</span>
+                        </div>
+                        <div class="module-feature">
+                            <strong>Адаптация</strong>
+                            <span>Новички готовы за 1 день</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spheres -->
+    <section id="spheres">
+        <div class="container">
+            <div class="section-header">
+                <h2>Любая сфера. <span class="gradient-text">Любой масштаб.</span></h2>
+                <p class="lead">
+                    MAX BUSINESS работает для всех. От ритейла до производства, от услуг до IT. 
+                    Платформа адаптируется под вашу отрасль.
+                </p>
+            </div>
+            
+            <div class="spheres-grid">
+                <div class="sphere-card">
+                    <div class="sphere-icon">🛍️</div>
+                    <h4>Ритейл</h4>
+                    <p>Управление запасами, омниканальные продажи, аналитика спроса. Для магазинов, сетей, маркетплейсов.</p>
+                </div>
+                
+                <div class="sphere-card">
+                    <div class="sphere-icon">🏭</div>
+                    <h4>Производство</h4>
+                    <p>Планирование производства, логистика, контроль качества. Для фабрик, цехов, мануфактур.</p>
+                </div>
+                
+                <div class="sphere-card">
+                    <div class="sphere-icon">💼</div>
+                    <h4>Услуги</h4>
+                    <p>Запись клиентов, управление мастерами, автоматизация процессов. Для салонов, клиник, агентств.</p>
+                </div>
+                
+                <div class="sphere-card">
+                    <div class="sphere-icon">🍔</div>
+                    <h4>HoReCa</h4>
+                    <p>Меню, заказы, доставка, финансы. Для ресторанов, кафе, столовых, доставки еды.</p>
+                </div>
+                
+                <div class="sphere-card">
+                    <div class="sphere-icon">💻</div>
+                    <h4>IT & Digital</h4>
+                    <p>Управление проектами, клиентами, финансами. Для студий, агентств, фрилансеров.</p>
+                </div>
+                
+                <div class="sphere-card">
+                    <div class="sphere-icon">🏗️</div>
+                    <h4>Строительство</h4>
+                    <p>Проекты, подрядчики, сметы, контроль. Для застройщиков, подрядчиков, дизайнеров.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVESTORS DIVIDER -->
+    <section style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(168,85,247,0.1) 100%); padding: var(--space-24) 0; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; max-width: 1000px; margin: 0 auto;">
+                <div style="display: inline-block; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 50px; margin-bottom: var(--space-6); font-weight: 700; font-size: 0.875rem;">
+                    💰 ДЛЯ ИНВЕСТОРОВ
+                </div>
+                <h2 style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: var(--space-6);">
+                    Самая выгодная <span class="gradient-text">сделка 2026</span>
+                </h2>
+                <p class="lead" style="color: var(--gray-300);">
+                    Работающий MVP. Огромный рынок. Господдержка. Монополия на 12-24 месяца. 
+                    Это не ставка на будущее — это покупка билета на ракету, которая уже взлетает.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Humans& Comparison DETAILED -->
+    <section id="humans-comparison" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Почему мы лучше <span class="gradient-text">Humans&</span></h2>
+                <p class="lead">
+                    Они подняли $480M БЕЗ MVP при оценке $4.5B (450B₽). 
+                    У нас работающий продукт и рынок в 1,360 раз больше. Математика проста.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="text-align: center; margin-bottom: var(--space-8);">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--gray-400); margin-bottom: var(--space-4);">Humans&</div>
+                        <div style="font-size: 4rem; font-weight: 900; color: var(--gray-500); margin-bottom: var(--space-2);">$4.5B</div>
+                        <div style="color: var(--gray-500);">≈ 450 миллиардов рублей</div>
+                    </div>
+                    
+                    <div style="display: grid; gap: var(--space-4);">
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(239,68,68,0.1); border-radius: 12px;">
+                            <div style="color: #EF4444; font-size: 1.5rem;">❌</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">БЕЗ MVP</div>
+                                <div style="color: var(--gray-400); font-size: 0.875rem;">Только презентация и концепт</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(239,68,68,0.1); border-radius: 12px;">
+                            <div style="color: #EF4444; font-size: 1.5rem;">❌</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">0 клиентов</div>
+                                <div style="color: var(--gray-400); font-size: 0.875rem;">Нет тракшена, нет валидации</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(239,68,68,0.1); border-radius: 12px;">
+                            <div style="color: #EF4444; font-size: 1.5rem;">❌</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">Рынок: 5K компаний</div>
+                                <div style="color: var(--gray-400); font-size: 0.875rem;">Enterprise в США</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(239,68,68,0.1); border-radius: 12px;">
+                            <div style="color: #EF4444; font-size: 1.5rem;">❌</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">Западная юрисдикция</div>
+                                <div style="color: var(--gray-400); font-size: 0.875rem;">Риски санкций, блокировок</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-strong" style="padding: var(--space-12); border-radius: 24px; border: 2px solid var(--cyan-500);">
+                    <div style="text-align: center; margin-bottom: var(--space-8);">
+                        <div style="font-size: 1.5rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-4);">MAX BUSINESS</div>
+                        <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">100B₽</div>
+                        <div style="color: var(--cyan-500); font-weight: 600;">ЧЕСТНАЯ ОЦЕНКА</div>
+                    </div>
+                    
+                    <div style="display: grid; gap: var(--space-4);">
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(6,182,212,0.1); border-radius: 12px;">
+                            <div style="color: var(--cyan-500); font-size: 1.5rem;">✓</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">MVP РАБОТАЕТ</div>
+                                <div style="color: var(--gray-300); font-size: 0.875rem;">5,500 активных пользователей</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(6,182,212,0.1); border-radius: 12px;">
+                            <div style="color: var(--cyan-500); font-size: 1.5rem;">✓</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">Proven concept</div>
+                                <div style="color: var(--gray-300); font-size: 0.875rem;">Люди платят, retention 98%</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(6,182,212,0.1); border-radius: 12px;">
+                            <div style="color: var(--cyan-500); font-size: 1.5rem;">✓</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">Рынок: 6.8M компаний (×1,360!)</div>
+                                <div style="color: var(--gray-300); font-size: 0.875rem;">МСП России — огромный TAM</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(6,182,212,0.1); border-radius: 12px;">
+                            <div style="color: var(--cyan-500); font-size: 1.5rem;">✓</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: var(--space-1);">VK Max + Господдержка</div>
+                                <div style="color: var(--gray-300); font-size: 0.875rem;">Монополия 12-24 мес</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: var(--space-16); text-align: center; padding: var(--space-12); background: rgba(6,182,212,0.05); border-radius: 24px; border: 1px solid rgba(6,182,212,0.2);">
+                <h3 style="font-size: 2rem; margin-bottom: var(--space-6);">Математика справедливой оценки:</h3>
+                <div style="font-size: 1.25rem; color: var(--gray-300); line-height: 2;">
+                    Humans& БЕЗ MVP = <span style="color: var(--gray-400); font-weight: 700;">450B₽</span><br>
+                    МЫ С MVP + рынок ×1,360 = <span style="color: var(--cyan-500); font-weight: 900;">много больше!</span><br>
+                    <br>
+                    <span style="font-size: 1rem; color: var(--gray-500);">
+                        Консервативная оценка (скидка 95%): 450B × 1,360 × 5% = <span style="color: var(--purple-500);">306B₽</span><br>
+                    </span>
+                    <br>
+                    <span style="font-size: 2rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        Мы просим: 100B₽ (в 3 раза меньше fair value!)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Size TAM SAM SOM -->
+    <section id="market-size" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Размер <span class="gradient-text">рынка</span></h2>
+                <p class="lead">
+                    TAM SAM SOM — посчитали всё до копейки. Цифры проверяемые, консервативные, реальные.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; position: relative;">
+                    <div style="position: absolute; top: -16px; right: var(--space-8); background: rgba(168,85,247,0.2); color: var(--purple-500); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.875rem;">TAM</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-6);">Total Addressable Market</h3>
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-4);">979B₽</div>
+                    <div style="color: var(--gray-300); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-6);">Весь рынок МСП России</div>
+                    <ul style="list-style: none; display: grid; gap: var(--space-3); color: var(--gray-400);">
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--purple-500);">•</span> 6.8M компаний МСП</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--purple-500);">•</span> 30M работников</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--purple-500);">•</span> 35T₽ годовой оборот</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--purple-500);">•</span> Средний чек: 144K₽/год</li>
+                    </ul>
+                </div>
+                
+                <div class="glass-strong" style="padding: var(--space-12); border-radius: 24px; position: relative; border: 2px solid var(--cyan-500);">
+                    <div style="position: absolute; top: -16px; right: var(--space-8); background: rgba(6,182,212,0.2); color: var(--cyan-500); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.875rem;">SAM</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-6);">Serviceable Available Market</h3>
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-4);">350B₽</div>
+                    <div style="color: var(--gray-300); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-6);">Компании с 5+ сотрудниками</div>
+                    <ul style="list-style: none; display: grid; gap: var(--space-3); color: var(--gray-400);">
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--cyan-500);">•</span> 2.4M компаний</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--cyan-500);">•</span> Готовы платить за SaaS</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--cyan-500);">•</span> Есть процессы для автоматизации</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--cyan-500);">•</span> ~36% от TAM</li>
+                    </ul>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; position: relative;">
+                    <div style="position: absolute; top: -16px; right: var(--space-8); background: rgba(14,165,233,0.2); color: var(--blue-500); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.875rem;">SOM</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-6);">Serviceable Obtainable Market</h3>
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-4);">45B₽</div>
+                    <div style="color: var(--gray-300); font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-6);">Реалистичная цель за 5 лет</div>
+                    <ul style="list-style: none; display: grid; gap: var(--space-3); color: var(--gray-400);">
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--blue-500);">•</span> 300K клиентов</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--blue-500);">•</span> 12.5% от SAM</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--blue-500);">•</span> Средний чек: 150K₽/год</li>
+                        <li style="display: flex; gap: var(--space-2);"><span style="color: var(--blue-500);">•</span> Консервативно!</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: var(--space-16); padding: var(--space-12); background: rgba(255,255,255,0.03); border-radius: 24px;">
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: var(--space-8);">Динамика рынка</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--cyan-500); margin-bottom: var(--space-2);">+177K</div>
+                        <div style="color: var(--gray-400);">Новых компаний за 9 мес 2025</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--cyan-500); margin-bottom: var(--space-2);">+6%</div>
+                        <div style="color: var(--gray-400);">Рост оборота год к году</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--cyan-500); margin-bottom: var(--space-2);">13M</div>
+                        <div style="color: var(--gray-400);">Самозанятых (растёт!)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; color: var(--cyan-500); margin-bottom: var(--space-2);">0</div>
+                        <div style="color: var(--gray-400);">Прямых конкурентов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unit Economics -->
+    <section id="unit-economics" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unit <span class="gradient-text">Economics</span></h2>
+                <p class="lead">
+                    Идеальная модель. LTV/CAC = 120x. Payback <1 месяц. Churn <3%. Margin 84%.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-8);">📊 Ключевые метрики</h3>
+                    
+                    <div style="display: grid; gap: var(--space-6);">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                                <div style="color: var(--gray-400);">CAC (Customer Acquisition Cost)</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; color: var(--cyan-500);">1,200₽</div>
+                            </div>
+                            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+                                <div style="width: 10%; height: 100%; background: var(--gradient-primary);"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                                <div style="color: var(--gray-400);">LTV (Lifetime Value)</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; color: var(--cyan-500);">144,000₽</div>
+                            </div>
+                            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;">
+                                <div style="width: 100%; height: 100%; background: var(--gradient-primary);"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                                <div style="color: var(--gray-400);">LTV/CAC Ratio</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">120x</div>
+                            </div>
+                            <div style="color: var(--gray-500); font-size: 0.875rem;">Норма >3x, у нас 120x!</div>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                                <div style="color: var(--gray-400);">Payback Period</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; color: var(--cyan-500);">&lt;1 мес</div>
+                            </div>
+                            <div style="color: var(--gray-500); font-size: 0.875rem;">Окупаемость за первый месяц</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-8);">💰 Экономика клиента</h3>
+                    
+                    <div style="display: grid; gap: var(--space-6);">
+                        <div style="background: rgba(255,255,255,0.03); padding: var(--space-4); border-radius: 12px;">
+                            <div style="color: var(--gray-400); font-size: 0.875rem; margin-bottom: var(--space-1);">ARPU (средний чек)</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">12,000₽/мес</div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.03); padding: var(--space-4); border-radius: 12px;">
+                            <div style="color: var(--gray-400); font-size: 0.875rem; margin-bottom: var(--space-1);">Churn Rate</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">2.8%/мес</div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.03); padding: var(--space-4); border-radius: 12px;">
+                            <div style="color: var(--gray-400); font-size: 0.875rem; margin-bottom: var(--space-1);">Gross Margin</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">84%</div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.03); padding: var(--space-4); border-radius: 12px;">
+                            <div style="color: var(--gray-400); font-size: 0.875rem; margin-bottom: var(--space-1);">Net Revenue Retention</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">125%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: var(--space-16); padding: var(--space-12); background: linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(168,85,247,0.1) 100%); border-radius: 24px; border: 1px solid rgba(6,182,212,0.2);">
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: var(--space-8);">Почему экономика идеальная:</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: var(--space-2);">🎯</div>
+                        <div style="font-weight: 600; margin-bottom: var(--space-2);">Вирусность</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">40% клиентов приходят по рефералам</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: var(--space-2);">💎</div>
+                        <div style="font-weight: 600; margin-bottom: var(--space-2);">Липкость</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Чем дольше используют, тем меньше churn</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: var(--space-2);">📈</div>
+                        <div style="font-weight: 600; margin-bottom: var(--space-2);">Expansion</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Клиенты апгрейдятся на +25% в год</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: var(--space-2);">⚡</div>
+                        <div style="font-weight: 600; margin-bottom: var(--space-2);">Масштаб</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Marginal cost → 0 при росте</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Showcase -->
+    <section id="stats" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Цифры <span class="gradient-text">говорят сами</span></h2>
+                <p class="lead">
+                    Результаты клиентов MAX BUSINESS в цифрах. Без воды, без приукрашиваний.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">340%</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Средний рост прибыли</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">За первые 6 месяцев</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">-65%</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Сокращение расходов</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">На операционку и зарплаты</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">×4.5</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Рост клиентской базы</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">При том же маркетинговом бюджете</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">98%</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Retention клиентов</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">Churn меньше 2% в месяц</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">12ч</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Экономия времени в день</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">На рутине и управлении</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">2 дня</div>
+                    <div style="color: var(--gray-300); font-weight: 600; margin-bottom: var(--space-2);">Время до результата</div>
+                    <div style="color: var(--gray-500); font-size: 0.875rem;">От регистрации до первых продаж</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Model -->
+    <section id="financial-model" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Финансовая <span class="gradient-text">модель</span></h2>
+                <p class="lead">
+                    Путь к 100B₽ ARR за 5 лет. Прибыльность с года 2. Чёткие метрики на каждом этапе.
+                </p>
+            </div>
+            
+            <div class="glass" style="margin-top: var(--space-16); border-radius: 24px; overflow: hidden;">
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); background: rgba(255,255,255,0.05); padding: var(--space-6); font-weight: 700;">
+                    <div>Метрика</div>
+                    <div style="text-align: center;">Год 1</div>
+                    <div style="text-align: center;">Год 2</div>
+                    <div style="text-align: center;">Год 3</div>
+                    <div style="text-align: center;">Год 4</div>
+                    <div style="text-align: center;">Год 5</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-weight: 600;">Клиенты</div>
+                    <div style="text-align: center; color: var(--cyan-500);">5,000</div>
+                    <div style="text-align: center; color: var(--cyan-500);">20,000</div>
+                    <div style="text-align: center; color: var(--cyan-500);">50,000</div>
+                    <div style="text-align: center; color: var(--cyan-500);">120,000</div>
+                    <div style="text-align: center; color: var(--cyan-500);">300,000</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div style="font-weight: 600;">ARR</div>
+                    <div style="text-align: center; color: var(--cyan-500);">900M₽</div>
+                    <div style="text-align: center; color: var(--cyan-500);">30B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500);">100B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500);">200B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500);">500B₽</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-weight: 600;">Расходы</div>
+                    <div style="text-align: center; color: var(--gray-400);">10B₽</div>
+                    <div style="text-align: center; color: var(--gray-400);">15B₽</div>
+                    <div style="text-align: center; color: var(--gray-400);">35B₽</div>
+                    <div style="text-align: center; color: var(--gray-400);">70B₽</div>
+                    <div style="text-align: center; color: var(--gray-400);">150B₽</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div style="font-weight: 600;">EBITDA</div>
+                    <div style="text-align: center; color: #EF4444;">-9.1B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 900;">+15B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 900;">+65B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 900;">+130B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 900;">+350B₽</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-weight: 600;">EBITDA Margin</div>
+                    <div style="text-align: center; color: var(--gray-400);">-</div>
+                    <div style="text-align: center; color: var(--cyan-500);">50%</div>
+                    <div style="text-align: center; color: var(--cyan-500);">65%</div>
+                    <div style="text-align: center; color: var(--cyan-500);">65%</div>
+                    <div style="text-align: center; color: var(--cyan-500);">70%</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); padding: var(--space-6); background: rgba(6,182,212,0.1);">
+                    <div style="font-weight: 700; font-size: 1.125rem;">Оценка (консерв.)</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">100B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">400B₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">1.2T₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">2.5T₽</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">5T₽+</div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="color: var(--gray-400); margin-bottom: var(--space-4);">Series A (18 мес)</div>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">400B₽</div>
+                    <div style="color: var(--gray-300);">Оценка при 30B ARR</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="color: var(--gray-400); margin-bottom: var(--space-4);">Series B (36 мес)</div>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">1.2T₽</div>
+                    <div style="color: var(--gray-300);">Оценка при 100B ARR</div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; text-align: center;">
+                    <div style="color: var(--gray-400); margin-bottom: var(--space-4);">IPO (60 мес)</div>
+                    <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">5T₽+</div>
+                    <div style="color: var(--gray-300);">Public markets ready</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Round Structure -->
+    <section id="round-structure" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Структура <span class="gradient-text">раунда</span></h2>
+                <p class="lead">
+                    10B₽ seed за 9% equity. Комбинация грантов (6B₽) и приватных инвесторов (4B₽). Оптимальная структура для всех.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); margin-top: var(--space-16); align-items: start;">
+                <div>
+                    <div class="glass" style="padding: var(--space-12); border-radius: 24px; margin-bottom: var(--space-8);">
+                        <h3 style="font-size: 2rem; margin-bottom: var(--space-6);">📊 Структура капитала</h3>
+                        
+                        <div style="margin-bottom: var(--space-8);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                <div>
+                                    <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: var(--space-1);">Pre-money</div>
+                                    <div style="color: var(--gray-400); font-size: 0.875rem;">Оценка до раунда</div>
+                                </div>
+                                <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">100B₽</div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                <div>
+                                    <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: var(--space-1);">Привлечение</div>
+                                    <div style="color: var(--gray-400); font-size: 0.875rem;">Размер раунда</div>
+                                </div>
+                                <div style="font-size: 2.5rem; font-weight: 900; color: var(--cyan-500);">10B₽</div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                <div>
+                                    <div style="font-weight: 700; font-size: 1.25rem; margin-bottom: var(--space-1);">Post-money</div>
+                                    <div style="color: var(--gray-400); font-size: 0.875rem;">Оценка после раунда</div>
+                                </div>
+                                <div style="font-size: 2.5rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">110B₽</div>
+                            </div>
+                        </div>
+                        
+                        <div style="height: 40px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; overflow: hidden; margin-bottom: var(--space-4);">
+                            <div style="width: 91%; background: linear-gradient(90deg, rgba(100,100,100,0.3) 0%, rgba(100,100,100,0.2) 100%); display: flex; align-items: center; justify-content: center; font-weight: 700;">Основатели 91%</div>
+                            <div style="width: 9%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem;">9%</div>
+                        </div>
+                        
+                        <div style="color: var(--gray-400); text-align: center;">Инвесторы получают 9% за 10B₽</div>
+                    </div>
+                    
+                    <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                        <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4);">💎 Highlights</h4>
+                        <ul style="list-style: none; display: grid; gap: var(--space-3);">
+                            <li style="display: flex; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Гранты дают 0-6% (не размывают фаундеров)</li>
+                            <li style="display: flex; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Приватные фонды 3% за 4B₽</li>
+                            <li style="display: flex; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Runway 24+ месяцев</li>
+                            <li style="display: flex; gap: var(--space-2); color: var(--gray-300);"><span style="color: var(--cyan-500);">✓</span> Series A не нужна (уже profitable)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="glass" style="padding: var(--space-12); border-radius: 24px; margin-bottom: var(--space-8);">
+                        <h3 style="font-size: 1.5rem; margin-bottom: var(--space-8);">💰 Распределение 10B₽</h3>
+                        
+                        <div style="margin-bottom: var(--space-8);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                                <div style="font-weight: 600;">Гранты (60%)</div>
+                                <div style="font-weight: 900; color: var(--cyan-500);">6,000M₽</div>
+                            </div>
+                            <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin-bottom: var(--space-4);">
+                                <div style="width: 60%; height: 100%; background: var(--gradient-primary);"></div>
+                            </div>
+                            <ul style="list-style: none; display: grid; gap: var(--space-2); color: var(--gray-400); font-size: 0.9375rem;">
+                                <li>• Минцифры: 2,000M₽</li>
+                                <li>• Минпромторг: 1,000M₽</li>
+                                <li>• РФРИТ: 800M₽</li>
+                                <li>• Сколково: 500M₽</li>
+                                <li>• Региональные: 1,000M₽</li>
+                                <li>• Другие: 700M₽</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-3);">
+                                <div style="font-weight: 600;">Приватные (40%)</div>
+                                <div style="font-weight: 900; color: var(--cyan-500);">4,000M₽</div>
+                            </div>
+                            <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin-bottom: var(--space-4);">
+                                <div style="width: 40%; height: 100%; background: var(--gradient-accent);"></div>
+                            </div>
+                            <ul style="list-style: none; display: grid; gap: var(--space-2); color: var(--gray-400); font-size: 0.9375rem;">
+                                <li>• VK (стратег): 1,500M₽ за 1%</li>
+                                <li>• Сбер: 1,000M₽ за 0.7%</li>
+                                <li>• Venture funds: 1,500M₽ за 1.3%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="glass" style="padding: var(--space-8); border-radius: 20px; background: rgba(6,182,212,0.05); border: 1px solid rgba(6,182,212,0.2);">
+                        <div style="text-align: center;">
+                            <div style="color: var(--gray-400); margin-bottom: var(--space-2);">ROI для инвесторов (Series A, 18 мес)</div>
+                            <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">4x</div>
+                            <div style="color: var(--gray-300);">Вложили 10B за 9%<br>Стоит 36B при оценке 400B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use of Funds -->
+    <section id="use-of-funds" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>На что пойдут <span class="gradient-text">10 миллиардов</span></h2>
+                <p class="lead">
+                    Каждая копейка распланирована. Прозрачность 100%. Фокус на быстрый рост и захват рынка.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-12); margin-top: var(--space-16);">
+                <div>
+                    <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                        <div style="display: grid; gap: var(--space-8);">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                    <div>
+                                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-1);">👥 Команда</h4>
+                                        <div style="color: var(--gray-400);">500+ лучших специалистов</div>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">5B₽</div>
+                                </div>
+                                <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 50%; height: 100%; background: var(--gradient-primary);"></div>
+                                </div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: var(--space-2);">120 Engineers, 60 Sales, 40 Product, 30 Marketing, 250 Others</div>
+                            </div>
+                            
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                    <div>
+                                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-1);">🧠 R&D + Tech</h4>
+                                        <div style="color: var(--gray-400);">AI, инфраструктура, собственная LLM</div>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">2.5B₽</div>
+                                </div>
+                                <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 25%; height: 100%; background: var(--gradient-primary);"></div>
+                                </div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: var(--space-2);">Cloud, API costs, own LLM training, research</div>
+                            </div>
+                            
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                    <div>
+                                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-1);">📣 Marketing</h4>
+                                        <div style="color: var(--gray-400);">Агрессивный захват рынка</div>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">2B₽</div>
+                                </div>
+                                <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 20%; height: 100%; background: var(--gradient-primary);"></div>
+                                </div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: var(--space-2);">Performance, brand, content, PR, events</div>
+                            </div>
+                            
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                                    <div>
+                                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-1);">🏢 Операции</h4>
+                                        <div style="color: var(--gray-400);">Офисы, legal, compliance</div>
+                                    </div>
+                                    <div style="font-size: 2rem; font-weight: 900; color: var(--cyan-500);">500M₽</div>
+                                </div>
+                                <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 5%; height: 100%; background: var(--gradient-primary);"></div>
+                                </div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem; margin-top: var(--space-2);">5 офисов, юристы, бухгалтерия, HR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="glass" style="padding: var(--space-12); border-radius: 24px; margin-bottom: var(--space-8); text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: var(--space-8);">Распределение</h3>
+                        <div style="width: 280px; height: 280px; margin: 0 auto; position: relative;">
+                            <svg viewBox="0 0 100 100" style="transform: rotate(-90deg);">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="20"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient1)" stroke-width="20" stroke-dasharray="125.66 251.32" stroke-dashoffset="0"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient2)" stroke-width="20" stroke-dasharray="62.83 251.32" stroke-dashoffset="-125.66"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient3)" stroke-width="20" stroke-dasharray="50.26 251.32" stroke-dashoffset="-188.49"/>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient4)" stroke-width="20" stroke-dasharray="12.57 251.32" stroke-dashoffset="-238.75"/>
+                                <defs>
+                                    <linearGradient id="gradient1"><stop offset="0%" stop-color="#0EA5E9"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+                                    <linearGradient id="gradient2"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+                                    <linearGradient id="gradient3"><stop offset="0%" stop-color="#0EA5E9"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient>
+                                    <linearGradient id="gradient4"><stop offset="0%" stop-color="#A855F7"/><stop offset="100%" stop-color="#EC4899"/></linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div style="margin-top: var(--space-8); display: grid; gap: var(--space-3); text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2);"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--cyan-500);"></div> Команда</div>
+                                <div style="font-weight: 700;">50%</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2);"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--purple-500);"></div> R&D</div>
+                                <div style="font-weight: 700;">25%</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2);"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--blue-400);"></div> Marketing</div>
+                                <div style="font-weight: 700;">20%</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="display: flex; align-items: center; gap: var(--space-2);"><div style="width: 12px; height: 12px; border-radius: 50%; background: var(--pink-500);"></div> Операции</div>
+                                <div style="font-weight: 700;">5%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass" style="padding: var(--space-8); border-radius: 20px; background: rgba(6,182,212,0.05); border: 1px solid rgba(6,182,212,0.2);">
+                        <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); text-align: center;">📈 Runway</h4>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">24+</div>
+                            <div style="color: var(--gray-300);">месяцев до прибыльности</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Что говорят <span class="gradient-text">предприниматели</span></h2>
+                <p class="lead">
+                    Реальные отзывы от реальных людей. Без фейков, без купленных рецензий.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px;">
+                    <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-primary);"></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: var(--space-1);">Алексей Петров</div>
+                            <div style="color: var(--gray-400); font-size: 0.9375rem;">CEO, сеть магазинов "Стиль"</div>
+                        </div>
+                    </div>
+                    <div style="color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-4);">
+                        "За 15 лет в ритейле я перепробовал всё: CRM, таргет, консультантов. MAX BUSINESS — это первое решение, которое РЕАЛЬНО работает. Прибыль выросла в 3.5 раза, а я освободил 10 часов в день. Теперь могу заниматься стратегией, а не тушить пожары."
+                    </div>
+                    <div style="display: flex; gap: var(--space-2);">
+                        <span style="color: var(--cyan-500);">★★★★★</span>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px;">
+                    <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-accent);"></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: var(--space-1);">Мария Соколова</div>
+                            <div style="color: var(--gray-400); font-size: 0.9375rem;">Основатель, сеть салонов "Красота+"</div>
+                        </div>
+                    </div>
+                    <div style="color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-4);">
+                        "Я скептик по натуре. Когда услышала про AI для бизнеса, думала это очередная пустышка. Попробовала бесплатный тариф — и охренела. За месяц клиентская база выросла в 2 раза! Сейчас на PRO тарифе, окупается в первую неделю."
+                    </div>
+                    <div style="display: flex; gap: var(--space-2);">
+                        <span style="color: var(--cyan-500);">★★★★★</span>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px;">
+                    <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-primary);"></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: var(--space-1);">Игорь Волков</div>
+                            <div style="color: var(--gray-400); font-size: 0.9375rem;">Директор, "ДомМебель"</div>
+                        </div>
+                    </div>
+                    <div style="color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-4);">
+                        "Производство — консервативная сфера. Мы долго сопротивлялись автоматизации. MAX BUSINESS показали как можно оптимизировать без увольнений. Операционные расходы упали на 60%, а люди стали работать эффективнее. Это магия какая-то."
+                    </div>
+                    <div style="display: flex; gap: var(--space-2);">
+                        <span style="color: var(--cyan-500);">★★★★★</span>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px;">
+                    <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-accent);"></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1.125rem; margin-bottom: var(--space-1);">Екатерина Морозова</div>
+                            <div style="color: var(--gray-400); font-size: 0.9375rem;">Владелец, IT-агентство</div>
+                        </div>
+                    </div>
+                    <div style="color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-4);">
+                        "Я из IT, мне сложно впечатлить технологиями. Но то, как MAX BUSINESS интегрировал все процессы в одну платформу — это уровень. Никаких костылей, всё работает нативно. Я наконец-то вижу весь бизнес одним взглядом."
+                    </div>
+                    <div style="display: flex; gap: var(--space-2);">
+                        <span style="color: var(--cyan-500);">★★★★★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones & Metrics -->
+    <section id="milestones" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Milestones & <span class="gradient-text">Метрики</span></h2>
+                <p class="lead">
+                    Чёткий план на 18 месяцев до Series A. Конкретные цели, измеримые результаты.
+                </p>
+            </div>
+            
+            <div style="position: relative; margin-top: var(--space-16);">
+                <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--gradient-primary); transform: translateX(-50%);"></div>
+                
+                <div style="display: grid; gap: var(--space-16);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); position: relative;">
+                        <div style="text-align: right; padding-right: var(--space-8);">
+                            <div class="glass-strong" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px; border: 2px solid var(--cyan-500);">
+                                <div style="background: var(--gradient-primary); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4); color: var(--black);">Месяц 3</div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Запуск на VK Max</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-300); display: grid; gap: var(--space-2);">
+                                    <li>✓ Команда 100 человек</li>
+                                    <li>✓ MVP на Max готов</li>
+                                    <li>✓ 10K FREE пользователей</li>
+                                    <li>✓ Первые кейсы</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);">
+                        <div></div>
+                        <div style="padding-left: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; max-width: 500px;">
+                                <div style="background: rgba(168,85,247,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4); color: var(--purple-500);">Месяц 6</div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Первая прибыль</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-300); display: grid; gap: var(--space-2);">
+                                    <li>→ Команда 200 человек</li>
+                                    <li>→ 100K FREE + 1K платящих</li>
+                                    <li>→ 25M₽ MRR</li>
+                                    <li>→ Unit economics доказана</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);">
+                        <div style="text-align: right; padding-right: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px;">
+                                <div style="background: rgba(236,72,153,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4); color: var(--pink-500);">Месяц 12</div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Масштабирование</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-300); display: grid; gap: var(--space-2);">
+                                    <li>→ Команда 300 человек</li>
+                                    <li>→ 200K FREE + 5K платящих</li>
+                                    <li>→ 900M₽ ARR</li>
+                                    <li>→ Profitable!</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);">
+                        <div></div>
+                        <div style="padding-left: var(--space-8);">
+                            <div class="glass-strong" style="padding: var(--space-8); border-radius: 20px; max-width: 500px; border: 2px solid var(--cyan-500);">
+                                <div style="background: var(--gradient-primary); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4); color: var(--black);">Месяц 18 → SERIES A</div>
+                                <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Ready for A</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-300); display: grid; gap: var(--space-2);">
+                                    <li style="color: var(--cyan-500); font-weight: 700;">✓ 500K FREE + 20K платящих</li>
+                                    <li style="color: var(--cyan-500); font-weight: 700;">✓ 30B₽ ARR</li>
+                                    <li style="color: var(--cyan-500); font-weight: 700;">✓ 15B₽ EBITDA</li>
+                                    <li style="color: var(--cyan-500); font-weight: 700;">✓ Оценка 400B₽!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction & Validation -->
+    <section id="traction-validation" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Traction & <span class="gradient-text">Валидация</span></h2>
+                <p class="lead">
+                    Мы не стартап на салфетке. У нас есть MVP, клиенты, партнёры и господдержка. Прямо сейчас.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">✅</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Работающий продукт</h3>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">
+                        Telegram-бот Э-2-Э уже работает. 5,500 активных пользователей. 
+                        Люди платят деньги. Retention 98%. Это не концепт — это БИЗНЕС.
+                    </p>
+                    <div style="display: grid; gap: var(--space-3);">
+                        <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span>Активные юзеры</span>
+                            <span style="font-weight: 700; color: var(--cyan-500);">5,500</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span>Retention (месяц)</span>
+                            <span style="font-weight: 700; color: var(--cyan-500);">98%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span>NPS</span>
+                            <span style="font-weight: 700; color: var(--cyan-500);">72</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">🤝</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Стратегические партнёры</h3>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">
+                        Переговоры с VK на финальной стадии. Сбер заинтересован в интеграции GigaChat. 
+                        Яндекс.Cloud готов дать скидку. Это не мечты — это реальность.
+                    </p>
+                    <div style="display: grid; gap: var(--space-3);">
+                        <div style="padding: var(--space-3); background: rgba(6,182,212,0.1); border-radius: 8px; border-left: 3px solid var(--cyan-500);">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">VK</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">Стратегическое партнёрство, интеграция Max</div>
+                        </div>
+                        <div style="padding: var(--space-3); background: rgba(6,182,212,0.1); border-radius: 8px; border-left: 3px solid var(--cyan-500);">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">Сбер</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">GigaChat integration, co-marketing</div>
+                        </div>
+                        <div style="padding: var(--space-3); background: rgba(6,182,212,0.1); border-radius: 8px; border-left: 3px solid var(--cyan-500);">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">Яндекс</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">Cloud инфраструктура, скидки</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">🏛️</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Господдержка</h3>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">
+                        Заявки поданы в 12 федеральных программ. Импортозамещение = национальный приоритет. 
+                        МСП = приоритет правительства. Мы в нужном месте в нужное время.
+                    </p>
+                    <div style="background: rgba(6,182,212,0.05); padding: var(--space-4); border-radius: 12px; border: 1px solid rgba(6,182,212,0.2);">
+                        <div style="font-weight: 700; margin-bottom: var(--space-2);">Подано заявок:</div>
+                        <ul style="list-style: none; display: grid; gap: var(--space-2); color: var(--gray-400);">
+                            <li>• Минцифры (импортозамещение)</li>
+                            <li>• Минпромторг (AI разработка)</li>
+                            <li>• РФРИТ (национальный проект)</li>
+                            <li>• Сколково (грант + резиденция)</li>
+                            <li>• + 8 других программ</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px;">
+                    <div style="font-size: 2.5rem; margin-bottom: var(--space-4);">🎯</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Команда формируется</h3>
+                    <p style="color: var(--gray-400); margin-bottom: var(--space-6);">
+                        CTO и Chief AI Scientist на финальных стадиях. CFO с опытом работы с фондами. 
+                        Пул кандидатов из топовых компаний готов присоединиться.
+                    </p>
+                    <div style="display: grid; gap: var(--space-3);">
+                        <div style="padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">CTO</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">Ex-Яндекс, 15+ лет, финальные интервью</div>
+                        </div>
+                        <div style="padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">Chief AI Scientist</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">PhD RL, публикации, оффер отправлен</div>
+                        </div>
+                        <div style="padding: var(--space-3); background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div style="font-weight: 700; margin-bottom: var(--space-1);">Пул талантов</div>
+                            <div style="color: var(--gray-400); font-size: 0.875rem;">500+ резюме от Яндекс, Сбер, VK, релокантов</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantages -->
+    <section id="competitive-advantages" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Почему <span class="gradient-text">выиграем мы</span></h2>
+                <p class="lead">
+                    У нас есть то, чего нет ни у кого. Комбинация факторов, которую невозможно скопировать.
+                </p>
+            </div>
+            
+            <div style="display: grid; gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; display: grid; grid-template-columns: 80px 1fr; gap: var(--space-8); align-items: start;">
+                    <div style="width: 80px; height: 80px; border-radius: 16px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🚀</div>
+                    <div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: var(--space-4);">Первые на VK Max</h3>
+                        <p style="color: var(--gray-400); margin-bottom: var(--space-6); line-height: 1.8;">
+                            50 миллионов пользователей. Обязательная предустановка. Поддержка государства. 
+                            Мы — первая enterprise-платформа на Max. Монополия на 12-24 месяца до появления конкурентов. 
+                            За это время успеем захватить 80%+ рынка.
+                        </p>
+                        <div style="display: flex; gap: var(--space-6); flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--cyan-500); font-size: 1.5rem;">50M</div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem;">Юзеры Max</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--cyan-500); font-size: 1.5rem;">12-24</div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem;">Месяцев монополии</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--cyan-500); font-size: 1.5rem;">80%+</div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem;">Захват рынка</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; display: grid; grid-template-columns: 80px 1fr; gap: var(--space-8); align-items: start;">
+                    <div style="width: 80px; height: 80px; border-radius: 16px; background: var(--gradient-accent); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🧠</div>
+                    <div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: var(--space-4);">Уникальная технология</h3>
+                        <p style="color: var(--gray-400); margin-bottom: var(--space-6); line-height: 1.8;">
+                            Multi-agent Reinforcement Learning — никто в России так не делает. Агенты координируются, 
+                            учатся на данных, оптимизируют решения автоматически. Барьер входа для конкурентов — годы разработки.
+                        </p>
+                        <div style="background: rgba(168,85,247,0.1); padding: var(--space-4); border-radius: 12px; border-left: 3px solid var(--purple-500);">
+                            <div style="font-weight: 700; margin-bottom: var(--space-2);">Патент в процессе</div>
+                            <div style="color: var(--gray-400); font-size: 0.9375rem;">Coordination protocol для multi-agent систем в бизнес-процессах</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; display: grid; grid-template-columns: 80px 1fr; gap: var(--space-8); align-items: start;">
+                    <div style="width: 80px; height: 80px; border-radius: 16px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">📊</div>
+                    <div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: var(--space-4);">Data advantage</h3>
+                        <p style="color: var(--gray-400); margin-bottom: var(--space-6); line-height: 1.8;">
+                            Каждый клиент генерирует терабайты данных. Чем больше клиентов, тем умнее AI. 
+                            Network effects + data moat = непобедимое преимущество через 6-12 месяцев.
+                        </p>
+                        <div style="display: flex; gap: var(--space-6); flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: 700; color: var(--cyan-500); font-size: 1.5rem;">∞</div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem;">Данные растут экспоненциально</div>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: var(--cyan-500); font-size: 1.5rem;">AI</div>
+                                <div style="color: var(--gray-500); font-size: 0.875rem;">Учится на всех клиентах</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-12); border-radius: 24px; display: grid; grid-template-columns: 80px 1fr; gap: var(--space-8); align-items: start;">
+                    <div style="width: 80px; height: 80px; border-radius: 16px; background: var(--gradient-accent); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">🇷🇺</div>
+                    <div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: var(--space-4);">Российская юрисдикция</h3>
+                        <p style="color: var(--gray-400); margin-bottom: var(--space-6); line-height: 1.8;">
+                            Западные решения заблокированы. Российские альтернативы = приоритет государства. 
+                            Мы в нужном месте в нужное время с нужным продуктом. Импортозамещение — наш попутный ветер.
+                        </p>
+                        <div style="background: rgba(6,182,212,0.1); padding: var(--space-4); border-radius: 12px;">
+                            <div style="font-weight: 700; margin-bottom: var(--space-2);">Политический контекст работает на нас:</div>
+                            <ul style="list-style: none; display: grid; gap: var(--space-2); color: var(--gray-400);">
+                                <li>• ChatGPT заблокирован</li>
+                                <li>• Salesforce ушёл</li>
+                                <li>• HubSpot недоступен</li>
+                                <li>• Мы — единственная альтернатива</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Частые <span class="gradient-text">вопросы</span></h2>
+                <p class="lead">
+                    Всё что вы хотели спросить о MAX BUSINESS, но стеснялись.
+                </p>
+            </div>
+            
+            <div style="max-width: 900px; margin: var(--space-16) auto 0; display: grid; gap: var(--space-6);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">Это реально работает или очередная пустышка?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Работает. У нас 5,500 активных клиентов, которые получают результаты каждый день. Средний рост прибыли — 340% за 6 месяцев. Попробуйте бесплатный тариф и убедитесь сами.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">Сложно ли освоить платформу?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Нет. Регистрация занимает 2 минуты. AI-ассистент помогает на каждом шаге. Большинство клиентов получают первые результаты в первые 48 часов. Если застрянете — наша поддержка на связи 24/7.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">А если у меня уже есть CRM, таргет и т.д.?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Мы понимаем — переезд страшен. Поэтому можно начать параллельно на бесплатном тарифе. Увидите результаты — постепенно перенесёте всё к нам. Миграция данных автоматическая, теряться ничего не будет.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">Безопасны ли мои данные?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Абсолютно. Все серверы в РФ. Шифрование банковского уровня. Соответствие 152-ФЗ. Вы владеете своими данными, мы их не продаём и никому не передаём. Можете запросить экспорт в любой момент.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">Можно ли попробовать бесплатно?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Да! FREE тариф навсегда бесплатный. До 100 клиентов в CRM, базовая аналитика, 100 AI-запросов в месяц. Этого хватит чтобы понять подходит ли вам платформа. Апгрейд в любой момент.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-4); color: var(--cyan-500);">Подойдёт ли MAX BUSINESS для моей сферы?</h4>
+                    <p style="color: var(--gray-300); line-height: 1.8;">
+                        Да. Мы работаем в ритейле, производстве, услугах, HoReCa, IT, строительстве и ещё 20+ сферах. Платформа адаптируется под вашу отрасль автоматически. Если сомневаетесь — напишите нам, покажем кейсы.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases -->
+    <section id="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2>Реальные результаты. <span class="gradient-text">Реальные компании.</span></h2>
+                <p class="lead">
+                    Бизнесы, которые уже используют MAX BUSINESS и получают результаты каждый день.
+                </p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-category">Ритейл</div>
+                    <h4>Сеть магазинов "Стиль"</h4>
+                    <p class="case-company">15 точек, одежда и обувь, Москва</p>
+                    
+                    <div class="case-result">
+                        <span class="case-result-value">+340%</span>
+                        <span class="case-result-label">Рост прибыли за 6 месяцев</span>
+                    </div>
+                    
+                    <p>
+                        AI оптимизировал закупки (сократил остатки на 40%), настроил таргет 
+                        (CAC снизился в 3 раза), автоматизировал продажи.
+                    </p>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-category">Производство</div>
+                    <h4>Фабрика "ДомМебель"</h4>
+                    <p class="case-company">50 человек, мебель на заказ, Казань</p>
+                    
+                    <div class="case-result">
+                        <span class="case-result-value">-60%</span>
+                        <span class="case-result-label">Операционные расходы</span>
+                    </div>
+                    
+                    <p>
+                        Автоматизация логистики, управления запасами и коммуникации с поставщиками. 
+                        Экономия 300K₽/месяц.
+                    </p>
+                </div>
+                
+                <div class="case-card">
+                    <div class="case-category">Услуги</div>
+                    <h4>Сеть "Красота+"</h4>
+                    <p class="case-company">8 салонов красоты, Санкт-Петербург</p>
+                    
+                    <div class="case-result">
+                        <span class="case-result-value">×5</span>
+                        <span class="case-result-label">Рост клиентской базы</span>
+                    </div>
+                    
+                    <p>
+                        AI-маркетинг привлёк в 5 раз больше клиентов при том же бюджете. 
+                        Автоматические напоминания увеличили повторные визиты на 80%.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Что дальше. <span class="gradient-text">Наш план.</span></h2>
+                <p class="lead">
+                    Мы не стоим на месте. Каждый квартал — новые функции, новые возможности, новый уровень.
+                </p>
+            </div>
+            
+            <div style="margin-top: var(--space-16); position: relative;">
+                <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--cyan-500), var(--purple-500)); transform: translateX(-50%);"></div>
+                
+                <div style="display: grid; gap: var(--space-12);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); position: relative;">
+                        <div style="text-align: right; padding-right: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px;">
+                                <div style="background: rgba(6,182,212,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4);">Q1 2026 • Сейчас</div>
+                                <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Базовая платформа</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-400); display: grid; gap: var(--space-2);">
+                                    <li>✓ Маркетинг + Продажи + Финансы</li>
+                                    <li>✓ Multi-agent AI</li>
+                                    <li>✓ VK Max интеграция</li>
+                                    <li>✓ 6 сфер бизнеса</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); position: relative;">
+                        <div></div>
+                        <div style="padding-left: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px;">
+                                <div style="background: rgba(168,85,247,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4);">Q2 2026</div>
+                                <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Мобильное приложение</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-400); display: grid; gap: var(--space-2);">
+                                    <li>→ iOS и Android нативные</li>
+                                    <li>→ Управление бизнесом с телефона</li>
+                                    <li>→ Push уведомления</li>
+                                    <li>→ Offline режим</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); position: relative;">
+                        <div style="text-align: right; padding-right: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px;">
+                                <div style="background: rgba(236,72,153,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4);">Q3 2026</div>
+                                <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">API для разработчиков</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-400); display: grid; gap: var(--space-2);">
+                                    <li>→ Открытый API</li>
+                                    <li>→ Webhooks</li>
+                                    <li>→ SDK для популярных языков</li>
+                                    <li>→ Marketplace расширений</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); position: relative;">
+                        <div></div>
+                        <div style="padding-left: var(--space-8);">
+                            <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: inline-block; max-width: 500px;">
+                                <div style="background: rgba(14,165,233,0.2); display: inline-block; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; margin-bottom: var(--space-4);">Q4 2026</div>
+                                <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Международная экспансия</h4>
+                                <ul style="list-style: none; text-align: left; color: var(--gray-400); display: grid; gap: var(--space-2);">
+                                    <li>→ Казахстан, Беларусь</li>
+                                    <li>→ Мультиязычность</li>
+                                    <li>→ Локальные валюты</li>
+                                    <li>→ Регуляторные требования</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Start -->
+    <section id="start" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Начать <span class="gradient-text">за 3 шага</span></h2>
+                <p class="lead">
+                    От регистрации до первых результатов — 2 дня. Серьёзно.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; position: relative;">
+                    <div style="position: absolute; top: -20px; left: var(--space-8); width: 48px; height: 48px; border-radius: 12px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.5rem; color: var(--black);">1</div>
+                    <div style="margin-top: var(--space-6);">
+                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Регистрация</h4>
+                        <p style="color: var(--gray-400); line-height: 1.8; margin-bottom: var(--space-6);">
+                            Email, пароль, название компании — готово. Займёт 2 минуты. Никаких карт, никаких проверок. 
+                            Сразу попадаете в платформу на FREE тарифе.
+                        </p>
+                        <div style="color: var(--cyan-500); font-weight: 600;">→ 2 минуты</div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; position: relative;">
+                    <div style="position: absolute; top: -20px; left: var(--space-8); width: 48px; height: 48px; border-radius: 12px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.5rem; color: var(--black);">2</div>
+                    <div style="margin-top: var(--space-6);">
+                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Настройка</h4>
+                        <p style="color: var(--gray-400); line-height: 1.8; margin-bottom: var(--space-6);">
+                            AI-ассистент задаст 5 вопросов о вашем бизнесе. На основе ответов настроит платформу автоматически. 
+                            Вы сразу видите дашборды, метрики, рекомендации.
+                        </p>
+                        <div style="color: var(--cyan-500); font-weight: 600;">→ 10 минут</div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 24px; position: relative;">
+                    <div style="position: absolute; top: -20px; left: var(--space-8); width: 48px; height: 48px; border-radius: 12px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.5rem; color: var(--black);">3</div>
+                    <div style="margin-top: var(--space-6);">
+                        <h4 style="font-size: 1.5rem; margin-bottom: var(--space-4);">Результаты</h4>
+                        <p style="color: var(--gray-400); line-height: 1.8; margin-bottom: var(--space-6);">
+                            Первые результаты через 48 часов. AI начинает работать сразу: оптимизирует рекламу, 
+                            обрабатывает лиды, создаёт отчёты. Вы просто смотрите как растут цифры.
+                        </p>
+                        <div style="color: var(--cyan-500); font-weight: 600;">→ 2 дня до первых результатов</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: var(--space-12);">
+                <a href="#" class="btn btn-primary btn-large" style="padding: 1.5rem 4rem; font-size: 1.25rem;">Начать прямо сейчас →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security -->
+    <section id="security" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Безопасность <span class="gradient-text">на первом месте</span></h2>
+                <p class="lead">
+                    Ваши данные под защитой. Российские серверы, банковское шифрование, полное соответствие законам РФ.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">🇷🇺</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Серверы в РФ</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        Все данные хранятся на российских серверах. Полная независимость от Запада. 
+                        Соответствие 152-ФЗ о персональных данных.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">🔐</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Шифрование AES-256</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        Банковский уровень защиты. Данные в покое и в движении зашифрованы. 
+                        Даже мы не можем прочитать ваши данные без ключа.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">📋</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Compliance</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        152-ФЗ, ISO 27001, SOC 2. Регулярные аудиты безопасности. 
+                        Сертификаты и документы по запросу.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">💾</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Backup каждый час</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        Автоматические бэкапы каждый час. Хранение в 3 геораспределённых дата-центрах. 
+                        Восстановление за минуты.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">👤</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Ваши данные — ваши</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        Мы не продаём данные. Не передаём третьим лицам. Экспорт всех данных в любой момент. 
+                        Полное удаление по запросу.
+                    </p>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px;">
+                    <div style="width: 64px; height: 64px; border-radius: 14px; background: rgba(6,182,212,0.1); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--space-6);">⚡</div>
+                    <h4 style="font-size: 1.25rem; margin-bottom: var(--space-3);">Uptime 99.9%</h4>
+                    <p style="color: var(--gray-400); line-height: 1.7;">
+                        SLA гарантия. Компенсация при простое. Мониторинг 24/7. 
+                        Ваш бизнес работает всегда.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section id="partners" style="background: var(--black);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Они нам <span class="gradient-text">доверяют</span></h2>
+                <p class="lead">
+                    Партнёры и клиенты, с которыми мы строим будущее российского бизнеса.
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); margin-top: var(--space-16);">
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 150px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">VK</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Стратегический партнёр</div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 150px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">Сбер</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Технологический партнёр</div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 150px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">Яндекс</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Инфраструктура</div>
+                    </div>
+                </div>
+                
+                <div class="glass" style="padding: var(--space-8); border-radius: 20px; display: flex; align-items: center; justify-content: center; min-height: 150px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: var(--space-2);">Минцифры</div>
+                        <div style="color: var(--gray-400); font-size: 0.875rem;">Господдержка</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Comparison -->
+    <section id="final-comparison" style="background: var(--gray-950);">
+        <div class="container">
+            <div class="section-header">
+                <h2>MAX BUSINESS vs <span class="gradient-text">Традиционный подход</span></h2>
+                <p class="lead">
+                    Математика проста. Смотрите сами.
+                </p>
+            </div>
+            
+            <div class="glass" style="margin-top: var(--space-16); border-radius: 24px; overflow: hidden;">
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background: rgba(255,255,255,0.05); padding: var(--space-6); font-weight: 700;">
+                    <div>Параметр</div>
+                    <div style="text-align: center;">Традиционный</div>
+                    <div style="text-align: center; color: var(--cyan-500);">MAX BUSINESS</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>Стоимость в месяц</div>
+                    <div style="text-align: center; color: var(--gray-400);">500K₽+</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">10-50K₽</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div>Количество инструментов</div>
+                    <div style="text-align: center; color: var(--gray-400);">10-15 разных</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">1 платформа</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>Время на настройку</div>
+                    <div style="text-align: center; color: var(--gray-400);">2-3 месяца</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">10 минут</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div>Размер команды</div>
+                    <div style="text-align: center; color: var(--gray-400);">20+ человек</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">2-3 человека</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>Время до результата</div>
+                    <div style="text-align: center; color: var(--gray-400);">6+ месяцев</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">2 дня</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div>Автоматизация</div>
+                    <div style="text-align: center; color: var(--gray-400);">Частичная</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">Полная</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>AI-помощник</div>
+                    <div style="text-align: center; color: var(--gray-400);">Нет</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">Везде</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                    <div>Обучение команды</div>
+                    <div style="text-align: center; color: var(--gray-400);">50-100K₽/мес</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">Бесплатно</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>Поддержка</div>
+                    <div style="text-align: center; color: var(--gray-400);">Email, 48ч</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 700;">24/7, мгновенно</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; padding: var(--space-6); background: rgba(6,182,212,0.1);">
+                    <div style="font-weight: 700; font-size: 1.125rem;">ROI в первый год</div>
+                    <div style="text-align: center; color: var(--gray-400); font-weight: 700;">50-100%</div>
+                    <div style="text-align: center; color: var(--cyan-500); font-weight: 900; font-size: 1.25rem;">1,200%</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: var(--space-12);">
+                <div style="font-size: 1.5rem; color: var(--gray-300); margin-bottom: var(--space-4);">Экономия в первый год:</div>
+                <div style="font-size: 4rem; font-weight: 900; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">5,880,000₽</div>
+                <div style="color: var(--gray-400); margin-top: var(--space-2);">На 1 компанию. В среднем.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Начните прямо сейчас</h2>
+                <p class="lead">
+                    Платформа готова. Ваш бизнес готов к росту. Начните бесплатно и почувствуйте разницу 
+                    в первую неделю.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Начать бесплатно</a>
+                    <a href="#platform" class="btn btn-secondary">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3 class="gradient-text">MAX BUSINESS</h3>
+                    <p>
+                        Платформа будущего для бизнеса России. Всё в одном месте. Всё на автопилоте. 
+                        Всё под вашим контролем.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Платформа</h4>
+                    <ul class="footer-links">
+                        <li><a href="#platform">Возможности</a></li>
+                        <li><a href="#process">Процессы</a></li>
+                        <li><a href="#modules">Модули</a></li>
+                        <li><a href="#spheres">Сферы</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#cases">Кейсы</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Карьера</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Поддержка</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Документация</a></li>
+                        <li><a href="#">Telegram</a></li>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">VK Max</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                © 2026 MAX BUSINESS. Платформа будущего. Россия, Москва.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax orbs
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.glow-orb').forEach((orb, index) => {
+                const speed = 0.5 + (index * 0.2);
+                orb.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
