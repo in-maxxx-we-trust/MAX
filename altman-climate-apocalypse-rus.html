@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 ЭКСТРЕННО: Климатический Апокалипсис - США и Россия Замерзают, Пока Альтман Сжигает Планету</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #ff0000;
+            --red-dark: #b30000;
+            --red-glow: rgba(255, 0, 0, 0.4);
+            --yellow: #ffff00;
+            --black: #000000;
+            --gray-dark: #1a1a1a;
+            --gray: #2a2a2a;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Roboto Condensed', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* BREAKING BANNER */
+        .breaking-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--red);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 30px var(--red-glow);
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 5px 30px var(--red-glow); }
+            50% { box-shadow: 0 5px 50px rgba(255, 0, 0, 0.8); }
+        }
+        
+        .breaking-label {
+            background: var(--black);
+            padding: 18px 30px;
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            white-space: nowrap;
+        }
+        
+        .breaking-text {
+            flex: 1;
+            padding: 18px 25px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            overflow: hidden;
+        }
+        
+        .breaking-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* HERO */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(180deg, #ff0000 0%, #000000 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 0, 0, 0.15) 2px, rgba(255, 0, 0, 0.15) 4px);
+            animation: scan-lines 10s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan-lines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(30px); }
+        }
+        
+        .alert-icon {
+            font-size: 6rem;
+            animation: alert-pulse 1.5s infinite;
+            filter: drop-shadow(0 0 20px var(--red-glow));
+        }
+        
+        @keyframes alert-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        h1 {
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(2.5rem, 9vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 30px var(--red-glow), 0 0 60px var(--red-glow), 5px 5px 0 var(--black);
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+            color: var(--yellow);
+            margin: 1.5rem 0 3rem;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.6), 3px 3px 0 var(--black);
+            font-weight: 600;
+        }
+        
+        .death-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 1200px;
+        }
+        
+        .death-card {
+            background: var(--black);
+            border: 4px solid var(--red);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 0 40px var(--red-glow);
+            position: relative;
+        }
+        
+        .death-card::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, var(--red), var(--yellow), var(--red));
+            z-index: -1;
+            animation: border-rotate 3s linear infinite;
+        }
+        
+        @keyframes border-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .death-flag {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .death-number {
+            font-family: 'Russo One', sans-serif;
+            font-size: 5rem;
+            color: var(--red);
+            text-shadow: 0 0 30px var(--red-glow);
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+        
+        .death-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        
+        .death-location {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--yellow);
+            font-weight: 700;
+        }
+        
+        /* EMERGENCY GRID */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+        }
+        
+        .emergency-card {
+            background: var(--gray-dark);
+            border: 3px solid var(--red);
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+        
+        .emergency-card:hover {
+            background: var(--red-dark);
+            transform: scale(1.03);
+            z-index: 10;
+            box-shadow: 0 0 60px var(--red-glow);
+        }
+        
+        .emergency-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--red-glow));
+        }
+        
+        .emergency-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .emergency-stat {
+            font-family: 'Russo One', sans-serif;
+            font-size: 3.5rem;
+            color: var(--yellow);
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+        }
+        
+        /* CONTAINER */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            border-bottom: 6px solid var(--red);
+        }
+        
+        .section-header {
+            background: var(--red);
+            padding: 2rem 3rem;
+            margin: 0 -2rem 4rem -2rem;
+            font-family: 'Russo One', sans-serif;
+            font-size: clamp(2rem, 6vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 0 var(--red-dark), 0 0 50px var(--red-glow);
+        }
+        
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin: 3rem 0 1.5rem;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            text-transform: uppercase;
+            color: var(--yellow);
+        }
+        
+        p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #e0e0e0;
+        }
+        
+        .urgent-box {
+            background: var(--red-dark);
+            border: 6px solid var(--yellow);
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            box-shadow: 0 0 50px var(--red-glow);
+        }
+        
+        .urgent-box::before {
+            content: '⚠ СРОЧНО ⚠';
+            position: absolute;
+            top: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--yellow);
+            color: var(--black);
+            padding: 0.5rem 3rem;
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+        }
+        
+        .urgent-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--yellow);
+            font-weight: 700;
+        }
+        
+        .evidence {
+            background: var(--gray);
+            border-left: 10px solid var(--red);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .evidence::before {
+            content: '📌 ФАКТЫ';
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+        
+        .quote {
+            background: var(--black);
+            border: 4px solid var(--yellow);
+            padding: 2.5rem 3rem 2.5rem 5rem;
+            margin: 3rem 0;
+            position: relative;
+            font-style: italic;
+            font-size: 1.4rem;
+            line-height: 1.7;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            font-size: 6rem;
+            color: var(--yellow);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+        
+        /* COMPARISON */
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        
+        .comparison-card {
+            background: var(--gray-dark);
+            border: 4px solid var(--red);
+            padding: 2.5rem;
+        }
+        
+        .comparison-label {
+            font-family: 'Russo One', sans-serif;
+            font-size: 2.5rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .comparison-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        li {
+            padding: 1rem 0 1rem 2.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--gray);
+            font-size: 1.15rem;
+        }
+        
+        li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        li strong {
+            color: var(--yellow);
+        }
+        
+        /* TICKER */
+        .ticker {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 2rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            overflow: hidden;
+            border-top: 6px solid var(--red);
+            border-bottom: 6px solid var(--red);
+            margin: 4rem 0;
+            font-weight: 700;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 50s linear infinite;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 3rem 0 3rem 5rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--red);
+            box-shadow: 0 0 15px var(--red-glow);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5.5rem;
+            top: 0.5rem;
+            width: 25px;
+            height: 25px;
+            background: var(--red);
+            border: 5px solid var(--yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--red-glow);
+        }
+        
+        .timeline-date {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            color: var(--yellow);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3rem 0;
+        }
+        
+        th {
+            padding: 1.5rem;
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            border: 3px solid var(--yellow);
+            background: var(--red);
+        }
+        
+        td {
+            padding: 2rem;
+            border: 3px solid var(--gray);
+            vertical-align: top;
+            font-size: 1.1rem;
+        }
+        
+        tr:nth-child(odd) td {
+            background: var(--gray-dark);
+        }
+        
+        tr:nth-child(even) td {
+            background: var(--gray);
+        }
+        
+        td strong {
+            color: var(--yellow);
+            font-size: 1.2rem;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: var(--red);
+            padding: 4rem 2rem;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        footer p {
+            font-size: 1.1rem;
+            margin: 0.8rem 0;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .breaking-label {
+                font-size: 1.2rem;
+                padding: 12px 20px;
+            }
+            
+            .breaking-text {
+                font-size: 1.1rem;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .death-number {
+                font-size: 4rem;
+            }
+            
+            .timeline {
+                padding-left: 3rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 1rem;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- BREAKING BANNER -->
+    <div class="breaking-banner">
+        <div class="breaking-label">🚨 ЭКСТРЕННО</div>
+        <div class="breaking-text">
+            <div class="breaking-ticker">
+                30+ ПОГИБШИХ В США • СМЕРТИ ОТ ОБМОРОЖЕНИЯ В СИБИРИ • -50°C В БУРЯТИИ • 630 000 БЕЗ СВЕТА • ТРАМП УГРОЖАЕТ ГРЕНЛАНДИИ • АЛЬТМАН СЖИГАЕТ ПЛАНЕТУ ДЛЯ AI • ЭНЕРГОСЕКРЕТАРЬ В СОВЕТЕ ДИРЕКТОРОВ ЕГО КОМПАНИИ • «НЕ СМОТРИТЕ ВВЕРХ» СТАЛ РЕАЛЬНОСТЬЮ • 
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="alert-icon flash">🚨</div>
+        <h1>КЛИМАТИЧЕСКИЙ<br>АПОКАЛИПСИС</h1>
+        <div class="subtitle">США И РОССИЯ ЗАМЕРЗАЮТ ДО СМЕРТИ, ПОКА МИЛЛИАРДЕР АЛЬТМАН СЖИГАЕТ ПЛАНЕТУ РАДИ ИМПЕРИИ AI</div>
+        
+        <div class="death-grid">
+            <div class="death-card">
+                <div class="death-flag">🇺🇸</div>
+                <div class="death-location">США</div>
+                <div class="death-number">30+</div>
+                <div class="death-label">Подтверждённых смертей</div>
+            </div>
+            <div class="death-card">
+                <div class="death-flag">🇷🇺</div>
+                <div class="death-location">РОССИЯ</div>
+                <div class="death-number">???</div>
+                <div class="death-label">Погибших от мороза</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMERGENCY STATUS -->
+    <div class="emergency-grid">
+        <div class="emergency-card">
+            <div class="emergency-icon">❄️</div>
+            <div class="emergency-title">США: Полярный Вихрь</div>
+            <div class="emergency-stat">-50°F</div>
+            <p>Обморожение за минуты, 30+ погибших</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🥶</div>
+            <div class="emergency-title">Россия: Крещенские Морозы</div>
+            <div class="emergency-stat">-50°C</div>
+            <p>Бурятия, Якутия, Сибирь, аварии ЖКХ</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">⚡</div>
+            <div class="emergency-title">США: Отключения</div>
+            <div class="emergency-stat">630K</div>
+            <p>Домов без электричества в мороз</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">💀</div>
+            <div class="emergency-title">Россия: Бурятия</div>
+            <div class="emergency-stat">СМЕРТИ</div>
+            <p>Многодетная мать погибла от угарного газа после отключения света в -40°C</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🔥</div>
+            <div class="emergency-title">Альтман: AI</div>
+            <div class="emergency-stat">17 ГВт</div>
+            <p>Электричество стран для Stargate</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🌍</div>
+            <div class="emergency-title">Планета</div>
+            <div class="emergency-stat">ГОРИТ</div>
+            <p>Полярный вихрь дестабилизирован</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- SECTION 1: USA -->
+        <section>
+            <div class="section-header">🇺🇸 США: 30+ ПОГИБШИХ В ЗИМНЕМ АДУ</div>
+            
+            <p>ПРЯМО СЕЙЧАС, пока вы читаете это, минимум 30 американцев МЕРТВЫ. "Колоссальный" зимний шторм, вызванный дестабилизированным полярным вихрем, превратил Соединённые Штаты в замороженный ад. Система шторма растянулась почти на 2000 миль от границы Мексика-США до Канады — метеорологи назвали его "потенциально историческим".</p>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">СЧЁТ ЖЕРТВ (ПО СОСТОЯНИЮ НА 27 ЯНВАРЯ 2026)</div>
+                <ul>
+                    <li><strong>НЬЮ-ЙОРК:</strong> 8 человек найдены мёртвыми на улице при минусовых температурах за выходные</li>
+                    <li><strong>ТЕХАС:</strong> 3 смерти, включая 16-летнюю девушку, погибшую в аварии на санях</li>
+                    <li><strong>ЛУИЗИАНА:</strong> 2 смерти от переохлаждения</li>
+                    <li><strong>МАССАЧУСЕТС И ОГАЙО:</strong> 2 человека переехали снегоуборочными машинами</li>
+                    <li><strong>АРКАНЗАС И ТЕХАС:</strong> Подростки погибли в авариях на санях</li>
+                    <li><strong>ТЕННЕССИ:</strong> Мужчина умер от сердечного приступа при уборке снега, плюс 11-летний ребёнок</li>
+                    <li><strong>МНОЖЕСТВО ШТАТОВ:</strong> Аварии на дорогах, более 160 столкновений только в Теннесси</li>
+                </ul>
+            </div>
+            
+            <div class="evidence">
+                Сильный зимний шторм принёс разрушительный ледяной дождь, снег со льдом и снег на большую часть США в конце января 2026. Сотни тысяч остались без электричества по всему Югу, когда лёд обрывал ветки деревьев и линии электропередач. Более фута снега выпало в частях Среднего Запада и Северо-Востока. Многие штаты столкнулись с лютым холодом, который продержится несколько дней.
+            </div>
+            
+            <h2>630 000+ БЕЗ ЭЛЕКТРИЧЕСТВА В ЗАМЕРЗАЮЩИХ ТЕМПЕРАТУРАХ</h2>
+            
+            <p>По состоянию на 26 января 2026, более 630 000 домов и предприятий остались без электричества по всей территории США, в основном на Юге, где шторм принёс ледяной дождь и катастрофическое обледенение. Только в Теннесси 300 000 домов и предприятий без электричества. Луизиана, Миссисипи и Джорджия — каждый сообщил о более чем 100 000 отключениях.</p>
+            
+            <div class="ticker">
+                <div class="ticker-content">
+                    ЭКСТРЕННО: ТЕМПЕРАТУРЫ -25°F ДО -30°F НА СЕВЕРЕ И СРЕДНЕМ ЗАПАДЕ • ВЕТРЯНОЙ ХОЛОД -50°F • ОБМОРОЖЕНИЕ ЗА МИНУТЫ • СРЕДНЯЯ НИЗКАЯ ТЕМПЕРАТУРА ПО США: 11-12°F • 24 ШТАТА ПОД ЧРЕЗВЫЧАЙНЫМ ПОЛОЖЕНИЕМ • ЭТО НЕ УЧЕНИЯ •
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: RUSSIA -->
+        <section>
+            <div class="section-header">🇷🇺 РОССИЯ: СИБИРЬ ЗАМЕРЗАЕТ, ЛЮДИ УМИРАЮТ</div>
+            
+            <h2>ЭКСТРЕМАЛЬНЫЕ МОРОЗЫ В СИБИРИ: ДО -50°C</h2>
+            
+            <p>С 23 января в Сибири температура опустилась на 12-15 градусов ниже климатической нормы. Научный руководитель Гидрометцентра России Роман Вильфанд предупредил о "суперхолодной погоде" в Алтайском крае, Кемеровской, Новосибирской, Омской и Томской областях, где ожидаются <strong>морозы до -42 градусов</strong>.</p>
+            
+            <p>На юго-востоке Сибирского федерального округа (Красноярский край, Хакасия и Тыва) столбики термометров могут опуститься до <strong>-50 градусов</strong>. Заморозки также пришли в Бурятию и Забайкальский край.</p>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ ТРАГЕДИЯ В БУРЯТИИ: СМЕРТЬ ОТ ОТКЛЮЧЕНИЯ ЭЛЕКТРИЧЕСТВА</div>
+                <p>Пока в стране активно обсуждают энергетический коллапс в Мурманской области, <strong>в Бурятии произошла ещё одна трагедия. Многодетная мать погибла от отравления угарным газом после того, как в сорокаградусные морозы её дом обесточили.</strong></p>
+                <p>По всей республике — максимум потребления мощности, учащаются аварии, люди остаются без электричества в морозы. А власти и "Россети" продолжают выпускать многообещающие пресс-релизы.</p>
+            </div>
+            
+            <h3>ГИБЕЛЬ ЛЮДЕЙ В МОРОЗЫ — СИСТЕМНАЯ ПРОБЛЕМА</h3>
+            
+            <p>Отключение света зимой может быть <strong>смертельно опасным</strong>. Самое поразительное, что никаких выводов из этого сделано не было. "Читаэнергосбыт" до сих пор не осознаёт серьёзность энергетического кризиса в республике и позволяет отключение жизненно важного ресурса в экстремальных условиях.</p>
+            
+            <div class="evidence">
+                Гибель людей повторилась в селе Нижняя Иволга. В разгар сорокаградусных морозов в доме многодетной матери отключили электричество. Среднее время восстановления электроснабжения составляет почти три часа. В условиях сибирских морозов этого более чем достаточно, чтобы дом стал непригодным для жизни.
+            </div>
+            
+            <h2>ГЕОГРАФИЯ КАТАСТРОФЫ</h2>
+            
+            <ul>
+                <li><strong>БУРЯТИЯ:</strong> Температуры до -50°C, рекордно низкие показатели, смерти от отключений электричества</li>
+                <li><strong>ЗАБАЙКАЛЬЕ И ИРКУТСКАЯ ОБЛАСТЬ:</strong> -35…-40 градусов ночью, днём -28…-33</li>
+                <li><strong>ЯКУТИЯ, ОМСКАЯ, ТОМСКАЯ, ТЮМЕНСКАЯ ОБЛАСТИ:</strong> -31…-36 градусов</li>
+                <li><strong>НОВОСИБИРСКАЯ ОБЛАСТЬ:</strong> 40-градусные морозы, спасены 25 человек на трассах</li>
+                <li><strong>КРАСНОЯРСКИЙ КРАЙ:</strong> До -45…-50 градусов, отклонение от нормы на 14-20 градусов</li>
+            </ul>
+            
+            <div class="quote">
+                "19-20 января в Новосибирске ожидается аномально холодная погода со среднесуточными температурами на 12, в Иркутске на 15, а в Красноярске на 23 градуса ниже климатической нормы."
+                <br><br>— Прогноз Гидрометцентра России
+            </div>
+            
+            <h3>КРЕЩЕНСКИЕ МОРОЗЫ 2026: "ГИБНУТ ДАЖЕ КРЫСЫ"</h3>
+            
+            <p>Крещенские морозы 2026 лютуют в Иркутской области и во всей Сибири. Появились видео с крысами, умершими якобы от холода. Жители, уже привыкшие к мягким зимам, крещенскими морозами 2026 в Сибири, мягко сказать, недовольны. Люди всё же выдерживают установившиеся 40-градусные холода, а вот техника и система ЖКХ — нет. То и дело идут сообщения об авариях.</p>
+            
+            <div class="ticker">
+                <div class="ticker-content">
+                    БУРЯТИЯ: СМЕРТЬ МАТЕРИ ОТ УГАРНОГО ГАЗА • -50°C В СИБИРИ • АВАРИИ ЖКХ • ОТКЛЮЧЕНИЯ ЭЛЕКТРИЧЕСТВА • 25 СПАСЁННЫХ НА ТРАССАХ • ГИБНУТ ДАЖЕ ЖИВОТНЫЕ • СИСТЕМА НЕ СПРАВЛЯЕТСЯ •
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CLIMATE SCIENCE -->
+        <section>
+            <div class="section-header">🌡️ НАУКА: ИЗМЕНЕНИЕ КЛИМАТА И ПОЛЯРНЫЙ ВИХРЬ</div>
+            
+            <h2>ЧТО ВЫЗВАЛО ЭТУ КАТАСТРОФУ?</h2>
+            
+            <p>Жестокая штормовая система — результат <strong>растянутого полярного вихря</strong> — арктического региона холодного воздуха низкого давления, который обычно формирует относительно компактную, круглую систему, но иногда морфирует в более овальную форму, отправляя ледяной воздух разливаться по Северной Америке.</p>
+            
+            <div class="evidence">
+                <strong>СПЕЦИАЛИСТ ПО ЗИМНЕЙ ПОГОДЕ MIT ДЖУДА КОЭН:</strong> Искажение полярного вихря тесно связано с продолжающимися изменениями в Арктике, включая рекордно низкий морской лёд и изменённые схемы снежного покрова в Сибири. Сдвиги в Арктике и уменьшение морского льда уже в октябре 2025 года "по сути, загрузили кости" для крупного события полярного вихря в условиях, сформированных глобальным потеплением.
+            </div>
+            
+            <h3>КАК ИЗМЕНЕНИЕ КЛИМАТА ДЕЛАЕТ ЗИМНИЕ ШТОРМЫ ХУЖЕ</h3>
+            
+            <ul>
+                <li><strong>АРКТИЧЕСКАЯ АМПЛИФИКАЦИЯ:</strong> Арктика нагревается быстрее, чем более низкие широты, уменьшая температурный градиент и делая полярный вихрь более нестабильным</li>
+                <li><strong>НАРУШЕНИЕ РЕАКТИВНОЙ СТРУИ:</strong> Ослабленный вихрь делает реактивную струю волнообразной, позволяя холодному воздуху проливаться на юг</li>
+                <li><strong>БОЛЕЕ ТЁПЛЫЕ ОКЕАНЫ = БОЛЬШЕ ВЛАГИ:</strong> Внезапный взрыв мог прийти как шок после в основном мягкого начала зимы, но это тепло частично способствовало свирепости шторма</li>
+                <li><strong>РЕКОРДНО НИЗКИЙ АРКТИЧЕСКИЙ МОРСКОЙ ЛЁД:</strong> Октябрь 2025 показал беспрецедентную потерю морского льда, создав условия для катастрофы</li>
+            </ul>
+            
+            <div class="quote">
+                "Метеорологи связывают резкие морозы с глобальными изменениями климата и нарушением циркуляции арктических воздушных потоков, из-за чего холодные массы дольше задерживаются над Сибирью."
+                <br><br>— Российские метеорологи о морозах в Сибири
+            </div>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ ТРАМП СОКРАЩАЕТ ФИНАНСИРОВАНИЕ КЛИМАТИЧЕСКОЙ НАУКИ</div>
+                <p>Большая часть данных и исследований, которые позволяют нам предсказывать и реагировать на сильные погодные явления, опирается на работу федеральных сотрудников, включая правительственные лаборатории, такие как Национальный центр атмосферных исследований (NCAR), который был <strong>ЦЕЛЬЮ АДМИНИСТРАЦИИ ТРАМПА ДЛЯ СОКРАЩЕНИЯ ФИНАНСИРОВАНИЯ.</strong></p>
+                <p>Эти учёные помогают разрабатывать важнейшие модели, измерительные приборы и данные, от которых зависят учёные и прогнозисты везде. <strong>Трамп буквально лишает финансирования способность предсказывать подобные катастрофы.</strong></p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ALTMAN -->
+        <section>
+            <div class="section-header">🔥 ПОКА МИР ЗАМЕРЗАЕТ, АЛЬТМАН СЖИГАЕТ ПЛАНЕТУ</div>
+            
+            <h2>РЕАЛЬНЫЙ "НЕ СМОТРИТЕ ВВЕРХ"</h2>
+            
+            <div class="comparison">
+                <div class="comparison-card">
+                    <div class="comparison-label">Фикция</div>
+                    <div class="comparison-name">ПИТЕР ИШЕРВЕЛЛ</div>
+                    <p><strong>Из фильма "Не смотрите вверх" (2021)</strong></p>
+                    <ul>
+                        <li>Технологический миллиардер, CEO BASH</li>
+                        <li>Убеждает президента добывать комету вместо остановки</li>
+                        <li>Ставит прибыль выше выживания планеты</li>
+                        <li>Использует алгоритмы для предсказания смертей, но ничего не делает для предотвращения</li>
+                        <li>Имеет "слишком большое влияние в политике"</li>
+                        <li>Одержим космической колонизацией</li>
+                        <li>Утверждает, что технология решит все проблемы</li>
+                        <li>Обрекает человечество через жадность и некомпетентность</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Реальность</div>
+                    <div class="comparison-name">СЭМ АЛЬТМАН</div>
+                    <p><strong>CEO OpenAI (2026)</strong></p>
+                    <ul>
+                        <li>Технологический миллиардер, CEO OpenAI</li>
+                        <li>Строит AI-инфраструктуру, потребляющую электричество целых стран</li>
+                        <li>Ставит разработку AI выше климатических проблем</li>
+                        <li>Утверждает "AI исправит климат", массово увеличивая выбросы</li>
+                        <li>Пожертвовал $1М Трампу, $3.5М на лоббирование</li>
+                        <li>Инвестировал $180М в исследования долголетия, хочет бессмертия</li>
+                        <li>Обещает AGI решит проблемы человечества</li>
+                        <li>Энергосекретарь в совете директоров его ядерной компании</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>ОБЕЩАНИЕ АЛЬТМАНА: "AI ИСПРАВИТ КЛИМАТ"</h2>
+            
+            <p>В сентябре 2024 года Сэм Альтман заявил, что AI принесёт "поразительные триумфы", включая <strong>"исправление климата"</strong> как часть возникающей "Эры интеллекта".</p>
+            
+            <h2>РЕАЛЬНОСТЬ АЛЬТМАНА: ПОТРЕБЛЕНИЕ ЭЛЕКТРИЧЕСТВА ЦЕЛОЙ НАЦИИ</h2>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">ЭНЕРГЕТИЧЕСКИЙ КРИЗИС, КОТОРЫЙ СОЗДАЁТ АЛЬТМАН</div>
+                <ul>
+                    <li><strong>ChatGPT использует 40 МИЛЛИОНОВ КИЛОВАТТ ЕЖЕДНЕВНО</strong> — достаточно для питания Empire State Building 18 месяцев</li>
+                    <li><strong>31 МИЛЛИОН ГАЛЛОНОВ ВОДЫ ЕЖЕГОДНО</strong> только для охлаждения</li>
+                    <li><strong>Проект Stargate потребит 17 ГИГАВАТТ</strong> — эквивалент Швейцарии + Португалии вместе</li>
+                    <li><strong>Первое предприятие Stargate питается ГАЗОВОЙ ЭЛЕКТРОСТАНЦИЕЙ</strong> — не чистой энергией</li>
+                    <li><strong>10 дата-центров, требующих 15 ГИГАВАТТ</strong> — эквивалент электропотребления малой нации</li>
+                </ul>
+            </div>
+            
+            <div class="evidence">
+                Альтман признал, что хочет "значительную долю" всего электричества Земли для питания AI. Ожидается, что дата-центры OpenAI будут потреблять столько же энергии, сколько Нью-Йорк. Это представляет то, что критики называют "ставкой на удвоение или ничего" — утверждение, что мы должны увеличить производство энергии и выбросы СЕЙЧАС, потому что продвинутый AI в конечном итоге решит изменение климата, БЕЗ ГАРАНТИИ, что эта технология будет решать вызовы, которые в основном касаются человеческого поведения.
+            </div>
+            
+            <h3>У НАС УЖЕ ЕСТЬ РЕШЕНИЯ</h3>
+            
+            <p>Климатолог Зике Хаусфатер: <strong>"Пока мы эффективно субсидируем ископаемое топливо, позволяя им использовать атмосферу как свалку отходов, нам нужны изменения политики, а не просто технологические прорывы, чтобы достичь наших климатических целей."</strong></p>
+            
+            <p>У нас уже есть технология чистой энергии, которая нам нужна — ядерная, солнечная, ветровая, батареи. Вызовы — это утопленные издержки, препятствия развития, политическая воля и инерция. <strong>Обещание Альтмана, что AI "исправит" изменение климата, позволяет продолжать задержку изменений политики и поведенческих сдвигов, которые нам нужны СЕЙЧАС.</strong></p>
+        </section>
+
+        <!-- SECTION 5: ENERGY EMPIRE -->
+        <section>
+            <div class="section-header">⚡ ЭНЕРГЕТИЧЕСКАЯ ИМПЕРИЯ АЛЬТМАНА</div>
+            
+            <h2>HELION ENERGY: СТАВКА В $1 МИЛЛИАРД НА ЯДЕРНЫЙ СИНТЕЗ</h2>
+            
+            <p>Альтман инвестировал <strong>$375 МИЛЛИОНОВ</strong> своего личного богатства в Helion Energy — его крупнейшая инвестиция, представляющая 20% его чистого состояния. Он председатель с 2015 года.</p>
+            
+            <ul>
+                <li><strong>ОБЕЩАНО:</strong> Коммерческий реактор синтеза к 2028 году, энергия для Microsoft</li>
+                <li><strong>РЕАЛЬНОСТЬ:</strong> Пропущен дедлайн 2024 года для демонстрации чистого производства электричества</li>
+                <li><strong>ПРОБЛЕМА:</strong> Компания не подтвердит, достигла ли она фундаментальной вехи производства больше энергии, чем требуется для синтеза</li>
+                <li><strong>ОЦЕНКА:</strong> $5.245 МИЛЛИАРДА (по состоянию на 28 января 2026) несмотря на отсутствие коммерческого продукта!</li>
+            </ul>
+            
+            <h2>OKLO: ЯДЕРНАЯ ЭНЕРГИЯ + ЭНЕРГОСЕКРЕТАРЬ ТРАМПА</h2>
+            
+            <p>Oklo производит малые модульные ядерные реакторы. Альтман был председателем до апреля 2025. Компания стала публичной через SPAC Альтмана, получив более $300 МИЛЛИОНОВ.</p>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">🚨 МАССИВНЫЙ КОНФЛИКТ ИНТЕРЕСОВ</div>
+                <p><strong>ЭНЕРГОСЕКРЕТАРЬ КРИС РАЙТ</strong> был членом совета директоров Oklo, когда Трамп номинировал его в кабинет. Райт, CEO Liberty Energy, заседал в совете Oklo — ядерной компании Альтмана.</p>
+                <p><strong>Сенатор Марки:</strong> "Oklo строит завод по переработке стоимостью $1.7 миллиарда в Теннесси при поддержке Министерства энергетики. Ваш энергосекретарь Крис Райт был членом совета директоров Oklo до его утверждения в феврале. В 2024 году Райт и его жена внесли $458 000 в вашу президентскую кампанию и $330 400 в RNC. В Q1 2025 Oklo увеличила расходы на лоббирование на 500% по сравнению с тем же периодом прошлого года."</p>
+            </div>
+            
+            <h3>ОРУЖЕЙНЫЙ ПЛУТОНИЙ ДЛЯ КОМПАНИИ АЛЬТМАНА</h3>
+            
+            <p>Белый дом предоставляет плутоний компании Oklo Альтмана. Министерство энергетики США запустило запрос для заинтересованных сторон на доступ к максимуму <strong>19 МЕТРИЧЕСКИХ ТОНН — почти 42 000 ФУНТОВ — ОРУЖЕЙНОГО ПЛУТОНИЯ.</strong></p>
+            
+            <div class="evidence">
+                Oklo — одна из компаний, от которых ожидается получение поставок делящегося изотопа от Министерства энергетики. Это вызывает серьёзные опасения в научном сообществе о расслабленном подходе к ядерному развитию.
+            </div>
+            
+            <h3>УКАЗЫ ТРАМПА ПРИНОСЯТ ПОЛЬЗУ АЛЬТМАНУ</h3>
+            
+            <p>В январе 2025 года правительство США издало <strong>Исполнительный указ 14156</strong>, объявляющий "Чрезвычайную ситуацию в национальной энергетике" для ускорения энергетической инфраструктуры AI, <strong>позволяя OpenAI обходить экологические и бюрократические регуляции</strong>, рассматривая кампусы Stargate как существенные национальные активы.</p>
+        </section>
+
+        <!-- SECTION 6: GREENLAND -->
+        <section>
+            <div class="section-header">🇬🇱 ТРАМП УГРОЖАЕТ ВТОРГНУТЬСЯ В ГРЕНЛАНДИЮ</div>
+            
+            <h2>КРИЗИС РАЗВОРАЧИВАЕТСЯ ПРЯМО СЕЙЧАС</h2>
+            
+            <p>Пока американцы и русские замерзают до смерти, президент Трамп угрожает <strong>ВОЕННЫМ ВТОРЖЕНИЕМ</strong> в Гренландию, самоуправляемую территорию Дании и союзника по НАТО. Это не шутка. Это происходит.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">ДЕКАБРЬ 2024</div>
+                    <div class="timeline-title">Трамп назначает специального посланника в Гренландию</div>
+                    <p>Дания называет это "совершенно неприемлемым"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">7 ЯНВАРЯ 2026</div>
+                    <div class="timeline-title">Трамп отказывается исключить военную силу</div>
+                    <p>"Использование американских вооружённых сил всегда вариант в распоряжении главнокомандующего"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">ЯНВАРЬ 2026</div>
+                    <div class="timeline-title">Трамп угрожает 25% тарифами 8 европейским нациям</div>
+                    <p>Если Дания не продаст Гренландию США</p>
+                </div>
+            </div>
+            
+            <h2>ПОЧЕМУ ТРАМП ХОЧЕТ ГРЕНЛАНДИЮ?</h2>
+            
+            <ul>
+                <li><strong>РЕДКОЗЕМЕЛЬНЫЕ МИНЕРАЛЫ:</strong> Триллионы долларов ресурсов (звучит знакомо? Та же причина, по которой Ишервелл хотел добывать комету в "Не смотрите вверх")</li>
+                <li><strong>СТРАТЕГИЧЕСКОЕ ПОЛОЖЕНИЕ:</strong> Между США и Европой, над разрывом GIUK, связывающим Арктику с Атлантикой</li>
+                <li><strong>НЕФТЬ И ГАЗ:</strong> Потенциальные месторождения</li>
+                <li><strong>АРКТИЧЕСКИЙ КОНТРОЛЬ:</strong> По мере того как изменение климата топит арктический лёд, новые судоходные маршруты и ресурсы становятся доступными</li>
+            </ul>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ ЭНЕРГЕТИЧЕСКОЙ ИМПЕРИИ АЛЬТМАНА НУЖНЫ РЕСУРСЫ ГРЕНЛАНДИИ</div>
+                <p>AI-инфраструктуре Сэма Альтмана требуются МАССИВНЫЕ количества энергии и редкоземельных минералов для чипов и батарей. В Гренландии есть и то, и другое. Трамп угрожает вторжением именно тогда, когда:</p>
+                <ul>
+                    <li>Альтман объявляет о проекте Stargate на $500 млрд, требующем электричества на уровне страны</li>
+                    <li>Энергосекретарь Трампа Крис Райт заседает в совете ядерной компании Альтмана (МАССИВНЫЙ конфликт интересов)</li>
+                    <li>Трамп объявляет "Чрезвычайную ситуацию в национальной энергетике" для обхода экологических регуляций для AI-инфраструктуры</li>
+                    <li>Альтман получает доступ к 19 МЕТРИЧЕСКИМ ТОННАМ ОРУЖЕЙНОГО ПЛУТОНИЯ для своей ядерной компании</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 7: DON'T LOOK UP -->
+        <section>
+            <div class="section-header">🎬 "НЕ СМОТРИТЕ ВВЕРХ" БЫЛА ПРЕДУПРЕЖДЕНИЕМ — И ЭТО ПРОИСХОДИТ</div>
+            
+            <h2>ПАРАЛЛЕЛИ УЖАСАЮТ</h2>
+            
+            <table>
+                <tr>
+                    <th>"НЕ СМОТРИТЕ ВВЕРХ" (ФИЛЬМ 2021)</th>
+                    <th>РЕАЛЬНОСТЬ (ЯНВАРЬ 2026)</th>
+                </tr>
+                <tr>
+                    <td><strong>Комета летит к Земле</strong><br>Учёные обнаруживают убийцу планет</td>
+                    <td><strong>Климатическая катастрофа ускоряется</strong><br>Рекордно низкий арктический лёд, дестабилизированный полярный вихрь, 30+ погибших в одном шторме, смерти в Сибири</td>
+                </tr>
+                <tr>
+                    <td><strong>Технологический миллиардер Питер Ишервелл</strong><br>CEO BASH Cellular, жутко роботизированный</td>
+                    <td><strong>Технологический миллиардер Сэм Альтман</strong><br>CEO OpenAI, обещает AI "исправит всё"</td>
+                </tr>
+                <tr>
+                    <td><strong>Ишервелл убеждает президента добывать комету</strong><br>Утверждает, что триллионы редкоземельных минералов важнее остановки катастрофы</td>
+                    <td><strong>Альтман убеждает Трампа угрожать вторжением в Гренландию</strong><br>Редкоземельные минералы нужны для AI-чипов; Трамп угрожает войной за ресурсы</td>
+                </tr>
+                <tr>
+                    <td><strong>Ишервелл — главный донор президента</strong><br>Имеет "слишком большое влияние в политике", президент буквально ему отвечает</td>
+                    <td><strong>Альтман пожертвовал $1М Трампу</strong><br>Энергосекретарь был в совете его ядерной компании; получает доступ к плутонию</td>
+                </tr>
+                <tr>
+                    <td><strong>Технология Ишервелла "решит всё"</strong><br>Алгоритмы могут предсказать смерти, но ничего не делает для их предотвращения</td>
+                    <td><strong>AI Альтмана "исправит климат"</strong><br>Тем временем AI-инфраструктура потребляет электричество целых стран</td>
+                </tr>
+                <tr>
+                    <td><strong>План остановить комету терпит неудачу</strong><br>Жадность и некомпетентность обрекают человечество</td>
+                    <td><strong>Действия по климату откладываются ради прибыли</strong><br>Альтман: "AI исправит это позже", пока накачивает CO2 сейчас</td>
+                </tr>
+                <tr>
+                    <td><strong>Ишервелл сбегает на космическом корабле</strong><br>Элиты покидают Землю, пока все остальные умирают</td>
+                    <td><strong>Альтман инвестирует $180М в исследования долголетия</strong><br>Хочет бессмертия, пока 30+ замерзают до смерти при его жизни</td>
+                </tr>
+            </table>
+            
+            <div class="quote">
+                "Игра Марка Райланса в роли сумасшедшего технологического CEO в 'Не смотрите вверх' — явный выпад в адрес ведущих миллиардеров-визионеров нашей страны. Питер Ишервелл Райланса сравнивают с Илоном Маском, Джеффом Безосом, Марком Цукербергом и другими. Ишервелл ставит деньги и прибыль выше надвигающегося климатического кризиса — распространённая критика, с которой сегодня сталкиваются богатейшие люди мира, когда они вливают миллиарды долларов в личные космические проекты, пока планета сталкивается с катастрофическим изменением климата."
+            </div>
+            
+            <h2 style="font-size: 5rem; text-align: center; margin: 4rem 0; color: var(--red);">ФИЛЬМ БЫЛ САТИРОЙ.<br>ТЕПЕРЬ ЭТО ДОКУМЕНТАЛКА.</h2>
+        </section>
+
+        <!-- SECTION 8: CONCLUSION -->
+        <section>
+            <div class="section-header">⏰ ЧТО ПРОИСХОДИТ ДАЛЬШЕ?</div>
+            
+            <h2>КОНВЕРГЕНЦИЯ КРИЗИСОВ</h2>
+            
+            <p>Мы наблюдаем схождение множества катастроф в реальном времени:</p>
+            
+            <ul>
+                <li><strong>КЛИМАТИЧЕСКАЯ КАТАСТРОФА:</strong> 30+ американцев погибло, 630К без электричества, полярный вихрь дестабилизирован потеплением Арктики; смерти в Сибири при -50°C, аварии ЖКХ в Бурятии</li>
+                <li><strong>ЭНЕРГЕТИЧЕСКИЙ КРИЗИС AI:</strong> Альтман строит инфраструктуру, потребляющую электричество целых наций, изначально питаемую ископаемым топливом</li>
+                <li><strong>КРИЗИС ГРЕНЛАНДИИ:</strong> Трамп угрожает военным вторжением в союзника по НАТО ради ресурсов, нужных энергетической империи Альтмана</li>
+                <li><strong>ПОЛИТИЧЕСКАЯ КОРРУПЦИЯ:</strong> Энергосекретарь заседает в совете ядерной компании Альтмана, пожертвование $1М Трампу, доступ к оружейному плутонию</li>
+                <li><strong>ЭКОЛОГИЧЕСКОЕ ДЕРЕГУЛИРОВАНИЕ:</strong> "Чрезвычайная ситуация в национальной энергетике" обходит все экологические проверки для AI-инфраструктуры</li>
+                <li><strong>ЛИШЕНИЕ ФИНАНСИРОВАНИЯ НАУКИ:</strong> Трамп сокращает финансирование исследований климата по мере ускорения катастроф</li>
+            </ul>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ ПЛАН МИЛЛИАРДЕРОВ</div>
+                <ol style="list-style-type: decimal; padding-left: 3rem;">
+                    <li style="list-style-type: decimal;">Обещать, что технология решит все проблемы</li>
+                    <li style="list-style-type: decimal;">Строить массивную инфраструктуру, которая ухудшает проблемы</li>
+                    <li style="list-style-type: decimal;">Покупать политическое влияние для избежания регуляции</li>
+                    <li style="list-style-type: decimal;">Получать доступ к правительственным ресурсам (плутоний, субсидии, отказы)</li>
+                    <li style="list-style-type: decimal;">Накапливать личное богатство, пока планета горит</li>
+                    <li style="list-style-type: decimal;">Инвестировать в планы побега (космос, бессмертие)</li>
+                    <li style="list-style-type: decimal;">Обвинять "алармистов", когда случается катастрофа</li>
+                    <li style="list-style-type: decimal;">Оставить всех остальных умирать</li>
+                </ol>
+                <p style="margin-top: 3rem; font-size: 2rem; color: var(--yellow); font-family: 'Russo One', sans-serif; text-align: center;">ЭТО ТОЧНО СЮЖЕТ "НЕ СМОТРИТЕ ВВЕРХ"</p>
+            </div>
+            
+            <div class="ticker">
+                <div class="ticker-content">
+                    30+ ПОГИБШИХ • 630К БЕЗ СВЕТА • -50°F ВЕТРЯНОЙ ХОЛОД • -50°C В СИБИРИ • СМЕРТИ ОТ ОТКЛЮЧЕНИЙ • ТРАМП УГРОЖАЕТ ГРЕНЛАНДИИ • АЛЬТМАН СЖИГАЕТ ПЛАНЕТУ ДЛЯ AI • КОНФЛИКТ ИНТЕРЕСОВ ЭНЕРГОСЕКРЕТАРЯ • ОРУЖЕЙНЫЙ ПЛУТОНИЙ ДЛЯ ЧАСТНОЙ КОМПАНИИ • НЕ СМОТРИТЕ ВВЕРХ БЫЛА ПРЕДУПРЕЖДЕНИЕМ • ЭТО НЕ УЧЕНИЯ •
+                </div>
+            </div>
+            
+            <div class="quote" style="border-color: var(--red); background: var(--red-dark); font-size: 1.6rem;">
+                "Ни один человек, женщина или машина не должны иметь такую власть над будущим AI — особенно когда все признаки указывают, что они не желают ставить свои частные поиски власти выше общественного блага."
+                <br><br>— Центр политики AI
+            </div>
+            
+            <h2 style="color: var(--red); font-size: 5rem; text-align: center; margin: 4rem 0;">КОМЕТА ЛЕТИТ</h2>
+            
+            <p style="font-size: 1.8rem; text-align: center; line-height: 1.6;">Но на этот раз комета — это изменение климата.<br>
+            А миллиардеры, добывающие её ради прибыли — реальны.<br>
+            И мы все ещё здесь, наблюдая, как это происходит.<br><br>
+            <strong>НЕ СМОТРИТЕ ВВЕРХ</strong></p>
+        </section>
+    </div>
+
+    <footer>
+        <p style="font-family: 'Russo One', sans-serif; font-size: 2.5rem; margin-bottom: 1.5rem;">🚨 ПОДЕЛИТЕСЬ ЭТИМ РАССЛЕДОВАНИЕМ 🚨</p>
+        <p>Вся информация основана на проверенных новостных отчётах, судебных документах и официальных заявлениях</p>
+        <p>Смерти: Al Jazeera, Associated Press, Wikipedia • Сибирь: Бабр24, АиФ Иркутск, Сибирские Новости</p>
+        <p>Климатология: MIT, NOAA, Fortune, Гидрометцентр России • Гренландия: Reuters, CNN</p>
+        <p>Расследование Альтмана: Forbes, Reuters, Wall Street Journal, показания Сената • Не смотрите вверх: Netflix, IMDB</p>
+        <p style="margin-top: 2.5rem; font-size: 1.8rem; font-family: 'Oswald', sans-serif; font-weight: 700;">
+            ОПУБЛИКОВАНО: 28 ЯНВАРЯ 2026 • ПОКА 30+ АМЕРИКАНЦЕВ ЛЕЖАТ МЁРТВЫМИ В СНЕГУ<br>
+            И ЛЮДИ УМИРАЮТ В СИБИРИ ОТ -50°C МОРОЗОВ
+        </p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

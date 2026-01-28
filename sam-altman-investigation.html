@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Altman Files: An Investigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Libre+Baskerville:wght@700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #151515;
+            --bg-card: #1a1a1a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent-red: #c41e3a;
+            --accent-yellow: #ffd700;
+            --accent-blue: #4a90e2;
+            --border: #2a2a2a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+            pointer-events: none;
+            animation: scan 8s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+        
+        .header-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+        
+        .classified {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+            text-shadow: 0 0 30px rgba(196, 30, 58, 0.5);
+        }
+        
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 10px); }
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-red);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            position: sticky;
+            top: 2rem;
+            z-index: 10;
+        }
+        
+        .toc h2 {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+        }
+        
+        .toc li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .toc a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+        }
+        
+        .toc a:hover {
+            color: var(--accent-red);
+        }
+        
+        /* Section Styling */
+        section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-red);
+        }
+        
+        .section-number {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        
+        h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+        }
+        
+        h3 {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        p {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Evidence Cards */
+        .evidence-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-red);
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .evidence-card::before {
+            content: '🔴';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .evidence-label {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .evidence-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        /* Quote Blocks */
+        blockquote {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-red);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-red);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            box-shadow: 0 0 0 4px var(--bg-primary);
+        }
+        
+        .timeline-date {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(196, 30, 58, 0.05) 100%);
+            border: 2px solid var(--accent-red);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .warning-box::before {
+            content: '⚠';
+            position: absolute;
+            top: -1.5rem;
+            left: 2rem;
+            font-size: 3rem;
+            background: var(--bg-primary);
+            padding: 0 1rem;
+        }
+        
+        .warning-title {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+        }
+        
+        /* List Styling */
+        ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+        
+        /* Connection Map */
+        .connection-map {
+            background: var(--bg-card);
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid var(--border);
+        }
+        
+        .connection-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .connection-item:last-child {
+            border-bottom: none;
+        }
+        
+        .connection-icon {
+            font-size: 3rem;
+            min-width: 4rem;
+            text-align: center;
+        }
+        
+        .connection-details h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .toc {
+                position: static;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .connection-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="classified">INVESTIGATIVE REPORT</div>
+            <h1>The Altman Files</h1>
+            <p class="subtitle">A comprehensive investigation into Sam Altman, OpenAI, and the concentration of power at the intersection of AI, energy, and politics</p>
+        </div>
+        <div class="scroll-indicator">Scroll to investigate ↓</div>
+    </header>
+
+    <div class="container">
+
+        <!-- SECTION 1: INTRODUCTION -->
+        <section id="introduction">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>Who is Sam Altman?</h2>
+            </div>
+            
+            <p>Sam Altman is the 39-year-old CEO of OpenAI, the company that launched ChatGPT and ignited the global AI revolution. Valued at $500 billion as of October 2025, OpenAI has become one of the most powerful technology companies in the world.</p>
+            
+            <p>But behind the visionary entrepreneur persona lies a complex web of conflicts of interest, political maneuvering, and concentrated power that raises fundamental questions about who controls the future of artificial intelligence.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$2.1B</div>
+                    <div class="stat-label">Personal Net Worth</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$0</div>
+                    <div class="stat-label">Equity in OpenAI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">400M</div>
+                    <div class="stat-label">Weekly ChatGPT Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$500B</div>
+                    <div class="stat-label">OpenAI Valuation (Oct 2025)</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <div class="warning-title">Critical Context</div>
+                <p>This investigation is based entirely on publicly available information from reputable news sources, court documents, and official statements. All claims are cited and verifiable. This is not speculation—this is what we know.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BACKGROUND -->
+        <section id="background">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>Background & Rise to Power</h2>
+            </div>
+            
+            <h3>Early Life</h3>
+            <p>Samuel Harris Altman was born April 22, 1985, in Chicago to a Jewish family, later moving to St. Louis, Missouri. At age eight, he received his first Macintosh computer and began programming. He attended the elite John Burroughs prep school, where he publicly came out as gay and encouraged teachers to post "Safe Space" placards.</p>
+            
+            <p>Altman attended Stanford University to study computer science but dropped out after two years, later saying he learned more playing poker with classmates than from professors. At 19, he co-founded Loopt, a location-based social networking app, which was acquired in 2012 for approximately $43 million.</p>
+            
+            <h3>Y Combinator (2011-2019)</h3>
+            <p>Altman joined Y Combinator in 2011 as a part-time partner and became president in 2014, succeeding founder Paul Graham. Under his leadership, Y Combinator helped about 1,900 companies including Airbnb, Instacart, DoorDash, Reddit, and Twitch.</p>
+            
+            <h3>OpenAI Leadership (2019-Present)</h3>
+            <p>In March 2019, Altman left Y Combinator to focus full-time as CEO of OpenAI, which had been co-founded in 2015 by Altman, Greg Brockman, Elon Musk, and others as a nonprofit AI research organization. Under Altman's leadership, OpenAI successfully launched ChatGPT in November 2022, positioning him as one of the leading figures of the AI boom.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1985</div>
+                    <div class="timeline-content">
+                        <h4>Born in Chicago</h4>
+                        <p>Samuel Harris Altman born to Jewish family</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2005</div>
+                    <div class="timeline-content">
+                        <h4>Co-founded Loopt</h4>
+                        <p>At age 19, drops out of Stanford to start location-based social network</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2014</div>
+                    <div class="timeline-content">
+                        <h4>Becomes Y Combinator President</h4>
+                        <p>Takes over from Paul Graham, helps launch 1,900+ companies</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2019</div>
+                    <div class="timeline-content">
+                        <h4>Full-time OpenAI CEO</h4>
+                        <p>Leaves Y Combinator to focus on OpenAI</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-content">
+                        <h4>ChatGPT Launch</h4>
+                        <p>OpenAI releases ChatGPT, sparking global AI revolution</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">
+                        <h4>Fired & Rehired</h4>
+                        <p>Board fires Altman for not being "consistently candid," employees force his return after 5 days</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: NOVEMBER CRISIS -->
+        <section id="november-crisis">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>The November 2023 Crisis</h2>
+            </div>
+            
+            <p>On November 17, 2023, OpenAI's board fired Altman as CEO, stating he "was not consistently candid in his communications with the board." What followed was one of the most dramatic corporate upheavals in Silicon Valley history.</p>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">The Firing</div>
+                <div class="evidence-content">
+                    Within days, 745 of OpenAI's 770 employees signed a letter threatening mass resignations if the board didn't resign and reinstate Altman. Microsoft offered to hire Altman to lead a new AI research team. After five days of turmoil, Altman was reinstated on November 21, 2023, with a reconstituted board.
+                </div>
+            </div>
+            
+            <h3>What Really Happened?</h3>
+            <p>Former board member Helen Toner later explained the board fired Altman because he:</p>
+            <ul>
+                <li>Withheld information about ChatGPT's release from the board</li>
+                <li>Failed to disclose his ownership of OpenAI's startup fund</li>
+                <li>Provided inaccurate information about safety measures</li>
+                <li>Was reported by two executives for psychological abuse and manipulation</li>
+            </ul>
+            
+            <blockquote>
+                "Former CTO Mira Murati told staffers in 2023 she didn't feel comfortable about Sam leading us to AGI. Co-founder Ilya Sutskever said 'I don't think Sam is the guy who should have the finger on the button for AGI.'"
+            </blockquote>
+            
+            <div class="warning-box">
+                <div class="warning-title">Key Insight</div>
+                <p>The people who worked closest with Altman—his own board members and executives—didn't trust him to lead OpenAI toward artificial general intelligence. Yet after five days, he returned with more power than ever, and the board that fired him was replaced.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: WEALTH -->
+        <section id="wealth">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>Wealth & Investment Empire</h2>
+            </div>
+            
+            <h3>The $2 Billion Paradox</h3>
+            <p>As of 2025, Altman's net worth is estimated between $1.2 billion and $2.1 billion by Forbes. Remarkably, none of this comes from OpenAI equity. Altman receives only a $76,001 annual salary from OpenAI and holds zero equity in the company, stating he doesn't want personal financial gain to influence AGI development decisions.</p>
+            
+            <p>This might sound noble—until you examine where his billions actually come from.</p>
+            
+            <h3>Investment Portfolio</h3>
+            
+            <div class="connection-map">
+                <div class="connection-item">
+                    <div class="connection-icon">🚀</div>
+                    <div class="connection-details">
+                        <h4>Reddit</h4>
+                        <p>Third-largest shareholder with approximately 9% ownership before the 2024 IPO</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">🏠</div>
+                    <div class="connection-details">
+                        <h4>Airbnb & Uber</h4>
+                        <p>Early $100,000 investments in both companies (2008)</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">⚡</div>
+                    <div class="connection-details">
+                        <h4>Helion Energy</h4>
+                        <p>$375 million personal investment in nuclear fusion startup, serves as chairman</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">☢️</div>
+                    <div class="connection-details">
+                        <h4>Oklo</h4>
+                        <p>Small modular nuclear reactor startup, was chairman until April 2025</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">🧬</div>
+                    <div class="connection-details">
+                        <h4>Retro Biosciences</h4>
+                        <p>$180 million investment in longevity research company</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">📊</div>
+                    <div class="connection-details">
+                        <h4>Portfolio Total</h4>
+                        <p>Stakes in over 400 companies valued at approximately $2.8 billion as of June 2024</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Personal Lifestyle</h3>
+            <p>Despite claiming only a $76,001 salary, Altman's lifestyle tells a different story:</p>
+            <ul>
+                <li>Drives a McLaren F1 valued at $15 million</li>
+                <li>Wears a $480,000 Greubel Forsey watch (one of only 33 made)</li>
+                <li>Accumulated $85 million in real estate in just 18 months</li>
+                <li>Properties in Hawaii, San Francisco, and Napa Valley</li>
+                <li>Married partner Oliver Mulherin at Hawaii estate in January 2024</li>
+            </ul>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">The Giving Pledge</div>
+                <div class="evidence-content">
+                    In May 2024, Altman and his partner Oliver Mulherin signed The Giving Pledge to donate most of their wealth. However, with billions tied up in private investments and continued accumulation of assets, questions remain about when and how this wealth will actually be distributed.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: ENERGY EMPIRE -->
+        <section id="energy">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>The Energy Power Play</h2>
+            </div>
+            
+            <h3>Helion Energy: $1 Billion Nuclear Fusion Bet</h3>
+            <p>Helion has attracted over $1 billion in funding, with more than $375 million coming directly from Altman—his largest personal investment, representing approximately 20% of his entire net worth. He has been chairman of Helion's board since 2015.</p>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">The Promise vs Reality</div>
+                <div class="evidence-content">
+                    <strong>Promised:</strong> Commercial fusion reactor by 2028, with a 2023 agreement to supply power to Microsoft<br><br>
+                    <strong>Reality:</strong> Despite missing the 2024 deadline for demonstrating net electricity production, the company claims it's still on schedule. However, Helion has not confirmed whether it has achieved the fundamental milestone of producing more energy than required to initiate fusion.
+                </div>
+            </div>
+            
+            <h3>Helion's Internal Problems</h3>
+            <p>In the past year, Dr. Claire Saunders, a materials science PhD and valued Helion employee, reported harassment from her male manager, including sexual comments about forcefully inserting material into a neutron generator referred to in female terms. Helion investigated but found "insufficient evidence of discrimination." At least five women have sought remedies in the past two years, including a scientist who resigned after a harassment investigation.</p>
+            
+            <p>On January 28, 2025 (today), Helion raised an additional $425 million at a $5.245 billion valuation—despite having no commercial product!</p>
+            
+            <h3>Oklo: Nuclear Power & Political Connections</h3>
+            <p>Oklo is a startup producing small modular nuclear reactors (SMRs), where Altman served as chairman from founding until April 2025. Oklo became public in May 2024 through merger with Altman's special purpose acquisition company (SPAC) AltC, leaving the nuclear startup with over $300 million for growth.</p>
+            
+            <div class="warning-box">
+                <div class="warning-title">Conflict of Interest Alert</div>
+                <p>Energy Secretary Chris Wright was also a board member of Oklo when Trump nominated him to the cabinet. Wright, CEO of Liberty Energy, sits on Oklo's board—a nuclear energy company backed by OpenAI CEO Sam Altman.</p>
+            </div>
+            
+            <h3>Weapons-Grade Plutonium for Altman's Company</h3>
+            <p>The White House is providing plutonium to Sam Altman's company Oklo. The Department of Energy launched a request for interested parties to access up to 19 metric tons—nearly 42,000 pounds—of weapons-grade plutonium.</p>
+            
+            <p>Oklo is one of the companies expected to receive supplies of the fissile isotope from the Department of Energy. This raises serious concerns in the scientific community about the relaxed approach to nuclear development.</p>
+            
+            <h3>Trump's Executive Orders</h3>
+            <p>In January 2025, the U.S. government issued Executive Order 14156, declaring a "National Energy Emergency" to fast-track AI energy infrastructure, allowing OpenAI to bypass environmental and bureaucratic regulations, treating Stargate campuses as essential national assets.</p>
+            
+            <p>The orders create a Department of Energy and Department of Defense partnership for at least three test reactors to achieve self-sufficiency by July 4, 2026. They also provide for reactors at military facilities by 2028.</p>
+            
+            <h3>Financial Windfalls</h3>
+            <p>Through an agreement between Oklo and European firm newcleo, newcleo plans to invest up to $2 billion through an investment mechanism. Oklo's stock has soared 450% since the beginning of the year, despite the company not yet having a federal license to operate any reactor and no binding contracts to supply electricity.</p>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">Senator Markey's Concerns</div>
+                <div class="evidence-content">
+                    "Oklo Inc., a nuclear technology startup, is a principal company interested in obtaining plutonium from the Department of Energy. Oklo is also building a DOE-backed $1.7 billion reprocessing plant in Tennessee. Your Energy Secretary Chris Wright was a board member of Oklo until his confirmation in February. In 2024, Wright and his wife also made contributions to your presidential campaign totaling about $458,000 and contributed to the Republican National Committee around $330,400. In Q1 2025, Oklo increased its lobbying spending by 500% compared to the same period last year."
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: TRUMP CONNECTION -->
+        <section id="trump">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>The Trump Connection</h2>
+            </div>
+            
+            <h3>From "Hitler" to "Best Friend"</h3>
+            
+            <blockquote>
+                "Anyone familiar with the history of 1930s Germany finds it chilling to watch Trump in action... Hitler taught us about the Big Lie—a lie so big and repeated so often that people eventually believe it. Trump's Big Lie is hiding in plain sight."
+                <br><br>— Sam Altman, June 2016
+            </blockquote>
+            
+            <p>From 2016 to 2022, Altman repeatedly warned about the dangers of Trump's leadership. At a "Talks with Google" event in October 2017, Altman defended his criticism: "When the future of the republic is at stake, duty to country and our values supersedes duty to your particular company and your stock price."</p>
+            
+            <h3>2025: Complete Reversal</h3>
+            <p>After Trump's reelection in November 2024, Altman was among the first corporate executives to publicly announce his donation to Trump's Inauguration Committee. OpenAI confirmed Altman donated $1 million in December 2024.</p>
+            
+            <blockquote>
+                "Thank you for being such a pro-business, pro-innovation president. It's a very refreshing change. We're very excited to see what you're doing to make our companies and our entire country so successful."
+                <br><br>— Sam Altman to Donald Trump, January 2025
+            </blockquote>
+            
+            <p>At the Stargate announcement, Altman said: "To build AGI here, to create hundreds of thousands of jobs, to create a new industry centered here, we couldn't do it without you, Mr. President, and I'm thrilled we're getting it done."</p>
+            
+            <h3>Political Evolution</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2016-2022</div>
+                    <div class="timeline-content">
+                        <h4>Major Democratic Donor</h4>
+                        <p>Donated $200,000 to Biden Victory Fund in 2023, endorsed Hillary Clinton, called Trump "unprecedented threat to America"</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Career Total</div>
+                    <div class="timeline-content">
+                        <h4>$1M+ to Democrats</h4>
+                        <p>Analysis shows over $1 million donated to Democratic politicians and organizations, with only one recorded donation to a Republican ($2,700 to Patrick McHenry in 2018)</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">July 4, 2025</div>
+                    <div class="timeline-content">
+                        <h4>"Politically Homeless"</h4>
+                        <p>Declared himself politically homeless, criticized Democrats for not encouraging "culture of innovation and entrepreneurship," called for "techno-capitalism"</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">December 2024</div>
+                    <div class="timeline-content">
+                        <h4>$1M to Trump</h4>
+                        <p>Personal donation to Trump's inauguration fund, prompting Senators Warren and Bennet to question whether he was trying to "curry favor" and avoid regulatory scrutiny</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Meeting at Trump's Golf Club</h3>
+            <p>In recent months, Altman met with President Trump and his major donors at Trump's golf club in New Jersey, signaling a new alignment of interests. The meeting came just two weeks after Elon Musk publicly cut ties with Trump, removing a key rival from the political arena.</p>
+            
+            <p>Altman now describes a "shift in sentiment" in Silicon Valley since Trump took office. He calls the Biden-Harris administration "hostile" and unfriendly to technology and business.</p>
+        </section>
+
+        <!-- SECTION 7: STARGATE -->
+        <section id="stargate">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>Project Stargate: $500 Billion Gamble</h2>
+            </div>
+            
+            <h3>The Announcement</h3>
+            <p>OpenAI CEO Sam Altman joined President Donald Trump and leaders from SoftBank and Oracle to announce Stargate, a $500 billion plan to build data centers across the U.S. to power the expected explosive growth in AI use in coming years.</p>
+            
+            <p>Trump announced that Stargate will build "physical and virtual infrastructure to power the next generation of AI advances," creating "colossal data centers" nationwide that would bring more than 100,000 American jobs almost immediately.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$500B</div>
+                    <div class="stat-label">Total Investment Pledged</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">17 GW</div>
+                    <div class="stat-label">Energy Consumption (= Switzerland + Portugal)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Data Centers Planned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Jobs Promised</div>
+                </div>
+            </div>
+            
+            <h3>Energy Consumption Reality</h3>
+            <p>The planned Stargate AI infrastructure will consume 17 gigawatts—equivalent to powering Switzerland and Portugal combined. The project plans 10 data centers requiring 15 gigawatts of power—equivalent to a small nation's electricity usage.</p>
+            
+            <p>The first facility in Abilene, Texas features an on-site natural gas plant as its primary power source—not clean energy.</p>
+            
+            <div class="warning-box">
+                <div class="warning-title">Reality Check</div>
+                <p><strong>Elon Musk's Claim:</strong> The venture doesn't have funding to achieve promised investment levels<br><br>
+                <strong>Current Status:</strong> Stargate AI has not completed a single data center deal. Goals were reportedly downgraded to building one data center in Ohio by end of 2025<br><br>
+                <strong>Altman's Response:</strong> Denied Musk's claims</p>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CONTROVERSIES -->
+        <section id="controversies">
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <h2>Major Controversies</h2>
+            </div>
+            
+            <h3>Sexual Abuse Allegations</h3>
+            <p>In January 2025, Altman's sister Ann filed a lawsuit alleging he sexually abused her regularly between 1997-2006, when she was 3-12 years old and he was 12-21.</p>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">The Lawsuit Details</div>
+                <div class="evidence-content">
+                    The lawsuit, filed in U.S. District Court in the Eastern District of Missouri, alleges abuse began when Ann was 3 and Sam was 12 at their family home in Clayton, Missouri. The filing claims abusive activities occurred "several times per week," beginning with oral sex and later involving penetration. The abuse included "numerous acts of rape, sexual assault, sexual abuse, molestation, sodomy, and battery," with the last instances occurring when Sam was an adult and Ann was still a minor.
+                </div>
+            </div>
+            
+            <p>The lawsuit requests a jury trial and damages exceeding $75,000. Ann claims she has experienced PTSD, extreme emotional distress, mental anguish, depression, lost wages, and "loss of enjoyment of a normal life" as a result.</p>
+            
+            <h3>Family Response</h3>
+            <p>Altman, his mother, and two brothers issued a joint statement denying the allegations as "utterly untrue." The family statement said Ann has "mental health challenges" and "refuses conventional treatment," claiming she has continuously attempted to extract money from the family despite monthly stipends and other financial support.</p>
+            
+            <h3>Context</h3>
+            <p>Ann first made similar claims publicly on social media in 2021. This lawsuit was filed just days before her 31st birthday—the deadline under Missouri law for child sexual abuse victims to file lawsuits.</p>
+            
+            <p>As of December 2025, the case remains active in federal court with no public updates on hearings, motions, or resolution. In March 2025, reports emerged of a potential countersuit by Sam against Ann for defamation, though no formal filing has been confirmed.</p>
+            
+            <div class="warning-box">
+                <div class="warning-title">Important Note</div>
+                <p>These are allegations in an active lawsuit. Sam Altman denies all claims. Both sides deserve to present their evidence in court. This investigation presents the facts as they are publicly known without making judgments about guilt or innocence.</p>
+            </div>
+            
+            <h3>Worldcoin/World Privacy Concerns</h3>
+            <p>Altman co-founded Worldcoin (now World), which scans users' irises using "Orb" devices to create biometric digital IDs in exchange for cryptocurrency tokens. The project has faced massive global backlash:</p>
+            
+            <ul>
+                <li><strong>Kenya (May 2025):</strong> High Court ordered World to delete all biometric data collected in the country, ruling it violated privacy law by using crypto payments to obtain data without valid consent</li>
+                <li><strong>Portugal, Spain, Germany:</strong> All investigated or temporarily banned Worldcoin operations over data privacy concerns</li>
+                <li><strong>Kenya (2023):</strong> Initially suspended operations after allegations that people who signed up never received promised money and officials were bribed</li>
+            </ul>
+            
+            <h3>OpenAI Safety Concerns</h3>
+            <p>In May 2024, former OpenAI safety researcher Jan Leike resigned, criticizing the company for prioritizing product development over safety. OpenAI was also exposed for using "extremely restrictive offboarding agreements" requiring departing employees to sign non-disparagement provisions forbidding criticism forever or lose vested equity.</p>
+            
+            <blockquote>
+                "Former executives Dario and Daniela Amodei (now founders of Anthropic) described Altman's tactics as 'gaslighting' and 'psychological abuse' to those around them."
+            </blockquote>
+            
+            <h3>The Elon Musk Feud</h3>
+            <p>Elon Musk, an OpenAI co-founder who left in 2018, has sued OpenAI twice, alleging it violated its founding mission to develop AI for humanity's benefit by pursuing profit.</p>
+            
+            <p>In February 2025, Musk led an investor group offering to buy OpenAI for $97.4 billion, which Altman rejected, saying Musk was trying to "slow us down." A federal judge has allowed the case to proceed to trial, scheduled for 2026.</p>
+        </section>
+
+        <!-- SECTION 9: NONPROFIT BETRAYAL -->
+        <section id="nonprofit">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <h2>The Nonprofit Betrayal</h2>
+            </div>
+            
+            <h3>The Original Mission</h3>
+            <p>OpenAI was founded in December 2015 as a nonprofit with "the goal of building safe and beneficial artificial general intelligence for the benefit of humanity." The founding charter stated an intention to "advance digital intelligence in the way that is most likely to benefit humanity as a whole, unconstrained by a need to generate financial return."</p>
+            
+            <p>Initial funding came from donations—$1 billion pledged by Sam Altman, Greg Brockman, Elon Musk, Reid Hoffman, Jessica Livingston, Peter Thiel, Amazon Web Services, and Infosys. However, actual capital collected significantly lagged pledges—only $130 million had been received by 2019.</p>
+            
+            <h3>The 2019 Transformation</h3>
+            <p>In 2019, Altman announced that the firm's ambitions had exceeded what donations could support and that OpenAI would create a for-profit arm to attract investments. The for-profit entity would be completely controlled by its nonprofit parent, with investors' returns capped at 100 times their investment.</p>
+            
+            <h3>The Failed Restructuring Attempt</h3>
+            <p>For over a year, OpenAI pursued plans to convert its core governance structure to become independent from the nonprofit. The goal: make the for-profit company independent of its current nonprofit board—the entity that fired Altman in November 2023.</p>
+            
+            <div class="evidence-card">
+                <div class="evidence-label">Why Investors Demanded Change</div>
+                <div class="evidence-content">
+                    The November 2023 crisis woke investors up to the idea that the interests of OpenAI's nonprofit board—to ensure AGI benefits all humanity—could conflict with their own interest in earning an outsize financial return. Investors insisted they didn't want to be in a position where their investment could be jeopardized by actions of the nonprofit board.
+                </div>
+            </div>
+            
+            <h3>May 2025: The Reversal</h3>
+            <p>After months of pursuing a for-profit conversion, OpenAI reversed course in May 2025. CEO Sam Altman announced the nonprofit would continue to control the company. The for-profit arm would convert to a Public Benefit Corporation (PBC) but remain under nonprofit control.</p>
+            
+            <p>Altman cited "hearing from civic leaders and having discussions with the offices of the Attorneys General of California and Delaware" as reasons for the decision. However, he said on a call with reporters that Elon Musk's lawsuit had nothing to do with the change.</p>
+            
+            <h3>Current Structure (October 2025)</h3>
+            <p>Following restructuring approved by California and Delaware regulators:</p>
+            <ul>
+                <li>Nonprofit OpenAI Foundation: 26% ownership</li>
+                <li>Microsoft: 27% ownership</li>
+                <li>Employees/other investors: 47% ownership</li>
+            </ul>
+            
+            <p>The OpenAI Foundation retains authority to appoint the board of the for-profit OpenAI Group PBC—a mechanism designed to align strategic direction with the Foundation's charitable charter.</p>
+            
+            <div class="warning-box">
+                <div class="warning-title">Unanswered Questions</div>
+                <p>Critics question whether the nonprofit can exercise meaningful control over day-to-day activities. Does the nonprofit have supervoting shares, or could new investors dilute its stake? With AGI requiring trillions of dollars according to Altman, how will the nonprofit maintain control as more capital is raised?</p>
+            </div>
+            
+            <h3>The Charitable Assets Debate</h3>
+            <p>Legal experts and nonprofits have raised concerns about whether OpenAI is properly protecting charitable assets. If the company was built using tax-advantaged nonprofit donations and resources, some argue those assets belong to the public and shouldn't be transferred to private shareholders for profit.</p>
+            
+            <blockquote>
+                "OpenAI is not a normal company and never will be."
+                <br><br>— Sam Altman, May 2025
+            </blockquote>
+        </section>
+
+        <!-- SECTION 10: CLIMATE -->
+        <section id="climate">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2>Climate Hypocrisy</h2>
+            </div>
+            
+            <h3>The Promise: "AI Will Fix the Climate"</h3>
+            <p>In September 2024, Altman claimed that AI would bring "astounding triumphs" including "fixing the climate" as part of an emerging "Intelligence Age."</p>
+            
+            <h3>The Reality: Unprecedented Energy Consumption</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">40M</div>
+                    <div class="stat-label">Kilowatts Daily (ChatGPT)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">31M</div>
+                    <div class="stat-label">Gallons Water Annually (Cooling)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">17 GW</div>
+                    <div class="stat-label">Stargate Power Needs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Gas</div>
+                    <div class="stat-label">Primary Power Source</div>
+                </div>
+            </div>
+            
+            <p>ChatGPT already uses nearly 40 million kilowatts daily—enough to power the Empire State Building for 18 months—and uses over 31 million gallons of water annually just for cooling. This is likely an underestimation given complex multimodal tasks.</p>
+            
+            <p>Altman has admitted he wants a "significant fraction" of Earth's total electricity to power AI, with OpenAI's data centers expected to consume as much power as New York City.</p>
+            
+            <h3>The "Double or Nothing" Bet</h3>
+            <p>Critics call this a "double or nothing bet"—the claim that we should increase energy production and emissions now because advanced AI will eventually solve climate change, with no guarantee this technology will address challenges that are fundamentally about human behavior and political will.</p>
+            
+            <blockquote>
+                "As long as we effectively subsidize fossil fuels by allowing them to use the atmosphere as a waste dump, we need policy changes, not just tech breakthroughs, to meet our climate goals."
+                <br><br>— Climate scientist Zeke Hausfather
+            </blockquote>
+            
+            <h3>We Already Have the Solutions</h3>
+            <p>Critics note that Altman's argument fundamentally misunderstands climate change. We already have the clean energy technology we need—nuclear, solar, wind, batteries. The challenges are sunk costs, development obstacles, political will, and inertia.</p>
+            
+            <p>Technological advances alone can't solve climate change when we already have the tools but face challenges of economic incentives and behavioral change.</p>
+            
+            <h3>Personal Contradictions</h3>
+            <p>While claiming AI will "fix the climate," Altman:</p>
+            <ul>
+                <li>Drives a $15 million McLaren F1</li>
+                <li>Accumulated $85 million in real estate in 18 months</li>
+                <li>Maintains multiple luxury properties across Hawaii, San Francisco, and Napa</li>
+                <li>Invested hundreds of millions in energy companies that serve OpenAI's needs</li>
+            </ul>
+            
+            <div class="warning-box">
+                <div class="warning-title">The Climate Calculation</div>
+                <p>OpenAI is building infrastructure that will consume more electricity than entire countries, powered initially by natural gas, while promising that future AI will somehow solve the climate crisis caused in part by this very infrastructure.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 11: CONCLUSION -->
+        <section id="conclusion">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2>Conclusions: Power Without Accountability</h2>
+            </div>
+            
+            <h3>The Web of Influence</h3>
+            <p>Sam Altman has constructed an unprecedented scheme of influence that connects:</p>
+            
+            <div class="connection-map">
+                <div class="connection-item">
+                    <div class="connection-icon">💰</div>
+                    <div class="connection-details">
+                        <h4>Personal Investments</h4>
+                        <p>$375M in Helion + control of Oklo in nuclear energy</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">⚡</div>
+                    <div class="connection-details">
+                        <h4>OpenAI's Energy Needs</h4>
+                        <p>Requiring electricity equivalent to entire countries</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">🏛️</div>
+                    <div class="connection-details">
+                        <h4>Political Influence</h4>
+                        <p>$1M to Trump + $3.5M on lobbying</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">☢️</div>
+                    <div class="connection-details">
+                        <h4>Government Resources</h4>
+                        <p>Weapons-grade plutonium, bypass environmental regulations</p>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <div class="connection-icon">🤝</div>
+                    <div class="connection-details">
+                        <h4>Conflicts of Interest</h4>
+                        <p>Energy Secretary Chris Wright was on Oklo's board</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>What This Means</h3>
+            <ul>
+                <li>Altman receives government funding and resources for his private companies</li>
+                <li>OpenAI gets energy while bypassing environmental regulations</li>
+                <li>The environment suffers under the guise of "national security"</li>
+                <li>One person controls critical infrastructure for AI's future</li>
+                <li>Conflicts of interest pervade every level of decision-making</li>
+            </ul>
+            
+            <div class="warning-box">
+                <div class="warning-title">The Final Warning</div>
+                <p>"No one man, woman, or machine should have this much power over the future of AI—especially when all signs suggest they are unwilling to put their private quest for power ahead of the public benefit."
+                <br><br>— Center for AI Policy</p>
+            </div>
+            
+            <h3>The Questions That Remain</h3>
+            <ol style="list-style-type: decimal; padding-left: 2rem;">
+                <li style="padding-left: 0;">Should one person wield this much influence over humanity's technological future?</li>
+                <li style="padding-left: 0;">Can someone with massive financial stakes in energy companies make unbiased decisions about AI development?</li>
+                <li style="padding-left: 0;">Is it appropriate to bypass environmental regulations for private AI infrastructure?</li>
+                <li style="padding-left: 0;">Should a company built on nonprofit donations be converted to generate private profit?</li>
+                <li style="padding-left: 0;">Can we trust promises of future AI benefits to justify present-day environmental damage?</li>
+                <li style="padding-left: 0;">Who really controls OpenAI—and who should?</li>
+            </ol>
+            
+            <h3>Final Assessment</h3>
+            <p>This is not a story about a visionary technologist. This is a story about the capture of power through energy, politics, and AI—under the cover of "saving humanity."</p>
+            
+            <p>Sam Altman embodies a profound contradiction at the heart of modern tech leadership. He promises AI will "fix the climate" while building infrastructure that consumes more electricity than entire countries. He claims to want AGI to benefit all humanity while accumulating billions in private wealth. He presents himself as politically neutral while donating millions to political figures and causes.</p>
+            
+            <p>Most critically, he has positioned himself at the center of an unprecedented concentration of power: controlling the most influential AI company in the world, while personally investing in the energy companies that will power that AI, while influencing the political system that regulates both.</p>
+            
+            <blockquote>
+                "You could parachute him into an island full of cannibals and come back in five years, and he'd be the king."
+                <br><br>— Paul Graham, Altman's mentor at Y Combinator
+            </blockquote>
+            
+            <p>The question isn't whether Sam Altman is a genius or a villain. The question is whether any one person should have this much control over technologies that will shape humanity's future—especially when their actions consistently contradict their stated values.</p>
+            
+            <p>The Altman Files reveal not just one man's rise to power, but a system that allows such concentration of influence to occur largely unchecked, with conflicts of interest rationalized as necessary for "innovation" and environmental destruction justified as steps toward a better future.</p>
+            
+            <p>What happens next is up to us.</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>This investigation is based entirely on publicly available information from reputable sources.</p>
+        <p>All claims are verifiable through cited news reports, court documents, and official statements.</p>
+        <p>Last Updated: January 28, 2026</p>
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.5;">
+            This website was created as an educational resource about publicly available information.<br>
+            No unauthorized reproduction of copyrighted material is included.
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Update TOC active state on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.toc a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--accent-red)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 BREAKING: The Altman Crisis - Climate Catastrophe & The Real Don't Look Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #ff0000;
+            --red-dark: #cc0000;
+            --red-glow: rgba(255, 0, 0, 0.3);
+            --yellow: #ffff00;
+            --black: #000000;
+            --gray-dark: #1a1a1a;
+            --gray: #2a2a2a;
+            --white: #ffffff;
+            --border-emergency: 3px solid var(--red);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Roboto Condensed', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* BREAKING NEWS BANNER */
+        .breaking-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--red);
+            color: var(--white);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.8);
+            animation: pulse-border 2s infinite;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 4px 20px rgba(255, 0, 0, 0.8); }
+            50% { box-shadow: 0 4px 40px rgba(255, 0, 0, 1); }
+        }
+        
+        .breaking-label {
+            background: var(--black);
+            padding: 15px 25px;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            white-space: nowrap;
+        }
+        
+        .breaking-text {
+            flex: 1;
+            padding: 15px 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            overflow: hidden;
+        }
+        
+        .breaking-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* HERO ALERT */
+        .hero {
+            margin-top: 60px;
+            background: linear-gradient(180deg, #ff0000 0%, #000000 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 0, 0, 0.1) 2px,
+                rgba(255, 0, 0, 0.1) 4px
+            );
+            animation: scan-lines 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan-lines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+        
+        .alert-icon {
+            font-size: 5rem;
+            animation: alert-pulse 1s infinite;
+        }
+        
+        @keyframes alert-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+        
+        h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 7rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px var(--red-glow),
+                         0 0 40px var(--red-glow),
+                         4px 4px 0 var(--black);
+            letter-spacing: -2px;
+        }
+        
+        .subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--yellow);
+            margin: 1rem 0 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5),
+                         2px 2px 0 var(--black);
+        }
+        
+        .death-count {
+            background: var(--black);
+            border: var(--border-emergency);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 0 30px var(--red-glow);
+        }
+        
+        .death-number {
+            font-family: 'Anton', sans-serif;
+            font-size: 6rem;
+            color: var(--red);
+            text-shadow: 0 0 20px var(--red-glow);
+            line-height: 1;
+        }
+        
+        .death-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 0.5rem;
+        }
+        
+        /* EMERGENCY GRID */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+            margin: 0;
+        }
+        
+        .emergency-card {
+            background: var(--gray-dark);
+            border: 2px solid var(--red);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .emergency-card:hover {
+            background: var(--red-dark);
+            transform: scale(1.02);
+            z-index: 10;
+            box-shadow: 0 0 50px var(--red-glow);
+        }
+        
+        .emergency-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .emergency-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .emergency-stat {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--yellow);
+            margin: 0.5rem 0;
+        }
+        
+        /* MAIN CONTENT */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            border-bottom: 5px solid var(--red);
+        }
+        
+        .section-header {
+            background: var(--red);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            margin: 0 -2rem 3rem -2rem;
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 5px 0 var(--red-dark);
+        }
+        
+        .urgent-box {
+            background: var(--red-dark);
+            border: 5px solid var(--yellow);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+            box-shadow: 0 0 40px var(--red-glow);
+        }
+        
+        .urgent-box::before {
+            content: '⚠ URGENT ⚠';
+            position: absolute;
+            top: -1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--yellow);
+            color: var(--black);
+            padding: 0.3rem 2rem;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+        }
+        
+        .urgent-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--yellow);
+        }
+        
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin: 2rem 0 1rem;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            color: var(--yellow);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #e0e0e0;
+        }
+        
+        .evidence {
+            background: var(--gray);
+            border-left: 8px solid var(--red);
+            padding: 2rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .evidence::before {
+            content: '📌 EVIDENCE';
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+        
+        .quote {
+            background: var(--black);
+            border: 3px solid var(--yellow);
+            padding: 2rem 2rem 2rem 4rem;
+            margin: 2rem 0;
+            position: relative;
+            font-style: italic;
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            font-size: 5rem;
+            color: var(--yellow);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+        
+        /* COMPARISON GRID */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .comparison-card {
+            background: var(--gray-dark);
+            border: 3px solid var(--red);
+            padding: 2rem;
+        }
+        
+        .comparison-label {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .comparison-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        li {
+            padding: 0.8rem 0 0.8rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* TICKER TAPE */
+        .ticker {
+            background: var(--yellow);
+            color: var(--black);
+            padding: 1.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            overflow: hidden;
+            border-top: 5px solid var(--red);
+            border-bottom: 5px solid var(--red);
+            margin: 3rem 0;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+        
+        /* TIMELINE */
+        .timeline {
+            position: relative;
+            padding: 3rem 0 3rem 4rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4.5rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--red);
+            border: 4px solid var(--yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+        
+        .timeline-date {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* IMAGE PLACEHOLDER */
+        .disaster-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--gray-dark) 0%, var(--black) 100%);
+            border: 5px solid var(--red);
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--red);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .disaster-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.3), transparent);
+            animation: sweep 3s infinite;
+        }
+        
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* FOOTER */
+        footer {
+            background: var(--red);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        footer p {
+            color: var(--white);
+            font-size: 1rem;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .breaking-label {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            
+            .breaking-text {
+                font-size: 1rem;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .death-number {
+                font-size: 4rem;
+            }
+        }
+        
+        /* ANIMATIONS */
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .flash {
+            animation: flash 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- BREAKING NEWS BANNER -->
+    <div class="breaking-banner">
+        <div class="breaking-label">🚨 BREAKING NEWS</div>
+        <div class="breaking-text">
+            <div class="breaking-ticker">
+                30+ DEAD IN POLAR VORTEX DISASTER • TRUMP THREATENS GREENLAND INVASION • SAM ALTMAN'S AI CONSUMING COUNTRY-LEVEL ELECTRICITY • CLIMATE CATASTROPHE NOW • 630,000 WITHOUT POWER • THE REAL "DON'T LOOK UP" IS HAPPENING • BILLIONAIRES IGNORE DYING PLANET FOR PROFIT • 
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="alert-icon flash">🚨</div>
+        <h1>THE ALTMAN CRISIS</h1>
+        <div class="subtitle">POLAR VORTEX KILLS 30+ AMERICANS WHILE TECH BILLIONAIRE BURNS PLANET FOR AI EMPIRE</div>
+        
+        <div class="death-count">
+            <div class="death-number">30+</div>
+            <div class="death-label">CONFIRMED DEAD IN WINTER STORM</div>
+        </div>
+    </div>
+
+    <!-- EMERGENCY STATUS -->
+    <div class="emergency-grid">
+        <div class="emergency-card">
+            <div class="emergency-icon">❄️</div>
+            <div class="emergency-title">Polar Vortex</div>
+            <div class="emergency-stat">-50°F</div>
+            <p>Wind chill temperatures causing frostbite in minutes</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">💀</div>
+            <div class="emergency-title">Deaths</div>
+            <div class="emergency-stat">30+</div>
+            <p>Hypothermia, accidents, heart attacks from shoveling snow</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">⚡</div>
+            <div class="emergency-title">Power Outages</div>
+            <div class="emergency-stat">630K</div>
+            <p>Homes without electricity in freezing temperatures</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🌍</div>
+            <div class="emergency-title">States Affected</div>
+            <div class="emergency-stat">24</div>
+            <p>Federal emergency declared in 12 states</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🛢️</div>
+            <div class="emergency-title">AI Energy Use</div>
+            <div class="emergency-stat">17 GW</div>
+            <p>Altman's Stargate = Switzerland + Portugal electricity</p>
+        </div>
+        <div class="emergency-card">
+            <div class="emergency-icon">🇬🇱</div>
+            <div class="emergency-title">Greenland Crisis</div>
+            <div class="emergency-stat">DEFCON 2</div>
+            <p>Trump threatens military invasion of NATO ally</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- SECTION 1: THE DISASTER -->
+        <section>
+            <div class="section-header">🌨️ JANUARY 2026: AMERICA FREEZES TO DEATH</div>
+            
+            <p>RIGHT NOW, as you read this, at least 30 Americans are dead. A "colossal" winter storm driven by a destabilized polar vortex has turned the United States into a frozen graveyard. The storm system stretched nearly 2,000 miles from the Mexico-U.S. border into Canada—meteorologists called it "potentially historic."</p>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">THE DEATH TOLL (AS OF JANUARY 27, 2026)</div>
+                <ul>
+                    <li><strong>NEW YORK CITY:</strong> 8 people found dead outdoors in subzero temperatures over the weekend</li>
+                    <li><strong>TEXAS:</strong> 3 deaths including a 16-year-old girl killed in sledding accident</li>
+                    <li><strong>LOUISIANA:</strong> 2 deaths from hypothermia</li>
+                    <li><strong>MASSACHUSETTS & OHIO:</strong> 2 people run over by snow plows</li>
+                    <li><strong>ARKANSAS & TEXAS:</strong> Teenagers killed in sledding accidents</li>
+                    <li><strong>TENNESSEE:</strong> Man died of heart attack while shoveling snow, plus 11-year-old in Crockett County</li>
+                    <li><strong>Multiple states:</strong> Weather-related traffic accidents, more than 160 crashes in Tennessee alone</li>
+                </ul>
+            </div>
+            
+            <div class="evidence">
+                A severe winter storm brought crippling freezing rain, sleet and snow to a large part of the U.S. in late January 2026. Hundreds of thousands lost power across the South as ice pulled down tree branches and power lines. More than a foot of snow fell in parts of the Midwest and Northeast. Many states faced bitter cold expected to linger for days.
+            </div>
+            
+            <h2>630,000+ WITHOUT POWER IN FREEZING TEMPERATURES</h2>
+            
+            <p>As of January 26, 2026, more than 630,000 houses and businesses were without electricity across the U.S., concentrated in the South where the storm brought freezing rain and catastrophic ice accumulation. Tennessee alone saw 300,000 homes and businesses without power. Louisiana, Mississippi, and Georgia each reported more than 100,000 outages.</p>
+            
+            <div class="quote">
+                "Ice accumulation—explicitly called 'catastrophic' in advance by the National Weather Service—proved especially devastating in the South, coating trees and power lines with up to half an inch of ice across at least a dozen states. Half an inch of ice can add hundreds of pounds of weight to power infrastructure, snapping poles and bringing down entire spans of distribution lines."
+            </div>
+            
+            <div class="ticker">
+                <div class="ticker-content">
+                    BREAKING: TEMPERATURES PLUNGE TO -25°F TO -30°F IN NORTH AND MIDWEST • WIND CHILL -50°F • FROSTBITE WITHIN MINUTES • AVERAGE LOW TEMPERATURE ACROSS US: 11-12°F • 24 STATES UNDER EMERGENCY DECLARATIONS • THIS IS NOT A DRILL •
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CLIMATE SCIENCE -->
+        <section>
+            <div class="section-header">🌡️ WHAT CAUSED THIS? CLIMATE CHANGE & THE POLAR VORTEX</div>
+            
+            <h2>THE SCIENCE IS CLEAR—AND TERRIFYING</h2>
+            
+            <p>The brutal storm system is the result of a <strong>stretched polar vortex</strong>—an Arctic region of cold, low-pressure air that normally forms a relatively compact, circular system but sometimes morphs into a more oval shape, sending frigid air spilling across North America.</p>
+            
+            <div class="evidence">
+                <strong>MIT WINTER WEATHER SPECIALIST JUDAH COHEN:</strong> The distortion of the polar vortex was closely linked to ongoing changes in the Arctic, including record-low sea ice and altered snow cover patterns in Siberia. Shifts in the Arctic and decreasing sea ice as early as October 2025 "essentially loaded the dice" for a major polar vortex event under conditions shaped by global warming.
+            </div>
+            
+            <h3>HOW CLIMATE CHANGE MAKES WINTER STORMS WORSE</h3>
+            
+            <ul>
+                <li><strong>ARCTIC AMPLIFICATION:</strong> The Arctic is warming faster than lower latitudes, reducing the temperature gradient and making the polar vortex more unstable</li>
+                <li><strong>JET STREAM DISRUPTION:</strong> A weakened vortex makes the jet stream wavy, allowing cold air to spill south</li>
+                <li><strong>WARMER OCEANS = MORE MOISTURE:</strong> The sudden blast may have come as a shock after a mostly mild start to winter, but that warmth partly contributed to the ferocity of the storm</li>
+                <li><strong>RECORD-LOW ARCTIC SEA ICE:</strong> October 2025 saw unprecedented sea ice loss, setting up conditions for disaster</li>
+            </ul>
+            
+            <div class="quote">
+                "Earth is unequivocally warming as human activities release greenhouse gas emissions that trap heat in the atmosphere. But that does not mean severe winter weather will never happen again. Some research suggests that even in a warming environment, cold events, while occurring less frequently, may still remain relatively severe in some locations. One factor may be increasing disruptions to the stratospheric polar vortex, which appear to be linked to the rapid warming of the Arctic with climate change."
+            </div>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ TRUMP CUTS CLIMATE SCIENCE FUNDING</div>
+                <p>Much of the data and research that allows us to predict and respond to severe weather events relies on work by federal employees, including government labs like the National Center for Atmospheric Research (NCAR), which has been <strong>TARGETED BY THE TRUMP ADMINISTRATION FOR FUNDING CUTS.</strong></p>
+                <p>These scientists help develop the crucial models, measuring instruments, and data that scientists and forecasters everywhere depend on. <strong>Trump is literally defunding the ability to predict disasters like this.</strong></p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SAM ALTMAN CONNECTION -->
+        <section>
+            <div class="section-header">🔥 WHILE AMERICA FREEZES, SAM ALTMAN BURNS THE PLANET</div>
+            
+            <h2>THE "DON'T LOOK UP" TECH BILLIONAIRE</h2>
+            
+            <div class="comparison">
+                <div class="comparison-card">
+                    <div class="comparison-label">Fiction</div>
+                    <div class="comparison-name">PETER ISHERWELL</div>
+                    <p><strong>From "Don't Look Up" (2021)</strong></p>
+                    <ul>
+                        <li>Tech billionaire CEO of BASH</li>
+                        <li>Convinces president to mine comet for rare minerals instead of stopping it</li>
+                        <li>Prioritizes profit over planetary survival</li>
+                        <li>Uses algorithms to predict deaths but does nothing to prevent them</li>
+                        <li>Has "too much sway in politics"</li>
+                        <li>Obsessed with space colonization</li>
+                        <li>Claims technology will solve all problems</li>
+                        <li>Dooms humanity through greed and incompetence</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Reality</div>
+                    <div class="comparison-name">SAM ALTMAN</div>
+                    <p><strong>CEO of OpenAI (2026)</strong></p>
+                    <ul>
+                        <li>Tech billionaire CEO of OpenAI</li>
+                        <li>Building AI infrastructure that consumes electricity of entire countries</li>
+                        <li>Prioritizes AI development over climate concerns</li>
+                        <li>Claims "AI will fix the climate" while massively increasing emissions</li>
+                        <li>Donated $1M to Trump, $3.5M on lobbying</li>
+                        <li>Invested $180M in longevity research, wants immortality</li>
+                        <li>Promises AGI will solve humanity's problems</li>
+                        <li>Energy Secretary on his nuclear company's board</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote">
+                "Peter Isherwell is a spoof of so many tech CEOs who have built a cult of personality around themselves. Part Elon Musk, part Jeff Bezos, part Sir Richard Branson... Isherwell is a billionaire who isn't merely content with being one of the richest men on the globe. He needs to be the richest man in the galaxy. With his luxury athleisure wear and his too-white smile, Isherwell feels like a robot pretending to be human."
+                <br><br>— Film critics on the "Don't Look Up" character based on real tech billionaires
+            </div>
+            
+            <h2>ALTMAN'S PROMISE: "AI WILL FIX THE CLIMATE"</h2>
+            
+            <p>In September 2024, Sam Altman claimed that AI would bring "astounding triumphs" including <strong>"fixing the climate"</strong> as part of an emerging "Intelligence Age."</p>
+            
+            <h2>ALTMAN'S REALITY: CONSUMING A NATION'S WORTH OF ELECTRICITY</h2>
+            
+            <div class="disaster-image">
+                ⚡ PROJECT STARGATE ⚡<br>
+                17 GIGAWATTS
+            </div>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">THE ENERGY CRISIS ALTMAN IS CREATING</div>
+                <ul>
+                    <li><strong>ChatGPT uses 40 MILLION KILOWATTS DAILY</strong> — enough to power Empire State Building for 18 months</li>
+                    <li><strong>31 MILLION GALLONS OF WATER ANNUALLY</strong> just for cooling</li>
+                    <li><strong>Project Stargate will consume 17 GIGAWATTS</strong> — equivalent to Switzerland + Portugal combined</li>
+                    <li><strong>First Stargate facility powered by NATURAL GAS PLANT</strong> — not clean energy</li>
+                    <li><strong>10 data centers planned requiring 15 GIGAWATTS</strong> — equivalent to a small nation's electricity</li>
+                </ul>
+            </div>
+            
+            <div class="evidence">
+                Altman admitted he wants a "significant fraction" of Earth's total electricity to power AI. OpenAI's data centers are expected to consume as much power as New York City. This represents what critics call a "double or nothing bet"—the claim that we should increase energy production and emissions NOW because advanced AI will eventually solve climate change, with NO GUARANTEE this technology will address challenges that are fundamentally about human behavior.
+            </div>
+            
+            <h3>WE ALREADY HAVE THE SOLUTIONS</h3>
+            
+            <p>Climate scientist Zeke Hausfather: <strong>"As long as we effectively subsidize fossil fuels by allowing them to use the atmosphere as a waste dump, we need policy changes, not just tech breakthroughs, to meet our climate goals."</strong></p>
+            
+            <p>We already have the clean energy technology we need—nuclear, solar, wind, batteries. The challenges are sunk costs, development obstacles, political will, and inertia. <strong>Altman's promise that AI will "fix" climate change allows continued delay on the policy changes and behavioral shifts we need NOW.</strong></p>
+        </section>
+
+        <!-- SECTION 4: GREENLAND -->
+        <section>
+            <div class="section-header">🇬🇱 TRUMP THREATENS TO INVADE GREENLAND—WITH ALTMAN'S ENERGY INTERESTS</div>
+            
+            <h2>THE CRISIS UNFOLDING RIGHT NOW</h2>
+            
+            <p>While Americans freeze to death, President Trump is threatening <strong>MILITARY INVASION</strong> of Greenland, a self-governing territory of Denmark and a NATO ally. This is not a joke. This is happening.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">DECEMBER 2024</div>
+                    <div class="timeline-title">Trump Names Jeff Landry as Special Envoy to Greenland</div>
+                    <p>Denmark calls this "completely unacceptable"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JANUARY 7, 2026</div>
+                    <div class="timeline-title">Trump Refuses to Rule Out Military Force</div>
+                    <p>"Utilizing the U.S. Military is always an option at the Commander in Chief's disposal"</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JANUARY 7, 2026</div>
+                    <div class="timeline-title">Donald Trump Jr. Visits Greenland</div>
+                    <p>Does not meet with Greenlandic government, guided by pro-Trump islander</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JANUARY 2026</div>
+                    <div class="timeline-title">Trump Threatens 25% Tariffs on 8 European Nations</div>
+                    <p>Unless Denmark sells Greenland to the US</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">JANUARY 21, 2026</div>
+                    <div class="timeline-title">Trump Partially Backs Down at Davos</div>
+                    <p>Announces "framework of a future deal" with NATO—details unknown</p>
+                </div>
+            </div>
+            
+            <div class="quote">
+                "Yeah, there is one thing. My own morality. My own mind. It's the only thing that can stop me. I don't need international law. I'm not looking to hurt people."
+                <br><br>— Donald Trump, January 7, 2026, New York Times
+            </div>
+            
+            <h2>WHY DOES TRUMP WANT GREENLAND?</h2>
+            
+            <ul>
+                <li><strong>RARE-EARTH MINERALS:</strong> Trillions of dollars worth of resources (sound familiar? Same reason Isherwell wanted to mine the comet in "Don't Look Up")</li>
+                <li><strong>STRATEGIC LOCATION:</strong> Between US and Europe, astride the GIUK gap linking Arctic to Atlantic</li>
+                <li><strong>OIL AND GAS:</strong> Potential deposits (though Greenland has never produced petroleum)</li>
+                <li><strong>ARCTIC CONTROL:</strong> As climate change melts Arctic ice, new shipping routes and resources become accessible</li>
+                <li><strong>MILITARY DOMINANCE:</strong> US already has Thule Air Base; wants total control</li>
+            </ul>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ ALTMAN'S ENERGY EMPIRE NEEDS GREENLAND'S RESOURCES</div>
+                <p>Sam Altman's AI infrastructure requires MASSIVE amounts of energy and rare-earth minerals for chips and batteries. Greenland has both. Trump threatens invasion just as:</p>
+                <ul>
+                    <li>Altman announces $500B Project Stargate requiring country-level electricity</li>
+                    <li>Trump's Energy Secretary Chris Wright sits on Altman's nuclear company board (MASSIVE conflict of interest)</li>
+                    <li>Trump declares "National Energy Emergency" to bypass environmental regulations for AI infrastructure</li>
+                    <li>Altman gets access to 19 METRIC TONS OF WEAPONS-GRADE PLUTONIUM for his nuclear company</li>
+                </ul>
+            </div>
+            
+            <div class="evidence">
+                <strong>GREENLAND'S RESPONSE:</strong> "We are not for sale and will never be for sale. We must not lose our long struggle for freedom." Thousands of Greenlanders demonstrated with signs: "NO MEANS NO," "STOP THREATENING US," "YANKEE GO HOME!"
+            </div>
+            
+            <div class="evidence">
+                <strong>NATO ALLIES RESPOND:</strong> Seven European nations issued joint statement defending Greenland's sovereignty. Danish PM Mette Frederiksen: An attack on Greenland would be the end of "everything." Senator Chris Murphy: NATO countries would "of course" have to defend Greenland against the US under Article 5.
+            </div>
+        </section>
+
+        <!-- SECTION 5: THE ALTMAN EMPIRE -->
+        <section>
+            <div class="section-header">💰 ALTMAN'S ENERGY EMPIRE: FOLLOW THE MONEY</div>
+            
+            <h2>HELION ENERGY: $1 BILLION NUCLEAR FUSION BET</h2>
+            
+            <p>Altman invested <strong>$375 MILLION</strong> of his personal wealth into Helion Energy—his largest investment, representing 20% of his entire net worth. He's been chairman since 2015.</p>
+            
+            <ul>
+                <li><strong>PROMISED:</strong> Commercial fusion reactor by 2028, power for Microsoft</li>
+                <li><strong>REALITY:</strong> Missed 2024 deadline for demonstrating net electricity production</li>
+                <li><strong>PROBLEM:</strong> Company won't confirm if it's achieved the fundamental milestone of producing more energy than required for fusion</li>
+                <li><strong>VALUATION:</strong> $5.245 BILLION (as of January 28, 2026) despite having NO COMMERCIAL PRODUCT</li>
+            </ul>
+            
+            <div class="evidence">
+                <strong>HELION'S INTERNAL SCANDALS:</strong> At least 5 women sought remedies in past 2 years. Dr. Claire Saunders reported harassment including sexual comments about neutron generators. Helion found "insufficient evidence of discrimination." One scientist resigned after harassment investigation.
+            </div>
+            
+            <h2>OKLO: NUCLEAR POWER + TRUMP'S ENERGY SECRETARY</h2>
+            
+            <p>Oklo makes small modular nuclear reactors. Altman was chairman until April 2025. The company went public through Altman's SPAC, giving it over $300 MILLION.</p>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">🚨 MASSIVE CONFLICT OF INTEREST</div>
+                <p><strong>ENERGY SECRETARY CHRIS WRIGHT</strong> was a board member of Oklo when Trump nominated him to cabinet. Wright, CEO of Liberty Energy, sat on Oklo's board—Altman's nuclear company.</p>
+                <p><strong>Senator Markey:</strong> "Oklo is building a DOE-backed $1.7 billion reprocessing plant in Tennessee. Your Energy Secretary Chris Wright was a board member until confirmation in February. In 2024, Wright and his wife contributed $458,000 to your presidential campaign and $330,400 to the RNC. In Q1 2025, Oklo increased lobbying spending by 500% compared to same period last year."</p>
+            </div>
+            
+            <h3>WEAPONS-GRADE PLUTONIUM FOR ALTMAN'S COMPANY</h3>
+            
+            <p>The White House is providing plutonium to Oklo. The Department of Energy launched a request for interested parties to access up to <strong>19 METRIC TONS—nearly 42,000 POUNDS—of WEAPONS-GRADE PLUTONIUM.</strong></p>
+            
+            <div class="evidence">
+                One of the companies expected to receive supplies of the fissile isotope from DOE is Oklo. This raises serious concerns in the scientific community about the relaxed approach to nuclear development.
+            </div>
+            
+            <h3>TRUMP'S EXECUTIVE ORDERS BENEFIT ALTMAN</h3>
+            
+            <p>In January 2025, the U.S. government issued <strong>Executive Order 14156</strong>, declaring a "National Energy Emergency" to fast-track AI energy infrastructure, <strong>allowing OpenAI to bypass environmental and bureaucratic regulations</strong>, treating Stargate campuses as essential national assets.</p>
+            
+            <p>The orders create a DOE and DOD partnership for at least 3 test reactors to achieve self-sufficiency by July 4, 2026, with reactors at military facilities by 2028.</p>
+            
+            <h3>FINANCIAL WINDFALLS</h3>
+            
+            <ul>
+                <li>European firm newcleo plans to invest up to <strong>$2 BILLION</strong> in Oklo</li>
+                <li>Oklo stock soared <strong>450% since beginning of year</strong></li>
+                <li>Company has NO federal license to operate any reactor</li>
+                <li>Company has NO binding contracts to supply electricity</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 6: ALTMAN'S TRANSFORMATION -->
+        <section>
+            <div class="section-header">🔄 FROM "TRUMP IS HITLER" TO "$1 MILLION DONATION"</div>
+            
+            <div class="comparison">
+                <div class="comparison-card">
+                    <div class="comparison-label">2016-2022</div>
+                    <div class="comparison-name">ALTMAN VS TRUMP</div>
+                    <div class="quote">
+                        "Anyone familiar with the history of 1930s Germany finds it chilling to watch Trump in action... Hitler taught us about the Big Lie—a lie so big and repeated so often that people eventually believe it. Trump's Big Lie is hiding in plain sight."
+                        <br><br>— Sam Altman, June 2016
+                    </div>
+                    <ul>
+                        <li>Donated $200,000 to Biden Victory Fund</li>
+                        <li>Endorsed Hillary Clinton</li>
+                        <li>Called Trump "unprecedented threat to America"</li>
+                        <li>Said duty to country "supersedes duty to your company"</li>
+                        <li>Over $1M donated to Democrats</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">2024-2026</div>
+                    <div class="comparison-name">ALTMAN ❤️ TRUMP</div>
+                    <div class="quote">
+                        "Thank you for being such a pro-business, pro-innovation president. It's a very refreshing change. We're very excited to see what you're doing to make our companies and our entire country so successful."
+                        <br><br>— Sam Altman to Trump, January 2025
+                    </div>
+                    <ul>
+                        <li>Donated $1 MILLION to Trump inauguration</li>
+                        <li>Declared himself "politically homeless"</li>
+                        <li>Called Democrats "hostile to innovation"</li>
+                        <li>Met Trump at his golf club with major donors</li>
+                        <li>$3.5M spent on lobbying 2024-2025</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote">
+                "To build AGI here, to create hundreds of thousands of jobs, to create a new industry centered here, we couldn't do it without you, Mr. President, and I'm thrilled we're getting it done."
+                <br><br>— Sam Altman at Stargate announcement with Trump
+            </div>
+            
+            <h2>WHY THE REVERSAL?</h2>
+            
+            <ul>
+                <li><strong>TRUMP GIVES HIM EVERYTHING:</strong> Energy access, plutonium, environmental regulation waivers, tax breaks</li>
+                <li><strong>ENERGY SECRETARY IS HIS BUSINESS PARTNER:</strong> Chris Wright on Oklo board = direct line to power</li>
+                <li><strong>"NATIONAL ENERGY EMERGENCY":</strong> Lets Altman build without environmental review</li>
+                <li><strong>GREENLAND'S RESOURCES:</strong> Rare-earth minerals needed for AI chips</li>
+                <li><strong>SENATORS QUESTION IF BUYING INFLUENCE:</strong> Warren & Bennet asked if $1M donation was to "curry favor" and avoid regulation</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 7: THE PATTERN -->
+        <section>
+            <div class="section-header">🎬 "DON'T LOOK UP" WAS A WARNING—AND IT'S HAPPENING</div>
+            
+            <h2>THE PARALLELS ARE TERRIFYING</h2>
+            
+            <div class="disaster-image">
+                🎭 FICTION BECOMES REALITY 🎭
+            </div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
+                <tr style="background: var(--red); color: var(--white);">
+                    <th style="padding: 1rem; font-family: 'Anton', sans-serif; font-size: 1.5rem; border: 2px solid var(--yellow);">DON'T LOOK UP (2021 FILM)</th>
+                    <th style="padding: 1rem; font-family: 'Anton', sans-serif; font-size: 1.5rem; border: 2px solid var(--yellow);">REALITY (JANUARY 2026)</th>
+                </tr>
+                <tr style="background: var(--gray-dark);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Comet heading toward Earth</strong><br>
+                        Scientists discover planet-killer
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Climate catastrophe accelerating</strong><br>
+                        Record-low Arctic ice, destabilized polar vortex, 30+ dead in one storm
+                    </td>
+                </tr>
+                <tr style="background: var(--gray);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Tech billionaire Peter Isherwell</strong><br>
+                        CEO of BASH Cellular, creepy and robotic
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Tech billionaire Sam Altman</strong><br>
+                        CEO of OpenAI, promises AI will "fix everything"
+                    </td>
+                </tr>
+                <tr style="background: var(--gray-dark);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Isherwell convinces president to mine comet</strong><br>
+                        Claims trillions in rare-earth minerals more important than stopping disaster
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Altman convinces Trump to threaten Greenland invasion</strong><br>
+                        Rare-earth minerals needed for AI chips; Trump threatens war for resources
+                    </td>
+                </tr>
+                <tr style="background: var(--gray);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Isherwell is president's top donor</strong><br>
+                        Has "too much sway in politics," president literally answers to him
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Altman donated $1M to Trump</strong><br>
+                        Energy Secretary was on his nuclear company's board; gets plutonium access
+                    </td>
+                </tr>
+                <tr style="background: var(--gray-dark);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Isherwell's tech will "solve everything"</strong><br>
+                        Algorithms can predict deaths but does nothing to prevent them
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Altman's AI will "fix the climate"</strong><br>
+                        Meanwhile AI infrastructure consumes electricity of entire countries
+                    </td>
+                </tr>
+                <tr style="background: var(--gray);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Plan to stop comet fails</strong><br>
+                        Greed and incompetence doom humanity
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Climate action delayed for profit</strong><br>
+                        Altman: "AI will fix it later" while pumping CO2 now
+                    </td>
+                </tr>
+                <tr style="background: var(--gray-dark);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Isherwell escapes on spaceship</strong><br>
+                        Elites abandon Earth while everyone else dies
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Altman invests $180M in longevity research</strong><br>
+                        Wants immortality while 30+ freeze to death in his lifetime
+                    </td>
+                </tr>
+                <tr style="background: var(--gray);">
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Scientists warn everyone</strong><br>
+                        Public told "Don't Look Up," media treats it as politics
+                    </td>
+                    <td style="padding: 1.5rem; border: 2px solid var(--gray); vertical-align: top;">
+                        <strong style="color: var(--yellow);">Climate scientists warn for decades</strong><br>
+                        Ignored, defunded by Trump, called "alarmists"
+                    </td>
+                </tr>
+                <tr style="background: var(--red-dark);">
+                    <td colspan="2" style="padding: 2rem; text-align: center; font-family: 'Anton', sans-serif; font-size: 2rem; border: 3px solid var(--yellow);">
+                        THE MOVIE WAS A SATIRE.<br>NOW IT'S A DOCUMENTARY.
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="quote">
+                "Mark Rylance's turn as a deranged tech CEO in 'Don't Look Up' is a clear dig at our country's leading billionaire visionaries. Rylance's Peter Isherwell is compared to Elon Musk, Jeff Bezos, Mark Zuckerberg, and others. Isherwell prioritizes money and profit over the impending climate crisis—a common criticism that the world's richest are facing today as they funnel billions of dollars into personal space projects as the planet faces catastrophic climate change."
+            </div>
+        </section>
+
+        <!-- SECTION 8: WHAT HAPPENS NOW -->
+        <section>
+            <div class="section-header">⏰ WHAT HAPPENS NEXT?</div>
+            
+            <h2>THE CONVERGENCE OF CRISES</h2>
+            
+            <p>We are watching multiple catastrophes converge in real-time:</p>
+            
+            <ul>
+                <li><strong>CLIMATE DISASTER:</strong> 30+ Americans dead, 630K without power, polar vortex destabilized by warming Arctic</li>
+                <li><strong>AI ENERGY CRISIS:</strong> Altman building infrastructure consuming electricity of entire nations, powered initially by fossil fuels</li>
+                <li><strong>GREENLAND CRISIS:</strong> Trump threatening military invasion of NATO ally for resources Altman's AI empire needs</li>
+                <li><strong>POLITICAL CORRUPTION:</strong> Energy Secretary sits on Altman's nuclear company board, $1M donation to Trump, weapons-grade plutonium access</li>
+                <li><strong>ENVIRONMENTAL DEREGULATION:</strong> "National Energy Emergency" bypasses all environmental review for AI infrastructure</li>
+                <li><strong>SCIENCE DEFUNDING:</strong> Trump cutting climate research funding as disasters accelerate</li>
+            </ul>
+            
+            <div class="urgent-box">
+                <div class="urgent-title">⚠️ THE BILLIONAIRE PLAYBOOK</div>
+                <ol style="list-style-type: decimal; padding-left: 2rem;">
+                    <li style="list-style-type: decimal;">Promise technology will solve all problems</li>
+                    <li style="list-style-type: decimal;">Build massive infrastructure that worsens the problems</li>
+                    <li style="list-style-type: decimal;">Buy political influence to avoid regulation</li>
+                    <li style="list-style-type: decimal;">Access government resources (plutonium, subsidies, waivers)</li>
+                    <li style="list-style-type: decimal;">Accumulate personal wealth while planet burns</li>
+                    <li style="list-style-type: decimal;">Invest in escape plans (space, immortality)</li>
+                    <li style="list-style-type: decimal;">Blame "alarmists" when disaster strikes</li>
+                    <li style="list-style-type: decimal;">Leave everyone else to die</li>
+                </ol>
+                <p style="margin-top: 2rem; font-size: 1.5rem; color: var(--yellow); font-family: 'Anton', sans-serif;">THIS IS EXACTLY THE PLOT OF "DON'T LOOK UP"</p>
+            </div>
+            
+            <h2>THE QUESTIONS WE MUST ASK</h2>
+            
+            <ul>
+                <li>Should one billionaire control technology that consumes a nation's electricity?</li>
+                <li>Should the Energy Secretary sit on that billionaire's nuclear company board?</li>
+                <li>Should we threaten war with allies to secure resources for private AI companies?</li>
+                <li>Should we bypass environmental regulations under "emergency" declarations?</li>
+                <li>Should we trust promises of future AI benefits to justify present climate destruction?</li>
+                <li>Can we afford to wait for technology to "fix" problems we can solve with policy NOW?</li>
+            </ul>
+            
+            <div class="ticker">
+                <div class="ticker-content">
+                    30+ DEAD • 630K WITHOUT POWER • -50°F WIND CHILL • TRUMP THREATENS GREENLAND • ALTMAN BURNS PLANET FOR AI • ENERGY SECRETARY CONFLICT OF INTEREST • WEAPONS-GRADE PLUTONIUM FOR PRIVATE COMPANY • DON'T LOOK UP WAS A WARNING • THIS IS NOT A DRILL •
+                </div>
+            </div>
+            
+            <div class="quote" style="border-color: var(--red); background: var(--red-dark);">
+                "No one man, woman, or machine should have this much power over the future of AI—especially when all signs suggest they are unwilling to put their private quest for power ahead of the public benefit."
+                <br><br>— Center for AI Policy
+            </div>
+            
+            <h2 style="color: var(--red); font-size: 4rem; text-align: center; margin: 3rem 0;">THE COMET IS COMING</h2>
+            
+            <p style="font-size: 1.5rem; text-align: center;">But this time, the comet is climate change.<br>
+            And the billionaires mining it for profit are real.<br>
+            And we're all still here watching it happen.</p>
+            
+            <div class="disaster-image" style="height: 200px; font-size: 4rem;">
+                DON'T LOOK UP
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 1rem;">🚨 SHARE THIS INVESTIGATION 🚨</p>
+        <p>All information based on verified news reports, court documents, and official statements</p>
+        <p>Deaths: Al Jazeera, Associated Press, Wikipedia • Climate Science: MIT, NOAA, Fortune • Greenland: Reuters, CNN, Wikipedia</p>
+        <p>Altman Investigation: Forbes, Reuters, Wall Street Journal, Senate testimony • Don't Look Up: Netflix, IMDB</p>
+        <p style="margin-top: 2rem; font-size: 1.5rem; font-family: 'Bebas Neue', sans-serif;">
+            PUBLISHED: JANUARY 28, 2026 • WHILE 30+ AMERICANS LAY DEAD IN THE SNOW
+        </p>
+    </footer>
+</body>
+</html>
