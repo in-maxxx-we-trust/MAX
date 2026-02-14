@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAX — Вселенная</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#02020A}
+body{cursor:none}
+canvas#cv{position:fixed;inset:0;z-index:1}
+canvas#fx{position:fixed;inset:0;z-index:2;pointer-events:none}
+#dot{width:6px;height:6px;background:#C8A97E;border-radius:50%;position:fixed;pointer-events:none;z-index:99;transform:translate(-50%,-50%);box-shadow:0 0 12px #C8A97E}
+#ring{width:32px;height:32px;border:1px solid rgba(200,169,126,.4);border-radius:50%;position:fixed;pointer-events:none;z-index:98;transform:translate(-50%,-50%);transition:transform .25s}
+
+/* START SCREEN */
+#start{
+  position:fixed;inset:0;z-index:50;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#02020A;
+}
+#start.gone{animation:dissolve .8s ease forwards;pointer-events:none}
+@keyframes dissolve{to{opacity:0}}
+
+.s-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(72px,12vw,160px);
+  font-weight:300;
+  letter-spacing:-4px;
+  line-height:1;
+  color:#C8A97E;
+  text-shadow:0 0 60px rgba(200,169,126,.3),0 0 120px rgba(200,169,126,.1);
+  animation:logoIn 1.4s cubic-bezier(.16,1,.3,1) forwards;
+  opacity:0;
+}
+@keyframes logoIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+
+.s-sub{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:5px;color:rgba(200,169,126,.4);
+  text-transform:uppercase;margin-top:16px;
+  animation:logoIn 1.4s .2s cubic-bezier(.16,1,.3,1) forwards;opacity:0;
+}
+.s-divider{
+  width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(200,169,126,.3),transparent);
+  margin:40px 0;
+  animation:logoIn 1s .5s ease forwards;opacity:0;
+}
+.s-btn{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:#02020A;background:#C8A97E;border:none;
+  padding:16px 48px;cursor:none;
+  transition:all .3s;
+  animation:logoIn 1s .7s ease forwards;opacity:0;
+  position:relative;overflow:hidden;
+}
+.s-btn::before{content:'';position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.s-btn:hover::before{transform:scaleX(1)}
+.s-btn span{position:relative;z-index:1}
+.s-hint{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;
+  color:rgba(200,169,126,.2);margin-top:20px;text-align:center;line-height:1.9;
+  animation:logoIn 1s 1s ease forwards;opacity:0;
+}
+
+/* HUD */
+#hud{position:fixed;inset:0;z-index:10;pointer-events:none;display:none}
+#hud.on{display:block}
+
+/* TOP */
+#topbar{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:28px 44px;
+  background:linear-gradient(to bottom,rgba(2,2,10,.9),transparent);
+  pointer-events:all;
+}
+.hud-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:8px;color:rgba(200,169,126,.7)}
+.hud-logo b{color:#C8A97E;font-weight:400}
+.status{
+  display:flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:rgba(200,169,126,.4);text-transform:uppercase;
+}
+.sdot{width:5px;height:5px;border-radius:50%;background:rgba(200,169,126,.3);flex-shrink:0}
+.sdot.l{background:#E05252;animation:sb 1s ease infinite}
+.sdot.t{background:#C8A97E;animation:sb .4s ease infinite}
+.sdot.r{background:#4CAF88}
+@keyframes sb{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+
+/* BOTTOM TRANSCRIPT */
+#txbar{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:32px 60px 40px;
+  background:linear-gradient(to top,rgba(2,2,10,.92),transparent);
+  text-align:center;
+}
+#txtext{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(15px,2vw,22px);
+  font-weight:300;font-style:italic;
+  color:rgba(242,237,230,.45);
+  line-height:1.6;max-width:700px;margin:0 auto;
+  min-height:54px;
+}
+#interim{color:rgba(200,169,126,.3)}
+
+/* MIC */
+#miczone{
+  position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  pointer-events:all;
+}
+#micbtn{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(200,169,126,.07);
+  border:1px solid rgba(200,169,126,.3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;transition:all .4s;position:relative;
+}
+#micbtn::before,#micbtn::after{content:'';position:absolute;border-radius:50%;border:1px solid rgba(200,169,126,.15);animation:ripple 3s ease-out infinite;opacity:0}
+#micbtn::before{inset:-14px;animation-delay:0s}
+#micbtn::after{inset:-28px;animation-delay:1s}
+@keyframes ripple{0%{opacity:.5;transform:scale(.8)}100%{opacity:0;transform:scale(1.3)}}
+#micbtn:hover{background:rgba(200,169,126,.15);border-color:rgba(200,169,126,.6)}
+#micbtn.on{background:rgba(224,82,82,.1);border-color:rgba(224,82,82,.5)}
+#micbtn.on::before,#micbtn.on::after{border-color:rgba(224,82,82,.2)}
+#miclabel{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(200,169,126,.3);text-transform:uppercase}
+
+/* COUNT */
+#nodecnt{position:absolute;top:100px;left:44px}
+.nc{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:rgba(200,169,126,.08);line-height:1}
+.nl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(200,169,126,.2);text-transform:uppercase;margin-top:4px}
+
+/* LEGEND */
+#legend{position:absolute;top:100px;right:44px;display:flex;flex-direction:column;gap:8px}
+.li{display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(200,169,126,.3);text-transform:uppercase}
+.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor}
+
+/* RESET */
+#reset{
+  position:absolute;top:28px;left:50%;transform:translateX(-50%);
+  background:transparent;border:1px solid rgba(200,169,126,.15);
+  color:rgba(200,169,126,.3);font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:3px;text-transform:uppercase;padding:7px 20px;
+  cursor:none;pointer-events:all;transition:all .3s;
+}
+#reset:hover{border-color:rgba(200,169,126,.4);color:rgba(200,169,126,.7)}
+
+/* TOOLTIP */
+#tooltip{
+  position:fixed;pointer-events:none;z-index:20;
+  background:rgba(2,2,10,.95);border:1px solid rgba(200,169,126,.25);
+  padding:12px 18px;display:none;transform:translate(20px,-50%);
+}
+.tt-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#F2EDE6}
+.tt-cat{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;margin-top:4px;text-transform:uppercase}
+
+/* WORD FLASH */
+#wordflash{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:15;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,12vw,160px);
+  font-weight:300;font-style:italic;
+  opacity:0;color:#C8A97E;
+  text-shadow:0 0 80px rgba(200,169,126,.4),0 0 160px rgba(200,169,126,.15);
+  letter-spacing:-3px;
+  transition:opacity .1s;
+  white-space:nowrap;
+}
+</style>
+</head>
+<body>
+
+<div id="dot"></div>
+<div id="ring"></div>
+<canvas id="cv"></canvas>
+<canvas id="fx"></canvas>
+
+<!-- START -->
+<div id="start">
+  <div class="s-logo">MAX</div>
+  <div class="s-sub">Вселенная вашей личности</div>
+  <div class="s-divider"></div>
+  <button class="s-btn" id="startbtn"><span>Начать говорить →</span></button>
+  <div class="s-hint">Говорите о себе — привычках, желаниях, мечтах<br>Web Speech API · OpenAI GPT-5 nano · Chrome/Edge</div>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="topbar">
+    <div class="hud-logo">M<b>A</b>X</div>
+    <div class="status"><div class="sdot" id="sdot"></div><span id="stext">Готов</span></div>
+  </div>
+  <div id="nodecnt"><div class="nc" id="ncnum">0</div><div class="nl">концептов</div></div>
+  <div id="legend">
+    <div class="li"><div class="ld" style="color:#C8A97E"></div>Желания</div>
+    <div class="li"><div class="ld" style="color:#4CAF88"></div>Ценности</div>
+    <div class="li"><div class="ld" style="color:#E05252"></div>Привычки</div>
+    <div class="li"><div class="ld" style="color:#F48FB1"></div>Мечты</div>
+    <div class="li"><div class="ld" style="color:#4FC3F7"></div>Люди</div>
+    <div class="li"><div class="ld" style="color:#F2EDE6"></div>Интересы</div>
+    <div class="li"><div class="ld" style="color:#CE93D8"></div>Места</div>
+    <div class="li"><div class="ld" style="color:#FF8A65"></div>Страхи</div>
+  </div>
+  <div id="txbar"><div id="txtext"><span id="final"></span><span id="interim"></span></div></div>
+  <div id="miczone">
+    <button id="micbtn">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="1.5" stroke-linecap="round">
+        <rect x="9" y="2" width="6" height="12" rx="3"/>
+        <path d="M5 10c0 3.866 3.134 7 7 7s7-3.134 7-7"/>
+        <line x1="12" y1="17" x2="12" y2="22"/>
+        <line x1="8" y1="22" x2="16" y2="22"/>
+      </svg>
+    </button>
+    <div id="miclabel">Нажмите и говорите</div>
+  </div>
+  <button id="reset">↺ сначала</button>
+</div>
+
+<div id="wordflash"></div>
+<div id="tooltip"><div class="tt-name" id="ttname"></div><div class="tt-cat" id="ttcat"></div></div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  ██████████ ВПИШИТЕ ВАШ КЛЮЧ СЮДА ██████████
+// ════════════════════════════════════════════════════════
+const OPENAI_API_KEY = 'ВСТАВЬТЕ_КЛЮЧ_ВОТ_СЮДА';
+const MODEL = 'gpt-5-nano'; // самый дешёвый OpenAI: $0.05/M input, $0.40/M output
+// ════════════════════════════════════════════════════════
+
+// ── CURSOR ──
+const dot=document.getElementById('dot'),ring=document.getElementById('ring');
+let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.cssText=`left:${mx}px;top:${my}px`});
+(function rl(){rx+=(mx-rx)*.08;ry+=(my-ry)*.08;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(rl)})();
+document.querySelectorAll('button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(2.4)';dot.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';dot.style.opacity='1'});
+});
+
+// ── THREE.JS SETUP ──
+const threeCanvas=document.getElementById('cv');
+const renderer=new THREE.WebGLRenderer({canvas:threeCanvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2.5));
+renderer.setSize(innerWidth,innerHeight);
+renderer.setClearColor(0x02020A,1);
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x02020A,.0014);
+
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,3000);
+camera.position.set(0,0,320);
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff,.1));
+const pLight=new THREE.PointLight(0xC8A97E,4,800);pLight.position.set(0,0,150);scene.add(pLight);
+const pLight2=new THREE.PointLight(0x4FC3F7,.8,500);pLight2.position.set(300,150,-200);scene.add(pLight2);
+const pLight3=new THREE.PointLight(0xF48FB1,.5,400);pLight3.position.set(-250,-100,100);scene.add(pLight3);
+
+// ── STAR FIELD (3 layers for depth) ──
+function makeStars(count,spread,size,opacity){
+  const geo=new THREE.BufferGeometry();
+  const pos=new Float32Array(count*3);
+  for(let i=0;i<count*3;i++)pos[i]=(Math.random()-.5)*spread;
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  return new THREE.Points(geo,new THREE.PointsMaterial({color:0xF2EDE6,size,transparent:true,opacity,sizeAttenuation:true}));
+}
+scene.add(makeStars(5000,3000,.3,.35));
+scene.add(makeStars(800,1500,1.0,.2));
+scene.add(makeStars(200,800,1.8,.12));
+
+// Nebula glow (soft spheres far away)
+[
+  {pos:[600,300,-800],col:0x1a0a2e,r:400},
+  {pos:[-500,-200,-600],col:0x0a1a1a,r:350},
+  {pos:[0,400,-700],col:0x1a1a0a,r:300},
+].forEach(({pos,col,r})=>{
+  const m=new THREE.Mesh(new THREE.SphereGeometry(r,16,16),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:.4,side:THREE.BackSide}));
+  m.position.set(...pos);scene.add(m);
+});
+
+// ── CENTER NODE (YOU) ──
+const centerGeo=new THREE.SphereGeometry(15,64,64);
+const centerMat=new THREE.MeshPhongMaterial({color:0xC8A97E,emissive:0x4A2E08,shininess:120,transparent:true,opacity:.98});
+const centerMesh=new THREE.Mesh(centerGeo,centerMat);
+scene.add(centerMesh);
+
+// Center outer glow
+const cgGeo=new THREE.SphereGeometry(22,32,32);
+const cgMat=new THREE.MeshBasicMaterial({color:0xC8A97E,transparent:true,opacity:.06,side:THREE.BackSide});
+scene.add(new THREE.Mesh(cgGeo,cgMat));
+
+// Rings around center
+const ringMeshes=[];
+[{r:22,s:.8},{r:30,s:.5},{r:40,s:.3}].forEach(({r,s},i)=>{
+  const rm=new THREE.Mesh(
+    new THREE.TorusGeometry(r,.4,8,100),
+    new THREE.MeshBasicMaterial({color:0xC8A97E,transparent:true,opacity:.18-i*.05})
+  );
+  rm.userData={speed:.005-i*.001,axis:new THREE.Vector3(Math.sin(i),Math.cos(i),.3).normalize()};
+  scene.add(rm);ringMeshes.push(rm);
+});
+
+// YOU label
+function makeLabel(text,color,fontSize){
+  const c=document.createElement('canvas');c.width=400;c.height=100;
+  const ctx=c.getContext('2d');
+  ctx.clearRect(0,0,400,100);
+  ctx.font=`300 ${fontSize||44}px 'Cormorant Garamond',serif`;
+  ctx.fillStyle=color||'#F2EDE6';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(text,200,50);
+  const tex=new THREE.CanvasTexture(c);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false,opacity:.8}));
+  sp.scale.set(100,25,1);
+  return sp;
+}
+const youLabel=makeLabel('ВЫ','#C8A97E',56);
+youLabel.position.set(0,-26,0);
+scene.add(youLabel);
+
+// ── CATEGORY COLORS ──
+const CAT_COLOR={
+  'желание':0xC8A97E,'ценность':0x4CAF88,'привычка':0xE05252,
+  'мечта':0xF48FB1,'человек':0x4FC3F7,'интерес':0xF2EDE6,
+  'место':0xCE93D8,'страх':0xFF8A65,'другое':0x8E8E8E
+};
+const CAT_CSS={
+  'желание':'#C8A97E','ценность':'#4CAF88','привычка':'#E05252',
+  'мечта':'#F48FB1','человек':'#4FC3F7','интерес':'#F2EDE6',
+  'место':'#CE93D8','страх':'#FF8A65','другое':'#8E8E8E'
+};
+const CAT_RU={
+  'желание':'Желания','ценность':'Ценности','привычка':'Привычки',
+  'мечта':'Мечты','человек':'Люди','интерес':'Интересы',
+  'место':'Места','страх':'Страхи','другое':'Прочее'
+};
+
+// ── GRAPH ──
+const nodes=[],edges=[],nodeMap={};
+
+function addNode(name,cat){
+  if(nodeMap[name]!==undefined)return nodeMap[name];
+  const idx=nodes.length;nodeMap[name]=idx;
+  const hex=CAT_COLOR[cat]||0x8E8E8E;
+  const r=4+Math.random()*4.5;
+
+  // Main sphere
+  const mat=new THREE.MeshPhongMaterial({
+    color:hex,emissive:hex,emissiveIntensity:.3,
+    shininess:90,transparent:true,opacity:0
+  });
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(r,32,32),mat);
+
+  // Glow layers
+  const g1mat=new THREE.MeshBasicMaterial({color:hex,transparent:true,opacity:0,side:THREE.BackSide});
+  const g1=new THREE.Mesh(new THREE.SphereGeometry(r*2,16,16),g1mat);mesh.add(g1);
+  const g2mat=new THREE.MeshBasicMaterial({color:hex,transparent:true,opacity:0,side:THREE.BackSide});
+  const g2=new THREE.Mesh(new THREE.SphereGeometry(r*4,8,8),g2mat);mesh.add(g2);
+
+  // Sparkle ring
+  const srmat=new THREE.MeshBasicMaterial({color:hex,transparent:true,opacity:0});
+  const sr=new THREE.Mesh(new THREE.TorusGeometry(r*1.5,.2,4,32),srmat);sr.rotation.x=Math.random()*Math.PI;mesh.add(sr);
+
+  // Label
+  const lbl=makeLabel(name,'#F2EDE6',42);
+  lbl.position.set(0,-(r+14),0);
+  lbl.material.opacity=0;
+  mesh.add(lbl);
+
+  // Random target on sphere
+  const dist=65+Math.random()*120;
+  const phi=Math.random()*Math.PI*2,theta=Math.acos(2*Math.random()-1);
+  const target=new THREE.Vector3(
+    dist*Math.sin(theta)*Math.cos(phi),
+    dist*Math.cos(theta),
+    dist*Math.sin(theta)*Math.sin(phi)
+  );
+
+  mesh.position.set(0,0,0); // start at center
+  scene.add(mesh);
+
+  const node={name,cat,mesh,mat,g1,g1mat,g2,g2mat,sr,srmat,lbl,target,
+    vel:new THREE.Vector3(),conns:[],r,idx,
+    phase:Math.random()*Math.PI*2,born:performance.now()};
+  nodes.push(node);
+
+  // ── BIRTH ANIMATION ──
+  birthAnimate(node);
+  spawnParticles(hex);
+  wordFlash(name);
+  document.getElementById('ncnum').textContent=nodes.length;
+
+  return idx;
+}
+
+// ── BIRTH: node explodes out from center ──
+function birthAnimate(node){
+  const start=performance.now();
+  const duration=1200; // ms
+
+  (function tick(){
+    const t=Math.min((performance.now()-start)/duration,1);
+    const bounce=easeOutElastic(t);
+    const fade=easeOutCubic(t);
+
+    node.mesh.position.lerpVectors(new THREE.Vector3(0,0,0),node.target,easeOutCubic(Math.min(t*1.1,1)));
+    node.mat.opacity=Math.min(fade*1.5,1)*.92;
+    node.g1mat.opacity=Math.min(fade,1)*.12;
+    node.g2mat.opacity=Math.min(fade*.5,1)*.05;
+    node.sr.rotation.z+=.04;
+    node.srmat.opacity=Math.max(0,fade*2-1)*.2;
+    node.mesh.scale.setScalar(bounce);
+    node.lbl.material.opacity=Math.max(0,fade*2-1)*.8;
+
+    if(t<1)requestAnimationFrame(tick);
+  })();
+}
+
+function easeOutElastic(t){
+  if(t===0||t===1)return t;
+  const c4=(2*Math.PI)/2.8;
+  return Math.pow(2,-8*t)*Math.sin((t*10-0.75)*c4)+1;
+}
+function easeOutCubic(t){return 1-Math.pow(1-t,3)}
+
+// ── PARTICLE EXPLOSION ──
+const fxCanvas=document.getElementById('fx');
+const fxCtx=fxCanvas.getContext('2d');
+fxCanvas.width=innerWidth;fxCanvas.height=innerHeight;
+
+const particles=[];
+function spawnParticles(hexColor){
+  const r=(hexColor>>16)&0xff,g=(hexColor>>8)&0xff,b=hexColor&0xff;
+  const col=`rgb(${r},${g},${b})`;
+  const cx=innerWidth/2,cy=innerHeight/2;
+  for(let i=0;i<60;i++){
+    const angle=Math.random()*Math.PI*2;
+    const speed=1+Math.random()*5;
+    particles.push({
+      x:cx+(Math.random()-.5)*40,y:cy+(Math.random()-.5)*40,
+      vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,
+      life:1,decay:.012+Math.random()*.018,
+      size:1+Math.random()*3,col,
+      spark:Math.random()>.5
+    });
+  }
+}
+
+function tickParticles(){
+  fxCtx.clearRect(0,0,fxCanvas.width,fxCanvas.height);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.x+=p.vx;p.y+=p.vy;
+    p.vx*=.95;p.vy*=.95;
+    p.vy+=.06; // gravity
+    p.life-=p.decay;
+    if(p.life<=0){particles.splice(i,1);continue}
+    fxCtx.globalAlpha=p.life*(p.spark?.8:.5);
+    fxCtx.fillStyle=p.col;
+    if(p.spark){
+      fxCtx.fillRect(p.x,p.y,p.size*.5,p.size*4);
+    } else {
+      fxCtx.beginPath();fxCtx.arc(p.x,p.y,p.size,0,Math.PI*2);fxCtx.fill();
+    }
+  }
+  fxCtx.globalAlpha=1;
+}
+
+window.addEventListener('resize',()=>{fxCanvas.width=innerWidth;fxCanvas.height=innerHeight});
+
+// ── WORD FLASH ──
+const wf=document.getElementById('wordflash');
+let wfTimer;
+function wordFlash(text){
+  wf.textContent=text;
+  wf.style.opacity='.65';
+  wf.style.transition='opacity .1s';
+  clearTimeout(wfTimer);
+  wfTimer=setTimeout(()=>{
+    wf.style.transition='opacity 1.2s ease';
+    wf.style.opacity='0';
+  },600);
+}
+
+// ── EDGES ──
+function addEdge(a,b){
+  const key=[a,b].sort().join('-');
+  if(edges.find(e=>e.userData.key===key))return;
+  const geo=new THREE.BufferGeometry().setFromPoints([
+    nodes[a].mesh.position.clone(),
+    nodes[b].mesh.position.clone()
+  ]);
+  const mat=new THREE.LineBasicMaterial({color:0xC8A97E,transparent:true,opacity:.08});
+  const line=new THREE.Line(geo,mat);
+  line.userData={key,a,b,phase:Math.random()*Math.PI*2};
+  scene.add(line);edges.push(line);
+  nodes[a].conns.push(b);nodes[b].conns.push(a);
+}
+
+function updateEdges(t){
+  edges.forEach(l=>{
+    const a=nodes[l.userData.a],b=nodes[l.userData.b];
+    const p=l.geometry.attributes.position;
+    p.setXYZ(0,a.mesh.position.x,a.mesh.position.y,a.mesh.position.z);
+    p.setXYZ(1,b.mesh.position.x,b.mesh.position.y,b.mesh.position.z);
+    p.needsUpdate=true;
+    // Pulse edges
+    l.material.opacity=.05+Math.sin(t*.001+l.userData.phase)*.04;
+  });
+}
+
+// ── FORCE LAYOUT ──
+function forces(){
+  const REP=6000,DAMP=.8;
+  nodes.forEach((ni,i)=>{
+    const age=(performance.now()-ni.born)/1000;
+    if(age<.3)return; // don't apply forces during birth burst
+
+    const f=new THREE.Vector3();
+    nodes.forEach((nj,j)=>{
+      if(i===j)return;
+      const d=ni.mesh.position.clone().sub(nj.mesh.position);
+      const len=Math.max(d.length(),10);
+      d.normalize().multiplyScalar(REP/(len*len));
+      f.add(d);
+    });
+    f.add(ni.target.clone().sub(ni.mesh.position).multiplyScalar(.005));
+    const fc=ni.mesh.position.clone().normalize();
+    if(ni.mesh.position.length()<30)f.add(fc.multiplyScalar(100));
+    ni.vel.add(f.multiplyScalar(.016));
+    ni.vel.multiplyScalar(DAMP);
+    ni.mesh.position.add(ni.vel);
+  });
+}
+
+// ── HOVER ──
+const raycaster=new THREE.Raycaster();
+const mouse=new THREE.Vector2();
+let hoveredNode=null;
+const tooltip=document.getElementById('tooltip');
+
+document.addEventListener('mousemove',e=>{
+  mouse.x=(e.clientX/innerWidth)*2-1;
+  mouse.y=-(e.clientY/innerHeight)*2+1;
+  tooltip.style.left=e.clientX+'px';
+  tooltip.style.top=e.clientY+'px';
+});
+
+function checkHover(){
+  if(!nodes.length)return;
+  raycaster.setFromCamera(mouse,camera);
+  const hits=raycaster.intersectObjects(nodes.map(n=>n.mesh));
+  if(hits.length){
+    const n=nodes.find(x=>x.mesh===hits[0].object);
+    if(n&&n!==hoveredNode){
+      hoveredNode=n;
+      tooltip.style.display='block';
+      document.getElementById('ttname').textContent=n.name;
+      const tc=document.getElementById('ttcat');
+      tc.textContent=CAT_RU[n.cat]||n.cat;
+      tc.style.color=CAT_CSS[n.cat]||'#9E9E9E';
+    }
+  } else {
+    hoveredNode=null;
+    tooltip.style.display='none';
+  }
+}
+
+// ── CAMERA ──
+let camAngle=0,camTargetX=0,camTargetY=0;
+document.addEventListener('mousemove',e=>{
+  camTargetX=(e.clientX/innerWidth-.5)*30;
+  camTargetY=-(e.clientY/innerHeight-.5)*20;
+});
+
+// ── MAIN RENDER LOOP ──
+let frameN=0;
+function render(){
+  requestAnimationFrame(render);
+  frameN++;
+  const t=performance.now();
+
+  // Camera
+  camAngle+=.0003;
+  camera.position.x+=(camTargetX*.5+Math.sin(camAngle)*20-camera.position.x)*.018;
+  camera.position.y+=(camTargetY*.4-camera.position.y)*.018;
+  camera.lookAt(0,0,0);
+
+  // Center
+  const pulse=1+Math.sin(frameN*.04)*.05;
+  centerMesh.scale.setScalar(pulse);
+  pLight.intensity=3+Math.sin(frameN*.04)*1;
+  pLight.position.x=Math.sin(frameN*.007)*30;
+  pLight.position.y=Math.cos(frameN*.005)*20;
+
+  // Rings
+  ringMeshes.forEach(rm=>rm.rotateOnAxis(rm.userData.axis,rm.userData.speed));
+
+  // Nodes
+  nodes.forEach(n=>{
+    const isH=n===hoveredNode;
+    const b=1+Math.sin(frameN*.025+n.phase)*.06;
+    n.mesh.scale.setScalar(b*(isH?1.6:1));
+    n.g1mat.opacity=(.1+Math.sin(frameN*.025+n.phase)*.03)*(isH?2.5:1);
+    n.g2mat.opacity=(isH?.05:.01)+Math.sin(frameN*.025+n.phase)*.01;
+    n.sr.rotation.z+=.012;
+    // show labels when fewer nodes or on hover
+    if(n.lbl)n.lbl.material.opacity=nodes.length<20||isH?.8:Math.max(0,.8-nodes.length*.025);
+    // edges from hovered glow
+    if(isH){
+      n.conns.forEach(ci=>{
+        edges.forEach(e=>{
+          if(e.userData.a===ci||e.userData.b===ci)e.material.opacity=.35;
+        });
+      });
+    }
+  });
+
+  if(nodes.length>0&&frameN%2===0)forces();
+  updateEdges(t);
+  tickParticles();
+  checkHover();
+  renderer.render(scene,camera);
+}
+render();
+
+window.addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+// ════════════════════════════════════════════════════════
+// APP LOGIC
+// ════════════════════════════════════════════════════════
+let rec=null,isListening=false;
+let finalText='',pendingText='',parseTimer=null;
+let sessionStarted=false;
+
+// START BUTTON
+document.getElementById('startbtn').addEventListener('click',()=>{
+  const s=document.getElementById('start');
+  s.classList.add('gone');
+  setTimeout(()=>{
+    s.style.display='none';
+    document.getElementById('hud').classList.add('on');
+    initSpeech();
+    setStatus('r','Готов');
+    sessionStarted=true;
+  },800);
+});
+
+// ── SPEECH RECOGNITION ──
+function initSpeech(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){setStatus('r','Только Chrome/Edge');return}
+  rec=new SR();
+  rec.lang='ru-RU';
+  rec.continuous=true;
+  rec.interimResults=true;
+  rec.maxAlternatives=1;
+
+  rec.onstart=()=>{
+    isListening=true;
+    document.getElementById('micbtn').classList.add('on');
+    document.getElementById('miclabel').textContent='Слушаю...';
+    setStatus('l','Слушаю');
+  };
+  rec.onend=()=>{
+    isListening=false;
+    document.getElementById('micbtn').classList.remove('on');
+    document.getElementById('miclabel').textContent='Нажмите и говорите';
+    setStatus('r','Готов');
+  };
+  rec.onresult=e=>{
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const txt=e.results[i][0].transcript;
+      if(e.results[i].isFinal){
+        finalText+=txt+' ';
+        pendingText+=txt+' ';
+        scheduleParse();
+      } else {
+        interim+=txt;
+      }
+    }
+    document.getElementById('final').textContent=finalText.slice(-200);
+    document.getElementById('interim').textContent=interim;
+  };
+  rec.onerror=e=>{
+    if(e.error!=='no-speech')console.warn('Speech:',e.error);
+  };
+}
+
+document.getElementById('micbtn').addEventListener('click',()=>{
+  if(!rec)return;
+  if(isListening){rec.stop();}
+  else{
+    finalText='';
+    document.getElementById('final').textContent='';
+    try{rec.start();}catch(e){}
+  }
+});
+
+function scheduleParse(){
+  clearTimeout(parseTimer);
+  parseTimer=setTimeout(()=>{
+    if(pendingText.trim().length>10){
+      parseText(pendingText);
+      pendingText='';
+    }
+  },2000);
+}
+
+// ── OPENAI API CALL ──
+async function parseText(text){
+  setStatus('t','Анализирую...');
+
+  const SYSTEM=`Ты извлекаешь концепты из речи человека для 3D карты вселенной личности.
+Отвечай ТОЛЬКО валидным JSON без маркдауна.
+Формат: {"concepts":[{"name":"1-3 слова","category":"категория","connections":["имя концепта если связан"]}]}
+Категории (строго одна): желание, ценность, привычка, мечта, человек, интерес, место, страх, другое.
+Извлекай 3-8 ключевых НОВЫХ концептов которых ещё нет в известных.
+Имена короткие (1-3 слова), на русском, ёмкие.`;
+
+  const USER=`Речь: "${text}"
+Известные концепты: [${Object.keys(nodeMap).join(', ')||'нет'}]
+Извлеки только новые.`;
+
+  try{
+    const resp=await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${OPENAI_API_KEY}`
+      },
+      body:JSON.stringify({
+        model:MODEL,
+        max_tokens:700,
+        messages:[
+          {role:'system',content:SYSTEM},
+          {role:'user',content:USER}
+        ]
+      })
+    });
+
+    const data=await resp.json();
+    if(data.error){
+      console.error('OpenAI error:',data.error);
+      setStatus('r','Ошибка API');
+      return;
+    }
+
+    const raw=data.choices[0].message.content;
+    const clean=raw.replace(/```json?/g,'').replace(/```/g,'').trim();
+    const parsed=JSON.parse(clean);
+
+    if(parsed.concepts&&Array.isArray(parsed.concepts)){
+      // Add with stagger
+      parsed.concepts.forEach((c,i)=>{
+        setTimeout(()=>{
+          const idx=addNode(c.name,c.category||'другое');
+          if(c.connections)c.connections.forEach(cname=>{
+            if(nodeMap[cname]!==undefined)addEdge(idx,nodeMap[cname]);
+          });
+        },i*350);
+      });
+    }
+
+    setStatus('l','Слушаю');
+  }catch(err){
+    console.error(err);
+    setStatus('r','Ошибка');
+  }
+}
+
+function setStatus(state,text){
+  document.getElementById('sdot').className='sdot '+state;
+  document.getElementById('stext').textContent=text;
+}
+
+// ── RESET ──
+document.getElementById('reset').addEventListener('click',()=>{
+  nodes.forEach(n=>scene.remove(n.mesh));
+  edges.forEach(e=>scene.remove(e));
+  nodes.length=0;edges.length=0;
+  Object.keys(nodeMap).forEach(k=>delete nodeMap[k]);
+  finalText='';pendingText='';
+  document.getElementById('final').textContent='';
+  document.getElementById('interim').textContent='';
+  document.getElementById('ncnum').textContent='0';
+  if(isListening&&rec)rec.stop();
+  setStatus('r','Готов');
+});
+</script>
+</body>
+</html>
