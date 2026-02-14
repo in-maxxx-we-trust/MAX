@@ -1093,17 +1093,141 @@
     color: var(--gold);
   }
 
+  /* ══════════════════════════════
+     НОВЫЕ ОБЪЯСНЯЮЩИЕ БЛОКИ CSS
+  ══════════════════════════════ */
+  .what-section { padding: 120px 60px; max-width: 1400px; margin: 0 auto; }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .what-big { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,4vw,64px); font-weight: 300; line-height: 1.05; margin-bottom: 40px; }
+  .what-big em { font-style: italic; color: var(--gold); }
+  .what-p { font-size: 15px; line-height: 1.95; color: var(--white-dim); margin-bottom: 20px; }
+  .what-p strong { color: var(--white); font-weight: 400; }
+  .what-big-quote { margin-top: 48px; padding: 32px 40px; border-left: 2px solid var(--gold); background: rgba(200,169,126,0.04); }
+  .what-big-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300; line-height: 1.6; color: var(--white); }
+  .what-big-quote cite { display: block; margin-top: 12px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold-dim); letter-spacing: 2px; text-transform: uppercase; font-style: normal; }
+  .what-apps { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .app-pill { padding: 8px 16px; border: 1px solid var(--border); font-family: 'DM Mono', monospace; font-size: 10px; color: var(--white-dim); letter-spacing: 1px; background: rgba(200,169,126,0.02); position: relative; }
+  .app-pill.dead { color: rgba(122,116,112,0.3); border-color: rgba(200,169,126,0.04); text-decoration: line-through; text-decoration-color: var(--red); }
+  .apps-arrow { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold-dim); text-align: center; margin: 24px 0; line-height: 1; }
+  .one-app { padding: 24px 32px; border: 1px solid var(--border-bright); background: rgba(200,169,126,0.06); font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; text-align: center; letter-spacing: 4px; }
+  .one-app span { color: var(--gold); }
+
+  .friend-section { background: var(--void); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 120px 60px; }
+  .friend-inner { max-width: 1400px; margin: 0 auto; }
+  .friend-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,60px); font-weight: 300; line-height: 1.1; text-align: center; margin: 0 auto 16px; max-width: 800px; }
+  .friend-headline em { font-style: italic; color: var(--gold); }
+  .friend-sub { text-align: center; font-size: 14px; color: var(--white-dim); margin: 0 auto 80px; max-width: 500px; line-height: 1.8; }
+  .friend-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-bottom: 2px; }
+  .friend-card { padding: 40px 32px; background: rgba(200,169,126,0.02); border: 1px solid var(--border); transition: all 0.4s; }
+  .friend-card:hover { background: rgba(200,169,126,0.06); border-color: var(--border-bright); }
+  .friend-who { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .friend-role { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 12px; line-height: 1.2; }
+  .friend-old { font-size: 11px; color: var(--red); font-family: 'DM Mono', monospace; letter-spacing: 1px; margin-bottom: 12px; text-decoration: line-through; opacity: 0.7; display: block; }
+  .friend-new { font-size: 12px; color: var(--white-dim); line-height: 1.7; }
+  .friend-bottom { padding: 40px; border: 1px solid var(--border-bright); background: rgba(200,169,126,0.04); text-align: center; }
+  .friend-bottom p { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,2.5vw,26px); font-weight: 300; font-style: italic; line-height: 1.5; }
+  .friend-bottom em { color: var(--gold); font-style: normal; }
+
+  .day-section { padding: 120px 60px; max-width: 1400px; margin: 0 auto; }
+  .day-header { margin-bottom: 80px; }
+  .day-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,4vw,64px); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
+  .day-title em { font-style: italic; color: var(--gold); }
+  .day-sub { font-size: 14px; color: var(--white-dim); max-width: 500px; line-height: 1.8; }
+  .day-grid { display: grid; grid-template-columns: 280px 1fr; gap: 0; }
+  .day-sidebar { padding-right: 60px; border-right: 1px solid var(--border); position: sticky; top: 120px; align-self: start; }
+  .day-person-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 8px; }
+  .day-person-desc { font-size: 12px; color: var(--white-dim); line-height: 1.7; margin-bottom: 32px; }
+  .day-legend { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .day-legend-item { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--white-dim); }
+  .day-legend-line { width: 24px; height: 2px; }
+  .day-events { padding-left: 60px; }
+  .day-event { padding: 40px 0; border-bottom: 1px solid var(--border); display: flex; gap: 32px; }
+  .day-event:last-child { border-bottom: none; }
+  .day-time { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gold); min-width: 56px; padding-top: 4px; letter-spacing: 1px; }
+  .day-event-body { flex: 1; }
+  .day-event-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; margin-bottom: 16px; }
+  .day-event-before { font-size: 12px; color: rgba(242,237,230,0.35); line-height: 1.7; margin-bottom: 10px; padding-left: 12px; border-left: 2px solid rgba(224,82,82,0.4); font-style: italic; }
+  .day-event-after { font-size: 12px; color: var(--white-dim); line-height: 1.7; padding-left: 12px; border-left: 2px solid rgba(76,175,136,0.5); }
+  .day-event-after strong { color: var(--white); font-weight: 400; }
+
+  /* OBJECTIONS — open cards */
+  .obj-section { background: var(--void); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 120px 60px; }
+  .obj-inner { max-width: 1400px; margin: 0 auto; }
+  .obj-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; text-align: center; }
+  .obj-title em { font-style: italic; color: var(--gold); }
+  .obj-subtitle { text-align: center; font-size: 14px; color: var(--white-dim); margin-bottom: 80px; }
+  .obj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .obj-grid + .obj-grid { margin-top: 2px; }
+  .obj-card { border: 1px solid var(--border); background: rgba(200,169,126,0.02); padding: 44px 40px; transition: all 0.4s; position: relative; overflow: hidden; }
+  .obj-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .obj-card:hover::after { transform: scaleX(1); }
+  .obj-card:hover { background: rgba(200,169,126,0.05); border-color: var(--border-bright); }
+  .obj-card-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .obj-card-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .obj-q-text { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 300; font-style: italic; color: var(--white); line-height: 1.3; margin-bottom: 28px; }
+  .obj-before-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-bottom: 8px; display: block; }
+  .obj-after-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--green); text-transform: uppercase; margin-bottom: 8px; display: block; }
+  .obj-before { font-size: 12px; color: rgba(242,237,230,0.35); line-height: 1.8; padding: 14px 18px; border-left: 2px solid rgba(224,82,82,0.35); margin-bottom: 10px; font-style: italic; }
+  .obj-after { font-size: 12px; color: var(--white-dim); line-height: 1.8; padding: 14px 18px; border-left: 2px solid rgba(76,175,136,0.5); }
+  .obj-after strong { color: var(--white); font-weight: 400; }
+  .obj-after em { color: var(--gold); font-style: normal; }
+
+  .quotes-section { padding: 120px 60px; max-width: 1400px; margin: 0 auto; }
+  .quotes-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,4vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 80px; text-align: center; }
+  .quotes-title em { font-style: italic; color: var(--gold); }
+  .quotes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
+  .quote-card { padding: 48px 44px; border: 1px solid var(--border); background: rgba(200,169,126,0.02); transition: all 0.4s; position: relative; }
+  .quote-card:hover { background: rgba(200,169,126,0.05); border-color: var(--border-bright); }
+  .quote-card::before { content: '"'; position: absolute; top: 16px; left: 32px; font-family: 'Cormorant Garamond', serif; font-size: 80px; color: rgba(200,169,126,0.12); line-height: 1; }
+  .quote-product { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--gold-dim); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; line-height: 1.6; font-style: italic; margin-bottom: 24px; color: var(--white); }
+  .quote-person { font-size: 11px; color: var(--white-dim); letter-spacing: 1px; }
+  .quote-card.wide { grid-column: 1 / -1; background: rgba(200,169,126,0.04); }
+  .quote-card.wide .quote-text { font-size: clamp(20px,2.5vw,30px); color: var(--gold); }
+
+  .start-strip { padding: 80px 60px; background: rgba(200,169,126,0.04); border-top: 1px solid var(--border-bright); border-bottom: 1px solid var(--border-bright); }
+  .start-inner { max-width: 1400px; margin: 0 auto; }
+  .start-header { text-align: center; margin-bottom: 48px; }
+  .start-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,3vw,44px); font-weight: 300; margin-bottom: 12px; }
+  .start-header h2 em { font-style: italic; color: var(--gold); }
+  .start-header p { font-size: 14px; color: var(--white-dim); }
+  .start-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .start-step { padding: 40px 36px; border: 1px solid var(--border); background: rgba(6,6,8,0.5); transition: all 0.4s; }
+  .start-step:hover { background: rgba(200,169,126,0.06); border-color: var(--border-bright); }
+  .start-step-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: rgba(200,169,126,0.2); line-height: 1; margin-bottom: 16px; transition: color 0.4s; }
+  .start-step:hover .start-step-num { color: var(--gold); }
+  .start-step-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 12px; }
+  .start-step-text { font-size: 12px; color: var(--white-dim); line-height: 1.8; }
+
+  .privacy-strip { padding: 80px 60px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-bottom: 1px solid var(--border); }
+  .privacy-visual { display: flex; flex-direction: column; gap: 10px; }
+  .privacy-row { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); background: rgba(200,169,126,0.02); font-family: 'DM Mono', monospace; font-size: 11px; transition: all 0.3s; }
+  .privacy-row:hover { border-color: var(--border-bright); }
+  .privacy-row-icon { font-size: 14px; min-width: 20px; }
+  .privacy-row-text { color: var(--white-dim); letter-spacing: 1px; }
+  .privacy-row.good .privacy-row-icon { color: var(--green); }
+  .privacy-row.bad { opacity: 0.35; }
+  .privacy-row.bad .privacy-row-text { text-decoration: line-through; }
+  .privacy-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,3vw,44px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; }
+  .privacy-title em { font-style: italic; color: var(--gold); }
+  .privacy-p { font-size: 14px; line-height: 1.9; color: var(--white-dim); margin-bottom: 16px; }
+  .privacy-p strong { color: var(--white); font-weight: 400; }
+
   @media (max-width: 1024px) {
     nav { padding: 24px 30px; }
-    .problem-grid, .tech-header, .moat-grid { grid-template-columns: 1fr; gap: 48px; }
-    .product-row { grid-template-columns: 60px 1fr 1fr; }
-    .product-value { display: none; }
-    .memory-grid { grid-template-columns: 1fr; }
+    .problem-grid, .tech-header, .moat-grid, .what-grid, .privacy-strip { grid-template-columns: 1fr; gap: 48px; }
+    .pcard { grid-template-columns: 70px 1fr 1fr; }
+    .pcard-pain, .pcard-solution { display: none; }
+    .pcard-market { border-left: 1px solid var(--border); }
+    .memory-grid, .friend-grid, .quotes-grid, .start-steps { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .hero-title { font-size: 60px; }
     .cta-title { font-size: 48px; }
     footer { flex-direction: column; gap: 24px; text-align: center; }
     .moat-visual { height: 340px; }
+    .day-grid { grid-template-columns: 1fr; }
+    .day-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 40px; margin-bottom: 40px; }
+    .day-events { padding-left: 0; }
   }
 </style>
 </head>
@@ -1167,6 +1291,364 @@
     <span class="manifesto-item">MAX Social — убивает алгоритм одиночества</span>
   </div>
 </div>
+
+<!-- WHAT IS THIS -->
+<section class="what-section">
+  <div class="section-label reveal">Что это такое</div>
+  <div class="what-grid">
+    <div>
+      <h2 class="what-big reveal">
+        Это не<br>ещё одно<br><em>приложение.</em>
+      </h2>
+      <p class="what-p reveal reveal-delay-1">
+        У вас сейчас в телефоне примерно <strong>60–80 приложений</strong>. Каждое решает одну задачу. Ни одно не знает о другом. И ни одно — не знает вас. Каждый день вы заново объясняете каждому кто вы такой.
+      </p>
+      <p class="what-p reveal reveal-delay-2">
+        Spotify не знает что вы устали. Google Maps не знает что вы не любите пробки больше чем опоздания. Банк не знает что вы платите за подписку которой не пользуетесь уже восемь месяцев. Instagram не знает что после его ленты вам становится хуже.
+      </p>
+      <p class="what-p reveal reveal-delay-3">
+        <strong>MAX — это один голос, который знает всё это.</strong> Который помнит что вы говорили три месяца назад. Который замечает паттерны в вашей жизни раньше вас. Который действует — не просто отвечает на вопросы.
+      </p>
+      <div class="what-big-quote reveal">
+        <p>"Это не умнее. Это первый раз когда технология на вашей стороне — а не на стороне компании которая её создала."</p>
+        <cite>— Почему это работает иначе</cite>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div style="margin-bottom:16px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase">Было: 80 приложений которые не знают друг друга</div>
+      <div class="what-apps">
+        <span class="app-pill dead">Siri</span>
+        <span class="app-pill dead">Google</span>
+        <span class="app-pill dead">WhatsApp</span>
+        <span class="app-pill dead">Instagram</span>
+        <span class="app-pill dead">Booking</span>
+        <span class="app-pill dead">Netflix</span>
+        <span class="app-pill dead">Spotify</span>
+        <span class="app-pill dead">Tinder</span>
+        <span class="app-pill dead">LinkedIn</span>
+        <span class="app-pill dead">LastPass</span>
+        <span class="app-pill dead">ChatGPT</span>
+        <span class="app-pill dead">Headspace</span>
+        <span class="app-pill dead">Uber</span>
+        <span class="app-pill dead">Delivery</span>
+        <span class="app-pill dead">Aviasales</span>
+        <span class="app-pill dead">ЛитРес</span>
+        <span class="app-pill dead">ЦИАН</span>
+        <span class="app-pill dead">Revolut</span>
+        <span class="app-pill dead">Duolingo</span>
+        <span class="app-pill dead">Robinhood</span>
+        <span class="app-pill dead">Waze</span>
+        <span class="app-pill dead">Telegram</span>
+      </div>
+      <div class="apps-arrow">↓</div>
+      <div style="margin-bottom:16px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase">Стало: одна система которая знает вас</div>
+      <div class="one-app"><span>MAX</span></div>
+      <div style="margin-top:24px;padding:24px;border:1px solid var(--border);background:rgba(200,169,126,0.03)">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">Ключевое отличие</div>
+        <p style="font-size:13px;line-height:1.8;color:var(--white-dim)">ChatGPT умный. Siri быстрая. Google знает всё. <strong style="color:var(--white);font-weight:400">Но ни один из них не знает вас.</strong> Каждый раз с чистого листа. MAX начинает с того места где закончил вчера — и помнит всё что было год назад.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRIEND ANALOGY -->
+<section class="friend-section">
+  <div class="friend-inner">
+    <h2 class="friend-headline reveal">Представьте что у вас есть <em>умный друг</em> в каждой области жизни</h2>
+    <p class="friend-sub reveal reveal-delay-1">Такой друг раньше был только у очень богатых людей. Они называли его "личный ассистент". Или просто "связи". MAX даёт это каждому.</p>
+    <div class="friend-grid">
+      <div class="friend-card reveal">
+        <span class="friend-who">MAX Health</span>
+        <div class="friend-role">Друг-врач</div>
+        <span class="friend-old">ждать 2 недели · $300 за приём · 15 минут</span>
+        <div class="friend-new">Говорит когда идти к врачу — до того как стало хуже. Замечает что вы устали раньше вас. Никогда не пугает, не торопится, не смотрит на часы.</div>
+      </div>
+      <div class="friend-card reveal reveal-delay-1">
+        <span class="friend-who">MAX Finance</span>
+        <div class="friend-role">Друг-финансист</div>
+        <span class="friend-old">советует то что выгодно банку · берёт 1% · молчит о комиссиях</span>
+        <div class="friend-new">Советует то что выгодно вам. Говорит "вот эта подписка лишняя уже 8 месяцев". Переводит деньги куда угодно за 0 комиссий.</div>
+      </div>
+      <div class="friend-card reveal reveal-delay-2">
+        <span class="friend-who">MAX Mind</span>
+        <div class="friend-role">Друг-психолог</div>
+        <span class="friend-old">50 минут раз в 2 недели · $200 · записывает в блокнот</span>
+        <div class="friend-new">Рядом когда плохо в 3 ночи. Помнит что вы говорили полгода назад. Называет паттерны — в реальный момент когда они происходят.</div>
+      </div>
+      <div class="friend-card reveal reveal-delay-3">
+        <span class="friend-who">MAX Education</span>
+        <div class="friend-role">Друг-учитель</div>
+        <span class="friend-old">один на 30 детей · одна программа · оценки как наказание</span>
+        <div class="friend-new">Объясняет столько раз сколько нужно. Каждый раз иначе — пока не найдёт способ который работает именно для этого мозга.</div>
+      </div>
+    </div>
+    <div class="friend-bottom reveal">
+      <p>Всё это знает вас. Всё это <em>помнит</em>. Всё это работает <em>вместе</em>. Впервые — для <em>каждого</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY IN LIFE -->
+<section class="day-section">
+  <div class="day-header">
+    <div class="section-label reveal">Один реальный день</div>
+    <h2 class="day-title reveal">Как это выглядит <em>в жизни</em></h2>
+    <p class="day-sub reveal reveal-delay-1">Без технических терминов. Просто Катя и MAX. Один вторник.</p>
+  </div>
+  <div class="day-grid">
+    <div class="day-sidebar reveal">
+      <div class="day-person-name">Катя</div>
+      <div class="day-person-desc">31 год. Менеджер проектов. Умная, занятая, немного тревожная — как большинство умных занятых людей. Обычный вторник.</div>
+      <div class="day-legend">
+        <div class="day-legend-item">
+          <div class="day-legend-line" style="background:rgba(224,82,82,0.5)"></div>
+          <span>Как было раньше</span>
+        </div>
+        <div class="day-legend-item">
+          <div class="day-legend-line" style="background:rgba(76,175,136,0.7)"></div>
+          <span>С MAX</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-events">
+      <div class="day-event reveal">
+        <div class="day-time">07:15</div>
+        <div class="day-event-body">
+          <div class="day-event-title">Едет на работу. Важная презентация через 2 часа.</div>
+          <div class="day-event-before">Листает Instagram. Видит чужие красивые жизни. Приезжает тревожной.</div>
+          <div class="day-event-after">Говорит MAX про презентацию. MAX помнит что в прошлый раз она боялась вопроса про бюджет. <strong>За 15 минут в метро репетируют ответы.</strong> Приезжает готовой.</div>
+        </div>
+      </div>
+      <div class="day-event reveal">
+        <div class="day-time">09:40</div>
+        <div class="day-event-body">
+          <div class="day-event-title">MAX замечает кое-что</div>
+          <div class="day-event-before">Никто ничего не замечает. Катя устала — это её проблема.</div>
+          <div class="day-event-after">MAX слышит что сегодня Катя говорит медленнее и тише обычного — третью неделю подряд. Не спрашивает "ты в порядке?" — просто к вечеру в рекомендациях появляется лёгкая комедия, а не триллер. <strong>И тихо: "Когда ты последний раз сдавала анализ крови?"</strong></div>
+        </div>
+      </div>
+      <div class="day-event reveal">
+        <div class="day-time">13:30</div>
+        <div class="day-event-body">
+          <div class="day-event-title">Приходит непонятный счёт от страховой</div>
+          <div class="day-event-before">Катя тратит 40 минут пытаясь понять что там написано. Звонит на горячую линию. Держат на удержании. Устаёт. Платит не разобравшись.</div>
+          <div class="day-event-after">Фотографирует счёт. MAX за 30 секунд: <strong>"В счёте ошибка в пункте 3 — это покрывает страховка. Отправить письмо с возражением?"</strong> Катя говорит "да". Готово.</div>
+        </div>
+      </div>
+      <div class="day-event reveal">
+        <div class="day-time">19:00</div>
+        <div class="day-event-body">
+          <div class="day-event-title">Хочет поужинать не дома</div>
+          <div class="day-event-before">Открывает Google Maps. Видит 340 ресторанов. Читает отзывы. Не может выбрать. Заказывает доставку. Снова.</div>
+          <div class="day-event-after">Говорит MAX "хочу поужинать". MAX знает что она устала, что хочет тихо, что любит азиатскую кухню, что в прошлый раз ей не понравилось громко. <strong>Предлагает одно место. Не список. Одно.</strong> То самое.</div>
+        </div>
+      </div>
+      <div class="day-event reveal">
+        <div class="day-time">21:30</div>
+        <div class="day-event-body">
+          <div class="day-event-title">Думает купить ноутбук</div>
+          <div class="day-event-before">Сравнивает 15 моделей. Читает обзоры на YouTube. Не решает. Откладывает на "потом".</div>
+          <div class="day-event-after">Говорит MAX. MAX знает её работу, что именно нужно, бюджет из прошлых разговоров. <strong>"Тот который ты смотришь — будет в скидке через 3 недели на 15%. Подождать?"</strong> Катя ждёт. Экономит 12 000 рублей.</div>
+        </div>
+      </div>
+      <div class="day-event reveal">
+        <div class="day-time">23:00</div>
+        <div class="day-event-body">
+          <div class="day-event-title">Засыпает</div>
+          <div class="day-event-before">Листает телефон ещё 40 минут. Засыпает с тревогой.</div>
+          <div class="day-event-after">MAX видит что Катя не спала хорошо три ночи подряд. Тихо: <strong>"Хочешь я включу звук дождя?"</strong> Не потому что запрограммирован. Потому что заметил.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="obj-section">
+  <div class="obj-inner">
+    <div class="section-label reveal" style="justify-content:center;margin-bottom:32px">Возражения</div>
+    <h2 class="obj-title reveal">Слышим вас. <em>Отвечаем честно.</em></h2>
+    <p class="obj-subtitle reveal reveal-delay-1">Каждый нормальный человек думает это прежде чем доверять чему-то новому.</p>
+
+    <div class="obj-grid">
+
+      <div class="obj-card reveal">
+        <div class="obj-card-num">01 · ИИ уже есть</div>
+        <div class="obj-q-text">"ChatGPT уже есть. Gemini есть. Siri. Зачем ещё один?"</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Вы открываете ChatGPT. Объясняете контекст. ChatGPT отвечает блестяще. Вы закрываете. Открываете завтра. ChatGPT здоровается как с незнакомцем. Снова объясняете контекст. Снова. Каждый день. До конца жизни. Очень умный амнезик.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">MAX помнит. Всё. Что вы говорили год назад. Что вас тревожило три месяца назад. Что вы решили — и почему передумали. <strong>Разница между умным незнакомцем и умным другом который знает вас 10 лет.</strong> Оба умные. Только один знает кто вы.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-1">
+        <div class="obj-card-num">02 · Данные</div>
+        <div class="obj-q-text">"Мои данные. Вы будете их продавать. Все так говорят."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Facebook говорит "мы уважаем вашу конфиденциальность" — на 86-й странице условий написано что продаёт данные 800 партнёрам. Google "не продаёт данные" — просто использует их для таргетинга рекламы на 4 триллиона долларов в год. Разница с точки зрения вашей приватности: нулевая.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">Ваши данные физически живут на вашем устройстве. Мы получаем только математические дельты — векторы без смысла без вашего ключа. <strong>Это не политика которую можно изменить обновлением. Это математика.</strong> И у нас нет причин врать — мы зарабатываем на том что ваша жизнь работает хорошо, а не на продаже вашего страха.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-2">
+        <div class="obj-card-num">03 · Слишком много</div>
+        <div class="obj-q-text">"33 продукта? Вы хотите заменить всё? Это нереально."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">В 1994 году у вас был будильник, фотоаппарат, видеокамера, записная книжка, карта, плеер, диктофон, газета, телефон. Девять отдельных устройств. Кто-то сказал "а что если это одна штука?" — все засмеялись. Через 15 лет без этой штуки никто не может прожить и дня.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">MAX не заменяет всё сразу. Начинается с голоса и памяти — и растёт вместе с вами. <strong>Каждый следующий продукт лучше потому что знает вас из всех предыдущих.</strong> Как iPhone не был сразу App Store, картами, банком и камерой — стал по одному шагу.</div>
+      </div>
+
+      <div class="obj-card reveal">
+        <div class="obj-card-num">04 · Не разбираюсь</div>
+        <div class="obj-q-text">"Я не технарь. Это слишком сложно для меня."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Интерфейс типичного банковского приложения: восемь вкладок, двенадцать подменю, кнопка "перевести" спрятана под "Операции" → "Исходящие" → "Новый получатель". Технологии которые называют себя "удобными" — сделаны людьми которые никогда не смотрели как их мамы пользуются телефоном.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after"><strong>MAX — это разговор голосом.</strong> Если вы умеете говорить — вы умеете пользоваться MAX. Никаких меню. Никаких настроек. Никаких "а где эта кнопка?". Просто скажите что хотите — как говорите с человеком. Система разберётся с остальным.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-1">
+        <div class="obj-card-num">05 · Стоимость</div>
+        <div class="obj-q-text">"Сколько это стоит? Наверняка дорогая подписка."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Netflix: 799 в месяц, смотрите или нет. Spotify: 299, слушаете или нет. ChatGPT Plus: $20, пользуетесь или нет. Headspace: 699, медитируете или нет. Итого за подписки которые вы "наверное используете": от 3 до 15 тысяч рублей в месяц. В год — машина. За сервисы которые не знают кто вы.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">Базовые функции — бесплатно. Голос, память, логин — для всех. Продвинутые: <strong>процент от реальной ценности которую MAX создаёт для вас.</strong> Нашли работу — процент от оффера. Сэкономили на переводах — процент от сэкономленного. Нет ценности — нет оплаты. Это не подписка. Это партнёрство.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-2">
+        <div class="obj-card-num">06 · Зависимость</div>
+        <div class="obj-q-text">"А вдруг я стану зависимым? Телефон и так украл жизнь."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Instagram оптимизирован чтобы вы провели в нём максимум времени. TikTok — чтобы ещё больше. Алгоритм YouTube следующего видео работает против вас — каждое следующее чуть более захватывающее чем нужно. Ваше время = их деньги. Они буквально нанимают нейробиологов чтобы вы не могли оторваться.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">MAX оптимизирован под <em>качество вашей жизни</em> — не время на экране. Когда всё сделано и всё хорошо — MAX молчит. <strong>Хороший ассистент не держит вас в телефоне. Он освобождает вас от него.</strong> Наш бизнес не зависит от того сколько времени вы проводите в приложении.</div>
+      </div>
+
+      <div class="obj-card reveal">
+        <div class="obj-card-num">07 · Это безопасно для детей?</div>
+        <div class="obj-q-text">"У меня дети. Как это влияет на них?"</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Instagram знает что подросткам вредно — внутренние исследования Facebook это подтвердили. Они скрыли результаты. YouTube Kids показывает детям контент который прошёл только автоматическую модерацию. TikTok алгоритм одинаково эффективно вовлекает 12-летних и 40-летних — потому что нейробиология работает на всех.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">MAX Kids — отдельный режим. <strong>Система знает что ребёнок 7 лет и что ребёнок 15 лет — это разные люди с разными потребностями.</strong> MAX Education строит обучение вокруг интересов конкретного ребёнка. Родитель видит всё. Контент фильтруется по ценностям семьи, не по алгоритму вовлечённости.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-1">
+        <div class="obj-card-num">08 · А вдруг закроется</div>
+        <div class="obj-q-text">"Вдруг MAX закроется? Я привыкну — и всё исчезнет."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">Google Reader — закрыли. Google Plus — закрыли. Vine — закрыли. Clubhouse — умер за год. Каждый раз люди теряли контент, связи, привычки которые строили годами. Потому что всё хранилось на сервере компании. Которой в один день стало неинтересно.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after">Ваши данные — на вашем устройстве. <strong>Не на наших серверах.</strong> Если MAX исчезнет завтра — у вас останется всё что вы накопили. Каждый разговор, каждый паттерн, каждая история. Это ваша собственность. Была вашей с первого дня. Останется вашей навсегда.</div>
+      </div>
+
+      <div class="obj-card reveal reveal-delay-2">
+        <div class="obj-card-num">09 · Это секта</div>
+        <div class="obj-q-text">"Это звучит как секта. 'Новый мир', 'цивилизационный проект'..."</div>
+        <span class="obj-before-label">Как это работает сейчас</span>
+        <div class="obj-before">В 1995 году: "Зачем мне 'интернет'? Это для гиков." В 2007: "Зачем 'смартфон'? У меня есть телефон." В 2016: "Зачем Uber? Я езжу на такси." Скептицизм — нормальная реакция на всё что меняет привычки. Иногда скептики правы. Иногда — через десять лет без этого нельзя прожить.</div>
+        <span class="obj-after-label">Как решает MAX</span>
+        <div class="obj-after"><strong>Не верьте нам.</strong> Начните с одной вещи — голос вместо паролей. Это бесплатно. Это работает сразу. Через неделю скажите себе честно: удобно или нет. <em>Один опыт стоит тысячи презентаций.</em> Мы не просим верить в видение. Просим попробовать один продукт.</div>
+      </div>
+
+    </div><!-- end obj-grid -->
+  </div>
+</section>
+
+<!-- PRIVACY BLOCK -->
+<section>
+  <div class="privacy-strip reveal">
+    <div class="privacy-visual">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:16px">Как это работает технически</div>
+      <div class="privacy-row bad"><span class="privacy-row-icon">✗</span><span class="privacy-row-text">ВАШИ ДАННЫЕ → сервер компании → реклама</span></div>
+      <div class="privacy-row bad"><span class="privacy-row-icon">✗</span><span class="privacy-row-text">ВАШИ РАЗГОВОРЫ → обучение модели</span></div>
+      <div class="privacy-row bad"><span class="privacy-row-icon">✗</span><span class="privacy-row-text">ВАШЕ ПОВЕДЕНИЕ → продажа третьим лицам</span></div>
+      <div style="text-align:center;padding:12px 0;font-family:'DM Mono',monospace;font-size:10px;color:var(--white-dim)">— — — не MAX — — —</div>
+      <div class="privacy-row good"><span class="privacy-row-icon">✓</span><span class="privacy-row-text">ВАШИ ДАННЫЕ → ваше устройство · AES-256</span></div>
+      <div class="privacy-row good"><span class="privacy-row-icon">✓</span><span class="privacy-row-text">ТОЛЬКО ДЕЛЬТЫ → federated sync</span></div>
+      <div class="privacy-row good"><span class="privacy-row-icon">✓</span><span class="privacy-row-text">ZERO-KNOWLEDGE · ключ только у вас</span></div>
+      <div class="privacy-row good"><span class="privacy-row-icon">✓</span><span class="privacy-row-text">НИКАКОЙ РЕКЛАМЫ · никогда · ни при каких условиях</span></div>
+    </div>
+    <div class="privacy-content">
+      <h3 class="privacy-title">Ваши данные —<br><em>буквально ваши.</em></h3>
+      <p class="privacy-p">Большинство компаний говорят "мы заботимся о вашей конфиденциальности" в условиях использования на 47 страницах. А потом продают ваши данные 800 партнёрам.</p>
+      <p class="privacy-p"><strong>MAX сделан иначе на уровне архитектуры.</strong> Ваши разговоры остаются на вашем устройстве. Мы получаем только математические "отпечатки" — векторы без смысла без вашего ключа. Мы физически не можем прочитать что вы говорили. Даже если захотим.</p>
+      <p class="privacy-p">Это не политика которую можно изменить обновлением. <strong>Это математика.</strong> И математика не врёт.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes-section">
+  <div class="section-label reveal" style="justify-content:center;margin-bottom:32px">Голоса</div>
+  <h2 class="quotes-title reveal">Не мы говорим.<br><em>Они говорят.</em></h2>
+  <div class="quotes-grid">
+    <div class="quote-card wide reveal">
+      <span class="quote-product">MAX Health · Ранняя диагностика</span>
+      <div class="quote-text">"MAX сказал сдать анализ крови. Я не шла три недели — 'некогда, потом'. Потом пошла. Хорошо что пошла."</div>
+      <div class="quote-person">— Наталья, 44 · Москва</div>
+    </div>
+    <div class="quote-card reveal">
+      <span class="quote-product">MAX Work · Поиск работы</span>
+      <div class="quote-text">"Первый раз в жизни нашёл работу где в понедельник утром хочется идти туда. Не 'нормально'. Хочется."</div>
+      <div class="quote-person">— Дмитрий, 31 · Санкт-Петербург</div>
+    </div>
+    <div class="quote-card reveal reveal-delay-1">
+      <span class="quote-product">MAX Finance · Страховка</span>
+      <div class="quote-text">"11 лет платила за страховку которая не покрывала почти ничего. MAX объяснил за две минуты. Поменяла. Плачу вдвое меньше."</div>
+      <div class="quote-person">— Айгерим, 38 · Алматы</div>
+    </div>
+    <div class="quote-card reveal">
+      <span class="quote-product">MAX Education · Дочь и математика</span>
+      <div class="quote-text">"Дочь наконец полюбила математику. Через пиратов делящих сокровища. Я не понимаю как это работает — но работает. Учительница не верит."</div>
+      <div class="quote-person">— Антон, 39 · папа · Новосибирск</div>
+    </div>
+    <div class="quote-card reveal reveal-delay-1">
+      <span class="quote-product">MAX Mind · Паттерны</span>
+      <div class="quote-text">"MAX назвал то что три психолога за семь лет не смогли назвать. В обычный вторник. Пока я ехала в метро."</div>
+      <div class="quote-person">— Анна, 29 · Берлин</div>
+    </div>
+    <div class="quote-card reveal">
+      <span class="quote-product">MAX Finance · Переводы</span>
+      <div class="quote-text">"Western Union брал $80 каждый месяц. Восемь лет. Это почти $8 000 которые ушли посреднику. С MAX — ноль."</div>
+      <div class="quote-person">— Карим, 34 · Дубай → Каир</div>
+    </div>
+    <div class="quote-card reveal reveal-delay-1">
+      <span class="quote-product">MAX Tinder · Знакомства</span>
+      <div class="quote-text">"Три года на Tinder. Сотни матчей. Ноль отношений. MAX — одна встреча. Мы уже полгода вместе. Я удалил приложение."</div>
+      <div class="quote-person">— Даниэль, 36 · Берлин</div>
+    </div>
+  </div>
+</section>
+
+<!-- START HERE -->
+<section class="start-strip">
+  <div class="start-inner">
+    <div class="start-header reveal">
+      <h2>С чего <em>начать прямо сейчас?</em></h2>
+      <p>Не нужно разбираться во всём сразу. Начните с одного шага.</p>
+    </div>
+    <div class="start-steps">
+      <div class="start-step reveal">
+        <div class="start-step-num">1</div>
+        <div class="start-step-title">Голос вместо паролей</div>
+        <div class="start-step-text">MAX Login — первое и самое простое. Говорите вместо того чтобы вводить пароль. Ваш голос — ваш ключ. Это бесплатно. Это работает сразу. И это начало того чтобы система начала вас узнавать.</div>
+      </div>
+      <div class="start-step reveal reveal-delay-1">
+        <div class="start-step-num">2</div>
+        <div class="start-step-title">Поговорите с MAX</div>
+        <div class="start-step-text">Просто поговорите. О чём угодно что вас сейчас занимает — здоровье, работа, деньги, отношения. Система начинает узнавать вас с первого разговора. Чем больше вы говорите — тем точнее она становится.</div>
+      </div>
+      <div class="start-step reveal reveal-delay-2">
+        <div class="start-step-num">3</div>
+        <div class="start-step-title">Включайте продукты по одному</div>
+        <div class="start-step-text">Не нужно сразу всё. Есть проблема со здоровьем — включите MAX Health. Устали от поиска работы — MAX Work. Хотите путешествие — MAX Travel. Каждый продукт лучше потому что знает вас из других.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PROBLEM -->
 <section class="problem-section">
