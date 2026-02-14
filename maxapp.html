@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAX — Операционная система вашей жизни</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060608;
+    --void: #0a0a0f;
+    --gold: #C8A97E;
+    --gold-dim: #8a7055;
+    --white: #F2EDE6;
+    --white-dim: #9A9490;
+    --blue: #4FC3F7;
+    --blue-dim: #1a4a5e;
+    --green: #4CAF88;
+    --red: #E05252;
+    --border: rgba(200,169,126,0.12);
+    --border-bright: rgba(200,169,126,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(200,169,126,0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+
+  /* CANVAS */
+  #neural-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(6,6,8,0.9);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(20px);
+    padding: 20px 60px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--gold);
+    padding: 10px 28px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+    font-family: 'Manrope', sans-serif;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 10vw, 140px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--white-dim);
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease 1s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 16px 48px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    font-family: 'Manrope', sans-serif;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s;
+  }
+  .btn-secondary:hover { color: var(--gold); }
+  .btn-secondary::after {
+    content: '→';
+    transition: transform 0.3s;
+  }
+  .btn-secondary:hover::after { transform: translateX(4px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.5s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--white-dim);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* MANIFESTO STRIP */
+  .manifesto-strip {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    background: rgba(200,169,126,0.03);
+  }
+  .manifesto-track {
+    display: flex;
+    gap: 80px;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+  }
+  .manifesto-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .manifesto-item::after { content: '◆'; }
+
+  /* PROBLEM SECTION */
+  .problem-section {
+    padding: 140px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .problem-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+  .problem-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .problem-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--white-dim);
+    margin-bottom: 20px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .stat-card {
+    background: rgba(200,169,126,0.04);
+    border: 1px solid var(--border);
+    padding: 32px;
+    transition: all 0.4s;
+  }
+  .stat-card:hover {
+    border-color: var(--border-bright);
+    background: rgba(200,169,126,0.08);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--white-dim);
+    line-height: 1.5;
+  }
+
+  /* HOW IT WORKS — TECHNICAL */
+  .tech-section {
+    padding: 140px 60px;
+    background: var(--void);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tech-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .tech-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+    align-items: end;
+  }
+
+  .tech-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  .tech-title em { font-style: italic; color: var(--gold); }
+
+  .tech-intro {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--white-dim);
+    padding-top: 20px;
+  }
+
+  /* ARCHITECTURE DIAGRAM */
+  .arch-diagram {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border);
+    padding: 60px;
+    margin-bottom: 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .arch-diagram::before {
+    content: 'MAX ARCHITECTURE v1.0';
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 2px;
+  }
+
+  .arch-layer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .arch-layer:hover {
+    border-color: var(--border);
+    background: rgba(200,169,126,0.04);
+  }
+  .arch-layer-num {
+    color: var(--gold-dim);
+    min-width: 24px;
+    font-size: 10px;
+  }
+  .arch-layer-name {
+    color: var(--blue);
+    min-width: 280px;
+  }
+  .arch-layer-desc {
+    color: var(--white-dim);
+    font-size: 11px;
+  }
+  .arch-connector {
+    margin-left: 12px;
+    color: var(--border-bright);
+    font-size: 10px;
+    padding: 8px 0;
+  }
+
+  /* MEMORY EXPLANATION */
+  .memory-section {
+    margin-bottom: 80px;
+  }
+
+  .memory-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .memory-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .memory-card {
+    background: rgba(200,169,126,0.03);
+    border: 1px solid var(--border);
+    padding: 40px 32px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .memory-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.4s;
+  }
+  .memory-card:hover::before { height: 100%; }
+  .memory-card:hover {
+    background: rgba(200,169,126,0.06);
+    border-color: var(--border-bright);
+  }
+
+  .memory-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .memory-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .memory-card-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--white-dim);
+  }
+
+  .code-block {
+    background: rgba(0,0,0,0.8);
+    border: 1px solid var(--border);
+    padding: 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .code-block::before {
+    content: 'MAX MEMORY ENGINE';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+  }
+  .code-comment { color: var(--white-dim); }
+  .code-key { color: var(--blue); }
+  .code-value { color: var(--green); }
+  .code-string { color: var(--gold); }
+  .code-num { color: #FF8A65; }
+
+  /* PRODUCTS */
+  .products-section {
+    padding: 140px 0;
+    max-width: 100%;
+  }
+  .products-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0 60px;
+  }
+  .products-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 80px);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .products-title em { font-style: italic; color: var(--gold); }
+  .products-sub {
+    font-size: 15px;
+    color: var(--white-dim);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* PRODUCT CARD — new expanded layout */
+  .products-list { display: flex; flex-direction: column; gap: 0; }
+
+  .pcard {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 160px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(200,169,126,0.015);
+    transition: all 0.4s;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .pcard::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+  }
+  .pcard:hover::before { transform: scaleY(1); }
+  .pcard:hover { background: rgba(200,169,126,0.05); }
+  .pcard:hover .pcard-num { color: var(--gold); }
+
+  .pcard-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: rgba(200,169,126,0.2);
+    line-height: 1;
+    transition: color 0.4s;
+    padding: 40px 0 40px 40px;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 44px;
+  }
+
+  .pcard-identity {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid var(--border);
+  }
+  .pcard-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+  .pcard-kills {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  .pcard-pain {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .pcard-pain-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .pcard-pain-text {
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--white-dim);
+    font-style: italic;
+  }
+
+  .pcard-solution {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .pcard-sol-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .pcard-sol-text {
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--white-dim);
+  }
+
+  .pcard-market {
+    padding: 40px 32px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: right;
+  }
+  .pcard-mnum {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pcard-mlabel {
+    font-size: 9px;
+    color: var(--white-dim);
+    letter-spacing: 1px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* TOTAL BAR */
+  .total-bar {
+    background: var(--gold);
+    color: var(--black);
+    padding: 48px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .total-bar-left { }
+  .total-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .total-sublabel {
+    font-size: 12px;
+    opacity: 0.6;
+    max-width: 400px;
+    line-height: 1.5;
+  }
+  .total-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .total-pct {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.7;
+    display: block;
+    text-align: right;
+  }
+
+  @media (max-width: 1100px) {
+    .pcard { grid-template-columns: 70px 1fr 1fr; }
+    .pcard-pain, .pcard-solution { display: none; }
+    .pcard-market { border-left: 1px solid var(--border); }
+  }
+
+  /* VISION */
+  .vision-section {
+    padding: 180px 60px;
+    background: var(--void);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .vision-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 400px;
+    font-weight: 300;
+    color: rgba(200,169,126,0.02);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -20px;
+  }
+
+  .vision-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .vision-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.3;
+    font-style: italic;
+    margin-bottom: 60px;
+  }
+  .vision-quote em { color: var(--gold); font-style: normal; }
+
+  .vision-timeline {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 80px;
+  }
+  .timeline-item {
+    flex: 1;
+    max-width: 240px;
+    padding: 32px 24px;
+    border: 1px solid var(--border);
+    position: relative;
+    text-align: left;
+    transition: all 0.4s;
+  }
+  .timeline-item:not(:last-child) { border-right: none; }
+  .timeline-item:hover {
+    background: rgba(200,169,126,0.05);
+    border-color: var(--border-bright);
+    z-index: 1;
+  }
+  .timeline-era {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .timeline-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .timeline-desc {
+    font-size: 12px;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+  .timeline-item.active {
+    border-color: var(--border-bright);
+    background: rgba(200,169,126,0.05);
+  }
+  .timeline-item.active .timeline-name { color: var(--gold); }
+
+  /* MOAT SECTION */
+  .moat-section {
+    padding: 140px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .moat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .moat-visual {
+    position: relative;
+    height: 500px;
+  }
+
+  .moat-rings {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring-1 { width: 100px; height: 100px; border-color: var(--gold); animation-duration: 8s; }
+  .ring-2 { width: 200px; height: 200px; border-color: rgba(200,169,126,0.5); animation-duration: 12s; }
+  .ring-3 { width: 320px; height: 320px; border-color: rgba(200,169,126,0.25); animation-duration: 16s; }
+  .ring-4 { width: 440px; height: 440px; border-color: rgba(200,169,126,0.1); animation-duration: 20s; }
+
+  .ring-center {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 4px;
+    z-index: 10;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ring-label {
+    position: absolute;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--white-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .moat-content .section-label { margin-bottom: 32px; }
+  .moat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .moat-title em { font-style: italic; color: var(--gold); }
+  .moat-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--white-dim);
+    margin-bottom: 20px;
+  }
+
+  .moat-laws {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .law-item {
+    display: flex;
+    align-items: start;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    background: rgba(200,169,126,0.02);
+    transition: all 0.3s;
+  }
+  .law-item:hover {
+    border-color: var(--border-bright);
+    background: rgba(200,169,126,0.05);
+  }
+  .law-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-dim);
+    letter-spacing: 2px;
+    min-width: 160px;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .law-desc {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 180px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(200,169,126,0.06) 0%, transparent 70%);
+  }
+
+  .cta-inner { position: relative; }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 100px);
+    font-weight: 300;
+    line-height: 0.95;
+    margin-bottom: 40px;
+  }
+  .cta-title em { font-style: italic; color: var(--gold); display: block; }
+
+  .cta-sub {
+    font-size: 16px;
+    color: var(--white-dim);
+    max-width: 500px;
+    margin: 0 auto 60px;
+    line-height: 1.8;
+  }
+
+  .cta-form {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .cta-input {
+    flex: 1;
+    background: rgba(200,169,126,0.05);
+    border: 1px solid var(--border-bright);
+    border-right: none;
+    padding: 18px 24px;
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+  .cta-input::placeholder { color: var(--white-dim); }
+  .cta-input:focus { border-color: var(--gold-dim); background: rgba(200,169,126,0.08); }
+
+  .cta-btn {
+    background: var(--gold);
+    border: none;
+    padding: 18px 40px;
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .cta-btn:hover { background: var(--white); }
+
+  .cta-disclaimer {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--white-dim);
+    letter-spacing: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    letter-spacing: 6px;
+    color: var(--white-dim);
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: var(--white-dim);
+    letter-spacing: 1px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 11px;
+    color: var(--white-dim);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes ticker {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes ringPulse {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* HIGHLIGHT */
+  mark {
+    background: none;
+    color: var(--gold);
+  }
+
+  @media (max-width: 1024px) {
+    nav { padding: 24px 30px; }
+    .problem-grid, .tech-header, .moat-grid { grid-template-columns: 1fr; gap: 48px; }
+    .product-row { grid-template-columns: 60px 1fr 1fr; }
+    .product-value { display: none; }
+    .memory-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .hero-title { font-size: 60px; }
+    .cta-title { font-size: 48px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .moat-visual { height: 340px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<canvas id="neural-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">M<span>A</span>X</div>
+  <ul class="nav-links">
+    <li><a href="#how">Технология</a></li>
+    <li><a href="#products">Продукты</a></li>
+    <li><a href="#moat">MOAT</a></li>
+    <li><a href="#vision">Видение</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.querySelector('#cta').scrollIntoView({behavior:'smooth'})">Ранний доступ</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">// Операционная система человеческой жизни</p>
+  <h1 class="hero-title">
+    Последний интерфейс,
+    <em>который вам нужен.</em>
+  </h1>
+  <p class="hero-sub">
+    Один голос. Всё что вы делаете. Система которая знает вас — 
+    не по данным которые вы дали, а по тому кто вы есть.
+  </p>
+  <div class="hero-actions">
+    <a href="#cta" class="btn-primary">Запросить доступ</a>
+    <a href="#how" class="btn-secondary">Как это работает</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Прокрутите</span>
+  </div>
+</section>
+
+<!-- MANIFESTO STRIP -->
+<div class="manifesto-strip">
+  <div class="manifesto-track" id="ticker">
+    <span class="manifesto-item">MAX Voice — убивает голосовых помощников</span>
+    <span class="manifesto-item">MAX Mind — убивает психологов-посредников</span>
+    <span class="manifesto-item">MAX Health — убивает реактивную медицину</span>
+    <span class="manifesto-item">MAX Finance — убивает банковских клерков</span>
+    <span class="manifesto-item">MAX Work — убивает резюме навсегда</span>
+    <span class="manifesto-item">MAX Education — убивает прусскую школу</span>
+    <span class="manifesto-item">MAX Food — убивает лишнюю логистику</span>
+    <span class="manifesto-item">MAX Social — убивает алгоритм одиночества</span>
+    <span class="manifesto-item">MAX Voice — убивает голосовых помощников</span>
+    <span class="manifesto-item">MAX Mind — убивает психологов-посредников</span>
+    <span class="manifesto-item">MAX Health — убивает реактивную медицину</span>
+    <span class="manifesto-item">MAX Finance — убивает банковских клерков</span>
+    <span class="manifesto-item">MAX Work — убивает резюме навсегда</span>
+    <span class="manifesto-item">MAX Education — убивает прусскую школу</span>
+    <span class="manifesto-item">MAX Food — убивает лишнюю логистику</span>
+    <span class="manifesto-item">MAX Social — убивает алгоритм одиночества</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="section-label">Проблема</div>
+  <div class="problem-grid">
+    <div>
+      <h2 class="problem-title reveal">
+        Мир построил <em>невероятно сложную</em> машину для простой задачи.
+      </h2>
+      <p class="problem-text reveal reveal-delay-1">
+        Между полем и вашим ртом — тридцать компаний. Между вашим желанием и его реализацией — сотни приложений, паролей, интерфейсов. Между вами и вашей жизнью — всё это.
+      </p>
+      <p class="problem-text reveal reveal-delay-2">
+        Средства стали целью. Деньги были инструментом обмена — стали смыслом существования. Компании создавались чтобы решать проблемы — стали машинами для создания новых. Технологии должны были освободить время — украли его.
+      </p>
+      <p class="problem-text reveal reveal-delay-3">
+        <mark>Siri</mark> — голосовой помощник 2011 года. 14 лет и сотни миллиардов вложений позже — он всё ещё не понимает "напомни когда буду рядом". Не потому что технологий нет. Потому что умный Siri убил бы App Store.
+      </p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-num">85%</div>
+        <div class="stat-label">людей делают работу которую не хотят делать — ради денег на то что не нужно</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$105T</div>
+        <div class="stat-label">мировой ВВП. 70% — обслуживание системы, не создание ценности</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$4T</div>
+        <div class="stat-label">теряет экономика ежегодно от кибермошенничества через украденные пароли</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">108</div>
+        <div class="stat-label">паролей у среднего человека. Половина — один и тот же. С вариациями.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">⅓</div>
+        <div class="stat-label">всей еды на планете выбрасывается пока 800 млн человек голодают</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50мин</div>
+        <div class="stat-label">видит вас ваш психолог раз в две недели. MAX — непрерывно.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH SECTION -->
+<section class="tech-section" id="how">
+  <div class="tech-inner">
+    <div class="tech-header">
+      <h2 class="tech-title reveal">
+        Как это<br>работает <em>на самом деле</em>
+      </h2>
+      <p class="tech-intro reveal reveal-delay-1">
+        MAX — это не чат-бот. Это не агрегатор сервисов. Это многослойная нейронная архитектура с постоянной памятью, мультимодальным вводом и локальной обработкой данных. Первая система в истории чья бизнес-модель полностью совпадает с интересами пользователя.
+      </p>
+    </div>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <div class="arch-diagram reveal">
+      <div class="arch-layer">
+        <span class="arch-layer-num">L0</span>
+        <span class="arch-layer-name" style="color:#4FC3F7">INPUT LAYER — Multimodal Perception</span>
+        <span class="arch-layer-desc">Voice biometrics · Acoustic analysis · Behavioral patterns · Contextual signals · Calendar & location</span>
+      </div>
+      <div class="arch-connector" style="margin-left:44px">│  ↓  Real-time signal processing on-device (quantized LLM, 2-4GB RAM)</div>
+      <div class="arch-layer">
+        <span class="arch-layer-num">L1</span>
+        <span class="arch-layer-name" style="color:#4CAF88">MEMORY ENGINE — Organic Context Layer</span>
+        <span class="arch-layer-desc">Episodic memory · Semantic compression · Pattern extraction · Emotional indexing · Temporal weighting</span>
+      </div>
+      <div class="arch-connector" style="margin-left:44px">│  ↓  Local encrypted vector store + differential sync (only deltas leave device)</div>
+      <div class="arch-layer">
+        <span class="arch-layer-num">L2</span>
+        <span class="arch-layer-name" style="color:#C8A97E">ORCHESTRATION — Model Router</span>
+        <span class="arch-layer-desc">Task classification → optimal model selection · claude-sonnet / gemini-ultra / specialist models · cost/latency optimization</span>
+      </div>
+      <div class="arch-connector" style="margin-left:44px">│  ↓  Federated inference: max privacy, min latency, zero data exposure</div>
+      <div class="arch-layer">
+        <span class="arch-layer-num">L3</span>
+        <span class="arch-layer-name" style="color:#FF8A65">ACTION LAYER — Autonomous Execution</span>
+        <span class="arch-layer-desc">API orchestration · MAX Coin transactions · Smart contract execution · Cross-platform integration · Biometric auth</span>
+      </div>
+      <div class="arch-connector" style="margin-left:44px">│  ↓  MOAT DATA accumulates with every interaction — compounding advantage</div>
+      <div class="arch-layer">
+        <span class="arch-layer-num">L4</span>
+        <span class="arch-layer-name" style="color:#CE93D8">OUTPUT — Contextual Response + World State Update</span>
+        <span class="arch-layer-desc">Voice synthesis (persona-matched) · Action confirmation · Memory consolidation · Pattern reinforcement</span>
+      </div>
+    </div>
+
+    <!-- MEMORY -->
+    <div class="memory-section">
+      <h3 class="memory-title reveal">Как работает память</h3>
+      <div class="memory-grid">
+        <div class="memory-card reveal">
+          <span class="memory-icon">MEM_TYPE :: EPISODIC</span>
+          <div class="memory-card-title">Эпизодическая память</div>
+          <div class="memory-card-text">
+            Каждый разговор сжимается в семантический вектор и хранится локально. Не дословно — смысл, эмоциональный тон, ключевые решения. AES-256 шифрование. Ни Anthropic, ни Google не видят ваши разговоры.
+            <br><br>
+            <code style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue)">embed(conversation) → float[1536] → local_store</code>
+          </div>
+        </div>
+        <div class="memory-card reveal reveal-delay-1">
+          <span class="memory-icon">MEM_TYPE :: SEMANTIC</span>
+          <div class="memory-card-title">Семантический граф</div>
+          <div class="memory-card-text">
+            Из эпизодов извлекаются устойчивые паттерны: ценности, страхи, предпочтения, отношения. Граф знаний о вас растёт и уточняется. Система видит связи которые вы сами не замечаете.
+            <br><br>
+            <code style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue)">patterns.extract(episodes_last_90d) → beliefs_graph</code>
+          </div>
+        </div>
+        <div class="memory-card reveal reveal-delay-2">
+          <span class="memory-icon">MEM_TYPE :: PROCEDURAL</span>
+          <div class="memory-card-title">Процедурная память</div>
+          <div class="memory-card-text">
+            Как вы принимаете решения. Какие форматы объяснений вам подходят. Что работает для вашей мотивации. MAX адаптируется под вас — не под усредненного пользователя. Персональный LLM fine-tuning на ваших данных.
+            <br><br>
+            <code style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue)">user_model.update(behavior_delta, lr=0.001)</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-block reveal">
+        <span class="code-comment">// MAX Memory consolidation — runs every 24h locally on your device</span><br><br>
+        <span class="code-key">async function</span> <span style="color:#FFD54F">consolidateMemory</span>(<span class="code-value">user_id</span>) {<br>
+        &nbsp;&nbsp;<span class="code-comment">// Pull raw episodes from local encrypted store</span><br>
+        &nbsp;&nbsp;<span class="code-key">const</span> episodes = <span class="code-key">await</span> LocalStore.get(<span class="code-string">`episodes_${user_id}_last_7d`</span>);<br><br>
+        &nbsp;&nbsp;<span class="code-comment">// Extract emotional fingerprint from voice analysis</span><br>
+        &nbsp;&nbsp;<span class="code-key">const</span> voicePatterns = VoiceBiometrics.extractStressMarkers(episodes);<br>
+        &nbsp;&nbsp;<span class="code-comment">// → pitch variance, speech rate, micro-pauses, hesitation markers</span><br><br>
+        &nbsp;&nbsp;<span class="code-comment">// Semantic compression: 10,000 words → 32 float vectors</span><br>
+        &nbsp;&nbsp;<span class="code-key">const</span> compressed = <span class="code-key">await</span> LocalModel.embed(episodes, {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;preserve: [<span class="code-string">'decisions'</span>, <span class="code-string">'emotions'</span>, <span class="code-string">'patterns'</span>, <span class="code-string">'people'</span>],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;discard: [<span class="code-string">'filler_words'</span>, <span class="code-string">'weather_small_talk'</span>]<br>
+        &nbsp;&nbsp;});<br><br>
+        &nbsp;&nbsp;<span class="code-comment">// Update belief graph — only DELTAS leave the device (federated)</span><br>
+        &nbsp;&nbsp;<span class="code-key">const</span> beliefDelta = BeliefGraph.update(compressed, voicePatterns);<br>
+        &nbsp;&nbsp;<span class="code-key">await</span> SecureSync.pushDelta(beliefDelta, { <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;encrypted: <span class="code-num">true</span>, <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;zero_knowledge: <span class="code-num">true</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;user_key_only: <span class="code-num">true</span> &nbsp;<span class="code-comment">// Anthropic cannot decrypt</span><br>
+        &nbsp;&nbsp;});<br><br>
+        &nbsp;&nbsp;<span class="code-comment">// MOAT accumulates: day 1 → 1x value | day 365 → 37x value</span><br>
+        &nbsp;&nbsp;<span class="code-key">return</span> { moat_score: beliefDelta.novelty * episodes.length };<br>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-header">
+    <div class="section-label" style="justify-content:center;margin-bottom:32px">Продуктовая вселенная</div>
+    <h2 class="products-title reveal">Один голос.<br><em>Сто пять триллионов.</em></h2>
+    <p class="products-sub reveal reveal-delay-1">Каждый продукт убивает целую индустрию. Не потому что лучше — потому что знает вас. Чего ни одна индустрия не умела никогда.</p>
+  </div>
+
+  <div style="padding:0 60px;margin-bottom:2px;display:grid;grid-template-columns:100px 1fr 1fr 1fr 160px;gap:0;border-bottom:1px solid var(--border)">
+    <div></div>
+    <div style="padding:12px 0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase">Продукт / убивает</div>
+    <div style="padding:12px 32px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase">Боль</div>
+    <div style="padding:12px 32px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase">Как работает</div>
+    <div style="padding:12px 0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;text-align:right">Рынок</div>
+  </div>
+
+  <div class="products-list" style="padding:0 60px">
+
+    <!-- 01 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">01</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Health</div>
+        <div class="pcard-kills">↳ Реактивная медицина<br>↳ Страховые компании<br>↳ Медкарты на бумаге<br>↳ $7T на лечение болезней</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы "здоровы" — значит не идёте к врачу. Симптом появляется, вы его гуглите, Google говорит что у вас либо насморк либо рак. Вы закрываете вкладку. Симптом нарастает. Ближайший приём через две недели. Анализы ещё через неделю. Специалист через месяц. Поздравляем — то что лечилось за один укол три месяца назад теперь требует курса химиотерапии. Медицина лечит — вместо того чтобы не допускать.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX слышит изменения в голосе за 3–7 дней до появления симптомов — температура, воспаление, усталость меняют акустику гортани. Видит паттерны сна через микрофон без датчиков. Замечает что вы упоминаете усталость чаще обычного. Когда паттерны совпадают — говорит: "Сдай анализ крови. Вот ближайшая клиника. Запись на завтра в 10:00." Медицинская карта в MAX Login — читается в любой стране на любом языке. В Таиланде потеряли сознание — врач открывает MAX, видит группу крови, аллергии, препараты. Это буквально спасает жизни.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$10T</div>
+        <div class="pcard-mlabel">global<br>healthcare</div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">02</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Mind</div>
+        <div class="pcard-kills">↳ Психологи-посредники<br>↳ Life coaches с Instagram<br>↳ Self-help книги<br>↳ $500B mental health</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Психолог видит вас 50 минут раз в две недели. За это время вы пересказываете прошлое — которое уже отстоялось, рационализировалось и потеряло остроту. Между сессиями — та же жизнь, те же паттерны, тот же разговор с мамой в воскресенье который заканчивается одинаково уже тридцать лет. Хороший психолог стоит $150–400 за час. Плохой — тоже. Разница видна через полгода. Если вообще видна.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX присутствует постоянно — слышит в реальном времени, не в пересказе. Замечает когда вы апологизируете за собственное существование (паттерн из детства). Замечает когда снова выбираете недоступного человека. Называет это — мягко, в момент когда это происходит, а не через неделю на сессии. Расстояние между паттерном и осознанием сокращается. Когда оно доходит до нуля — появляется выбор. Работает с родовыми программами через эпигенетику, не мистику. Освобождает когнитивный ресурс потраченный на подавление — мозг начинает работать по-другому.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$570B</div>
+        <div class="pcard-mlabel">mental health<br>+ coaching</div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">03</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Finance</div>
+        <div class="pcard-kills">↳ Retail banking<br>↳ Страховые агенты<br>↳ Финансовые советники<br>↳ Бухгалтеры-операционисты</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          У вас 12 подписок. Вы помните 7. Остальные 5 списываются по 299 рублей в месяц уже полтора года — "потом отпишусь". Банк предлагает вам вклад под 4% — умалчивая что рядом есть под 11%. Страховой агент продаёт полис от 15 рисков — 12 из которых в вашей жизни невозможны. Финансовый советник дружески советует инструменты на которых зарабатывает его банк. Комиссия за перевод другу в другую страну — 8%. Western Union берёт $50B в год с беднейших людей планеты. За что? За то что нажали кнопку.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Видит все транзакции. Показывает подписки которыми не пользуетесь — одна кнопка чтобы отписаться. Финансовый советник который заинтересован в том чтобы у вас было больше денег — а не меньше. Подозрительная транзакция — уведомление за секунду. MAX Coin: перевод в любую точку мира мгновенно, комиссия → 0. Не потому что мы добрые — потому что это просто запись в блокчейне, она ничего не стоит. $50B в год возвращаются людям которым они принадлежат.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$12T</div>
+        <div class="pcard-mlabel">banking<br>+ insurance</div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">04</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Food + Farm</div>
+        <div class="pcard-kills">↳ Промышленное сельское хозяйство<br>↳ Супермаркеты<br>↳ Логистику ради логистики<br>↳ Ценник 999</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Понюхайте томат из супермаркета. Теперь понюхайте томат с огорода. Это разные запахи — потому что это разные продукты. Один выведен за транспортабельность: толстая кожица, никакого вкуса, живёт две недели. От фермы до вашего рта — 14 дней, три логистических хаба, пластик который будет разлагаться 500 лет. Треть всей еды на планете выбрасывается. Одновременно 800 миллионов человек голодают. Это не проблема производства. Это проблема системы которой всё равно.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Вертикальные фермы в вашем районе. Дрон знает каждое растение — вот этому томату нужна вода, дрон полил именно его. Этот созрел — дрон собрал. От сбора до вашего стола: 3 часа, не 14 дней. 2% воды от традиционной фермы — замкнутый цикл. MAX знает ваш биохимический профиль: сегодня вам нужно больше магния — еда сегодня это учитывает. Генная селекция — это то что фермеры делали тысячи лет, только медленно. Теперь быстро. Томат для сибирского климата, клубника с утроенным содержанием антиоксидантов. Еда как лекарство которое вкусно.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$9T</div>
+        <div class="pcard-mlabel">food &<br>agriculture</div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">05</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Voice</div>
+        <div class="pcard-kills">↳ Siri (14 лет позора)<br>↳ Alexa (продаёт Amazon)<br>↳ Google Assistant<br>↳ Все голосовые интерфейсы</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          "Напомни мне когда буду рядом с поликлиникой." — "Хорошо, напомню в 9 утра." Четырнадцать лет и сотни миллиардов долларов. Siri всё ещё не понимает элементарного. Но вы знаете почему? Умный Siri который реально помогает убивает App Store. App Store приносит Apple 30% со всего. Поэтому Siri достаточно умный для презентации — и достаточно тупой чтобы вы продолжали качать приложения. Это не баг. Это дизайн.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Voice — первый голосовой интерфейс бизнес-модель которого совпадает с вашими интересами. Чем лучше работает ваша жизнь — тем богаче MAX DATA — тем умнее система для всех. Говорите голосом — всё. Переводы, напоминания, бронирование, анализ, творчество, психология. Каждый разговор накапливает контекст. День 1: знает немного. День 365: знает вас лучше большинства людей вокруг. Это не функция — это отношения.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$100B</div>
+        <div class="pcard-mlabel">voice AI<br>к 2030</div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">06</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Login</div>
+        <div class="pcard-kills">↳ Пароли навсегда<br>↳ LastPass · 1Password<br>↳ SMS-коды<br>↳ $4T кибермошенничества</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          108 паролей. У среднего человека. Большинство — один и тот же с цифрой в конце. Рабочая почта требует смены раз в квартал — вы пишете "Qwerty2025!" меняя только год. Потеряли телефон — потеряли доступ ко всему потому что 2FA привязана к номеру. Сервис которым пользовались в 2019 — взломан, ваш пароль утёк, вы об этом не знаете, кто-то заходит в ваш Netflix уже три года. "Забыли пароль?" — ваши лучшие 7 минут дня.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Три слоя биометрии: голос (уникальный слепок гортани — невозможно синтезировать), сетчатка (через фронтальную камеру, пассивно), поведенческая биометрика (как держите телефон — нельзя скопировать). Непрерывная аутентификация: система знает что это вы не по паролю — а потому что постоянно вас видит. Чужой взял телефон — система знает через секунды. Один MAX ID для всего в цифровом мире. Конец "Забыли пароль?" — навсегда.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$200B</div>
+        <div class="pcard-mlabel">identity<br>+ security</div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">07</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Work</div>
+        <div class="pcard-kills">↳ Резюме как формат<br>↳ LinkedIn как реальность<br>↳ Рекрутинговые агентства<br>↳ HR в нынешнем виде</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Резюме — документ где вы перечисляете вещи которые умеете в формате убеждающем незнакомца который просматривает его 20 секунд. HR написал вакансию для работы которую никогда не делал. ATS-система отфильтровала вас потому что написали "руководил" вместо "управлял". 40% нанятых уходят в первый год. Стоимость — до двух годовых зарплат позиции. Идеальный кандидат сидит в другом городе с плохо написанным резюме. Все проиграли.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает что вы реально умеете — через задачи которые реально делали. Знает в какой среде расцветаете. С какими людьми. В какое время продуктивнее. Что вас выгорает. Знает компанию с другой стороны — реальную культуру, не сайт с ценностями. Matching по тысяче параметров которые ни один рекрутер не может проверить за час собеседования. 40% неудачного найма → близко к нулю. Резюме не нужно. Собеседование — как разговор, не как стрессовый перформанс.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$700B</div>
+        <div class="pcard-mlabel">recruiting<br>+ HR software</div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">08</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Education</div>
+        <div class="pcard-kills">↳ Прусская школа 1892 года<br>↳ Репетиторы по расписанию<br>↳ Стандартизированные тесты<br>↳ "Он просто не любит математику"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Система образования разработана в 1892 году для производства послушных рабочих. Один учитель, 30 детей, один темп, одна программа. Ребёнок который думает быстрее — скучает и теряет любопытство. Который думает иначе — получает плохие оценки и решает что он тупой. Это убеждение остаётся на всю жизнь. 90% взрослых убеждены что плохо понимают математику. Нет — им просто плохо объяснили. Один раз. И больше не объяснили иначе.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Один учитель. Один ученик. Всегда. Система видит как конкретный ребёнок думает. Лука любит динозавров — через динозавров изучает геологию, физику, математику временных масштабов. Не зная что это "предметы". Маша понимает через истории — математика через задачу о пиратах делящих сокровища понятна. Через абстрактные уравнения нет. MAX никогда не теряет терпения. Объясняет столько раз сколько нужно — каждый раз иначе пока не найдёт способ который работает именно для этого мозга.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$6T</div>
+        <div class="pcard-mlabel">global<br>education</div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">09</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Social</div>
+        <div class="pcard-kills">↳ Instagram (продаёт зависть)<br>↳ TikTok (продаёт время)<br>↳ Facebook (продаёт гнев)<br>↳ $200B рекламы на разжигание</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Алгоритм Facebook оптимизирован под вовлечённость. Что лучше вовлекает? Гнев. Зависть. Страх. Злой человек листает ленту на 14% дольше счастливого — это данные внутренних исследований Facebook которые утекли. Instagram убеждает вас что все вокруг живут лучше — потому что подборка из 5 лучших фото в год выглядит как вечный праздник. 30% взрослых в развитых странах не имеют с кем поговорить о важном. Мы "соединены" — и одиноки как никогда.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Social не оптимизирует время на экране. Оптимизирует качество ваших реальных отношений. Street Mode: идёте по улице, рядом человек с 91% совместимостью. MAX тихо: "Человек у кофейни. Вы оба были на том концерте в марте. Он тоже изучает японский." Дальше — вы. Живые люди. Это не приложение для знакомств — это возврат человеческих связей в физическое пространство с умной поддержкой. MAX Feed: не лента чужого контента, а генерация вашего — под ваше состояние сегодня.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$210B</div>
+        <div class="pcard-mlabel">social media<br>advertising</div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">10</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Tinder</div>
+        <div class="pcard-kills">↳ Tinder (монетизирует одиночество)<br>↳ Bumble · Hinge · OkCupid<br>↳ Все dating-приложения<br>↳ Индустрию свиданий $10B</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Средний мужчина на Tinder получает 0.6% взаимных лайков. Это не опечатка. Шесть десятых процента. Алгоритм Tinder не заинтересован чтобы вы нашли партнёра. Достаточно матчей чтобы не уйти — недостаточно чтобы найти. Это бизнес-модель построенная на вашем одиночестве. Люди ходят на свидания с людьми с которыми не совместимы — потому что анкета из 5 фото и "люблю путешествовать" — это худший способ познакомиться из всех изобретённых человечеством.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Tinder хочет чтобы вы его удалили. Первый раз в истории. Не матчинг по фото — совместимость по тысяче реальных параметров накопленных за время общения с MAX. Не "нравится ли вам активный отдых" — реальные ценности, реальные паттерны, реальное поведение. Цель — одна встреча которая имеет смысл. Не сто свайпов в день. Street Mode приводит к живым знакомствам без экрана. Приложение умирает от собственного успеха. Именно так и должно быть.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$10B</div>
+        <div class="pcard-mlabel">dating apps<br>+ loneliness economy</div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">11</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Travel</div>
+        <div class="pcard-kills">↳ Booking · Airbnb · Aviasales<br>↳ Турагентства<br>↳ Туристические пакеты<br>↳ "Откроем в 2 ночи"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы планируете отпуск. Открываете 47 вкладок. Сравниваете 12 отелей которые выглядят одинаково на фото но на месте один из них "у шоссе". Booking показывает "осталось 2 номера!" — это было правдой в 2019, сейчас это просто красная кнопка. Агрегатор берёт 15–25% с отеля — отель закладывает это в цену — вы платите за посредника которого не просили. Турагент продаёт вам "экзотику" которую продаёт всем — и вы едете смотреть достопримечательности из того же списка что и 40 миллионов туристов в год.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает вас: что вас реально наполняет, не что вы отмечаете в анкете. Планирует путешествие под ваш характер — не под средний туристический вкус. Бронирует напрямую без посредника — комиссия → 0. Знает что в этой деревне в Португалии есть семья которая принимает гостей и готовит по рецепту из 1847 года — и это именно то что вам нужно. MAX Community: приезжаете в другой город — система знает что там есть 3 человека с 89% совместимостью. Путешествие как погружение в живую культуру, не как набор достопримечательностей.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$1.4T</div>
+        <div class="pcard-mlabel">global travel<br>industry</div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">12</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Home</div>
+        <div class="pcard-kills">↳ Риелторы<br>↳ Ипотечные брокеры<br>↳ ЦИАНы и Зиллоу<br>↳ $4T рынок недвижимости</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Риелтор — человек у которого есть информация которой у вас нет, и который продаёт вам доступ к этой информации под видом услуги. Берёт 3–6% от суммы сделки за то что показал квартиру которую вы нашли сами на ЦИАН. Ипотечный брокер говорит что "нашёл лучшую ставку" — не говоря что получает откат от банка. Аренда: вы платите первый месяц, последний месяц, депозит, комиссию агенту который провёл вас по квартире 20 минут. Это три месячных платежа авансом — чтобы снять квартиру.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Полная информация по каждому объекту без посредника. MAX знает реальную историю квартиры, реальных соседей по отзывам других жильцов, реальный уровень шума в 7 утра и 11 вечера. Соединяет арендодателя и жильца напрямую. MAX Coin — депозит в смарт-контракте: не отдаёте деньги чужому человеку, они разблокируются автоматически при соблюдении условий. Комиссия MAX — 0.5% против 5% агента. Пространство подбирается под вас: система знает что вы лучше работаете с видом на воду и что вам важна тишина до 10 утра.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$4T</div>
+        <div class="pcard-mlabel">real estate<br>transactions</div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">13</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Shop</div>
+        <div class="pcard-kills">↳ Amazon · Wildberries<br>↳ Маркетплейсы<br>↳ 999-рублёвые ценники<br>↳ "Скидка 70%!" (от завышенной цены)</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы покупаете кроссовки за 15 000 рублей. Из них 4 000 — маркетинг. Маркетинг который вы не просили видеть, который вас раздражал, который вы игнорировали — но заплатили за него всё равно. Ценник 999 рублей. Ваш мозг видит "меньше тысячи". Маркетологи получили премию. Вы купили что-то что не совсем то что хотели потому что "акция до конца дня!" — создаёт искусственный дефицит времени. Wildberries показывает 4.8 из 5 на основании 3 отзывов — двух из которых написал продавец.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает что вам реально нужно — не по запросу, по жизненному контексту. Не "купить кроссовки" — а "вам нужна обувь для треккинга, вы планируете поход в мае, ваш размер 42, предпочитаете натуральные материалы, бюджет до 8 000". Рекомендует конкретное — не 47 похожих товаров. Цены честные — без психологических трюков. Отзывы реальные — верифицированы через MAX Login. MAX Store: физический магазин без касс, без охраны, без мерчандайзинговых манипуляций. Взял — система знает — списалось. Ушёл.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$5T</div>
+        <div class="pcard-mlabel">global retail<br>e-commerce</div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">14</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Business</div>
+        <div class="pcard-kills">↳ Рекламные агентства<br>↳ Маркетинговые отделы<br>↳ CRM системы<br>↳ $700B рекламного рынка</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Малый бизнес тратит 20–30% выручки на маркетинг. Половина — впустую. Таргет который приводит не тех. Акции которые привлекают охотников за скидками и больше они не возвращаются. Агрегатор берёт 25–30% от каждого заказа — и клиент считает себя клиентом агрегатора, не вашим. Владелец ресторана занимается бухгалтерией, таргетом, отзывами, расписанием, налогами — и готовит в оставшиеся 20% времени. Мировая реклама — $700B в год. 90% из них — баннерная слепота, боты, нерелевантный показ. Выброшенные деньги.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX — бизнес-партнёр который берёт 10% только когда вы заработали. Не авансом. Знает кому из 8 миллиардов пользователей нужен именно ваш продукт — и говорит им об этом в правильный момент. Не реклама — рекомендация от кого-то кто знает обе стороны. Бухгалтерия, налоги, расписание сотрудников, анализ отзывов — автоматически. Владелец кофейни занимается кофе. MAX занимается остальным. Лучший продавец — друг. MAX — друг для каждого на планете.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$1.5T</div>
+        <div class="pcard-mlabel">ads + biz<br>software</div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">15</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Legal</div>
+        <div class="pcard-kills">↳ Юристы за $500/час<br>↳ Нотариусы<br>↳ Юридические консультации<br>↳ "Мелкий шрифт"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы подписываете договор аренды. В нём 14 страниц. Вы читаете первую, пробегаете взглядом остальные, подписываете. Потом оказывается что в пункте 8.3 написано что вы несёте ответственность за всё включая "форс-мажорные обстоятельства вне зависимости от причины". Юрист чтобы прочитать этот договор — 3 часа работы, $300–500. Это больше чем ваш месячный депозит. Поэтому вы подписываете не читая. Именно на это и рассчитано.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Любой документ — голосом или фото — MAX объясняет простым языком за 30 секунд. "В пункте 8.3 есть условие которое может быть невыгодным — хочешь объяснение?" Стандартные договоры генерируются автоматически и корректно. Смарт-контракты на MAX Coin исполняются без участия нотариуса — условия выполнены, деньги разблокированы, математика не врёт. Доступ к базовой юридической защите — для всех, не только для тех у кого есть $500 на консультацию.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$1T</div>
+        <div class="pcard-mlabel">legal services<br>global</div>
+      </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">16</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Cars</div>
+        <div class="pcard-kills">↳ Каршеринги<br>↳ Такси-агрегаторы<br>↳ Автосалоны<br>↳ Техобслуживание вслепую</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы едете на техобслуживание. Мастер говорит что нужно заменить ещё пять вещей которые "вот-вот сломаются". Вы не разбираетесь — соглашаетесь. Переплачиваете втрое. Каршеринг в час пик нет доступных машин. Uber в новогоднюю ночь — х4 к тарифу. Автомобиль стоит в среднем 23 часа в сутки. Самый дорогой предмет который вы используете 4% времени. Купили за 2 миллиона, теряет 20% стоимости в момент выезда из салона, ещё 15% в первый год.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает ваш маршрутный паттерн — предиктивно заказывает транспорт до того как вы попросили. Оптимальный способ передвижения в каждый момент: своя машина, каршеринг, такси, метро, пешком. MAX Cars: диагностика автомобиля через OBD-порт — MAX знает состояние каждого узла в реальном времени. Говорит за 3 недели до поломки — не постфактум. Рекомендует конкретный сервис с конкретной ценой. Без "а вот ещё масло поменяем?".
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$2T</div>
+        <div class="pcard-mlabel">automotive<br>+ mobility</div>
+      </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">17</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Entertainment</div>
+        <div class="pcard-kills">↳ Netflix · Spotify · YouTube<br>↳ Алгоритм "похожего контента"<br>↳ 20 минут выбора что посмотреть<br>↳ $500B стриминг рынок</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы открываете Netflix. Двадцать минут листаете. Читаете описания. Смотрите трейлер. Возвращаетесь в каталог. Выбираете что-то. Смотрите пятнадцать минут — не то. Закрываете. Снова листаете. Засыпаете. Итог вечера: заплатили за подписку, потратили полчаса на выбор, посмотрели ничего. Spotify Discover Weekly предлагает "похожую музыку" — вы слышите одно и то же снова. Алгоритм оптимизирован под то чтобы вы не уходили с платформы. Не под то чтобы вы были счастливы.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает ваше состояние сегодня вечером — по голосу, по тому как прошёл день. Пятница после тяжёлой недели — предлагает что-то лёгкое и смешное. Воскресное утро — документальное. Не спрашивает "что посмотреть?" — просто включает. MAX Feed генерирует персональный контент: музыку под ваше настроение прямо сейчас, не плейлист который слушали в прошлый раз. MAX Cinema: локальные кинотеатры, живые концерты, нишевые события — те которые вы пропустили бы без MAX.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$500B</div>
+        <div class="pcard-mlabel">streaming<br>+ entertainment</div>
+      </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">18</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Avito</div>
+        <div class="pcard-kills">↳ Авито · OLX · eBay<br>↳ Барахолки<br>↳ "Фото 2019 года актуально"<br>↳ Люди которые не отвечают</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          У вас дома велосипед которым не пользовались 3 года. Хотите продать. Сфотографировать — надо убрать хлам с фона. Написать описание — надо думать. Выбрать категорию — их 47. Поставить цену — поди угадай. Ждать звонков людей которые торгуются до последнего и не приходят. Большинство людей просто не продают — выбрасывают или оставляют пылиться. Огромная ценность заморожена в вещах которые нужны кому-то в двух кварталах — и оба об этом не знают.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          "Хочу продать велосипед." Всё. MAX сам фотографирует через камеру. Сам пишет описание. Сам определяет справедливую цену по рынку в вашем районе. Сам находит человека в двух кварталах которому нужен именно такой велосипед — и который уже 3 месяца ищет. Транзакция через MAX Coin — мгновенно, безопасно. Не нужно встречаться с незнакомцем с наличными. Это не просто удобство — это активация триллионов замороженной ценности в вещах которые лежат по всей планете.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$120B</div>
+        <div class="pcard-mlabel">C2C<br>marketplace</div>
+      </div>
+    </div>
+
+    <!-- 19 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">19</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Beauty</div>
+        <div class="pcard-kills">↳ Бьюти-индустрию<br>↳ Косметику "для всех"<br>↳ $500 кремы "с гиалуроном"<br>↳ Рекламу страха старения</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Бьюти-индустрия зарабатывает на вашей неуверенности в себе. Буквально. Маркетинговая модель построена на создании проблемы — а потом продаже решения. "Поры слишком заметны" (никто не замечал до этой рекламы). "Морщины — это плохо" (кто решил?). Крем за $400 с "уникальной формулой" который в производстве стоит $8. Консультант в магазине косметики не дерматолог — это продавец с планом продаж. Подбирает что вам "подойдёт" исходя из маржинальности.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает ваш тип кожи, климат в котором живёте, гормональный фон по косвенным маркерам, аллергии, образ жизни. Рекомендует конкретные продукты с конкретным составом который работает для вас — без маркетинга, только биохимия. Объясняет из чего состоит ваш крем за 3 000 рублей — и что аналог за 400 рублей идентичен по составу. Честно. Потому что MAX зарабатывает не на продаже косметики — а на вашем доверии.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$500B</div>
+        <div class="pcard-mlabel">beauty<br>+ personal care</div>
+      </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">20</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Kids</div>
+        <div class="pcard-kills">↳ Детские товары "премиум"<br>↳ Детские секции по расписанию<br>↳ Родительский тревожный поиск<br>↳ "Должен уметь в 3 года"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Три часа ночи. Ребёнок не спит. Вы гуглите симптомы — Google говорит либо зубы либо менингит. Педиатр завтра в 9. Вы не спите всю ночь. Секции: ребёнок ходит в 4 секции потому что "надо развивать". Он устал. Вы устали возить. Никто не понял зачем. Детские товары: коляска "рейтинг 1 место" стоит 80 000 рублей. Ребёнок сидит в ней 8 месяцев потом вырастает. Смесь за 2 500 рублей против смеси за 800 — состав идентичен, разница в упаковке и маркетинге.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Kids — педиатр в 3 ночи без паники. Описываете симптомы голосом — система оценивает серьёзность, говорит нужно ли ехать сейчас или подождать до утра, что сделать прямо сейчас. MAX наблюдает развитие ребёнка — без чек-листов "должен уметь" — видит его индивидуальный темп и замечает реальные отклонения. Знает какие секции подходят именно этому ребёнку по характеру — не по рейтингу района. Честные рекомендации товаров без наценки за бренд.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$300B</div>
+        <div class="pcard-mlabel">childcare<br>+ parenting</div>
+      </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">21</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Energy</div>
+        <div class="pcard-kills">↳ Счета за электричество<br>↳ Fossil fuel посредников<br>↳ Непрозрачные тарифы<br>↳ "Экономьте — выключайте свет"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Счёт за электричество приходит раз в месяц. Вы платите не понимая за что именно. Тариф меняется по решению которое вас не спрашивали. Солнечные панели выгодны но установка окупается 8–12 лет и никто не объяснит как это работает. Энергетические компании — монополии в большинстве стран. Монополии не заинтересованы в вашей эффективности. Они заинтересованы в вашем потреблении.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX видит ваше потребление в реальном времени — что именно потребляет больше всего, когда пики, где можно сэкономить без потери комфорта. Оптимизирует умный дом: когда вы спите — снижает отопление, когда уходите — выключает что не нужно, когда едете домой — включает к вашему приезду. Помогает просчитать солнечные панели именно для вашего дома, вашего климата, вашего потребления — и реальный срок окупаемости без маркетинга.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$2T</div>
+        <div class="pcard-mlabel">energy<br>utilities</div>
+      </div>
+    </div>
+
+    <!-- 22 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">22</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX News</div>
+        <div class="pcard-kills">↳ Медиа которые продают страх<br>↳ Алгоритм поляризации<br>↳ "Читайте нас чтобы бояться"<br>↳ $100B медиаиндустрия</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Новости оптимизированы под клики. Страх кликается лучше всего. За ним — гнев. За гневом — возмущение. Счастливые новости не собирают трафик. Поэтому мировые медиа производят поток тревоги 24/7 — независимо от реального состояния мира. Вы читаете новости 30 минут — чувствуете что мир рушится. Мир не рушится. Просто так устроена бизнес-модель медиа: ваш страх = их деньги.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX фильтрует информацию которая реально важна для вас — не для среднего читателя. Отделяет факты от интерпретаций. Показывает несколько точек зрения на спорные вопросы вместо одной с наибольшим количеством эмоций. Информирует — не тревожит. Знает какие темы вам важны профессионально, какие лично — и даёт глубину там где нужно, краткость там где достаточно. Вы информированы. Не пуганы.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$100B</div>
+        <div class="pcard-mlabel">media<br>industry</div>
+      </div>
+    </div>
+
+    <!-- 23 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">23</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Pets</div>
+        <div class="pcard-kills">↳ Ветклиники "наугад"<br>↳ Зоомагазины<br>↳ Дорогой корм с "мясом"<br>↳ Питомцы которых не понимают</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Ваш кот вёл себя странно два дня. Вы загуглили — либо съел что-то либо лимфома. Поехали в ветклинику. Ветеринар назначил анализы на 8 000 рублей "на всякий случай". Всё нормально. "Просто стресс". Корм в зоомагазине: на упаковке написано "с говядиной" — говядина на 4 месте в составе после кукурузного крахмала, сои и "мясных субпродуктов". Подбор корма — по рекламе или по совету продавца который продаёт то что дороже.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает вашего питомца. Следит за изменениями в поведении через ваши описания и умный ошейник если есть. Говорит когда поведение требует внимания — и когда просто стресс от переезда. Подбирает корм по реальному составу под вид, возраст, породу, вес, здоровье — без маркетинга. Помогает найти ветеринара с реальными отзывами верифицированных владельцев. Напоминает о прививках, обработках, плановых осмотрах. Ваш питомец живёт дольше и лучше — потому что за ним наблюдают.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$150B</div>
+        <div class="pcard-mlabel">pet industry<br>global</div>
+      </div>
+    </div>
+
+    <!-- 24 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">24</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Prison</div>
+        <div class="pcard-kills">↳ Рецидивизм 50%+<br>↳ Тюрьму как школу криминала<br>↳ "Исправительное" без исправления<br>↳ Потерянные жизни</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Больше половины людей вышедших из тюрьмы возвращаются туда в течение нескольких лет. Тюрьма как исправительное учреждение — не исправляет. Она наказывает. Человек попадает в среду где единственный способ выжить — криминальные навыки. Выходит с прокачанными именно теми навыками которые привели его туда. И с нулём легальных возможностей — потому что судимость закрывает большинство дверей. Это не жестокость — это просто система которая так устроена.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX в тюрьме — постоянное образование под конкретного человека. Его историю, психологию, навыки, потенциал. Непрерывная работа с паттернами мышления которые привели к преступлению. Профессиональная переподготовка — не абстрактная, а под конкретный рынок труда в момент выхода. К выходу человек умеет что-то конкретное что нужно прямо сейчас. MAX Work находит работодателя готового дать шанс. Рецидивизм при такой системе падает радикально. Не потому что люди стали лучше — потому что наконец работает исправление.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$300B</div>
+        <div class="pcard-mlabel">criminal justice<br>+ rehabilitation</div>
+      </div>
+    </div>
+
+    <!-- 25 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">25</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Government</div>
+        <div class="pcard-kills">↳ Бюрократию<br>↳ Коррупцию<br>↳ Государство как непрозрачную машину<br>↳ МФЦ в 8 утра</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вам нужна справка. Вы идёте в МФЦ. Берёте номер. Ждёте. Оказывается нужен ещё один документ которого нет с собой. Возвращаетесь. Снова ждёте. Получаете справку с опечаткой. Возвращаетесь. Три визита ради бумаги которая нужна для другой бумаги. Государственный бюджет расходуется — вы не знаете как. Налоги платятся — вы не знаете куда именно идут. Политики обещают — никто не проверяет. Коррупция процветает там где нет прозрачности.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          Все государственные услуги через голос. Не через сайты которые не работают в Edge. MAX заранее знает какие документы нужны — готовит список до того как вы собрались идти. Все транзакции государства в блокчейне — прозрачны для каждого гражданина. Коррупция не предотвращается — она становится математически невозможной. Первая страна которая партнёрится с MAX получает конкурентное преимущество в здоровье, образовании, эффективности экономики. Остальные видят и присоединяются.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$10T</div>
+        <div class="pcard-mlabel">gov spending<br>efficiency</div>
+      </div>
+    </div>
+
+    <!-- 26 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">26</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Community</div>
+        <div class="pcard-kills">↳ Изолированные районы<br>↳ Анонимные города<br>↳ "Не знаю соседей 10 лет"<br>↳ Одиночество как эпидемию</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы живёте в доме 10 лет. Знаете соседа в лицо — не знаете имени. В вашем подъезде живёт человек с которым у вас 15 общих интересов — вы никогда не разговаривали. В вашем районе 20 000 человек. Вы знаете 12 из них. Город как коллекция незнакомцев которые смотрят в телефоны в лифте. 30% взрослых не имеют с кем поговорить о важном. Это не судьба. Это отсутствие инструмента.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Community: система видит что в вашем районе 5 человек занимаются тем же хобби — предлагает встречу. Без принуждения, тихо. Соседский обмен: у вас дрель которой пользуетесь раз в год, соседу нужна на час — MAX организует. Локальные события которые соответствуют вашим интересам — не общая афиша для всех. Поселения будущего: умные сообщества где MAX помогает людям находить друг друга, организовывать общие пространства, создавать локальные экономики. Город превращается из коллекции незнакомцев в живую сеть.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$500B</div>
+        <div class="pcard-mlabel">community<br>+ local economy</div>
+      </div>
+    </div>
+
+    <!-- 27 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">27</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Idea Bank</div>
+        <div class="pcard-kills">↳ Венчурные фонды с NDA<br>↳ Банки с залогом<br>↳ "Хорошая идея, не подходим"<br>↳ Идеи которые умерли не родившись</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          У вас есть идея. Хорошая. Реально хорошая. Вы идёте в банк — нужен залог. Идёте к инвесторам — нужен трекшн. Чтобы получить трекшн нужны деньги. Чтобы получить деньги нужен трекшн. Замкнутый круг. Венчур берёт 25% и решает куда идти. Краудфандинг требует маркетинга которого у вас нет. Большинство хороших идей умирают потому что человек родился не в том городе, не в той семье, не с теми связями.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX оценивает идею по первым принципам: рыночный потенциал, реализуемость, конкурентная среда — честно, без человеческих предубеждений. Идея выходит на внутреннюю биржу MAX Community. Люди которым это интересно — вкладываются. Не как инвесторы ожидающие 10x — как участники сообщества верящие в идею. Беспроцентные займы потому что в конечном счёте платит потребитель — и когда идея реализуется все выигрывают. Кикстартер встроенный в экономику. Без посредников. Без $500 за питч-деку.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$300B</div>
+        <div class="pcard-mlabel">VC + crowdfunding<br>+ SME lending</div>
+      </div>
+    </div>
+
+    <!-- 28 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">28</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Longevity</div>
+        <div class="pcard-kills">↳ Старость как угасание<br>↳ БАДы без доказательств<br>↳ "После 40 так и должно быть"<br>↳ $200B anti-aging индустрия лжи</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вам 45. Вы чувствуете что энергии стало меньше. Врач говорит "это возраст". Интернет предлагает 40 БАДов "для молодости". Блогер продаёт курс "как быть в 50 как в 30" за $997. Половина добавок не работает, четверть вредна. Реальная медицина долголетия существует — она просто не монетизируется так красиво как страхование жизни или таблетки от "возрастных изменений".
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Longevity — персонализированная программа основанная на реальных биомаркерах и доказательной медицине. Знает ваш биологический возраст — не паспортный. Видит что именно ускоряет ваше старение: сон, стресс, питание, движение, социальные связи (да, одиночество старит). Конкретные изменения — не "ешьте меньше". Работа со сном, воспалением, митохондриальной функцией. Цель — не продать крем. Цель — чтобы в 80 у вас были планы на следующий год.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$200B</div>
+        <div class="pcard-mlabel">longevity<br>+ anti-aging</div>
+      </div>
+    </div>
+
+    <!-- 29 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">29</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Freelance</div>
+        <div class="pcard-kills">↳ Upwork (берёт 20%)<br>↳ Fiverr (берёт 20%)<br>↳ Гонорары которые неловко называть<br>↳ Клиентов которые "есть вопросик"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы дизайнер-фрилансер. Upwork берёт 20% ваших денег за то что вы нашли клиента сами через портфолио которое сами создали. Клиент хочет "быстро и недорого". Вы боитесь называть нормальную цену — вдруг откажется. Контракт — в переписке в Telegram. Клиент исчезает после сдачи работы не заплатив. Вы боитесь писать напоминание потому что "неловко". Потратили 40 часов. Получили 0. Правовой защиты нет.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает ваши реальные навыки и реальную рыночную стоимость — называет справедливую цену за вас. Смарт-контракт в MAX Coin: оплата заблокирована при старте, разблокируется при сдаче. Никаких "а можешь чуть подправить?" бесплатно — любое изменение вне ТЗ автоматически добавляется к счёту. MAX берёт 3% — не 20%. Ваша репутация переносима между платформами через MAX Login — портфолио принадлежит вам, не Upwork.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$450B</div>
+        <div class="pcard-mlabel">gig economy<br>freelance</div>
+      </div>
+    </div>
+
+    <!-- 30 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">30</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Sport</div>
+        <div class="pcard-kills">↳ Тренеров с типовыми программами<br>↳ Фитнес-клубы с картами которые не используют<br>↳ "Просто ешь меньше двигайся больше"<br>↳ $100B фитнес-индустрия</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы купили годовую карту в зал. Ходили первые три недели. Потом раз в месяц. Потом вспоминаете когда списывается следующий платёж. Тренер дал программу "для начинающих" — такую же как 200 другим начинающим. Через три месяца результата нет. "Надо было стараться". Диета из интернета рассчитана на среднестатистического человека — не на вас с вашим метаболизмом, расписанием, едой которую вы реально купите.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX знает ваш образ жизни, уровень стресса, качество сна, доступное время — и строит программу под реальную вас, не идеальную. Знает что вы не пойдёте в зал в понедельник вечером потому что в понедельник вечером у вас всегда что-то случается — и учитывает это. Адаптирует нагрузку в реальном времени: сегодня плохо спали — снижает интенсивность. Еда под ваш метаболизм и то что реально есть в ближайшем магазине. Прогресс — реальный, не "должны были".
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$100B</div>
+        <div class="pcard-mlabel">fitness<br>+ wellness</div>
+      </div>
+    </div>
+
+    <!-- 31 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">31</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Earth</div>
+        <div class="pcard-kills">↳ Климатический кризис<br>↳ "Потребляй ответственно"<br>↳ Компании которые покупают "зелёные" сертификаты<br>↳ Углеродные компенсации-фикции</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Компания покупает углеродные кредиты — "посадили лес в Индонезии". Лес не посадили. Или посадили монокультуру которая сгорит через 10 лет. Климатические данные существуют — они разрозненны, несопоставимы, манипулируемы. Человек сортирует мусор — чувствует что делает что-то. Чувство обманчиво: 80% "перерабатываемого" пластика всё равно сжигается. Реальные изменения требуют системного видения которого ни у кого нет.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Earth — нервная система планеты. Видит реальное воздействие каждого решения на экосистему. Не через 50 лет прогнозов — через реальные данные в реальном времени. Прозрачный углеродный след каждого продукта через весь цикл производства. Когда системы умных ферм, чистой энергии и оптимизированной логистики работают вместе — исчезает необходимость компромисса между экономикой и экологией. Правильное экономически — оказывается правильным для планеты.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$5T</div>
+        <div class="pcard-mlabel">climate economy<br>+ green transition</div>
+      </div>
+    </div>
+
+    <!-- 32 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">32</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX Creativity</div>
+        <div class="pcard-kills">↳ "У меня нет таланта"<br>↳ Творчество только для избранных<br>↳ Adobe за $600 в год<br>↳ Курсы "стань дизайнером за 3 месяца"</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          Вы хотели рисовать с детства. Учитель сказал что у вас нет способностей — и вы поверили. Тридцать лет не рисовали. Или хотели писать — но "кому это интересно". Или сочинять музыку — но "я не музыкант". Творчество стало профессией для специалистов и хобби для людей с деньгами на курсы и временем на практику. Для остальных — потребление чужого творчества навсегда.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Creativity — соавтор который знает вас. Не генерирует за вас — помогает выразить то что внутри вас. Пишете — MAX помогает найти слова для того что вы чувствуете. Рисуете — MAX видит что вы пытаетесь создать и показывает как. Музыка — наигрываете мелодию голосом, MAX помогает оформить. Инструменты без подписки $600 в год. Творчество возвращается к восьми миллиардам людей которым отказали в нём в раннем возрасте. Это не маленькая вещь — это огромная часть человеческого потенциала который был заперт.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">$250B</div>
+        <div class="pcard-mlabel">creative tools<br>+ content creation</div>
+      </div>
+    </div>
+
+    <!-- 33 -->
+    <div class="pcard reveal">
+      <div class="pcard-num">33</div>
+      <div class="pcard-identity">
+        <div class="pcard-name">MAX UBI</div>
+        <div class="pcard-kills">↳ Бедность как судьбу<br>↳ "Работай или голодай"<br>↳ Социальную помощь через бюрократию<br>↳ Принуждение страхом</div>
+      </div>
+      <div class="pcard-pain">
+        <span class="pcard-pain-label">Реальная боль</span>
+        <div class="pcard-pain-text">
+          2 миллиарда человек не имеют банковского счёта. Не потому что не хотят. Потому что нужны документы, минимальный остаток, физическое отделение, комиссии. Социальная помощь государства — бюрократия, очереди, унижение, проверки. Автоматизация уничтожает рабочие места быстрее чем создаёт новые. Это не временный кризис. Это структурный сдвиг. И единственный честный ответ — базовый доход. Который пока невозможно распределить честно и эффективно.
+        </div>
+      </div>
+      <div class="pcard-solution">
+        <span class="pcard-sol-label">MAX решает</span>
+        <div class="pcard-sol-text">
+          MAX Coin + биометрия голоса — банковский счёт для каждого человека на планете. Без документов. Без минимального остатка. Без отделения. Без комиссий. Базовый доход через прозрачный смарт-контракт: условия выполнены — деньги пришли. Без чиновника который решает достоин ли ты. По мере того как автоматизация снижает стоимость базовых благ — базовый доход покрывает всё больше. Работа ради выживания исчезает. Остаётся работа ради смысла. Это и есть конец истории принуждения.
+        </div>
+      </div>
+      <div class="pcard-market">
+        <div class="pcard-mnum">∞</div>
+        <div class="pcard-mlabel">this is not<br>a market. this is<br>civilization.</div>
+      </div>
+    </div>
+
+  </div><!-- end products-list -->
+
+  <div class="total-bar reveal">
+    <div class="total-bar-left">
+      <span class="total-label">Итого адресуемый рынок · 33 продукта</span>
+      <div class="total-sublabel">Мировой ВВП $105T полностью проходит через MAX. Комиссия 10% = $10.5T/год выручки. Мультипликатор 20x = капитализация сопоставимая с мировым ВВП. Но цифры — не цель. Цель — восемь миллиардов хороших жизней.</div>
+    </div>
+    <div>
+      <span class="total-pct">= весь мировой ВВП</span>
+      <div class="total-num">$105T</div>
+    </div>
+  </div>
+</section>
+
+<!-- MOAT -->
+<section class="moat-section" id="moat">
+  <div class="moat-grid">
+    <div class="moat-visual">
+      <div class="moat-rings">
+        <div class="ring ring-4">
+          <span class="ring-label" style="top:10px;left:50%;transform:translateX(-50%)">Пользователи планеты</span>
+        </div>
+        <div class="ring ring-3">
+          <span class="ring-label" style="top:10px;left:50%;transform:translateX(-50%)">Органическая data</span>
+        </div>
+        <div class="ring ring-2">
+          <span class="ring-label" style="top:8px;left:50%;transform:translateX(-50%)">Паттерны</span>
+        </div>
+        <div class="ring ring-1"></div>
+        <div class="ring-center">MAX</div>
+      </div>
+    </div>
+    <div class="moat-content">
+      <div class="section-label">MOAT — Непреодолимое преимущество</div>
+      <h2 class="moat-title reveal">
+        То что нельзя<br>купить, скопировать<br><em>или догнать.</em>
+      </h2>
+      <p class="moat-text reveal reveal-delay-1">
+        ChatGPT, Gemini, все остальные — умные. И каждый раз с чистого листа. Ноль памяти. Ноль контекста. Ноль знания о вас. Это Nokia 2006 года — хорошо звонит. MAX — это iPhone. Другая категория.
+      </p>
+      <p class="moat-text reveal reveal-delay-2">
+        Год реальных разговоров с пользователем — нельзя нагнать никакими деньгами. Это органическое знание которое растёт только через доверие и время.
+      </p>
+
+      <div class="moat-laws reveal reveal-delay-3">
+        <div class="law-item">
+          <span class="law-name">Закон Меткалфа</span>
+          <span class="law-desc">Ценность сети = квадрату числа участников. 1 пользователь → 1. Миллиард → 10<sup>18</sup>. Кто первый достигает критической массы — победил навсегда.</span>
+        </div>
+        <div class="law-item">
+          <span class="law-name">Compound Effect</span>
+          <span class="law-desc">+1% лучше каждый день → 37x лучше за год. MOAT DATA работает так же. День 1: система знает немного. День 365: знает больше чем большинство людей в вашей жизни.</span>
+        </div>
+        <div class="law-item">
+          <span class="law-name">Federated Privacy</span>
+          <span class="law-desc">Ваши данные физически не покидают устройство без явного разрешения. Только математические дельты. Это не политика в ToS — это архитектурная математика. Нельзя отменить обновлением.</span>
+        </div>
+        <div class="law-item">
+          <span class="law-name">Aligned Economics</span>
+          <span class="law-desc">Чем лучше работает ваша жизнь — тем больше зарабатывает MAX. Первый раз в истории tech это не слоган. Это механика бизнес-модели.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision-section" id="vision">
+  <div class="vision-bg-text">MAX</div>
+  <div class="vision-inner">
+    <div class="section-label" style="justify-content:center;margin-bottom:48px">Три эпохи</div>
+    <div class="vision-timeline reveal">
+      <div class="timeline-item">
+        <span class="timeline-era">Сейчас · Земля 1.0</span>
+        <div class="timeline-name">Абсурд</div>
+        <div class="timeline-desc">70-80% экономики обслуживает саму себя. Средства стали целью. 85% людей делают не то чего хотят.</div>
+      </div>
+      <div class="timeline-item active">
+        <span class="timeline-era">MAX · Земля 2.0</span>
+        <div class="timeline-name">Автоматизация</div>
+        <div class="timeline-desc">Всё что не нужно — заменено. База покрыта. Умные фермы, чистая энергия, превентивная медицина. Появляется время.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-era">Итог · Земля 3.0</span>
+        <div class="timeline-name">Рай</div>
+        <div class="timeline-desc">Работа как призвание — не принуждение. Еда в трёх минутах. Люди знают соседей. Дети учатся через страсть.</div>
+      </div>
+    </div>
+
+    <blockquote class="vision-quote reveal">
+      "Каждая великая революция давала людям <em>время</em>. Колесо. Пар. Электричество. Интернет. MAX освобождает больше времени чем все они вместе — и впервые не только для богатых."
+    </blockquote>
+
+    <p style="font-size:13px;color:var(--white-dim);line-height:1.9;max-width:600px;margin:0 auto" class="reveal reveal-delay-1">
+      Это не утопия. Все технологии для Земли 3.0 существуют прямо сейчас. Вертикальные фермы — существуют. Чистая энергия — существует. Превентивная медицина — существует. Персональное образование — существует. Не хватало системы которая соединяет всё это вокруг правильного вопроса. Правильный вопрос — не "как заработать больше денег". А "что нужно каждому человеку для хорошей жизни".
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content:center;margin-bottom:40px">Присоединиться</div>
+    <h2 class="cta-title reveal">
+      Войдите
+      <em>первыми.</em>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-1">
+      MAX сейчас в закрытом доступе. Первые участники формируют фундамент системы и получают доступ к MOAT DATA которую нельзя купить позже.
+    </p>
+    <div class="cta-form reveal reveal-delay-2">
+      <input type="email" class="cta-input" placeholder="ваш@email.com">
+      <button class="cta-btn">Запросить →</button>
+    </div>
+    <p class="cta-disclaimer reveal reveal-delay-3">
+      Ваши данные не передаются третьим лицам. Никогда. Это архитектура, не политика.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MAX</div>
+  <p class="footer-copy">© 2026 MAX. Операционная система жизни.</p>
+  <ul class="footer-links">
+    <li><a href="#">Манифест</a></li>
+    <li><a href="#">Технология</a></li>
+    <li><a href="#">Конфиденциальность</a></li>
+    <li><a href="#">Контакт</a></li>
+  </ul>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px';
+  ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('button, a, .product-row, .stat-card, .memory-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.transform = 'scale(1.5)';
+    ring.style.borderColor = 'rgba(200,169,126,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+    ring.style.borderColor = 'rgba(200,169,126,0.4)';
+  });
+});
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// NEURAL CANVAS
+const canvas = document.getElementById('neural-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let nodes = [];
+const NODE_COUNT = 60;
+
+for (let i = 0; i < NODE_COUNT; i++) {
+  nodes.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 2 + 1,
+    pulse: Math.random() * Math.PI * 2
+  });
+}
+
+let mouseX = canvas.width / 2;
+let mouseY = canvas.height / 2;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+function drawNeural() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  nodes.forEach(n => {
+    n.x += n.vx;
+    n.y += n.vy;
+    n.pulse += 0.02;
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+    const distM = Math.hypot(n.x - mouseX, n.y - mouseY);
+    if (distM < 150) {
+      n.x += (n.x - mouseX) * 0.002;
+      n.y += (n.y - mouseY) * 0.002;
+    }
+  });
+
+  nodes.forEach((a, i) => {
+    nodes.slice(i + 1).forEach(b => {
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 160) {
+        const alpha = (1 - d / 160) * 0.25;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(200,169,126,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    });
+
+    const pulse = Math.sin(a.pulse) * 0.5 + 0.5;
+    ctx.beginPath();
+    ctx.arc(a.x, a.y, a.r * (0.8 + pulse * 0.4), 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,169,126,${0.3 + pulse * 0.3})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(drawNeural);
+}
+drawNeural();
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// COUNTER ANIMATION
+function animateCounter(el, target, suffix='') {
+  const start = 0;
+  const duration = 2000;
+  const startTime = performance.now();
+
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(start + (target - start) * ease);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// TICKER DUPLICATE
+const track = document.getElementById('ticker');
+track.innerHTML += track.innerHTML;
+
+// EMAIL FORM
+document.querySelector('.cta-btn').addEventListener('click', () => {
+  const input = document.querySelector('.cta-input');
+  if (input.value && input.value.includes('@')) {
+    input.value = '';
+    input.placeholder = '✓ Добро пожаловать в новый мир';
+    document.querySelector('.cta-btn').textContent = 'Готово';
+    document.querySelector('.cta-btn').style.background = 'var(--green)';
+  }
+});
+</script>
+</body>
+</html>
