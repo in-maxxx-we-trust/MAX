@@ -1229,6 +1229,101 @@
     .day-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 40px; margin-bottom: 40px; }
     .day-events { padding-left: 0; }
   }
+
+  /* ══════════════════════════════
+     QUOTE INSERTS — MILK STRIPS
+  ══════════════════════════════ */
+  .qi {
+    background: #F0E8DA;
+    color: #1a1712;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .qi::before {
+    content: ',,';
+    position: absolute;
+    top: -20px; left: 44px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    color: rgba(200,169,126,0.25);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .qi-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .qi-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #8a7055;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .qi-tag::before { content: ''; width: 32px; height: 1px; background: #8a7055; }
+  .qi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: #1a1712;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .qi-who {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .qi-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1712;
+    letter-spacing: 1px;
+  }
+  .qi-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #6a5a3f;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .qi-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(200,169,126,0.4);
+    margin-bottom: 32px;
+  }
+  .qi-explain {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #3d3328;
+    max-width: 720px;
+  }
+  .qi-explain strong { color: #1a1712; font-weight: 500; }
+  .qi-explain em { color: #8a7055; font-style: normal; font-weight: 500; }
+  /* Variant: dark gold */
+  .qi.qi-dark {
+    background: #C8A97E;
+    color: var(--black);
+  }
+  .qi.qi-dark::before { color: rgba(6,6,8,0.1); }
+  .qi.qi-dark .qi-tag { color: rgba(6,6,8,0.5); }
+  .qi.qi-dark .qi-tag::before { background: rgba(6,6,8,0.4); }
+  .qi.qi-dark .qi-quote { color: var(--black); }
+  .qi.qi-dark .qi-name { color: var(--black); }
+  .qi.qi-dark .qi-title { color: rgba(6,6,8,0.6); }
+  .qi.qi-dark .qi-divider { background: rgba(6,6,8,0.2); }
+  .qi.qi-dark .qi-explain { color: rgba(6,6,8,0.75); }
+  .qi.qi-dark .qi-explain strong { color: var(--black); }
 </style>
 </head>
 <body>
@@ -1289,6 +1384,21 @@
     <span class="manifesto-item">MAX Education — убивает прусскую школу</span>
     <span class="manifesto-item">MAX Food — убивает лишнюю логистику</span>
     <span class="manifesto-item">MAX Social — убивает алгоритм одиночества</span>
+  </div>
+</div>
+
+
+<!-- QUOTE INSERT: FORD -->
+<div class="qi reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">Об инновациях</div>
+    <div class="qi-quote">"If I had asked people what they wanted, they would have said faster horses."</div>
+    <div class="qi-who">
+      <span class="qi-name">Henry Ford</span>
+      <span class="qi-title">Основатель Ford Motor Company · 1863–1947</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">Форд не улучшал лошадей. Он заменил всю парадигму транспорта — и мир не заметил как перестал ездить верхом. <strong>MAX не делает лучший Siri.</strong> Мы задаём другой вопрос — не "как сделать приложение удобнее?" а "почему вообще нужны 80 отдельных приложений которые не знают друг друга и не знают вас?" Люди просят быстрее лошадей. Мы строим автомобиль.</p>
   </div>
 </div>
 
@@ -1388,6 +1498,21 @@
   </div>
 </section>
 
+
+<!-- QUOTE INSERT: JOBS -->
+<div class="qi qi-dark reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О видении</div>
+    <div class="qi-quote">"People don't know what they want until you show it to them."</div>
+    <div class="qi-who">
+      <span class="qi-name">Steve Jobs</span>
+      <span class="qi-title">Сооснователь Apple · 1955–2011</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">В 2006 году никто не просил смартфон. Просили лучший телефон и лучший плеер отдельно. Джобс объединил всё — и через пять лет у каждого в кармане был компьютер мощнее чем целые университеты 20 лет назад. <strong>Никто не просит "голосовой ИИ который помнит кто я и знает мою жизнь".</strong> Но после первой недели с MAX вы не понимаете как жили без этого. Именно так ощущалось когда люди впервые взяли в руки iPhone.</p>
+  </div>
+</div>
+
 <!-- DAY IN LIFE -->
 <section class="day-section">
   <div class="day-header">
@@ -1462,6 +1587,21 @@
     </div>
   </div>
 </section>
+
+
+<!-- QUOTE INSERT: TESLA -->
+<div class="qi reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О времени и правоте</div>
+    <div class="qi-quote">"The present is theirs; the future, for which I really worked, is mine."</div>
+    <div class="qi-who">
+      <span class="qi-name">Nikola Tesla</span>
+      <span class="qi-title">Изобретатель · 1856–1943</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">Tesla умер в долгах в номере отеля. Edison был богат и знаменит. Инвесторы смеялись над "беспроводной передачей энергии" — идеей настолько опережавшей время что казалась безумием. Сегодня имя Теслы носит самая дорогая автомобильная компания мира, а его принципы лежат в основе каждого Wi-Fi роутера. <strong>Правильные ставки делаются не на то что популярно сегодня — а на то что неизбежно завтра.</strong> MAX неизбежен. Вопрос только когда вы окажетесь внутри.</p>
+  </div>
+</div>
 
 <!-- OBJECTIONS -->
 <section class="obj-section">
@@ -1557,6 +1697,21 @@
   </div>
 </section>
 
+
+<!-- QUOTE INSERT: FULLER -->
+<div class="qi qi-dark reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О стратегии изменений</div>
+    <div class="qi-quote">"You never change things by fighting the existing reality. To change something, build a new model that makes the existing model obsolete."</div>
+    <div class="qi-who">
+      <span class="qi-name">Buckminster Fuller</span>
+      <span class="qi-title">Архитектор · Футурист · Инженер · 1895–1983</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">MAX не воюет с банками. Не судится со страховыми компаниями. Не подаёт петиции против Instagram. Мы просто строим лучшую альтернативу. <strong>Когда альтернатива достаточно хороша — старая модель умирает сама.</strong> По экономике. Без драмы. Так умерли Kodak, Blockbuster, Nokia. Не потому что кто-то с ними боролся — а потому что кто-то построил нечто лучшее и люди тихо перешли.</p>
+  </div>
+</div>
+
 <!-- PRIVACY BLOCK -->
 <section>
   <div class="privacy-strip reveal">
@@ -1649,6 +1804,21 @@
     </div>
   </div>
 </section>
+
+
+<!-- QUOTE INSERT: EINSTEIN -->
+<div class="qi reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О мышлении</div>
+    <div class="qi-quote">"We cannot solve our problems with the same thinking we used when we created them."</div>
+    <div class="qi-who">
+      <span class="qi-name">Albert Einstein</span>
+      <span class="qi-title">Физик · Нобелевский лауреат · 1879–1955</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">70–80% мировой экономики — overhead на обслуживание системы которая сама же создала проблему. Люди работают чтобы покупать вещи у компаний которые платят другим людям которые работают чтобы покупать вещи. Попытки улучшить эту систему изнутри — более умные приложения, более быстрая доставка, более красивый интерфейс — это мышление которое создало проблему. <strong>MAX — другой уровень вопроса.</strong> Не "как оптимизировать?" а "зачем это вообще нужно?"</p>
+  </div>
+</div>
 
 <!-- PROBLEM -->
 <section class="problem-section">
@@ -1802,6 +1972,21 @@
     </div>
   </div>
 </section>
+
+
+<!-- QUOTE INSERT: ALAN KAY -->
+<div class="qi qi-dark reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О будущем</div>
+    <div class="qi-quote">"The best way to predict the future is to invent it."</div>
+    <div class="qi-who">
+      <span class="qi-name">Alan Kay</span>
+      <span class="qi-title">Создатель современного UI · Xerox PARC · Apple Fellow</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">Кей изобрёл концепцию персонального компьютера и оконного интерфейса в 1970-х — когда "компьютеры для людей" казались абсурдом. Каждая компания тогда производила компьютеры для корпораций. Кей просто построил то чего не существовало. <strong>Ниже — 33 продукта которые не существуют в нынешнем виде.</strong> Не потому что технологий нет. Потому что ни у кого раньше не было причины объединить всё это вокруг одного вопроса: что нужно каждому человеку для хорошей жизни.</p>
+  </div>
+</div>
 
 <!-- PRODUCTS -->
 <section class="products-section" id="products">
@@ -2711,6 +2896,21 @@
     </div>
   </div>
 </section>
+
+
+<!-- QUOTE INSERT: ARTHUR CLARKE -->
+<div class="qi reveal">
+  <div class="qi-inner">
+    <div class="qi-tag">О технологии и магии</div>
+    <div class="qi-quote">"Any sufficiently advanced technology is indistinguishable from magic."</div>
+    <div class="qi-who">
+      <span class="qi-name">Arthur C. Clarke</span>
+      <span class="qi-title">Писатель · Футурист · Автор "Космической одиссеи" · 1917–2008</span>
+    </div>
+    <div class="qi-divider"></div>
+    <p class="qi-explain">В 1945 году Кларк предсказал спутниковую связь — когда радиоволны ловили только прямой видимостью. Его засмеяли. Через 12 лет запустили первый спутник. MAX Mind который замечает что вам плохо до того как вы сами это осознали — это не магия. MAX Health который слышит начало болезни в вашем голосе — это не волшебство. <strong>Это достаточно продвинутая технология.</strong> Разница только в том принято ли уже считать это нормой.</p>
+  </div>
+</div>
 
 <!-- VISION -->
 <section class="vision-section" id="vision">
