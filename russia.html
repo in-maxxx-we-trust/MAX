@@ -1,0 +1,3567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЦИФРОВАЯ РОССИЯ 2030 — Национальный план цифровизации</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #f5f8ff;
+  --deep: #eaf0fb;
+  --card: #ffffff;
+  --border: #ccd8ef;
+  --gold: #003087;
+  --gold2: #1a50c8;
+  --red: #CC1F1F;
+  --blue: #003087;
+  --cyan: #1a50c8;
+  --white: #0a1628;
+  --muted: #6b7a99;
+  --text: #2d3e5c;
+  /* tricolor */
+  --ru-white: #FFFFFF;
+  --ru-blue: #003087;
+  --ru-red: #CC1F1F;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Geologica', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.08;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(245,248,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 20px rgba(0,48,135,0.07);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.4; transform: scale(0.7); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 80px;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,48,135,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,48,135,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -200px; left: -200px;
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(0,48,135,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  bottom: -300px; right: -100px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(204,31,31,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeUp 1s ease both;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 10vw, 148px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  animation: fadeUp 1s ease 0.1s both;
+}
+
+.hero h1 .accent {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--gold);
+}
+
+.hero h1 .red {
+  color: var(--red);
+}
+
+.hero-sub {
+  margin-top: 40px;
+  max-width: 620px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text);
+  animation: fadeUp 1s ease 0.2s both;
+}
+
+.hero-sub strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 64px;
+  animation: fadeUp 1s ease 0.3s both;
+  flex-wrap: wrap;
+}
+
+.hstat {
+  border-left: 2px solid var(--gold);
+  padding-left: 20px;
+}
+
+.hstat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.hstat-num span { color: var(--gold); }
+
+.hstat-label {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px; left: 48px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 1s ease 0.5s both;
+}
+
+.hero-scroll::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--muted);
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ─── SECTION UTILITY ─── */
+section {
+  padding: 120px 48px;
+  position: relative;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.section-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,48,135,0.2);
+}
+
+.section-body {
+  max-width: 640px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+  margin: 0 48px;
+}
+
+/* ─── VOICE ASSISTANT SECTION ─── */
+.voice-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.voice-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+.voice-orb {
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(0,48,135,0.15), rgba(204,31,31,0.08), rgba(234,240,251,0.9));
+  box-shadow:
+    0 0 60px rgba(0,48,135,0.15),
+    0 0 120px rgba(0,48,135,0.07),
+    inset 0 0 60px rgba(255,255,255,0.5);
+  animation: orbPulse 3s ease-in-out infinite;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-orb::before,
+.voice-orb::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0,48,135,0.15);
+  animation: ringExpand 3s ease-in-out infinite;
+}
+
+.voice-orb::before {
+  width: 280px; height: 280px;
+  animation-delay: 0.5s;
+}
+
+.voice-orb::after {
+  width: 360px; height: 360px;
+  animation-delay: 1s;
+}
+
+@keyframes orbPulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 60px rgba(0,48,135,0.15), 0 0 120px rgba(0,48,135,0.07), inset 0 0 60px rgba(255,255,255,0.5); }
+  50% { transform: scale(1.04); box-shadow: 0 0 100px rgba(0,48,135,0.25), 0 0 200px rgba(0,48,135,0.12), inset 0 0 60px rgba(255,255,255,0.5); }
+}
+
+@keyframes ringExpand {
+  0% { opacity: 0.6; transform: scale(0.95); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+
+.voice-mic {
+  font-size: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.voice-bars {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  height: 40px;
+}
+
+.voice-bar {
+  width: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: barAnim 1.2s ease-in-out infinite;
+}
+
+.voice-bar:nth-child(1) { animation-delay: 0s; }
+.voice-bar:nth-child(2) { animation-delay: 0.1s; }
+.voice-bar:nth-child(3) { animation-delay: 0.2s; }
+.voice-bar:nth-child(4) { animation-delay: 0.3s; }
+.voice-bar:nth-child(5) { animation-delay: 0.2s; }
+.voice-bar:nth-child(6) { animation-delay: 0.1s; }
+.voice-bar:nth-child(7) { animation-delay: 0s; }
+
+@keyframes barAnim {
+  0%,100% { height: 8px; opacity: 0.4; }
+  50% { height: 36px; opacity: 1; }
+}
+
+.voice-features {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.vf-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.vf-item:hover {
+  border-color: var(--gold);
+  transform: translateX(4px);
+}
+
+.vf-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.vf-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.vf-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── DIALOG DEMO ─── */
+.dialog-demo {
+  margin-top: 48px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dialog-header {
+  background: rgba(0,48,135,0.05);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.dialog-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.msg {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 90%;
+}
+
+.msg.user { flex-direction: row-reverse; align-self: flex-end; }
+
+.msg-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.msg.ai .msg-avatar { background: rgba(0,48,135,0.1); }
+
+.msg-text {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.msg.ai .msg-text {
+  background: rgba(0,48,135,0.06);
+  border: 1px solid rgba(0,48,135,0.15);
+  color: var(--text);
+}
+
+.msg.user .msg-text {
+  background: rgba(204,31,31,0.05);
+  border: 1px solid rgba(204,31,31,0.15);
+  color: var(--white);
+}
+
+/* ─── PLAN SECTION ─── */
+.plan-section { background: var(--black); }
+
+.timeline {
+  margin-top: 64px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 200px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 196px;
+  top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 16px rgba(0,48,135,0.4);
+}
+
+.tl-date {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold);
+  text-align: right;
+  padding-right: 32px;
+  padding-top: 0;
+  letter-spacing: 0.05em;
+}
+
+.tl-date small {
+  display: block;
+  font-family: 'Geologica', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.tl-content {}
+
+.tl-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.tl-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tl-point {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.tl-point::before {
+  content: '→';
+  color: var(--gold);
+  flex-shrink: 0;
+  font-weight: 400;
+}
+
+.tl-badge {
+  display: inline-block;
+  background: rgba(0,48,135,0.08);
+  border: 1px solid rgba(0,48,135,0.25);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.tl-badge.red {
+  background: rgba(204,31,31,0.08);
+  border-color: rgba(204,31,31,0.25);
+  color: var(--red);
+}
+
+/* ─── 12 VERTICALS ─── */
+.verticals-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+}
+
+.verticals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 64px;
+  border: 1px solid var(--border);
+}
+
+.vert-card {
+  background: var(--card);
+  padding: 32px;
+  transition: background 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.vert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.vert-card:hover::before { transform: scaleX(1); }
+.vert-card:hover { background: rgba(0,48,135,0.03); }
+
+.vert-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  color: rgba(0,48,135,0.06);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.vert-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+
+.vert-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.vert-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.vert-kpi {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+/* ─── BUDGET SECTION ─── */
+.budget-section { background: var(--black); }
+
+.budget-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 12vw, 180px);
+  color: var(--white);
+  line-height: 0.9;
+  margin: 40px 0 0;
+  position: relative;
+}
+
+.budget-big span { color: var(--gold); }
+
+.budget-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 64px;
+  border: 1px solid var(--border);
+}
+
+.budget-card {
+  background: var(--card);
+  padding: 32px 24px;
+  transition: background 0.2s;
+}
+
+.budget-card:hover { background: rgba(0,48,135,0.02); }
+
+.bc-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.bc-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--white);
+  line-height: 1;
+}
+
+.bc-amount .unit {
+  font-family: 'Geologica', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-left: 4px;
+}
+
+.bc-bar-wrap {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.bc-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+}
+
+.bc-growth {
+  font-size: 12px;
+  color: #4caf50;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* ─── ARCHITECTURE ─── */
+.arch-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+}
+
+.arch-diagram {
+  margin-top: 64px;
+  position: relative;
+}
+
+.arch-layer {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  margin-bottom: 2px;
+  align-items: stretch;
+}
+
+.arch-layer-label {
+  background: rgba(0,48,135,0.05);
+  border: 1px solid rgba(0,48,135,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 16px 8px;
+}
+
+.arch-boxes {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+.arch-box {
+  flex: 1;
+  min-width: 100px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.arch-box:hover {
+  border-color: var(--gold);
+  background: rgba(0,48,135,0.04);
+  color: var(--white);
+  box-shadow: 0 2px 12px rgba(0,48,135,0.1);
+}
+
+.arch-box .box-sub {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── BRIKS SECTION ─── */
+.briks-section { background: var(--black); }
+
+.briks-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 64px;
+  margin-top: 64px;
+  align-items: start;
+}
+
+.briks-map {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 48px;
+  border-radius: 2px;
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.briks-map::before {
+  content: 'БРИКС+';
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  color: rgba(0,48,135,0.04);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  white-space: nowrap;
+}
+
+.briks-countries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.briks-country {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.briks-country:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,48,135,0.12);
+}
+
+.briks-country.ru {
+  border-color: rgba(0,48,135,0.4);
+  background: rgba(0,48,135,0.06);
+  color: var(--gold);
+}
+
+.briks-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.briks-point {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+}
+
+.briks-point h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.briks-point p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── CONCLUSION ─── */
+.conclusion {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 160px 48px;
+}
+
+.conclusion h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 8vw, 120px);
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.conclusion h2 span { color: var(--gold); }
+
+.conclusion p {
+  max-width: 600px;
+  margin: 0 auto 48px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.cta-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,48,135,0.25);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--gold);
+  box-shadow: none;
+}
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  border: 2px solid var(--border);
+  transition: all 0.2s;
+  border-radius: 4px;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ─── PROGRESS BARS ─── */
+.metrics-section { background: var(--black); }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 64px;
+}
+
+.metric-item { margin-bottom: 28px; }
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.metric-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.metric-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.metric-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.metric-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 2px;
+}
+
+.metric-target {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.footer-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── TRICOLOR STRIPE ─── */
+.tricolor-bar {
+  height: 5px;
+  background: linear-gradient(90deg, #FFFFFF 33.33%, #003087 33.33% 66.66%, #CC1F1F 66.66%);
+  border-top: 1px solid #dde4f0;
+}
+
+/* ─── ANNOUNCE TICKER ─── */
+.announce-bar {
+  background: #003087;
+  color: #fff;
+  padding: 0;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 99;
+}
+
+.announce-label {
+  background: #CC1F1F;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  gap: 8px;
+}
+
+.announce-label::before {
+  content: '●';
+  animation: pulse 1s ease-in-out infinite;
+  font-size: 8px;
+}
+
+.announce-track {
+  overflow: hidden;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.announce-inner {
+  display: flex;
+  gap: 0;
+  animation: tickerMove 40s linear infinite;
+  white-space: nowrap;
+}
+
+.announce-inner:hover { animation-play-state: paused; }
+
+.announce-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 0 48px;
+  color: rgba(255,255,255,0.9);
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+.announce-item strong { color: #fff; }
+
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── HERO COMPLETE OVERHAUL ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 60px 80px;
+  overflow: hidden;
+  background: #f7faff;
+}
+
+/* Big diagonal blue/red shape */
+.hero-bg-shape-blue {
+  position: absolute;
+  top: 0; right: 0;
+  width: 52%;
+  height: 100%;
+  background: linear-gradient(160deg, #003087 0%, #1a50c8 100%);
+  clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.hero-bg-shape-red {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 35%;
+  height: 45%;
+  background: linear-gradient(135deg, #CC1F1F 0%, #e63535 100%);
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.hero-bg-white-stripe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 52%;
+  height: 8px;
+  background: #fff;
+  z-index: 1;
+}
+
+/* Grid only on left white part */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,48,135,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,48,135,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  clip-path: polygon(0 0, 52% 0, 38% 100%, 0 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,48,135,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  bottom: -150px; right: 200px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(204,31,31,0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating decoration circles on blue */
+.hero-deco {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-deco-1 {
+  width: 300px; height: 300px;
+  border: 1px solid rgba(255,255,255,0.1);
+  top: 10%; right: 6%;
+  animation: heroRotate 20s linear infinite;
+}
+
+.hero-deco-2 {
+  width: 180px; height: 180px;
+  border: 1px solid rgba(255,255,255,0.15);
+  top: 15%; right: 12%;
+  animation: heroRotate 14s linear infinite reverse;
+}
+
+.hero-deco-3 {
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.08);
+  top: 25%; right: 18%;
+}
+
+.hero-deco-4 {
+  width: 20px; height: 20px;
+  background: #CC1F1F;
+  bottom: 30%; right: 14%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-deco-5 {
+  width: 12px; height: 12px;
+  background: rgba(255,255,255,0.4);
+  top: 40%; right: 28%;
+}
+
+@keyframes heroRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Right side badge */
+.hero-badge {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  animation: fadeUp 1s ease 0.6s both;
+}
+
+.hero-badge-ring {
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto 24px;
+}
+
+.hero-badge-ring::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.hero-badge-inner {
+  text-align: center;
+}
+
+.hero-badge-year {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  line-height: 0.9;
+  color: #fff;
+}
+
+.hero-badge-sub {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.hero-badge-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hero-chip {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+/* Hero tag now styled differently */
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: #003087;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp 1s ease both;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag::after {
+  content: '';
+  display: inline-block;
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, #003087, #CC1F1F);
+}
+
+/* H1 tricolor treatment */
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 9vw, 140px);
+  line-height: 0.88;
+  letter-spacing: 0.01em;
+  animation: fadeUp 1s ease 0.1s both;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 .h1-white { color: #0a1628; display: block; }
+.hero h1 .h1-blue  { color: #003087; display: block; }
+.hero h1 .h1-red   { color: #CC1F1F; display: block; }
+.hero h1 .h1-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px #003087;
+  display: block;
+}
+
+/* Stat pills redesign */
+.hstat {
+  border-left: 3px solid #003087;
+  padding-left: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.hstat:nth-child(2) { border-color: #CC1F1F; }
+.hstat:nth-child(3) { border-color: #003087; }
+.hstat:nth-child(4) { border-color: #CC1F1F; }
+
+.hstat-num { color: #0a1628; }
+.hstat-num span { color: #003087; }
+
+/* hero-sub z-index */
+.hero-sub {
+  margin-top: 36px;
+  max-width: 560px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #2d3e5c;
+  animation: fadeUp 1s ease 0.2s both;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-sub strong { color: #0a1628; font-weight: 700; }
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 56px;
+  animation: fadeUp 1s ease 0.3s both;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px; left: 60px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #6b7a99;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 1s ease 0.5s both;
+  z-index: 2;
+}
+
+.hero-scroll::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, #003087, #CC1F1F);
+}
+
+/* Tricolor vertical decoration left edge */
+.hero-tricolor-left {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, #fff 33.33%, #003087 33.33% 66.66%, #CC1F1F 66.66%);
+  z-index: 3;
+}
+
+/* ─── PERSONA / WHO IS THIS FOR ─── */
+.persona-section {
+  background: #003087;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.persona-section::before {
+  content: 'ДЛЯ ВАС';
+  position: absolute;
+  right: -20px; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 140px;
+  color: rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.persona-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #fff 33.33%, #003087 33.33% 66.66%, #CC1F1F 66.66%);
+  background-color: #CC1F1F;
+  /* just red bottom accent */
+  background: linear-gradient(90deg, rgba(255,255,255,0.2), #CC1F1F, rgba(255,255,255,0.2));
+}
+
+.persona-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.persona-header .section-label {
+  color: rgba(255,255,255,0.5);
+}
+
+.persona-header h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  color: #fff;
+  line-height: 1;
+}
+
+.persona-header h2 em {
+  font-style: normal;
+  color: #CC1F1F;
+  -webkit-text-stroke: 0;
+}
+
+.persona-header p {
+  color: rgba(255,255,255,0.7);
+  font-size: 17px;
+  font-weight: 300;
+  margin-top: 16px;
+  max-width: 560px;
+  margin-inline: auto;
+  line-height: 1.65;
+}
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.persona-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 28px 20px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.persona-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: #CC1F1F;
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+}
+
+.persona-card:hover,
+.persona-card.active {
+  background: rgba(255,255,255,0.13);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+.persona-card:hover::before,
+.persona-card.active::before {
+  transform: scaleX(1);
+}
+
+.persona-emoji {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.persona-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.persona-role {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+}
+
+.persona-detail {
+  margin-top: 40px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 36px 40px;
+  display: none;
+  animation: fadeUp 0.4s ease both;
+}
+
+.persona-detail.active { display: block; }
+
+.persona-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.pd-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 12px;
+  grid-column: 1 / -1;
+}
+
+.pd-block {
+  background: rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.pd-block-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #CC1F1F;
+  margin-bottom: 8px;
+}
+
+.pd-block-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+
+/* ─── INTERACTIVE VOICE DEMO ─── */
+.voice-interactive {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 48px;
+  box-shadow: 0 8px 40px rgba(0,48,135,0.1);
+}
+
+.vi-header {
+  background: linear-gradient(90deg, #003087, #1a50c8);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vi-dot { width: 10px; height: 10px; border-radius: 50%; }
+.vi-dot.r { background: #CC1F1F; }
+.vi-dot.y { background: #f0c96e; }
+.vi-dot.g { background: #4caf50; }
+
+.vi-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.1em;
+  margin-left: 4px;
+}
+
+/* ─── LIVE NUMBERS TICKER ─── */
+.live-section {
+  background: linear-gradient(135deg, #CC1F1F 0%, #8b0000 100%);
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-section::before {
+  content: '18.02.2026';
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 96px;
+  color: rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.live-item {
+  color: #fff;
+}
+
+.live-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-label::before {
+  content: '▶';
+  font-size: 8px;
+  color: rgba(255,255,255,0.4);
+}
+
+.live-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 4vw, 64px);
+  line-height: 1;
+  color: #fff;
+}
+
+.live-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ─── REGIONS MAP STRIP ─── */
+.regions-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+}
+
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.region-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.region-card:hover {
+  border-color: #003087;
+  box-shadow: 0 4px 20px rgba(0,48,135,0.1);
+  transform: translateY(-2px);
+}
+
+.region-card.pilot {
+  border-color: rgba(0,48,135,0.35);
+  background: rgba(0,48,135,0.03);
+}
+
+.region-pilot-badge {
+  display: inline-block;
+  background: #003087;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.region-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.region-status {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media(max-width: 900px) {
+  .persona-section { padding: 60px 20px; }
+  .persona-grid { grid-template-columns: repeat(3, 1fr); }
+  .persona-detail-grid { grid-template-columns: 1fr; }
+  .live-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .live-section { padding: 48px 20px; }
+  .regions-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-badge { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-tricolor-left { width: 4px; }
+  .hero-bg-shape-blue { width: 100%; clip-path: polygon(0 60%, 100% 40%, 100% 100%, 0% 100%); }
+  .hero-bg-shape-red { display: none; }
+  .hero-grid { clip-path: none; }
+  .announce-bar { height: 32px; }
+}
+
+@media(max-width: 560px) {
+  .persona-grid { grid-template-columns: repeat(2, 1fr); }
+  .live-grid { grid-template-columns: 1fr 1fr; }
+  .regions-grid { grid-template-columns: 1fr 1fr; }
+  .hero-bg-shape-blue { clip-path: polygon(0 70%, 100% 50%, 100% 100%, 0% 100%); }
+  .announce-label { padding: 0 12px; font-size: 9px; }
+}
+
+.tricolor-accent {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tricolor-accent span {
+  display: inline-block;
+  width: 24px; height: 4px;
+  border-radius: 2px;
+}
+
+/* ─── WHAT IS THIS ─── */
+.what-section {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.what-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FFFFFF 33.33%, #003087 33.33% 66.66%, #CC1F1F 66.66%);
+}
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 64px;
+  align-items: center;
+}
+
+.what-pill {
+  display: inline-block;
+  background: rgba(0,48,135,0.07);
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(0,48,135,0.15);
+}
+
+.what-text h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 4vw, 60px);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.what-text h3 em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.what-text p {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.what-text p strong { color: var(--white); font-weight: 700; }
+
+.what-points {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.what-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.what-point:hover {
+  box-shadow: 0 4px 24px rgba(0,48,135,0.1);
+  transform: translateX(4px);
+}
+
+.what-point-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  background: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,48,135,0.1);
+}
+
+.what-point-body h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.what-point-body p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── БЫЛО / СТАЛО ─── */
+.before-after-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+}
+
+.before-after-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.ba-col {}
+
+.ba-header {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ba-header.before { color: var(--muted); }
+.ba-header.after { color: var(--gold); }
+
+.ba-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ba-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ba-item.bad {
+  background: rgba(204,31,31,0.04);
+  border: 1px solid rgba(204,31,31,0.12);
+  color: var(--text);
+}
+
+.ba-item.good {
+  background: rgba(0,48,135,0.05);
+  border: 1px solid rgba(0,48,135,0.15);
+  color: var(--text);
+}
+
+.ba-item.good .ba-ico { color: #16a34a; }
+.ba-item.bad .ba-ico { color: var(--red); }
+
+.ba-ico {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── LIFE SCENARIOS ─── */
+.scenarios-section {
+  background: #FFFFFF;
+  border-top: 1px solid var(--border);
+}
+
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+
+.scenario-card {
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: default;
+}
+
+.scenario-card:hover {
+  box-shadow: 0 8px 40px rgba(0,48,135,0.12);
+  transform: translateY(-3px);
+}
+
+.scenario-top {
+  padding: 28px 28px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.scenario-emoji {
+  font-size: 36px;
+  width: 64px; height: 64px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,48,135,0.1);
+  flex-shrink: 0;
+}
+
+.scenario-meta {}
+
+.scenario-who {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.scenario-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.scenario-steps {
+  padding: 0 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sc-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text);
+  padding: 10px 14px;
+  background: rgba(0,48,135,0.03);
+  border-radius: 8px;
+}
+
+.sc-step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sc-result {
+  margin: 4px 28px 20px;
+  background: rgba(22,163,74,0.07);
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #15803d;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sc-time-save {
+  margin: 0 28px 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.sc-time-badge {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sc-time-badge.old {
+  background: rgba(204,31,31,0.07);
+  color: var(--red);
+  border: 1px solid rgba(204,31,31,0.2);
+  text-decoration: line-through;
+}
+
+.sc-time-badge.new {
+  background: rgba(0,48,135,0.07);
+  color: var(--gold);
+  border: 1px solid rgba(0,48,135,0.2);
+}
+
+/* ─── FAQ ─── */
+.faq-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+}
+
+.faq-list {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: 22px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.faq-q:hover { background: rgba(0,48,135,0.03); }
+
+.faq-q-arrow {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.faq-item.open .faq-q-arrow { transform: rotate(180deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-a-inner {
+  padding: 0 28px 24px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.75;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.faq-item.open .faq-a { max-height: 500px; }
+
+/* ─── GUARANTEE STRIP ─── */
+.guarantee-strip {
+  background: var(--gold);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.gs-item {
+  text-align: center;
+  color: #ffffff;
+}
+
+.gs-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+
+.gs-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.gs-label {
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.85;
+  letter-spacing: 0.05em;
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section { padding: 72px 20px; }
+  .hero { padding: 96px 20px 60px; }
+  .voice-grid { grid-template-columns: 1fr; }
+  .verticals-grid { grid-template-columns: repeat(2,1fr); }
+  .budget-grid { grid-template-columns: repeat(2,1fr); }
+  .briks-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .timeline::before { left: 100px; }
+  .tl-item { grid-template-columns: 100px 1fr; gap: 24px; }
+  .tl-item::before { left: 96px; }
+  .divider { margin: 0 20px; }
+  footer { padding: 32px 20px; }
+  .arch-layer { grid-template-columns: 70px 1fr; }
+  .hero-stats { gap: 20px; }
+  .what-grid { grid-template-columns: 1fr; gap: 40px; }
+  .before-after-grid { grid-template-columns: 1fr; }
+  .scenarios-grid { grid-template-columns: 1fr; }
+  .guarantee-strip { grid-template-columns: repeat(2,1fr); padding: 40px 20px; }
+  .hero h1 { font-size: clamp(60px, 14vw, 120px); }
+}
+
+@media(max-width: 560px) {
+  .verticals-grid { grid-template-columns: 1fr; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .tl-item { grid-template-columns: 1fr; gap: 8px; }
+  .timeline::before { display: none; }
+  .tl-item::before { display: none; }
+  .tl-date { text-align: left; padding-right: 0; font-size: 22px; }
+  .guarantee-strip { grid-template-columns: 1fr 1fr; }
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hstat-num { font-size: 36px; }
+  section { padding: 60px 16px; }
+  .hero { padding: 88px 16px 60px; }
+  .conclusion { padding: 80px 16px; }
+  footer { padding: 24px 16px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- TRICOLOR TOP BAR -->
+<div class="tricolor-bar"></div>
+
+<!-- ANNOUNCE TICKER -->
+<div class="announce-bar">
+  <div class="announce-label">СЕЙЧАС</div>
+  <div class="announce-track">
+    <div class="announce-inner">
+      <span class="announce-item"><strong>18.02.2026</strong> — Все 61 федеральное ведомство запустили ИТ-программы цифровизации</span>
+      <span class="announce-item"><strong>1 апреля 2026</strong> — Заселение в гостиницы без паспорта: только биометрия</span>
+      <span class="announce-item"><strong>155,3 млрд ₽</strong> — бюджет на ИИ в России на 2026 год</span>
+      <span class="announce-item"><strong>36 жизненных ситуаций</strong> уже автоматизированы на Госуслугах</span>
+      <span class="announce-item"><strong>Орешкин и Григоренко</strong> — сопредседатели нового национального штаба по ИИ</span>
+      <span class="announce-item"><strong>99,96%</strong> исполнения бюджета нацпроекта в 2025 году</span>
+      <span class="announce-item"><strong>13.03.2026</strong> — дедлайн закона о регулировании ИИ в России</span>
+      <!-- дублируем для бесконечного скролла -->
+      <span class="announce-item"><strong>18.02.2026</strong> — Все 61 федеральное ведомство запустили ИТ-программы цифровизации</span>
+      <span class="announce-item"><strong>1 апреля 2026</strong> — Заселение в гостиницы без паспорта: только биометрия</span>
+      <span class="announce-item"><strong>155,3 млрд ₽</strong> — бюджет на ИИ в России на 2026 год</span>
+      <span class="announce-item"><strong>36 жизненных ситуаций</strong> уже автоматизированы на Госуслугах</span>
+      <span class="announce-item"><strong>Орешкин и Григоренко</strong> — сопредседатели нового национального штаба по ИИ</span>
+      <span class="announce-item"><strong>99,96%</strong> исполнения бюджета нацпроекта в 2025 году</span>
+      <span class="announce-item"><strong>13.03.2026</strong> — дедлайн закона о регулировании ИИ в России</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    ЦИФРОВАЯ РОССИЯ 2030
+  </div>
+  <ul class="nav-links">
+    <li><a href="#who">Для кого?</a></li>
+    <li><a href="#what">Что это?</a></li>
+    <li><a href="#scenarios">Сценарии</a></li>
+    <li><a href="#voice">ГосАссистент</a></li>
+    <li><a href="#plan">Нацплан</a></li>
+    <li><a href="#verticals">12 вертикалей</a></li>
+    <li><a href="#budget">Бюджет</a></li>
+    <li><a href="#faq">Вопросы</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+  <!-- BG shapes -->
+  <div class="hero-tricolor-left"></div>
+  <div class="hero-bg-shape-blue"></div>
+  <div class="hero-bg-shape-red"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <!-- Floating deco on blue area -->
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="hero-deco hero-deco-4"></div>
+  <div class="hero-deco hero-deco-5"></div>
+
+  <!-- Right badge -->
+  <div class="hero-badge">
+    <div class="hero-badge-ring">
+      <div class="hero-badge-inner">
+        <div class="hero-badge-year">2030</div>
+        <div class="hero-badge-sub">Год<br>завершения</div>
+      </div>
+    </div>
+    <div class="hero-badge-chips">
+      <div class="hero-chip">🇷🇺 Сделано в России</div>
+      <div class="hero-chip">🔒 Суверенные данные</div>
+      <div class="hero-chip">⚡ 155,3 млрд ₽ в 2026</div>
+    </div>
+  </div>
+
+  <div class="hero-tag">🇷🇺 Национальный план цифровизации Российской Федерации · 2025–2030</div>
+
+  <h1>
+    <span class="h1-white">ГОСУДАРСТВО</span>
+    <span class="h1-blue">НОВОГО</span>
+    <span class="h1-red">ПОКОЛЕНИЯ</span>
+  </h1>
+
+  <p class="hero-sub">
+    <strong>Никаких очередей. Никаких бумаг. Никаких отказов без объяснений.</strong>
+    Россия строит государство, которое само о вас заботится — знает, когда вам нужна помощь, и решает вопросы до того, как вы о них подумали. Один голос — и всё сделано.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">155<span>.3 млрд ₽</span></div>
+      <div class="hstat-label">Бюджет 2026</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">61</div>
+      <div class="hstat-label">ИТ-программ ведомств</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">36<span>+</span></div>
+      <div class="hstat-label">Жизненных ситуаций на ИИ</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">2030</div>
+      <div class="hstat-label">Год полного внедрения</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">ПРОКРУТИТЕ ВНИЗ</div>
+</section>
+
+<!-- ═══ ЖИВЫЕ ЦИФРЫ ═══ -->
+<div class="live-section reveal">
+  <div class="live-grid">
+    <div class="live-item">
+      <div class="live-label">Сегодня · 18.02.2026</div>
+      <div class="live-num">61</div>
+      <div class="live-desc">федеральных ведомств запустили ИИ-программы — каждое с обязательным ИИ-замом</div>
+    </div>
+    <div class="live-item">
+      <div class="live-label">Факт 2025</div>
+      <div class="live-num">99,96%</div>
+      <div class="live-desc">исполнение бюджета нацпроекта — 149,9 млрд ₽ потрачено точно в цель</div>
+    </div>
+    <div class="live-item">
+      <div class="live-label">Через 41 день</div>
+      <div class="live-num">01.04</div>
+      <div class="live-desc">заселение в гостиницы по биометрии по всей России — паспорт не нужен</div>
+    </div>
+    <div class="live-item">
+      <div class="live-label">К 2030 году</div>
+      <div class="live-num">1 трлн ₽</div>
+      <div class="live-desc">суммарный бюджет программы + 420 млрд внебюджетных инвестиций</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ДЛЯ КОГО ═══ -->
+<section id="who" class="persona-section">
+  <div class="persona-header">
+    <div class="section-label">// Выберите вашу ситуацию</div>
+    <h2>ЭТО ДЛЯ <em>ВАС</em> — КЕМ БЫ ВЫ НИ БЫЛИ</h2>
+    <p>Нажмите на свою карточку — и узнайте, как конкретно изменится ваша жизнь</p>
+  </div>
+
+  <div class="persona-grid reveal">
+    <div class="persona-card active" onclick="showPersona(this, 'mama')">
+      <span class="persona-emoji">👩‍👶</span>
+      <div class="persona-name">Мама</div>
+      <div class="persona-role">с маленькими детьми</div>
+    </div>
+    <div class="persona-card" onclick="showPersona(this, 'pensioner')">
+      <span class="persona-emoji">👴</span>
+      <div class="persona-name">Пенсионер</div>
+      <div class="persona-role">и пожилые родители</div>
+    </div>
+    <div class="persona-card" onclick="showPersona(this, 'worker')">
+      <span class="persona-emoji">👷</span>
+      <div class="persona-name">Работающий</div>
+      <div class="persona-role">нет времени на очереди</div>
+    </div>
+    <div class="persona-card" onclick="showPersona(this, 'biz')">
+      <span class="persona-emoji">💼</span>
+      <div class="persona-name">Предприниматель</div>
+      <div class="persona-role">ИП и малый бизнес</div>
+    </div>
+    <div class="persona-card" onclick="showPersona(this, 'student')">
+      <span class="persona-emoji">🎓</span>
+      <div class="persona-name">Студент</div>
+      <div class="persona-role">молодёжь и абитуриенты</div>
+    </div>
+  </div>
+
+  <!-- Persona Details -->
+  <div id="persona-mama" class="persona-detail active">
+    <div class="persona-detail-grid">
+      <div class="pd-title">👩‍👶 Для мамы с детьми</div>
+      <div class="pd-block">
+        <div class="pd-block-label">Пособия и выплаты</div>
+        <div class="pd-block-text">Родился ребёнок — ГосАссистент сам узнаёт из ЗАГС и предлагает оформить маткапитал, пособие по уходу и СНИЛС. Без заявлений. Без МФЦ.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Детский сад и школа</div>
+        <div class="pd-block-text">Запись в детский сад через голосового помощника. ИИ подберёт ближайшее место и поставит в очередь автоматически при регистрации ребёнка.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Врач и медицина</div>
+        <div class="pd-block-text">Запись к педиатру за 30 секунд. Электронная карта ребёнка — у врача заранее. Напоминания о прививках и плановых осмотрах — автоматически.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="persona-pensioner" class="persona-detail">
+    <div class="persona-detail-grid">
+      <div class="pd-title">👴 Для пенсионера</div>
+      <div class="pd-block">
+        <div class="pd-block-label">Оформление пенсии</div>
+        <div class="pd-block-text">За 3 месяца до пенсионного возраста — уведомление. Система сама собирает стаж, справки с работодателей и предлагает дату первой выплаты.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Льготы и субсидии</div>
+        <div class="pd-block-text">ИИ проверяет по базам, есть ли у вас право на льготы по ЖКХ, лекарствам, проезду. Если есть — предлагает оформить одним нажатием.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Простой интерфейс</div>
+        <div class="pd-block-text">Обычный телефонный звонок на 8-800. Голосовой помощник говорит по-русски, без жаргона. Никаких приложений и регистраций.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="persona-worker" class="persona-detail">
+    <div class="persona-detail-grid">
+      <div class="pd-title">👷 Для работающего человека</div>
+      <div class="pd-block">
+        <div class="pd-block-label">Документы без очередей</div>
+        <div class="pd-block-text">Справка о доходах, паспорт, водительские права — всё через приложение или голосом. Никаких отгулов ради похода в инстанции.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Смена работы</div>
+        <div class="pd-block-text">Увольнение, трудовая книжка, пособие по безработице, новое место — ГосАссистент ведёт вас через весь процесс и следит за правами.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Недвижимость</div>
+        <div class="pd-block-text">Купля-продажа квартиры — за 1 день онлайн. Ипотека, оценка, Росреестр, эскроу — ИИ координирует всё между ведомствами.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="persona-biz" class="persona-detail">
+    <div class="persona-detail-grid">
+      <div class="pd-title">💼 Для предпринимателя</div>
+      <div class="pd-block">
+        <div class="pd-block-label">Регистрация бизнеса</div>
+        <div class="pd-block-text">Открыть ИП или ООО — за 15 минут голосом. ФНС, расчётный счёт, печать — всё в одном сценарии без похода в банк и налоговую.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Отчётность</div>
+        <div class="pd-block-text">ИИ-бухгалтер напоминает о сроках, сам формирует декларации из банковских данных. Штрафы за просрочку — в прошлом.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Лицензии и разрешения</div>
+        <div class="pd-block-text">Система сама знает, какие разрешения нужны для вашего вида деятельности, и ведёт по шагам. Время согласования: было 30 дней — стало 3 дня.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="persona-student" class="persona-detail">
+    <div class="persona-detail-grid">
+      <div class="pd-title">🎓 Для студента и молодёжи</div>
+      <div class="pd-block">
+        <div class="pd-block-label">Поступление в вуз</div>
+        <div class="pd-block-text">Подача заявлений в вузы — через одно приложение. ГосАссистент отслеживает статус, рейтинг и уведомит о зачислении мгновенно.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Стипендии и льготы</div>
+        <div class="pd-block-text">Система знает ваш GPA, состав семьи, доходы — и сама предложит льготы, на которые вы имеете право. Проездной, общежитие, матпомощь.</div>
+      </div>
+      <div class="pd-block">
+        <div class="pd-block-label">Паспорт и документы</div>
+        <div class="pd-block-text">В 14 лет — уведомление о паспорте, в 18 — о воинской обязанности. Всё оформляется через ГосАссистент. Без поездок в МВД.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ПИЛОТНЫЕ РЕГИОНЫ ═══ -->
+<section class="regions-section">
+  <div class="section-label">// Первая волна · Пилотные регионы 2026</div>
+  <h2 class="section-title">ПИЛОТНЫЕ<br><span class="outline">РЕГИОНЫ</span></h2>
+  <p class="section-body">10 регионов в 2026 году первыми получат ИИ-управление ЖКХ, транспортом и социальными выплатами. Следом — вся страна.</p>
+  <div class="regions-grid reveal">
+    <div class="region-card pilot"><div class="region-pilot-badge">Пилот 2026</div><div class="region-name">🏙 Москва</div><div class="region-status">Транспорт, ЖКХ, соцзащита</div></div>
+    <div class="region-card pilot"><div class="region-pilot-badge">Пилот 2026</div><div class="region-name">🌊 Санкт-Петербург</div><div class="region-status">Медицина, образование</div></div>
+    <div class="region-card pilot"><div class="region-pilot-badge">Пилот 2026</div><div class="region-name">🏔 Татарстан</div><div class="region-status">Умный город, АПК</div></div>
+    <div class="region-card pilot"><div class="region-pilot-badge">Пилот 2026</div><div class="region-name">🌲 Новосибирск</div><div class="region-status">Научный кластер + ИИ</div></div>
+    <div class="region-card pilot"><div class="region-pilot-badge">Пилот 2026</div><div class="region-name">⚡ Екатеринбург</div><div class="region-status">Промышленный ИИ</div></div>
+    <div class="region-card"><div class="region-name">🌾 Краснодарский край</div><div class="region-status">Агро-ИИ, туризм</div></div>
+    <div class="region-card"><div class="region-name">🏭 Нижний Новгород</div><div class="region-status">Промышленность</div></div>
+    <div class="region-card"><div class="region-name">🌏 Приморский край</div><div class="region-status">Логистика, порт</div></div>
+    <div class="region-card"><div class="region-name">🔥 Тюменская обл.</div><div class="region-status">Энергетика + ИИ</div></div>
+    <div class="region-card"><div class="region-name">🏗 Ленинградская обл.</div><div class="region-status">Умное строительство</div></div>
+  </div>
+  <div style="margin-top:40px;padding:28px 32px;background:rgba(0,48,135,0.05);border:1px solid rgba(0,48,135,0.15);border-radius:12px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#003087;line-height:1;">2027</div>
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px;">Полное масштабирование на все 89 регионов</div>
+      <div style="font-size:14px;font-weight:300;color:var(--muted);">После успешного завершения пилота — каждый субъект РФ обязан иметь собственного ИИ-руководителя и ИТ-программу цифрового управления.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="what" class="what-section">
+  <div class="section-label">// 00 · Для граждан · Что такое цифровизация государства</div>
+  <h2 class="section-title">ЧТО ЭТО<br><span class="outline">МЕНЯЕТ?</span></h2>
+
+  <div class="what-grid reveal">
+    <div class="what-text">
+      <div class="what-pill">Простыми словами</div>
+      <h3>Государство перестаёт быть <em>бюрократией</em></h3>
+      <p>Сегодня, чтобы получить справку, льготу или записаться к врачу, вы проходите через десятки кабинетов, форм и ожиданий. <strong>Это уходит в прошлое.</strong></p>
+      <p>ИИ-система знает о вас всё необходимое — из ФНС, Росреестра, медкарты, ЗАГС. Она сама собирает данные между ведомствами. <strong>Вам нужно только сказать, что вы хотите.</strong></p>
+      <p>Или даже не говорить — государство само предложит то, на что вы имеете право.</p>
+
+      <div class="what-points">
+        <div class="what-point">
+          <div class="what-point-icon">🎙</div>
+          <div class="what-point-body">
+            <h4>Говоришь — получаешь</h4>
+            <p>Голосовой помощник заменяет визит в МФЦ. Работает как звонок другу, который знает ответ на любой вопрос.</p>
+          </div>
+        </div>
+        <div class="what-point">
+          <div class="what-point-icon">⚡</div>
+          <div class="what-point-body">
+            <h4>Минуты вместо недель</h4>
+            <p>Среднее время решения вопроса — 12 минут. Без очередей, без записи, в любое время суток.</p>
+          </div>
+        </div>
+        <div class="what-point">
+          <div class="what-point-icon">🤖</div>
+          <div class="what-point-body">
+            <h4>Государство само знает</h4>
+            <p>Родился ребёнок — система автоматически начисляет пособия. Исполнилось 14 лет — паспорт уже готов. Вышел срок водительских прав — напомнит за месяц.</p>
+          </div>
+        </div>
+        <div class="what-point">
+          <div class="what-point-icon">🔒</div>
+          <div class="what-point-body">
+            <h4>Безопасно и под контролем</h4>
+            <p>Все данные хранятся в российской государственной инфраструктуре. Только вы решаете, к чему дать доступ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="background: var(--gold); border-radius: 20px; padding: 36px; color: #fff; margin-bottom: 24px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size: 52px; line-height:1;">36</div>
+        <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">жизненных ситуаций</div>
+        <div style="font-size: 14px; font-weight: 300; opacity: 0.85; line-height: 1.6;">уже автоматизированы. Рождение ребёнка, смена работы, покупка квартиры, пенсия, справки — всё решается голосом или в один клик.</div>
+      </div>
+      <div style="background: var(--red); border-radius: 20px; padding: 36px; color: #fff; margin-bottom: 24px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size: 52px; line-height:1;">0</div>
+        <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">бумажных справок</div>
+        <div style="font-size: 14px; font-weight: 300; opacity: 0.85; line-height: 1.6;">Ни одна госструктура больше не вправе требовать от вас документы, которые у неё уже есть в системе. По закону — с 2026 года.</div>
+      </div>
+      <div style="background: linear-gradient(135deg, #003087, #1a50c8); border-radius: 20px; padding: 36px; color: #fff;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size: 52px; line-height:1;">24/7</div>
+        <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">работа без выходных</div>
+        <div style="font-size: 14px; font-weight: 300; opacity: 0.85; line-height: 1.6;">ГосАссистент принимает обращения круглосуточно. В три ночи, в воскресенье, из любой точки России — не имеет значения.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ БЫЛО / СТАЛО ═══ -->
+<section class="before-after-section">
+  <div class="section-label">// 00b · Сравнение</div>
+  <h2 class="section-title">БЫЛО /<br><span class="outline">СТАЛО</span></h2>
+  <p class="section-body">Вот как конкретно изменится жизнь каждого гражданина. Не в теории — по конкретным ситуациям.</p>
+
+  <div class="before-after-grid reveal">
+    <div class="ba-col">
+      <div class="ba-header before">😩 Было</div>
+      <div class="ba-items">
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Стоять в очереди в МФЦ 2–3 часа только чтобы узнать, какие документы нужны
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Сдать документы, получить отказ через 10 дней: «не та справка»
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Записаться к врачу на 3 недели вперёд, простоять час в регистратуре
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Не знать, что вам положена льгота — государство не обязано сообщать
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Каждый раз заново доказывать свою личность — паспорт, СНИЛС, ИНН
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Решить вопрос с недвижимостью — от 30 дней и 5 ведомств
+        </div>
+        <div class="ba-item bad">
+          <span class="ba-ico">✗</span>
+          Пенсионный вопрос: записи, архивы, справки с работы за 20 лет
+        </div>
+      </div>
+    </div>
+
+    <div class="ba-col">
+      <div class="ba-header after">🚀 Стало</div>
+      <div class="ba-items">
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Сказать голосовому помощнику — он сам собирает все документы и подаёт
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          ИИ проверяет документы мгновенно и говорит заранее, что нужно добавить
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Запись к врачу за 30 секунд. Электронная карта уже у врача. Без бумаг.
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Система сама находит льготы и спрашивает: «Хотите оформить?»
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Один раз — биометрия. Больше никогда не нужен паспорт для госуслуг
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Купля-продажа недвижимости — за 1 день. Онлайн. Без нотариуса.
+        </div>
+        <div class="ba-item good">
+          <span class="ba-ico">✓</span>
+          Пенсия назначается автоматически на основе данных ПФР — не нужно ничего делать
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ЖИЗНЕННЫЕ СЦЕНАРИИ ═══ -->
+<section id="scenarios" class="scenarios-section">
+  <div class="section-label">// 00c · Реальные сценарии</div>
+  <h2 class="section-title">КАК ЭТО<br><span class="outline">РАБОТАЕТ?</span></h2>
+  <p class="section-body">Четыре реальные ситуации из жизни — как это будет выглядеть для вас уже в 2026 году.</p>
+
+  <div class="scenarios-grid reveal">
+
+    <!-- 1 -->
+    <div class="scenario-card">
+      <div class="scenario-top">
+        <div class="scenario-emoji">👶</div>
+        <div class="scenario-meta">
+          <div class="scenario-who">Молодая мама</div>
+          <div class="scenario-title">Родился ребёнок — получить все выплаты</div>
+        </div>
+      </div>
+      <div class="scenario-steps">
+        <div class="sc-step"><span class="sc-step-num">1</span>Роддом передаёт данные о рождении в систему автоматически</div>
+        <div class="sc-step"><span class="sc-step-num">2</span>ГосАссистент пишет маме: «Поздравляем! Хотите оформить пособия?»</div>
+        <div class="sc-step"><span class="sc-step-num">3</span>Мама отвечает «Да» — система сама всё оформляет</div>
+      </div>
+      <div class="sc-result">✅ Маткапитал, пособие по уходу и СНИЛС ребёнка — готово</div>
+      <div class="sc-time-save">
+        <span class="sc-time-badge old">Было: 3 недели, 4 ведомства</span>
+        <span class="sc-time-badge new">Стало: 1 день</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="scenario-card">
+      <div class="scenario-top">
+        <div class="scenario-emoji">🏠</div>
+        <div class="scenario-meta">
+          <div class="scenario-who">Семья покупает квартиру</div>
+          <div class="scenario-title">Оформить ипотеку и право собственности</div>
+        </div>
+      </div>
+      <div class="scenario-steps">
+        <div class="sc-step"><span class="sc-step-num">1</span>Говорите ассистенту: «Хочу взять ипотеку, нашёл квартиру»</div>
+        <div class="sc-step"><span class="sc-step-num">2</span>ИИ проверяет право собственности продавца, историю объекта, доходы</div>
+        <div class="sc-step"><span class="sc-step-num">3</span>Оформляет договор, регистрирует в Росреестре, открывает счёт эскроу</div>
+      </div>
+      <div class="sc-result">✅ Право собственности зарегистрировано. Ипотека одобрена.</div>
+      <div class="sc-time-save">
+        <span class="sc-time-badge old">Было: 30–45 дней</span>
+        <span class="sc-time-badge new">Стало: 1 день</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="scenario-card">
+      <div class="scenario-top">
+        <div class="scenario-emoji">👴</div>
+        <div class="scenario-meta">
+          <div class="scenario-who">Пенсионер</div>
+          <div class="scenario-title">Оформить пенсию — без беготни</div>
+        </div>
+      </div>
+      <div class="scenario-steps">
+        <div class="sc-step"><span class="sc-step-num">1</span>За 3 месяца до возраста — уведомление от ГосАссистента</div>
+        <div class="sc-step"><span class="sc-step-num">2</span>Система сама собирает стаж из ПФР, справки с бывших работодателей</div>
+        <div class="sc-step"><span class="sc-step-num">3</span>Предлагает выбрать вид пенсии и дату первой выплаты</div>
+      </div>
+      <div class="sc-result">✅ Пенсия назначена. Первая выплата — через 7 дней.</div>
+      <div class="sc-time-save">
+        <span class="sc-time-badge old">Было: месяц хождений, архивные справки</span>
+        <span class="sc-time-badge new">Стало: одно касание</span>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="scenario-card">
+      <div class="scenario-top">
+        <div class="scenario-emoji">🚗</div>
+        <div class="scenario-meta">
+          <div class="scenario-who">Автомобилист</div>
+          <div class="scenario-title">Заселиться в гостиницу без паспорта</div>
+        </div>
+      </div>
+      <div class="scenario-steps">
+        <div class="sc-step"><span class="sc-step-num">1</span>Подходите на ресепшн — камера считывает лицо</div>
+        <div class="sc-step"><span class="sc-step-num">2</span>Система сверяет с ЕБС (биометрия) за 2 секунды</div>
+        <div class="sc-step"><span class="sc-step-num">3</span>Карточка номера — в приложении. Паспорт не нужен.</div>
+      </div>
+      <div class="sc-result">✅ Заселение за 15 секунд. Работает с 1 апреля 2026.</div>
+      <div class="sc-time-save">
+        <span class="sc-time-badge old">Было: паспорт, ксерокс, формы — 10 мин</span>
+        <span class="sc-time-badge new">Стало: 15 секунд</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GUARANTEE STRIP -->
+<div class="guarantee-strip reveal">
+  <div class="gs-item">
+    <span class="gs-icon">⚡</span>
+    <div class="gs-num">12</div>
+    <div class="gs-label">минут — среднее время решения вопроса</div>
+  </div>
+  <div class="gs-item">
+    <span class="gs-icon">🔒</span>
+    <div class="gs-num">100%</div>
+    <div class="gs-label">данных в российской инфраструктуре</div>
+  </div>
+  <div class="gs-item">
+    <span class="gs-icon">🤖</span>
+    <div class="gs-num">36+</div>
+    <div class="gs-label">жизненных ситуаций автоматизировано</div>
+  </div>
+  <div class="gs-item">
+    <span class="gs-icon">📱</span>
+    <div class="gs-num">24/7</div>
+    <div class="gs-label">доступность — без выходных и очередей</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<section id="voice" class="voice-section">
+  <div class="section-label">// 01 · Флагманский продукт</div>
+  <h2 class="section-title">ГОС<span class="outline">АССИСТЕНТ</span></h2>
+  <p class="section-body">
+    Единый государственный ИИ-помощник. Заменяет Госуслуги, МФЦ и колл-центры. Работает голосом, текстом и жестом. Знает вас — без логина и паспорта.
+  </p>
+
+  <div class="voice-grid reveal">
+    <div class="voice-visual">
+      <div class="voice-orb">
+        <div class="voice-mic">🎙</div>
+      </div>
+      <div class="voice-bars">
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+        <div class="voice-bar"></div>
+      </div>
+    </div>
+
+    <div class="voice-features">
+      <div class="vf-item">
+        <div class="vf-icon">🧬</div>
+        <div>
+          <div class="vf-title">Биометрическая аутентификация</div>
+          <div class="vf-desc">Голос + лицо = личность. Никаких СНИЛС, паролей и ЭЦП. Система сама знает, кто обращается.</div>
+        </div>
+      </div>
+      <div class="vf-item">
+        <div class="vf-icon">⚡</div>
+        <div>
+          <div class="vf-title">Проактивное государство</div>
+          <div class="vf-desc">ГосАссистент не ждёт заявлений. Он сам уведомляет: «Вашему ребёнку исполнилось 14 — готов комплект документов».</div>
+        </div>
+      </div>
+      <div class="vf-item">
+        <div class="vf-icon">🔄</div>
+        <div>
+          <div class="vf-title">Сквозная автоматизация</div>
+          <div class="vf-desc">Запрос проходит через все ведомства автоматически. Пользователь получает результат, а не «межведомственный запрос».</div>
+        </div>
+      </div>
+      <div class="vf-item">
+        <div class="vf-icon">📡</div>
+        <div>
+          <div class="vf-title">Везде и всегда</div>
+          <div class="vf-desc">Мобильное приложение, умные колонки, терминалы МФЦ, телефон 8-800. Единая точка входа в государство.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog Demo -->
+  <div class="dialog-demo reveal">
+    <div class="dialog-header">// ДЕМО ДИАЛОГА · ГосАссистент v2.0</div>
+    <div class="dialog-body">
+      <div class="msg user">
+        <div class="msg-avatar">👤</div>
+        <div class="msg-text">Хочу записаться на замену водительского удостоверения</div>
+      </div>
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-text">Здравствуйте, Иван Петрович. Ваше удостоверение действует до 15 марта 2026. Медицинская справка получена 8 января — она действительна. Ближайшее время в ГИБДД на Ленина, 12 — <strong>завтра в 11:00</strong>. Записать?</div>
+      </div>
+      <div class="msg user">
+        <div class="msg-avatar">👤</div>
+        <div class="msg-text">Да, записывай</div>
+      </div>
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-text">✅ Готово. Запись оформлена, госпошлина 2000 ₽ списана через СБП. Уведомление и маршрут отправлены в приложение. Среднее время приёма: 12 минут.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ НАЦИОНАЛЬНЫЙ ПЛАН ═══════════════════════════════ -->
+<section id="plan" class="plan-section">
+  <div class="section-label">// 02 · Нацплан · Поручения Президента</div>
+  <h2 class="section-title">ПЛАН<br><span class="outline">ДЕЙСТВИЙ</span></h2>
+  <p class="section-body">Официальный хронограф внедрения ИИ в госуправление. Каждый дедлайн — подписанное поручение.</p>
+
+  <div class="timeline reveal">
+
+    <div class="tl-item">
+      <div class="tl-date"><small>Ноябрь</small>2025</div>
+      <div class="tl-content">
+        <div class="tl-title">Конференция AI Journey · Точка старта</div>
+        <div class="tl-items">
+          <div class="tl-point">Путин утвердил список поручений по внедрению ИИ в госуправление <span class="tl-badge">ПОДПИСАНО</span></div>
+          <div class="tl-point">ИИ официально признан «новым органом управления» — уравнён с нормативными актами</div>
+          <div class="tl-point">Исполнительное поручение Григоренко: все ведомства — предложения по ИИ-интеграции в ИТ-системы до 19.11</div>
+          <div class="tl-point">Запуск анализа 100% мероприятий нацпроектов с помощью ИИ в Белом доме</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date"><small>Декабрь</small>2025</div>
+      <div class="tl-content">
+        <div class="tl-title">Бюджетный финал · Завершение цикла</div>
+        <div class="tl-items">
+          <div class="tl-point">Исполнение нацпроекта «Экономика данных»: <strong>99,96%</strong> — 149,9 млрд ₽ потрачено <span class="tl-badge">ФАКТ</span></div>
+          <div class="tl-point">Основные расходы декабря: облачные вычисления и суперкомпьютеры</div>
+          <div class="tl-point">Поручение 15.12: создать национальный штаб по ИИ при Президенте</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date"><small>Январь</small>2026</div>
+      <div class="tl-content">
+        <div class="tl-title">Нацштаб · Поручения 05.01.2026</div>
+        <div class="tl-items">
+          <div class="tl-point">Путин поручил разработать <strong>Национальный план внедрения ИИ</strong> в экономику, социальную сферу и госуправление <span class="tl-badge">ПОРУЧЕНИЕ</span></div>
+          <div class="tl-point">Создан Национальный штаб по ИИ: сопредседатели — Орешкин и Григоренко. В составе: Минэк, Минфин, Минцифры, Минпромторг, Минэнерго, Минобороны, ФСБ</div>
+          <div class="tl-point">Госуслуги: запуск 36 «жизненных ситуаций» с ИИ. «Безбумажный офис» для граждан</div>
+          <div class="tl-point">Для каждого региона — подкомиссия под руководством губернатора, ответственного за ИИ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date"><small>Февраль</small>2026</div>
+      <div class="tl-content">
+        <div class="tl-title">Внедрение · Регулирование · БРИКС <span class="tl-badge red">СЕЙЧАС</span></div>
+        <div class="tl-items">
+          <div class="tl-point">09–10.02: Григоренко — все министерства запустили <strong>61 ИТ-программу</strong>. Каждое ведомство обязано иметь ИИ-зама</div>
+          <div class="tl-point">13.02: заселение в гостиницы по биометрии (с 01.04.2026) — без паспорта, только FaceID</div>
+          <div class="tl-point">06.02: рамочный законопроект об ИИ — гибкое регулирование, жёсткие нормы в медицине и судопроизводстве</div>
+          <div class="tl-point">16–20.02: India AI Impact Summit в Нью-Дели. Россия — создание ИИ-стандартов БРИКС</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date"><small>I–II кв.</small>2026</div>
+      <div class="tl-content">
+        <div class="tl-title">Законодательство · Метрики · Регионы</div>
+        <div class="tl-items">
+          <div class="tl-point">13.03.2026: Минцифры вносит в Правительство консолидированный пакет по регулированию ИИ <span class="tl-badge">ДЕДЛАЙН</span></div>
+          <div class="tl-point">01.06.2026: утвердить систему ключевых метрик внедрения ИИ — KPI для каждого ведомства</div>
+          <div class="tl-point">Запуск 10 пилотных регионов: ИИ управляет ЖКХ, транспортом и социальными выплатами в тестовом режиме</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date"><small>2027–</small>2030</div>
+      <div class="tl-content">
+        <div class="tl-title">Масштабирование · Целевое состояние</div>
+        <div class="tl-items">
+          <div class="tl-point">ГосАссистент обрабатывает 90% обращений граждан без участия чиновника</div>
+          <div class="tl-point">Доверие к ИИ: 80% граждан (сейчас 55%). Отрасли с высокой готовностью: 95% (сейчас 12%)</div>
+          <div class="tl-point">Объём рынка ИИ-услуг: 60+ млрд ₽/год. Выпуск из вузов: 15 500 специалистов/год</div>
+          <div class="tl-point">Суверенный технологический стек: 100% критических систем на отечественных платформах</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ 12 ВЕРТИКАЛЕЙ ═══════════════════════════════ -->
+<section id="verticals" class="verticals-section">
+  <div class="section-label">// 03 · Охват отраслей</div>
+  <h2 class="section-title">12 ВЕРТИ<span class="outline">КАЛЕЙ</span></h2>
+  <p class="section-body">Каждая ключевая сфера государства получает собственный ИИ-слой. Не пилот — обязательное внедрение с KPI и персональной ответственностью министра.</p>
+
+  <div class="verticals-grid reveal">
+
+    <div class="vert-card">
+      <div class="vert-num">01</div>
+      <span class="vert-icon">🏥</span>
+      <div class="vert-title">Здравоохранение</div>
+      <div class="vert-desc">ИИ-диагностика, предиктивная аналитика заболеваемости, автоматическая маршрутизация пациентов, роботизированные аптеки. Дефицит врачей — закрыт алгоритмами первичного приёма.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -30% врачебных ошибок · +40% скорость постановки диагноза</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">02</div>
+      <span class="vert-icon">🎓</span>
+      <div class="vert-title">Образование</div>
+      <div class="vert-desc">Адаптивные ИИ-курсы, автоматическая проверка работ, персональные учебные треки с 1 класса, ИИ-наставник 24/7. К 2030 — 15 500 ИИ-специалистов в год из вузов.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: ИИ в 100% школ к 2027 · 15 500 выпускников ИИ к 2030</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">03</div>
+      <span class="vert-icon">🚇</span>
+      <div class="vert-title">Транспорт и ЖКХ</div>
+      <div class="vert-desc">Умные светофоры, предиктивное обслуживание теплосетей, автоматическое распределение ресурсов ЖКХ. 10 пилотных регионов с ИИ-управлением инфраструктурой в 2026.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -25% аварийных ситуаций · 10 пилотных регионов в 2026</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">04</div>
+      <span class="vert-icon">⚖️</span>
+      <div class="vert-title">Юстиция и суды</div>
+      <div class="vert-desc">ИИ-ассистент для судей (анализ дел, поиск прецедентов), автоматическая проверка исковых заявлений, прогнозирование рецидивов. Особый режим регулирования — жёсткий надзор.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -40% время рассмотрения дел · 100% решений проходят ИИ-проверку</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">05</div>
+      <span class="vert-icon">💰</span>
+      <div class="vert-title">Финансы и бюджет</div>
+      <div class="vert-desc">Минфин + Яндекс: ИИ прогнозирует доходы бюджета. Автоматическое выявление нецелевых расходов, ИИ-аудит госзакупок в реальном времени, предиктивная налоговая аналитика.</div>
+      <div class="vert-kpi">→ ФАКТ 2025: 99,96% исполнения бюджета · ИИ-прогноз доходов запущен</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">06</div>
+      <span class="vert-icon">🛡</span>
+      <div class="vert-title">Безопасность</div>
+      <div class="vert-desc">Видеоаналитика в городах, автоматическое обнаружение угроз, ИИ-патрулирование периметров. Кибербезопасность: +21% бюджет на ИИ-системы защиты критической инфраструктуры.</div>
+      <div class="vert-kpi">→ БЮДЖЕТ 2025: +21% рост · 12,2 млрд ₽ на кибербезопасность</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">07</div>
+      <span class="vert-icon">🌾</span>
+      <div class="vert-title">АПК и сельское хозяйство</div>
+      <div class="vert-desc">Дроны-агрономы, ИИ-прогноз урожайности, точное земледелие, автоматические системы ирригации. Цифровой мониторинг 100% сельхозугодий к 2028.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: +15% урожайность · 100% угодий под мониторингом к 2028</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">08</div>
+      <span class="vert-icon">⚙️</span>
+      <div class="vert-title">Промышленность</div>
+      <div class="vert-desc">Предиктивное обслуживание оборудования, цифровые двойники заводов, ИИ-оптимизация производственных цепочек, автоматизация контроля качества на 100% оборонных производств.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -35% плановые простои · цифровые двойники 500+ предприятий</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">09</div>
+      <span class="vert-icon">🌐</span>
+      <div class="vert-title">Госуправление и МФЦ</div>
+      <div class="vert-desc">61 ведомство, 61 ИТ-программа, у каждого — ИИ-зам. ГосАссистент принимает 90% обращений. МФЦ — терминалы с голосовым интерфейсом. Биометрия вместо паспорта с 01.04.2026.</div>
+      <div class="vert-kpi">→ ФАКТ 02.2026: 61 ИТ-программа запущена · биометрия с апреля</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">10</div>
+      <span class="vert-icon">⚡</span>
+      <div class="vert-title">Энергетика</div>
+      <div class="vert-desc">Умные энергосети с ИИ-балансировкой, предиктивный ремонт электростанций, оптимизация энергопотребления в регионах. Приоритет — суверенное энергообеспечение ЦОД.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -20% потери в сетях · 100% ЦОД на отечественной энергии</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">11</div>
+      <span class="vert-icon">🏗</span>
+      <div class="vert-title">Строительство и кадастр</div>
+      <div class="vert-desc">ИИ-проверка проектной документации, автоматическое согласование разрешений на строительство, цифровой кадастр с нейросетевой обработкой спутниковых снимков.</div>
+      <div class="vert-kpi">→ ЦЕЛЬ: -60% время согласования разрешений · 100% кадастр оцифрован</div>
+    </div>
+
+    <div class="vert-card">
+      <div class="vert-num">12</div>
+      <span class="vert-icon">💊</span>
+      <div class="vert-title">Социальная защита</div>
+      <div class="vert-desc">Проактивное назначение льгот и выплат — без заявлений. ИИ сам определяет право на пособие по данным ЗАГС, ПФР, ФНС. 36 жизненных ситуаций полностью автоматизированы.</div>
+      <div class="vert-kpi">→ ФАКТ: 36 жизненных ситуаций автоматизированы · «безбумажный офис» 2026</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ БЮДЖЕТ ═══════════════════════════════ -->
+<section id="budget" class="budget-section">
+  <div class="section-label">// 04 · Финансирование</div>
+  <h2 class="section-title">БЮДЖЕТ</h2>
+
+  <div class="budget-big reveal">1 <span>трлн</span></div>
+  <div class="budget-sub">рублей · нацпроект «Экономика данных» · 2025–2030 (бюджетных) + 420 млрд внебюджетных</div>
+
+  <div class="budget-grid reveal">
+    <div class="budget-card">
+      <div class="bc-label">Факт 2025</div>
+      <div class="bc-amount">149,9<span class="unit">млрд ₽</span></div>
+      <div class="bc-bar-wrap"><div class="bc-bar" style="width:99.96%"></div></div>
+      <div class="bc-growth">✓ 99,96% исполнение</div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">План 2026</div>
+      <div class="bc-amount">155,3<span class="unit">млрд ₽</span></div>
+      <div class="bc-bar-wrap"><div class="bc-bar" style="width:60%"></div></div>
+      <div class="bc-growth">↑ +3.6% к 2025</div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">План 2027</div>
+      <div class="bc-amount">168,9<span class="unit">млрд ₽</span></div>
+      <div class="bc-bar-wrap"><div class="bc-bar" style="width:70%"></div></div>
+      <div class="bc-growth">↑ +8.8% к 2026</div>
+    </div>
+    <div class="budget-card">
+      <div class="bc-label">План 2028</div>
+      <div class="bc-amount">183,7<span class="unit">млрд ₽</span></div>
+      <div class="bc-bar-wrap"><div class="bc-bar" style="width:78%"></div></div>
+      <div class="bc-growth">↑ +8.8% к 2027</div>
+    </div>
+  </div>
+
+  <!-- Breakdown -->
+  <div style="margin-top: 64px;" class="reveal">
+    <div class="section-label">// Разбивка по направлениям · 2025 факт</div>
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 24px;">
+      <div class="budget-card">
+        <div class="bc-label">Цифровое госуправление</div>
+        <div class="bc-amount">65,0<span class="unit">млрд</span></div>
+        <div class="bc-bar-wrap"><div class="bc-bar" style="width:100%"></div></div>
+      </div>
+      <div class="budget-card">
+        <div class="bc-label">Интернет-инфраструктура</div>
+        <div class="bc-amount">40,0<span class="unit">млрд</span></div>
+        <div class="bc-bar-wrap"><div class="bc-bar" style="width:61%"></div></div>
+      </div>
+      <div class="budget-card">
+        <div class="bc-label">Кибербезопасность</div>
+        <div class="bc-amount">12,2<span class="unit">млрд</span></div>
+        <div class="bc-bar-wrap"><div class="bc-bar" style="width:19%; background: linear-gradient(90deg, var(--red), #ff6b6b);"></div></div>
+        <div class="bc-growth" style="color: var(--red);">↑ +21% рост бюджета</div>
+      </div>
+      <div class="budget-card">
+        <div class="bc-label">Искусственный интеллект</div>
+        <div class="bc-amount">7,2<span class="unit">млрд</span></div>
+        <div class="bc-bar-wrap"><div class="bc-bar" style="width:11%"></div></div>
+        <div class="bc-growth">→ к 2030: 71 млрд суммарно</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ АРХИТЕКТУРА ═══════════════════════════════ -->
+<section id="arch" class="arch-section">
+  <div class="section-label">// 05 · Технический стек</div>
+  <h2 class="section-title">АРХИ<span class="outline">ТЕКТУРА</span></h2>
+  <p class="section-body">Суверенный технологический стек. Ни одного критического зависимого компонента от враждебных юрисдикций. Построено на российских облаках, отечественных LLM и собственных чипах.</p>
+
+  <div class="arch-diagram reveal">
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">Интерфейс</div>
+      <div class="arch-boxes">
+        <div class="arch-box">Голосовой интерфейс<div class="box-sub">Мобайл, колонки, МФЦ-терминалы</div></div>
+        <div class="arch-box">Мессенджеры<div class="box-sub">Госсистемы, ВКонтакте, TamTam</div></div>
+        <div class="arch-box">Веб-портал<div class="box-sub">Новые Госуслуги + ЛКГражданина</div></div>
+        <div class="arch-box">API для бизнеса<div class="box-sub">Открытые интеграции</div></div>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">ИИ-ядро</div>
+      <div class="arch-boxes">
+        <div class="arch-box">Языковые модели<div class="box-sub">GigaChat + Яндекс ЯМ + открытые LLM</div></div>
+        <div class="arch-box">Компьютерное зрение<div class="box-sub">Биометрия, видеоаналитика</div></div>
+        <div class="arch-box">Рекомендательные системы<div class="box-sub">Проактивные уведомления</div></div>
+        <div class="arch-box">Предиктивная аналитика<div class="box-sub">Прогнозы, риски, бюджет</div></div>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">Платформа</div>
+      <div class="arch-boxes">
+        <div class="arch-box">Гос.Облако<div class="box-sub">Суверенная облачная инфраструктура</div></div>
+        <div class="arch-box">СМЭВ 4.0<div class="box-sub">Межведомственный обмен нового поколения</div></div>
+        <div class="arch-box">ЕБС<div class="box-sub">Единая биометрическая система</div></div>
+        <div class="arch-box">Реестр данных<div class="box-sub">Единое пространство данных РФ</div></div>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">Данные</div>
+      <div class="arch-boxes">
+        <div class="arch-box">ФНС<div class="box-sub">Налоговые данные граждан</div></div>
+        <div class="arch-box">ПФР / СФР<div class="box-sub">Пенсионные и соцданные</div></div>
+        <div class="arch-box">ЗАГС / МВД<div class="box-sub">Личные данные граждан</div></div>
+        <div class="arch-box">Росреестр<div class="box-sub">Имущество и земля</div></div>
+        <div class="arch-box">Минздрав<div class="box-sub">Медицинские записи</div></div>
+      </div>
+    </div>
+
+    <div class="arch-layer">
+      <div class="arch-layer-label">Железо</div>
+      <div class="arch-boxes">
+        <div class="arch-box">Суперкомпьютеры<div class="box-sub">10+ петафлопс национальной инфраструктуры</div></div>
+        <div class="arch-box">Отечественные чипы<div class="box-sub">Эльбрус, Байкал + параллельный импорт</div></div>
+        <div class="arch-box">Распределённые ЦОД<div class="box-sub">Геораспределение по 8 федеральным округам</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ МЕТРИКИ ═══════════════════════════════ -->
+<section id="metrics" class="metrics-section">
+  <div class="section-label">// 06 · Ключевые показатели</div>
+  <h2 class="section-title">МЕТРИКИ<br><span class="outline">ГОТОВНОСТИ</span></h2>
+  <p class="section-body">Официальные KPI из нацпроекта. Дедлайн утверждения системы метрик — 01.06.2026.</p>
+
+  <div class="metrics-grid reveal">
+    <div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Использование ИИ организациями</div>
+          <div class="metric-val">43% → 80%</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:43%"></div></div>
+        <div class="metric-target">Сейчас: 43% · Цель 2030: 80%</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Доверие граждан к ИИ</div>
+          <div class="metric-val">55% → 80%</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:55%"></div></div>
+        <div class="metric-target">Сейчас: 55% · Цель 2030: 80%</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Отрасли с высокой ИИ-готовностью</div>
+          <div class="metric-val">12% → 95%</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:12%"></div></div>
+        <div class="metric-target">Сейчас: 12% · Цель 2030: 95%</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Нацстандарты в сфере ИИ</div>
+          <div class="metric-val">61 из 100</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:61%"></div></div>
+        <div class="metric-target">Принято 61 нацстандарт · 8 международных</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Организаций, получивших эффект от ИИ</div>
+          <div class="metric-val">97%</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:97%"></div></div>
+        <div class="metric-target">Среди использующих ИИ: 97% отметили позитивный эффект</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Ведомств с ИИ-программами</div>
+          <div class="metric-val">61 из 61</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:100%"></div></div>
+        <div class="metric-target">100% федеральных органов власти · февраль 2026</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Рынок ИИ-услуг к 2030</div>
+          <div class="metric-val">12 → 60+ млрд ₽/год</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:20%"></div></div>
+        <div class="metric-target">Рост в 5× · от 12 млрд в 2022 до 60+ млрд к 2030</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-header">
+          <div class="metric-name">Исполнение бюджета нацпроекта</div>
+          <div class="metric-val">99,96%</div>
+        </div>
+        <div class="metric-track"><div class="metric-fill" style="width:99.96%"></div></div>
+        <div class="metric-target">Факт 2025 · 149,9 из 150 млрд ₽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ БРИКС ═══════════════════════════════ -->
+<section id="briks" class="briks-section">
+  <div class="section-label">// 07 · Глобальная повестка</div>
+  <h2 class="section-title">БРИКС<span class="outline">+ИИ</span></h2>
+  <p class="section-body">Россия строит альтернативный технологический мир. Суверенные данные, независимые ИИ-стандарты и совместная инфраструктура — вместо Nvidia и Amazon.</p>
+
+  <div class="briks-grid reveal">
+    <div class="briks-map">
+      <div class="briks-countries">
+        <div class="briks-country ru">🇷🇺 РОССИЯ<br><small>Координатор, данные</small></div>
+        <div class="briks-country">🇨🇳 КИТАЙ<br><small>Производство чипов</small></div>
+        <div class="briks-country">🇮🇳 ИНДИЯ<br><small>IT-разработка</small></div>
+        <div class="briks-country">🇧🇷 БРАЗИЛИЯ<br><small>Агро-ИИ</small></div>
+        <div class="briks-country">🇿🇦 ЮАР<br><small>Ресурсы</small></div>
+        <div class="briks-country">🇦🇪 ОАЭ<br><small>Финансовый хаб</small></div>
+        <div class="briks-country">🇸🇦 Саудовская Аравия<br><small>Энергия для ЦОД</small></div>
+        <div class="briks-country">🇮🇷 Иран<br><small>Обход санкций</small></div>
+        <div class="briks-country">🇪🇹 Эфиопия<br><small>АПК</small></div>
+      </div>
+    </div>
+
+    <div class="briks-side">
+      <div class="briks-point">
+        <h4>Альянс БРИКС по ИИ</h4>
+        <p>Путин анонсировал создание межгосударственного альянса по развитию ИИ. Общая цель: технологический суверенитет вне западной инфраструктуры.</p>
+      </div>
+      <div class="briks-point">
+        <h4>Суверенные данные</h4>
+        <p>Концепция Орешкина: данные стран БРИКС хранятся в «дружественных облаках» — в РФ или у союзников. Ответ на CLOUD Act и санкционные риски.</p>
+      </div>
+      <div class="briks-point">
+        <h4>India AI Impact Summit</h4>
+        <p>16–20 февраля 2026, Нью-Дели. Россия участвует в выработке глобальных ИИ-стандартов через площадку БРИКС — в обход G7.</p>
+      </div>
+      <div class="briks-point">
+        <h4>Инфраструктурный обход санкций</h4>
+        <p>Совместные ЦОД с Индией и Китаем как способ получить доступ к вычислительным мощностям без американских чипов Nvidia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="faq-section">
+  <div class="section-label">// 08 · Часто задаваемые вопросы</div>
+  <h2 class="section-title">ВОПРОСЫ<br><span class="outline">ГРАЖДАН</span></h2>
+  <p class="section-body">Отвечаем честно на то, что волнует людей больше всего.</p>
+
+  <div class="faq-list reveal">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Мои данные не украдут? Это безопасно?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          Все данные хранятся исключительно в <strong>государственной облачной инфраструктуре России</strong> — не в иностранных облаках Amazon, Google или Microsoft. Доступ к вашим данным строго регулируется: каждый запрос логируется. Вы в любой момент можете посмотреть, кто и когда обращался к вашим данным — через личный кабинет. Кибербезопасность — один из приоритетов нацпроекта: бюджет вырос на 21% и составил 12,2 млрд руб. в 2025 году.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        А что если я не умею пользоваться смартфоном?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          ГосАссистент работает <strong>по обычному телефону</strong> — достаточно позвонить на бесплатный номер 8-800 и поговорить голосом. Никаких приложений, никаких сайтов. Кроме того, во всех МФЦ страны появятся умные терминалы с голосовым интерфейсом — достаточно подойти и заговорить. Сотрудники МФЦ никуда не исчезают: они помогут тем, кто хочет живого общения.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Что будет с чиновниками? Их всех уволят?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          Нет. ИИ берёт на себя <strong>рутину</strong> — сбор справок, проверку данных, составление ответов на типовые запросы. Сотрудники ведомств будут работать над сложными случаями, где нужен живой человек: спорные ситуации, жалобы, исключения. Фактически — переход от функции «бумажного конвейера» к роли настоящих советников и помощников граждан.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Биометрия обязательна? Меня заставят сдавать?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          Биометрия — <strong>добровольна</strong>. Вы сами решаете, регистрироваться в Единой биометрической системе или нет. Если вы не хотите — паспорт и привычные документы продолжают работать в полном объёме. Биометрия лишь даёт дополнительные удобства: заселение в гостиницу без паспорта, доступ к госуслугам без логина — и только если вы сами этого хотите.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Когда это всё заработает? Сроки реальные?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          Многое уже работает. <strong>Прямо сейчас, в феврале 2026:</strong> 61 федеральное ведомство запустило собственные ИИ-программы. 36 жизненных ситуаций автоматизированы на Госуслугах. С <strong>1 апреля 2026</strong> — заселение в гостиницы по биометрии. К середине 2026 года — первые 10 регионов с ИИ-управлением ЖКХ и транспортом. Полноценная система — к 2030 году. Всё подкреплено президентскими поручениями и бюджетом 155,3 млрд руб. на 2026 год.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        А если ИИ ошибётся и откажет мне в льготе?
+        <span class="faq-q-arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          Система предусматривает <strong>обязательную возможность обжалования</strong> любого автоматического решения через живого сотрудника. Новое законодательство (закон о регулировании ИИ, срок принятия — март 2026) устанавливает: в чувствительных сферах — здравоохранении, социальной защите, судопроизводстве — ИИ выдаёт только рекомендацию, окончательное решение всегда за человеком. Право на «человеческий контакт» гарантировано.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════ CONCLUSION ═══════════════════════════════ -->
+<section class="conclusion">
+  <h2>РОССИЯ<br><span>2030</span></h2>
+  <p>
+    Государство без очередей. Услуги без заявлений. Управление без ошибок. 155 миллиардов рублей в 2026 году. 61 ведомство. Одна цель: сделать Россию самым технологичным государством в незападном мире.
+  </p>
+  <div class="cta-row">
+    <a href="#voice" class="btn-primary">СМОТРЕТЬ ДЕМО ГОЛОСОВОГО ИИ</a>
+    <a href="#plan" class="btn-outline">НАЦПЛАН 2025–2030</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ЦИФРОВАЯ РОССИЯ · ai.gov.ru</div>
+  <div style="display:flex; gap: 8px; align-items: center;">
+    <span style="width:20px;height:4px;border-radius:2px;background:#fff;border:1px solid #ddd;display:inline-block;"></span>
+    <span style="width:20px;height:4px;border-radius:2px;background:#003087;display:inline-block;"></span>
+    <span style="width:20px;height:4px;border-radius:2px;background:#CC1F1F;display:inline-block;"></span>
+  </div>
+  <div class="footer-meta">
+    ПРИ ПРАВИТЕЛЬСТВЕ РФ · НЦРИИ · МИНЦИФРЫ · © 2026
+  </div>
+</footer>
+<div class="tricolor-bar"></div>
+
+<script>
+// ─── PERSONA TOGGLE ───
+function showPersona(card, id) {
+  document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.persona-detail').forEach(d => d.classList.remove('active'));
+  card.classList.add('active');
+  const detail = document.getElementById('persona-' + id);
+  if(detail) detail.classList.add('active');
+}
+
+// ─── FAQ TOGGLE ───
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ─── REVEAL ON SCROLL ───
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+revealEls.forEach(r => revealObs.observe(r));
+
+// ─── NAV ACTIVE STATE ───
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 200) current = s.id; });
+  navLinks.forEach(a => {
+    const isActive = a.getAttribute('href') === '#' + current;
+    a.style.color = isActive ? '#003087' : '';
+    a.style.fontWeight = isActive ? '700' : '';
+  });
+});
+
+// ─── LIVE COUNTER ANIMATION ───
+function animateCounters() {
+  document.querySelectorAll('.live-num').forEach(el => {
+    const text = el.textContent;
+    // Only animate pure numbers
+    const num = parseFloat(text.replace(/[^0-9.]/g, ''));
+    if(isNaN(num) || text.includes('/') || text.includes('.') && text.length < 5) return;
+    const suffix = text.replace(/[0-9.]/g, '');
+    let start = 0;
+    const dur = 1800;
+    const t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * num) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+const liveObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting) { animateCounters(); liveObs.disconnect(); }
+}, { threshold: 0.5 });
+const liveSection = document.querySelector('.live-section');
+if(liveSection) liveObs.observe(liveSection);
+</script>
+
+</body>
+</html>
