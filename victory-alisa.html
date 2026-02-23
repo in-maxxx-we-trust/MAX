@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Память и подвиг: Великая Отечественная война 1941–1945</title>
+    <style>
+        /* Базовые стили */
+        body {
+            font-family: 'PT Serif', serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(to right, #8B0000, #4B0000);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #4B0000;
+            padding: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #8B0000;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #4B0000;
+            color: white;
+            margin-top: 40px;
+        }
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .event {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .hero-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .hero-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+        }
+        .hero-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Память и подвиг: Великая Отечественная война 1941–1945</h1>
+        <p>Подвиг народа — в наших сердцах</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#blokada">Блокада Ленинграда</a></li>
+            <li><a href="#battles">Главные битвы</a></li>
+            <li><a href="#heroes">Героизм советского солдата</a></li>
+            <li><a href="#horrors">Ужасы войны</a></li>
+            <li><a href="#memory">Память поколений</a></li>
+            <li><a href="#education">Для школьников</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- Главная страница -->
+        <section id="home">
+            <h2>Главная</h2>
+            <p>Этот сайт посвящён подвигу советского народа в Великой Отечественной войне. Здесь собраны хроники событий, истории героев, свидетельства очевидцев и материалы для изучения истории.</p>
+            <div class="timeline">
+                <div class="event">
+                    <h3>22 июня 1941</h3>
+                    <p>Начало Великой Отечественной войны. Нападение Германии на СССР.</p>
+                </div>
+                <div class="event">
+                    <h3>8 сентября 1941</h3>
+                    <p>Начало блокады Ленинграда.</p>
+                </div>
+                <div class="event">
+                    <h3>9 мая 1945</h3>
+                    <p>День Победы. Капитуляция Германии.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блокада Ленинграда -->
+        <section id="blokada">
+            <h2>Блокада Ленинграда</h2>
+            <button class="accordion">Хронология блокады</button>
+            <div class="panel">
+                <p>Блокада длилась 872 дня — с 8 сентября 1941 по 27 января 1944 года.</p>
+                <p>За это время от голода и обстрелов погибло около 1 млн человек.</p>
+            </div>
+            <button class="accordion">Дорога жизни</button>
+            <div class="panel">
+                <p>Ледовая трасса через Ладожское озеро, по которой в город доставляли продовольствие.</p>
+                <img src="https://via.placeholder.com/600x400" alt="Дорога жизни">
+            </div>
+            <button class="accordion">Жизнь в осаждённом городе</button>
+            <div class="panel">
+                <p>Нормы выдачи хлеба в ноябре 1941 года: 125 г для служащих, детей и иждивенцев.</p>
+                <p>Работали заводы, театры, школы.</p>
+            </div>
+        </section>
+
+        <!-- Главные битвы -->
+        <section id="battles">
+            <h2>Главные битвы войны</h2>
+            <div class="timeline">
+                <div class="event">
+                    <h3>Битва за Москву</h3>
+                    <p>(30.09.1941–20.04.1942)</p>
+                    <img src="https://via.placeholder.com/300x200" alt="Битва за Москву">
+                </div>
+                <div class="event">
+                    <h3>Сталинградская битва</h3>
+                    <p>(17.07.1942–02.02.1943)</p>
+                    <img src="https://via.placeholder.com/300x200" alt="Сталинградская битва">
+                </div>
+                <div class="event">
+                    <h3>Курская дуга</h3>
+                    <p>(05.07–23.08.1943)</p>
+                    <img src="https://via.placeholder.com/300x200" alt="Курская дуга">
+                </div>
+            </div>
+        </section>
+        <section id="heroes">
+            <h2>Героизм советского солдата</h2>
+            <div class="hero-gallery">
+                <div class="hero-card">
+                    <img src="https://via.placeholder.com/250x300" alt="Александр Матросов">
+                    <h3>Александр Матросов</h3>
+                    <p>Закрыл собой амбразуру вражеского дзота, обеспечив продвижение подразделения.</p>
+                </div>
+                <div class="hero-card">
+                    <img src="https://via.placeholder.com/250x300" alt="Зоя Космодемьянская">
+                    <h3>Зоя Космодемьянская</h3>
+                    <p>Партизанка, Герой Советского Союза. Казнена фашистами в ноябре 1941 года.</p>
+                </div>
+                <div class="hero-card">
+                    <img src="https://via.placeholder.com/250x300" alt="Алексей Маресьев">
+                    <h3>Алексей Маресьев</h3>
+                    <p>Лётчик, воевавший без ног после ампутации. Совершил 86 боевых вылетов.</p>
+                </div>
+                <div class="hero-card">
+                    <img src="https://via.placeholder.com/250x300" alt="Николай Гастелло">
+                    <h3>Николай Гастелло</h3>
+                    <p>Совершил огненный таран, направив горящий самолёт на колонну врага.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ужасы войны -->
+        <section id="horrors">
+            <h2>Ужасы войны</h2>
+            <p><strong>Внимание:</strong> Контент содержит шокирующие материалы.</p>
+            <button class="accordion">Статистика потерь</button>
+            <div class="panel">
+                <p>Общие потери СССР — около 27 млн человек.</p>
+                <p>Из них: 8,7 млн — военнослужащие, 18,3 млн — мирное население.</p>
+            </div>
+            <button class="accordion">Преступления нацистов</button>
+            <div class="panel">
+                <p>Хатынь, Бабий Яр, концлагеря — места массовых убийств мирных жителей.</p>
+                <img src="https://via.placeholder.com/600x400" alt="Бабий Яр">
+            </div>
+            <button class="accordion">Разрушения городов</button>
+            <div class="panel">
+                <p>Сталинград, Севастополь, Минск — города, практически стёртые с лица земли.</p>
+                <img src="https://via.placeholder.com/600x400" alt="Разрушенный Сталинград">
+            </div>
+        </section>
+
+        <!-- Память поколений -->
+        <section id="memory">
+            <h2>Память поколений</h2>
+            <h3>Книга памяти</h3>
+            <p>Поиск по фамилии погибших и пропавших без вести.</p>
+            <form>
+                <input type="text" placeholder="Введите фамилию..." style="width: 300px; padding: 10px;">
+                <button type="submit" style="padding: 10px 20px;">Найти</button>
+            </form>
+            <h3>Моя семья в войне</h3>
+            <p>Поделитесь историей своего родственника-фронтовика.</p>
+            <form>
+                <textarea placeholder="Расскажите историю..." style="width: 100%; height: 100px;"></textarea><br>
+                <input type="file" accept="image/*"><br>
+                <button type="submit" style="margin-top: 10px; padding: 10px 20px;">Загрузить</button>
+            </form>
+        </section>
+
+        <!-- Для школьников и учителей -->
+        <section id="education">
+            <h2>Для школьников и учителей</h2>
+            <h3>Тесты и викторины</h3>
+            <p>Проверьте свои знания о Великой Отечественной войне.</p>
+            <a href="#" style="display: inline-block; margin: 10px; padding: 10px 20px; background: #8B0000; color: white; text-decoration: none;">Начать тест</a>
+            <h3>Сценарии уроков</h3>
+            <ul>
+                <li><a href="#">Урок «Блокада Ленинграда»</a></li>
+                <li><a href="#">Внеклассное мероприятие «Герои войны»</a></li>
+                <li><a href="#">Классный час «Цена Победы»</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Посвящается памяти павших. Создано Максом в 2026 г.</p>
+        <p>Источники: РИА Новости, ТАСС, архив Минобороны РФ, портал «Память народа».</p>
+        <p><a href="mailto:info@memory-site.ru" style="color: white;">Связаться с нами</a></p>
+    </footer>
+
+    <!-- JavaScript для аккордеонов -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
