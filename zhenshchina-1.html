@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Женщина №1 — Полное руководство по отношениям от Макса</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FAF6F0;
+  --cream2: #F3EDE3;
+  --cream3: #EDE4D8;
+  --wine: #6B1E2E;
+  --wine-light: #8B2D42;
+  --wine-dark: #4A1020;
+  --rose: #C4747A;
+  --rose-light: #DBA5A8;
+  --rose-gold: #B5826B;
+  --blush: #F0D5D0;
+  --dark: #1A0F12;
+  --text: #2C1A1F;
+  --text-mid: #5A3A42;
+  --text-light: #8B6870;
+  --white: #FFFFFF;
+  --green: #3D7A5E;
+  --red-flag: #A0243A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--wine); }
+
+/* PROGRESS */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(to right, var(--wine), var(--rose), var(--rose-gold));
+  z-index: 9999;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(250,246,240,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(107,30,46,0.12);
+}
+
+.nav-logo {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--wine);
+  text-decoration: none;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-mid);
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--wine); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 130px 48px 100px;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+/* Decorative circles */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,116,122,0.12) 0%, transparent 70%);
+  top: -100px;
+  right: -150px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181,130,107,0.1) 0%, transparent 70%);
+  bottom: -50px;
+  left: -100px;
+  pointer-events: none;
+}
+
+/* Floating ornament lines */
+.hero-ornament {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(107,30,46,0.08), transparent);
+  transform: translateY(-200px);
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.2s forwards;
+}
+
+.hero h1 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(64px, 12vw, 140px);
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--dark);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.4s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 .wine { color: var(--wine); }
+.hero h1 .italic { font-style: italic; color: var(--wine-light); }
+.hero h1 .thin { font-weight: 400; color: var(--text-light); }
+
+.hero-tagline {
+  font-family: 'Lora', serif;
+  font-size: clamp(17px, 2.2vw, 24px);
+  font-style: italic;
+  color: var(--text-mid);
+  max-width: 680px;
+  margin-bottom: 56px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.6s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 56px;
+  justify-content: center;
+  margin-bottom: 64px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.8s forwards;
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--wine);
+  display: block;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.hero-btn {
+  display: inline-block;
+  background: var(--wine);
+  color: var(--cream);
+  padding: 20px 56px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  opacity: 0;
+  animation: fadeUp 0.9s 1s forwards;
+  border: 2px solid var(--wine);
+}
+
+.hero-btn:hover {
+  background: transparent;
+  color: var(--wine);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(107,30,46,0.18);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeUp 0.9s 1.2s forwards;
+}
+
+.scroll-hint span {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rose);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* MODULES STRIP */
+.modules-strip {
+  background: var(--dark);
+  padding: 72px 48px;
+}
+
+.modules-strip-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.modules-strip-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.modules-strip-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--rose);
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+}
+
+.mod-card {
+  background: var(--dark);
+  padding: 32px 28px;
+  text-decoration: none;
+  color: var(--cream);
+  display: block;
+  border: 1px solid transparent;
+  transition: all 0.25s;
+}
+
+.mod-card:hover {
+  background: rgba(196,116,122,0.08);
+  border-color: rgba(196,116,122,0.25);
+}
+
+.mod-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--rose);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.mod-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.mod-desc {
+  font-size: 13px;
+  color: var(--text-light);
+  font-family: 'Lora', serif;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* SECTION WRAPPER */
+.section-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 14px;
+}
+
+.sec-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(38px, 5.5vw, 72px);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+
+.sec-lead {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text-mid);
+  max-width: 720px;
+  margin-bottom: 64px;
+  line-height: 1.7;
+}
+
+/* ALT SECTION BG */
+.alt-bg { background: var(--cream2); }
+.dark-bg { background: var(--dark); }
+.wine-bg { background: var(--wine); }
+.blush-bg { background: var(--blush); }
+
+/* BODY TEXT */
+.prose {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text);
+  max-width: 820px;
+}
+
+.prose p { margin-bottom: 22px; }
+.prose b { color: var(--wine); font-weight: 600; }
+.prose em { font-style: italic; color: var(--text-mid); }
+
+/* PULL QUOTE */
+.pull-quote {
+  font-family: 'Bodoni Moda', serif;
+  font-size: clamp(22px, 3.5vw, 42px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--wine);
+  padding: 48px 0;
+  border-top: 2px solid var(--wine);
+  border-bottom: 2px solid var(--wine);
+  margin: 64px 0;
+  position: relative;
+}
+
+.pull-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  font-size: 120px;
+  color: rgba(107,30,46,0.1);
+  font-family: 'Bodoni Moda', serif;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* TWO COLUMNS */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin: 48px 0;
+}
+
+@media(max-width:768px){ .two-col { grid-template-columns: 1fr; } }
+
+.card-light {
+  background: var(--cream2);
+  padding: 40px 36px;
+  border-top: 4px solid var(--rose);
+}
+
+.card-dark {
+  background: var(--dark);
+  color: var(--cream);
+  padding: 40px 36px;
+  border-top: 4px solid var(--wine);
+}
+
+.card-light h3, .card-dark h3 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.card-dark h3 { color: var(--cream); }
+
+/* MISTAKE / CORRECT */
+.mc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin: 40px 0;
+}
+
+@media(max-width:768px){ .mc-grid { grid-template-columns: 1fr; } }
+
+.mc-wrong {
+  background: rgba(160,36,58,0.06);
+  border-left: 4px solid var(--red-flag);
+  padding: 32px;
+}
+
+.mc-right {
+  background: rgba(61,122,94,0.06);
+  border-left: 4px solid var(--green);
+  padding: 32px;
+}
+
+.mc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.mc-wrong .mc-tag { color: var(--red-flag); }
+.mc-right .mc-tag { color: var(--green); }
+
+.mc-body {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+.mc-body p { margin-bottom: 12px; }
+.mc-body p:last-child { margin-bottom: 0; }
+.mc-body b { color: var(--text); }
+
+/* ACCORDION */
+.accordion { margin: 40px 0; }
+
+.acc-item { border-bottom: 1px solid rgba(107,30,46,0.12); }
+
+.acc-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text);
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 20px;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.acc-btn:hover { color: var(--wine); }
+
+.acc-ico {
+  color: var(--wine);
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  min-width: 24px;
+  transition: transform 0.3s;
+}
+
+.acc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.acc-body.open { max-height: 3000px; }
+
+.acc-content {
+  padding: 0 0 28px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--text-mid);
+}
+
+.acc-content p { margin-bottom: 14px; }
+.acc-content b { color: var(--wine); }
+
+/* STYLED LIST */
+.slist {
+  list-style: none;
+  margin: 28px 0;
+}
+
+.slist li {
+  padding: 14px 0 14px 32px;
+  position: relative;
+  border-bottom: 1px solid rgba(107,30,46,0.08);
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+.slist li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  color: var(--rose);
+  font-size: 9px;
+}
+
+.slist li b { color: var(--text); }
+
+/* NUMBERED LIST */
+.nlist {
+  list-style: none;
+  counter-reset: n;
+  margin: 28px 0;
+}
+
+.nlist li {
+  counter-increment: n;
+  padding: 20px 20px 20px 72px;
+  position: relative;
+  border-bottom: 1px solid rgba(107,30,46,0.08);
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+.nlist li::before {
+  content: counter(n);
+  position: absolute;
+  left: 0; top: 16px;
+  width: 48px; height: 48px;
+  background: var(--wine);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.nlist li b { color: var(--wine); font-weight: 600; }
+
+/* EXAMPLE BLOCK */
+.example {
+  background: var(--cream2);
+  border-left: 5px solid var(--rose-gold);
+  padding: 36px 40px;
+  margin: 40px 0;
+  position: relative;
+  font-style: italic;
+}
+
+.example::before {
+  content: 'История';
+  position: absolute;
+  top: -13px; left: 40px;
+  background: var(--rose-gold);
+  color: var(--white);
+  padding: 2px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+.example p {
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 12px;
+}
+
+.example p:last-child { margin-bottom: 0; }
+
+/* INFO BOX */
+.info-box {
+  background: rgba(107,30,46,0.04);
+  border: 1px solid rgba(107,30,46,0.18);
+  padding: 36px 40px;
+  margin: 40px 0;
+}
+
+.info-box::before {
+  content: '★';
+  display: block;
+  color: var(--wine);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.info-box p {
+  font-size: 17px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.info-box p b { color: var(--wine); }
+
+/* WARNING */
+.warn {
+  background: rgba(160,36,58,0.05);
+  border-left: 5px solid var(--red-flag);
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+
+.warn p { font-size: 16px; color: var(--text-mid); margin: 0; line-height: 1.75; }
+.warn b { color: var(--red-flag); }
+
+/* TIMELINE */
+.timeline {
+  padding-left: 44px;
+  position: relative;
+  margin: 40px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--wine), var(--rose), transparent);
+}
+
+.tl-item {
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -39px; top: 7px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--wine);
+  background: var(--cream);
+}
+
+.tl-phase {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--rose);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tl-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--dark);
+}
+
+.tl-text {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+/* PRINCIPLES GRID */
+.p-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 3px;
+  margin: 40px 0;
+}
+
+.p-card {
+  background: var(--cream2);
+  padding: 36px 32px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.p-card:hover {
+  border-bottom-color: var(--wine);
+  background: var(--cream3);
+}
+
+.p-ico { font-size: 30px; margin-bottom: 18px; display: block; }
+
+.p-t {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--dark);
+}
+
+.p-d { font-size: 15px; color: var(--text-light); line-height: 1.7; }
+
+/* RED FLAG / GREEN FLAG */
+.flag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin: 40px 0;
+}
+
+@media(max-width:768px){ .flag-grid { grid-template-columns: 1fr; } }
+
+.red-flag-card {
+  background: rgba(160,36,58,0.05);
+  padding: 32px;
+  border-top: 3px solid var(--red-flag);
+}
+
+.green-flag-card {
+  background: rgba(61,122,94,0.05);
+  padding: 32px;
+  border-top: 3px solid var(--green);
+}
+
+.flag-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.red-flag-card .flag-title { color: var(--red-flag); }
+.green-flag-card .flag-title { color: var(--green); }
+
+/* TABLE */
+.s-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 40px 0;
+  font-size: 16px;
+}
+
+.s-table thead tr { border-bottom: 2px solid var(--wine); }
+
+.s-table th {
+  padding: 14px 20px;
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wine);
+  font-weight: 400;
+}
+
+.s-table td {
+  padding: 14px 20px;
+  color: var(--text-mid);
+  border-bottom: 1px solid rgba(107,30,46,0.08);
+  vertical-align: top;
+}
+
+.s-table tr:hover td { background: rgba(107,30,46,0.03); }
+
+/* SECTION DIVIDER */
+.sec-div {
+  padding: 80px 48px;
+}
+
+.sec-div-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* FINAL SECTION */
+.finale {
+  background: var(--dark);
+  color: var(--cream);
+  text-align: center;
+  padding: 120px 48px;
+}
+
+.finale .sec-title { color: var(--cream); }
+.finale .prose { color: rgba(250,246,240,0.8); margin: 0 auto; }
+
+/* FOOTER */
+footer {
+  background: var(--wine-dark);
+  padding: 80px 48px;
+  text-align: center;
+}
+
+.foot-logo {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--cream);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.foot-text {
+  font-size: 16px;
+  color: rgba(250,246,240,0.6);
+  font-style: italic;
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.foot-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(250,246,240,0.35);
+  text-transform: uppercase;
+}
+
+/* BACK TO TOP */
+.btt {
+  position: fixed;
+  bottom: 40px; right: 40px;
+  width: 52px; height: 52px;
+  background: var(--wine);
+  color: var(--cream);
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  border-radius: 50%;
+}
+
+.btt.vis { opacity: 1; }
+.btt:hover { transform: translateY(-4px); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* DARK SECTION OVERRIDES */
+.dark-bg .sec-title { color: var(--cream); }
+.dark-bg .sec-lead { color: rgba(250,246,240,0.65); }
+.dark-bg .prose { color: rgba(250,246,240,0.8); }
+.dark-bg .prose b { color: var(--rose-light); }
+.dark-bg .slist li { color: rgba(250,246,240,0.75); border-color: rgba(255,255,255,0.08); }
+.dark-bg .slist li b { color: var(--cream); }
+.dark-bg .nlist li { color: rgba(250,246,240,0.75); border-color: rgba(255,255,255,0.08); }
+.dark-bg .nlist li b { color: var(--rose-light); }
+.dark-bg .nlist li::before { background: var(--rose); }
+.dark-bg .p-card { background: rgba(255,255,255,0.04); }
+.dark-bg .p-card:hover { background: rgba(255,255,255,0.07); border-bottom-color: var(--rose); }
+.dark-bg .p-t { color: var(--cream); }
+.dark-bg .p-d { color: rgba(250,246,240,0.5); }
+.dark-bg .pull-quote { color: var(--rose-light); border-color: var(--rose); }
+.dark-bg .acc-btn { color: var(--cream); }
+.dark-bg .acc-item { border-color: rgba(255,255,255,0.1); }
+.dark-bg .acc-content { color: rgba(250,246,240,0.7); }
+.dark-bg .tl-item::before { background: var(--dark); border-color: var(--rose); }
+.dark-bg .tl-title { color: var(--cream); }
+.dark-bg .tl-text { color: rgba(250,246,240,0.65); }
+.dark-bg .tl-phase { color: var(--rose); }
+.dark-bg .example { background: rgba(255,255,255,0.04); }
+.dark-bg .example p { color: rgba(250,246,240,0.7); }
+.dark-bg .info-box { background: rgba(196,116,122,0.1); border-color: rgba(196,116,122,0.3); }
+.dark-bg .info-box p { color: rgba(250,246,240,0.75); }
+.dark-bg .info-box::before { color: var(--rose); }
+.dark-bg .warn { border-color: #E05470; background: rgba(224,84,112,0.08); }
+.dark-bg .warn p { color: rgba(250,246,240,0.7); }
+.dark-bg .s-table th { color: var(--rose); }
+.dark-bg .s-table td { color: rgba(250,246,240,0.65); border-color: rgba(255,255,255,0.07); }
+.dark-bg .mc-wrong { background: rgba(160,36,58,0.12); }
+.dark-bg .mc-right { background: rgba(61,122,94,0.1); }
+.dark-bg .mc-body { color: rgba(250,246,240,0.7); }
+.dark-bg .flag-grid .red-flag-card { background: rgba(160,36,58,0.12); }
+.dark-bg .flag-grid .green-flag-card { background: rgba(61,122,94,0.1); }
+.dark-bg .flag-title.rf { color: #E05470; }
+.dark-bg .flag-title.gf { color: #5CB891; }
+.dark-bg .timeline::before { background: linear-gradient(to bottom, var(--rose), rgba(196,116,122,0.3), transparent); }
+.dark-bg .sec-eyebrow { color: var(--rose); }
+
+/* DECORATIVE DASH */
+.dash {
+  display: inline-block;
+  width: 48px;
+  height: 2px;
+  background: var(--wine);
+  margin-bottom: 32px;
+  vertical-align: middle;
+}
+
+/* SUBTITLE TAG */
+.sub-tag {
+  display: inline-block;
+  background: var(--blush);
+  color: var(--wine);
+  padding: 4px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links { display: none; }
+  nav { padding: 16px 24px; }
+  .section-wrap { padding: 72px 24px; }
+  .sec-div { padding: 64px 24px; }
+  .modules-strip { padding: 56px 24px; }
+  .hero { padding: 120px 24px 80px; }
+  .finale { padding: 80px 24px; }
+  footer { padding: 60px 24px; }
+}
+
+@media(max-width:600px){
+  .hero-stats { gap: 24px; }
+  .two-col, .mc-grid, .flag-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="#top" class="nav-logo">Ж№1</a>
+  <ul class="nav-links">
+    <li><a href="#psychology">Психология</a></li>
+    <li><a href="#men">Мужчины</a></li>
+    <li><a href="#meeting">Знакомство</a></li>
+    <li><a href="#dating">Отношения</a></li>
+    <li><a href="#red-flags">Красные флаги</a></li>
+    <li><a href="#mistakes">Ошибки</a></li>
+    <li><a href="#self">О себе</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="top" class="hero">
+  <div class="hero-ornament"></div>
+  <div class="hero-eyebrow">Курс от Макса · Только для женщин · 2024</div>
+  <h1>
+    <span class="wine">Женщина</span><br>
+    <span class="italic">№&thinsp;1</span>
+  </h1>
+  <p class="hero-tagline">Всё, что должна знать женщина об отношениях. Честно — без розовых очков. Глубоко — без воды. Практично — с первого дня.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">13</span>
+      <span class="stat-label">Модулей</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">120+</span>
+      <span class="stat-label">Ситуаций</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Ценность</span>
+    </div>
+  </div>
+  <a href="#intro" class="hero-btn">Начать читать</a>
+  <div class="scroll-hint">
+    <span>Листай вниз</span>
+    <div class="scroll-dot"></div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="modules-strip">
+  <div class="modules-strip-inner">
+    <div class="modules-strip-sub">Программа курса</div>
+    <h2 class="modules-strip-title">Что тебя ждёт</h2>
+    <div class="mod-grid">
+      <a href="#intro" class="mod-card"><div class="mod-num">01</div><div class="mod-title">Вступление</div><div class="mod-desc">Почему большинство советов для женщин — вредны</div></a>
+      <a href="#psychology" class="mod-card"><div class="mod-num">02</div><div class="mod-title">Как устроена ты</div><div class="mod-desc">Психология женщины: потребности, паттерны, ловушки</div></a>
+      <a href="#men" class="mod-card"><div class="mod-num">03</div><div class="mod-title">Как устроен мужчина</div><div class="mod-desc">То, что тебе никто не объяснял — честно и без прикрас</div></a>
+      <a href="#attraction-men" class="mod-card"><div class="mod-num">04</div><div class="mod-title">Что привлекает мужчин</div><div class="mod-desc">Реальный список. Не внешность на первом месте</div></a>
+      <a href="#meeting" class="mod-card"><div class="mod-num">05</div><div class="mod-title">Знакомство и начало</div><div class="mod-desc">Где, как, что транслировать с первых минут</div></a>
+      <a href="#dating" class="mod-card"><div class="mod-num">06</div><div class="mod-title">Свидания и выбор</div><div class="mod-desc">Как оценивать, как вести себя, когда давать второй шанс</div></a>
+      <a href="#red-flags" class="mod-card"><div class="mod-num">07</div><div class="mod-title">Красные флаги</div><div class="mod-desc">50 признаков мужчины, от которого нужно уходить</div></a>
+      <a href="#communication" class="mod-card"><div class="mod-num">08</div><div class="mod-title">Коммуникация</div><div class="mod-desc">Как говорить так, чтобы тебя слышали</div></a>
+      <a href="#building" class="mod-card"><div class="mod-num">09</div><div class="mod-title">Строим отношения</div><div class="mod-desc">Близость, доверие, баланс «себя» и «нас»</div></a>
+      <a href="#intimacy" class="mod-card"><div class="mod-num">10</div><div class="mod-title">Интимность</div><div class="mod-desc">Эмоциональная и физическая близость — что важно знать</div></a>
+      <a href="#serious" class="mod-card"><div class="mod-num">11</div><div class="mod-title">Серьёзные отношения</div><div class="mod-desc">Когда и как переходить к следующему уровню</div></a>
+      <a href="#mistakes" class="mod-card"><div class="mod-num">12</div><div class="mod-title">60 главных ошибок</div><div class="mod-desc">Разбор паттернов с примерами и альтернативами</div></a>
+      <a href="#self" class="mod-card"><div class="mod-num">13</div><div class="mod-title">Работа над собой</div><div class="mod-desc">Женщина, которую любят. И которая любит себя</div></a>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 01: ВСТУПЛЕНИЕ -->
+<div id="intro" class="section-wrap">
+  <div class="sec-eyebrow">Вступление · Модуль 01</div>
+  <h2 class="sec-title">Почему этот курс другой</h2>
+  <p class="sec-lead">Честный разговор о том, с чего начинаются все женские проблемы в отношениях</p>
+
+  <div class="prose">
+    <p>Если ты открыла этот курс — значит, тебе нужна правда. Не «будь собой и всё придёт», не «мужчина обязан», не «ты королева — жди достойного». Реальная, честная, иногда неудобная правда.</p>
+    <p>Большинство советов для женщин устроены так: они либо <b>говорят тебе, что ты жертва</b> и во всём виноваты мужчины, либо наоборот — учат тебя <em>манипулировать</em>, «выгодно продавать себя», «не отвечать первой три дня». Ни то, ни другое не работает.</p>
+    <p>Этот курс другой. Здесь нет ни одного совета, который унижает — ни мужчин, ни тебя. Здесь есть психология, честность и инструменты. Потому что <b>счастливые отношения начинаются с понимания: себя, другого человека и того, как вы взаимодействуете</b>.</p>
+    <p>Мы разберём мужскую психологию — не чтобы манипулировать, а чтобы понять. Мы поговорим о твоих паттернах — не чтобы осудить, а чтобы изменить. Мы обсудим красные флаги, ошибки, коммуникацию и то, как строить отношения, в которых хочется оставаться.</p>
+  </div>
+
+  <div class="pull-quote">
+    Настоящая сила женщины — не в умении удержать мужчину. А в умении выбрать правильного — и строить с ним настоящее.
+  </div>
+
+  <div class="prose">
+    <p>Предупреждение: часть того, что здесь написано, может тебя задеть. Потому что некоторые паттерны — это про тебя. Это нормально. Задеть — значит попасть в точку. Значит — есть что менять.</p>
+    <p>Готова? Начнём.</p>
+  </div>
+</div>
+
+<!-- MODULE 02: ПСИХОЛОГИЯ ЖЕНЩИНЫ -->
+<div id="psychology" class="alt-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 02</div>
+    <h2 class="sec-title">Как устроена ты</h2>
+    <p class="sec-lead">Твоя психология, потребности и ловушки, которые мешают строить отношения</p>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="prose">
+    <p>Чтобы строить хорошие отношения с другими — нужно сначала понять себя. Свои настоящие потребности, свои паттерны из детства, и то, как ты реагируешь под давлением.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif; font-size:28px; font-weight:700; margin:50px 0 24px; color:var(--dark);">Базовые потребности женщины в отношениях</h3>
+
+  <div class="p-grid">
+    <div class="p-card"><span class="p-ico">🛡</span><div class="p-t">Безопасность</div><div class="p-d">Эмоциональная и физическая безопасность — не роскошь, а базовая потребность. Когда она есть — ты открытая, нежная, инициативная. Когда нет — закрываешься и «становишься холодной».</div></div>
+    <div class="p-card"><span class="p-ico">💬</span><div class="p-t">Быть услышанной</div><div class="p-d">Не «проблему решили», а «меня поняли». Это разные вещи. Когда тебя слышат — появляется близость. Когда перебивают или обесценивают — появляется стена.</div></div>
+    <div class="p-card"><span class="p-ico">✨</span><div class="p-t">Быть желанной</div><div class="p-d">Не только физически. Желанной как человек, как партнёр, как личность. Знать, что он думает о тебе и хочет быть рядом — принципиально важно для женской психологии.</div></div>
+    <div class="p-card"><span class="p-ico">🌿</span><div class="p-t">Пространство для роста</div><div class="p-d">Отношения, которые тебя ограничивают, — медленно разрушают. Партнёр, который даёт тебе расти, поддерживает твои цели и восхищается твоим развитием — редкость и ценность.</div></div>
+    <div class="p-card"><span class="p-ico">🤲</span><div class="p-t">Принятие</div><div class="p-d">Быть принятой целиком — со своими страхами, несовершенствами, плохими днями. Постоянное ощущение, что тебя «ещё недостаточно» — прямой путь к низкой самооценке.</div></div>
+    <div class="p-card"><span class="p-ico">🤝</span><div class="p-t">Партнёрство</div><div class="p-d">Не папа и не ребёнок — а равный человек рядом. Мужчина, с которым ты принимаешь решения вместе, а не подчиняешься или тащишь всё сама.</div></div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif; font-size:28px; font-weight:700; margin:60px 0 24px; color:var(--dark);">Женские психологические паттерны — что мешает</h3>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Синдром «я исправлю его» <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Что это:</b> Выбор мужчины с очевидными проблемами — с верой, что любовь и терпение его изменят. «Он просто не встречал правильной женщины».</p>
+        <p><b>Правда:</b> Взрослый человек меняется только если <em>сам</em> хочет меняться. Ты не его терапевт и не мама. Твоя задача — найти партнёра, а не проект. Принимай человека таким, какой он есть сейчас — или уходи.</p>
+        <p><b>Откуда это берётся:</b> Часто — из семьи, где любовь нужно было «заслужить» или где был нестабильный родитель, которого хотелось «починить».</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Тревожная привязанность — «он перестал писать, значит разлюбил» <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Что это:</b> Постоянная тревога о статусе отношений. Анализировать каждое сообщение, проверять «видел ли», болезненно реагировать на паузы.</p>
+        <p><b>Почему это разрушает:</b> Тревога транслируется — и создаёт именно то отдаление, которого боишься. Чем больше давишь — тем больше он отдаляется. Это не его вина и не твоя — это динамика тревожно-избегающей пары.</p>
+        <p><b>Что делать:</b> Работа с тревожной привязанностью — один из самых ценных вкладов в отношения. Это решается через психотерапию, осознанность и практику самоуспокоения.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Растворение в партнёре — потеря себя <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Что это:</b> Полная концентрация на нём: его планы, его настроение, его потребности. Свои интересы, подруги, цели — в сторону.</p>
+        <p><b>Почему это происходит:</b> Кажется романтичным. «Он — весь мой мир». На деле — это нездоровая зависимость и огромное давление на партнёра.</p>
+        <p><b>Последствия:</b> Ты перестаёшь быть интересной, потому что живёшь только им. Он чувствует давление. Ты — полную беспомощность при расставании. Сохраняй себя — это не эгоизм, это здоровье.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">«Он должен догадаться» — молчание вместо слов <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Что это:</b> Ожидание, что партнёр сам поймёт, что ты хочешь, что тебе больно, что нужно по-другому. Без слов.</p>
+        <p><b>Реальность:</b> Мужчины (и люди вообще) не читают мысли. «Если любит — поймёт» — это иллюзия, которая создаёт обиды и разочарования.</p>
+        <p><b>Что делать:</b> Говорить прямо. «Мне сейчас нужно, чтобы ты просто обнял меня» — это не слабость. Это зрелая коммуникация. Мужчины благодарны за ясность.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Самооценка через отношения — «без него я никто» <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Что это:</b> Ощущение, что ценность и смысл появляются только когда рядом мужчина. Одиночество — невыносимо.</p>
+        <p><b>Почему опасно:</b> Это заставляет терпеть неприемлемое, цепляться за плохие отношения, выбирать кого угодно — лишь бы не быть одной.</p>
+        <p><b>Правда:</b> Ты — целый человек сама по себе. Отношения дополняют твою жизнь, а не создают её. Научись хорошо быть с собой — и отношения станут выбором, а не спасательным кругом.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p><b>Главный инсайт:</b> Большинство повторяющихся проблем в отношениях — это твои паттерны, а не «все мужики одинаковые». Смена партнёра без работы над собой воспроизводит те же сценарии с новым лицом.</p>
+  </div>
+</div>
+
+<!-- MODULE 03: МУЖСКАЯ ПСИХОЛОГИЯ -->
+<div id="men" class="dark-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 03</div>
+    <h2 class="sec-title">Как устроен мужчина</h2>
+    <p class="sec-lead">Честный справочник без обид и обвинений — просто понимание</p>
+  </div>
+</div>
+
+<div class="dark-bg section-wrap">
+  <div class="prose">
+    <p>Большинство конфликтов между мужчиной и женщиной происходят не из-за злого умысла, а из-за <b>разного устройства</b>. Он не «игнорирует тебя» — он восстанавливается в тишине. Она не «требует внимания» — она укрепляет связь через разговор. Понять эту разницу — огромный шаг.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:50px 0 24px;color:var(--cream);">Что реально важно мужчинам</h3>
+
+  <div class="p-grid">
+    <div class="p-card"><span class="p-ico">🏆</span><div class="p-t">Уважение</div><div class="p-d">Для большинства мужчин уважение важнее любви. Публичное унижение, постоянная критика, насмешки — разрушают мужчину изнутри быстрее, чем всё остальное.</div></div>
+    <div class="p-card"><span class="p-ico">🧘</span><div class="p-t">Тишина и автономия</div><div class="p-d">После стресса мужчина уходит «в пещеру» — молчит, играет, смотрит видео. Это не отдаление. Это восстановление. Не интерпретируй это как равнодушие.</div></div>
+    <div class="p-card"><span class="p-ico">💪</span><div class="p-t">Чувствовать себя нужным</div><div class="p-d">Мужчина хочет решать твои проблемы и помогать тебе. Когда ты всегда отвечаешь «я сама справлюсь» — он чувствует себя лишним. Принимать помощь — это тоже навык.</div></div>
+    <div class="p-card"><span class="p-ico">🔓</span><div class="p-t">Принятие без переделки</div><div class="p-d">Постоянные попытки «улучшить» его — одеть, изменить привычки, переделать — считываются как «ты недостаточно хорош». Люби того, кто есть, или ищи другого.</div></div>
+    <div class="p-card"><span class="p-ico">🤫</span><div class="p-t">Пространство для молчания</div><div class="p-d">Мужчины не всегда хотят говорить о чувствах. Принуждение к «давай поговорим прямо сейчас» — часто закрывает его ещё больше. Терпение открывает больше, чем давление.</div></div>
+    <div class="p-card"><span class="p-ico">🌟</span><div class="p-t">Быть твоим героем</div><div class="p-d">Мужчинам важно чувствовать, что они делают что-то важное для тебя. Благодарность и восхищение — это не «лесть», это топливо для мужской мотивации в отношениях.</div></div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;color:var(--cream);">Мужское поведение, которое женщины неправильно интерпретируют</h3>
+
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Он молчит после ссоры — значит не любит? <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Реальность:</b> Мужчины обрабатывают конфликт иначе. Им нужно время, чтобы осмыслить — прежде чем говорить. «Мне нужно подумать» — это честность, не избегание.</p>
+        <p><b>Что не делать:</b> Преследовать его с «ну скажи же что-нибудь!» Это усиливает стресс и закрывает его ещё больше. Дай паузу — и он придёт сам.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Он не замечает твоих намёков — значит не думает о тебе? <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Реальность:</b> Мужчины в среднем хуже считывают невербальные сигналы. Не потому что равнодушны — просто так работает их мозг. Намёки не работают. Прямые слова — работают.</p>
+        <p><b>Пример:</b> «Мне было бы приятно, если бы ты сам иногда предлагал куда пойти» вместо холодного молчания в ожидании, что он догадается.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Он предлагает решение когда я просто хочу выговориться — он меня не слышит? <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Реальность:</b> Когда мужчина слышит проблему — он автоматически включает режим «решить». Это не равнодушие, это его способ помочь.</p>
+        <p><b>Решение:</b> Скажи прямо в начале: «Мне не нужно решение, мне нужно просто выговориться и чтобы ты послушал». Большинство мужчин с радостью переключатся.</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">Он меньше пишет — значит охладел? <span class="acc-ico">+</span></button>
+      <div class="acc-body"><div class="acc-content">
+        <p><b>Реальность:</b> Переписка для большинства мужчин — инструмент, а не замена общению. Если вы встречаетесь, если он рядом — количество сообщений не коррелирует с глубиной чувств.</p>
+        <p><b>Важно отличать:</b> Охлаждение — это изменение поведения в целом: он перестал предлагать встречи, стал рассеянным при встрече, избегает разговоров о будущем. Это красные флаги. А «мало пишет, но горит при встрече» — просто другой стиль общения.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    Мужчина не должен быть загадкой. Он становится понятным, когда перестаёшь переводить его действия через призму своей психологии.
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;color:var(--cream);">Что мужчина ищет в партнёрше — реальность</h3>
+
+  <ul class="nlist">
+    <li><b>Эмоциональная стабильность.</b> Не «всегда счастливая» — а умеющая справляться со своими эмоциями. Непредсказуемые вспышки, постоянная обидчивость, манипуляции — вызывают тревогу и желание дистанцироваться.</li>
+    <li><b>Своя жизнь и интересы.</b> Женщина, которая живёт только им — кажется привлекательной в начале и становится давлением через полгода. Свои подруги, цели, хобби — это не угроза отношениям, это их питательная среда.</li>
+    <li><b>Искренность.</b> Игры, манипуляции, «проверки» — быстро считываются и разрушают доверие. Прямость и честность — редкость, которую ценят.</li>
+    <li><b>Позитивный фон.</b> Постоянные претензии, нытьё, сравнения с другими — делают общение энергозатратным. Мужчина хочет, чтобы рядом с тобой было <em>хорошо</em>.</li>
+    <li><b>Уважение без условий.</b> Уважение только «когда он заслуживает» — это не уважение. Принятие мужчины как личности, даже в его несовершенствах, — то, что удерживает.</li>
+    <li><b>Лёгкость и юмор.</b> Умение смеяться, не драматизировать мелкое, быть партнёром по жизни, а не по проблемам — огромная ценность.</li>
+    <li><b>Сексуальность без стыда.</b> Женщина, которая принимает своё тело, знает чего хочет и не стыдится этого — гораздо привлекательнее той, что постоянно комплексует.</li>
+  </ul>
+</div>
+
+<!-- MODULE 04: ЧТО ПРИВЛЕКАЕТ МУЖЧИН -->
+<div id="attraction-men" class="section-wrap">
+  <div class="sec-eyebrow">Модуль 04</div>
+  <h2 class="sec-title">Что привлекает мужчин</h2>
+  <p class="sec-lead">Реальный список. Спойлер: внешность не на первом месте</p>
+
+  <div class="prose">
+    <p>Красота притягивает взгляд. Но <b>удерживает совсем другое</b>. Исследования и практика говорят одно и то же: мужчины влюбляются не в идеальное тело и не в правильный макияж — а в ощущение рядом с конкретной женщиной.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:26px;font-weight:700;margin:50px 0 24px;">Что создаёт притяжение — по убыванию реальной важности</h3>
+
+  <ul class="nlist">
+    <li><b>Уверенность в себе — №1.</b> Не самовлюблённость, а спокойная вера в свою ценность. Женщина, которая знает себе цену — притягивает сильнее любой внешности. Это считывается в осанке, взгляде, темпе речи.</li>
+    <li><b>Лёгкость и позитивная энергия.</b> Рядом с ней хорошо. Она не драматизирует, умеет смеяться, относится к жизни с любопытством. Это редкость и ценность.</li>
+    <li><b>Своя жизнь и страсти.</b> Женщина, которой интересно в этом мире — интересна другим. Любое дело, которое её захватывает — делает её привлекательнее.</li>
+    <li><b>Искренность и прямота.</b> Говорит то, что думает. Не играет роли. Мужчины устали от «угадай, что я имею в виду».</li>
+    <li><b>Умение слушать и задавать вопросы.</b> Живой искренний интерес к человеку — мощнейший аттрактор. Люди обожают тех, кто по-настоящему слышит.</li>
+    <li><b>Эмоциональная стабильность.</b> Предсказуемость реакций — это не скучно, это безопасно. Безопасность создаёт близость.</li>
+    <li><b>Внешность.</b> Да, важна. Но «внешность» — это ухоженность и то, как ты себя несёшь, а не параметры тела. Женщина, которая принимает своё тело и транслирует это — привлекательнее той, что постоянно прячет его.</li>
+  </ul>
+
+  <div class="example">
+    <p>Две девушки на вечеринке. Первая — объективно красивее. Весь вечер стоит у стены, смотрит в телефон, отвечает односложно.</p>
+    <p>Вторая — смеётся, задаёт вопросы, рассказывает историю с горящими глазами, уверенно держит паузу. К концу вечера вокруг неё пятеро.</p>
+    <p>Это не магия. Это энергия присутствия и уверенности.</p>
+  </div>
+
+  <div class="warn">
+    <p><b>Что убивает притяжение мгновенно:</b> постоянные жалобы и нытьё, разговоры о бывших при первом знакомстве, навязчивость и «почему не пишешь», агрессивный флирт как стратегия, демонстративная доступность без интереса к человеку, постоянное соглашательство без своего мнения.</p>
+  </div>
+</div>
+
+<!-- MODULE 05: ЗНАКОМСТВО -->
+<div id="meeting" class="alt-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 05</div>
+    <h2 class="sec-title">Знакомство и начало</h2>
+    <p class="sec-lead">Где знакомиться, как оценивать, что транслировать с первых минут</p>
+  </div>
+</div>
+
+<div class="alt-bg section-wrap">
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:0 0 30px;color:var(--dark);">Твой профиль на датинге — честный разбор</h3>
+
+  <div class="two-col">
+    <div class="card-light">
+      <h3>Что работает</h3>
+      <ul class="slist" style="margin-top:0">
+        <li><b>Живые фото</b> — смеёшься, в движении, за любимым делом. Не только портреты</li>
+        <li><b>Конкретное описание</b> — «люблю треккинг и готовлю шурпу лучше всех в Москве» лучше, чем «люблю путешествовать и общаться»</li>
+        <li><b>Своё мнение в тексте</b> — «не понимаю людей без любимой книги» даёт зацепку для разговора</li>
+        <li><b>Юмор и лёгкость</b> — один смешной факт о себе работает лучше трёх серьёзных</li>
+      </ul>
+    </div>
+    <div class="card-light">
+      <h3>Что не работает</h3>
+      <ul class="slist" style="margin-top:0">
+        <li><b>Список требований</b> — «ищу серьёзного, не пьющего, со своим жильём» — это анкета, не знакомство</li>
+        <li><b>Только модельные фото</b> — нереалистичный образ создаёт разочарование при встрече</li>
+        <li><b>«Я обычная девочка»</b> — ты необычная. Покажи это</li>
+        <li><b>Негатив в описании</b> — «устала от несерьёзных» — транслирует тревогу, не привлекательность</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 30px;color:var(--dark);">Первое впечатление — что важно</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-phase">Первые 30 секунд</div>
+      <div class="tl-title">Язык тела важнее слов</div>
+      <div class="tl-text">Прямая спина, открытая поза, взгляд в глаза (не вниз, не в телефон). Лёгкая улыбка — не приклеенная, а живая. Это транслирует уверенность мгновенно.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Первые минуты</div>
+      <div class="tl-title">Интерес, а не самопрезентация</div>
+      <div class="tl-text">Лучший способ понравиться — задать хороший вопрос и по-настоящему слушать ответ. Люди влюбляются в тех, кто ими искренне интересуется.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">В процессе общения</div>
+      <div class="tl-title">Своё мнение — золото</div>
+      <div class="tl-text">Не соглашайся со всем. Лёгкое несогласие («а я думаю иначе») создаёт интеллектуальное притяжение. Мужчина запомнит разговор, где ты была собой.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">В конце встречи</div>
+      <div class="tl-title">Заканчивать первой</div>
+      <div class="tl-text">«Было интересно, но мне пора» — это не игра. Это уважение к своему времени. Ты не обязана ждать, пока ОН решит, что хватит. Уйди, пока хорошо.</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p><b>Правило первого свидания:</b> Твоя задача — не произвести впечатление. Твоя задача — понять, нравится ли тебе <em>он</em>. Ты выбираешь, а не только тебя выбирают. Эта смена позиции меняет всё.</p>
+  </div>
+</div>
+
+<!-- MODULE 06: СВИДАНИЯ И ВЫБОР -->
+<div id="dating" class="section-wrap">
+  <div class="sec-eyebrow">Модуль 06</div>
+  <h2 class="sec-title">Свидания и выбор</h2>
+  <p class="sec-lead">Как оценивать мужчину, как вести себя и когда давать шанс</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:0 0 30px;">Что наблюдать на первых свиданиях</h3>
+
+  <p class="prose" style="max-width:100%; margin-bottom: 32px;">Первые свидания — не про «нравлюсь ли я ему». Это твоё время для наблюдения. Смотри на <b>поведение, а не на слова</b>.</p>
+
+  <div class="two-col">
+    <div class="card-light">
+      <h3 style="color:var(--green);">🟢 Хорошие знаки</h3>
+      <ul class="slist" style="margin-top:0;">
+        <li>Приходит вовремя или предупреждает заранее</li>
+        <li>Убирает телефон и смотрит на тебя</li>
+        <li>Задаёт вопросы и помнит то, что ты говорила</li>
+        <li>Не говорит плохо о бывших (или кратко и нейтрально)</li>
+        <li>Берёт маленькие инициативы: где сесть, что предложить</li>
+        <li>Уважительно относится к официантам и посторонним людям</li>
+        <li>Говорит о конкретных планах, а не «когда-нибудь»</li>
+      </ul>
+    </div>
+    <div class="card-light" style="border-top-color: var(--red-flag);">
+      <h3 style="color:var(--red-flag);">🔴 Тревожные знаки</h3>
+      <ul class="slist" style="margin-top:0;">
+        <li>Опаздывает без предупреждения и без извинений</li>
+        <li>Говорит только о себе — тебя почти не спрашивает</li>
+        <li>Унижает или высмеивает официантов, прохожих</li>
+        <li>Активно обсуждает бывших с обидой или превосходством</li>
+        <li>Давит на физический контакт раньше, чем ты готова</li>
+        <li>«Бомбардирует» комплиментами — выглядит неестественно</li>
+        <li>Всё время в телефоне или явно скучает</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 30px;">Вопрос, который решает всё: как он себя ведёт, когда злится?</h3>
+
+  <div class="prose">
+    <p>Посмотреть на человека в стрессе — важнее, чем в хорошие дни. Как он реагирует, когда что-то не по его плану? Что делает, если ты с ним не согласна? Злится ли на мелочи?</p>
+    <p>Это покажет больше, чем три месяца «медового» периода.</p>
+  </div>
+
+  <div class="example">
+    <p>Катя встречалась с Андреем. Всё было отлично — внимательный, красивый, обаятельный. Однажды официант перепутал заказ. Андрей повысил голос, был груб и весь вечер оставался раздражённым.</p>
+    <p>Катя сказала себе: «Ну это же просто плохой день». Через год эта же реакция была направлена на неё.</p>
+    <p><b>Правило:</b> как он ведёт себя с теми, кто ему ничего не должен — так он будет вести себя с тобой, когда ты ему «станешь должна».</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 30px;">Переписка и темп — важные правила</h3>
+
+  <div class="mc-grid">
+    <div class="mc-wrong">
+      <div class="mc-tag">✕ Что разрушает темп</div>
+      <div class="mc-body">
+        <p>Отвечать мгновенно на всё 24/7 — создаёт впечатление, что ты ждёшь у экрана</p>
+        <p>Писать первой несколько раз без ответа</p>
+        <p>Длинные монологи в переписке — оставь для живого разговора</p>
+        <p>«Почему не пишешь?» после одного пропущенного дня</p>
+        <p>Читать и не отвечать намеренно — как «игра»</p>
+      </div>
+    </div>
+    <div class="mc-right">
+      <div class="mc-tag">✓ Здоровый темп</div>
+      <div class="mc-body">
+        <p>Отвечать когда удобно — у тебя есть своя жизнь</p>
+        <p>Написать первой — нормально. Написать первой три раза без ответа — сигнал остановиться</p>
+        <p>Короткие живые сообщения создают больше интриги</p>
+        <p>Цель переписки — договориться о встрече, а не заменить её</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE 07: КРАСНЫЕ ФЛАГИ -->
+<div id="red-flags" class="dark-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 07</div>
+    <h2 class="sec-title">Красные флаги</h2>
+    <p class="sec-lead">50 признаков мужчины, от которого нужно уходить</p>
+  </div>
+</div>
+
+<div class="dark-bg section-wrap">
+  <div class="prose">
+    <p>Красные флаги — это не «он несовершенен». Это <b>паттерны поведения, которые сигнализируют об опасности</b>. Ключевое слово — паттерн. Один плохой день не флаг. Повторяющееся поведение — флаг.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">🚩 Контроль и манипуляции</h3>
+  <ul class="nlist">
+    <li><b>Изолирует тебя от подруг и семьи.</b> «Они плохо на тебя влияют», «зачем тебе они, пока есть я» — начало изоляции, которая делает тебя полностью зависимой.</li>
+    <li><b>Проверяет твой телефон, переписку, местоположение.</b> Это не любовь — это тревожность или желание контролировать. Ни то, ни другое не лечится «большим доверием» с твоей стороны.</li>
+    <li><b>Решает за тебя: что носить, с кем дружить, куда ходить.</b> Совет — нормально. Требование и обида при несогласии — красный флаг.</li>
+    <li><b>Газлайтинг.</b> «Этого не было», «ты всё придумала», «ты слишком чувствительная» в ответ на твои законные претензии. Это разрушение восприятия реальности.</li>
+    <li><b>Угрозы при попытке уйти.</b> «Без меня ты никто», «я не дам тебе уйти», «ты пожалеешь» — это не любовь. Это насилие.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">🚩 Эмоциональная незрелость</h3>
+  <ul class="nlist">
+    <li><b>Никогда не признаёт ошибок.</b> Всегда виноват кто-то другой: ты, обстоятельства, судьба. Взрослый человек умеет сказать «я был неправ».</li>
+    <li><b>«Мне сделали больно, поэтому я имею право делать больно тебе».</b> Токсичная логика. Прошлые травмы объясняют поведение, но не оправдывают его.</li>
+    <li><b>Эмоциональные взрывы из ниоткуда.</b> Агрессия, крики, хлопанье дверями — при мелких раздражителях. Признак неуправляемых эмоций и потенциальной опасности.</li>
+    <li><b>Бросает и возвращается циклично.</b> «Я ухожу» — через неделю возвращается — снова уходит. Это не «сложные отношения», это эмоциональные качели, которые разрушают.</li>
+    <li><b>Эмоциональная недоступность постоянная.</b> Никогда не говорит о чувствах, блокируется при попытке сблизиться, всё хорошее воспринимает без реакции — это не «сдержанный» человек, это стена.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">🚩 Непоследовательность и ненадёжность</h3>
+  <ul class="nlist">
+    <li><b>Говорит одно — делает другое систематически.</b> Один раз — случайность. Паттерн — характер.</li>
+    <li><b>«Бомбардировка любовью» в начале.</b> Слишком быстро: «ты моя судьба», «я никого так не любил», «давай уже вместе жить». Это тревожный знак, а не романтика. Так работают нарциссы.</li>
+    <li><b>Исчезает на дни без объяснений.</b> И появляется как ни в чём не бывало. И злится, если ты спрашиваешь.</li>
+    <li><b>Его истории постоянно меняются.</b> Детали не сходятся, объяснения противоречат себе.</li>
+    <li><b>Живёт в «потенциале».</b> «Я мог бы», «я собираюсь», «скоро всё изменится» — годами. Без действий.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">🚩 Обесценивание и неуважение</h3>
+  <ul class="nlist">
+    <li><b>Высмеивает твои цели, мечты, интересы.</b> «И зачем тебе это нужно?», «ты наивная» — это не «он реалист». Это обесценивание.</li>
+    <li><b>Сравнивает тебя с другими женщинами.</b> «Вот бывшая всегда...», «посмотри на Машу — она не жалуется». Это унижение как инструмент управления.</li>
+    <li><b>Шутки, которые задевают — и «ты без юмора».</b> Если шутка систематически про твои слабости и обидна — это не юмор. Это агрессия в упаковке.</li>
+    <li><b>Грубит при людях.</b> Как он говорит о тебе при других — показывает, как он тебя воспринимает.</li>
+    <li><b>Твои чувства — «ерунда».</b> «Подумаешь», «ты слишком остро реагируешь», «из-за такого плакать?» — систематическое обесценивание эмоций.</li>
+  </ul>
+
+  <div class="warn">
+    <p><b>Самый важный принцип:</b> Красные флаги видны с самого начала. Мы просто решаем их не замечать — потому что «он такой замечательный во всём остальном», «у него было тяжёлое детство», «я его изменю». <b>Замечай флаги. И верь им — не его объяснениям.</b></p>
+  </div>
+</div>
+
+<!-- MODULE 08: КОММУНИКАЦИЯ -->
+<div id="communication" class="sec-div alt-bg">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 08</div>
+    <h2 class="sec-title">Коммуникация</h2>
+    <p class="sec-lead">Как говорить так, чтобы тебя слышали — и слышать самой</p>
+  </div>
+</div>
+
+<div class="alt-bg section-wrap">
+  <div class="prose">
+    <p>Большинство проблем в отношениях — это <b>коммуникационные проблемы</b>. Не потому что люди плохие, а потому что нас никто не учил говорить о своих потребностях и слышать другого без защитной реакции.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:50px 0 24px;">Формула «Я-высказывания» — главный инструмент</h3>
+
+  <div class="info-box">
+    <p><b>«Когда [конкретная ситуация] — я чувствую [чувство] — потому что мне важно [потребность] — я прошу тебя [конкретная просьба]».</b><br><br>Это превращает атаку в просьбу. Мужчина перестаёт защищаться и начинает слышать.</p>
+  </div>
+
+  <div class="mc-grid">
+    <div class="mc-wrong">
+      <div class="mc-tag">✕ Ты-высказывания (атака)</div>
+      <div class="mc-body">
+        <p>«Ты вечно опаздываешь, тебе на меня плевать»</p>
+        <p>«Ты никогда меня не слушаешь»</p>
+        <p>«Ты всегда всё делаешь не так»</p>
+        <p>«Ты меня не любишь»</p>
+      </div>
+    </div>
+    <div class="mc-right">
+      <div class="mc-tag">✓ Я-высказывания (связь)</div>
+      <div class="mc-body">
+        <p>«Когда ты опаздываешь без предупреждения, я чувствую, что меня не уважают. Прошу писать заранее»</p>
+        <p>«Когда я говорю о проблеме и не вижу реакции, я чувствую себя одинокой. Мне нужно знать, что ты слышишь»</p>
+        <p>«Когда ты советуешь вместо того, чтобы просто выслушать, я расстраиваюсь. Сейчас мне нужна поддержка, а не решение»</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">Правила конфликта</h3>
+
+  <ul class="slist">
+    <li><b>Правило одной темы.</b> В конфликте — только один вопрос. Запрещено: «а вот ещё три года назад...» и «а ты вообще...». Только сейчас, только это.</li>
+    <li><b>Не говорить «всегда» и «никогда».</b> Это неправда и провокация. Мужчина начинает защищаться, а не слышать.</li>
+    <li><b>Пауза при эмоциональном пике.</b> «Мне нужно 20 минут» — и уйти остыть. Не молча обидеться, а сказать и вернуться.</li>
+    <li><b>Цель — понять, а не победить.</b> В здоровом конфликте нет победителей. Если ты «выиграла» — значит он «проиграл» — значит отношения потеряли.</li>
+    <li><b>Заканчивать тем, что хочется изменить — не обвинением.</b> «Я хочу, чтобы у нас было больше совместного времени» вместо «ты всегда занят».</li>
+    <li><b>Не уходить не помирившись.</b> «Мы поговорим завтра» — ок если оба согласны. «Замолчать навсегда» — нет.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">Как говорить о своих потребностях без «выпрашивания»</h3>
+
+  <div class="prose">
+    <p>Многие женщины боятся выражать потребности напрямую — кажется, что это «нытьё» или «слабость». В результате они молчат, накапливают обиду и взрываются — что выглядит именно как нытьё.</p>
+    <p><b>Прямая просьба — это уважение к обоим.</b> «Я хотела бы, чтобы мы раз в неделю куда-то ходили вдвоём» — это взрослый разговор. «Ты никогда никуда не зовёшь» — это упрёк, который закрывает диалог.</p>
+  </div>
+</div>
+
+<!-- MODULE 09: СТРОИМ ОТНОШЕНИЯ -->
+<div id="building" class="section-wrap">
+  <div class="sec-eyebrow">Модуль 09</div>
+  <h2 class="sec-title">Строим отношения</h2>
+  <p class="sec-lead">Близость, доверие и главный баланс: «я» и «мы»</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:0 0 30px;">Стадии отношений — что происходит и почему</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-phase">0–6 месяцев</div>
+      <div class="tl-title">Химия и идеализация</div>
+      <div class="tl-text">Дофамин, окситоцин. Он кажется идеальным. Ты кажешься себе лучшей версией. Важно: не принимай главных решений в этой фазе — ты видишь образ, а не человека.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">6–18 месяцев</div>
+      <div class="tl-title">Кризис реальности</div>
+      <div class="tl-text">Химия спадает. Появляются раздражения, разочарования, первые конфликты. Это не конец — это начало настоящих отношений. Многие пары ломаются здесь, думая что «любовь прошла».</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">18+ месяцев</div>
+      <div class="tl-title">Осознанный выбор</div>
+      <div class="tl-text">Ты знаешь его недостатки — и выбираешь быть рядом. Это настоящая любовь. Не химия, а решение. Привязанность, уважение, желание расти вместе.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Долгосрочные</div>
+      <div class="tl-title">Глубина и партнёрство</div>
+      <div class="tl-text">Спокойная близость вместо бабочек. Это не скука — это безопасность. Знать человека насквозь и оставаться интересными друг другу через совместный рост.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">Как не потерять себя в отношениях</h3>
+
+  <div class="prose">
+    <p>Один из самых опасных паттернов — <b>растворение</b>. Постепенно твои интересы заменяются его интересами. Твои подруги — его друзьями. Твои мечты — его планами. Ты перестаёшь быть собой.</p>
+  </div>
+
+  <ul class="slist">
+    <li><b>Сохраняй свои хобби и интересы.</b> Не только «наши» — а твои. То, что делаешь для себя без него.</li>
+    <li><b>Не обрывай подруг.</b> Подруги — это не конкуренция отношениям. Это твоя поддержка и твоя идентичность.</li>
+    <li><b>Имей собственные цели.</b> Карьера, творчество, образование, здоровье — то, что ты строишь для себя.</li>
+    <li><b>Позволяй себе не соглашаться.</b> В здоровых отношениях можно иметь другое мнение. Постоянное соглашательство — потеря себя.</li>
+    <li><b>Твоё счастье — не его ответственность.</b> Он не обязан делать тебя счастливой. Ты приходишь в отношения счастливой человеком — и делитесь этим друг с другом.</li>
+  </ul>
+
+  <div class="pull-quote">
+    Лучшие отношения — когда двое целых человека выбирают быть вместе, а не когда двое половинок пытаются собраться в одно целое.
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">5 языков любви — почему «любите» но не чувствуете любви</h3>
+
+  <div class="prose">
+    <p>Ты выражаешь любовь словами. Он — действиями. Ты чувствуешь себя нелюбимой, потому что он «мало говорит». Он чувствует себя непонятым, потому что «постоянно делает, а она недовольна». Оба любят — но <b>не совпадают в языке</b>.</p>
+  </div>
+
+  <table class="s-table">
+    <thead><tr><th>Язык любви</th><th>Ты чувствуешь любовь когда</th><th>Что попросить у него</th></tr></thead>
+    <tbody>
+      <tr><td><b>Слова</b></td><td>Он говорит «я тебя люблю», хвалит, замечает детали</td><td>«Мне важно слышать, что ты ценишь меня — говори это чаще»</td></tr>
+      <tr><td><b>Время и внимание</b></td><td>Он полностью здесь — без телефона, только вы двое</td><td>«Давай раз в неделю вечер только для нас»</td></tr>
+      <tr><td><b>Помощь</b></td><td>Он берёт на себя задачи, помогает без просьбы</td><td>«Для меня важно, когда ты помогаешь с [конкретным]»</td></tr>
+      <tr><td><b>Подарки</b></td><td>Он думает о тебе и удивляет — неважно, чем</td><td>«Небольшие сюрпризы говорят мне, что ты думаешь обо мне»</td></tr>
+      <tr><td><b>Прикосновения</b></td><td>Объятия, рука на плечо, несексуальный тактильный контакт</td><td>«Мне нужно больше просто обниматься, без повода»</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MODULE 10: ИНТИМНОСТЬ -->
+<div id="intimacy" class="dark-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 10</div>
+    <h2 class="sec-title">Интимность</h2>
+    <p class="sec-lead">Физическая и эмоциональная близость — два измерения, одна связь</p>
+  </div>
+</div>
+
+<div class="dark-bg section-wrap">
+  <div class="prose">
+    <p>Интимность — это не только секс. Это <b>степень открытости и доверия</b> между двумя людьми. Физическая и эмоциональная составляющие взаимосвязаны: когда одна страдает — страдает вторая.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:50px 0 24px;color:var(--cream);">Эмоциональная интимность — без неё ничего нет</h3>
+
+  <ul class="slist">
+    <li><b>Делиться уязвимостью — первой.</b> Парадокс: открытость создаёт открытость. Когда ты рассказываешь о своих страхах — он начинает рассказывать о своих. Уязвимость — не слабость, это мост.</li>
+    <li><b>Принимать его уязвимость.</b> Если он решился сказать что-то «немужское» — не обесценивай, не советуй сразу, не смейся. Это редкий момент настоящей близости.</li>
+    <li><b>Не использовать откровенное против него.</b> То, что он сказал тебе в минуту слабости — не аргумент в споре. Никогда.</li>
+    <li><b>Последовательность строит доверие.</b> Слова без действий — пустые. Быть той, кем ты себя называешь — каждый день.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;color:var(--cream);">О сексе честно</h3>
+
+  <div class="prose">
+    <p>Для многих женщин физическая близость возникает <b>из эмоциональной</b>. Когда есть доверие, когда чувствуешь себя желанной как человек, когда безопасно — тогда возникает настоящее желание.</p>
+    <p>Если физическая близость угасает — почти всегда это сигнал об эмоциональном отдалении. Искать причину там, а не в «мы уже привыкли».</p>
+  </div>
+
+  <ul class="slist">
+    <li><b>Говорить о том, что нравится — не стыдно.</b> «Мне нравится когда...», «я хочу попробовать...» — это не вульгарность, это честность. Партнёры не телепаты.</li>
+    <li><b>Несексуальные прикосновения важны.</b> Объятия просто так, рука в руке, голова на плече — это физическая близость без сексуального подтекста. Она поддерживает связь.</li>
+    <li><b>«Нет» — полное предложение.</b> Без объяснений, извинений и уговаривания себя. Если он не принимает «нет» — это красный флаг категории А.</li>
+    <li><b>Твоё тело — твоё.</b> Принятие своего тела — напрямую влияет на качество интимной жизни. Постоянные комплексы создают барьер. Тело не должно быть идеальным, чтобы его принимали и желали.</li>
+  </ul>
+</div>
+
+<!-- MODULE 11: СЕРЬЁЗНЫЕ ОТНОШЕНИЯ -->
+<div id="serious" class="section-wrap">
+  <div class="sec-eyebrow">Модуль 11</div>
+  <h2 class="sec-title">Серьёзные отношения</h2>
+  <p class="sec-lead">Как перейти к следующему уровню без давления и игр</p>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:0 0 30px;">Как понять, что он готов к серьёзному</h3>
+
+  <div class="two-col">
+    <div class="card-light">
+      <h3>Готов — когда</h3>
+      <ul class="slist" style="margin-top:0;">
+        <li>Сам говорит о будущем вместе: «мы поедем», «в следующем году мы...»</li>
+        <li>Знакомит с друзьями и семьёй</li>
+        <li>Последователен: говорит и делает</li>
+        <li>Называет вас парой или использует «мы»</li>
+        <li>Присутствует в твоей жизни — знает твои дела, спрашивает, помнит</li>
+      </ul>
+    </div>
+    <div class="card-light" style="border-top-color:var(--red-flag);">
+      <h3 style="color:var(--red-flag);">Не готов — когда</h3>
+      <ul class="slist" style="margin-top:0;">
+        <li>Всё время «посмотрим» и «не торопись» без конкретики</li>
+        <li>Не знакомит с близкими через несколько месяцев</li>
+        <li>Ты не знаешь, где он и с кем — постоянно</li>
+        <li>Избегает разговора о статусе отношений</li>
+        <li>«Я не готов к отношениям» — при этом проводит с тобой всё время</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p><b>Правило ясности:</b> Если через 3–4 месяца встреч ты не знаешь, «вы вместе или нет» — это разговор, который нужно иметь. Не в виде ультиматума, а в виде взрослого вопроса: «Как ты видишь нас?» Его ответ — информация, которую ты заслуживаешь знать.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 30px;">О чём договориться до совместной жизни</h3>
+
+  <ul class="nlist">
+    <li><b>Дети.</b> Хотите ли. Сколько. Когда. Это не опционально — это базово. Несовпадение по этому вопросу не решается любовью.</li>
+    <li><b>Деньги.</b> Кто зарабатывает. Общий бюджет или раздельный. Кто за что отвечает. Деньги — одна из главных причин разводов. Поговори заранее.</li>
+    <li><b>Быт.</b> Кто что делает. «Само сложится» — не складывается. Потом это превращается в «ты никогда не помогаешь».</li>
+    <li><b>Родители и границы.</b> Насколько они вовлечены. Как принимаются решения — с их советом или без. Это особенно важно в российском контексте.</li>
+    <li><b>Свободное время.</b> Сколько времени вместе, сколько отдельно. Это не мелочь — это архитектура совместной жизни.</li>
+  </ul>
+
+  <div class="warn">
+    <p><b>Не выходи замуж за потенциал.</b> «Он изменится», «после свадьбы всё станет лучше», «когда мы съедемся — он станет другим». Брак не меняет людей — он усиливает то, что уже есть. Выходи замуж за человека, которого видишь сейчас.</p>
+  </div>
+</div>
+
+<!-- MODULE 12: ОШИБКИ -->
+<div id="mistakes" class="dark-bg sec-div">
+  <div class="sec-div-inner">
+    <div class="sec-eyebrow">Модуль 12</div>
+    <h2 class="sec-title">60 главных ошибок</h2>
+    <p class="sec-lead">Паттерны, которые разрушают отношения — разбор с альтернативами</p>
+  </div>
+</div>
+
+<div class="dark-bg section-wrap">
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:0 0 20px;color:var(--rose-light);">При знакомстве и в начале</h3>
+  <ul class="nlist">
+    <li><b>Слишком быстро становиться «доступной».</b> Не в смысле секса — а в смысле полной открытости дня и жизни с первых дней. Загадка привлекает. Полная предсказуемость — нет.</li>
+    <li><b>Рассказывать о бывших на первом свидании.</b> Неважно — хорошо или плохо. Это не твоя история сейчас. Один кратким ответ если спросил — и всё.</li>
+    <li><b>Писать первой несколько раз подряд без ответа.</b> Один раз написала — жди. Два — уже неловко. Три — ты ведёшь себя как человек без альтернатив.</li>
+    <li><b>Соглашаться на всё в надежде понравиться.</b> «Да, мне тоже нравится футбол», «да, я люблю рыбалку» — ложь ради одобрения. Лучше быть собой и не подойти, чем изображать кого-то и попасть в ловушку.</li>
+    <li><b>Ждать «идеального момента» начать отношения.</b> Пока «похудею», «найду работу», «куплю новый гардероб». Хорошие отношения начинаются с того, кто ты есть сейчас.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">В отношениях: коммуникация</h3>
+  <ul class="nlist">
+    <li><b>Накапливать обиды вместо разговора.</b> Молчишь неделями — потом взрываешься из-за мелочи. Говори о проблемах рано — пока они маленькие.</li>
+    <li><b>«Ты должен сам догадаться».</b> Телепатии не существует. Прямые слова работают. Молчаливое ожидание — нет.</li>
+    <li><b>Использовать молчание и холод как наказание.</b> Эмоциональный шантаж («замолчала, исчезла, стала холодной») — токсичный паттерн, который закрывает мужчину и создаёт дистанцию.</li>
+    <li><b>Говорить «всё хорошо» когда плохо.</b> А потом злиться, что он не заметил. Это ловушка для вас обоих.</li>
+    <li><b>Привлекать третьих — маму, подруг, соцсети — к парным конфликтам.</b> Это выносит личное наружу и разрушает доверие.</li>
+    <li><b>Критиковать при людях.</b> Никогда. Любая критика — только наедине.</li>
+    <li><b>Сравнивать с другими мужчинами.</b> «Вот у Маши муж...», «мой бывший всегда...» — стоп. Это унижение в чистом виде.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">В отношениях: поведение</h3>
+  <ul class="nlist">
+    <li><b>Проверять его телефон.</b> Это не «я просто беспокоюсь». Это нарушение доверия. Если ты не доверяешь — это разговор, который нужно иметь, а не шпионаж.</li>
+    <li><b>Ревность без основания.</b> Допрашивать, с кем был, кто писал, почему посмотрел чью-то историю — это контроль, который разрушает. Ревность — это сигнал о своей тревоге, не о его поведении.</li>
+    <li><b>Пытаться изменить его фундаментально.</b> Если тебя не устраивают его базовые ценности, образ жизни, привычки — это несовместимость, а не «материал для работы».</li>
+    <li><b>Терять себя ради отношений.</b> Бросать работу, подруг, хобби, мечты — «ради нас». Через год ты будешь несчастна и обиженна. Сохраняй себя.</li>
+    <li><b>Ставить ультиматумы без готовности уйти.</b> «Или — или» работает только если ты готова к «или». Пустой ультиматум разрушает доверие к твоим словам.</li>
+    <li><b>Цепляться за «потенциал» человека, а не за реальность.</b> «Он мог бы быть...» — это не отношения. Это фантазия о другом человеке.</li>
+    <li><b>Оставаться из-за страха одиночества.</b> Плохие отношения хуже, чем одиночество. Одиночество временно. Нездоровые отношения — хроническое состояние.</li>
+  </ul>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;margin:50px 0 20px;color:var(--rose-light);">Ошибки отношения к себе</h3>
+  <ul class="nlist">
+    <li><b>Ставить его нужды выше своих систематически.</b> Один раз — забота. Системно — потеря себя и накопление обиды.</li>
+    <li><b>Просить меньше, чем заслуживаешь — чтобы не спугнуть.</b> Ты достойна уважения, внимания, верности. Если боишься это запросить — значит чувствуешь, что он не готов это дать. Это сигнал.</li>
+    <li><b>Игнорировать собственную интуицию.</b> «Что-то не так, но я не понимаю что» — твоя интуиция замечает паттерны раньше, чем логика. Слушай её.</li>
+    <li><b>Извиняться за то, что тебе важно.</b> «Извини, это может звучать глупо, но...» — стоп. Твои потребности и чувства не требуют извинений.</li>
+    <li><b>Прощать без изменений бесконечно.</b> Прощать — ценность. Прощать снова и снова одно и то же без изменений — это не добродетель. Это соучастие.</li>
+    <li><b>Думать, что любовь — это страдание.</b> «Если не больно — значит не по-настоящему». Нет. Настоящая любовь бывает сложной — но она не должна причинять постоянную боль.</li>
+  </ul>
+</div>
+
+<!-- MODULE 13: РАБОТА НАД СОБОЙ -->
+<div id="self" class="section-wrap">
+  <div class="sec-eyebrow">Модуль 13</div>
+  <h2 class="sec-title">Работа над собой</h2>
+  <p class="sec-lead">Женщина, которую любят — и которая любит себя</p>
+
+  <div class="prose">
+    <p>Самый недооценённый вклад в отношения — это <b>работа над собой</b>. Не «стать лучше для него». А стать человеком, которым ты хочешь быть — для себя. Это и есть лучшая подготовка к глубоким, настоящим отношениям.</p>
+  </div>
+
+  <div class="pull-quote">
+    Ты не можешь любить кого-то глубже, чем любишь себя. Не как красивая фраза — как факт.
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:50px 0 24px;">Пять столпов женщины</h3>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-phase">Столп 01</div>
+      <div class="tl-title">Самооценка, не зависящая от отношений</div>
+      <div class="tl-text">Знать себе цену вне зависимости от того, есть ли рядом мужчина. Это не высокомерие — это фундамент. Женщина с устойчивой самооценкой не терпит неприемлемого, не выпрашивает внимания и не боится уйти из плохих отношений.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Столп 02</div>
+      <div class="tl-title">Эмоциональный интеллект</div>
+      <div class="tl-text">Умение называть свои чувства, управлять реакциями, понимать чужие эмоции. Это развивается. Через дневник, терапию, осознанность. Это не «женское» — это человеческое, и это меняет качество всех отношений в жизни.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Столп 03</div>
+      <div class="tl-title">Своя жизнь, интересы и цели</div>
+      <div class="tl-text">Работа или дело, которое тебя захватывает. Подруги. Хобби. Физическая активность. Мечты — и шаги к ним. Это делает тебя интересной собеседником, стабильным человеком и привлекательной партнёршей.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Столп 04</div>
+      <div class="tl-title">Финансовая независимость</div>
+      <div class="tl-text">Не «чтобы не нужен был мужчина» — а чтобы быть в отношениях по выбору, а не по необходимости. Финансовая зависимость — одна из главных причин, почему женщины остаются в плохих отношениях.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-phase">Столп 05</div>
+      <div class="tl-title">Границы</div>
+      <div class="tl-text">Знать, что для тебя приемлемо, а что нет — и уметь это транслировать. «Это для меня неприемлемо» — полное предложение. Границы — не агрессия. Это уважение к себе, которое учит других, как с тобой обращаться.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">Психотерапия — для умных, а не для сломанных</h3>
+
+  <div class="prose">
+    <p>Если ты замечаешь повторяющиеся паттерны: каждый раз одинаковые мужчины, одни и те же конфликты, одна и та же боль — это не «тебе не везёт с мужчинами». Это <b>твои паттерны</b>, сформированные в детстве, которые ты воспроизводишь.</p>
+    <p>Психотерапия — не признак «сломанности». Это самый честный разговор с собой, который ты когда-либо будешь иметь. И самая высокая отдача от любой инвестиции в отношения.</p>
+  </div>
+
+  <h3 style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;margin:60px 0 24px;">Книги, которые стоит прочитать</h3>
+
+  <table class="s-table">
+    <thead><tr><th>Книга</th><th>Автор</th><th>О чём</th></tr></thead>
+    <tbody>
+      <tr><td><b>«Женщины, которые любят слишком сильно»</b></td><td>Робин Норвуд</td><td>Про зависимые паттерны и как их менять</td></tr>
+      <tr><td><b>«5 языков любви»</b></td><td>Гэри Чепмен</td><td>Как понять язык любви свой и партнёра</td></tr>
+      <tr><td><b>«Привязанность»</b></td><td>Левин, Хеллер</td><td>Теория привязанности — тревожный, избегающий, надёжный типы</td></tr>
+      <tr><td><b>«Дары несовершенства»</b></td><td>Брене Браун</td><td>Уязвимость как сила. Про принятие себя</td></tr>
+      <tr><td><b>«Границы»</b></td><td>Клод&nbsp;Штайнер</td><td>Как выстраивать и удерживать личные границы</td></tr>
+      <tr><td><b>«Мужчины с Марса, женщины с Венеры»</b></td><td>Джон Грэй</td><td>Различия в коммуникации — немного устарело, но полезно</td></tr>
+      <tr><td><b>«Сила настоящего»</b></td><td>Экхарт Толле</td><td>Осознанность и эмоциональная стабильность</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FINALE -->
+<div class="finale">
+  <div class="sec-eyebrow" style="color:var(--rose);">Послесловие</div>
+  <h2 class="sec-title">Слова от Макса</h2>
+  <div class="prose" style="max-width:820px; margin: 0 auto 48px; text-align:left;">
+    <p>Если ты прочитала до конца — ты уже совершила важный шаг. Большинство людей не хотят смотреть на себя честно. Ты захотела.</p>
+    <p>Кое-что из этого тебя задело. Может быть, что-то разозлило. Это нормально — значит попало в точку. Возьми это «задело» и подумай над ним. Там — золото.</p>
+    <p>Ты заслуживаешь отношений, в которых тебя видят, слышат и выбирают. Не «несмотря на», а «именно такую». Это реально — но это начинается с тебя.</p>
+    <p>Не ищи идеального мужчину. Стань собой — своей лучшей, настоящей версией. Иди туда, где живёшь, а не там, где ждёшь. Любите тех, кто выбирает вас в ответ.</p>
+    <p>Всё получится.</p>
+  </div>
+  <div style="font-family:'Bodoni Moda',serif;font-size:36px;font-style:italic;color:var(--rose-light);">— Макс</div>
+</div>
+
+<!-- SUMMARY -->
+<div class="section-wrap" style="background:var(--blush);">
+  <div class="sec-eyebrow">Шпаргалка</div>
+  <h2 class="sec-title">10 правил в одном месте</h2>
+  <ul class="nlist">
+    <li><b>Знай себя.</b> Свои паттерны, потребности, триггеры. Без этого ты воспроизводишь одни и те же сценарии с разными людьми.</li>
+    <li><b>Ты выбираешь — не только тебя выбирают.</b> Меняй позицию. Смотри на него критически с самого начала, а не только ждёшь его оценки.</li>
+    <li><b>Верь поступкам, а не словам.</b> Он говорит «ты особенная», но постоянно опаздывает и не выполняет обещания — верь поступкам.</li>
+    <li><b>Замечай красные флаги — и не игнорируй их.</b> Они видны с самого начала. Мы просто решаем не видеть.</li>
+    <li><b>Говори прямо.</b> О своих потребностях, чувствах, ожиданиях. Телепатии не существует.</li>
+    <li><b>Сохраняй себя.</b> Свои цели, подруг, интересы. Отношения дополняют твою жизнь — не заменяют её.</li>
+    <li><b>Не исправляй — выбирай.</b> Принимай человека таким, какой он есть. Или уходи. Проект по переделке взрослого человека — провален заранее.</li>
+    <li><b>Береги свои границы.</b> «Это для меня неприемлемо» — полное предложение. Без объяснений.</li>
+    <li><b>Страх одиночества — плохой советчик.</b> Лучше быть одной и хорошей, чем вдвоём и несчастной.</li>
+    <li><b>Работай над собой — это лучшее, что ты можешь сделать для своих отношений.</b></li>
+  </ul>
+</div>
+
+<div style="text-align:center; padding:80px 40px; border-top:1px solid rgba(107,30,46,0.12);">
+  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--wine);text-transform:uppercase;margin-bottom:24px;">Конец курса</div>
+  <div class="pull-quote" style="max-width:680px;margin:0 auto 48px;font-size:clamp(18px,2.5vw,30px);">
+    Настоящая любовь начинается с любви к себе. Не как клише — как практика.
+  </div>
+  <a href="#top" class="hero-btn">Начать сначала</a>
+</div>
+
+<footer>
+  <div class="foot-logo">Женщина №1</div>
+  <p class="foot-text">Полное руководство по отношениям от Макса. Для тех, кто хочет настоящего.</p>
+  <div class="foot-copy">КУРС ОТ МАКСА · 2024 · ТОЛЬКО ДЛЯ ЖЕНЩИН</div>
+</footer>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const st = document.documentElement.scrollTop;
+  const sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progress').style.width = (st/sh*100) + '%';
+  const b = document.getElementById('btt');
+  if(st > 400) b.classList.add('vis'); else b.classList.remove('vis');
+});
+
+// Accordion
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const ico = btn.querySelector('.acc-ico');
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.acc-ico').forEach(i => { i.textContent='+'; i.style.transform=''; });
+  if(!isOpen) {
+    body.classList.add('open');
+    ico.textContent = '×';
+    ico.style.transform = 'rotate(180deg)';
+  }
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.p-card,.mod-card,.card-light,.card-dark,.tl-item,.example,.info-box').forEach(el => {
+  el.style.opacity='0';
+  el.style.transform='translateY(18px)';
+  el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
