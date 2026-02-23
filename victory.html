@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Никто не забыт — Ничто не забыто</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0804;
+  --deep: #120e08;
+  --red: #b01c1c;
+  --red-bright: #e02020;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --ash: #c8bfb0;
+  --smoke: #7a7060;
+  --paper: #f0e8d8;
+  --white: #f5f0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--ash);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ==================== HERO ==================== */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #2a1008 0%, #120804 40%, var(--black) 100%);
+}
+
+.hero-bg-stars {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20% 30%, rgba(255,220,150,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,220,150,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 80%, rgba(255,220,150,0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 30% 60%, rgba(255,200,100,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,220,150,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 70%, rgba(255,220,150,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 55%, rgba(255,220,150,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 15%, rgba(255,220,150,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 90%, rgba(255,220,150,0.15) 0%, transparent 100%);
+}
+
+.flame-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 300px;
+}
+
+.eternal-flame {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flame {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+}
+
+.flame-core {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 80px;
+  background: radial-gradient(ellipse at 50% 100%, #fff 0%, #ffd700 20%, #ff6600 50%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flicker1 1.5s ease-in-out infinite alternate;
+  filter: blur(2px);
+}
+
+.flame-mid {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 120px;
+  background: radial-gradient(ellipse at 50% 100%, #ffd700 0%, #ff4400 40%, #aa0000 70%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flicker2 2s ease-in-out infinite alternate;
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.flame-outer {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 160px;
+  background: radial-gradient(ellipse at 50% 100%, #ff4400 0%, #aa0000 30%, #440000 60%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: flicker3 2.5s ease-in-out infinite alternate;
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+.flame-glow {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(200,80,0,0.3) 0%, transparent 70%);
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes flicker1 {
+  0% { transform: translateX(-50%) scaleX(1) scaleY(1) skewX(0deg); }
+  100% { transform: translateX(-50%) scaleX(0.85) scaleY(1.1) skewX(3deg); }
+}
+@keyframes flicker2 {
+  0% { transform: translateX(-50%) scaleX(1) scaleY(1) skewX(-2deg); }
+  100% { transform: translateX(-50%) scaleX(1.1) scaleY(0.95) skewX(4deg); }
+}
+@keyframes flicker3 {
+  0% { transform: translateX(-50%) scaleX(0.9) scaleY(1); }
+  100% { transform: translateX(-50%) scaleX(1.05) scaleY(1.05); }
+}
+@keyframes glow-pulse {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+}
+
+.star-of-victory {
+  position: absolute;
+  top: 40px;
+  font-size: 60px;
+  color: var(--red);
+  animation: star-pulse 3s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(200,30,30,0.8), 0 0 80px rgba(200,30,30,0.4);
+  filter: drop-shadow(0 0 20px rgba(200,30,30,0.6));
+}
+@keyframes star-pulse {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 40px rgba(200,30,30,0.8), 0 0 80px rgba(200,30,30,0.4); }
+  50% { transform: scale(1.05); text-shadow: 0 0 60px rgba(220,50,50,1), 0 0 120px rgba(200,30,30,0.6); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+  animation: fade-in-up 2s ease forwards;
+  margin-bottom: 200px;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-date {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+  font-size: 0.9rem;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+  text-shadow: 0 0 60px rgba(200,30,0,0.4);
+  margin-bottom: 0.5rem;
+}
+
+.hero-title span {
+  color: var(--red);
+  display: block;
+}
+
+.hero-subtitle {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 200;
+  letter-spacing: 8px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin: 1.5rem 0;
+}
+
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 2rem auto;
+}
+
+.hero-dedication {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ash);
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+.hero-dedication strong {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 350px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
+  animation: fade-in-up 3s ease 1s forwards;
+}
+
+.scroll-hint span {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 30px;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  position: relative;
+}
+
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scroll-down 2s infinite;
+}
+
+@keyframes scroll-down {
+  0% { top: 5px; opacity: 1; }
+  100% { top: 15px; opacity: 0; }
+}
+
+/* ==================== NAV ==================== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: rgba(10,8,4,0.95);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(10px);
+  padding: 0;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold-light); }
+
+/* ==================== SECTIONS ==================== */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.section-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--red), transparent);
+  max-width: 80px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+}
+
+.section-text {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: var(--ash);
+  max-width: 750px;
+}
+
+.section-text + .section-text { margin-top: 1.5rem; }
+
+/* ==================== STATS BAR ==================== */
+.stats-bar {
+  background: var(--red);
+  padding: 0;
+  overflow: hidden;
+}
+
+.stats-inner {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.4rem;
+  display: block;
+  font-style: italic;
+}
+
+/* ==================== BLOCKADE ==================== */
+#blockade {
+  background: linear-gradient(180deg, var(--black) 0%, #0d0a06 100%);
+}
+
+.blockade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 4rem;
+  align-items: start;
+}
+
+.blockade-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.blockade-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slide-in 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.3s; }
+.timeline-item:nth-child(3) { animation-delay: 0.5s; }
+.timeline-item:nth-child(4) { animation-delay: 0.7s; }
+.timeline-item:nth-child(5) { animation-delay: 0.9s; }
+
+@keyframes slide-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.4rem;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(176,28,28,0.8);
+}
+
+.timeline-date {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--smoke);
+}
+
+.blockade-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fact-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-left: 3px solid var(--gold);
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.fact-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-left-color: var(--red);
+  transform: translateX(4px);
+}
+
+.fact-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+
+.fact-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ash);
+  margin-top: 0.5rem;
+}
+
+/* ==================== ROAD OF LIFE ==================== */
+#road {
+  background: linear-gradient(180deg, #0d0a06 0%, #0a0804 50%, #120e0a 100%);
+  position: relative;
+}
+
+#road::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,0.01) 40px,
+    rgba(255,255,255,0.01) 41px
+  );
+}
+
+.road-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.road-visual {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lake-ice {
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 30% 50%, rgba(30,60,100,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(20,50,90,0.2) 0%, transparent 50%),
+    linear-gradient(180deg, #080c14 0%, #0c1520 40%, #060e18 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(80,120,180,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ice-crack {
+  position: absolute;
+  background: rgba(100,150,220,0.15);
+  transform-origin: left center;
+}
+
+.ice-crack:nth-child(1) {
+  width: 120px; height: 1px;
+  top: 40%; left: 20%;
+  transform: rotate(15deg);
+}
+.ice-crack:nth-child(2) {
+  width: 80px; height: 1px;
+  top: 45%; left: 30%;
+  transform: rotate(-25deg);
+}
+.ice-crack:nth-child(3) {
+  width: 60px; height: 1px;
+  top: 60%; left: 50%;
+  transform: rotate(40deg);
+}
+.ice-crack:nth-child(4) {
+  width: 100px; height: 1px;
+  top: 30%; left: 55%;
+  transform: rotate(-10deg);
+}
+
+.road-line {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 40px;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.03);
+  border-top: 1px dashed rgba(255,255,255,0.08);
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+
+.truck-icon {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  transform: translateY(-50%);
+  animation: truck-drive 6s linear infinite;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+}
+
+@keyframes truck-drive {
+  0% { left: 5%; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { left: 90%; opacity: 0; }
+}
+
+.road-text strong {
+  color: var(--gold-light);
+}
+
+.hero-name-card {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.hero-name-card::before {
+  content: '★';
+  position: absolute;
+  top: -12px;
+  left: 2rem;
+  color: var(--gold);
+  font-size: 1.2rem;
+  background: #0a0804;
+  padding: 0 8px;
+}
+
+.hero-name-card .name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hero-name-card .role {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.hero-name-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ash);
+  font-style: italic;
+}
+
+/* ==================== BATTLES ==================== */
+#battles {
+  background: var(--black);
+}
+
+.battles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+}
+
+.battle-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--deep);
+  padding: 2.5rem 2rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.4s;
+  cursor: default;
+}
+
+.battle-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(176,28,28,0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.battle-card:hover::before { opacity: 1; }
+.battle-card:hover { border-bottom-color: var(--red); transform: translateY(-4px); }
+
+.battle-year {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(176,28,28,0.15);
+  line-height: 1;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  transition: color 0.4s;
+}
+
+.battle-card:hover .battle-year { color: rgba(176,28,28,0.3); }
+
+.battle-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+
+.battle-meta {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.battle-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--smoke);
+  position: relative;
+  z-index: 1;
+}
+
+.battle-result {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+/* ==================== HEROES ==================== */
+#heroism {
+  background: linear-gradient(180deg, var(--black) 0%, #0d0907 100%);
+}
+
+.heroes-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.quote-block {
+  position: relative;
+  padding: 3rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(201,168,76,0.1);
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 8rem;
+  color: rgba(176,28,28,0.2);
+  line-height: 0;
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+}
+
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  display: block;
+}
+
+.heroes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.hero-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--red);
+  transition: height 0.4s;
+}
+
+.hero-card:hover::after { height: 100%; }
+.hero-card:hover { background: rgba(255,255,255,0.04); }
+
+.hero-card-star {
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.hero-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.hero-card-rank {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.hero-card-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--smoke);
+}
+
+/* ==================== MEMORY ==================== */
+#memory {
+  background: linear-gradient(180deg, #0d0907 0%, #180c08 50%, #0a0804 100%);
+  position: relative;
+}
+
+#memory::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.memory-center {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.candles-row {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 4rem 0;
+}
+
+.candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.candle-flame {
+  width: 16px;
+  height: 40px;
+  background: radial-gradient(ellipse at 50% 100%, #fff9 0%, #ffd700cc 30%, #ff4400aa 60%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  animation: candle-flicker 1.8s ease-in-out infinite alternate;
+  filter: blur(1px);
+  position: relative;
+}
+
+.candle:nth-child(2) .candle-flame { animation-delay: 0.4s; }
+.candle:nth-child(3) .candle-flame { animation-delay: 0.8s; }
+.candle:nth-child(4) .candle-flame { animation-delay: 1.2s; }
+.candle:nth-child(5) .candle-flame { animation-delay: 0.2s; }
+
+@keyframes candle-flicker {
+  0% { transform: skewX(0deg) scaleX(1); opacity: 0.9; }
+  100% { transform: skewX(5deg) scaleX(0.9); opacity: 1; }
+}
+
+.candle-body {
+  width: 8px;
+  height: 60px;
+  background: linear-gradient(to bottom, #d4b88a, #aa8855);
+  border-radius: 2px 2px 4px 4px;
+}
+
+.candle-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--gold);
+  text-align: center;
+  max-width: 80px;
+}
+
+.memory-dedication {
+  background: rgba(176,28,28,0.05);
+  border: 1px solid rgba(176,28,28,0.2);
+  padding: 3rem;
+  margin: 3rem 0;
+  position: relative;
+}
+
+.memory-dedication::before {
+  content: '✦';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 1.4rem;
+  background: #120c08;
+  padding: 0 12px;
+}
+
+.dedication-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.dedication-text {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--ash);
+  font-style: italic;
+}
+
+.dedication-text strong {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.memory-poem {
+  margin: 4rem 0;
+  padding: 3rem;
+  background: rgba(255,255,255,0.015);
+  border-left: 3px solid var(--gold);
+}
+
+.memory-poem p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 2;
+  color: var(--ash);
+}
+
+.poem-author {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-top: 1.5rem;
+  display: block;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+  background: #060402;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.footer-star {
+  font-size: 2rem;
+  color: var(--red);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.footer-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--smoke);
+}
+
+.footer-dates {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin: 1.5rem 0;
+}
+
+.footer-from {
+  font-size: 0.85rem;
+  color: var(--smoke);
+  margin-top: 2rem;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 900px) {
+  .blockade-grid, .road-content, .heroes-intro { grid-template-columns: 1fr; gap: 2rem; }
+  .battles-grid { grid-template-columns: 1fr; }
+  .heroes-grid { grid-template-columns: 1fr; }
+  .stats-inner { flex-wrap: wrap; }
+  .stat-item { min-width: 45%; border: 1px solid rgba(255,255,255,0.05); }
+  .nav-links { display: none; }
+  .road-visual { height: 200px; }
+  .candles-row { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg-stars"></div>
+
+  <div class="hero-content">
+    <div class="hero-date">23 февраля 2026 · День Защитника Отечества</div>
+    <h1 class="hero-title">
+      Великая
+      <span>Отечественная</span>
+    </h1>
+    <div class="hero-subtitle">1941 — 1945</div>
+    <div class="hero-divider"></div>
+    <p class="hero-dedication">
+      Посвящается <strong>Вере</strong> — блокаднице,<br>
+      <strong>Жене</strong> — регулировщице Дороги жизни,<br>
+      всем прадедам, павшим в бою.<br>
+      <em>От Макса — с вечной любовью и памятью.</em>
+    </p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>листай</span>
+    <div class="scroll-arrow"></div>
+  </div>
+
+  <div class="flame-container">
+    <div class="eternal-flame">
+      <span class="star-of-victory">★</span>
+      <div class="flame-glow"></div>
+      <div class="flame-outer"></div>
+      <div class="flame-mid"></div>
+      <div class="flame-core"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">★ Никто не забыт</a>
+    <ul class="nav-links">
+      <li><a href="#blockade">Блокада</a></li>
+      <li><a href="#road">Дорога жизни</a></li>
+      <li><a href="#battles">Битвы</a></li>
+      <li><a href="#heroism">Герои</a></li>
+      <li><a href="#memory">Память</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== STATS ==================== -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-number">27 млн</span>
+      <span class="stat-label">советских жизней отдано за Победу</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">872 дня</span>
+      <span class="stat-label">продолжалась блокада Ленинграда</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">1418 дней</span>
+      <span class="stat-label">войны — каждый стоил тысяч жизней</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">11 000+</span>
+      <span class="stat-label">Героев Советского Союза</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BLOCKADE ==================== -->
+<section id="blockade">
+  <div class="section-inner">
+    <div class="section-label">Ленинград 1941–1944</div>
+    <h2 class="section-title">Блокада.<br>872 дня ада.</h2>
+    <p class="section-text">
+      8 сентября 1941 года немецкие войска замкнули кольцо вокруг Ленинграда. Началась одна из самых страшных осад в истории человечества. Город оказался отрезан от страны — без еды, без топлива, под непрекращающимися бомбардировками. Но он не сдался.
+    </p>
+    <p class="section-text">
+      Люди умирали от голода прямо на улицах. Нормы хлеба падали до 125 граммов в сутки для иждивенцев — это была пайка, едва совместимая с жизнью. И всё же ленинградцы работали, защищали город, рожали детей, слушали симфонию Шостаковича и отказывались сдаться врагу.
+    </p>
+
+    <div class="blockade-grid">
+      <div class="blockade-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">8 сентября 1941</div>
+          <div class="timeline-title">Начало блокады</div>
+          <p class="timeline-text">Немецкие войска захватили Шлиссельбург. Кольцо замкнулось. Три миллиона человек оказались в ловушке.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Зима 1941–1942</div>
+          <div class="timeline-title">Смертная зима</div>
+          <p class="timeline-text">Самая страшная зима блокады. Морозы до −32°C. Нет отопления, воды, электричества. По различным данным, от голода и холода погибло более 100 000 человек только за первую зиму.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">12 января 1943</div>
+          <div class="timeline-title">Операция «Искра»</div>
+          <p class="timeline-text">Войска Ленинградского и Волховского фронтов нанесли встречные удары. 18 января 1943 года блокада была прорвана — образован коридор шириной 8–11 км.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">27 января 1944</div>
+          <div class="timeline-title">Полное снятие блокады</div>
+          <p class="timeline-text">872 дня спустя блокада была полностью снята. В честь победы в небе над Ленинградом прогремел салют — 324 орудия. Люди плакали на улицах.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">1965</div>
+          <div class="timeline-title">Город-Герой</div>
+          <p class="timeline-text">Ленинграду было присвоено звание «Город-Герой» — за невиданное мужество его защитников и жителей.</p>
+        </div>
+      </div>
+
+      <div class="blockade-facts">
+        <div class="fact-card">
+          <span class="fact-number">~1 100 000</span>
+          <p class="fact-desc">мирных жителей погибло за годы блокады — от голода, холода, бомбёжек и артобстрелов. Большинство похоронены в братских могилах Пискарёвского кладбища.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-number">125 г</span>
+          <p class="fact-desc">хлеба в сутки — норма для иждивенцев в ноябре–декабре 1941 года. «Хлеб» делали из опилок, жмыха, целлюлозы. Это была грань между жизнью и смертью.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-number">1,5 млн</span>
+          <p class="fact-desc">человек было эвакуировано из блокадного Ленинграда — в основном детей, стариков и раненых. Эвакуация шла через Дорогу жизни по льду Ладожского озера.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-number">150 000+</span>
+          <p class="fact-desc">снарядов и 107 000 бомб сбросили враги на Ленинград за годы блокады. Но дух города сломить не удалось.</p>
+        </div>
+        <div class="fact-card">
+          <span class="fact-number">9 августа 1942</span>
+          <p class="fact-desc">в осаждённом городе исполнили Седьмую («Ленинградскую») симфонию Шостаковича. Её транслировали на весь город и на позиции врага. Это был акт духовного сопротивления.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ROAD OF LIFE ==================== -->
+<section id="road">
+  <div class="section-inner">
+    <div class="section-label">Ладожское озеро · 1941–1943</div>
+    <h2 class="section-title">Дорога жизни</h2>
+
+    <div class="road-content">
+      <div>
+        <p class="section-text">
+          Единственной артерией, связывавшей блокадный Ленинград с Большой землёй, стала Дорога жизни — ледовая трасса по Ладожскому озеру. По ней везли продовольствие, боеприпасы и лекарства в город, а обратно — эвакуировали людей.
+        </p>
+        <p class="section-text" style="margin-top:1.5rem">
+          Трасса работала под непрекращающимися авиационными бомбардировками, в 40-градусные морозы, по льду, который в любой момент мог треснуть. Сотни машин ушли под воду вместе с грузами и водителями. Но колонны шли без остановки.
+        </p>
+        <p class="section-text" style="margin-top:1.5rem">
+          На трассе несли службу <strong style="color:var(--gold-light)">регулировщицы</strong> — женщины, стоявшие в ледяную стужу на перекрёстках и направлявшие движение. Это был каторжный труд: часами на морозе, под бомбами, в полной темноте. Они спасали жизни ленинградцев своим стоянием на льду.
+        </p>
+
+        <div class="hero-name-card">
+          <div class="name">Бабушка Женя</div>
+          <div class="role">Регулировщица · Дорога жизни</div>
+          <p>Одна из тех, кто стоял на льду Ладоги и направлял машины с хлебом к умирающему городу. Её руки в перчатках, её голос на ветру, её присутствие на морозе — часть этого великого подвига.</p>
+        </div>
+      </div>
+
+      <div class="road-visual">
+        <div class="lake-ice">
+          <div class="ice-crack"></div>
+          <div class="ice-crack"></div>
+          <div class="ice-crack"></div>
+          <div class="ice-crack"></div>
+          <div class="road-line"></div>
+          <div class="truck-icon">🚛</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BATTLES ==================== -->
+<section id="battles">
+  <div class="section-inner">
+    <div class="section-label">Великие сражения</div>
+    <h2 class="section-title">Битвы, которые<br>изменили мир</h2>
+    <p class="section-text">
+      Вторая мировая война решалась на Восточном фронте. Советский солдат воевал в условиях, не имевших аналогов в истории — против лучшей армии мира, в жестокий мороз, зачастую с минимальным снаряжением и максимальной решимостью победить.
+    </p>
+  </div>
+
+  <div class="battles-grid">
+    <div class="battle-card">
+      <div class="battle-year">41</div>
+      <div class="battle-meta">30 сентября — 7 января · 1941–42</div>
+      <h3 class="battle-name">Битва за Москву</h3>
+      <p class="battle-desc">Враг стоял в 20 километрах от столицы. Советские войска под командованием Жукова остановили вермахт и нанесли контрудар в декабре 1941 года — первое крупное поражение Германии во Второй мировой войне.</p>
+      <div class="battle-result">⚔ Победа советских войск — Москва выстояла</div>
+    </div>
+
+    <div class="battle-card">
+      <div class="battle-year">42</div>
+      <div class="battle-meta">17 июля 1942 — 2 февраля 1943</div>
+      <h3 class="battle-name">Сталинградская битва</h3>
+      <p class="battle-desc">Величайшее сражение в истории человечества. Уличные бои в руинах Сталинграда. Операция «Уран» — окружение 300-тысячной армии Паулюса. Коренной перелом в войне. Здесь сломали хребет вермахту.</p>
+      <div class="battle-result">⚔ Поворотный момент — начало конца Третьего Рейха</div>
+    </div>
+
+    <div class="battle-card">
+      <div class="battle-year">43</div>
+      <div class="battle-meta">5 июля — 23 августа 1943</div>
+      <h3 class="battle-name">Курская битва</h3>
+      <p class="battle-desc">Крупнейшее танковое сражение в истории. Операции «Цитадель», «Кутузов», «Полководец Румянцев». Немецкий план «Цитадель» провалился. Стратегическая инициатива перешла к советским войскам навсегда.</p>
+      <div class="battle-result">⚔ Победа — стратегический перелом завершён</div>
+    </div>
+
+    <div class="battle-card">
+      <div class="battle-year">44</div>
+      <div class="battle-meta">23 июня — 19 августа 1944</div>
+      <h3 class="battle-name">Операция «Багратион»</h3>
+      <p class="battle-desc">Освобождение Белоруссии. Одна из крупнейших военных операций в истории. Группа армий «Центр» была разгромлена. В плен взяты десятки тысяч немецких солдат, проведённых по улицам Москвы.</p>
+      <div class="battle-result">⚔ Победа — Белоруссия освобождена</div>
+    </div>
+
+    <div class="battle-card">
+      <div class="battle-year">45</div>
+      <div class="battle-meta">16 апреля — 2 мая 1945</div>
+      <h3 class="battle-name">Берлинская операция</h3>
+      <p class="battle-desc">Последний штурм. Советские солдаты шли через руины имперской столицы к Рейхстагу. Сержант Кантария и сержант Егоров водрузили Знамя Победы. 2 мая Берлин капитулировал.</p>
+      <div class="battle-result">⚔ Победа — Знамя над Рейхстагом</div>
+    </div>
+
+    <div class="battle-card">
+      <div class="battle-year">41</div>
+      <div class="battle-meta">Сентябрь 1941 — Январь 1944</div>
+      <h3 class="battle-name">Оборона Ленинграда</h3>
+      <p class="battle-desc">872 дня. Артиллерийские обстрелы, голод, холод — но город не сдался. Солдаты умирали в окопах, горожане — на заводах и в очередях за хлебом. Ленинград стал символом несломленного духа.</p>
+      <div class="battle-result">⚔ Город выстоял — Победа 27 января 1944</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HEROISM ==================== -->
+<section id="heroism">
+  <div class="section-inner">
+    <div class="section-label">Советский солдат</div>
+    <h2 class="section-title">Лицо героизма</h2>
+
+    <div class="heroes-intro">
+      <div>
+        <p class="section-text">
+          Советский солдат воевал не за абстрактные идеи — он защищал своих близких, свой дом, свою землю. За ним стояла живая Родина: мать, жена, дети. Именно это давало ему силу идти под пули, бросаться на амбразуру, тянуть раненых с поля боя под огнём.
+        </p>
+        <p class="section-text" style="margin-top:1.5rem;">
+          11 443 человека стали Героями Советского Союза. Но за каждым официальным героем — тысячи безымянных, кто так же отдал всё, кто погиб без наград, кто остался лежать в полях и лесах. Их имён мы часто не знаем. Но мы помним их подвиг.
+        </p>
+        <p class="section-text" style="margin-top:1.5rem;">
+          Среди героев — люди всех национальностей СССР: русские и украинцы, белорусы и казахи, узбеки и грузины, татары и евреи. Победа была общей. Горе — тоже.
+        </p>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">Мы шли в бой не потому, что не боялись смерти. Мы боялись. Но мы боялись потерять Родину — ещё больше.</p>
+        <span class="quote-author">— из воспоминаний ветеранов</span>
+      </div>
+    </div>
+
+    <div class="section-label">Бессмертные имена</div>
+    <div class="heroes-grid">
+      <div class="hero-card">
+        <span class="hero-card-star">★</span>
+        <div class="hero-card-name">Александр Матросов</div>
+        <div class="hero-card-rank">Рядовой · 27 февраля 1943</div>
+        <p class="hero-card-text">В бою под Псковом закрыл своим телом амбразуру вражеского дзота, чтобы его товарищи смогли продолжить атаку. Ему было 19 лет. Посмертно удостоен звания Героя Советского Союза. Подвиг Матросова повторили более 300 советских солдат.</p>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-star">★</span>
+        <div class="hero-card-name">Зоя Космодемьянская</div>
+        <div class="hero-card-rank">Боец партизанского отряда · 1941</div>
+        <p class="hero-card-text">18-летняя москвичка ушла добровольцем в партизанский отряд. Захваченная немцами, она не выдала своих товарищей даже под пытками. Перед казнью крикнула: «Нас двести миллионов! Всех не перевешаете!» Стала первой женщиной — Героем СССР во Второй мировой.</p>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-star">★</span>
+        <div class="hero-card-name">Алексей Маресьев</div>
+        <div class="hero-card-rank">Лётчик-истребитель · Герой СССР</div>
+        <p class="hero-card-text">Сбитый над лесом, он восемнадцать суток полз к своим. Ноги ампутировали. Но он вернулся в строй — на протезах — и сбил ещё семь самолётов врага. Его история стала основой для книги Бориса Полевого «Повесть о настоящем человеке».</p>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-star">★★★</span>
+        <div class="hero-card-name">Иван Кожедуб</div>
+        <div class="hero-card-rank">Лётчик · Трижды Герой СССР</div>
+        <p class="hero-card-text">Самый результативный лётчик-истребитель антигитлеровской коалиции. 62 воздушные победы. Ни разу не был сбит. Начинал войну без единой победы и был списан в инструкторы — но добился возврата на фронт и стал легендой советской авиации.</p>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-star">★</span>
+        <div class="hero-card-name">Марина Раскова</div>
+        <div class="hero-card-rank">Военный лётчик · основатель женских авиаполков</div>
+        <p class="hero-card-text">Организовала три женских авиационных полка. «Ночные ведьмы» — 588-й ночной бомбардировочный полк — наводили ужас на врага: они делали 1000 вылетов в год на деревянных самолётах, без парашютов, в полной темноте.</p>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-star">★</span>
+        <div class="hero-card-name">Рядовой Солдат</div>
+        <div class="hero-card-rank">Имя неизвестно · Подвиг вечен</div>
+        <p class="hero-card-text">За каждым Героем Советского Союза — сотни тысяч безымянных солдат. Они погибли без наград, их имена не вошли в учебники. Но именно они — миллионы обычных людей — и были сердцем Победы. Среди них — прадеды Макса.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MEMORY ==================== -->
+<section id="memory">
+  <div class="section-inner">
+    <div class="memory-center">
+      <div class="section-label" style="justify-content:center; text-align:center;">Вечная память</div>
+      <h2 class="section-title" style="text-align:center;">Они должны<br>жить в наших сердцах</h2>
+
+      <div class="candles-row">
+        <div class="candle">
+          <div class="candle-flame"></div>
+          <div class="candle-body"></div>
+          <span class="candle-name">Вера</span>
+        </div>
+        <div class="candle">
+          <div class="candle-flame"></div>
+          <div class="candle-body"></div>
+          <span class="candle-name">Женя</span>
+        </div>
+        <div class="candle">
+          <div class="candle-flame"></div>
+          <div class="candle-body"></div>
+          <span class="candle-name">Прадеды</span>
+        </div>
+        <div class="candle">
+          <div class="candle-flame"></div>
+          <div class="candle-body"></div>
+          <span class="candle-name">Все солдаты</span>
+        </div>
+        <div class="candle">
+          <div class="candle-flame"></div>
+          <div class="candle-body"></div>
+          <span class="candle-name">Блокадники</span>
+        </div>
+      </div>
+
+      <div class="memory-dedication">
+        <div class="dedication-title">Макс помнит</div>
+        <p class="dedication-text">
+          <strong>Бабушка Вера</strong> — ты пережила блокаду Ленинграда, когда весь мир, казалось, сошёл с ума от жестокости. Ты видела то, что видеть невозможно. Ты выжила там, где выжить — уже подвиг. Ты несла этот огонь всю жизнь.<br><br>
+          <strong>Бабушка Женя</strong> — ты стояла на льду Ладоги в мороз и темноту и направляла машины с хлебом к умирающему городу. Каждый грузовик, который ты провела через это ледяное поле — это спасённая жизнь. Это победа.<br><br>
+          <strong>Прадеды, павшие в бою</strong> — вы не вернулись домой. Вы заплатили самую высокую цену. Вашей кровью полита земля, по которой мы ходим сегодня. Мы помним вас.<br><br>
+          Эта страница создана с любовью и памятью о вас.
+        </p>
+      </div>
+
+      <div class="memory-poem">
+        <p>
+          Помните!<br>
+          Через века, через года —<br>
+          помните!<br>
+          О тех, кто уже не придёт никогда —<br>
+          помните!<br><br>
+          Не плачьте!<br>
+          В горле сдержите стоны,<br>
+          горькие стоны.<br>
+          Памяти павших<br>
+          будьте достойны!<br>
+          Вечно достойны!
+        </p>
+        <span class="poem-author">— Роберт Рождественский · «Реквием»</span>
+      </div>
+
+      <p style="font-size:1.1rem; line-height:1.9; color:var(--ash); font-style:italic; max-width:650px; margin: 0 auto 3rem;">
+        Война — это не только даты и цифры. Это конкретные люди: твои прабабушки, прадеды, соседи, учителя. Пока мы их помним — они живы. Пока мы рассказываем о них детям — они продолжают жить. Это наш долг и наша привилегия.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <span class="footer-star">★</span>
+  <span class="footer-text">Никто не забыт</span>
+  <p class="footer-sub">Ничто не забыто</p>
+  <div class="footer-dates">1941 — 1945</div>
+  <p class="footer-from" style="color:var(--smoke); font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; margin-top:1rem;">
+    Создано Максом с любовью к Вере, Жене и всем прадедам<br>
+    23 февраля 2026 · День Защитника Отечества
+  </p>
+</footer>
+
+<script>
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+// Animate sections on scroll
+document.querySelectorAll('.section-inner').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 1s ease, transform 1s ease';
+  observer.observe(el);
+});
+
+// Counter animation for stats
+const counters = document.querySelectorAll('.stat-number');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = 'none';
+      setTimeout(() => {
+        entry.target.style.animation = 'counter-reveal 0.8s ease forwards';
+      }, 10);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(c => counterObserver.observe(c));
+</script>
+</body>
+</html>
