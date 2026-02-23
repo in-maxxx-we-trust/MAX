@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Соцсети и дети — Что важно знать каждой маме</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ee;
+    --warm-white: #fefaf5;
+    --blush: #f2c4b2;
+    --rose: #d4776a;
+    --deep-rose: #b85a4d;
+    --coral: #e8856e;
+    --teal: #3d7a6f;
+    --dark-teal: #2a5a52;
+    --sage: #8aab9e;
+    --charcoal: #2c2c2c;
+    --muted: #7a7065;
+    --light-line: #e8ddd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #2a5a52 0%, #3d7a6f 40%, #4a8f80 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(242,196,178,0.15);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .hero-badge {
+    background: rgba(242,196,178,0.25);
+    border: 1px solid rgba(242,196,178,0.5);
+    color: #f2c4b2;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 40px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    max-width: 850px;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+
+  .hero h1 span {
+    color: var(--blush);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1.1s 0.3s ease both;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 28px 36px;
+    text-align: center;
+    min-width: 160px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--blush);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeUp 1.5s 0.5s ease both;
+  }
+
+  .scroll-arrow {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253,246,238,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--light-line);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--dark-teal);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rose); }
+
+  /* SECTIONS */
+  section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--charcoal);
+    line-height: 1.2;
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+
+  .section-title em {
+    color: var(--teal);
+    font-style: italic;
+  }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 650px;
+    margin-bottom: 60px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--light-line);
+    margin: 0;
+  }
+
+  /* IMPACT GRID */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .impact-card {
+    background: var(--warm-white);
+    border-radius: 24px;
+    padding: 36px;
+    border: 1px solid var(--light-line);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .impact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(44,44,44,0.1);
+  }
+
+  .impact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .impact-card.danger::before { background: linear-gradient(90deg, var(--rose), var(--coral)); }
+  .impact-card.warning::before { background: linear-gradient(90deg, #e8a44a, #f2c56a); }
+  .impact-card.info::before { background: linear-gradient(90deg, var(--teal), var(--sage)); }
+
+  .card-icon {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .card-text {
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* AGE SECTION */
+  .age-section { background: var(--charcoal); color: white; padding: 100px 0; }
+  .age-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  .age-section .section-title { color: white; }
+  .age-section .section-intro { color: rgba(255,255,255,0.65); }
+
+  .age-tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .age-tab {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    padding: 10px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .age-tab.active, .age-tab:hover {
+    background: var(--rose);
+    border-color: var(--rose);
+    color: white;
+  }
+
+  .age-content { display: none; }
+  .age-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+  .age-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--blush);
+  }
+
+  .age-info p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 16px;
+  }
+
+  .risk-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .risk-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+
+  .risk-list li::before {
+    content: '⚠';
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    margin-top: 1px;
+  }
+
+  /* BRAIN SECTION */
+  .brain-section {
+    background: linear-gradient(160deg, #fdf0e8, #fdf6ee);
+    padding: 100px 0;
+  }
+
+  .brain-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  .brain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .brain-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brain-circle {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--sage));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(61,122,111,0.3);
+  }
+
+  .orbit-item {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 12px 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    border: 1px solid var(--light-line);
+    white-space: nowrap;
+  }
+
+  .orbit-item:nth-child(2) { top: -10px; right: -20px; }
+  .orbit-item:nth-child(3) { bottom: 40px; right: -40px; }
+  .orbit-item:nth-child(4) { bottom: -10px; left: 0; }
+  .orbit-item:nth-child(5) { top: 50px; left: -40px; }
+
+  /* SIGNS SECTION */
+  .signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .sign-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border-left: 4px solid var(--rose);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+  }
+
+  .sign-card:hover {
+    border-left-color: var(--teal);
+    transform: translateX(4px);
+  }
+
+  .sign-emoji { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+
+  .sign-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .sign-desc {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* TIPS */
+  .tips-section { background: var(--teal); padding: 100px 0; }
+  .tips-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .tips-section .section-title { color: white; }
+  .tips-section .section-intro { color: rgba(255,255,255,0.7); }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .tip-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 24px;
+    padding: 36px;
+    color: white;
+    transition: background 0.3s;
+  }
+
+  .tip-card:hover { background: rgba(255,255,255,0.18); }
+
+  .tip-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .tip-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+
+  .tip-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.78);
+  }
+
+  /* QUOTE */
+  .quote-section { text-align: center; padding: 80px 40px; }
+
+  .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+    font-style: italic;
+    color: var(--charcoal);
+    max-width: 800px;
+    margin: 0 auto 24px;
+    line-height: 1.5;
+  }
+
+  .quote-author {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* SCREEN TIME */
+  .screentime-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .time-bars { display: flex; flex-direction: column; gap: 20px; }
+
+  .time-bar-row label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .time-bar-track {
+    background: var(--light-line);
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+  }
+
+  .time-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--rose), var(--coral));
+    transition: width 1.5s cubic-bezier(.25,.8,.25,1);
+  }
+
+  /* RESOURCES */
+  .resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .resource-item {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid var(--light-line);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+  }
+
+  .resource-item:hover {
+    border-color: var(--rose);
+    box-shadow: 0 10px 40px rgba(212,119,106,0.15);
+    transform: translateY(-3px);
+  }
+
+  .resource-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--rose), var(--coral));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .resource-text h4 {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: var(--charcoal);
+  }
+
+  .resource-text p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 48px 40px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .age-content.active { grid-template-columns: 1fr; gap: 30px; }
+    .brain-grid { grid-template-columns: 1fr; }
+    .brain-circle { width: 220px; height: 220px; font-size: 4rem; }
+    .screentime-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 16px; }
+    .stat-card { padding: 20px 24px; min-width: 130px; }
+  }
+
+  /* ACCORDION */
+  .accordion { display: flex; flex-direction: column; gap: 12px; }
+
+  .accordion-item {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--light-line);
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    padding: 22px 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--charcoal);
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .accordion-header:hover { background: var(--cream); }
+
+  .accordion-arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-body-inner {
+    padding: 0 28px 24px;
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .accordion-body-inner ul {
+    margin-top: 12px;
+    padding-left: 20px;
+  }
+
+  .accordion-body-inner li {
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Важно каждой маме</div>
+  <h1>Соцсети и <span>детская психика</span> — правда, которую нужно знать</h1>
+  <p class="hero-sub">Подробный гид для родителей о влиянии Instagram, TikTok, YouTube и других платформ на развитие, здоровье и психику вашего ребёнка</p>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <span class="stat-num">6.5</span>
+      <div class="stat-label">часов в сутки<br>проводит средний подросток онлайн</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">72%</span>
+      <div class="stat-label">детей до 10 лет<br>уже имеют смартфон</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">+40%</span>
+      <div class="stat-label">рост тревожности<br>среди подростков за 10 лет</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Листай вниз</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ДетиОнлайн.рф</div>
+  <ul class="nav-links">
+    <li><a href="#impact">Влияние</a></li>
+    <li><a href="#age">По возрасту</a></li>
+    <li><a href="#brain">Мозг</a></li>
+    <li><a href="#signs">Тревожные знаки</a></li>
+    <li><a href="#tips">Советы мамам</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- INTRO QUOTE -->
+<div class="quote-section">
+  <p class="big-quote">«Мы первое поколение родителей, которым предстоит вырастить детей в эпоху соцсетей — и у нас нет готового учебника»</p>
+  <p class="quote-author">— Психолог Джонатан Хайдт, автор книги «Тревожное поколение»</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- IMPACT SECTION -->
+<section id="impact">
+  <div class="section-label">Что происходит на самом деле</div>
+  <h2 class="section-title fade-in">Как соцсети влияют на <em>детей</em></h2>
+  <p class="section-intro fade-in">Исследования последнего десятилетия дают однозначный ответ: регулярное использование соцсетей оказывает реальное воздействие на развивающийся мозг ребёнка. Вот самые важные аспекты.</p>
+
+  <div class="impact-grid">
+    <div class="impact-card danger fade-in">
+      <span class="card-icon">🧠</span>
+      <div class="card-title">Дофаминовая зависимость</div>
+      <p class="card-text">Лайки, комментарии и уведомления вызывают выброс дофамина — того же вещества, что и в азартных играх. Детский мозг, ещё не умеющий регулировать эмоции, особенно уязвим к этому механизму. Формируется компульсивная тяга проверять телефон снова и снова.</p>
+    </div>
+    <div class="impact-card danger fade-in">
+      <span class="card-icon">😔</span>
+      <div class="card-title">Депрессия и тревожность</div>
+      <p class="card-text">Согласно исследованию 2023 года (более 100 000 подростков), те, кто проводит в соцсетях более 3 часов в день, в 2 раза чаще страдают от депрессии. Особенно это касается девочек 11–14 лет. Постоянное сравнение себя с «идеальными» образами подрывает самооценку.</p>
+    </div>
+    <div class="impact-card danger fade-in">
+      <span class="card-icon">💤</span>
+      <div class="card-title">Нарушение сна</div>
+      <p class="card-text">Синий свет экранов подавляет выработку мелатонина. 70% подростков проверяют телефон после полуночи. Недосыпание у детей ведёт к снижению концентрации, раздражительности, ослаблению иммунитета и трудностям в обучении.</p>
+    </div>
+    <div class="impact-card warning fade-in">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Снижение концентрации внимания</div>
+      <p class="card-text">Бесконечная лента коротких видео (TikTok, Reels) приучает мозг к мгновенному вознаграждению. Детям всё сложнее сосредоточиться на уроке, книге или разговоре длиннее нескольких минут. Это напрямую влияет на успеваемость.</p>
+    </div>
+    <div class="impact-card warning fade-in">
+      <span class="card-icon">👥</span>
+      <div class="card-title">Кибербуллинг</div>
+      <p class="card-text">Каждый третий российский подросток сталкивается с онлайн-травлей. В отличие от обычной агрессии, кибербуллинг происходит 24/7, анонимно, и ребёнок не может «уйти» от него. Последствия — тяжёлые эмоциональные травмы, отказ от общения, в крайних случаях — суицидальные мысли.</p>
+    </div>
+    <div class="impact-card warning fade-in">
+      <span class="card-icon">🪞</span>
+      <div class="card-title">Искажение образа тела</div>
+      <p class="card-text">Фильтры, фотошоп и нереалистичные стандарты красоты в соцсетях формируют у детей (особенно у девочек) негативное восприятие собственного тела. Это связано с ростом расстройств пищевого поведения среди подростков 12–17 лет.</p>
+    </div>
+    <div class="impact-card info fade-in">
+      <span class="card-icon">🔒</span>
+      <div class="card-title">Угрозы безопасности</div>
+      <p class="card-text">Открытые профили, геолокация, незнакомцы в директе — всё это реальные угрозы. Случаи груминга (манипулирования детьми взрослыми с преступными намерениями) участились с ростом популярности соцсетей среди детей до 12 лет.</p>
+    </div>
+    <div class="impact-card info fade-in">
+      <span class="card-icon">📵</span>
+      <div class="card-title">Упущенное развитие</div>
+      <p class="card-text">Каждый час в соцсетях — это час без живого общения, физической активности, творчества, чтения. Именно эти активности критически важны для формирования эмпатии, речи, логики и социальных навыков. Дефицит реального опыта накапливается.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AGE SECTION -->
+<div class="age-section" id="age">
+  <div class="age-inner">
+    <div class="section-label" style="color: var(--blush);">Влияние по возрасту</div>
+    <h2 class="section-title fade-in">Что важно знать для <em style="color:var(--blush)">каждого возраста</em></h2>
+    <p class="section-intro fade-in">Риски и характер воздействия существенно различаются в зависимости от возраста ребёнка. Выберите нужную группу:</p>
+
+    <div class="age-tabs">
+      <button class="age-tab active" onclick="showAge('age0')">До 6 лет</button>
+      <button class="age-tab" onclick="showAge('age1')">6–9 лет</button>
+      <button class="age-tab" onclick="showAge('age2')">10–12 лет</button>
+      <button class="age-tab" onclick="showAge('age3')">13–15 лет</button>
+      <button class="age-tab" onclick="showAge('age4')">16–18 лет</button>
+    </div>
+
+    <div id="age0" class="age-content active">
+      <div class="age-info">
+        <h3>Малыши до 6 лет — самые уязвимые</h3>
+        <p>Мозг ребёнка до 6 лет находится в активной стадии формирования нейронных связей. Экранное время в этот период не просто «отвлекает» — оно напрямую конкурирует с живым взаимодействием, которое жизненно необходимо для развития.</p>
+        <p>Американская академия педиатрии рекомендует: до 18 месяцев — никаких экранов (кроме видеозвонков с родственниками). От 2 до 5 лет — не более 1 часа в день качественного контента совместно со взрослым.</p>
+      </div>
+      <ul class="risk-list">
+        <li>Задержка речевого развития: экраны не дают обратной связи, которую даёт живое общение</li>
+        <li>Нарушение формирования привязанности к родителям, если гаджет заменяет совместное время</li>
+        <li>Трудности с концентрацией внимания и саморегуляцией</li>
+        <li>Нарушение сна из-за синего света и перевозбуждения</li>
+        <li>Слабое развитие воображения и творческого мышления</li>
+      </ul>
+    </div>
+
+    <div id="age1" class="age-content">
+      <div class="age-info">
+        <h3>6–9 лет — формирование социальных навыков</h3>
+        <p>В этом возрасте дети активно осваивают социальный мир, учатся дружить и справляться с конфликтами. Онлайн-общение может подменять реальный опыт, не давая нужных навыков.</p>
+        <p>YouTube и игровые платформы — основные «ворота» в цифровой мир для этого возраста. Алгоритмы часто рекомендуют всё более радикальный или возбуждающий контент, затягивая ребёнка.</p>
+      </div>
+      <ul class="risk-list">
+        <li>Экспозиция к неподходящему контенту через рекомендации YouTube</li>
+        <li>Агрессивное поведение как следствие просмотра насилия в играх и видео</li>
+        <li>Трудности в реальном общении, предпочтение экрана живым играм</li>
+        <li>Слабое развитие навыков чтения и письма из-за видеозамены книг</li>
+        <li>Первые контакты с рекламой и манипулятивным контентом</li>
+      </ul>
+    </div>
+
+    <div id="age2" class="age-content">
+      <div class="age-info">
+        <h3>10–12 лет — «пре-подростковый» пик риска</h3>
+        <p>Это возраст, когда дети массово заводят аккаунты в соцсетях (часто вопреки правилам платформ, устанавливающим минимальный возраст 13 лет). Гормональные изменения, поиск идентичности и социального принятия делают их особенно уязвимыми.</p>
+        <p>TikTok и Instagram становятся основными площадками. Первые столкновения с сравнением себя с блогерами и идеальными образами.</p>
+      </div>
+      <ul class="risk-list">
+        <li>Начало формирования зависимости от лайков и одобрения в сети</li>
+        <li>Первые случаи кибербуллинга — как жертвы, так и агрессора</li>
+        <li>Знакомство с контентом про похудение, «идеальную внешность», фильтры</li>
+        <li>Риск общения с незнакомцами, груминг</li>
+        <li>Секретность: дети скрывают онлайн-активность от родителей</li>
+      </ul>
+    </div>
+
+    <div id="age3" class="age-content">
+      <div class="age-info">
+        <h3>13–15 лет — самый острый период</h3>
+        <p>Подростковый мозг в этом возрасте переживает глубокую реструктуризацию. Префронтальная кора (отвечающая за контроль импульсов и принятие решений) ещё не сформирована, зато система вознаграждения гиперактивна.</p>
+        <p>Именно в этой группе исследования фиксируют наибольшую корреляцию между временем в соцсетях и депрессией — особенно у девочек.</p>
+      </div>
+      <ul class="risk-list">
+        <li>Острая зависимость от социального одобрения в сети, FOMO (страх пропустить)</li>
+        <li>Сравнение себя с инфлюенсерами → хроническое недовольство собой</li>
+        <li>Депрессия, тревожные расстройства, в тяжёлых случаях — мысли о самоповреждении</li>
+        <li>Нарушения пищевого поведения, спровоцированные контентом о «правильном теле»</li>
+        <li>Проблемы с учёбой, прокрастинация, разрыв с семьёй</li>
+      </ul>
+    </div>
+
+    <div id="age4" class="age-content">
+      <div class="age-info">
+        <h3>16–18 лет — осознанность и самостоятельность</h3>
+        <p>В старшем подростковом возрасте мозг постепенно «дозревает». Молодые люди способны лучше осознавать риски, но при этом уже могут быть глубоко вовлечены в цифровую среду.</p>
+        <p>Главная задача родителей — перейти от контроля к диалогу и обучению цифровой грамотности. Запреты работают хуже, чем доверие и открытый разговор.</p>
+      </div>
+      <ul class="risk-list">
+        <li>«Цифровой след»: посты и фото могут влиять на репутацию годами</li>
+        <li>Онлайн-отношения и связанные с ними эмоциональные риски</li>
+        <li>Политическая радикализация через алгоритмические пузыри</li>
+        <li>Ночные сессии и хронический недосып накануне важных экзаменов</li>
+        <li>Финансовые риски: донаты, азартные игры, мошенничество</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- BRAIN SECTION -->
+<div class="brain-section" id="brain">
+  <div class="brain-inner">
+    <div class="section-label">Нейронаука</div>
+    <h2 class="section-title fade-in">Что происходит с <em>мозгом ребёнка</em></h2>
+    <div class="brain-grid">
+      <div>
+        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;margin-bottom:24px;">Детский мозг — не маленькая копия взрослого. До 25 лет продолжается активное формирование нейронных связей. Соцсети вмешиваются в этот процесс на глубинном уровне.</p>
+        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;margin-bottom:24px;"><strong style="color:var(--charcoal)">Дофаминовая петля:</strong> каждое уведомление — это микродоза дофамина. Мозг учится «ждать» этой дозы и постепенно требует её всё чаще. Механизм идентичен формированию игровой зависимости.</p>
+        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;margin-bottom:24px;"><strong style="color:var(--charcoal)">Атрофия эмпатии:</strong> онлайн-общение лишено невербальных сигналов — мимики, тона голоса, прикосновений. Дети, общающиеся преимущественно онлайн, хуже «считывают» эмоции других людей.</p>
+        <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;"><strong style="color:var(--charcoal)">Стресс-система:</strong> непрерывный поток новостей и социальных сравнений держит нервную систему в состоянии хронического стресса, повышая уровень кортизола.</p>
+      </div>
+      <div class="brain-visual">
+        <div class="brain-circle">
+          🧠
+          <div class="orbit-item">↑ Кортизол</div>
+          <div class="orbit-item">↓ Мелатонин</div>
+          <div class="orbit-item">↑ Дофамин</div>
+          <div class="orbit-item">↓ Концентрация</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN TIME -->
+<section>
+  <div class="section-label">Экранное время</div>
+  <h2 class="section-title fade-in">Сколько — это <em>слишком много?</em></h2>
+  <div class="screentime-grid">
+    <div>
+      <p style="font-size:1.05rem;color:var(--muted);line-height:1.85;margin-bottom:32px;">Не всё экранное время одинаково вредно. Видеозвонок с бабушкой, совместный просмотр документального фильма или образовательное приложение — не то же самое, что бесконечный скроллинг. Но есть чёткие ориентиры.</p>
+
+      <div style="background:var(--warm-white);border-radius:20px;padding:32px;border:1px solid var(--light-line);">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:20px;">Рекомендации педиатров</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:center;gap:16px;"><div style="width:12px;height:12px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div><div><strong>До 2 лет:</strong> только видеозвонки с родными</div></div>
+          <div style="display:flex;align-items:center;gap:16px;"><div style="width:12px;height:12px;border-radius:50%;background:var(--sage);flex-shrink:0;"></div><div><strong>2–5 лет:</strong> до 1 часа качественного контента при участии взрослого</div></div>
+          <div style="display:flex;align-items:center;gap:16px;"><div style="width:12px;height:12px;border-radius:50%;background:#e8a44a;flex-shrink:0;"></div><div><strong>6–12 лет:</strong> не более 1.5–2 часов развлекательного контента</div></div>
+          <div style="display:flex;align-items:center;gap:16px;"><div style="width:12px;height:12px;border-radius:50%;background:var(--rose);flex-shrink:0;"></div><div><strong>13–18 лет:</strong> не более 2–3 часов, с обязательными «офлайн-периодами»</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:28px;color:var(--charcoal)">Среднее время в день (реальные данные)</h3>
+      <div class="time-bars">
+        <div class="time-bar-row">
+          <label><span>TikTok (подростки)</span><span style="color:var(--rose)">3.4 часа</span></label>
+          <div class="time-bar-track"><div class="time-bar-fill" style="width:85%;"></div></div>
+        </div>
+        <div class="time-bar-row">
+          <label><span>YouTube (6–12 лет)</span><span style="color:var(--rose)">2.8 часа</span></label>
+          <div class="time-bar-track"><div class="time-bar-fill" style="width:70%;"></div></div>
+        </div>
+        <div class="time-bar-row">
+          <label><span>ВКонтакте (13–18)</span><span style="color:var(--rose)">2.1 часа</span></label>
+          <div class="time-bar-track"><div class="time-bar-fill" style="width:52%;"></div></div>
+        </div>
+        <div class="time-bar-row">
+          <label><span>Telegram (13–18)</span><span style="color:var(--rose)">1.9 часа</span></label>
+          <div class="time-bar-track"><div class="time-bar-fill" style="width:47%;"></div></div>
+        </div>
+        <div class="time-bar-row">
+          <label><span>Instagram (подростки)</span><span style="color:var(--rose)">1.5 часа</span></label>
+          <div class="time-bar-track"><div class="time-bar-fill" style="width:37%;"></div></div>
+        </div>
+      </div>
+      <p style="margin-top:20px;font-size:0.82rem;color:var(--muted);">*По данным исследований 2023–2024 гг. Суммарное время может превышать 8 часов, так как дети часто используют несколько платформ одновременно.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SIGNS SECTION -->
+<section id="signs">
+  <div class="section-label">Тревожные сигналы</div>
+  <h2 class="section-title fade-in">Признаки того, что <em>нужно действовать</em></h2>
+  <p class="section-intro fade-in">Как понять, что использование соцсетей уже влияет на вашего ребёнка негативно? Вот сигналы, на которые стоит обратить внимание.</p>
+
+  <div class="signs-grid">
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">😤</span>
+      <div class="sign-title">Агрессия при изъятии телефона</div>
+      <p class="sign-desc">Бурная реакция на просьбу отложить гаджет — слёзы, скандал, истерика. Признак сформировавшейся зависимости.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">🌙</span>
+      <div class="sign-title">Проблемы со сном</div>
+      <p class="sign-desc">Ребёнок долго не может уснуть, встаёт ночью, утром с трудом просыпается, постоянно уставший.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">📉</span>
+      <div class="sign-title">Падение успеваемости</div>
+      <p class="sign-desc">Снижение оценок, невыполненные задания, рассеянность на уроках — часто следствие недосыпа и рассеянного внимания.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">🚪</span>
+      <div class="sign-title">Социальная изоляция</div>
+      <p class="sign-desc">Отказ от встреч с друзьями, нежелание выходить на улицу, общение только онлайн.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">🤐</span>
+      <div class="sign-title">Секретность и ложь</div>
+      <p class="sign-desc">Прячет телефон, меняет пароли, отрицает использование соцсетей — явный признак, что что-то скрывается.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">😢</span>
+      <div class="sign-title">Перепады настроения</div>
+      <p class="sign-desc">Ребёнок заходит в телефон в нормальном настроении, выходит подавленным или раздражённым. Реагирует на количество лайков.</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">🍽</span>
+      <div class="sign-title">Изменения в питании</div>
+      <p class="sign-desc">Отказ от еды, резкое ограничение рациона — особенно у девочек-подростков под влиянием контента о «правильном теле».</p>
+    </div>
+    <div class="sign-card fade-in">
+      <span class="sign-emoji">💬</span>
+      <div class="sign-title">Тревога о лайках и подписчиках</div>
+      <p class="sign-desc">Ребёнок часто упоминает количество лайков, переживает из-за комментариев, навязчиво возвращается к телефону.</p>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#fdf0e8,#fceee8);border-radius:24px;padding:40px;margin-top:48px;border:1px solid var(--blush);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:16px;color:var(--deep-rose)">🚨 Срочно обратитесь к специалисту, если:</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:0.93rem;color:var(--muted);">
+      <div style="display:flex;gap:10px;align-items:flex-start;"><span>•</span>Ребёнок говорит о нежелании жить или о том, что «лучше бы его не было»</div>
+      <div style="display:flex;gap:10px;align-items:flex-start;"><span>•</span>Вы обнаружили признаки самоповреждения</div>
+      <div style="display:flex;gap:10px;align-items:flex-start;"><span>•</span>Подросток перестал есть или резко потерял вес</div>
+      <div style="display:flex;gap:10px;align-items:flex-start;"><span>•</span>Полный отказ от общения с семьёй и реальными друзьями более 2 недель</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS SECTION -->
+<div class="tips-section" id="tips">
+  <div class="tips-inner">
+    <div class="section-label" style="color:rgba(255,255,255,0.5);">Практические советы</div>
+    <h2 class="section-title fade-in">Что делать маме: <em style="color:var(--blush)">12 работающих шагов</em></h2>
+    <p class="section-intro fade-in">Запреты работают плохо и ненадолго. Вот стратегии, которые реально помогают.</p>
+
+    <div class="tips-grid">
+      <div class="tip-card fade-in">
+        <div class="tip-num">01</div>
+        <div class="tip-title">Установите семейные правила вместе</div>
+        <p class="tip-text">Не диктуйте — договаривайтесь. Ребёнок, который участвовал в создании правил, соблюдает их гораздо охотнее. Обсудите: когда телефон убирается, где заряжается ночью, какой контент под запретом.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">02</div>
+        <div class="tip-title">Зарядка телефона — вне спальни</div>
+        <p class="tip-text">Это простое правило улучшает сон детей в среднем на 1.5 часа в сутки. Введите «докинговую станцию» для всей семьи на кухне или в коридоре. Вы тоже оставляете там телефон — это важно.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">03</div>
+        <div class="tip-title">Создайте «телефоно-свободные зоны»</div>
+        <p class="tip-text">Обеденный стол, спальни, первые 30 минут после школы — хорошие кандидаты. Исследования показывают: совместный приём пищи без гаджетов значительно укрепляет связь в семье.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">04</div>
+        <div class="tip-title">Используйте родительский контроль</div>
+        <p class="tip-text">Встроенные инструменты (Screen Time на iPhone, Digital Wellbeing на Android) позволяют ограничивать время в приложениях, блокировать нежелательный контент и видеть статистику. Приложения: Kaspersky Safe Kids, Family Link.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">05</div>
+        <div class="tip-title">Говорите об алгоритмах честно</div>
+        <p class="tip-text">Объясните ребёнку: TikTok и Instagram специально разработаны, чтобы удерживать внимание как можно дольше. Это не магия — это бизнес-модель. Дети, понимающие это, лучше справляются с искушением.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">06</div>
+        <div class="tip-title">Будьте примером</div>
+        <p class="tip-text">Если вы сами не выпускаете телефон из рук за ужином, запреты для ребёнка выглядят несправедливыми. Проведите эксперимент: неделя без телефона за едой для всей семьи.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">07</div>
+        <div class="tip-title">Интересуйтесь, а не запрещайте</div>
+        <p class="tip-text">Попросите ребёнка показать, что его увлекает в соцсетях. Смотрите вместе. Задавайте вопросы: «Как ты думаешь, это правда или монтаж?», «Тебе нравится этот блогер? Почему?». Диалог лучше контроля.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">08</div>
+        <div class="tip-title">Наполните офлайн-жизнь</div>
+        <p class="tip-text">Дети уходят в телефон от скуки и одиночества. Кружки, спорт, живое общение с друзьями, совместные семейные активности — лучшая «конкуренция» для соцсетей. Не запрещайте — предлагайте альтернативу.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">09</div>
+        <div class="tip-title">Обсуждайте медиаграмотность</div>
+        <p class="tip-text">Учите ребёнка отличать рекламу от реального контента, фильтры от реальности, проверять источники. Это навык, который защитит его гораздо лучше любого запрета.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">10</div>
+        <div class="tip-title">Реагируйте на кибербуллинг правильно</div>
+        <p class="tip-text">Не говорите «просто игнорируй». Выслушайте, поверьте, не обвиняйте. Сохраните скриншоты. В серьёзных случаях — обратитесь к школьному психологу и, при необходимости, в полицию.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">11</div>
+        <div class="tip-title">Защитите конфиденциальность</div>
+        <p class="tip-text">Закрытый профиль, геолокация отключена, никаких домашних адресов и номера школы в публичных постах. Проверьте настройки приватности вместе с ребёнком — это хороший повод для спокойного разговора.</p>
+      </div>
+      <div class="tip-card fade-in">
+        <div class="tip-num">12</div>
+        <div class="tip-title">Не бойтесь просить помощи</div>
+        <p class="tip-text">Если ситуация вышла из-под контроля — детский психолог, специализирующийся на цифровых зависимостях, не роскошь, а необходимость. Это не значит, что вы плохая мама. Это значит, что вы заботливая.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Часто задаваемые вопросы</div>
+  <h2 class="section-title fade-in">Вопросы, которые <em>волнуют мам</em></h2>
+  <p class="section-intro fade-in">Отвечаем на самые распространённые вопросы о детях и социальных сетях.</p>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        С какого возраста можно давать ребёнку смартфон?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Большинство экспертов рекомендуют не раньше 11–12 лет, и только «кнопочный» или ограниченный смартфон для связи без интернет-доступа к соцсетям. Полноценный смартфон с соцсетями — не раньше 14–16 лет, и только с чёткими правилами использования. Движение «Подождите до 8-го класса» (Wait Until 8th) набирает популярность среди родителей по всему миру.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        Мой ребёнок уже сидит в TikTok часами. Что делать?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Резкий запрет редко работает и вызывает обратный эффект. Действуйте постепенно:
+          <ul>
+            <li>Начните с разговора — без обвинений, с искренним интересом к тому, что он смотрит</li>
+            <li>Вместе установите ограничения через Screen Time или Family Link</li>
+            <li>Постепенно сокращайте время (на 30 мин каждую неделю) — это менее болезненно, чем резкий запрет</li>
+            <li>Предложите привлекательную альтернативу в то же время дня</li>
+            <li>Если поведение ребёнка не меняется — обратитесь к психологу</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        Нужно ли читать переписку ребёнка?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Это болезненный вопрос баланса между безопасностью и доверием. Для детей до 12 лет — мониторинг переписки оправдан, если ребёнок об этом предупреждён. Для подростков тайное чтение переписки разрушает доверие и в долгосрочной перспективе делает общение ещё более закрытым. Лучший подход: открытый разговор о том, что происходит онлайн, и договорённость о возможности проверить телефон в случае беспокойства.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        Как поговорить с ребёнком о соцсетях, если он сразу закрывается?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Ключевое — начинать не с претензий, а с любопытства. Попросите показать вам что-то интересное из ленты. Смотрите вместе видео, которые нравятся ребёнку. Задавайте открытые вопросы без оценок. Рассказывайте о своём опыте в сети. Главное — дать ребёнку понять, что вы не враг и не судья, а союзник, которому можно доверять. Это формируется годами, а не одним разговором.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        Правда ли, что соцсети ведут к депрессии? Или это преувеличение?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Связь реальная, но не столь прямолинейная. Соцсети не «вызывают» депрессию как вирус. Но они существенно усиливают риск у детей, уже имеющих предрасположенность. Исследование Твенге и Хайдта (2017–2023) показало чёткую корреляцию: чем больше времени девочки 11–14 лет проводят в Instagram, тем выше уровень тревожности и депрессивных симптомов. Для мальчиков связь менее выражена, но тоже существует. Это не значит, что каждый пользователь TikTok впадёт в депрессию — но риск реален и требует внимания.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        А есть ли что-то полезное в соцсетях для детей?
+        <div class="accordion-arrow">▼</div>
+      </div>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          Да, безусловно. Соцсети могут:
+          <ul>
+            <li>Помочь найти сообщества по интересам, особенно для детей с нестандартными увлечениями</li>
+            <li>Дать доступ к образовательному контенту высочайшего качества</li>
+            <li>Поддержать подростков, чувствующих себя «белой вороной» в реальной жизни</li>
+            <li>Развить творческие способности (видеомонтаж, дизайн, написание текстов)</li>
+            <li>Поддерживать связь с друзьями и родственниками на расстоянии</li>
+          </ul>
+          Проблема не в самих соцсетях, а в неограниченном, неосознанном использовании без родительского участия.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESOURCES -->
+<section>
+  <div class="section-label">Полезные ресурсы</div>
+  <h2 class="section-title fade-in">Куда обратиться <em>за помощью</em></h2>
+  <p class="section-intro fade-in">Если вам нужна профессиональная помощь или дополнительная информация — вот проверенные ресурсы.</p>
+
+  <div class="resources-list">
+    <div class="resource-item">
+      <div class="resource-icon">📞</div>
+      <div class="resource-text">
+        <h4>Телефон доверия для детей и подростков</h4>
+        <p>Бесплатная анонимная линия психологической помощи. Работает круглосуточно. Тел: 8-800-2000-122 (бесплатно по России). Звонить могут и дети, и родители.</p>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">🔐</div>
+      <div class="resource-text">
+        <h4>Kaspersky Safe Kids</h4>
+        <p>Российское приложение родительского контроля. Позволяет ограничивать время в приложениях, фильтровать контент, видеть местоположение ребёнка. Есть бесплатная версия с базовыми функциями.</p>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">📚</div>
+      <div class="resource-text">
+        <h4>Книга «Тревожное поколение» — Джонатан Хайдт</h4>
+        <p>Самая подробная и документально подтверждённая книга о влиянии смартфонов и соцсетей на психику детей. Переведена на русский язык. Обязательное чтение для современных родителей.</p>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">🏛</div>
+      <div class="resource-text">
+        <h4>Роскомнадзор — жалобы на опасный контент</h4>
+        <p>Если вы обнаружили в сети контент, опасный для детей (пропаганда суицида, груминг, насилие), вы можете подать жалобу через официальный сайт eais.rkn.gov.ru.</p>
+      </div>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">🧠</div>
+      <div class="resource-text">
+        <h4>Детский психолог — как найти хорошего</h4>
+        <p>Ищите специалиста с указанием специализации «интернет-зависимость», «подростковая психология». Платформы b17.ru и Zigmund.Online позволяют фильтровать по специализации и читать реальные отзывы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-size:1.3rem;font-family:'Playfair Display',serif;color:rgba(255,255,255,0.8);margin-bottom:12px;">Вы уже делаете правильное — вы читаете и узнаёте.</p>
+  <p>Этот сайт подготовлен на основе научных исследований в области детской психологии, нейронауки и цифрового благополучия.<br>
+  Материалы носят информационный характер и не заменяют консультацию специалиста.</p>
+  <p style="margin-top:20px;font-size:0.78rem;opacity:0.5;">© 2024 ДетиОнлайн.рф — для заботливых мам России</p>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Age tabs
+  function showAge(id) {
+    document.querySelectorAll('.age-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.age-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Accordion
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    const body = item.querySelector('.accordion-body');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.accordion-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.accordion-body').style.maxHeight = '0';
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  // Animate bars on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.time-bar-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => { bar.style.width = w; }, 100);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.time-bars').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>
