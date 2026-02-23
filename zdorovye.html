@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АБСОЛЮТ — Правда о здоровье, питании и долголетии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --bg2: #111110;
+    --bg3: #1a1a17;
+    --cream: #f0ead8;
+    --gold: #c9a84c;
+    --gold2: #e8c96a;
+    --red: #c0392b;
+    --green: #4a7c59;
+    --green2: #6daf84;
+    --text: #d8d2c4;
+    --muted: #7a7468;
+    --accent: #e07b39;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLL PROGRESS ─── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 24px 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(74,124,89,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 20%, rgba(192,57,43,0.05) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.4em;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: var(--cream);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 32px;
+    max-width: 680px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .btn-gold {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+
+  .btn-gold:hover { color: var(--bg); }
+  .btn-gold:hover::before { transform: translateX(0); }
+
+  .hero-stats {
+    margin-top: 80px;
+    display: flex;
+    gap: 60px;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 100px 0;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .wide-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.4em;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .section-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 680px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    margin: 0;
+  }
+
+  /* ─── BIG TEXT QUOTE ─── */
+  .big-quote {
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+  }
+
+  .big-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 3.2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--cream);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .big-quote span { color: var(--gold); }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: rgba(201,168,76,0.15);
+    line-height: 0;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  /* ─── MYTH CARDS ─── */
+  .myths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .myth-card {
+    background: var(--bg2);
+    padding: 40px 36px;
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .myth-card:hover { background: var(--bg3); }
+
+  .myth-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: rgba(201,168,76,0.1);
+    line-height: 1;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+  }
+
+  .myth-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(192,57,43,0.2);
+    border: 1px solid rgba(192,57,43,0.4);
+    color: #e57368;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .myth-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .myth-card .myth-lie {
+    color: #e57368;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    font-style: italic;
+    border-left: 2px solid rgba(192,57,43,0.5);
+    padding-left: 12px;
+  }
+
+  .myth-card .myth-truth {
+    color: var(--green2);
+    font-size: 0.9rem;
+    border-left: 2px solid rgba(109,175,132,0.5);
+    padding-left: 12px;
+  }
+
+  .myth-truth-label, .myth-lie-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .myth-lie-label { color: #e57368; }
+  .myth-truth-label { color: var(--green2); }
+
+  /* ─── CAUSE SECTION ─── */
+  .causes-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .cause-item {
+    padding: 32px 0;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .cause-item:first-child { border-top: none; }
+
+  .cause-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+  }
+
+  .cause-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .cause-item p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+
+  .cause-item strong { color: var(--text); font-weight: 500; }
+
+  /* ─── SCIENCE TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold), rgba(201,168,76,0.1));
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 48px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -47px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    border-radius: 50%;
+  }
+
+  .timeline-year {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .timeline-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .timeline-item p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    max-width: 700px;
+  }
+
+  .timeline-item p strong { color: var(--text); font-weight: 500; }
+
+  /* ─── FOOD TABLE ─── */
+  .food-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .food-col {
+    padding: 32px 28px;
+    border: 1px solid;
+  }
+
+  .food-col.bad { border-color: rgba(192,57,43,0.3); background: rgba(192,57,43,0.04); }
+  .food-col.ok { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.04); }
+  .food-col.good { border-color: rgba(74,124,89,0.3); background: rgba(74,124,89,0.04); }
+
+  .food-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    font-size: 1rem;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid;
+  }
+
+  .bad .food-col-title { color: #e57368; border-color: rgba(192,57,43,0.3); }
+  .ok .food-col-title { color: var(--gold); border-color: rgba(201,168,76,0.3); }
+  .good .food-col-title { color: var(--green2); border-color: rgba(74,124,89,0.3); }
+
+  .food-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .food-item-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .bad .food-item-dot { background: #e57368; }
+  .ok .food-item-dot { background: var(--gold); }
+  .good .food-item-dot { background: var(--green2); }
+
+  /* ─── PILLARS ─── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: rgba(201,168,76,0.08);
+  }
+
+  .pillar {
+    background: var(--bg2);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .pillar:hover { background: var(--bg3); }
+
+  .pillar-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6rem;
+    color: rgba(201,168,76,0.06);
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+    line-height: 1;
+  }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .pillar h3 em { color: var(--gold); font-style: normal; }
+
+  .pillar p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.85;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pillar p strong { color: var(--text); font-weight: 500; }
+
+  .pillar-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* ─── LONGEVITY ─── */
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .zone-card {
+    padding: 36px 28px;
+    border: 1px solid rgba(201,168,76,0.15);
+    position: relative;
+    overflow: hidden;
+    background: var(--bg2);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .zone-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-4px);
+  }
+
+  .zone-flag {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  .zone-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .zone-country {
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .zone-list {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .zone-list li::before {
+    content: '— ';
+    color: var(--green2);
+  }
+
+  /* ─── PRACTICAL GUIDE ─── */
+  .day-plan {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    max-width: 800px;
+  }
+
+  .day-time {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    padding: 24px 0;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    padding-right: 32px;
+    text-align: right;
+  }
+
+  .day-content {
+    padding: 20px 0 20px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .day-content h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    color: var(--cream);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .day-content p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── WARNING BOXES ─── */
+  .warn-box {
+    border: 1px solid rgba(192,57,43,0.35);
+    background: rgba(192,57,43,0.06);
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+
+  .warn-box-title {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    color: #e57368;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .info-box {
+    border: 1px solid rgba(74,124,89,0.35);
+    background: rgba(74,124,89,0.06);
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+
+  .info-box-title {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    color: var(--green2);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .gold-box {
+    border: 1px solid rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.04);
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 40px;
+    margin: 32px 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .check-icon {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--green2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 0.7rem;
+    color: var(--green2);
+  }
+
+  /* ─── BIG NUMBER FACTS ─── */
+  .facts-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(201,168,76,0.08);
+    margin: 60px 0;
+  }
+
+  .fact-box {
+    background: var(--bg2);
+    padding: 40px 28px;
+    text-align: center;
+  }
+
+  .fact-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .fact-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ─── INSULIN SECTION ─── */
+  .insulin-diagram {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 48px 0;
+    background: var(--bg2);
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .ins-col {
+    padding: 36px 32px;
+  }
+
+  .ins-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+    height: 100%;
+  }
+
+  .ins-col h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--cream);
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .ins-col ul {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .ins-col ul li::before { content: '→ '; color: var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── FINAL CTA ─── */
+  .final-section {
+    background: var(--bg2);
+    padding: 120px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-section::before {
+    content: 'АБСОЛЮТ';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 25vw;
+    color: rgba(201,168,76,0.03);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .final-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  .final-section h2 em { color: var(--gold); font-style: italic; }
+
+  .final-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 48px 32px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ─── TEXT STYLES ─── */
+  .body-text {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .body-text strong { color: var(--text); font-weight: 500; }
+  .body-text em { color: var(--gold); font-style: italic; }
+
+  .lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  /* ─── TWO COL TEXT ─── */
+  .two-col-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .causes-layout { grid-template-columns: 1fr; }
+    .food-grid { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .two-col-text { grid-template-columns: 1fr; }
+    .facts-row { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 32px; flex-wrap: wrap; justify-content: center; }
+    .checklist { grid-template-columns: 1fr; }
+    .insulin-diagram { grid-template-columns: 1fr; }
+    .ins-arrow { display: none; }
+    .day-plan { grid-template-columns: 80px 1fr; }
+    .day-time { font-size: 1.1rem; padding-right: 16px; }
+  }
+
+  /* ─── STICKY ANCHOR ─── */
+  .anchor {
+    position: relative;
+    top: -80px;
+  }
+
+  /* ─── HIGHLIGHT TEXT ─── */
+  .hl-red { color: #e57368; }
+  .hl-green { color: var(--green2); }
+  .hl-gold { color: var(--gold); }
+
+  /* ─── TABLE ─── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 32px 0;
+  }
+
+  .data-table th {
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .data-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--muted);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .data-table td strong { color: var(--text); font-weight: 500; }
+
+  /* ─── HORIZONTAL RULE ─── */
+  hr.gold {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+    margin: 60px 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">АБСОЛЮТ</a>
+  <ul class="nav-links">
+    <li><a href="#myths">Мифы</a></li>
+    <li><a href="#causes">Причины болезней</a></li>
+    <li><a href="#science">Наука</a></li>
+    <li><a href="#food">Питание</a></li>
+    <li><a href="#longevity">Долголетие</a></li>
+    <li><a href="#guide">Руководство</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-eyebrow">Правда. Только правда. Ничего, кроме правды</div>
+    <h1>Живи<em>100+</em></h1>
+    <p class="hero-sub">Полное руководство по здоровью, основанное на науке — без мифов, без рекламных интересов, без страха. Только то, к чему пришли учёные за последние 30 лет.</p>
+    <div class="hero-cta">
+      <a href="#myths" class="btn-gold">Начать читать</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">78%</span>
+        <div class="stat-label">смертей — от болезней образа жизни</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20+</span>
+        <div class="stat-label">главных мифов развенчано</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100+</span>
+        <div class="stat-label">лет — это реально</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTRO -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="big-quote fade-in">
+      <span class="quote-mark">"</span>
+      <p>Большинство людей умирают не от болезней — они умирают от <span>невежества</span>, насаждённого десятилетиями в угоду пищевой и фармацевтической промышленности.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MYTHS -->
+<section id="myths">
+  <div class="anchor" id="myths-anchor"></div>
+  <div class="container">
+    <div class="section-label">Раздел I</div>
+    <h2 class="section-title fade-in">Мифы о питании,<br>которые <em>убивают</em></h2>
+    <p class="section-intro fade-in">Десятилетиями нас учили неправильно. Вот 16 главных мифов, которые были опровергнуты наукой — некоторые из них финансировались теми, кто был заинтересован во лжи.</p>
+  </div>
+  <div class="wide-container">
+    <div class="myths-grid">
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">01</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Жир делает вас толстым и убивает сердце</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Насыщенный жир повышает холестерин и вызывает инфаркт. Ешьте обезжиренное.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Исследование PURE (2017, 135 000 человек в 18 странах): высокое потребление жира снижает смертность. Обезжиренные продукты заменяют жир сахаром, что катастрофически вреднее.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">02</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Холестерин в еде повышает холестерин в крови</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Яйца опасны! Не ешьте больше 2 яиц в неделю из-за холестерина.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Печень сама регулирует выработку холестерина. При поступлении пищевого — снижает собственное производство. 70% людей — «некомпенсаторы». Яйца не влияют на риск ССЗ у здоровых людей (Кокрейновский обзор, 2020).</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">03</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Калория = калория. Считайте калории — похудеете</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Просто меньше ешьте и больше двигайтесь. Дефицит калорий — и всё.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>100 ккал из сахара и 100 ккал из авокадо работают принципиально по-разному. Гормональный ответ (инсулин, лептин, грелин) определяет всё. Ожирение — гормональное, а не «поведенческое» расстройство.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">04</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Красное мясо вызывает рак и болезни сердца</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>ВОЗ отнесла переработанное мясо к канцерогенам группы 1. Значит, мясо убивает.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Группа 1 = «есть доказательства», не «высокий риск». Вред от 50г переработанного мяса в день: +18% относительного риска РТК (с 5% до 5.9%). Натуральное необработанное мясо — другая история с минимальным риском.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">05</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Соль — главная причина гипертонии</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Ограничьте соль до 5г в день. Соль = гипертония = инсульт.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Только ~25% людей «соль-чувствительны». Исследование TOHP: снижение соли сократило риск ССЗ лишь на 25% у чувствительных. Дефицит натрия повышает инсулинорезистентность и уровень стресс-гормонов. Калий из овощей важнее, чем количество соли.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">06</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Цельнозерновые продукты — основа здорового питания</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Пирамида питания: зерновые в основании. 6-11 порций в день.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Даже цельнозерновой хлеб повышает гликемический индекс выше, чем столовый сахар! Глиадин (фракция глютена) увеличивает кишечную проницаемость у всех людей, не только у целиаков. Пшеница 2024 года — гибрид с 42 хромосомами, а не та, что ели предки.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">07</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Солнечный свет опасен, всегда используйте крем SPF</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Солнце = рак кожи. Используйте SPF 50 каждый день.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Дефицит витамина D (солнечный свет — главный источник) связан с раком, аутоиммунными болезнями, депрессией, ССЗ. 80% россиян дефицитны по D3. Разумное пребывание на солнце — мощнейший инструмент здоровья. Меланома коррелирует с недостатком UVB, а не с его избытком.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">08</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Фруктоза натуральна — значит, полезна</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Фрукты полезны, пейте соки, ешьте сколько угодно — это природный сахар!</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Фруктоза метаболизируется почти исключительно в печени, как алкоголь. Избыток → жирная печень (НАЖБП), повышение мочевой кислоты, триглицеридов. Соки — это просто жидкий сахар без клетчатки. В природе фрукты были сезонными и куда менее сладкими.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">09</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Растительные масла лучше животных жиров</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Замените сливочное масло и сало подсолнечным, кукурузным, маргарином.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Омега-6 жиры (подсолнечное масло) при нагревании образуют альдегиды — нейротоксины и канцерогены. Оптимальное соотношение Ω6:Ω3 = 1:1–4:1. У современного человека — 20:1 и выше. Это провоцирует системное воспаление — мать всех болезней.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">10</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Частое питание «разгоняет» метаболизм</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Ешьте 5-6 раз в день небольшими порциями. Не давайте организму «голодать».</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Каждый приём пищи = выброс инсулина. 6 раз в день = инсулин почти всегда высокий = жир не сжигается. Аутофагия (самоочищение клеток) включается только при голодании. Интервальное голодание улучшает чувствительность к инсулину, маркеры воспаления и когнитивные функции.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">11</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Молоко необходимо для крепких костей</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Пейте молоко — кальций укрепляет кости и предотвращает остеопороз.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Страны с наибольшим потреблением молока (скандинавские) имеют наибольшую частоту переломов шейки бедра. Кальций без витамина D3, K2 и магния не усваивается в кости. Казеин молока (A1 белок) у многих людей повышает воспаление. Листовая зелень, сардины с костями, кунжут — лучшие источники кальция.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">12</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Антиоксиданты в таблетках борются с болезнями</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Витамины C, E в высоких дозах — это антивозрастная бомба.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Синтетические мегадозы антиоксидантов нейтрализуют в том числе полезные свободные радикалы (сигнальные молекулы, иммунная защита). Исследования CARET и ATBC: высокие дозы β-каротина повысили риск рака лёгкого у курильщиков. Антиоксиданты работают в еде — в матрице, а не изолированно.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">13</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Спортивные напитки необходимы при нагрузке</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Gatorade, изотоники — восполняют электролиты лучше воды.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Маркетинг Gatorade начался как исследование, финансированное самой компанией. При тренировках менее 90 минут — вода и естественная еда (банан, щепотка соли) эффективнее и не несут 34г сахара на бутылку.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">14</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Диетические продукты и нулевой сахар — помогают похудеть</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>«Light», «0% жира», «без сахара» — идеально для похудения.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Аспартам, сукралоза, ацесульфам-К изменяют микробиом кишечника. Сладкий вкус без калорий усиливает тягу к сладкому и нарушает инсулиновый ответ. Исследование San Antonio (2015): употребляющие диет-напитки набирают больше веса в долгосрочной перспективе.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">15</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Стресс — это «в голове», питание тут ни при чём</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Депрессия и тревога — болезни психики, лечите таблетками.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>90% серотонина производится в кишечнике. «Кишечно-мозговая ось» — реальная система связи. Воспалительный рацион (сахар, рафинированные масла, глютен у чувствительных) = нейровоспаление = депрессия, тревога, туман в голове.</div>
+      </div>
+
+      <div class="myth-card fade-in">
+        <div class="myth-num">16</div>
+        <div class="myth-badge">МИФ</div>
+        <h3>Пожилым не нужно много белка — берегите почки</h3>
+        <div class="myth-lie"><span class="myth-lie-label">Что говорили</span>Много белка нагружает почки. Пожилым хватит 0.8 г/кг.</div>
+        <div class="myth-truth"><span class="myth-truth-label">Наука говорит</span>Здоровым почкам белок не вредит. После 40 лет начинается саркопения (потеря мышц). Норма должна быть 1.6–2.2 г/кг для активных людей. Мышечная масса — важнейший предиктор долголетия и метаболического здоровья.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ИСТИННЫЕ ПРИЧИНЫ БОЛЕЗНЕЙ -->
+<section id="causes" style="background:var(--bg2);">
+  <div class="anchor"></div>
+  <div class="container">
+    <div class="section-label fade-in">Раздел II</div>
+    <h2 class="section-title fade-in">Настоящие причины<br><em>сосудистых и хронических</em><br>заболеваний</h2>
+    <p class="section-intro fade-in">Индустрия убедила нас, что болезни сердца — от холестерина, диабет — от сладкого, а рак — это «не повезло». Правда сложнее и одновременно гораздо проще.</p>
+
+    <div class="warn-box fade-in">
+      <div class="warn-box-title">⚠ КЛЮЧЕВОЕ ОТКРЫТИЕ</div>
+      <p class="body-text">Хроническое воспаление — первопричина практически всех современных болезней: атеросклероза, диабета 2 типа, болезни Альцгеймера, большинства онкологических заболеваний, аутоиммунных расстройств и депрессии. Это не метафора — это биохимический факт, подтверждённый тысячами исследований.</p>
+    </div>
+
+    <div class="causes-layout fade-in">
+      <div>
+        <div class="cause-item">
+          <div class="cause-icon">🔥</div>
+          <h3>Хроническое системное воспаление</h3>
+          <p>Воспаление — нормальная защитная реакция. Но когда оно <strong>хроническое и низкоинтенсивное</strong>, оно незаметно разрушает организм годами. Основные причины: <strong>рацион с высоким содержанием рафинированных углеводов, Ω-6 масел, трансжиров, алкоголь, стресс, нарушение сна, дисбактериоз</strong>. CRP (С-реактивный белок) — главный маркер. Норма: &lt;1 мг/л. У большинства россиян — 2–5 мг/л.</p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">📈</div>
+          <h3>Инсулинорезистентность — «тихая пандемия»</h3>
+          <p>По данным CDC, около 88% американцев метаболически нездоровы. В России — сопоставимые цифры. <strong>Инсулинорезистентность (ИР) — предшественник диабета, но также причина НАЖБП, поликистоза яичников, гипертонии, деменции («диабет 3 типа»), ожирения.</strong> Диагностируется годами до появления диабета — но врачи смотрят только на сахар натощак, пропуская ИР.</p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">🩺</div>
+          <h3>Дисфункция эндотелия — начало атеросклероза</h3>
+          <p>Атеросклероз начинается не от «высокого холестерина», а от <strong>повреждения внутренней стенки артерий (эндотелия)</strong>. Что повреждает эндотелий? Хроническое воспаление, высокий инсулин, оксидативный стресс (повреждённые масла), гомоцистеин (дефицит B12, B6, фолата), высокий кортизол, курение, трансжиры. <strong>Холестерин — «скорая помощь» в уже повреждённый сосуд, а не первопричина.</strong></p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">🧠</div>
+          <h3>Нейровоспаление и деменция</h3>
+          <p>Болезнь Альцгеймера сейчас называют <strong>«диабетом 3 типа»</strong> — мозг теряет способность утилизировать глюкозу. Амилоидные бляшки — следствие нейровоспаления. Инсулинорезистентность мозга — главный предиктор. <strong>Кетоны (из жиров) — альтернативное топливо для нейронов, которое сохраняет мозг.</strong> Профилактика начинается за 20–30 лет до симптомов.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="cause-item">
+          <div class="cause-icon">🦠</div>
+          <h3>Нарушение микробиома кишечника</h3>
+          <p>В кишечнике — 38 триллионов бактерий. Это не просто «пищеварение». Микробиом производит нейромедиаторы, регулирует иммунитет (70% иммунных клеток — в кишечнике), защищает от воспаления. <strong>Антибиотики, сахар, рафинированные продукты, стресс, алкоголь уничтожают здоровый микробиом.</strong> Следствие: «дырявый кишечник», аутоиммунные болезни, ожирение, депрессия, аллергии.</p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">😴</div>
+          <h3>Хронический недосон — недооценённый убийца</h3>
+          <p><strong>Менее 7 часов сна ночью повышает риск: инфаркта на 200%, ожирения на 55%, диабета на 50%, рака на 40%, деменции значительно.</strong> За ночь мозг очищается от токсинов (система глимфатики) — только во время глубокого сна. Сон — не роскошь, это основная биологическая функция. Нарушение циркадных ритмов (работа ночью, синий свет до полуночи) — мощный фактор болезней.</p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">⚗️</div>
+          <h3>Токсическая нагрузка окружающей среды</h3>
+          <p>Фталаты, бисфенол А (пластик), пестициды, гербициды (глифосат), тяжёлые металлы, загрязнение воздуха — <strong>всё это эндокринные разрушители и источники оксидативного стресса.</strong> Они не убивают мгновенно, но десятилетиями нарушают гормональный фон, иммунитет и ДНК. Современный человек несёт токсическую нагрузку, с которой эволюция никогда не сталкивалась.</p>
+        </div>
+
+        <div class="cause-item">
+          <div class="cause-icon">🪑</div>
+          <h3>Гиподинамия — болезнь цивилизации</h3>
+          <p>Сидячий образ жизни — независимый фактор риска смерти, <strong>даже если вы занимаетесь спортом 1 час в день</strong>. «Активные перерывы» (вставать каждый час) критически важны. Скелетные мышцы — эндокринный орган: при сокращении выделяют миокины, снижающие воспаление, улучшающие чувствительность к инсулину и поддерживающие здоровье мозга.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSULIN DIAGRAM -->
+    <hr class="gold fade-in">
+    <h3 class="section-title fade-in" style="font-size:1.8rem;">Цикл инсулинорезистентности:<br>как мы попадаем в ловушку</h3>
+    <div class="insulin-diagram fade-in">
+      <div class="ins-col">
+        <h4>🔴 Современный рацион</h4>
+        <ul>
+          <li>Высокогликемические углеводы</li>
+          <li>Рафинированный сахар, фруктоза</li>
+          <li>Редкие приёмы пищи / перекусы</li>
+          <li>Мало клетчатки и белка</li>
+          <li>Растительные масла Ω-6</li>
+        </ul>
+      </div>
+      <div class="ins-arrow">→</div>
+      <div class="ins-col">
+        <h4>🟡 Что происходит</h4>
+        <ul>
+          <li>Постоянно высокий инсулин</li>
+          <li>Клетки «глохнут» к инсулину</li>
+          <li>Глюкоза не может войти в клетки</li>
+          <li>Печень превращает избыток в жир</li>
+          <li>Воспаление нарастает</li>
+        </ul>
+      </div>
+      <div class="ins-arrow">→</div>
+      <div class="ins-col">
+        <h4>🔴 Последствия через 10-20 лет</h4>
+        <ul>
+          <li>Диабет 2 типа</li>
+          <li>Жирная печень (НАЖБП)</li>
+          <li>Гипертония</li>
+          <li>Атеросклероз</li>
+          <li>Деменция, рак, ожирение</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="facts-row fade-in">
+      <div class="fact-box">
+        <span class="fact-number">1 из 2</span>
+        <div class="fact-desc">россиян имеет предиабет или диабет 2 типа</div>
+      </div>
+      <div class="fact-box">
+        <span class="fact-number">90%</span>
+        <div class="fact-desc">людей с лишним весом имеют инсулинорезистентность</div>
+      </div>
+      <div class="fact-box">
+        <span class="fact-number">20 лет</span>
+        <div class="fact-desc">атеросклероз развивается до первых симптомов</div>
+      </div>
+      <div class="fact-box">
+        <span class="fact-number">80%</span>
+        <div class="fact-desc">хронических болезней можно предотвратить образом жизни</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCIENCE -->
+<section id="science">
+  <div class="anchor"></div>
+  <div class="container">
+    <div class="section-label fade-in">Раздел III</div>
+    <h2 class="section-title fade-in">Что открыла наука<br>за последние <em>30 лет</em></h2>
+    <p class="section-intro fade-in">Эпигенетика, микробиом, аутофагия, теломеры, хронобиология — эти открытия перевернули медицину. Вот самое важное, что нужно знать.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1993 — ЭПИГЕНЕТИКА</div>
+        <h3>Гены — не приговор</h3>
+        <p>Исследования Конрада Уоддингтона и позднее Брюса Липтона показали: <strong>экспрессия генов контролируется средой и образом жизни.</strong> Вы можете включать и выключать гены питанием, стрессом, движением, мыслями. BRCA1 (ген рака груди) есть у многих — болеют не все. <strong>Геном — это пистолет, триггер — ваш образ жизни.</strong></p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2003 — ТЕЛОМЕРЫ И СТАРЕНИЕ</div>
+        <h3>Можно замедлить биологическое старение</h3>
+        <p>Элизабет Блэкбёрн (Нобелевская премия 2009) открыла, что длина теломер определяет биологический возраст клетки. <strong>Что удлиняет теломеры: медитация, физические упражнения, средиземноморская диета, Ω-3, витамин D, качественный сон.</strong> Что укорачивает: стресс, воспалительный рацион, курение, одиночество, ультраобработанные продукты.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2007 — МИКРОБИОМ</div>
+        <h3>Мы — суперорганизм: 50% наших клеток — бактерии</h3>
+        <p>Human Microbiome Project изменил понимание человека. <strong>Разнообразие микробиома — ключевой маркер здоровья.</strong> Низкое разнообразие связано с ожирением, диабетом, аутоиммунными болезнями, депрессией. Что восстанавливает: ферментированные продукты, разнообразные овощи, пребиотики (клетчатка), жизнь на природе, контакт с землёй, животными. Что уничтожает: антибиотики, сахар, хлор из водопровода, пестициды.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2009 — АУТОФАГИЯ</div>
+        <h3>Клетки умеют «убирать мусор» — если им позволить</h3>
+        <p>Ёсинори Осуми (Нобелевская премия 2016) открыл механизм аутофагии: клетки переваривают поврежденные компоненты и перерабатывают их. <strong>Аутофагия — главный механизм против рака, деменции и старения.</strong> Она включается при голодании (от 12 часов), ограничении калорий, физической нагрузке. <strong>6 приёмов пищи в день полностью её блокируют.</strong></p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2012 — ВОСПАЛЕНИЕ</div>
+        <h3>Воспаление — общий знаменатель всех болезней цивилизации</h3>
+        <p>Мета-анализы подтвердили: <strong>уровень CRP, IL-6, TNF-α предсказывает риск инфаркта точнее, чем LDL-холестерин.</strong> Статины работают не от снижения холестерина — а от противовоспалительного эффекта (исследование JUPITER). Противовоспалительный рацион снижает CRP в 2–3 раза за 8 недель.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2014 — ХРОНОБИОЛОГИЯ</div>
+        <h3>Когда вы едите — так же важно, как что вы едите</h3>
+        <p>Работы Сатчидананды Панды показали: <strong>питание синхронизировано с циркадными ритмами кардинально меняет метаболизм.</strong> Те же калории, съеденные днём vs вечером — разный метаболический результат. Приём пищи в окне 8–10 часов (с утра до не позднее 19:00) улучшает чувствительность к инсулину, качество сна, давление, уровень триглицеридов.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2018 — ИНТЕРВАЛЬНОЕ ГОЛОДАНИЕ</div>
+        <h3>Голодание — не стресс, а мощнейший инструмент здоровья</h3>
+        <p>Систематические обзоры подтвердили: <strong>интервальное голодание (16:8, 5:2) снижает воспаление, улучшает липидный профиль, чувствительность к инсулину, активирует аутофагию, улучшает функцию мозга.</strong> Не нужно голодать вечно — нужно просто дать организму периоды без пищи, в которые он делает «ремонт».</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2020–2024 — МЫШЦЫ И ДОЛГОЛЕТИЕ</div>
+        <h3>Мышечная масса — лучший предиктор долгой жизни</h3>
+        <p>Исследования Питера Аттии и других геронтологов показали: <strong>VO2max (максимальное потребление кислорода) и мышечная сила — сильнейшие предикторы долголетия, сильнее, чем любые анализы крови.</strong> Саркопения (потеря мышц после 40) убивает медленно. Силовые тренировки — медицинская необходимость, а не опция.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOD SECTION -->
+<section id="food" style="background:var(--bg2);">
+  <div class="anchor"></div>
+  <div class="container">
+    <div class="section-label fade-in">Раздел IV</div>
+    <h2 class="section-title fade-in">Питание:<br><em>абсолютная</em> правда</h2>
+    <p class="section-intro fade-in">Не диета, не ограничения. Понимание того, как работает еда на молекулярном уровне, — и свобода выбора на основе этого знания.</p>
+
+    <div class="gold-box fade-in">
+      <div class="info-box-title">ГЛАВНЫЙ ПРИНЦИП</div>
+      <p class="body-text"><strong>Ешьте настоящую еду. Не слишком много. В основном растения (но не только).</strong> Эта формула Майкла Поллана остаётся лучшим резюме нутрициологии. «Настоящая еда» — то, что ваша прабабушка узнала бы как еду. Если состав содержит 15+ ингредиентов с непроизносимыми названиями — это не еда.</p>
+    </div>
+
+    <div class="food-grid fade-in">
+      <div class="food-col bad">
+        <div class="food-col-title">🚫 ИЗБЕГАЙТЕ ВСЕГДА</div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Трансжиры</strong> — маргарин, гидрогенизированные масла, многие чипсы и печенье. Встроиваются в клеточные мембраны, нарушая работу клетки навсегда.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Жидкие сахара</strong> — сладкие напитки, соки (даже свежевыжатые в избытке), энергетики. Фруктоза в жидком виде — удар по печени.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Ультраобработанные продукты</strong> (UPF) — всё, у чего состав невозможно воспроизвести дома. Связаны с раком, деменцией, ССЗ в десятках исследований 2023–2024 гг.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Рафинированные углеводы</strong> — белый хлеб, булки, выпечка, белый рис в большом количестве, большинство готовых каш.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Рафинированные растительные масла</strong> для жарки — подсолнечное, кукурузное, соевое. При нагревании = канцерогены.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Искусственные подсластители</strong> регулярно — аспартам, сукралоза, сахарин в ежедневном употреблении.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Алкоголь регулярно</strong> — нет безопасной дозы. Любая доза повышает риск рака. «Польза красного вина» — миф, финансированный индустрией.</span></div>
+      </div>
+
+      <div class="food-col ok">
+        <div class="food-col-title">⚠ УМЕРЕННО / С УМОМ</div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Молочные продукты</strong> — лучше ферментированные (йогурт, кефир, твёрдый сыр). Молоко A2 (козье, овечье) лучше коровьего A1 для большинства людей.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Фрукты</strong> — отличны, но в умеренном количестве. Ягоды — лучший выбор (низкий ГИ, максимум антиоксидантов). Сухофрукты — концентрированный сахар.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Цельнозерновые злаки</strong> — гречка, овсянка долгого приготовления, нешлифованный рис. Полезнее белых аналогов, но не основа рациона.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Бобовые</strong> — отличный белок и клетчатка, но содержат лектины и фитаты. Замачивание и варка нейтрализуют. Подходят не всем (ИБС, синдром раздражённого кишечника).</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Кофе</strong> — умеренно (2–3 чашки) связан с пользой. Но не для людей с тревожностью, проблемами с давлением и нарушением сна.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Переработанное мясо</strong> (колбаса, бекон) — редко, как деликатес. Добавленные нитраты и насыщенность — повод ограничить.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Крахмалистые овощи</strong> (картофель, кукуруза) — лучше в сочетании с жирами и белком, охлаждённые (резистентный крахмал).</span></div>
+      </div>
+
+      <div class="food-col good">
+        <div class="food-col-title">✓ ОСНОВА РАЦИОНА</div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Жирная рыба</strong> — лосось, сардины, скумбрия, сельдь 2–4 раза в неделю. Лучший источник Ω-3 (EPA/DHA), витамина D, B12.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Разнообразные некрахмалистые овощи</strong> — чем больше цветов, тем лучше. Цель: 30+ разных растений в неделю (исследование микробиома AMS).</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Яйца</strong> — идеальная еда. Полный белок, холин (для мозга), жирорастворимые витамины. 1–3 в день — безопасно для здоровых.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Качественное мясо</strong> — говядина пастбищного выращивания, баранина, птица. Богаты железом гемовым, цинком, B12, карнитином.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Оливковое масло extra virgin</strong> — не для жарки, для заправки. Олеокантал = природный противовоспалительный агент уровня ибупрофена.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Орехи и семена</strong> — грецкие, миндаль, тыквенные семечки, чиа, лён. Ежедневная горсть снижает риск ССЗ на 15–20%.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Ферментированные продукты</strong> — квашеная капуста, кимчи, кефир, натуральный йогурт, мисо. Живые бактерии для микробиома.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Ягоды</strong> — черника, голубика, малина, клубника. Антоцианы — мощнейшие антиоксиданты для мозга и сосудов.</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Грибы</strong> — β-глюканы для иммунитета, единственный немясной источник витамина D (при выращивании на свету).</span></div>
+        <div class="food-item"><div class="food-item-dot"></div><span><strong>Горький шоколад 85%+</strong> — флавоноиды для сосудов, магний, антиоксиданты. 20–30г в день — полезно.</span></div>
+      </div>
+    </div>
+
+    <hr class="gold fade-in">
+
+    <!-- IMPORTANT NUTRIENTS -->
+    <h3 class="section-title fade-in" style="font-size:2rem;">Дефициты, о которых молчат врачи</h3>
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>Нутриент</th>
+          <th>% дефицитных в России</th>
+          <th>Чем грозит дефицит</th>
+          <th>Лучшие источники</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Витамин D3</strong></td>
+          <td class="hl-red">~80%</td>
+          <td>Рак, аутоиммунные болезни, депрессия, остеопороз, ССЗ, снижение иммунитета</td>
+          <td>Солнце (главное), жирная рыба, яйца. Часто необходима добавка 2000–5000 МЕ/день</td>
+        </tr>
+        <tr>
+          <td><strong>Магний</strong></td>
+          <td class="hl-red">~70%</td>
+          <td>Гипертония, тахикардия, судороги, тревога, бессонница, мигрени, инсулинорезистентность</td>
+          <td>Тёмная листовая зелень, тыквенные семечки, горький шоколад, авокадо, рыба. Добавка: магний глицинат/малат 300–400 мг</td>
+        </tr>
+        <tr>
+          <td><strong>Омега-3 (EPA/DHA)</strong></td>
+          <td class="hl-red">~90%</td>
+          <td>Воспаление, ССЗ, депрессия, нейродегенерация, плохая память</td>
+          <td>Жирная рыба 2–4р/нед. Добавка: рыбий жир 2–4г/день EPA+DHA</td>
+        </tr>
+        <tr>
+          <td><strong>Витамин K2</strong></td>
+          <td class="hl-red">~85%</td>
+          <td>Кальций откладывается в сосудах, а не в костях → атеросклероз + остеопороз</td>
+          <td>Натто (ферм. соя), твёрдые сыры, гусиная печень. Добавка: MK-7 100–200 мкг</td>
+        </tr>
+        <tr>
+          <td><strong>Витамин B12</strong></td>
+          <td class="hl-red">~40%</td>
+          <td>Неврологические нарушения, анемия, высокий гомоцистеин (атеросклероз), деменция</td>
+          <td>Только животная пища. Мясо, рыба, яйца. При веганстве — добавка обязательна</td>
+        </tr>
+        <tr>
+          <td><strong>Цинк</strong></td>
+          <td class="hl-red">~50%</td>
+          <td>Снижение иммунитета, медленное заживление, нарушение вкуса, гормональный дисбаланс</td>
+          <td>Устрицы (рекорд!), говядина, тыквенные семечки, кешью</td>
+        </tr>
+        <tr>
+          <td><strong>Иод</strong></td>
+          <td class="hl-red">~70%</td>
+          <td>Гипотиреоз, усталость, лишний вес, когнитивные нарушения, у беременных — снижение IQ ребёнка</td>
+          <td>Морская капуста (ламинария), морепродукты, йодированная соль</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box fade-in">
+      <div class="warn-box-title">⚠ ОБ АНАЛИЗАХ</div>
+      <p class="body-text">Стандартный ОАК и биохимия — это минимум. Запросите у врача: <strong>витамин D (25-OH), магний в эритроцитах (не в сыворотке!), гомоцистеин, B12, ферритин, инсулин натощак, HbA1c, CRP высокочувствительный, TSH + Т4 свободный, тестостерон (мужчины)</strong>. Большинство «нормальных» диапазонов разработаны для больных, не для оптимального здоровья.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LONGEVITY / BLUE ZONES -->
+<section id="longevity">
+  <div class="anchor"></div>
+  <div class="container">
+    <div class="section-label fade-in">Раздел V</div>
+    <h2 class="section-title fade-in">Жить <em>100+</em><br>Что объединяет долгожителей</h2>
+    <p class="section-intro fade-in">Дэн Бюттнер и группа учёных National Geographic изучили «Голубые зоны» — регионы с максимальной концентрацией долгожителей. Оказалось, у всех есть общие черты.</p>
+
+    <div class="zones-grid fade-in">
+      <div class="zone-card">
+        <div class="zone-flag">🇮🇹</div>
+        <div class="zone-name">Сардиния</div>
+        <div class="zone-country">Нуоро, Италия</div>
+        <ul class="zone-list">
+          <li>Пекорино (сыр из молока пастбищных овец)</li>
+          <li>Красное вино Cannonau с флавоноидами</li>
+          <li>Бобовые, ячмень</li>
+          <li>Подъёмы в гору (ежедневно)</li>
+          <li>Мужчины живут столь же долго, как женщины</li>
+        </ul>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-flag">🇯🇵</div>
+        <div class="zone-name">Окинава</div>
+        <div class="zone-country">Япония</div>
+        <ul class="zone-list">
+          <li>«Хара хачи бу» — есть до 80% насыщения</li>
+          <li>Сладкий картофель (батат)</li>
+          <li>Тофу, водоросли, мисо</li>
+          <li>«Икигай» — смысл жизни</li>
+          <li>«Моаи» — группы поддержки с детства</li>
+        </ul>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-flag">🇬🇷</div>
+        <div class="zone-name">Икария</div>
+        <div class="zone-country">Греция</div>
+        <ul class="zone-list">
+          <li>Оливковое масло, дикие травы</li>
+          <li>Дневной сон (снижает ССЗ на 35%)</li>
+          <li>Горный чай из трав (розмарин, мята, орегано)</li>
+          <li>Активная сексуальная жизнь до 90 лет</li>
+          <li>Почти нет деменции</li>
+        </ul>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-flag">🇨🇷</div>
+        <div class="zone-name">Никойя</div>
+        <div class="zone-country">Коста-Рика</div>
+        <ul class="zone-list">
+          <li>Кукуруза, бобы, тыква («три сестры»)</li>
+          <li>Физический труд до старости</li>
+          <li>«План де вида» — ощущение смысла</li>
+          <li>Крепкие семейные связи</li>
+          <li>Жёсткая вода (кальций, магний)</li>
+        </ul>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-flag">🇺🇸</div>
+        <div class="zone-name">Лома-Линда</div>
+        <div class="zone-country">Калифорния, США</div>
+        <ul class="zone-list">
+          <li>Адвентисты 7-го дня</li>
+          <li>Преимущественно растительный рацион</li>
+          <li>Орехи ежедневно</li>
+          <li>Суббота — полный отдых и общение</li>
+          <li>Волонтёрство и служение</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="gold fade-in">
+    <h3 class="section-title fade-in" style="font-size:2rem;">9 общих принципов долгожителей<br><em>(Power 9 — Дэн Бюттнер)</em></h3>
+
+    <div class="pillars-grid fade-in">
+      <div class="pillar">
+        <div class="pillar-tag">Движение</div>
+        <div class="pillar-num">1</div>
+        <h3>Естественное <em>движение</em></h3>
+        <p>Долгожители не ходят в спортзал — они <strong>живут в среде, которая вынуждает двигаться</strong>: огороды, холмы, отсутствие лифтов. Движение происходит постоянно, без усилий воли. Это важнее двух часов в зале 3 раза в неделю при полной гиподинамии остальное время.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Смысл</div>
+        <div class="pillar-num">2</div>
+        <h3><em>Икигай</em> и план де вида</h3>
+        <p>Знание, зачем вы просыпаетесь утром, <strong>добавляет в среднем 7 лет жизни</strong>. Смысл — не работа, а призвание. Пенсия убивает буквально: риск смерти резко растёт у тех, кто «просто отдыхает». Служение другим, творчество, семья — всё это работает как антидепрессант и антистресс.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Стресс</div>
+        <div class="pillar-num">3</div>
+        <h3><em>Ритуалы</em> снятия стресса</h3>
+        <p>Хронический стресс разрушает всё: гормоны, иммунитет, кишечник, теломеры. Долгожители имеют <strong>ежедневные ритуалы разгрузки</strong>: молитва, медитация, дневной сон, время с предками. Не «стресс-менеджмент», а встроенные паузы. Медитация 20 минут снижает кортизол более эффективно, чем отпуск.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Питание</div>
+        <div class="pillar-num">4</div>
+        <h3>80% — растения,<br><em>хара хачи бу</em></h3>
+        <p>Бобовые — угловой камень большинства долгожительских рационов: 100г в день снижает смертность на 8%. <strong>Мясо — 5 раз в месяц, небольшими порциями.</strong> «Хара хачи бу» (есть до 80%) работает как автоматическое ограничение калорий без диет и подсчётов.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Алкоголь</div>
+        <div class="pillar-num">5</div>
+        <h3>Бокал вина <em>с друзьями</em></h3>
+        <p>Большинство долгожительских культур пьют умеренно, с едой и в компании. <strong>Но важнее не само вино, а контекст — социальный ритуал</strong>. Исследования последних лет всё больше указывают: польза умеренного алкоголя преувеличена, а риски реальны. Полифенолы вина есть в ягодах и шоколаде — без алкоголя.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Принадлежность</div>
+        <div class="pillar-num">6</div>
+        <h3>Вера и <em>сообщество</em></h3>
+        <p>258 из 263 долгожителей принадлежали к религиозной общине. <strong>Посещение службы 4 раза в месяц прибавляет 4–14 лет жизни</strong>. Не обязательно религиозность — важна принадлежность к сообществу, чувство смысла и общие ценности. Одиночество убивает так же, как 15 сигарет в день.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Семья</div>
+        <div class="pillar-num">7</div>
+        <h3>Семья — <em>главный приоритет</em></h3>
+        <p>Долгожители держат стареющих родителей рядом. <strong>Дети из таких семей на 20% реже болеют.</strong> Пожизненный партнёр добавляет до 3 лет жизни. Инвестиции во взаимоотношения — самые выгодные инвестиции в здоровье. Одиночество — фактор риска, сравнимый с курением.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Окружение</div>
+        <div class="pillar-num">8</div>
+        <h3>Правильное <em>социальное окружение</em></h3>
+        <p><strong>Ожирение «заразно» — ваш риск набрать вес вырастает на 57%, если ближайший друг страдает ожирением.</strong> И наоборот: окружение из здоровых, активных, жизнерадостных людей формирует вас. Долгожители Окинавы создают «моаи» — группы из 5 друзей, с которыми проводят всю жизнь.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-tag">Природа</div>
+        <div class="pillar-num">9</div>
+        <h3><em>Связь</em> с природой</h3>
+        <p>20 минут в природной среде снижают кортизол. «Лесные ванны» (синрин-йоку) в Японии — официальная медицинская практика. <strong>Земля, деревья, звуки природы буквально перестраивают нервную систему.</strong> Жизнь в городе без контакта с природой — хронический стресс-фактор.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRACTICAL GUIDE -->
+<section id="guide" style="background:var(--bg2);">
+  <div class="anchor"></div>
+  <div class="container">
+    <div class="section-label fade-in">Раздел VI</div>
+    <h2 class="section-title fade-in">Практическое руководство:<br><em>как начать</em> и как придерживаться</h2>
+    <p class="section-intro fade-in">Знание без действия бесполезно. Вот пошаговый, честный план — с учётом трудностей, срывов и российской реальности.</p>
+
+    <div class="warn-box fade-in">
+      <div class="warn-box-title">⚠ ЧЕСТНО О ТРУДНОСТЯХ ПЕРЕХОДА</div>
+      <p class="body-text">
+        Первые 1–3 недели при переходе на правильное питание будет <strong>хуже</strong>. Это нормально и называется «кето-грипп» или «адаптация». Симптомы: усталость, головная боль, раздражительность, тяга к углеводам. Причина: ваше тело перестраивает метаболизм с сахара на жиры. Через 2–4 недели вы почувствуете энергию, какой не знали годами. <strong>Большинство людей сдаются именно в этот тяжёлый период.</strong> Не сдавайтесь — пройдите его.
+      </p>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--cream); margin-bottom:32px;" class="fade-in">Идеальный день долгожителя</h3>
+
+    <div class="day-plan fade-in">
+      <div class="day-time">6:00</div>
+      <div class="day-content">
+        <h4>Пробуждение без будильника (по возможности)</h4>
+        <p>Откройте шторы — первый свет активирует циркадные ритмы. Не берите телефон первые 30 минут. Стакан воды с щепоткой морской соли и лимоном — восполняет потерянный ночью магний и электролиты.</p>
+      </div>
+
+      <div class="day-time">6:30</div>
+      <div class="day-content">
+        <h4>Выход на улицу / к окну</h4>
+        <p>10–15 минут яркого утреннего света в глаза — запускает выработку серотонина и настраивает мелатониновый ритм (вечерний сон). Это важнее, чем любые добавки.</p>
+      </div>
+
+      <div class="day-time">7:00</div>
+      <div class="day-content">
+        <h4>Движение натощак</h4>
+        <p>30–45 минут: прогулка, зарядка, йога или силовая тренировка. Тренировка натощак усиливает чувствительность к инсулину и активирует аутофагию сильнее, чем после еды.</p>
+      </div>
+
+      <div class="day-time">8:30</div>
+      <div class="day-content">
+        <h4>Первый приём пищи — настоящий завтрак</h4>
+        <p>Яйца (2–3) с овощами, авокадо, кусочек лосося или сардины. Высокобелковый, жирный завтрак = стабильный сахар крови весь день, нет тяги к снекам. Избегайте каш, сладких йогуртов, мюсли — они вызывают скачок сахара и голод через 2 часа.</p>
+      </div>
+
+      <div class="day-time">13:00</div>
+      <div class="day-content">
+        <h4>Обед — основной приём пищи</h4>
+        <p>Большая порция: 150–200г белка (рыба, мясо, птица), много некрахмалистых овощей, ложка оливкового масла, бобовые или немного крупы. После обеда — 10–15 минут прогулки: снижает пик сахара на 30%.</p>
+      </div>
+
+      <div class="day-time">15:00</div>
+      <div class="day-content">
+        <h4>Дневной спад — короткий отдых</h4>
+        <p>Если возможно — 20 минут отдыха (не глубокий сон). Исследование икарийцев: регулярный дневной отдых снижает риск ССЗ на 37%. Лёгкая прогулка, медитация или просто закрытые глаза.</p>
+      </div>
+
+      <div class="day-time">18:00</div>
+      <div class="day-content">
+        <h4>Ужин — последний и лёгкий</h4>
+        <p>Не позднее 19:00–19:30. Лёгкий белок + овощи. Принцип: до ужина — углеводы (энергия), на ужин — белок и жиры (строительство и восстановление). Никакой еды после 20:00 — печень ночью должна работать на детокс, а не на переваривание.</p>
+      </div>
+
+      <div class="day-time">20:00</div>
+      <div class="day-content">
+        <h4>Вечерний ритуал — подготовка ко сну</h4>
+        <p>Синий свет из экранов = мозг думает, что день. Используйте фильтры синего света или очки. Тёплый душ. Чтение. Запишите 3 вещи, за которые благодарны — снижает тревогу и улучшает глубокий сон.</p>
+      </div>
+
+      <div class="day-time">22:00</div>
+      <div class="day-content">
+        <h4>Сон — главное восстановление</h4>
+        <p>Комната 18–20°C, полная темнота, тишина. 7–9 часов — не переговорная позиция. В 22:00–02:00 — пик выработки мелатонина и гормона роста. Спать в это время = антистарение.</p>
+      </div>
+    </div>
+
+    <hr class="gold fade-in">
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--cream); margin-bottom:32px;" class="fade-in">Обязательный минимум<br>для здоровья</h3>
+
+    <ul class="checklist fade-in">
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Сон 7–9 часов</strong> — в темноте, в прохладе, до полуночи. Это основа, без которой ничего не работает.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>10 000 шагов в день</strong> — или любая активность. Разбейте на части: 3 прогулки по 10–15 минут работают так же хорошо, как одна длинная.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>2–3 силовые тренировки в неделю</strong> — не обязательно зал. Отжимания, приседания, подтягивания дома. Мышцы — ваш главный метаболический актив.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Окно питания 8–10 часов</strong> — например, с 10:00 до 18:00 или с 8:00 до 16:00. Простейший инструмент для здоровья метаболизма.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>30+ разных растений в неделю</strong> — это формула здорового микробиома. Считайте: специи, зелень, ягоды, орехи — всё в зачёт.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Жирная рыба 2–3 раза в неделю</strong> — сардины, скумбрия, лосось, сельдь. Или рыбий жир 2–3г EPA+DHA в день.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Солнечный свет каждый день</strong> — 20–30 минут на открытые руки и лицо без SPF. Зимой — добавка D3 от 2000 МЕ/день с K2.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>1.5–2 л воды в день</strong> — не считая других напитков. Обезвоживание 2% снижает когнитивные способности, провоцирует усталость и запоры.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Стресс-менеджмент</strong> — хоть что-то: медитация, дыхание, природа, молитва, творчество. 10 минут в день снижают кортизол.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Живые отношения</strong> — встречи вживую важнее переписки. Крепкие социальные связи снижают риск смерти на 50%.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Исключить или резко сократить сахар и UPF</strong> — это даст 80% результата без остальных изменений. Читайте состав: сахар прячется под 61 названием.</span>
+      </li>
+      <li>
+        <div class="check-icon">✓</div>
+        <span><strong>Ежегодная сдача крови</strong> — D25-OH, ферритин, гомоцистеин, инсулин натощак, CRP, HbA1c, магний, B12. Не ждите симптомов.</span>
+      </li>
+    </ul>
+
+    <hr class="gold fade-in">
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--cream); margin-bottom:24px;" class="fade-in">Правда о переходе:<br>почему это трудно — и как преодолеть</h3>
+
+    <div class="two-col-text fade-in">
+      <div>
+        <div class="cause-item" style="border-top:1px solid rgba(201,168,76,0.15); padding-top:24px;">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">Физическая зависимость от сахара</h3>
+          <p class="body-text">Сахар активирует те же рецепторы мозга, что и кокаин — нейронаука это подтверждает. Первые 2 недели без него — настоящая ломка: раздражительность, туман в голове, тяга. <strong>Стратегия: убирайте сахар постепенно, в течение 2–4 недель. Замените сладкое на ягоды, горький шоколад, орехи. Не боритесь — замещайте.</strong></p>
+        </div>
+        <div class="cause-item">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">Социальное давление</h3>
+          <p class="body-text">«Ты что, на диете?», «Не будь таким занудой», «Один раз не считается». Семья и друзья часто воспринимают ваши изменения как осуждение их выбора. <strong>Не читайте лекций. Просто ешьте своё. Результаты через 3–6 месяцев скажут сами за себя. Лучший аргумент — ваш внешний вид и энергия.</strong></p>
+        </div>
+        <div class="cause-item">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">«Всё или ничего»</h3>
+          <p class="body-text">Съели пиццу на дне рождения → «Я всё сломал, можно начинать с понедельника». Это ловушка перфекционизма. <strong>Принцип 80/20: 80% времени — правильно, 20% — жизнь. Один «нечистый» приём не отменяет недели хорошей работы. Главное — тренд, а не каждый день.</strong></p>
+        </div>
+      </div>
+      <div>
+        <div class="cause-item" style="border-top:1px solid rgba(201,168,76,0.15); padding-top:24px;">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">Стоимость «здоровой еды»</h3>
+          <p class="body-text">Мнение, что правильное питание дорого — частично миф. <strong>Сардины в жестяной банке — дешевле колбасы. Яйца, субпродукты, замороженные овощи, бобовые, крупы — доступнее фастфуда. Дорого стоит: лосось, авокадо, органика. Но это не обязательный минимум.</strong></p>
+        </div>
+        <div class="cause-item">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">«Нет времени готовить»</h3>
+          <p class="body-text"><strong>Batch cooking: 1 раз в неделю, 2 часа</strong> — сварить яйца, запечь куриную грудь или рыбу, нарезать овощи, сварить бобовые. Этого хватает на 4–5 дней быстрых сборок. Авокадо + яйца + любые овощи = 5 минут. Сардины из банки + листовой салат = 2 минуты.</p>
+        </div>
+        <div class="cause-item">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--cream);">Информационный хаос</h3>
+          <p class="body-text">Один эксперт кричит «мясо убивает», другой — «без мяса нельзя», третий продаёт курс за 30 000₽. <strong>Ориентир: смотрите на источник финансирования исследования. Долгосрочные данные важнее краткосрочных. Консенсус — выше одного исследования. И доверяйте тому, что показывает ваш собственный анализ крови.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SUPPLEMENTS -->
+<section>
+  <div class="container">
+    <div class="section-label fade-in">Раздел VII</div>
+    <h2 class="section-title fade-in">Добавки:<br><em>что реально работает</em></h2>
+    <p class="section-intro fade-in">Индустрия добавок — 130 миллиардов долларов. Большинство — выброс денег. Вот что реально подкреплено доказательствами, и только если нет возможности получить из еды.</p>
+
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>Добавка</th>
+          <th>Для кого</th>
+          <th>Дозировка</th>
+          <th>Доказательная база</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Витамин D3 + K2</strong></td>
+          <td>Почти всем в России (особенно октябрь–апрель)</td>
+          <td>D3: 2000–5000 МЕ/день, K2 (MK-7): 100–200 мкг</td>
+          <td class="hl-green">Очень высокая. Сотни исследований. Дефицит = риск рака, ССЗ, иммунодефицит.</td>
+        </tr>
+        <tr>
+          <td><strong>Магний глицинат/малат</strong></td>
+          <td>Большинству из-за истощения почв и стресса</td>
+          <td>300–400 мг перед сном</td>
+          <td class="hl-green">Высокая. Улучшает сон, снижает АД, снижает тревогу, необходим для 300+ ферментов</td>
+        </tr>
+        <tr>
+          <td><strong>Омега-3 (рыбий жир)</strong></td>
+          <td>Тем, кто не ест жирную рыбу 3р/нед</td>
+          <td>2–4г EPA+DHA/день (проверяйте состав, не объём капсулы)</td>
+          <td class="hl-green">Высокая для противовоспалительного эффекта. Умеренная для ССЗ профилактики.</td>
+        </tr>
+        <tr>
+          <td><strong>Витамин B12 (метилкобаламин)</strong></td>
+          <td>Веганам, вегетарианцам, людям 50+ (снижается усвоение)</td>
+          <td>500–1000 мкг/день сублингвально</td>
+          <td class="hl-green">Очень высокая. Без B12 — нейропатия, деменция, анемия.</td>
+        </tr>
+        <tr>
+          <td><strong>Цинк бисглицинат</strong></td>
+          <td>При частых ОРВИ, медленном заживлении ран, мужчинам</td>
+          <td>15–25 мг с едой (не на пустой желудок)</td>
+          <td class="hl-green">Высокая. Иммунитет, тестостерон, заживление, вкус.</td>
+        </tr>
+        <tr>
+          <td><strong>Креатин моногидрат</strong></td>
+          <td>Людям 40+, спортсменам, веганам</td>
+          <td>3–5г/день в любое время</td>
+          <td class="hl-green">Очень высокая. Мышечная сила, мощность мозга, нейропротекция. Один из самых исследованных нутриентов.</td>
+        </tr>
+        <tr>
+          <td><strong>Берберин</strong></td>
+          <td>При инсулинорезистентности, высоком сахаре</td>
+          <td>500 мг 2–3р/день с едой</td>
+          <td class="hl-gold">Умеренная но многообещающая. По эффективности сравним с метформином в некоторых исследованиях.</td>
+        </tr>
+        <tr>
+          <td><strong>Коллаген</strong></td>
+          <td>Для суставов, кожи (особенно 40+)</td>
+          <td>10–15г гидролизата с витамином C</td>
+          <td class="hl-gold">Умеренная. Исследования суставных болей позитивны, кожи — перспективны.</td>
+        </tr>
+        <tr>
+          <td><strong>Мультивитамины «премиум»</strong></td>
+          <td>Большинству не нужны при разнообразном рационе</td>
+          <td>—</td>
+          <td class="hl-red">Низкая. Часто содержат оксидные формы с плохой усвояемостью. Лучше отдельные нутриенты по анализам.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MINDSET -->
+<section style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-label fade-in">Раздел VIII</div>
+    <h2 class="section-title fade-in">Психология и смысл:<br>без этого не работает <em>ничего</em></h2>
+
+    <div class="lead fade-in">
+      Физические протоколы — лишь 50% здоровья. Остальные 50% — это ваши мысли, отношения, смысл, эмоциональный климат и способность справляться со стрессом.
+    </div>
+
+    <div class="two-col-text fade-in">
+      <div>
+        <p class="body-text" style="margin-bottom:24px;">
+          <strong>Психосоматика — не мистика, а физиология.</strong> Хронический стресс поднимает кортизол. Высокий кортизол → инсулинорезистентность, воспаление, нарушение сна, подавление иммунитета, разрушение мышц. Неразрешённые обиды и тревога буквально живут в теле — мышечные зажимы, повышенное давление, синдром раздражённого кишечника.
+        </p>
+        <p class="body-text" style="margin-bottom:24px;">
+          <strong>Нейропластичность работает в любом возрасте.</strong> Мозг меняется до последнего дня жизни. Новые навыки, сложные задачи, изучение языков, музыка — буквально выращивают новые нейронные связи и защищают от деменции. Скука и рутина — ускорители старения мозга.
+        </p>
+        <p class="body-text">
+          <strong>Прощение продлевает жизнь.</strong> Исследования Стэнфорда показали: хроническая злоба и обида — мощный фактор воспаления. Не ради другого человека — ради своего здоровья. Прощение снижает давление, ЧСС и маркеры воспаления.
+        </p>
+      </div>
+      <div>
+        <p class="body-text" style="margin-bottom:24px;">
+          <strong>Визуализация будущего здоровья.</strong> Люди, которые видят себя здоровыми и активными в старости, с большей вероятностью принимают здоровые решения сегодня. Мозг не различает живой опыт и яркое воображение. Создайте образ себя в 80, 90, 100 лет.
+        </p>
+        <p class="body-text" style="margin-bottom:24px;">
+          <strong>Благодарность — не банальность, а нейрохимия.</strong> Ежедневная практика записи 3 благодарностей повышает уровень серотонина и дофамина, снижает кортизол, улучшает сон и иммунитет. Работает через 3–4 недели регулярной практики.
+        </p>
+        <p class="body-text">
+          <strong>Помощь другим — эгоистична в лучшем смысле.</strong> Волонтёрство снижает риск депрессии на 40%, смертности на 22%. Когда мы помогаем, вырабатываются окситоцин, серотонин, дофамин. Служение — не жертва, а один из мощнейших инструментов здоровья.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-box fade-in">
+      <div class="info-box-title">ИТОГОВАЯ ФОРМУЛА ЗДОРОВЬЯ</div>
+      <p class="body-text">
+        <strong>Питание (30%)</strong> + <strong>Движение (20%)</strong> + <strong>Сон (20%)</strong> + <strong>Стресс-менеджмент (15%)</strong> + <strong>Социальные связи (10%)</strong> + <strong>Смысл и цель (5%)</strong> = <em style="color:var(--gold)">Долгая здоровая жизнь</em>
+      </p>
+      <p class="body-text" style="margin-top:16px;">
+        Ни один из компонентов не работает в изоляции. Идеальный рацион при хроническом стрессе и одиночестве — не спасёт. Идеальные отношения при ужасном питании и гиподинамии — тоже. Система работает только как целое. Начните с самого слабого звена — для большинства это сон или сахар.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL -->
+<div class="final-section">
+  <h2>Теперь вы <em>знаете</em>.<br>Осталось только действовать.</h2>
+  <p>Знание без действия — красивый гроб. Начните с одного изменения сегодня. Не ждите понедельника. Не ждите идеального момента. Выпейте воду. Лягте в 22:00. Уберите одну банку газировки. Один шаг → следующий → жизнь меняется.</p>
+  <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+    <a href="#myths" class="btn-gold">Перечитать с начала</a>
+  </div>
+  <div class="facts-row" style="max-width:800px; margin:60px auto 0; background:rgba(201,168,76,0.06);">
+    <div class="fact-box" style="background:transparent;">
+      <span class="fact-number">70%</span>
+      <div class="fact-desc">биологического возраста определяет образ жизни, а не гены</div>
+    </div>
+    <div class="fact-box" style="background:transparent;">
+      <span class="fact-number">2 нед</span>
+      <div class="fact-desc">достаточно, чтобы почувствовать первые изменения</div>
+    </div>
+    <div class="fact-box" style="background:transparent;">
+      <span class="fact-number">3 мес</span>
+      <div class="fact-desc">коренным образом меняют анализы крови и самочувствие</div>
+    </div>
+    <div class="fact-box" style="background:transparent;">
+      <span class="fact-number">∞</span>
+      <div class="fact-desc">ваш потенциал, если начать прямо сейчас</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p style="font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:16px;">АБСОЛЮТ</p>
+  <p>Материал основан на peer-reviewed исследованиях, опубликованных в NEJM, Lancet, JAMA, Cell, Nature Medicine, Nutrition Reviews и других научных изданиях. Не является медицинской рекомендацией. Перед изменением рациона и образа жизни при наличии заболеваний — проконсультируйтесь с врачом.</p>
+  <p style="margin-top:12px; font-size:0.68rem; color:rgba(122,116,104,0.5);">Ключевые источники: Attia P. Outlive (2023) · Buettner D. Blue Zones (2023) · PURE Study (Lancet, 2017) · Panda S. Time-Restricted Eating (Cell, 2015) · Blackburn E. The Telomere Effect (2017) · Lustig R. Metabolical (2021) · Lipton B. Biology of Belief (2005) · Sonnenburg J. The Good Gut (2015)</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Intersection observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+
+  // Stagger myth cards
+  document.querySelectorAll('.myth-card').forEach((card, i) => {
+    card.style.transitionDelay = (i % 3 * 0.1) + 's';
+  });
+</script>
+</body>
+</html>
