@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALI MACET — Почему стоит и как это починить за 30 дней</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A08;
+  --surface: #111110;
+  --border: rgba(255,255,255,0.07);
+  --text: #E8E4DC;
+  --muted: rgba(232,228,220,0.45);
+  --green: #4ADE80;
+  --red: #FF3B30;
+  --orange: #FF9500;
+  --yellow: #FFD60A;
+  --blue: #0A84FF;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─── */
+#cur {
+  width:8px; height:8px;
+  background: var(--green);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+  mix-blend-mode: screen;
+  transition: transform .15s, width .15s, height .15s;
+}
+
+/* ─── TOPBAR ─── */
+nav {
+  position:sticky; top:0; z-index:100;
+  background: rgba(10,10,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 14px 48px;
+}
+.nav-logo { font-family:'Bebas Neue'; font-size:20px; letter-spacing:4px; color:var(--green); }
+.nav-links { display:flex; gap:32px; }
+.nav-links a {
+  font-size:11px; letter-spacing:2px; color:var(--muted);
+  text-decoration:none; text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--text); }
+.nav-status {
+  font-size:10px; letter-spacing:2px; color:var(--red);
+  display:flex; align-items:center; gap:8px;
+}
+.dot { width:6px; height:6px; background:var(--red); border-radius:50%; animation:blink 1.2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding: 80px 48px 60px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid-bg {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-glow {
+  position:absolute; top:-20%; left:60%;
+  width:600px; height:600px;
+  background: radial-gradient(circle, rgba(255,59,48,0.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-tag {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; letter-spacing:3px; color:var(--red);
+  text-transform:uppercase; margin-bottom:32px;
+}
+.hero-tag::before { content:''; width:24px; height:1px; background:var(--red); }
+
+h1.title {
+  font-family:'Bebas Neue';
+  font-size: clamp(72px, 12vw, 180px);
+  line-height:.87;
+  letter-spacing:-2px;
+  color:var(--text);
+  margin-bottom:40px;
+}
+h1.title .g { color:var(--green); }
+h1.title .outline { -webkit-text-stroke:1px var(--text); color:transparent; }
+
+.hero-desc {
+  max-width:560px;
+  font-size:14px; line-height:1.9;
+  color:var(--muted);
+  font-family:'Crimson Pro', serif; font-style:italic;
+  margin-bottom:48px;
+}
+
+.hero-numbers {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border: 1px solid var(--border);
+  max-width:800px;
+}
+.hn {
+  padding:24px 28px;
+  border-right:1px solid var(--border);
+}
+.hn:last-child { border-right:none; }
+.hn-val {
+  font-family:'Bebas Neue'; font-size:44px; line-height:1;
+  margin-bottom:4px;
+}
+.hn-val.g { color:var(--green); }
+.hn-val.r { color:var(--red); }
+.hn-val.y { color:var(--yellow); }
+.hn-val.o { color:var(--orange); }
+.hn-label { font-size:9px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+
+/* ─── SECTIONS ─── */
+section {
+  padding:100px 48px;
+  border-top:1px solid var(--border);
+  position:relative;
+}
+.sec-num {
+  position:absolute; top:40px; right:48px;
+  font-family:'Bebas Neue'; font-size:120px;
+  color:rgba(255,255,255,0.02); line-height:1;
+  pointer-events:none;
+}
+.sec-tag {
+  font-size:10px; letter-spacing:4px; color:var(--green);
+  text-transform:uppercase; margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.sec-tag::before { content:'//'; opacity:.4; }
+h2 {
+  font-family:'Bebas Neue';
+  font-size: clamp(40px, 5vw, 72px);
+  line-height:.93; letter-spacing:-1px;
+  margin-bottom:48px;
+}
+
+/* ─── HOTSPOTS TABLE ─── */
+.spots-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+.spots-table th {
+  text-align:left; padding:12px 16px;
+  font-size:9px; letter-spacing:3px; color:var(--muted);
+  text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+.spots-table td {
+  padding:18px 16px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  vertical-align:top;
+  line-height:1.5;
+}
+.spots-table tr:hover td { background:rgba(255,255,255,0.02); }
+.spot-name { font-weight:700; font-size:14px; color:var(--text); }
+.spot-road { font-size:11px; color:var(--green); margin-top:2px; }
+.pill {
+  display:inline-block; padding:3px 10px;
+  font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  border-radius:2px;
+}
+.pill-red { background:rgba(255,59,48,0.15); color:var(--red); border:1px solid rgba(255,59,48,0.25); }
+.pill-orange { background:rgba(255,149,0,0.15); color:var(--orange); border:1px solid rgba(255,149,0,0.25); }
+.pill-yellow { background:rgba(255,214,10,0.15); color:var(--yellow); border:1px solid rgba(255,214,10,0.25); }
+.pill-green { background:rgba(74,222,128,0.15); color:var(--green); border:1px solid rgba(74,222,128,0.25); }
+.time-chip {
+  display:inline-block; padding:2px 8px; margin:2px;
+  background:rgba(255,255,255,0.05); border:1px solid var(--border);
+  font-size:10px; color:var(--muted);
+}
+
+/* ─── PROBLEM SECTION ─── */
+.why-list { display:flex; flex-direction:column; gap:1px; }
+.why-item {
+  display:grid; grid-template-columns:280px 1fr;
+  gap:0;
+  border:1px solid var(--border);
+  margin-top:-1px;
+  transition:background .2s;
+}
+.why-item:hover { background:rgba(255,255,255,0.02); }
+.why-left {
+  padding:28px 32px;
+  border-right:1px solid var(--border);
+  display:flex; align-items:flex-start; gap:16px;
+}
+.why-num {
+  font-family:'Bebas Neue'; font-size:36px; color:rgba(255,255,255,.1);
+  flex-shrink:0; line-height:1;
+}
+.why-title { font-size:14px; font-weight:700; color:var(--text); line-height:1.3; }
+.why-right {
+  padding:28px 32px;
+  font-size:13px; line-height:1.75;
+  color:var(--muted);
+  font-family:'Crimson Pro', serif;
+}
+
+/* ─── THE CORE PROBLEM ─── */
+.core-block {
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:48px;
+  margin:48px 0;
+  display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+}
+.core-diagram {
+  display:flex; flex-direction:column; align-items:center; gap:0;
+}
+.diagram-label {
+  font-size:10px; letter-spacing:3px; color:var(--muted);
+  text-transform:uppercase; margin-bottom:20px;
+}
+.diagram-wrap {
+  position:relative; width:220px; height:220px;
+  display:flex; align-items:center; justify-content:center;
+}
+.road-v-t { position:absolute; top:0; left:80px; width:60px; height:80px; background:#1E1E1C; }
+.road-v-b { position:absolute; bottom:0; left:80px; width:60px; height:80px; background:#1E1E1C; }
+.road-h-l { position:absolute; left:0; top:80px; width:80px; height:60px; background:#1E1E1C; }
+.road-h-r { position:absolute; right:0; top:80px; width:80px; height:60px; background:#1E1E1C; }
+.cross {
+  position:absolute; left:80px; top:80px; width:60px; height:60px;
+  background: var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:white; text-align:center; line-height:1.2;
+  letter-spacing:1px;
+  z-index:2;
+}
+.moto {
+  position:absolute; font-size:16px;
+  animation: moto-pulse 0.9s infinite alternate;
+}
+.moto-n { top:18px; left:98px; }
+.moto-s { bottom:18px; left:98px; transform:rotate(180deg); animation-delay:.2s; }
+.moto-w { left:14px; top:98px; animation-delay:.4s; }
+.moto-e { right:14px; top:98px; transform:rotate(180deg); animation-delay:.6s; }
+@keyframes moto-pulse { from{opacity:.3; transform:scale(1)} to{opacity:1; transform:scale(1.2)} }
+.moto-s { animation: moto-pulse-r 0.9s .2s infinite alternate; }
+@keyframes moto-pulse-r {
+  from{opacity:.3; transform:rotate(180deg) scale(1)}
+  to{opacity:1; transform:rotate(180deg) scale(1.2)}
+}
+.moto-e { animation: moto-pulse-e 0.9s .6s infinite alternate; }
+@keyframes moto-pulse-e {
+  from{opacity:.3; transform:rotate(180deg) scale(1)}
+  to{opacity:1; transform:rotate(180deg) scale(1.2)}
+}
+
+.core-text h3 {
+  font-family:'Bebas Neue'; font-size:48px; line-height:.95;
+  color:var(--red); margin-bottom:24px;
+}
+.core-text p {
+  font-size:14px; line-height:1.8; color:var(--muted);
+  font-family:'Crimson Pro', serif;
+  margin-bottom:16px;
+}
+.core-text strong { color:var(--text); }
+
+/* ─── GREEN WAVE SECTION ─── */
+.gw-section { background: var(--surface); }
+
+.gw-hero {
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;
+  margin-bottom:64px;
+}
+.gw-explain h3 {
+  font-family:'Bebas Neue'; font-size:56px; line-height:.93;
+  color:var(--green); margin-bottom:24px;
+}
+.gw-explain p {
+  font-size:14px; line-height:1.85; color:var(--muted);
+  font-family:'Crimson Pro'; margin-bottom:16px;
+}
+.gw-explain p strong { color:var(--text); }
+
+.gw-visual {
+  border:1px solid var(--border);
+  padding:32px;
+}
+.gw-visual-title {
+  font-size:10px; letter-spacing:3px; color:var(--muted);
+  text-transform:uppercase; margin-bottom:24px;
+}
+.corridor {
+  display:flex; flex-direction:column; gap:12px;
+}
+.corr-row {
+  display:flex; align-items:center; gap:0;
+}
+.corr-road {
+  flex:1; height:28px; background:#1A1A18;
+  display:flex; align-items:center; padding:0 12px;
+  font-size:10px; color:rgba(255,255,255,.2);
+  letter-spacing:1px; gap:8px;
+}
+.corr-light {
+  width:28px; height:28px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; position:relative;
+}
+.corr-light.green-on { background:rgba(74,222,128,0.2); border:1px solid var(--green); }
+.corr-light.red-on { background:rgba(255,59,48,0.1); border:1px solid rgba(255,59,48,0.3); }
+.corr-name {
+  width:160px; font-size:10px; color:var(--muted); letter-spacing:1px; text-transform:uppercase;
+  padding-left:12px;
+}
+.wave-arrow {
+  font-size:9px; color:var(--green); letter-spacing:2px;
+  animation: wave-slide 2s infinite;
+}
+@keyframes wave-slide { 0%{opacity:.2} 50%{opacity:1} 100%{opacity:.2} }
+
+.gw-stats {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--border); margin-top:16px;
+}
+.gw-stat {
+  background:var(--bg); padding:24px;
+  text-align:center;
+}
+.gw-stat-val {
+  font-family:'Bebas Neue'; font-size:48px; color:var(--green); line-height:1;
+}
+.gw-stat-label { font-size:10px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+
+/* ─── SOLUTION PER CORRIDOR ─── */
+.corridors { display:flex; flex-direction:column; gap:2px; margin-top:48px; }
+.corridor-card {
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.corridor-card:hover { border-color:rgba(74,222,128,0.3); }
+.corr-header {
+  display:grid; grid-template-columns:320px 1fr auto;
+  gap:0; cursor:pointer;
+  padding:0;
+}
+.corr-h-name {
+  padding:24px 28px;
+  border-right:1px solid var(--border);
+}
+.corr-road-name {
+  font-family:'Bebas Neue'; font-size:22px; color:var(--green); letter-spacing:1px;
+}
+.corr-road-sub { font-size:10px; color:var(--muted); letter-spacing:2px; margin-top:4px; }
+.corr-h-meta {
+  padding:24px 28px;
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+}
+.corr-h-status {
+  padding:24px 28px; border-left:1px solid var(--border);
+  display:flex; align-items:center;
+}
+.corr-body {
+  padding:32px 28px 28px;
+  background:rgba(255,255,255,0.015);
+  border-top:1px solid var(--border);
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px;
+}
+.corr-col-title {
+  font-size:9px; letter-spacing:3px; color:var(--muted);
+  text-transform:uppercase; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:8px;
+}
+.corr-col-body {
+  font-size:12px; line-height:1.7; color:var(--muted);
+  font-family:'Crimson Pro', serif;
+}
+.corr-col-body strong { color:var(--text); font-family:'IBM Plex Mono'; font-size:11px; }
+.corr-lights {
+  display:flex; flex-direction:column; gap:8px; margin-top:8px;
+}
+.cl-row {
+  display:flex; align-items:center; gap:10px;
+  font-size:11px; color:var(--muted);
+}
+.cl-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.cl-dot.g { background:var(--green); }
+.cl-dot.r { background:var(--red); }
+.cl-dot.y { background:var(--yellow); }
+
+/* ─── NOW / BEFORE / AFTER ─── */
+.compare-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  background:var(--border); margin-top:48px;
+}
+.comp-col { background:var(--bg); padding:40px; }
+.comp-col.after { background: rgba(74,222,128,0.03); }
+.comp-col-title {
+  font-family:'Bebas Neue'; font-size:28px; margin-bottom:24px;
+}
+.comp-col-title.bad { color:var(--red); }
+.comp-col-title.good { color:var(--green); }
+.comp-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.comp-list li {
+  font-size:13px; line-height:1.6; color:var(--muted);
+  font-family:'Crimson Pro'; display:flex; gap:10px;
+  align-items:flex-start; padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.comp-list li .ic { flex-shrink:0; margin-top:2px; font-style:normal; }
+
+/* ─── PLAN ─── */
+.plan-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); margin-top:48px; }
+.plan-col { background:var(--bg); padding:36px 32px; }
+.plan-phase {
+  font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px;
+}
+.plan-phase.p1 { color:var(--green); }
+.plan-phase.p2 { color:var(--yellow); }
+.plan-phase.p3 { color:var(--blue); }
+.plan-title { font-family:'Bebas Neue'; font-size:32px; margin-bottom:16px; line-height:1; }
+.plan-timeline {
+  font-family:'Bebas Neue'; font-size:20px; margin-bottom:20px;
+  padding:8px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.plan-timeline.p1 { color:var(--green); }
+.plan-timeline.p2 { color:var(--yellow); }
+.plan-timeline.p3 { color:var(--blue); }
+.plan-items { display:flex; flex-direction:column; gap:8px; }
+.plan-item {
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:12px; color:var(--muted); font-family:'Crimson Pro'; line-height:1.5;
+}
+.plan-item::before { content:'→'; color:var(--muted); flex-shrink:0; margin-top:1px; }
+
+/* ─── COST ─── */
+.cost-table { width:100%; border-collapse:collapse; margin-top:48px; }
+.cost-table th {
+  text-align:left; padding:12px 20px;
+  font-size:9px; letter-spacing:3px; color:var(--muted); text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+.cost-table td { padding:16px 20px; border-bottom:1px solid rgba(255,255,255,.04); font-size:13px; }
+.cost-table tr:last-child td { font-weight:700; color:var(--text); background:rgba(74,222,128,0.05); }
+.cost-name { color:var(--text); }
+.cost-val { font-family:'Bebas Neue'; font-size:20px; color:var(--green); }
+.cost-note { font-size:11px; color:var(--muted); font-family:'Crimson Pro'; }
+
+/* ─── FINALE ─── */
+.finale {
+  background:var(--green);
+  color:var(--bg);
+  min-height:50vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  padding:80px 48px;
+  position:relative; overflow:hidden;
+}
+.finale::before {
+  content:'GREEN WAVE';
+  font-family:'Bebas Neue';
+  font-size:22vw; color:rgba(0,0,0,.08);
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap; pointer-events:none;
+}
+.finale-inner { position:relative; z-index:2; }
+.finale h2 {
+  font-family:'Bebas Neue';
+  font-size:clamp(48px,8vw,110px);
+  line-height:.9; color:var(--bg);
+  margin-bottom:24px;
+}
+.finale p {
+  font-size:18px; line-height:1.7;
+  color:rgba(10,10,8,0.7);
+  max-width:600px; margin:0 auto 32px;
+  font-family:'Crimson Pro'; font-style:italic;
+}
+.finale-cta {
+  display:inline-block;
+  background:var(--bg); color:var(--green);
+  font-family:'Bebas Neue'; font-size:18px; letter-spacing:3px;
+  padding:16px 48px;
+}
+
+footer {
+  background:var(--bg); padding:32px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-top:1px solid var(--border);
+}
+.footer-logo { font-family:'Bebas Neue'; font-size:16px; letter-spacing:4px; color:var(--green); }
+.footer-note { font-size:10px; color:var(--muted); letter-spacing:1px; }
+
+/* ─── UTILS ─── */
+.fade { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+.fade.in { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .hero, section, footer { padding-left:20px; padding-right:20px; }
+  h1.title { font-size:18vw; }
+  .hero-numbers { grid-template-columns:repeat(2,1fr); }
+  .gw-hero, .core-block, .corr-body { grid-template-columns:1fr; }
+  .compare-grid, .plan-grid { grid-template-columns:1fr; }
+  .corr-header { grid-template-columns:1fr; }
+  .why-item { grid-template-columns:1fr; }
+  .spots-table { font-size:11px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+
+<nav>
+  <div class="nav-logo">BALI MACET 🛵</div>
+  <div class="nav-links">
+    <a href="#hotspots">Горячие точки</a>
+    <a href="#problem">Проблема</a>
+    <a href="#solution">Решение</a>
+    <a href="#corridors">Коридоры</a>
+    <a href="#plan">План</a>
+  </div>
+  <div class="nav-status"><div class="dot"></div>ТРАФИК СТОИТ ПРЯМО СЕЙЧАС</div>
+</nav>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">Анализ транспортного кризиса 2026</div>
+
+  <h1 class="title">
+    BALI<br>
+    <span class="g">СТОИТ.</span><br>
+    <span class="outline">ПРИЧИНА</span><br>
+    ЯСНА.
+  </h1>
+
+  <p class="hero-desc">
+    На острове <strong>5 миллионов машин</strong> и мотоциклов, 4.4 миллиона жителей,
+    3.89 миллиона туристов только за первые 7 месяцев 2024.
+    На главных коридорах <strong>нет ни одного нормального светофора</strong>.
+    Решение — не LRT за миллиарды. Решение называется <strong>GREEN WAVE</strong>.
+    Стоит 0.1% от бюджета LRT. Работает с первого дня.
+  </p>
+
+  <div class="hero-numbers fade">
+    <div class="hn"><div class="hn-val r">1.04M</div><div class="hn-label">Транспорта в Баданге</div></div>
+    <div class="hn"><div class="hn-val y">568K</div><div class="hn-label">Жителей там же</div></div>
+    <div class="hn"><div class="hn-val o">184</div><div class="hn-label">Машин на 100 человек</div></div>
+    <div class="hn"><div class="hn-val g">≈0</div><div class="hn-label">Светофоров на главных коридорах</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ ГОРЯЧИЕ ТОЧКИ ══════════════════════════ -->
+<section id="hotspots">
+  <div class="sec-num">01</div>
+  <div class="sec-tag">Реальная картина</div>
+  <h2>КАЖДЫЙ ДЕНЬ.<br>КАЖДЫЙ ПЕРЕКРЁСТОК.</h2>
+
+  <table class="spots-table fade">
+    <thead>
+      <tr>
+        <th style="width:200px">Точка</th>
+        <th>Перекрёстки / Дороги</th>
+        <th>Пик</th>
+        <th>Уровень</th>
+        <th>Суть проблемы</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="spot-name">Canggu Shortcut</div>
+          <div class="spot-road">Jl. Raya Canggu ↔ Jl. Raya Kerobokan</div>
+        </td>
+        <td>
+          Открыт в 2024 как решение — стал новым узким местом.
+          Узкая дорога без приоритета движения.
+          Клинч на обоих концах одновременно.
+        </td>
+        <td>
+          <span class="time-chip">07:30–09:30</span>
+          <span class="time-chip">16:30–21:00</span>
+        </td>
+        <td><span class="pill pill-red">☠ КРИТИЧНО</span></td>
+        <td>Нет светофоров на въезде/выезде. Все одновременно в обе стороны.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Kerobokan Corridor</div>
+          <div class="spot-road">Jl. Raya Kerobokan + Jl. Petitenget</div>
+        </td>
+        <td>
+          12+ пересечений между Семиньяком и Берава.
+          Декабрь 2025 — введена односторонность, но без синхронизации.
+          Бизнесы потеряли 70% трафика. Пробки перераспределились, не исчезли.
+        </td>
+        <td>
+          <span class="time-chip">Весь день</span>
+          <span class="time-chip">Дождь = коллапс</span>
+        </td>
+        <td><span class="pill pill-red">☠ КРИТИЧНО</span></td>
+        <td>12 перекрёстков — ни на одном нет синхронизированного сигнала.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Sunset Road</div>
+          <div class="spot-road">Simpang Siur Junction</div>
+        </td>
+        <td>
+          Главная развязка где сходятся Кута, Семиньяк и Денпасар.
+          Одна из немногих точек где ЕСТЬ светофор — но он не настроен на поток.
+          Работает по фиксированному циклу без адаптации.
+        </td>
+        <td>
+          <span class="time-chip">08:00–10:00</span>
+          <span class="time-chip">17:00–20:00</span>
+        </td>
+        <td><span class="pill pill-red">☠ КРИТИЧНО</span></td>
+        <td>Светофор есть — но работает вхолостую. Нет Green Wave вниз по Sunset.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Ngurah Rai Bypass</div>
+          <div class="spot-road">Аэропорт ↔ Nusa Dua ↔ Jimbaran</div>
+        </td>
+        <td>
+          29 дек. 2023: туристы бросили машины и пошли пешком с чемоданами — видео облетело мир.
+          Единственный прямой путь на юг острова.
+          Светофоры есть, но не координированы между собой.
+        </td>
+        <td>
+          <span class="time-chip">Праздники</span>
+          <span class="time-chip">Ливни</span>
+          <span class="time-chip">17:00–21:00</span>
+        </td>
+        <td><span class="pill pill-orange">⚠ ТЯЖЕЛО</span></td>
+        <td>Несинхронизированные светофоры создают стоп-волну вместо зелёной.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Ubud Center</div>
+          <div class="spot-road">Jl. Raya Ubud + Jl. Monkey Forest</div>
+        </td>
+        <td>
+          «Хуже, чем Чангу» — Reddit, апрель 2025.
+          Горный городок без объездных путей.
+          Вся масса туристов через один Т-перекрёсток в центре.
+        </td>
+        <td>
+          <span class="time-chip">11:00–15:00</span>
+          <span class="time-chip">Апр–Окт</span>
+        </td>
+        <td><span class="pill pill-orange">⚠ ТЯЖЕЛО</span></td>
+        <td>Один ключевой перекрёсток без светофора блокирует весь город.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Siligita / Nirmala / Pecatu</div>
+          <div class="spot-road">South Kuta — Uluwatu corridor</div>
+        </td>
+        <td>
+          Глава Dishub лично назвал эти три перекрёстка «высокоприоритетными».
+          Единственный въезд на полуостров Буkit.
+          Закат = все едут в Улувату одновременно. Одна нить = полный стоп.
+        </td>
+        <td>
+          <span class="time-chip">16:30–19:00</span>
+          <span class="time-chip">Закат</span>
+        </td>
+        <td><span class="pill pill-yellow">! СЕРЬЁЗНО</span></td>
+        <td>Узкое горло на въезде в Буkit — без регуляции поток просто встаёт.</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="spot-name">Denpasar–Tanah Lot Hwy</div>
+          <div class="spot-road">Kerobokan intersection → Canggu</div>
+        </td>
+        <td>
+          Официально признан «коренной причиной» пробок в Чангу.
+          Шоссе обрывается в деревенские дороги без плавного перехода.
+          Власти сделали feasibility study на 2025 — дорогу ещё не начали строить.
+        </td>
+        <td>
+          <span class="time-chip">07:00–09:30</span>
+          <span class="time-chip">16:00–20:00</span>
+        </td>
+        <td><span class="pill pill-yellow">! СЕРЬЁЗНО</span></td>
+        <td>Переход магистраль→деревня без светофорного регулирования = клинч.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════ ПРОБЛЕМА ══════════════════════════ -->
+<section id="problem">
+  <div class="sec-num">02</div>
+  <div class="sec-tag">Корневая причина</div>
+  <h2>ПРОБКА — ЭТО<br>НЕ МОТОЦИКЛЫ.<br>ЭТО ПЕРЕКРЁСТКИ.</h2>
+
+  <div class="why-list fade">
+    <div class="why-item">
+      <div class="why-left">
+        <div class="why-num">01</div>
+        <div class="why-title">На главных коридорах нет светофоров вообще</div>
+      </div>
+      <div class="why-right">
+        Jalan Raya Kerobokan, Canggu Shortcut, Berawa, Pererenan — это самые загруженные дороги острова.
+        На них нет <em>ни одного</em> синхронизированного сигнала. Водители определяют приоритет
+        «методом напора» — кто первый влез, тот и едет. При тысяче мотоциклов в час это гарантированный клинч.
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-left">
+        <div class="why-num">02</div>
+        <div class="why-title">Где светофоры есть — они не синхронизированы</div>
+      </div>
+      <div class="why-right">
+        Simpang Siur на Sunset Road, несколько точек на Ngurah Rai Bypass — светофоры есть.
+        Но они работают по <em>фиксированному циклу</em> без учёта соседних перекрёстков.
+        Машина проехала зелёный — упёрлась в красный через 200 метров.
+        Вместо зелёного коридора получается стоп-старт волна. Каждая остановка = хвост.
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-left">
+        <div class="why-num">03</div>
+        <div class="why-title">Декабрь 2025: односторонность без синхронизации</div>
+      </div>
+      <div class="why-right">
+        Власти сделали правильный первый шаг — ввели одностороннее движение в Кероболане.
+        Но это не сработало как надо: пробки переместились на соседние улицы, бизнесы потеряли 70% клиентов.
+        Почему? Потому что <em>движение упорядочили, но не создали коридор</em>.
+        Без синхронизации светофоров на одностороннем потоке — всё равно стоп-старт.
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-left">
+        <div class="why-num">04</div>
+        <div class="why-title">Нет данных, нет адаптации</div>
+      </div>
+      <div class="why-right">
+        Текущее управление трафиком — реактивное. Регулировщик встаёт когда уже стоп.
+        Утренний пик в 07:30 предсказуем с точностью до минуты — каждый день одно и то же.
+        Вечерний пик в 16:30 — одно и то же. Нет ни одной системы, которая бы <em>заранее</em>
+        перестраивала фазы под известный паттерн спроса.
+      </div>
+    </div>
+  </div>
+
+  <div class="core-block fade">
+    <div class="core-diagram">
+      <div class="diagram-label">Типичный перекрёсток Бали — без светофора</div>
+      <div class="diagram-wrap">
+        <div class="road-v-t"></div>
+        <div class="road-v-b"></div>
+        <div class="road-h-l"></div>
+        <div class="road-h-r"></div>
+        <div class="cross">КЛИНЧ<br>↑↓←→</div>
+        <div class="moto moto-n">🛵</div>
+        <div class="moto moto-s">🛵</div>
+        <div class="moto moto-w">🛵</div>
+        <div class="moto moto-e">🛵</div>
+      </div>
+      <div style="margin-top:16px; font-size:11px; color:var(--red); letter-spacing:2px;">= ВСЕ ЖДУТ = НИКТО НЕ ЕДЕТ</div>
+    </div>
+    <div class="core-text">
+      <h3>ПОЧЕМУ<br>КЛИНЧ?</h3>
+      <p>
+        На перекрёсток одновременно въезжают потоки с 4 сторон.
+        <strong>Никто не имеет приоритета.</strong>
+        Каждый ждёт пока другой уступит. Никто не уступает.
+        Мотоцикли заполняют перекрёсток со всех сторон — образуется <strong>блокировка</strong>.
+      </p>
+      <p>
+        Когда такой клинч повторяется на <strong>12 перекрёстках подряд</strong> по Kerobokan corridor —
+        каждые 200–300 метров — получается цепная реакция.
+        Хвост от одного клинча достигает следующего. Весь коридор — одна большая пробка.
+      </p>
+      <p>
+        Решение не в том чтобы <em>убрать мотоциклы</em>.
+        Решение в том чтобы <em>организовать их поток</em> —
+        дать им ехать не мешая друг другу.
+        <strong>Это и есть Green Wave.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ РЕШЕНИЕ — GREEN WAVE ══════════════════════════ -->
+<section id="solution" class="gw-section">
+  <div class="sec-num">03</div>
+  <div class="sec-tag">Решение</div>
+  <h2>GREEN WAVE —<br>ЗЕЛЁНЫЙ КОРИДОР<br>ИЗ СВЕТОФОРОВ</h2>
+
+  <div class="gw-hero fade">
+    <div class="gw-explain">
+      <h3>КАК ЭТО<br>РАБОТАЕТ</h3>
+      <p>
+        <strong>Green Wave</strong> — это когда серия светофоров вдоль одной дороги
+        переключается в зелёный <em>последовательно</em>, с расчётным сдвигом по времени.
+        Если ты едешь со скоростью 30 км/ч — каждый следующий светофор
+        становится зелёным ровно когда ты к нему подъезжаешь.
+        Ты <strong>«серфишь» зелёную волну</strong> без единой остановки.
+      </p>
+      <p>
+        Для Бали с его мотоциклами это идеальное решение.
+        Мотоциклы — компактные, манёвренные, одинаковые по скорости.
+        Синхронизировать под них проще чем под машины.
+        <strong>30 км/ч — рабочая скорость мотопотока на острове.</strong>
+      </p>
+      <p>
+        Одиночный светофор на Бали уже есть — просто они не разговаривают между собой.
+        Задача: <strong>соединить существующие и добавить недостающие</strong>,
+        настроить единый цикл на каждом коридоре. Это не стройка — это программирование.
+      </p>
+    </div>
+
+    <div class="gw-visual">
+      <div class="gw-visual-title">// Зелёная волна — 30 км/ч — Kerobokan Corridor</div>
+      <div class="corridor">
+        <div class="corr-row">
+          <div class="corr-light green-on">🟢</div>
+          <div class="corr-road">
+            <span class="wave-arrow">→→→→→→→→→→→→→→→→→→→→→</span>
+            <span style="font-size:12px">🛵🛵🛵🛵🛵</span>
+          </div>
+          <div class="corr-name">Simpang Tangkuban</div>
+        </div>
+        <div class="corr-row" style="opacity:.6">
+          <div class="corr-light red-on" style="opacity:.5">🔴</div>
+          <div class="corr-road"></div>
+          <div class="corr-name" style="color:rgba(255,255,255,.2)">+7 сек...</div>
+        </div>
+        <div class="corr-row" style="opacity:.4">
+          <div class="corr-light red-on" style="opacity:.3">🔴</div>
+          <div class="corr-road"></div>
+          <div class="corr-name" style="color:rgba(255,255,255,.15)">+14 сек...</div>
+        </div>
+        <div class="corr-row" style="opacity:.25">
+          <div class="corr-light red-on" style="opacity:.2">🔴</div>
+          <div class="corr-road"></div>
+          <div class="corr-name" style="color:rgba(255,255,255,.1)">+21 сек...</div>
+        </div>
+      </div>
+      <div style="margin-top:12px; font-size:10px; color:var(--muted); letter-spacing:1px; font-style:italic;">
+        // Пока первый поток едет — волна зелёного движется впереди него.<br>
+        // Следующий перекрёсток зеленеет ровно когда мотоцикли к нему подъезжают.
+      </div>
+
+      <div class="gw-stats">
+        <div class="gw-stat"><div class="gw-stat-val">54%</div><div class="gw-stat-label">Снижение времени в пути (Kansas City)</div></div>
+        <div class="gw-stat"><div class="gw-stat-val">25%</div><div class="gw-stat-label">Меньше задержек (Pittsburgh)</div></div>
+        <div class="gw-stat"><div class="gw-stat-val">10%</div><div class="gw-stat-label">Снижение выбросов CO</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-grid fade">
+    <div class="comp-col">
+      <div class="comp-col-title bad">БАЛИ СЕЙЧАС</div>
+      <ul class="comp-list">
+        <li><span class="ic">✗</span>Перекрёстки без приоритета — все одновременно</li>
+        <li><span class="ic">✗</span>Где светофоры есть — фиксированный цикл без координации</li>
+        <li><span class="ic">✗</span>Каждые 200м новая остановка = нарастающий хвост</li>
+        <li><span class="ic">✗</span>Вечерний пик 16:30 предсказуем, но никто не готовится заранее</li>
+        <li><span class="ic">✗</span>Декабрь 2025: односторонность без синхронизации — пробки переехали, не исчезли</li>
+        <li><span class="ic">✗</span>Реакция только после коллапса — регулировщики встают когда уже стоп</li>
+      </ul>
+    </div>
+    <div class="comp-col after">
+      <div class="comp-col-title good">С GREEN WAVE</div>
+      <ul class="comp-list">
+        <li><span class="ic" style="color:var(--green)">✓</span>Светофоры на каждом перекрёстке коридора — очерёдность гарантирована</li>
+        <li><span class="ic" style="color:var(--green)">✓</span>Единый цикл по коридору: поток едет 30 км/ч без остановок</li>
+        <li><span class="ic" style="color:var(--green)">✓</span>Нет клинча — нет хвоста — нет цепной реакции</li>
+        <li><span class="ic" style="color:var(--green)">✓</span>Утренний/вечерний цикл — разные программы под разный объём потока</li>
+        <li><span class="ic" style="color:var(--green)">✓</span>Результат виден на следующий день после включения</li>
+        <li><span class="ic" style="color:var(--green)">✓</span>Стоимость: светофор + контроллер + кабель ≈ $3,000–8,000 за точку</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ ПЛАН ПО КОРИДОРАМ ══════════════════════════ -->
+<section id="corridors">
+  <div class="sec-num">04</div>
+  <div class="sec-tag">Конкретный план</div>
+  <h2>ЧТО СТАВИТЬ<br>И ГДЕ</h2>
+
+  <div class="corridors fade">
+
+    <!-- CANGGU CORRIDOR -->
+    <div class="corridor-card">
+      <div class="corr-header">
+        <div class="corr-h-name">
+          <div class="corr-road-name">ЧАНГУ КОРИДОР</div>
+          <div class="corr-road-sub">Jl. Raya Canggu + Shortcut + Berawa</div>
+        </div>
+        <div class="corr-h-meta">
+          <span class="pill pill-red">☠ Приоритет 1</span>
+          <span class="pill pill-yellow">7 перекрёстков</span>
+          <span class="time-chip">16:30–21:00 УБИЙСТВО</span>
+        </div>
+        <div class="corr-h-status"><span class="pill pill-red">0 светофоров сейчас</span></div>
+      </div>
+      <div class="corr-body">
+        <div>
+          <div class="corr-col-title">// ПРОБЛЕМА</div>
+          <div class="corr-col-body">
+            Canggu Shortcut — новая дорога 2024 года — уже стала хуже оригинала.
+            Оба конца (въезд с Jl. Raya Canggu и выезд на Jl. Raya Kerobokan)
+            без приоритета. Плюс 5 промежуточных пересечений — все без сигналов.
+            <br><br>
+            В часы пик Jalan Raya Canggu встаёт <strong>полностью</strong> от Batu Bolong до Berawa.
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// РЕШЕНИЕ — 7 ТОЧЕК</div>
+          <div class="corr-lights">
+            <div class="cl-row"><div class="cl-dot g"></div><span>Jl. Raya Canggu / Batu Bolong — <strong>главный въезд</strong></span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Shortcut North — въезд в шорткат, 60 сек цикл</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Shortcut Mid — средний перекрёсток</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Shortcut South — выезд на Kerobokan</span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>Berawa junction — приоритет на главную</span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>Pererenan crossroads — регулируемый приоритет</span></div>
+            <div class="cl-row"><div class="cl-dot r"></div><span>Tanah Lot highway junction — переход с шоссе</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// ПАРАМЕТРЫ ВОЛНЫ</div>
+          <div class="corr-col-body">
+            <strong>Скорость волны:</strong> 30 км/ч<br>
+            <strong>Цикл:</strong> 60 сек (утро) / 90 сек (вечер)<br>
+            <strong>Оффсет между светофорами:</strong> ~24 сек при 200м расстоянии<br>
+            <strong>Результат:</strong> Проезд коридора без остановки 7–8 мин<br>
+            <br>
+            Сейчас: 35–60 мин в час пик.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEROBOKAN -->
+    <div class="corridor-card">
+      <div class="corr-header">
+        <div class="corr-h-name">
+          <div class="corr-road-name">КЕРОБОЛАН КОРИДОР</div>
+          <div class="corr-road-sub">Jl. Raya Kerobokan + Jl. Petitenget + Jl. Tangkuban Perahu</div>
+        </div>
+        <div class="corr-h-meta">
+          <span class="pill pill-red">☠ Приоритет 1</span>
+          <span class="pill pill-yellow">12 перекрёстков</span>
+          <span class="time-chip">Весь день</span>
+        </div>
+        <div class="corr-h-status"><span class="pill pill-orange">Одностороннее без синхронизации</span></div>
+      </div>
+      <div class="corr-body">
+        <div>
+          <div class="corr-col-title">// ПРОБЛЕМА</div>
+          <div class="corr-col-body">
+            В декабре 2025 введена односторонность — это правильно.
+            Но <strong>без синхронизации</strong> это просто переместило пробки.
+            Один бизнес потерял 70 млн IDR выручки за 2 месяца.
+            Jl. Petitenget и Jl. Tangkuban — 12 пересечений, ни одного синхронизированного сигнала.
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// РЕШЕНИЕ</div>
+          <div class="corr-lights">
+            <div class="cl-row"><div class="cl-dot g"></div><span>Simpang Petitenget (4, 10, 11, 12) — <strong>якорный узел</strong></span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Simpang Semer / "самолёт" — уже есть светофор → оптимизировать</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Batu Belig Rd junction — добавить сигнал</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Simpang Oberoi — добавить</span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>Jl. Merta Agung x3 — добавить на одностороннем</span></div>
+            <div class="cl-row"><div class="cl-dot r"></div><span>Kerobokan Prison Junction — добавить</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// ПАРАМЕТРЫ ВОЛНЫ</div>
+          <div class="corr-col-body">
+            <strong>Скорость волны:</strong> 25 км/ч (узкие улицы)<br>
+            <strong>Цикл:</strong> 75 сек стандарт<br>
+            <strong>Оффсет:</strong> ~28 сек при 200м<br>
+            <strong>Результат:</strong> 12 перекрёстков без клинча<br>
+            <br>
+            Текущая односторонность уже создала условие — просто добавить волну сверху.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUNSET ROAD -->
+    <div class="corridor-card">
+      <div class="corr-header">
+        <div class="corr-h-name">
+          <div class="corr-road-name">SUNSET ROAD</div>
+          <div class="corr-road-sub">Simpang Siur → Kuta → Airport link</div>
+        </div>
+        <div class="corr-h-meta">
+          <span class="pill pill-red">☠ Приоритет 1</span>
+          <span class="pill pill-yellow">5 перекрёстков</span>
+          <span class="time-chip">08:00–10:00</span>
+          <span class="time-chip">17:00–20:00</span>
+        </div>
+        <div class="corr-h-status"><span class="pill pill-yellow">Светофор есть — не настроен</span></div>
+      </div>
+      <div class="corr-body">
+        <div>
+          <div class="corr-col-title">// ПРОБЛЕМА</div>
+          <div class="corr-col-body">
+            Simpang Siur — самый большой перекрёсток юга. Светофор <strong>есть</strong>.
+            Но он работает по фиксированному 90-секундному циклу без адаптации к потоку.
+            В час пик длина зелёного одинакова что утром что ночью.
+            <br><br>
+            Downstream на Sunset Road — ещё 4 перекрёстка без координации.
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// РЕШЕНИЕ</div>
+          <div class="corr-lights">
+            <div class="cl-row"><div class="cl-dot y"></div><span>Simpang Siur — <strong>перепрограммировать</strong> существующий</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Sunset Rd × Jl. Dewi Sri — добавить</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Sunset Rd × Jl. Imam Bonjol — добавить</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Sunset Rd × Jl. Sunset — добавить</span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>Airport bypass junction — координировать</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// ПАРАМЕТРЫ ВОЛНЫ</div>
+          <div class="corr-col-body">
+            <strong>Скорость волны:</strong> 40 км/ч (шире дорога)<br>
+            <strong>Цикл утро:</strong> 120 сек (тяжёлый поток)<br>
+            <strong>Цикл вечер:</strong> 90 сек<br>
+            <strong>Ночь:</strong> актуированный режим (по датчику)<br>
+            <br>
+            Этот коридор — самый быстрый ROI: <strong>один контроллер уже стоит</strong>, надо просто обновить программу.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NGURAH RAI BYPASS -->
+    <div class="corridor-card">
+      <div class="corr-header">
+        <div class="corr-h-name">
+          <div class="corr-road-name">NGURAH RAI BYPASS</div>
+          <div class="corr-road-sub">Airport → Nusa Dua → Jimbaran + Siligita/Nirmala/Pecatu</div>
+        </div>
+        <div class="corr-h-meta">
+          <span class="pill pill-orange">⚠ Приоритет 2</span>
+          <span class="pill pill-yellow">6 перекрёстков</span>
+          <span class="time-chip">Праздники = апокалипсис</span>
+        </div>
+        <div class="corr-h-status"><span class="pill pill-yellow">Есть несинхр. светофоры</span></div>
+      </div>
+      <div class="corr-body">
+        <div>
+          <div class="corr-col-title">// ПРОБЛЕМА</div>
+          <div class="corr-col-body">
+            Светофоры есть — но каждый живёт своей жизнью.
+            29 декабря 2023: туристы бросили машины и пошли пешком.
+            Siligita, Nirmala, Pecatu — три перекрёстка на въезде в Буkit,
+            лично названные Dishub «высокоприоритетными». Без синхронизации.
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// РЕШЕНИЕ</div>
+          <div class="corr-lights">
+            <div class="cl-row"><div class="cl-dot y"></div><span>Airport South — синхронизировать существующий</span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>Jimbaran junction — синхронизировать</span></div>
+            <div class="cl-row"><div class="cl-dot r"></div><span>Siligita intersection — <strong>новый светофор, приоритет 1</strong></span></div>
+            <div class="cl-row"><div class="cl-dot r"></div><span>Nirmala intersection — <strong>новый светофор</strong></span></div>
+            <div class="cl-row"><div class="cl-dot r"></div><span>Pecatu-Labuan Sait — <strong>новый светофор</strong></span></div>
+            <div class="cl-row"><div class="cl-dot y"></div><span>GWK cultural park junction — координировать</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// ПРАЗДНИЧНЫЙ РЕЖИМ</div>
+          <div class="corr-col-body">
+            <strong>Специальный 31 дек. режим:</strong><br>
+            — Цикл увеличить до 150 сек<br>
+            — Приоритет на выезд с Буkit с 18:00<br>
+            — Приоритет на въезд 22:00–01:00<br>
+            — Интеграция с планом диверсий Bali Police<br><br>
+            Декабрь 2025: Bali Police уже делает диверсии вручную — это надо автоматизировать.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UBUD -->
+    <div class="corridor-card">
+      <div class="corr-header">
+        <div class="corr-h-name">
+          <div class="corr-road-name">УБУД ЦЕНТР</div>
+          <div class="corr-road-sub">Jl. Raya Ubud + Monkey Forest Rd + Jl. Hanoman</div>
+        </div>
+        <div class="corr-h-meta">
+          <span class="pill pill-orange">⚠ Приоритет 2</span>
+          <span class="pill pill-yellow">3 ключевых точки</span>
+          <span class="time-chip">11:00–15:00</span>
+          <span class="time-chip">Апр–Окт особенно</span>
+        </div>
+        <div class="corr-h-status"><span class="pill pill-red">0 светофоров</span></div>
+      </div>
+      <div class="corr-body">
+        <div>
+          <div class="corr-col-title">// ПРОБЛЕМА</div>
+          <div class="corr-col-body">
+            Горный город — один вход/выход. Jl. Raya Ubud × Monkey Forest Road —
+            главный Т-перекрёсток, через который проходит <em>всё</em>.
+            «Хуже чем Чангу» (Reddit, апрель 2025). Ни одного светофора.
+            Туристы пешком, отели убрали трансферы.
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// РЕШЕНИЕ</div>
+          <div class="corr-lights">
+            <div class="cl-row"><div class="cl-dot r"></div><span>Jl. Raya Ubud × Monkey Forest — <strong>1 светофор = 70% решения</strong></span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Jl. Raya Ubud × Jl. Hanoman — добавить</span></div>
+            <div class="cl-row"><div class="cl-dot g"></div><span>Jl. Raya Ubud × Jl. Suweta — добавить</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="corr-col-title">// ТУРИСТИЧЕСКИЙ РЕЖИМ</div>
+          <div class="corr-col-body">
+            <strong>11:00–15:00:</strong> длинный зелёный на Monkey Forest (туристический поток вниз)<br>
+            <strong>15:00–17:00:</strong> длинный зелёный на Raya Ubud (выезд из центра)<br>
+            <strong>Ночь:</strong> мигающий жёлтый<br><br>
+            Один светофор на главном перекрёстке даст <strong>немедленный эффект</strong> — это самый простой case на острове.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════ ПЛАН ══════════════════════════ -->
+<section id="plan">
+  <div class="sec-num">05</div>
+  <div class="sec-tag">Дорожная карта</div>
+  <h2>ЗА 30 ДНЕЙ —<br>ПЕРВЫЕ РЕЗУЛЬТАТЫ</h2>
+
+  <div class="plan-grid fade">
+    <div class="plan-col">
+      <div class="plan-phase p1">// Фаза 1</div>
+      <div class="plan-title">БЫСТРЫЕ<br>ПОБЕДЫ</div>
+      <div class="plan-timeline p1">ДНЕЙ 1–30</div>
+      <div class="plan-items">
+        <div class="plan-item">Перепрограммировать Simpang Siur (Sunset Road) — контроллер уже стоит, только код</div>
+        <div class="plan-item">Синхронизировать 3 существующих светофора на Ngurah Rai Bypass</div>
+        <div class="plan-item">Поставить 1 светофор на Jl. Raya Ubud × Monkey Forest</div>
+        <div class="plan-item">Поставить светофоры на въезд/выезд Canggu Shortcut (2 точки)</div>
+        <div class="plan-item">Настроить единый цикл 60 сек для всех 5 точек Фазы 1</div>
+        <div class="plan-item">Результат: -30–40% времени в пути на этих коридорах</div>
+      </div>
+    </div>
+    <div class="plan-col">
+      <div class="plan-phase p2">// Фаза 2</div>
+      <div class="plan-title">ГЛАВНЫЕ<br>КОРИДОРЫ</div>
+      <div class="plan-timeline p2">ДНЕЙ 31–90</div>
+      <div class="plan-items">
+        <div class="plan-item">Полный Kerobokan corridor — 12 точек синхронизировать поверх одностороннего</div>
+        <div class="plan-item">Canggu corridor complete — 7 точек в единую волну</div>
+        <div class="plan-item">Siligita, Nirmala, Pecatu — 3 новых светофора на Буkit въезде</div>
+        <div class="plan-item">Adaptive режим: утренний и вечерний цикл разные</div>
+        <div class="plan-item">Интеграция с Gojek/Grab для предупреждений водителей</div>
+        <div class="plan-item">Результат: главные красные зоны острова — под контролем</div>
+      </div>
+    </div>
+    <div class="plan-col">
+      <div class="plan-phase p3">// Фаза 3</div>
+      <div class="plan-title">УМНАЯ<br>СИСТЕМА</div>
+      <div class="plan-timeline p3">ДНЕЙ 91–180</div>
+      <div class="plan-items">
+        <div class="plan-item">Сенсоры (индуктивные петли) на 20 ключевых перекрёстках</div>
+        <div class="plan-item">Центральный диспетчерский пункт для всего Badung</div>
+        <div class="plan-item">AI-адаптация: реальный поток = реальные фазы</div>
+        <div class="plan-item">Праздничный режим с автоматическим переключением</div>
+        <div class="plan-item">Приоритет для экстренных служб (скорая, пожарные)</div>
+        <div class="plan-item">Публичный дашборд: жители видят загруженность в реальном времени</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="cost-table fade">
+    <thead>
+      <tr>
+        <th>Компонент</th>
+        <th>Кол-во</th>
+        <th>Стоимость за ед.</th>
+        <th>Итого</th>
+        <th>Примечание</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cost-name">Новый светофор + контроллер + монтаж</td>
+        <td>25 точек</td>
+        <td class="cost-val">$6K</td>
+        <td class="cost-val">$150K</td>
+        <td class="cost-note">Фазы 1 и 2 — все новые точки</td>
+      </tr>
+      <tr>
+        <td class="cost-name">Перепрограммирование существующих</td>
+        <td>10 точек</td>
+        <td class="cost-val">$500</td>
+        <td class="cost-val">$5K</td>
+        <td class="cost-note">Только ПО + работа инженера</td>
+      </tr>
+      <tr>
+        <td class="cost-name">Сенсоры потока (петли)</td>
+        <td>20 точек</td>
+        <td class="cost-val">$2K</td>
+        <td class="cost-val">$40K</td>
+        <td class="cost-note">Фаза 3</td>
+      </tr>
+      <tr>
+        <td class="cost-name">Центральный диспетчерский + ПО</td>
+        <td>1</td>
+        <td class="cost-val">$80K</td>
+        <td class="cost-val">$80K</td>
+        <td class="cost-note">Разовые инвестиции, Фаза 3</td>
+      </tr>
+      <tr>
+        <td class="cost-name">Обучение + операционные на 1 год</td>
+        <td>—</td>
+        <td class="cost-val">—</td>
+        <td class="cost-val">$25K</td>
+        <td class="cost-note">3–5 инженеров-операторов</td>
+      </tr>
+      <tr>
+        <td class="cost-name" style="color:var(--green)">ИТОГО — ПОЛНАЯ СИСТЕМА</td>
+        <td>35 точек</td>
+        <td>—</td>
+        <td class="cost-val" style="color:var(--green)">$300K</td>
+        <td class="cost-note">Бюджет LRT: $2–4 МИЛЛИАРДА. Green Wave в 7000 раз дешевле.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════ ФИНАЛ ══════════════════════════ -->
+<div class="finale">
+  <div class="finale-inner fade">
+    <h2>ЗЕЛЁНЫЙ<br>КОРИДОР<br>ДЛЯ БАЛИ</h2>
+    <p>
+      $300,000. 35 перекрёстков. 30 дней до первых результатов.
+      Не нужен LRT, не нужно сносить виллы, не нужно ждать годами.
+      Нужно просто дать мотоциклам зелёный коридор —
+      и они поедут сами.
+    </p>
+    <div class="finale-cta">🟢 GREEN WAVE — MACET SOLVED</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">BALI MACET — 2026</div>
+  <div class="footer-note">
+    Источники: The Bali Sun, Merah Putih Bali, SCMP, Bali.live, Villa Bali Sale, Wikipedia (Green Wave),
+    Eastgate Software (Adaptive Traffic), US DOT Signal Sync Case Studies
+  </div>
+</footer>
+
+<script>
+// cursor
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX - 4 + 'px';
+  cur.style.top = e.clientY - 4 + 'px';
+});
+
+// scroll fade
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+// Green wave animation — cycling the lights
+const lights = document.querySelectorAll('.corr-light');
+let step = 0;
+setInterval(() => {
+  lights.forEach((l, i) => {
+    l.classList.remove('green-on', 'red-on');
+    l.classList.add(i === step % lights.length ? 'green-on' : 'red-on');
+  });
+  step++;
+}, 700);
+</script>
+</body>
+</html>
