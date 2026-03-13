@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карина — Полный Портрет Судьбы</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FDF8F2;
+  --cream2: #F7EFE3;
+  --cream3: #EFE3D0;
+  --parchment: #E8D9C0;
+  --ink: #2C1F0E;
+  --ink2: #5C4530;
+  --ink3: #9A7B5A;
+  --ink4: #C4A882;
+  --rose: #C4687A;
+  --rose2: #D4899A;
+  --rose3: #E8C4CC;
+  --rose4: #F5E8EC;
+  --mauve: #9B7B9A;
+  --mauve2: #C4A8C2;
+  --mauve3: #EAD8E8;
+  --sage: #7A9B8A;
+  --sage2: #A8C4B2;
+  --sage3: #D8EAE0;
+  --gold: #B8962A;
+  --gold2: #D4B44A;
+  --gold3: #EED88A;
+  --gold4: #FAF2D0;
+  --terracotta: #C46A4A;
+  --terracotta2: #D8987A;
+  --terracotta3: #F0D0C0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ═══ TEXTURE ═══ */
+body::after {
+  content:'';
+  position:fixed; top:0;left:0;right:0;bottom:0;
+  pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity:0.6;
+}
+
+/* ═══ FLORAL DECORATIONS via CSS ═══ */
+.floral {
+  text-align:center;
+  font-size:22px;
+  color: var(--rose2);
+  margin:8px 0;
+  letter-spacing:12px;
+  opacity:0.7;
+}
+
+/* ═══ NAV ═══ */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(253,248,242,0.94);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--parchment);
+  padding:0 16px;
+  overflow-x:auto;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+.nav-i{display:flex;gap:0;min-width:max-content;padding:8px 0;align-items:center}
+.nav-brand{
+  font-family:'Cormorant',serif;font-size:18px;font-weight:600;font-style:italic;
+  color:var(--rose);margin-right:16px;flex-shrink:0;letter-spacing:1px;
+}
+nav a{
+  color:var(--ink3);text-decoration:none;font-size:9.5px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:20px;
+  transition:all .3s;white-space:nowrap;
+}
+nav a:hover{color:var(--rose);background:var(--rose4)}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:90px 24px 60px;
+  position:relative;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(196,104,122,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 0% 100%, rgba(155,123,154,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 50%, rgba(184,150,42,0.05) 0%, transparent 50%),
+    var(--cream);
+}
+
+/* Decorative botanical SVG circles */
+.hero-ring {
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
+.hr1{width:480px;height:480px;top:50%;left:50%;transform:translate(-50%,-52%);border:1px solid rgba(196,104,122,0.1);animation:spinRing 60s linear infinite}
+.hr2{width:340px;height:340px;top:50%;left:50%;transform:translate(-50%,-52%);border:1px dashed rgba(196,104,122,0.12);animation:spinRing 40s linear infinite reverse}
+.hr3{width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-52%);background:radial-gradient(circle,rgba(196,104,122,0.06),transparent 70%)}
+
+@keyframes spinRing{to{transform:translate(-50%,-52%) rotate(360deg)}}
+
+.hero-inner{position:relative;z-index:2;max-width:600px;margin:0 auto}
+
+.hero-pre{
+  font-family:'Lato',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:5px;text-transform:uppercase;color:var(--ink4);
+  margin-bottom:20px;
+  animation:fadeUp .9s ease both;
+}
+
+.hero-name{
+  font-family:'Cormorant',serif;
+  font-size:clamp(72px,20vw,130px);
+  font-weight:300;font-style:italic;
+  line-height:.85;letter-spacing:-2px;
+  color:var(--ink);
+  margin-bottom:6px;
+  animation:fadeUp .9s .15s ease both;
+}
+.hero-name span{color:var(--rose)}
+
+.hero-date{
+  font-family:'Cormorant',serif;font-size:15px;font-weight:400;
+  letter-spacing:10px;color:var(--ink3);
+  margin-bottom:28px;
+  animation:fadeUp .9s .25s ease both;
+}
+
+.hero-ornament{
+  font-size:13px;color:var(--rose2);letter-spacing:8px;
+  margin-bottom:28px;opacity:.6;
+  animation:fadeUp .9s .3s ease both;
+}
+
+.hero-tagline{
+  font-family:'Cormorant',serif;font-size:clamp(19px,4.5vw,24px);
+  font-style:italic;font-weight:400;
+  color:var(--ink2);line-height:1.55;
+  margin-bottom:48px;
+  animation:fadeUp .9s .4s ease both;
+}
+.hero-tagline em{color:var(--rose);font-style:normal;font-weight:600}
+
+/* Number pills */
+.hero-nums{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+  animation:fadeUp .9s .55s ease both;
+}
+.hn{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:100px;padding:10px 20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hn-n{font-family:'Cormorant',serif;font-size:32px;font-weight:700;line-height:1}
+.hn-l{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3)}
+
+.scroll-hint{
+  margin-top:48px;font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--ink4);animation:fadeUp .9s .7s ease both;
+}
+.scroll-arrow{display:block;font-size:18px;margin-top:6px;animation:floatDown 2.5s ease infinite;color:var(--rose2)}
+@keyframes floatDown{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+/* ═══ LAYOUT ═══ */
+section{position:relative;padding:72px 20px}
+.wrap{max-width:680px;margin:0 auto}
+
+/* ═══ SECTION HEADER ═══ */
+.schapter{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:8px;
+}
+.schapter-line{flex:1;height:1px;background:var(--parchment)}
+.schapter-num{
+  font-family:'Cormorant',serif;font-size:11px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;color:var(--ink4);
+  flex-shrink:0;
+}
+
+.stag{
+  display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:4px 14px;border-radius:20px;
+  margin-bottom:10px;
+}
+.stag-rose{background:var(--rose4);color:var(--rose)}
+.stag-mauve{background:var(--mauve3);color:var(--mauve)}
+.stag-sage{background:var(--sage3);color:var(--sage)}
+.stag-gold{background:var(--gold4);color:var(--gold)}
+.stag-terra{background:var(--terracotta3);color:var(--terracotta)}
+
+.stitle{
+  font-family:'Cormorant',serif;
+  font-size:clamp(34px,8vw,54px);
+  font-weight:600;font-style:italic;
+  line-height:1.05;letter-spacing:-1px;
+  color:var(--ink);margin-bottom:14px;
+}
+
+.slead{
+  font-family:'Cormorant',serif;font-size:18px;font-style:italic;font-weight:400;
+  color:var(--ink2);line-height:1.7;margin-bottom:36px;
+}
+
+/* ═══ DIVIDER ═══ */
+.divider{
+  display:flex;align-items:center;gap:16px;
+  margin:52px 0;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--parchment),transparent)}
+.divider-inner{color:var(--rose2);font-size:14px;letter-spacing:6px;opacity:.8;white-space:nowrap}
+
+/* ═══ CARDS ═══ */
+.card{
+  background:white;
+  border:1px solid var(--parchment);
+  border-radius:20px;padding:32px 28px;
+  margin-bottom:18px;
+  position:relative;overflow:hidden;
+  box-shadow:0 2px 20px rgba(44,31,14,0.04);
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:20px 20px 0 0;
+}
+.cb-rose::before{background:linear-gradient(90deg,var(--rose3),var(--rose),var(--rose3))}
+.cb-mauve::before{background:linear-gradient(90deg,var(--mauve3),var(--mauve),var(--mauve3))}
+.cb-sage::before{background:linear-gradient(90deg,var(--sage3),var(--sage),var(--sage3))}
+.cb-gold::before{background:linear-gradient(90deg,var(--gold4),var(--gold2),var(--gold4))}
+.cb-terra::before{background:linear-gradient(90deg,var(--terracotta3),var(--terracotta),var(--terracotta3))}
+
+.card-header{display:flex;gap:22px;align-items:flex-start;margin-bottom:22px}
+.card-num{
+  font-family:'Cormorant',serif;font-size:76px;font-weight:700;font-style:italic;
+  line-height:.9;flex-shrink:0;min-width:60px;
+}
+.card-meta h3{font-family:'Cormorant',serif;font-size:24px;font-weight:600;margin-bottom:3px;line-height:1.2}
+.card-meta .planet{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.card-meta .formula{font-size:12px;color:var(--ink3);font-style:italic}
+
+.card-body p{font-size:14.5px;line-height:1.85;color:var(--ink2);margin-bottom:14px}
+.card-body p:last-child{margin-bottom:0}
+.card-body strong{color:var(--ink);font-weight:700}
+
+/* ═══ PULL QUOTE ═══ */
+.pull{
+  border-left:3px solid var(--rose2);
+  padding:18px 22px;margin:22px 0;
+  border-radius:0 14px 14px 0;
+  font-family:'Cormorant',serif;font-size:19px;font-style:italic;font-weight:400;
+  color:var(--ink2);line-height:1.6;
+  background:var(--rose4);
+}
+.pull.mauve{border-color:var(--mauve2);background:var(--mauve3)}
+.pull.sage{border-color:var(--sage2);background:var(--sage3)}
+.pull.gold{border-color:var(--gold2);background:var(--gold4)}
+.pull.terra{border-color:var(--terracotta2);background:var(--terracotta3)}
+.pull.ink{border-color:var(--ink);background:var(--cream2)}
+
+/* ═══ TAGS ═══ */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-size:11px;font-weight:700;padding:5px 13px;border-radius:20px;letter-spacing:.3px}
+.t-rose{background:var(--rose4);color:var(--rose)}
+.t-mauve{background:var(--mauve3);color:var(--mauve)}
+.t-sage{background:var(--sage3);color:var(--sage)}
+.t-gold{background:var(--gold4);color:var(--gold)}
+.t-terra{background:var(--terracotta3);color:var(--terracotta)}
+.t-ink{background:var(--cream2);color:var(--ink2);border:1px solid var(--parchment)}
+
+/* ═══ INFO BOX ═══ */
+.ibox{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:14px;padding:20px;margin:16px 0;
+  display:flex;gap:14px;
+}
+.ibox-icon{font-size:26px;flex-shrink:0;line-height:1.2}
+.ibox-title{font-size:13px;font-weight:700;margin-bottom:5px;color:var(--ink)}
+.ibox-text{font-size:13px;color:var(--ink3);line-height:1.65}
+
+/* ═══ BIG LETTER ═══ */
+.dropcap::first-letter{
+  font-family:'Cormorant',serif;font-size:72px;font-weight:700;font-style:italic;
+  float:left;line-height:.75;margin-right:8px;margin-top:6px;color:var(--rose);
+}
+
+/* ═══ TWO COL GRID ═══ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.g2-card{
+  background:var(--cream2);border:1px solid var(--parchment);
+  border-radius:14px;padding:18px 16px;text-align:center;
+}
+.g2-n{font-family:'Cormorant',serif;font-size:42px;font-weight:700;font-style:italic;line-height:1;margin-bottom:4px}
+.g2-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.g2-desc{font-size:11.5px;color:var(--ink3);line-height:1.5}
+
+/* ═══ PYTHAGORAS GRID ═══ */
+.pyth-wrap{background:white;border:1px solid var(--parchment);border-radius:20px;padding:28px;margin-bottom:20px;box-shadow:0 2px 20px rgba(44,31,14,0.04)}
+.pyth-digits{font-family:'Cormorant',serif;font-size:20px;font-weight:500;letter-spacing:8px;color:var(--ink3);margin-bottom:22px;text-align:center}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:260px;margin:0 auto 22px}
+.gc{
+  aspect-ratio:1;border-radius:12px;
+  border:1px solid var(--parchment);background:var(--cream2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;padding:4px;
+}
+.gc.has{background:white;border-color:rgba(196,104,122,0.35);box-shadow:0 1px 8px rgba(196,104,122,0.08)}
+.gc .gl{font-size:8px;color:var(--ink4);position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:700;letter-spacing:1px}
+.gc .gn{font-family:'Cormorant',serif;font-size:24px;font-weight:700;font-style:italic;color:var(--rose);letter-spacing:-2px}
+.gc.miss .gn{color:rgba(44,31,14,0.12)}
+.gc .gm{font-size:8px;color:var(--ink4);position:absolute;bottom:3px;left:0;right:0;text-align:center}
+
+/* ═══ MATRIX ═══ */
+.matrix-vis{position:relative;width:290px;height:290px;margin:0 auto 24px}
+.mx-sq{position:absolute;top:48px;left:48px;width:194px;height:194px;border:1.5px solid rgba(196,104,122,0.2);transform:rotate(45deg)}
+.mx-sq2{position:absolute;top:68px;left:68px;width:154px;height:154px;border:1px dashed rgba(184,150,42,0.15);transform:rotate(45deg)}
+.mnode{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mnode-n{font-family:'Cormorant',serif;font-weight:700;font-style:italic;line-height:1}
+.mnode-a{font-size:7px;line-height:1.3;margin-top:2px;font-weight:700;letter-spacing:.3px}
+.mnode-l{font-size:6.5px;letter-spacing:.5px;text-transform:uppercase;margin-top:1px;opacity:.8}
+.sz-lg{width:60px;height:60px}.sz-lg .mnode-n{font-size:28px}
+.sz-md{width:50px;height:50px}.sz-md .mnode-n{font-size:22px}
+.sz-sm{width:42px;height:42px}.sz-sm .mnode-n{font-size:17px}
+.p-top{top:0;left:calc(50% - 30px)}
+.p-right{top:calc(50% - 25px);right:0}
+.p-bottom{bottom:0;left:calc(50% - 30px)}
+.p-left{top:calc(50% - 25px);left:0}
+.p-center{top:calc(50% - 30px);left:calc(50% - 30px)}
+.p-tl{top:20px;left:20px}.p-tr{top:20px;right:20px}
+.p-bl{bottom:20px;left:20px}.p-br{bottom:20px;right:20px}
+.col-rose{background:var(--rose4);border:1.5px solid var(--rose2)}.col-rose .mnode-n{color:var(--rose)}.col-rose .mnode-a,.col-rose .mnode-l{color:var(--rose)}
+.col-mauve{background:var(--mauve3);border:1.5px solid var(--mauve2)}.col-mauve .mnode-n{color:var(--mauve)}.col-mauve .mnode-a,.col-mauve .mnode-l{color:var(--mauve)}
+.col-sage{background:var(--sage3);border:1.5px solid var(--sage2)}.col-sage .mnode-n{color:var(--sage)}.col-sage .mnode-a,.col-sage .mnode-l{color:var(--sage)}
+.col-gold{background:var(--gold4);border:1.5px solid var(--gold2)}.col-gold .mnode-n{color:var(--gold)}.col-gold .mnode-a,.col-gold .mnode-l{color:var(--gold)}
+.col-terra{background:var(--terracotta3);border:1.5px solid var(--terracotta2)}.col-terra .mnode-n{color:var(--terracotta)}.col-terra .mnode-a,.col-terra .mnode-l{color:var(--terracotta)}
+.col-center{background:linear-gradient(135deg,var(--rose4),var(--mauve3));border:2px solid var(--rose2)}.col-center .mnode-n{color:var(--rose)}.col-center .mnode-a,.col-center .mnode-l{color:var(--rose)}
+
+/* ═══ TIMELINE ═══ */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:1.5px;background:linear-gradient(180deg,transparent,var(--rose2),var(--rose2),transparent);opacity:.3}
+.tli{position:relative;margin-bottom:32px}
+.tl-dot{position:absolute;left:-23px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--rose2);box-shadow:0 0 0 3px var(--rose4)}
+.tl-year{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);font-weight:700;margin-bottom:4px}
+.tl-title{font-family:'Cormorant',serif;font-size:21px;font-weight:600;font-style:italic;margin-bottom:7px}
+.tl-text{font-size:13.5px;color:var(--ink2);line-height:1.8}
+
+/* ═══ COMPAT ═══ */
+.compat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.compat-c{border-radius:16px;padding:18px 12px;text-align:center;border:1px solid transparent}
+.compat-c.great{background:var(--sage3);border-color:rgba(122,155,138,.4)}
+.compat-c.good{background:var(--gold4);border-color:rgba(184,150,42,.35)}
+.compat-c.hard{background:var(--rose4);border-color:rgba(196,104,122,.3)}
+.compat-n{font-family:'Cormorant',serif;font-size:38px;font-weight:700;font-style:italic;line-height:1}
+.compat-c.great .compat-n{color:var(--sage)}
+.compat-c.good .compat-n{color:var(--gold)}
+.compat-c.hard .compat-n{color:var(--rose)}
+.compat-l{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+
+/* ═══ TABLE ═══ */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin:18px 0}
+.tbl thead th{background:var(--cream2);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:10px 14px;text-align:left;color:var(--ink3);border-bottom:1px solid var(--parchment)}
+.tbl td{padding:13px 14px;border-bottom:1px solid rgba(196,104,122,0.08);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .yn{font-family:'Cormorant',serif;font-size:26px;font-weight:700;font-style:italic;color:var(--rose)}
+.tbl tr.now td{background:var(--rose4)}
+.tbl .ylabel{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px}
+
+/* ═══ CHAKRA ═══ */
+.ch-item{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.ch-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.ch-name{font-size:11px;font-weight:700;min-width:90px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2)}
+.ch-track{flex:1;height:6px;background:var(--cream2);border-radius:3px;overflow:hidden;border:1px solid var(--parchment)}
+.ch-fill{height:100%;border-radius:3px}
+.ch-pct{font-size:11px;color:var(--ink3);min-width:28px;text-align:right;font-weight:700}
+
+/* ═══ SECTION BANDING ═══ */
+.s-rose{background:linear-gradient(180deg,var(--cream) 0%,rgba(196,104,122,0.04) 50%,var(--cream) 100%)}
+.s-mauve{background:linear-gradient(180deg,var(--cream) 0%,rgba(155,123,154,0.04) 50%,var(--cream) 100%)}
+.s-sage{background:linear-gradient(180deg,var(--cream) 0%,rgba(122,155,138,0.04) 50%,var(--cream) 100%)}
+.s-gold{background:linear-gradient(180deg,var(--cream) 0%,rgba(184,150,42,0.04) 50%,var(--cream) 100%)}
+.s-stripe{background:var(--cream2)}
+
+/* ═══ COURSE MODULES ═══ */
+.module{background:white;border:1px solid var(--parchment);border-radius:18px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 12px rgba(44,31,14,.03)}
+.mod-head{padding:20px 24px;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none}
+.mod-num{width:38px;height:38px;border-radius:50%;background:var(--rose4);border:1.5px solid var(--rose2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant',serif;font-size:18px;font-weight:700;font-style:italic;color:var(--rose);flex-shrink:0}
+.mod-title{font-size:15px;font-weight:700;flex:1;color:var(--ink)}
+.mod-arr{color:var(--ink4);font-size:11px;transition:transform .3s}
+.module.open .mod-arr{transform:rotate(180deg)}
+.mod-body{padding:0 24px;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s}
+.module.open .mod-body{max-height:4000px;padding:0 24px 24px}
+.lesson{padding:11px 0;border-bottom:1px solid rgba(196,104,122,0.08);font-size:13.5px;color:var(--ink2);display:flex;align-items:flex-start;gap:12px;line-height:1.75}
+.lesson:last-child{border-bottom:none}
+.li{font-size:17px;flex-shrink:0;line-height:1.3}
+
+/* ═══ PROPHECY ═══ */
+.prophecy{
+  text-align:center;padding:56px 24px;
+  background:linear-gradient(135deg,var(--rose4),var(--mauve3));
+  border-radius:28px;margin:28px 0;
+  border:1px solid rgba(196,104,122,.2);
+}
+.prophecy-sym{font-size:36px;margin-bottom:18px;letter-spacing:12px}
+.prophecy p{
+  font-family:'Cormorant',serif;font-size:clamp(20px,4.5vw,26px);
+  font-style:italic;font-weight:400;line-height:1.6;
+  color:var(--ink2);max-width:520px;margin:0 auto;
+}
+.prophecy p strong{color:var(--rose);font-style:normal}
+.prophecy p em{color:var(--mauve);font-style:normal}
+
+/* ═══ ANGEL GRID ═══ */
+.angel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin:18px 0}
+.angel-c{background:white;border:1px solid var(--parchment);border-radius:16px;padding:20px 16px;box-shadow:0 1px 10px rgba(44,31,14,.03)}
+.angel-n{font-family:'Cormorant',serif;font-size:30px;font-weight:700;font-style:italic;color:var(--rose);margin-bottom:6px}
+.angel-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.angel-desc{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* ═══ BIG QUOTE BOX ═══ */
+.bigq{
+  background:var(--ink);color:var(--cream);
+  border-radius:24px;padding:40px 32px;margin:28px 0;text-align:center;
+}
+.bigq p{font-family:'Cormorant',serif;font-size:clamp(19px,4.5vw,25px);font-style:italic;line-height:1.6}
+.bigq p em{color:var(--rose3);font-style:normal}
+.bigq p strong{color:var(--gold3);font-style:normal}
+.bigq .attr{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(253,248,242,.3);margin-top:16px}
+
+/* ═══ REVEAL ═══ */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.rev.vis{opacity:1;transform:none}
+
+footer{border-top:1px solid var(--parchment);padding:40px 20px 70px;text-align:center}
+footer p{font-size:11.5px;color:var(--ink4);line-height:2;font-family:'Cormorant',serif;font-style:italic}
+
+@media(max-width:400px){
+  .compat-grid{grid-template-columns:repeat(2,1fr)}
+  .angel-grid{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .hero-nums{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-i">
+    <span class="nav-brand">Карина</span>
+    <a href="#hero">Начало</a>
+    <a href="#who">Кто ты</a>
+    <a href="#pyth">Пифагор</a>
+    <a href="#western">Западная</a>
+    <a href="#chaldean">Халдейская</a>
+    <a href="#vedic">Ведическая</a>
+    <a href="#kabbalah">Каббала</a>
+    <a href="#matrix">Матрица судьбы</a>
+    <a href="#matrix-deep">Глубины матрицы</a>
+    <a href="#hd">Дизайн человека</a>
+    <a href="#loshu">Ло Шу</a>
+    <a href="#years">Прогноз</a>
+    <a href="#love">Любовь</a>
+    <a href="#chakra">Чакры</a>
+    <a href="#angel">Знаки</a>
+    <a href="#shadow">Тень</a>
+    <a href="#gifts">Дары</a>
+    <a href="#course">Мини-курс</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-ring hr1"></div>
+  <div class="hero-ring hr2"></div>
+  <div class="hero-ring hr3"></div>
+  <div class="hero-inner">
+    <div class="hero-pre">Персональный портрет судьбы</div>
+    <div class="hero-name"><span>К</span>арина</div>
+    <div class="hero-date">14 · 01 · 1997</div>
+    <div class="hero-ornament">✦ ✦ ✦</div>
+    <p class="hero-tagline">
+      Меркурий дал тебе крылья.<br>
+      Мастер-число 11 — антенну.<br>
+      Шут в линии денег — бесстрашие.<br>
+      А Солнце в сорок лет — обещание.
+    </p>
+    <div class="hero-nums">
+      <div class="hn"><div class="hn-n" style="color:var(--rose)">5</div><div class="hn-l">Жизненный путь</div></div>
+      <div class="hn"><div class="hn-n" style="color:var(--mauve)">11</div><div class="hn-l">Душевный порыв</div></div>
+      <div class="hn"><div class="hn-n" style="color:var(--sage)">9</div><div class="hn-l">Число имени</div></div>
+      <div class="hn"><div class="hn-n" style="color:var(--gold)">22</div><div class="hn-l">Линия денег</div></div>
+      <div class="hn"><div class="hn-n" style="color:var(--terracotta)">7</div><div class="hn-l">Личность</div></div>
+    </div>
+    <div class="scroll-hint">
+      читай вниз
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ КТО ТЫ ══════════════════════════ -->
+<section id="who" class="s-rose">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Вступление</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Общий портрет</div>
+  <h2 class="stitle">Прежде чем начать — кто ты такая</h2>
+  <p class="slead">Прежде чем мы нырнём в числа, арканы и системы — давай скажем главное. То, что видно сразу, когда смотришь на всю картину целиком.</p>
+
+  <div class="card cb-rose rev">
+    <p class="dropcap" style="font-size:14.5px;line-height:1.85;color:var(--ink2)">Ты — один из тех редких людей, у кого жизненный путь и число судьбы совпадают. Обе пятёрки. Двойной Меркурий. Это значит, что твоя природа и твоё предназначение говорят на одном языке — тебе не нужно себя переламывать, чтобы идти своим путём. Просто быть собой — уже и есть движение в правильную сторону.</p>
+    <p style="font-size:14.5px;line-height:1.85;color:var(--ink2)">Но это ещё не всё. В твоей карте живёт мастер-число 11 — душевный порыв. Это означает, что внутри тебя есть нечто, что большинство людей называют «чутьём» или «шестым чувством». Ты чувствуешь людей насквозь. Чувствуешь, что будет, раньше чем это происходит. Это не мистика — это тонкая нейронная обработка, которой у большинства просто нет.</p>
+    <p style="font-size:14.5px;line-height:1.85;color:var(--ink2)">И третье, что нужно знать сразу: в линии денег у тебя стоит аркан 22, Шут. Это не значит «несерьёзно». Это значит — безграничный потенциал, который открывается только тогда, когда ты перестаёшь бояться и делаешь шаг.</p>
+  </div>
+
+  <div class="divider"><div class="divider-inner">✦ ✦ ✦</div></div>
+
+  <div class="grid2 rev">
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--rose)">5</div>
+      <div class="g2-title">Жизненный путь</div>
+      <div class="g2-desc">Меркурий · Свобода · Перемены · Адаптивность</div>
+    </div>
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--mauve)">11</div>
+      <div class="g2-title">Душевный порыв</div>
+      <div class="g2-desc">Мастер-число · Интуиция · Посланник · Просветление</div>
+    </div>
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--sage)">9</div>
+      <div class="g2-title">Число имени</div>
+      <div class="g2-desc">Завершение циклов · Мудрость · Служение</div>
+    </div>
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--terracotta)">7</div>
+      <div class="g2-title">Число личности</div>
+      <div class="g2-desc">Загадочность · Глубина · Аналитика</div>
+    </div>
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--gold)">22</div>
+      <div class="g2-title">Линия денег</div>
+      <div class="g2-desc">Шут · Безграничный потенциал · Доверие</div>
+    </div>
+    <div class="g2-card">
+      <div class="g2-n" style="color:var(--rose)">19</div>
+      <div class="g2-title">Точка 40 лет</div>
+      <div class="g2-desc">Солнце · Расцвет · Радость · Плоды труда</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ПИФАГОР ══════════════════════════ -->
+<section id="pyth">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система I</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Квадрат Пифагора</div>
+  <h2 class="stitle">Матрица цифр твоей даты</h2>
+  <p class="slead">Самая «честная» система из всех. Раскладывает твою дату рождения как паззл — каждая цифра говорит о конкретном качестве.</p>
+
+  <div class="pyth-wrap rev">
+    <div class="pyth-digits">1 · 4 · 0 · 1 · 1 · 9 · 9 · 7</div>
+    <div class="g3">
+      <div class="gc has"><div class="gl">7</div><div class="gn">7</div><div class="gm">Удача</div></div>
+      <div class="gc miss"><div class="gl">8</div><div class="gn">–</div><div class="gm">Долг</div></div>
+      <div class="gc has"><div class="gl">9</div><div class="gn">99</div><div class="gm">Память</div></div>
+      <div class="gc has"><div class="gl">4</div><div class="gn">4</div><div class="gm">Здоровье</div></div>
+      <div class="gc miss"><div class="gl">5</div><div class="gn">–</div><div class="gm">Логика</div></div>
+      <div class="gc miss"><div class="gl">6</div><div class="gn">–</div><div class="gm">Земля</div></div>
+      <div class="gc has"><div class="gl">1</div><div class="gn">111</div><div class="gm">Воля</div></div>
+      <div class="gc miss"><div class="gl">2</div><div class="gn">–</div><div class="gm">Энергия</div></div>
+      <div class="gc miss"><div class="gl">3</div><div class="gn">–</div><div class="gm">Интерес</div></div>
+    </div>
+    <div class="pull rev" style="max-width:500px;margin:0 auto">Три единицы, двойка девяток, одна семёрка и одна четвёрка. Пять чисел отсутствуют. Это не пустота — это твои уроки.</div>
+  </div>
+
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">111</div>
+      <div class="card-meta">
+        <h3>Тройная единица — Несгибаемая воля</h3>
+        <div class="planet" style="color:var(--rose)">Линия 1–2–3 · Характер и воля</div>
+        <div class="formula">Три единицы в твоей дате — исключительная редкость</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Три единицы в квадрате Пифагора — это одна из сильнейших комбинаций в нумерологии. Такой человек буквально рождён с встроенным внутренним компасом: всегда знает, чего хочет, идёт туда — и чаще всего доходит. Ты из тех людей, которых практически невозможно сломить внешним давлением. Попытки манипулировать или навязать чужую волю работают плохо — ты просто делаешь по-своему, иногда даже не осознавая этого.</p>
+      <p>Но у этой силы есть обратная сторона, которую важно понять. Три единицы дают сильнейшую установку «я сама». Ты склонна делать всё самостоятельно — не потому что не доверяешь людям, а потому что интуитивно чувствуешь, что сделаешь лучше. Иногда это правда. Но иногда это просто привычка контролировать, которая стоит тебе огромных сил.</p>
+      <p>Лучший подарок, который ты можешь сделать себе — научиться делегировать без тревоги. Это не слабость трёх единиц. Это их зрелость.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-rose">Внутренний компас</span>
+      <span class="tag t-rose">Лидерство</span>
+      <span class="tag t-rose">Несгибаемость</span>
+      <span class="tag t-ink">Риск гиперконтроля</span>
+    </div>
+  </div>
+
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">99</div>
+      <div class="card-meta">
+        <h3>Двойка девяток — Живая память</h3>
+        <div class="planet" style="color:var(--mauve)">Линия 3–6–9 · Духовность и память</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Двойка девяток — это богатый внутренний мир, который работает как библиотека. Ты помнишь всё: разговоры трёхлетней давности, интонации, детали, которые другие давно забыли. Это одновременно дар и нагрузка. Дар — потому что ты учишься на опыте глубже, чем большинство. Нагрузка — потому что обиды, разочарования и чужие слова тоже хранятся долго.</p>
+      <p>Девятки также означают завершение циклов. Ты часто оказываешься рядом с людьми именно в переломный момент их жизни. Это не случайность — это твоя природа притягивать тех, кому нужна точка опоры. Ты умеешь помогать людям «закрывать» старые главы и начинать новые.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-mauve">Глубокая память</span>
+      <span class="tag t-mauve">Завершение циклов</span>
+      <span class="tag t-mauve">Духовная мудрость</span>
+      <span class="tag t-ink">Долго хранит обиды</span>
+    </div>
+  </div>
+
+  <div class="card cb-gold rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">7</div>
+      <div class="card-meta">
+        <h3>Единица семёрки — Тонкое чутьё</h3>
+        <div class="planet" style="color:var(--gold)">Линия 7–8–9 · Удача и интуиция</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Одна семёрка означает удачу в умеренных, но стабильных дозах. Это не «везунчик» в банальном смысле — это человек, который интуитивно оказывается в правильном месте в правильное время. Ты редко объясняешь, почему пошла именно туда или написала именно тому человеку — просто чувствовала. И это «просто чувствовала» работает.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-gold">Тонкая удача</span>
+      <span class="tag t-gold">Чутьё на место и момент</span>
+    </div>
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">🌿</div>
+    <div>
+      <div class="ibox-title">Отсутствующие числа: 2, 3, 5, 6, 8</div>
+      <div class="ibox-text">Это не «дефекты» — это зоны роста. Самое важное из отсутствующих: пятёрка (гибкость мышления и логика) — иронично, что твой жизненный путь пятёрка, но в квадрате её нет. Это значит, что природную свободу ты будешь «завоёвывать» осознанно, а не получать автоматически.</div>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    Диагональ воли (1→5→9): есть 1 и 9, нет 5. Ты видишь цель и знаешь, каким должен быть результат — но «средний путь» требует от тебя сознательных усилий. Это твоё главное поле роста.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ЗАПАДНАЯ ══════════════════════════ -->
+<section id="western" class="s-mauve">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система II</div><div class="schapter-line"></div></div>
+  <div class="stag stag-mauve">Западная нумерология</div>
+  <h2 class="stitle">Пять чисел, которые описывают тебя</h2>
+  <p class="slead">Самая популярная система в мире. Смотрит на тебя через пять ключевых чисел — и каждое открывает свой слой личности.</p>
+
+  <!-- ЖИЗНЕННЫЙ ПУТЬ 5 -->
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">5</div>
+      <div class="card-meta">
+        <h3>Жизненный путь — Свобода и движение</h3>
+        <div class="planet" style="color:var(--rose)">14+01+1997 → 5 · Меркурий</div>
+        <div class="formula">1+4=5, 0+1=1, 1+9+9+7=26→8. Итого: 5+1+8=14→5</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Пятёрка — самое живое число в нумерологии. Это Меркурий: быстрейшая планета, вечное движение, острый ум, жажда нового. Люди с этим путём буквально страдают от застоя — не морально, а физически. Когда жизнь превращается в монотонный ритм, тело начинает сигнализировать: тревожность, усталость, «всё серое». Это не депрессия. Это навигационная система пятёрки говорит: «нам не туда».</p>
+      <p>Твоя суперсила — адаптивность. Там, где другие теряются от неожиданных перемен, ты расцветаешь. Кризисы тебя не ломают — они тебя заводят. Ты лучшая версия себя именно в момент, когда нужно быстро принять решение и двигаться. Это очень редкое качество, и мало кто это ценит — до тех пор, пока не оказывается рядом с тобой в критической ситуации.</p>
+      <p>Главная ловушка пятёрки — разбросанность. Столько всего интересного, столько всего хочется — и в какой-то момент становится сложно выбрать одно и довести до конца. Именно поэтому самые успешные пятёрки — те, кто научился соединять свободу со структурой. Не клетка, но направление. Не стены, но вектор.</p>
+      <p>Важная деталь именно для тебя: с мастер-числом 11 в душевном порыве твоя пятёрка работает иначе, чем у большинства. Ты не просто ищешь новизну — ты ищешь смысл в новизне. Каждая перемена в твоей жизни несёт в себе урок, который ты способна видеть глубже других.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-rose">Свобода</span>
+      <span class="tag t-rose">Адаптивность</span>
+      <span class="tag t-rose">Коммуникация</span>
+      <span class="tag t-rose">Авантюризм</span>
+      <span class="tag t-ink">Риск разброса</span>
+    </div>
+  </div>
+
+  <div class="bigq rev">
+    <p>«Пятёрка не ищет приключений на свою голову. <em>Приключения находят её сами</em> — потому что она единственная из всех чисел, кто умеет ими пользоваться.»</p>
+    <div class="attr">Нумерологическая традиция</div>
+  </div>
+
+  <!-- МАСТЕР 11 -->
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">11</div>
+      <div class="card-meta">
+        <h3>Душевный порыв — Мастер-число</h3>
+        <div class="planet" style="color:var(--mauve)">A(1)+I(9)+A(1)=11 · Уран · Посланник</div>
+        <div class="formula">Гласные имени КАРИНА</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><strong>Это самое важное число во всей твоей карте.</strong> Мастер-число 11 встречается у небольшого процента людей — и у тех, у кого оно стоит именно в позиции душевного порыва, есть что-то особенное в том, как они чувствуют мир.</p>
+      <p>Одиннадцатка — это «число интуиции и посланника». В твоей глубине живёт невероятно чуткий приёмник: ты улавливаешь настроения людей раньше, чем они сами их осознали. Ты чувствуешь «что-то не так» за несколько часов до того, как это станет очевидным. Ты читаешь между строк — не потому что аналитически думаешь, а потому что просто знаешь. Это не мистика и не фантазия. Это нейрологически задокументированная чувствительность, которая у части людей работает на другой частоте.</p>
+      <p>Обратная сторона 11 — внутреннее напряжение, которое живёт в тебе постоянно. Тебя «разрывает» между высокими стандартами, которые ты ощущаешь как правду, и реальностью, которая вечно не дотягивает. Между тем, что ты чувствуешь нутром, и тем, что «разумно». Именно отсюда тревожность, перфекционизм и периодическое ощущение «я не такая, как все» — это не баг личности, это особенность настройки.</p>
+      <p>Миссия 11 в этой жизни — не просто жить, а освещать путь другим. Не обязательно стать учителем или блогером. Достаточно просто быть собой — своим примером, своим отношением к жизни, своей честностью. Люди рядом с одиннадцатками начинают думать иначе. Это происходит само, без усилий.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-mauve">Мастер-число</span>
+      <span class="tag t-mauve">Интуиция</span>
+      <span class="tag t-mauve">Чувствительность</span>
+      <span class="tag t-mauve">Посланник</span>
+      <span class="tag t-ink">Внутреннее напряжение</span>
+    </div>
+  </div>
+
+  <!-- ЛИЧНОСТЬ 7 -->
+  <div class="card cb-sage rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--sage)">7</div>
+      <div class="card-meta">
+        <h3>Число личности — Загадка</h3>
+        <div class="planet" style="color:var(--sage)">K(2)+R(9)+N(5)=16→7 · Нептун</div>
+        <div class="formula">Согласные имени КАРИНА</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Число 7 в позиции личности — это то, как тебя воспринимают другие люди ещё до того, как ты что-то сказала. Ты производишь впечатление человека умного, немного отстранённого, явно знающего что-то, что другие не знают. Люди слегка теряются, пытаясь тебя «считать» — и это держит их в тонусе.</p>
+      <p>Интересная комбинация: снаружи ты выглядишь как таинственная семёрка — глубокая, избирательная, немного закрытая. Внутри же — живая, подвижная пятёрка, которая жаждет приключений и свежего воздуха. Это несоответствие иногда удивляет людей, которые думали, что знают тебя. «Я думал, ты интроверт» — говорят они, когда видят тебя в своей тарелке.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-sage">Загадочность</span>
+      <span class="tag t-sage">Глубина</span>
+      <span class="tag t-sage">Избирательность</span>
+      <span class="tag t-mauve">Контраст с внутренним</span>
+    </div>
+  </div>
+
+  <!-- ЧИСЛО ИМЕНИ 9 -->
+  <div class="card cb-terra rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--terracotta)">9</div>
+      <div class="card-meta">
+        <h3>Число имени — Завершитель</h3>
+        <div class="planet" style="color:var(--terracotta)">K(2)+A(1)+R(9)+I(9)+N(5)+A(1)=27→9 · Марс</div>
+        <div class="formula">Все буквы имени КАРИНА</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Имя «Карина» несёт вибрацию девятки — последнего числа в пифагорейской шкале. Это означает завершённость, мудрость и притяжение важных моментов. Ты буквально создана для того, чтобы быть рядом, когда что-то заканчивается и что-то начинается.</p>
+      <p>Девятка имени притягивает людей «на перекрёстке». Не случайно рядом с тобой часто оказываются те, кто переживает переломный момент — смену работы, расставание, новое начало. Ты умеешь помочь человеку поставить точку там, где нужна точка, и начать новую строчку. Это редкий и ценный дар.</p>
+      <p>Имя также определяет твою «публичную» вибрацию — то, как тебя воспринимают незнакомые люди. Девятка делает тебя «своей» для очень разных людей. Ты умеешь говорить с каждым на его языке — это тоже Меркурий в действии.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-terra">Завершение</span>
+      <span class="tag t-terra">Притяжение переломных моментов</span>
+      <span class="tag t-terra">Гибкость в общении</span>
+    </div>
+  </div>
+
+  <!-- ЧИСЛО ДНЯ 14 -->
+  <div class="card cb-gold rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">14</div>
+      <div class="card-meta">
+        <h3>Число дня рождения — Умеренность</h3>
+        <div class="planet" style="color:var(--gold)">14-е число · Аркан XIV Таро</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>14-е число не сводится просто к 5. В таро 14 — это «Умеренность» или «Temperance»: ангел, переливающий воду из золотой чаши в серебряную, стоя одной ногой на земле, другой — в воде. Образ баланса между противоположностями, алхимии, нахождения золотой середины.</p>
+      <p>Рождённые 14-го несут в себе постоянную внутреннюю работу по балансировке: между свободой и ответственностью, между импульсом и обдуманностью, между «я хочу» и «надо». Это не слабость — это твоя самая тонкая суперсила. Ты умеешь находить гармонию там, где другие видят только противоречие. Ты умеешь смешивать несмешиваемое.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-gold">Умеренность</span>
+      <span class="tag t-gold">Алхимия</span>
+      <span class="tag t-gold">Внутренний баланс</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ХАЛДЕЙСКАЯ ══════════════════════════ -->
+<section id="chaldean" class="s-gold">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система III</div><div class="schapter-line"></div></div>
+  <div class="stag stag-gold">Халдейская нумерология</div>
+  <h2 class="stitle">4000 лет вавилонской мудрости</h2>
+  <p class="slead">Древнейшая из сохранившихся систем. Каждой букве — своя вибрация звука, а не порядковый номер. Иногда даёт результаты, разительно отличающиеся от пифагорейских.</p>
+
+  <div class="card cb-gold rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">3</div>
+      <div class="card-meta">
+        <h3>Халдейское число имени — Юпитер</h3>
+        <div class="planet" style="color:var(--gold)">K(2)+A(1)+R(2)+I(1)+N(5)+A(1)=12→3</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>В халдейской системе «Р» читается как 2 (по звуку), а не как 9. Это меняет всё — имя КАРИНА звучит на тройке, числе Юпитера: роста, удачи и дара слова.</p>
+      <p>Тройка по-халдейски — это природная харизма в коммуникации. Ты умеешь говорить так, что люди слушают. Не обязательно громко — иногда достаточно нескольких точных слов. Ты умеешь объяснять сложное просто. Это открывает двери, которые перед другими остаются закрытыми.</p>
+      <p>Сочетание пифагорейской девятки (завершение) и халдейской тройки (рост и начало) создаёт редкий узор. Ты одновременно умеешь закрывать старые двери и открывать новые. Именно поэтому в твоей жизни смены бывают резкими, но никогда не пустыми — каждый конец сразу же становится началом чего-то другого.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-gold">Юпитер</span>
+      <span class="tag t-gold">Дар слова</span>
+      <span class="tag t-gold">Рост</span>
+      <span class="tag t-gold">Харизма коммуникации</span>
+    </div>
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">🏺</div>
+    <div>
+      <div class="ibox-title">Халдейское число 32 — «Волшебник коммуникации»</div>
+      <div class="ibox-text">1+4+1+1+9+9+7=32. В халдейской традиции 32 — одно из «магических» составных чисел. Называется «Communicator» — человек с природным магнетизмом в словах и взаимодействии. Число людей, которые буквально умеют договариваться — с людьми, с обстоятельствами, с жизнью.</div>
+    </div>
+  </div>
+
+  <div class="pull gold rev">
+    Пифагор видел числа как абстрактную математику. Халдеи слышали их как вибрацию звука. Обе системы правы — они просто смотрят на разные грани одного кристалла.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ВЕДИЧЕСКАЯ ══════════════════════════ -->
+<section id="vedic" class="s-sage">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система IV</div><div class="schapter-line"></div></div>
+  <div class="stag stag-sage">Ведическая нумерология</div>
+  <h2 class="stitle">Планеты, которые ведут тебя</h2>
+  <p class="slead">Индийская система видит за каждым числом живую планету. Не метафорически — буквально. Ты рождена под Меркурием, и это объясняет очень многое.</p>
+
+  <div class="card cb-sage rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--sage)">5</div>
+      <div class="card-meta">
+        <h3>Дженма Анк — Меркурий (Будха)</h3>
+        <div class="planet" style="color:var(--sage)">14→5 · Планета Будха · Ртуть</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>В ведической нумерологии пятёрка — Будха, Меркурий. Самая быстрая планета Солнечной системы. Люди Меркурия думают быстро, говорят точно, схватывают на лету. Им физически необходимо разнообразие — однообразие буквально истощает.</p>
+      <p>Ведическое значение Меркурия особенно богато: это планета торговли, интеллекта и медиации. Люди Будхи — естественные переговорщики. Они находят язык с кем угодно, потому что буквально «слышат» собеседника на нескольких уровнях одновременно. Это не манипуляция — это чувствительность.</p>
+      <p>Ведическое предупреждение для пятёрки: Меркурий управляет нервной системой. При информационных перегрузках — а пятёрки их любят и притягивают — первой «садится» именно она. Тревожность, рассеянность, бессонница — это сигналы перегруженного Меркурия. Периодические паузы от потока информации — не слабость. Это техническое обслуживание твоего главного инструмента.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-sage">Будха / Меркурий</span>
+      <span class="tag t-sage">Быстрый интеллект</span>
+      <span class="tag t-sage">Медиация</span>
+      <span class="tag t-ink">Нервная система — зона внимания</span>
+    </div>
+  </div>
+
+  <div class="pull sage rev">
+    Ведическое правило для пятёрок: «Меркурий любит движение, но не терпит хаос. Найди свой ритм — и планета будет работать на тебя, а не против тебя».
+  </div>
+
+  <div class="card cb-sage rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--sage)">5+5</div>
+      <div class="card-meta">
+        <h3>Двойной Меркурий — Будха Юга</h3>
+        <div class="planet" style="color:var(--sage)">Число рождения + число судьбы = 5+5</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Число рождения 5 и число судьбы 5 — «двойной Меркурий», Будха Юга. Исключительно редкое сочетание, при котором природа и судьба говорят на одном языке. Это означает: твоё предназначение созвучно твоей природе. Тебе не нужно переламывать себя, чтобы идти своим путём. Просто быть собой — уже и есть движение в правильном направлении. Это огромная привилегия, которую мало кто имеет.</p>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-inner">✦ Планетарные периоды жизни ✦</div></div>
+
+  <div class="tl rev">
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">0–16 лет</div>
+      <div class="tl-title">Период Солнца (Сурья) — Формирование</div>
+      <div class="tl-text">Детство и юность под знаком личностного становления. Желание признания, формирование эго, пробы разных ролей. У пятёрок этот период — время проб и экспериментов: «кто я?» остаётся главным вопросом.</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">16–27 лет · Сейчас</div>
+      <div class="tl-title">Период Луны (Чандра) — Чувства и основа</div>
+      <div class="tl-text">Период эмоций, отношений и интуитивного познания жизни. Для двойного Меркурия — это важнейший этап: здесь формируется твоя эмоциональная база. Всё, что ты чувствуешь сейчас — не лишнее. Это строительный материал для всего, что будет.</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot" style="background:var(--rose2);box-shadow:0 0 0 3px var(--rose4)"></div>
+      <div class="tl-year">27–34 лет · Скоро</div>
+      <div class="tl-title">Период Марса (Мангала) — Прорыв</div>
+      <div class="tl-text">Период действия и прорыва. Для пятёрок с двойным Меркурием — это момент, когда скорость и решительность начинают работать в полную силу. Именно здесь большинство «меркурианских» людей совершают свой главный рывок.</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">34–52 лет</div>
+      <div class="tl-title">Период Раху — Расширение</div>
+      <div class="tl-text">Период нестандартных решений и выхода за пределы прежних рамок. Раху для пятёрки — эпоха, когда твоя природная склонность к приключениям начинает приносить материальные плоды.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ КАББАЛА ══════════════════════════ -->
+<section id="kabbalah">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система V</div><div class="schapter-line"></div></div>
+  <div class="stag stag-mauve">Каббалистическая нумерология</div>
+  <h2 class="stitle">Твоё имя как код</h2>
+  <p class="slead">Мистическая традиция иудаизма. Каждой букве — своя числовая вибрация на иврите. Имя здесь — не просто звук. Это духовный код.</p>
+
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">π</div>
+      <div class="card-meta">
+        <h3>Гематрия КАРИНА — 273</h3>
+        <div class="planet" style="color:var(--mauve)">K(11)+A(1)+R(200)+I(10)+N(50)+A(1)=273</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Полная гематрия твоего имени — 273. Это число математически связано с числом Пи (π) в иудейской нумерологии. Оно несёт значение бесконечного развития и совершенства структуры. Иначе говоря: ты буквально «математически совершенна» по имени.</p>
+      <p>273 сводится к тройке (2+7+3=12→3), что соответствует сфире Бина на Древе Жизни. Бина — «Понимание» — третья сфира, связанная с высшим интеллектом и способностью видеть структуру за хаосом. Это женская, «тёмная» мудрость: та, что постигает через опыт, а не через теорию.</p>
+      <p>На практике это означает: ты способна понимать людей и ситуации на уровне, который труднообъясним рационально. Ты видишь паттерны. Видишь, чем всё закончится, когда другие ещё только начинают. Это и есть Бина в действии.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-mauve">Сфира Бина</span>
+      <span class="tag t-mauve">Понимание структур</span>
+      <span class="tag t-mauve">Число π в имени</span>
+      <span class="tag t-mauve">Женская мудрость</span>
+    </div>
+  </div>
+
+  <div class="pull mauve rev">
+    Число π никогда не заканчивается — 3.14159265358979... Как и ты: тебе всегда найдётся что-то новое, что захочется понять, изучить, распробовать. Это не рассеянность. Это структура твоей личности.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ МАТРИЦА СУДЬБЫ ══════════════════════════ -->
+<section id="matrix" class="s-rose">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система VI</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Матрица Судьбы</div>
+  <h2 class="stitle">Пять точек, которые держат твою судьбу</h2>
+  <p class="slead">Синтез нумерологии и таро, созданный в 2006 году. Пять точек ромба — пять граней твоей личности. Каждая — конкретный аркан с конкретным смыслом.</p>
+
+  <div class="pyth-wrap rev">
+    <div class="matrix-vis">
+      <div class="mx-sq"></div>
+      <div class="mx-sq2"></div>
+      <div class="mnode sz-lg col-center p-center"><div class="mnode-n">5</div><div class="mnode-a">Иерофант</div><div class="mnode-l">Центр</div></div>
+      <div class="mnode sz-md col-rose p-top"><div class="mnode-n">15</div><div class="mnode-a">Дьявол</div><div class="mnode-l">Небесное Я</div></div>
+      <div class="mnode sz-md col-terra p-right"><div class="mnode-n">1</div><div class="mnode-a">Маг</div><div class="mnode-l">Социум</div></div>
+      <div class="mnode sz-md col-sage p-bottom"><div class="mnode-n">9</div><div class="mnode-a">Отшельник</div><div class="mnode-l">Земное Я</div></div>
+      <div class="mnode sz-md col-gold p-left"><div class="mnode-n">22</div><div class="mnode-a">Шут</div><div class="mnode-l">Деньги</div></div>
+      <div class="mnode sz-sm col-rose p-tl"><div class="mnode-n">14</div><div class="mnode-a">Умер.</div></div>
+      <div class="mnode sz-sm col-mauve p-tr"><div class="mnode-n">6</div><div class="mnode-a">Влюб.</div></div>
+      <div class="mnode sz-sm col-sage p-br"><div class="mnode-n">19</div><div class="mnode-a">Солнце</div></div>
+      <div class="mnode sz-sm col-terra p-bl"><div class="mnode-n">10</div><div class="mnode-a">Колесо</div></div>
+    </div>
+  </div>
+
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">5</div>
+      <div class="card-meta">
+        <h3>Иерофант — Центр матрицы</h3>
+        <div class="planet" style="color:var(--rose)">A+B+C = 14+1+8 = 23→5</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Иерофант — пятый аркан. Не священник и не догма. Это архетип человека, который <strong>знает, зачем</strong>. Знает правила достаточно глубоко, чтобы понимать — когда их стоит соблюдать, а когда нарушить. Это мудрость системы изнутри, а не снаружи.</p>
+      <p>С этим арканом в центре матрицы твоя жизнь будет постоянно ставить тебя в ситуации, где нужно найти смысл. Не поверить чужому смыслу — а выработать свой. Каждый кризис, каждая потеря, каждая смена — это не случайность, а очередной раунд вопроса «зачем?».</p>
+      <p>Высокая вибрация Иерофанта: ты становишься для других тем самым человеком, который помогает найти ориентиры. Не навязывает — а показывает возможность. Люди будут приходить к тебе за этим, даже если ты сама не считаешь себя «учителем».</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-rose">Хранитель смысла</span>
+      <span class="tag t-rose">Поиск «зачем»</span>
+      <span class="tag t-rose">Ориентир для других</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ МАТРИЦА ГЛУБОКО ══════════════════════════ -->
+<section id="matrix-deep">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Матрица · Глубокий уровень</div><div class="schapter-line"></div></div>
+  <div class="stag stag-mauve">Все позиции матрицы</div>
+  <h2 class="stitle">Полный разбор каждой точки</h2>
+  <p class="slead">Теперь по каждой позиции отдельно — с полным значением аркана, его высокой и низкой вибрацией, и тем, что это конкретно значит для тебя.</p>
+
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">15</div>
+      <div class="card-meta">
+        <h3>Небесное Я — Аркан «Дьявол»</h3>
+        <div class="planet" style="color:var(--rose)">A+B = 14+1 = 15 · Высшая цель</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Аркан 15 — «Дьявол» — самый часто неправильно понимаемый аркан. <strong>Он не означает зло.</strong> Он означает привязанность, иллюзию цепей, страсти — и главное, то, что держит тебя только потому, что ты сама решаешь держаться.</p>
+      <p>На классическом изображении двое людей стоят прикованные к постаменту. Но цепи на их шеях свободно висят — они могут снять их сами, в любой момент. Дьявол здесь — это всё, что держит тебя не силой, а убеждением о своей несвободе.</p>
+      <p>В позиции Небесного Я это означает: твоя душа пришла научиться различать настоящие ограничения и придуманные. Страхи, ограничивающие убеждения, токсичные паттерны — это «цепи Дьявола». Твоя высшая задача — осознать их и снять. Не через борьбу, а через ясность. Осознанность — единственное оружие, которое здесь работает.</p>
+      <p>Высокая вибрация этого аркана: человек, который помогает другим увидеть свои иллюзии. Не указывает пальцем — а задаёт правильный вопрос. Рядом с такими людьми чужие «цепи» становятся заметны и вдруг кажутся снимаемыми.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-rose">Освобождение от иллюзий</span>
+      <span class="tag t-rose">Работа с тенью</span>
+      <span class="tag t-mauve">Высшее осознание</span>
+      <span class="tag t-ink">Иллюзии ограничений</span>
+    </div>
+  </div>
+
+  <div class="card cb-sage rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--sage)">9</div>
+      <div class="card-meta">
+        <h3>Земное Я — Аркан «Отшельник»</h3>
+        <div class="planet" style="color:var(--sage)">B+C = 1+8 = 9 · Земная реализация</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Отшельник — аркан мудрости, накопленной в тишине и переданной миру. Старик с фонарём на вершине горы. Он поднялся сам — и теперь освещает путь тем, кто идёт за ним. Это не одиночество ради одиночества. Это сознательное погружение для того, чтобы потом осветить путь другим.</p>
+      <p>В позиции Земного Я это говорит: твоя реализация в мире связана с глубиной. Ты не можешь быть «поверхностным специалистом» — тебе нужно понимать по-настоящему. Когда ты понимаешь глубоко — ты объясняешь так, что другие тоже понимают. Это редчайший дар.</p>
+      <p>Отшельник означает и физическую потребность в уединении. Ты восстанавливаешься в тишине — не в компании, не в шуме, а именно в одиночестве. Это не социофобия. Это то, как работает твоя батарея. Без регулярной «тишины» ты начинаешь терять себя в чужих энергиях — и первой это замечаешь как раздражительность или усталость без причины.</p>
+      <p>Отшельник + Иерофант в центре = человек, чья профессиональная реализация связана с передачей глубокого знания. Наставничество, экспертиза, контент, преподавание — всё, где ты передаёшь то, что прошла сама.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-sage">Мудрость через опыт</span>
+      <span class="tag t-sage">Нужна тишина</span>
+      <span class="tag t-sage">Передача знания</span>
+      <span class="tag t-mauve">Свет для других</span>
+    </div>
+  </div>
+
+  <div class="card cb-terra rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--terracotta)">1</div>
+      <div class="card-meta">
+        <h3>Социум — Аркан «Маг»</h3>
+        <div class="planet" style="color:var(--terracotta)">Месяц 01 = 1 · Манифестация</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Маг — первый аркан, чистая манифестация. На столе перед ним четыре инструмента: жезл (воля), кубок (чувства), меч (разум), пентакль (материя). Он умеет работать с каждым — и в этом его сила.</p>
+      <p>В социальной позиции Маг означает: в обществе ты проявляешься как человек многогранный. Быстро осваиваешь новые навыки, легко переключаешься между сферами, умеешь «подать» идею. Люди видят в тебе компетентность — иногда ещё до того, как ты успела её подтвердить делами.</p>
+      <p>Маг + Иерофант в центре — это сочетание «знает зачем + умеет как». Это профиль человека, который способен не просто делать, но и вдохновлять других на действие через собственный пример. Ты убеждаешь не аргументами — ты убеждаешь тем, что делаешь сама.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-terra">Манифестация</span>
+      <span class="tag t-terra">Многогранность</span>
+      <span class="tag t-terra">Природный авторитет</span>
+    </div>
+  </div>
+
+  <div class="card cb-gold rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">22</div>
+      <div class="card-meta">
+        <h3>Деньги и предки — Аркан «Шут»</h3>
+        <div class="planet" style="color:var(--gold)">A+C = 14+8 = 22 · Безграничный потенциал</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Двадцать два — Шут. Нулевой или последний аркан, в зависимости от колоды. Молодой человек на краю обрыва с котомкой и цветком, смотрящий в небо. Он делает шаг вперёд — не потому что не видит пропасти, а потому что доверяет.</p>
+      <p>В позиции денег 22 означает: твой финансовый потенциал буквально безграничен. Но есть условие. Шут открывает возможности только тогда, когда ты делаешь шаг без стопроцентной уверенности. Именно тогда, когда «страшно, но иду» — Шут помогает. Когда ты ждёшь гарантий — он молчит.</p>
+      <p>Родовая программа Шута в этой позиции означает: в твоём роду, скорее всего, были убеждения о ненадёжности денег — «деньги приходят и уходят», «нельзя рассчитывать на достаток», «богатство — это для других». Это не твои убеждения. Это унаследованные. И они поддаются переписыванию — осознанно, намеренно.</p>
+      <p>22 в линии денег — редкость. Это означает: ты способна создать финансовую реальность, которой не было в твоём роду. Буквально стать первой, кто сломал этот паттерн. Это огромная ответственность — и огромная свобода одновременно.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-gold">Безграничный потенциал</span>
+      <span class="tag t-gold">Деньги через доверие</span>
+      <span class="tag t-gold">Первая в роду</span>
+      <span class="tag t-ink">Страх ненадёжности</span>
+    </div>
+  </div>
+
+  <div class="pull gold rev">
+    Финансовая формула: Найди область со смыслом (Иерофант) → Изучи глубоко (Отшельник) → Действуй как Маг → Прыгни как Шут. Это не теория — это буквально архитектура твоей денежной судьбы.
+  </div>
+
+  <!-- КАРМА И ДРАКОН -->
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">8</div>
+      <div class="card-meta">
+        <h3>Карма предков — Аркан «Сила»</h3>
+        <div class="planet" style="color:var(--rose)">Год 1997→8 · Родовая программа</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Восьмёрка в позиции кармы предков — это история о силе и справедливости, которую твой род не до конца проработал. Аркан «Сила» изображает женщину, спокойно раскрывающую пасть льву. Без страха, без борьбы — просто с внутренней уверенностью.</p>
+      <p>В твоём роду, скорее всего, была тема силы, которой либо не хватало — кто-то из предков жил с ощущением бессилия перед обстоятельствами — либо с ней обращались неправильно. Твоя кармическая задача: найти здоровый способ обращения с собственной силой. Не через доминирование и не через жертвенность — а через то самое спокойное бесстрашие женщины со львом.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-rose">Родовая тема силы</span>
+      <span class="tag t-rose">Закрытие кармы</span>
+      <span class="tag t-sage">Здоровая власть</span>
+    </div>
+  </div>
+
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">6</div>
+      <div class="card-meta">
+        <h3>Хвост дракона — Аркан «Влюблённые»</h3>
+        <div class="planet" style="color:var(--mauve)">D+E = 15+9 = 24→6 · Прошлый опыт</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Хвост дракона — это то, с чем ты пришла. Опыт прошлых жизней или, если удобнее, унаследованные паттерны реагирования. Аркан «Влюблённые» здесь означает: в прошлом ты много энергии отдавала выбору между сердцем и разумом, между своими желаниями и ожиданиями близких.</p>
+      <p>Это проявляется как склонность жертвовать собой ради отношений, трудность с выбором когда «и то и то важно», поиск идеальной любви. Это не плохо — это просто твоя автоматическая реакция, зона «привычного». Хвост дракона — это то, к чему легко откатиться под давлением.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-mauve">Прошлый опыт отношений</span>
+      <span class="tag t-mauve">Жертвенность как паттерн</span>
+      <span class="tag t-ink">Зона «автопилота»</span>
+    </div>
+  </div>
+
+  <div class="card cb-terra rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--terracotta)">10</div>
+      <div class="card-meta">
+        <h3>Голова дракона — «Колесо Фортуны»</h3>
+        <div class="planet" style="color:var(--terracotta)">D+F = 15+22 = 37→10 · Точка назначения</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Голова дракона — это точка назначения. Колесо Фортуны — аркан судьбы, цикличности и поворотных точек. Твоё будущее связано с умением принимать перемены и работать с циклами жизни.</p>
+      <p>Люди с Колесом в Голове дракона живут «поворотными моментами» — их жизнь состоит из ярких переходов, новых циклов, неожиданных разворотов судьбы. Это не нестабильность — это формат. И чем лучше ты умеешь работать с переменами, тем лучше «крутится» твоё колесо.</p>
+      <p>Также Колесо означает связь с синхронизмом. Ты замечаешь знаки судьбы — и это не суеверие, это твоя природная способность. Люди, умеющие «читать» поворотные моменты, оказываются в нужном месте в нужное время не по случайности.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-terra">Колесо судьбы</span>
+      <span class="tag t-terra">Работа с циклами</span>
+      <span class="tag t-gold">Синхронизм</span>
+    </div>
+  </div>
+
+  <!-- ТОЧКА 40 ЛЕТ -->
+  <div class="card cb-gold rev" style="border:2px solid var(--gold2)">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">19</div>
+      <div class="card-meta">
+        <h3>Точка реализации в 40 лет — «Солнце»</h3>
+        <div class="planet" style="color:var(--gold)">G+A = 5+14 = 19 · Расцвет</div>
+        <div class="formula">Один из лучших арканов в этой позиции</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Аркан 19 — Солнце — самая светлая карта таро. Ребёнок на белой лошади, руки раскинуты, солнце за спиной. Радость, ясность, успех, расцвет, плоды многолетнего труда. В точке 40 лет — это обещание: всё, что ты строила и сеяла — начнёт светить.</p>
+      <p>Это не «потерпи, потом будет хорошо». Это конкретный переход в новое качество жизни около сорока лет. Солнце в этой позиции — одна из лучших комбинаций, которые вообще могут быть в матрице. Это означает, что зрелость для тебя будет настоящим расцветом, а не закатом.</p>
+      <p>Всё, что ты делаешь сейчас, — всё, что кажется «не замеченным», «не оценённым», «не окупившимся» — это семена. И они взойдут. У Солнца нет сомнений в этом.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-gold">Солнце</span>
+      <span class="tag t-gold">Расцвет после 40</span>
+      <span class="tag t-gold">Плоды долгого труда</span>
+      <span class="tag t-gold">Редкая позиция</span>
+    </div>
+  </div>
+
+  <div class="pull gold rev">
+    От Влюблённых (жертвую собой ради выбора) — к Колесу Фортуны (доверяю циклам и двигаюсь вместе с жизнью). От кармы Силы (борьба за власть) — к Солнцу в сорок лет. Это направление твоей личной эволюции.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ДИЗАЙН ЧЕЛОВЕКА ══════════════════════════ -->
+<section id="hd" class="s-sage">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система VII</div><div class="schapter-line"></div></div>
+  <div class="stag stag-sage">Дизайн Человека</div>
+  <h2 class="stitle">Твоя механика принятия решений</h2>
+  <p class="slead">Human Design — синтез астрологии, И-Цзин, каббалы и квантовой физики. Создан в 1987 году. Отвечает не на вопрос «кто ты», а на вопрос «как ты работаешь».</p>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">⚡</div>
+    <div>
+      <div class="ibox-title">Важное примечание</div>
+      <div class="ibox-text">Для 100% точного HD-расчёта нужно время рождения до минуты — оно определяет точные ворота и каналы. Ниже — вероятный профиль на основе 14.01.1997. Для полного расчёта нужны время и место рождения на mybodygraph.com.</div>
+    </div>
+  </div>
+
+  <div class="card cb-sage rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--sage)">МГ</div>
+      <div class="card-meta">
+        <h3>Вероятный тип — Манифестирующий Генератор</h3>
+        <div class="planet" style="color:var(--sage)">~37% населения · Стратегия: Реагируй и информируй</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>МГ — один из самых «живых» и непредсказуемых типов. Ты не просто генерируешь энергию (как Генератор) — ты умеешь инициировать и создавать одновременно, двигаясь нелинейно. Там, где другие идут по прямой — ты делаешь петли. И при этом нередко приходишь первой.</p>
+      <p>Суперсила МГ — способность делать несколько дел одновременно, причём хорошо. Другие типы видят это как «несфокусированность» или «разбросанность». На самом деле это другая биология: у МГ несколько активных каналов энергии, которые работают параллельно. Это не баг. Это архитектура.</p>
+      <p>Ключевая проблема МГ — нетерпеливость. Ты видишь финишную линию и хочешь прыгнуть сразу туда, пропуская промежуточные шаги. Это приводит к ошибкам и необходимости возвращаться. Парадокс МГ: замедление на этапе «как» — ускоряет в итоге.</p>
+      <p>Ещё одна особенность: МГ иногда бросает начатое на полпути, когда сакральный отклик говорит «больше не интересно». Это не ненадёжность — это биологическая необходимость двигаться только туда, где есть живой отклик. Дело, которое потеряло смысл для МГ, буквально начинает истощать. Ключ — научиться объяснять это окружающим, прежде чем бросать.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-sage">Неиссякаемая энергия</span>
+      <span class="tag t-sage">Нелинейность</span>
+      <span class="tag t-sage">Многозадачность</span>
+      <span class="tag t-ink">Нетерпеливость</span>
+    </div>
+  </div>
+
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">1/3</div>
+      <div class="card-meta">
+        <h3>Вероятный профиль — Исследователь / Мученик</h3>
+        <div class="planet" style="color:var(--mauve)">Линия 1 + Линия 3</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Первая линия — «Исследователь». Это сознательная часть: перед действием тебе нужен фундамент. Изучить, разобраться, понять механику. Ты физически не можешь действовать уверенно, не зная основ — и это абсолютно нормально для первой линии. Это не промедление, это стратегическое строительство базы.</p>
+      <p>Третья линия — «Мученик». Бессознательная часть: твой главный способ познания — через пробы и ошибки. Ты узнаёшь, как правильно, через опыт «как не нужно». Это не невезение. Это буквально твоя программа обучения. Люди 3/6 вокруг тебя могут удивляться, почему ты «наступаешь на грабли» — но именно через эти грабли ты накапливаешь знания, которые другим недоступны.</p>
+      <p>Сочетание 1/3: ты хочешь знать всё заранее (линия 1), но судьба учит тебя через эксперимент (линия 3). Это постоянное напряжение между «подготовиться» и «попробовать». Лучшая стратегия — изучать основы, а потом не бояться экспериментировать на практике.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-mauve">Исследователь</span>
+      <span class="tag t-mauve">Обучение через опыт</span>
+      <span class="tag t-mauve">«Ошибки» как метод</span>
+    </div>
+  </div>
+
+  <div class="pull sage rev">
+    Стратегия МГ: «Реагируй → Информируй → Действуй». Не инициируй каждый раз самостоятельно — сначала дождись телесного отклика. Потом скажи окружению что собираешься делать. Потом действуй. Пропускаешь первый шаг — и жизнь превращается в сопротивление.
+  </div>
+
+  <div class="card cb-terra rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--terracotta)">41</div>
+      <div class="card-meta">
+        <h3>Вероятные ворота Солнца — Ворота 41</h3>
+        <div class="planet" style="color:var(--terracotta)">14 января · Козерог 24° · «Фантазия / Сжатие»</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Ворота 41 — одни из самых интересных во всей И-Цзин. «Сжатие» или «Фантазия». Это ворота новых начинаний, рождённых из силы образа. Люди с этими воротами буквально «видят» будущее — не в мистическом смысле, а в смысле: они живут с ярким внутренним образом того, каким всё должно быть, и неосознанно движутся к нему.</p>
+      <p>В сочетании с МГ-типом: ты не просто видишь образ желаемого — ты умеешь его манифестировать. Твои «мечты» — это не эскапизм. Это рабочие чертежи. Сила 41-х ворот именно в том, что образ держится живым достаточно долго, чтобы реализоваться.</p>
+    </div>
+    <div class="tags">
+      <span class="tag t-terra">Ворота 41</span>
+      <span class="tag t-terra">Образ будущего</span>
+      <span class="tag t-terra">Манифестация через мечту</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ЛО ШУ ══════════════════════════ -->
+<section id="loshu">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Система VIII</div><div class="schapter-line"></div></div>
+  <div class="stag stag-gold">Ло Шу</div>
+  <h2 class="stitle">Китайский квадрат — 4000 лет мудрости</h2>
+  <p class="slead">Священный квадрат, начертанный на панцире черепахи. Каждая клетка — стихия и сторона света. Твои цифры рассказывают историю о том, какие стихии в тебе сильны, а какие требуют внимания.</p>
+
+  <div class="pyth-wrap rev">
+    <div class="pyth-digits">1 · 4 · 0 · 1 · 1 · 9 · 9 · 7</div>
+    <div class="g3" style="max-width:250px">
+      <div class="gc miss"><div class="gl">ЮВ-4</div><div class="gn">–</div><div class="gm">Дерево</div></div>
+      <div class="gc has"><div class="gl">Ю-9</div><div class="gn">99</div><div class="gm">Огонь</div></div>
+      <div class="gc miss"><div class="gl">ЮЗ-2</div><div class="gn">–</div><div class="gm">Земля</div></div>
+      <div class="gc miss"><div class="gl">В-3</div><div class="gn">–</div><div class="gm">Дерево</div></div>
+      <div class="gc miss"><div class="gl">Ц-5</div><div class="gn">–</div><div class="gm">Центр</div></div>
+      <div class="gc miss"><div class="gl">З-6</div><div class="gn">–</div><div class="gm">Небо</div></div>
+      <div class="gc miss"><div class="gl">СВ-8</div><div class="gn">–</div><div class="gm">Гора</div></div>
+      <div class="gc has"><div class="gl">С-1</div><div class="gn">111</div><div class="gm">Карьера</div></div>
+      <div class="gc has"><div class="gl">СЗ-7</div><div class="gn">7</div><div class="gm">Металл</div></div>
+    </div>
+  </div>
+
+  <div class="card cb-rose rev">
+    <div class="card-body">
+      <p>🔥 <strong style="color:var(--rose)">Огонь (9) — двойной Юг:</strong> Очень сильная энергия публичности и харизмы. Тебя видят. Тебя замечают. Двойной Огонь на Юге означает природный магнетизм — особенно когда ты вдохновлена. В эти моменты ты буквально притягиваешь людей и обстоятельства.</p>
+      <p>💧 <strong style="color:var(--sage)">Карьера (1) — тройная Вода:</strong> Тройная единица на Севере — это карьерная сила. Твоя профессиональная линия в Ло Шу исключительно сильна. Люди видят в тебе специалиста и лидера — иногда раньше, чем ты сама начинаешь себя такой считать.</p>
+      <p>⚙️ <strong style="color:var(--gold)">Металл (7) — одиночная семёрка:</strong> Есть интуиция и деловая хватка в умеренных дозах. Не перегружена аналитикой — и это хорошо для скорости принятия решений, характерной для Меркурия.</p>
+      <p>🌿 <strong style="color:var(--terracotta)">Зоны роста — Дерево и Земля:</strong> Отсутствуют 3, 4 (Дерево = последовательность, планирование) и 2, 6 (Земля = стабильность, быт, забота о теле). Сознательно добавляй элементы структуры и «заземления» в жизнь — они не возникнут сами.</p>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    Совет Ло Шу: окружи себя живыми растениями, добавь дерево в пространство, веди финансовый учёт. Это звучит банально — но буквально «закрывает» зияющие пробелы в твоей энергетической карте.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ПРОГНОЗ ══════════════════════════ -->
+<section id="years" class="s-rose">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Прогноз</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Личные года</div>
+  <h2 class="stitle">Климат твоих следующих семи лет</h2>
+  <p class="slead">Каждый год несёт свою энергию. Не предсказание — это климат. Зная его, планируешь умнее.</p>
+
+  <table class="tbl rev">
+    <thead><tr><th>Год</th><th>Число</th><th>Энергия</th><th>Твоя задача</th></tr></thead>
+    <tbody>
+      <tr class="now">
+        <td><strong>2024</strong></td>
+        <td><span class="yn">5</span></td>
+        <td><div class="ylabel">Перемены · Свобода</div>Год твоего числа — двойная энергия пятёрки</td>
+        <td>Разрывай старые шаблоны. Пробуй новое. Этот год буквально создан под твою природу</td>
+      </tr>
+      <tr>
+        <td><strong>2025</strong></td>
+        <td><span class="yn">6</span></td>
+        <td><div class="ylabel">Дом · Ответственность</div>Год семьи, отношений и заботы</td>
+        <td>Приземлись. Укрепи близкие связи. Позволь себе нуждаться в других</td>
+      </tr>
+      <tr>
+        <td><strong>2026</strong></td>
+        <td><span class="yn">7</span></td>
+        <td><div class="ylabel">Поиск · Глубина</div>Год внутренней работы и познания</td>
+        <td>Учись, исследуй, погружайся. Не торопи внешние результаты — они придут позже</td>
+      </tr>
+      <tr>
+        <td><strong>2027</strong></td>
+        <td><span class="yn">8</span></td>
+        <td><div class="ylabel">Власть · Результат</div>Год материальных достижений</td>
+        <td>Строй, инвестируй, реализовывай. Всё накопленное — теперь в действие</td>
+      </tr>
+      <tr>
+        <td><strong>2028</strong></td>
+        <td><span class="yn">9</span></td>
+        <td><div class="ylabel">Завершение · Отпускание</div>Финал девятилетнего цикла</td>
+        <td>Отпускай всё, что больше не твоё. Это не потеря — это освобождение</td>
+      </tr>
+      <tr>
+        <td><strong>2029</strong></td>
+        <td><span class="yn">1</span></td>
+        <td><div class="ylabel">Новый цикл · Начало</div>Старт следующего 9-летия</td>
+        <td>Сажай семена. Всё, что начнёшь в 2029 — определит следующие 9 лет</td>
+      </tr>
+      <tr>
+        <td><strong>2030</strong></td>
+        <td><span class="yn">2</span></td>
+        <td><div class="ylabel">Партнёрство · Терпение</div>Год союзов и сотрудничества</td>
+        <td>Ищи партнёров. Учись слушать. Двойка требует терпения — и вознаграждает его</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">✨</div>
+    <div>
+      <div class="ibox-title">2024 — резонансный год для тебя</div>
+      <div class="ibox-text">Личный год 5 при жизненном пути 5 — это «резонансный год». Твоя природная энергия совпадает с годовой вибрацией. Такое бывает раз в девять лет. Если есть время для большого шага — это прямо сейчас.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ЛЮБОВЬ ══════════════════════════ -->
+<section id="love" class="s-mauve">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Отношения</div><div class="schapter-line"></div></div>
+  <div class="stag stag-mauve">Любовь и совместимость</div>
+  <h2 class="stitle">Пятёрка в любви — это вихрь</h2>
+  <p class="slead">Яркая, живая, непредсказуемая. Партнёру нужна либо особая гибкость, либо особая уверенность в себе — а лучше и то, и другое одновременно.</p>
+
+  <div class="compat-grid rev">
+    <div class="compat-c great"><div class="compat-n">1</div><div class="compat-l">Сильный союз</div></div>
+    <div class="compat-c great"><div class="compat-n">3</div><div class="compat-l">Идеально</div></div>
+    <div class="compat-c great"><div class="compat-n">7</div><div class="compat-l">Глубина</div></div>
+    <div class="compat-c good"><div class="compat-n">5</div><div class="compat-l">Огонь</div></div>
+    <div class="compat-c good"><div class="compat-n">9</div><div class="compat-l">Гармония</div></div>
+    <div class="compat-c hard"><div class="compat-n">4</div><div class="compat-l">Сложно</div></div>
+  </div>
+
+  <div class="card cb-mauve rev">
+    <div class="card-body">
+      <p><strong style="color:var(--sage)">С единицей:</strong> Мощный союз двух лидеров. Единица даёт пятёрке ощущение направления — то, чего ей иногда не хватает. Пятёрка даёт единице лёгкость, игру и неожиданные повороты. Главное — не превращать отношения в соревнование.</p>
+      <p><strong style="color:var(--sage)">С тройкой:</strong> Самый «весёлый» союз в нумерологии. Оба любят общение, свободу и новизну. Риск: оба могут избегать серьёзных разговоров, прячась за позитивом и юмором. Нужна сознательная работа на уровне глубины.</p>
+      <p><strong style="color:var(--sage)">С семёркой:</strong> Неожиданно глубокие отношения. Число личности пятёрки — это семёрка. Есть что-то притягательное и загадочное между ними. Снаружи кажется «они такие разные», а внутри — очень много общего.</p>
+      <p><strong style="color:var(--gold)">С другой пятёркой:</strong> Ярко, весело, хаотично. Оба понимают потребность в свободе — и это облегчает жизнь. Но двое непостоянных — это вдвойне нужна договорённость о том, что держит вас вместе.</p>
+      <p><strong style="color:var(--rose)">С четвёркой:</strong> Самый сложный союз. Четвёрка хочет стабильности и предсказуемости — именно то, что пятёрка не умеет давать от природы. Требует огромной взаимной работы и уважения к разным потребностям.</p>
+    </div>
+  </div>
+
+  <div class="card cb-rose rev">
+    <div class="card-body">
+      <p style="font-size:15px"><strong>Паттерн из матрицы (хвост — Влюблённые):</strong> В прошлом ты жертвовала собой ради выбора. Делала «правильно» вместо «по-своему». Угождала вместо того, чтобы быть. Этот паттерн будет возникать снова и снова — особенно в романтических отношениях. Замечать его — уже половина работы.</p>
+      <p style="font-size:15px"><strong>Главная ловушка пятёрки в любви:</strong> Страх обязательств — не потому что не любит, а потому что боится потерять себя. Настоящая свобода — это когда ты выбираешь остаться, а не когда ты просто не можешь уйти. Разница огромная.</p>
+      <p style="font-size:15px"><strong>Что ты несёшь партнёру:</strong> Лёгкость, живость, неожиданные повороты, умение находить радость в мелочах. Рядом с тобой жизнь перестаёт быть скучной. Это очень ценный дар — не все это понимают, пока не окажутся с тобой рядом.</p>
+    </div>
+  </div>
+
+  <div class="pull mauve rev">
+    Мастер-число 11 в позиции душевного порыва означает, что в любви ты ищешь не просто партнёра — ты ищешь человека, с которым можно говорить о настоящем. О том, что важно. О том, что болит. Это делает тебя избирательной — и это правильно.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ЧАКРЫ ══════════════════════════ -->
+<section id="chakra">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Энергетика</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Чакровый профиль</div>
+  <h2 class="stitle">Нумерологический портрет чакр</h2>
+  <p class="slead">Каждое число связано с определённым энергетическим центром. Твои числа рисуют конкретный чакровый портрет — где энергия сильна, а где требует внимания.</p>
+
+  <div class="pyth-wrap rev">
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#CC1111"></div>
+      <div class="ch-name" style="color:#AA1111">Муладхара</div>
+      <div class="ch-track"><div class="ch-fill" style="width:48%;background:linear-gradient(90deg,#CC1111,#FF4444)"></div></div>
+      <div class="ch-pct">48%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#E06010"></div>
+      <div class="ch-name" style="color:#B05010">Свадхистхана</div>
+      <div class="ch-track"><div class="ch-fill" style="width:82%;background:linear-gradient(90deg,#E06010,#FF9040)"></div></div>
+      <div class="ch-pct">82%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#D4A020"></div>
+      <div class="ch-name" style="color:#A07010">Манипура</div>
+      <div class="ch-track"><div class="ch-fill" style="width:75%;background:linear-gradient(90deg,#D4A020,#FFD040)"></div></div>
+      <div class="ch-pct">75%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#20AA55"></div>
+      <div class="ch-name" style="color:#107A3A">Анахата</div>
+      <div class="ch-track"><div class="ch-fill" style="width:88%;background:linear-gradient(90deg,#20AA55,#50DD88)"></div></div>
+      <div class="ch-pct">88%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#1888CC"></div>
+      <div class="ch-name" style="color:#0A5A99">Вишудха</div>
+      <div class="ch-track"><div class="ch-fill" style="width:95%;background:linear-gradient(90deg,#1888CC,#40AAFF)"></div></div>
+      <div class="ch-pct">95%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#4455DD"></div>
+      <div class="ch-name" style="color:#2233AA">Аджна</div>
+      <div class="ch-track"><div class="ch-fill" style="width:90%;background:linear-gradient(90deg,#4455DD,#7788FF)"></div></div>
+      <div class="ch-pct">90%</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-dot" style="background:#9930BB"></div>
+      <div class="ch-name" style="color:#6A2288">Сахасрара</div>
+      <div class="ch-track"><div class="ch-fill" style="width:80%;background:linear-gradient(90deg,#9930BB,#CC60EE)"></div></div>
+      <div class="ch-pct">80%</div>
+    </div>
+  </div>
+
+  <div class="card cb-rose rev">
+    <div class="card-body">
+      <p>💙 <strong style="color:#1888CC">Вишудха (95%) — твоя доминирующая чакра.</strong> Горловой центр — коммуникация, слово, голос. Число 5 Меркурия + халдейская тройка = сверхактивная горловая чакра. Слова — твой главный инструмент. Когда Вишудха «перегружена» — появляется либо слишком много слов, либо, напротив, замолчание о самом важном. Следи за обоими крайностями.</p>
+      <p>💙 <strong style="color:#4455DD">Аджна (90%) — мощный третий глаз.</strong> Двойка девяток + мастер-число 11 + семёрка личности = очень активный центр интуиции. Ты видишь паттерны и структуры там, где другие видят хаос. Доверяй этому видению — оно надёжнее, чем ты думаешь.</p>
+      <p>💚 <strong style="color:#20AA55">Анахата (88%) — открытое сердце.</strong> Мастер-число 11 и девятка имени открывают сердечный центр. Ты умеешь чувствовать людей глубоко и искренне. Риск: брать на себя слишком много чужой боли, особенно с хвостом «Влюблённых» в матрице.</p>
+      <p>🔴 <strong style="color:#CC1111">Муладхара (48%) — зона внимания.</strong> Пятёрка по природе «не заземлена». Корневая чакра требует сознательной работы: режим, физическая нагрузка, финансовая стабильность как основа, а не ограничение. Без этого «фундамента» даже самая высокая башня шатается.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ АНГЕЛЬСКИЕ ЧИСЛА ══════════════════════════ -->
+<section id="angel" class="s-gold">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Знаки</div><div class="schapter-line"></div></div>
+  <div class="stag stag-gold">Ангельские числа</div>
+  <h2 class="stitle">Числа, которые говорят именно с тобой</h2>
+  <p class="slead">Числа, которые ты видишь слишком часто — не случайность. Для пятёрки с мастер-числом 11 это особенно актуально.</p>
+
+  <div class="angel-grid rev">
+    <div class="angel-c">
+      <div class="angel-n">14</div>
+      <div class="angel-name">Умеренность в движении</div>
+      <div class="angel-desc">Твоё личное число. Когда видишь 14 — это сигнал: ты идёшь своей дорогой. Остановись и почувствуй это.</div>
+    </div>
+    <div class="angel-c">
+      <div class="angel-n">11:11</div>
+      <div class="angel-name">Портал намерения</div>
+      <div class="angel-desc">С мастер-числом 11 ты «притягиваешь» 11:11. В этот момент — сформулируй намерение. Это работает буквально.</div>
+    </div>
+    <div class="angel-c">
+      <div class="angel-n">55</div>
+      <div class="angel-name">Двойная перемена</div>
+      <div class="angel-desc">Самый мощный знак для пятёрки. Большие перемены рядом — и они именно для тебя, не вопреки тебе.</div>
+    </div>
+    <div class="angel-c">
+      <div class="angel-n">555</div>
+      <div class="angel-name">Огромный сдвиг</div>
+      <div class="angel-desc">Когда видишь 555 — что-то в жизни вот-вот изменится кардинально. Не сопротивляйся. Шут не боится прыгать.</div>
+    </div>
+    <div class="angel-c">
+      <div class="angel-n">95</div>
+      <div class="angel-name">Закрой старое</div>
+      <div class="angel-desc">Завершение (9) ради свободы (5). Закрой что-то, что держит тебя — и появится место для нового.</div>
+    </div>
+    <div class="angel-c">
+      <div class="angel-n">19</div>
+      <div class="angel-name">Солнце идёт</div>
+      <div class="angel-desc">Напоминание: твоё Солнце в 40 лет — это обещание. Всё, что делаешь сейчас — семена для него.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ТЕНЬ ══════════════════════════ -->
+<section id="shadow">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Честный разговор</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Тень и вызовы</div>
+  <h2 class="stitle">То, о чём не говорят в красивых разборах</h2>
+  <p class="slead">Настоящий нумерологический портрет — это не только дары. Это ещё и честный разговор о тех паттернах, которые мешают. Не чтобы расстроить — а чтобы увидеть.</p>
+
+  <div class="card cb-rose rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--rose)">5</div>
+      <div class="card-meta">
+        <h3>Тень пятёрки — Страх глубины</h3>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Пятёрка бежит от глубины — не потому что не способна, а потому что глубина требует остановиться. А остановиться — страшно. Вдруг окажется, что в тишине есть что-то неприятное? Поэтому пятёрки иногда заполняют жизнь движением, новизной и общением — лишь бы не сидеть с собой.</p>
+      <p>Это проявляется как: постоянная занятость без конкретной цели, переключение между проектами не потому что закончила, а потому что стало «скучно», отношения вширь а не вглубь. Это не плохой характер. Это защитный механизм пятёрки.</p>
+    </div>
+  </div>
+
+  <div class="card cb-mauve rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--mauve)">11</div>
+      <div class="card-meta">
+        <h3>Тень одиннадцатки — Тревожность</h3>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>Мастер-число 11 несёт в себе постоянное внутреннее напряжение. Это проявляется как фоновая тревожность, которая есть всегда — даже когда «всё хорошо». Перфекционизм как попытка контролировать тревогу. Склонность прокручивать разговоры и ситуации снова и снова.</p>
+      <p>Одиннадцатки часто не понимают, откуда это напряжение. Кажется, что «я просто такой человек». Но это не личностная черта — это особенность работы нервной системы с такой чувствительностью. Осознание этого уже снижает давление.</p>
+    </div>
+  </div>
+
+  <div class="card cb-gold rev">
+    <div class="card-header">
+      <div class="card-num" style="color:var(--gold)">22</div>
+      <div class="card-meta">
+        <h3>Тень Шута — Саботаж перед прыжком</h3>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>22 в линии денег — безграничный потенциал. Но Шут несёт и свою тень: страх прыжка. Именно тогда, когда возможность реальна и конкретна — появляется желание подождать, убедиться, подготовиться ещё немного. «Я ещё не готова». «Сначала надо...». Это и есть родовая программа Шута, которая говорит: «деньги ненадёжны, лучше не рисковать».</p>
+      <p>Ловить этот момент — когда возможность есть, страх есть, и ты снова откладываешь — и делать шаг именно здесь. Это и есть работа с этим арканом.</p>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    Знать свои теневые паттерны — это не самокритика. Это навигация. Ты не можешь обойти то, чего не видишь.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ДАРЫ ══════════════════════════ -->
+<section id="gifts" class="s-sage">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Твои дары</div><div class="schapter-line"></div></div>
+  <div class="stag stag-sage">Что ты несёшь в мир</div>
+  <h2 class="stitle">То, что есть в тебе и больше нигде</h2>
+  <p class="slead">После честного разговора о тени — самое время поговорить о том, что ты несёшь в мир. Не как «позитивная аффирмация», а как реальный анализ твоего нумерологического профиля.</p>
+
+  <div class="card cb-sage rev">
+    <div class="card-body">
+      <p>🌿 <strong style="color:var(--sage)">Дар понимания структуры за хаосом (Бина, гематрия имени).</strong> Ты видишь, чем всё закончится, когда другие ещё только начинают. Видишь паттерны. Это делает тебя ценнейшим человеком в любой кризисной ситуации — потому что ты не паникуешь, а видишь структуру.</p>
+      <p>🌿 <strong style="color:var(--sage)">Дар адаптации (двойной Меркурий).</strong> Ты можешь работать в любых условиях. Менять направление без потери себя. Находить возможности там, где другие видят тупик. Это не везение — это навык, вшитый в твою природу.</p>
+      <p>🌿 <strong style="color:var(--sage)">Дар коммуникации (халдейская тройка, Вишудха 95%).</strong> Ты умеешь говорить так, что люди слышат. Не потому что говоришь правильные слова — а потому что говоришь из правды. Это чувствуется. И это открывает двери.</p>
+      <p>🌿 <strong style="color:var(--mauve)">Дар чувствования людей (мастер-число 11).</strong> Ты знаешь, что человек чувствует, раньше чем он сам это осознал. Это делает тебя редким другом, партнёром и коллегой — если ты не прячешь этот дар из страха «показаться странной».</p>
+      <p>🌿 <strong style="color:var(--gold)">Дар новых начинаний (Шут 22).</strong> Ты способна начать с нуля там, где другие не могут. Страх потери у тебя другой — ты боишься потерять свободу, но не материальное. Это даёт тебе смелость начинать заново, которой у многих нет.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ ПРОРОЧЕСТВО ══════════════════════════ -->
+<section style="padding:40px 20px">
+<div class="wrap">
+  <div class="prophecy rev">
+    <div class="prophecy-sym">✦ ✦ ✦</div>
+    <p>
+      Карина, 14 января 1997-го.<br><br>
+      Двойной Меркурий. Мастер-число 11. Шут в деньгах. <strong>Солнце в сорок лет.</strong><br><br>
+      Ты создана не для одной роли — ты создана для движения.<br>
+      Каждый раз, когда тебе становится тесно — это не каприз.<br>
+      Это твоя природа говорит: <em>пора на следующий уровень.</em><br><br>
+      Слушай её.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════ МИНИ-КУРС ══════════════════════════ -->
+<section id="course" class="s-stripe">
+<div class="wrap">
+  <div class="schapter"><div class="schapter-line"></div><div class="schapter-num">Обучение</div><div class="schapter-line"></div></div>
+  <div class="stag stag-rose">Мини-курс</div>
+  <h2 class="stitle">Как читать всё это самой</h2>
+  <p class="slead">Ты только что прочитала огромный разбор. Теперь давай разберём основы — чтобы ты могла считать числа и читать матрицы для себя и других.</p>
+
+  <div class="module" id="m1">
+    <div class="mod-head" onclick="toggle('m1')">
+      <div class="mod-num">1</div>
+      <div class="mod-title">Как считать основные числа</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">📐</span><div><strong>Жизненный путь:</strong> Сложи все цифры даты рождения. Своди к 1–9, останавливаясь на 11, 22, 33. Для 14.01.1997: 1+4+0+1+1+9+9+7=32→5. Или поэлементно: 14→5, 01→1, 1997→8, итого 5+1+8=14→5.</div></div>
+      <div class="lesson"><span class="li">✍️</span><div><strong>Число имени (пифагорейское):</strong> A=1, B=2, C=3, D=4, E=5, F=6, G=7, H=8, I=9, J=1, K=2, L=3, M=4, N=5, O=6, P=7, Q=8, R=9, S=1, T=2, U=3, V=4, W=5, X=6, Y=7, Z=8. Сложи все буквы, сведи к 1–9.</div></div>
+      <div class="lesson"><span class="li">💎</span><div><strong>Мастер-числа 11, 22, 33:</strong> Не сводятся дальше. Если в процессе расчёта получилось 11 — стоп. 11 — это самостоятельное число, не двойка.</div></div>
+      <div class="lesson"><span class="li">📅</span><div><strong>Личный год:</strong> День + месяц рождения + текущий год, сведи к 1–9. Меняется в день рождения, а не 1 января.</div></div>
+      <div class="lesson"><span class="li">👂</span><div><strong>Душевный порыв:</strong> Только гласные буквы имени. A=1, E=5, I=9, O=6, U=3 (по пифагорейской). Если сумма = 11 или 22 — не сводить.</div></div>
+      <div class="lesson"><span class="li">🎭</span><div><strong>Число личности:</strong> Только согласные буквы имени. Показывает «маску», которую видят другие.</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m2">
+    <div class="mod-head" onclick="toggle('m2')">
+      <div class="mod-num">2</div>
+      <div class="mod-title">Значения чисел 1–9 и мастер-числа</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">1</span><div><strong>Единица — Лидер · Солнце:</strong> Независимость, инициатива, первопроходец. Урок: научиться принимать помощь и не тащить всё в одиночку.</div></div>
+      <div class="lesson"><span class="li">2</span><div><strong>Двойка — Дипломат · Луна:</strong> Сотрудничество, чуткость, баланс противоположностей. Урок: отстаивать себя, не растворяясь в других.</div></div>
+      <div class="lesson"><span class="li">3</span><div><strong>Тройка — Творец · Юпитер:</strong> Самовыражение, слово, радость, коммуникация. Урок: доводить начатое до конца.</div></div>
+      <div class="lesson"><span class="li">4</span><div><strong>Четвёрка — Строитель · Уран:</strong> Порядок, дисциплина, фундамент, надёжность. Урок: принять ограничения как инструмент роста, а не тюрьму.</div></div>
+      <div class="lesson"><span class="li">5</span><div><strong>Пятёрка — Путешественник · Меркурий:</strong> Перемены, свобода, коммуникация, адаптивность. Урок: научиться завершать и не бежать от глубины.</div></div>
+      <div class="lesson"><span class="li">6</span><div><strong>Шестёрка — Кормилец · Венера:</strong> Любовь, семья, красота, ответственность. Урок: давать из силы, а не из страха потерять любовь.</div></div>
+      <div class="lesson"><span class="li">7</span><div><strong>Семёрка — Мистик · Нептун:</strong> Анализ, тайны, духовность, одиночество как ресурс. Урок: доверять миру и выходить из башни из слоновой кости.</div></div>
+      <div class="lesson"><span class="li">8</span><div><strong>Восьмёрка — Архитектор · Сатурн:</strong> Власть, деньги, стратегия, кармическая ответственность. Урок: власть над собой прежде власти над другими.</div></div>
+      <div class="lesson"><span class="li">9</span><div><strong>Девятка — Гуманист · Марс:</strong> Завершение, мудрость, служение, притяжение важных моментов. Урок: отпускать с лёгкостью, без сожаления.</div></div>
+      <div class="lesson"><span class="li">✦</span><div><strong>11 — Посланник · Уран:</strong> Интуиция, чувствительность, просветление. Труднейший путь с высочайшим потенциалом. Урок: доверять своей интуиции и не заглушать её «разумными» объяснениями.</div></div>
+      <div class="lesson"><span class="li">✦</span><div><strong>22 — Мастер-строитель · Нептун:</strong> Строительство в глобальном масштабе. Редчайшее число — способность воплощать самые смелые мечты через систему и труд.</div></div>
+      <div class="lesson"><span class="li">✦</span><div><strong>33 — Мастер-учитель:</strong> Высшая форма любви и служения. Встречается крайне редко. Полное посвящение другим через собственную трансформацию.</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m3">
+    <div class="mod-head" onclick="toggle('m3')">
+      <div class="mod-num">3</div>
+      <div class="mod-title">Матрица судьбы — как строить самой</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">🃏</span><div><strong>Пять основных точек:</strong> A = число дня (14→14 или если >22 то сводить). B = число месяца. C = сумма цифр года (1997→1+9+9+7=26→8). D = A+B (если >22 → сводить). E = B+C. F = A+C. Центр = A+B+C.</div></div>
+      <div class="lesson"><span class="li">🃏</span><div><strong>Ограничение 22:</strong> Все точки матрицы — числа от 1 до 22. Если сумма > 22, складывай цифры: 23→5, 37→10, 46→10.</div></div>
+      <div class="lesson"><span class="li">🃏</span><div><strong>Дракон:</strong> Хвост = D+E (сводить). Голова = D+F. Это кармическое направление: хвост — откуда пришла, голова — куда идёшь.</div></div>
+      <div class="lesson"><span class="li">🃏</span><div><strong>Точка 40 лет:</strong> Центр + A (число дня). Это аркан твоего расцвета.</div></div>
+      <div class="lesson"><span class="li">💡</span><div><strong>Читай арканы:</strong> 1=Маг, 2=Жрица, 3=Императрица, 4=Император, 5=Иерофант, 6=Влюблённые, 7=Колесница, 8=Сила, 9=Отшельник, 10=Колесо, 11=Справедливость, 12=Повешенный, 13=Смерть (трансформация!), 14=Умеренность, 15=Дьявол, 16=Башня, 17=Звезда, 18=Луна, 19=Солнце, 20=Суд, 21=Мир, 22=Шут.</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m4">
+    <div class="mod-head" onclick="toggle('m4')">
+      <div class="mod-num">4</div>
+      <div class="mod-title">Квадрат Пифагора — полная инструкция</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">📊</span><div><strong>Строим:</strong> Выписываем все цифры даты (включая нули — они убирают энергию соседней цифры в некоторых школах). Считаем, сколько раз встречается каждая цифра от 1 до 9.</div></div>
+      <div class="lesson"><span class="li">📊</span><div><strong>Строки:</strong> 7-8-9 = удача, долг, духовная память. 4-5-6 = здоровье тела, логика, отношение к земному. 1-2-3 = воля, биоэнергетика, интерес к жизни.</div></div>
+      <div class="lesson"><span class="li">📊</span><div><strong>Столбцы:</strong> 1-4-7 = самореализация и достаток. 2-5-8 = жизненная сила и энергия. 3-6-9 = семья и духовность.</div></div>
+      <div class="lesson"><span class="li">📊</span><div><strong>Диагонали:</strong> 1-5-9 = диагональ воли (цель, путь, завершение). 3-5-7 = диагональ духа (интуиция и мистика). Полностью заполненная — сильнейшее качество.</div></div>
+      <div class="lesson"><span class="li">💡</span><div><strong>Количество значит всё:</strong> 0 = нет этого качества от природы (задача жизни). 1 = есть, но слабо. 2 = норма. 3 = сила. 4+ = перебор, который мешает (как три единицы и контроль).</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m5">
+    <div class="mod-head" onclick="toggle('m5')">
+      <div class="mod-num">5</div>
+      <div class="mod-title">Human Design — с чего начать</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">⚡</span><div><strong>Типы (самое главное):</strong> Манифестор (9%) — инициирует, стратегия «информируй». Генератор (37%) — создаёт через отклик, стратегия «реагируй». МГ (37%) — многозадачный Генератор. Проектор (20%) — направляет, стратегия «жди приглашения». Рефлектор (1%) — отражает, стратегия «жди лунного цикла».</div></div>
+      <div class="lesson"><span class="li">🎯</span><div><strong>Авторитет (второе по важности):</strong> Откуда исходит твоё правильное решение? Сакральный (тело говорит «угу»/«нет»), Эмоциональный (нужно время на волну чувств), Селезёнка (мгновенная интуиция), Эго (то, что хочет воля) и другие.</div></div>
+      <div class="lesson"><span class="li">🔢</span><div><strong>Профиль:</strong> Два числа через дробь. Первое — сознательная «роль» (знаешь о ней). Второе — бессознательный «талант» (другие видят в тебе, ты сама удивляешься). 6 линий: 1=Исследователь, 2=Отшельник, 3=Мученик, 4=Оппортунист, 5=Еретик, 6=Ролевая модель.</div></div>
+      <div class="lesson"><span class="li">🏛️</span><div><strong>Центры:</strong> Определённый = стабильная энергия, которую ты транслируешь. Неопределённый = место, где ты усиливаешь чужие энергии и легко «заряжаешься» чужим состоянием.</div></div>
+      <div class="lesson"><span class="li">🌐</span><div><strong>Где взять карту бесплатно:</strong> mybodygraph.com или jovianarchive.com. Нужны точные дата, время (до минуты!) и место рождения.</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m6">
+    <div class="mod-head" onclick="toggle('m6')">
+      <div class="mod-num">6</div>
+      <div class="mod-title">Как применять всё это в реальной жизни</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">🎯</span><div><strong>Не будь фаталистом.</strong> Нумерология — карта местности, не маршрут. Она не говорит, куда идти — она показывает, что там есть. Ты всегда сама выбираешь дорогу. «Сложный аркан» — это урок, не приговор.</div></div>
+      <div class="lesson"><span class="li">📅</span><div><strong>Личный год — главный инструмент планирования.</strong> 1 = начинай новое. 4 = строй систему. 7 = учись и исследуй, не торопи результат. 8 = реализуй накопленное. 9 = завершай и отпускай. Действия в резонансе с годом работают ощутимо лучше.</div></div>
+      <div class="lesson"><span class="li">👥</span><div><strong>Числа для понимания людей.</strong> Знаешь дату рождения — понимаешь базовые установки. Это не инструмент манипуляции, а инструмент эмпатии. «Почему он так реагирует» — часто отвечается жизненным путём.</div></div>
+      <div class="lesson"><span class="li">🔄</span><div><strong>Совмести системы правильно.</strong> Западная нумерология = общая структура характера. Матрица судьбы = потенциал и кармические темы. HD = механика принятия решений. Ведическая = планетарные ритмы жизни. Начни с одной, освой хорошо, потом добавляй.</div></div>
+      <div class="lesson"><span class="li">📚</span><div><strong>Что читать дальше:</strong> «The Life You Were Born to Live» — Дэн Миллман. По матрице — обучение в школе Натальи Ладини. По HD — «Human Design» Линды Баннелл или курсы Вани Пинес (на русском). По ведической — книги Шри Свами Сивананды о планетарных периодах.</div></div>
+    </div>
+  </div>
+
+  <div class="module" id="m7">
+    <div class="mod-head" onclick="toggle('m7')">
+      <div class="mod-num">7</div>
+      <div class="mod-title">Словарь понятий — если что-то непонятно</div>
+      <div class="mod-arr">▼</div>
+    </div>
+    <div class="mod-body">
+      <div class="lesson"><span class="li">📖</span><div><strong>Аркан</strong> — карта старшего аркана таро. Числа 1–22. Каждый — архетип, набор качеств и ситуаций. «Аркан 5» = пятая карта таро (Иерофант).</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Гематрия</strong> — числовое значение слова или имени в иврите. Каждой букве присвоено число, сумма = гематрия слова.</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Сфира (мн. Сфирот)</strong> — «сосуд» или «сфера» на Древе Жизни в каббале. Их 10, каждая соответствует определённому аспекту бытия.</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Мастер-число</strong> — числа 11, 22, 33. Не сводятся к однозначным. Несут усиленную вибрацию соответствующей базовой цифры (11 = усиленная 2, но с другим качеством).</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Хвост / Голова дракона</strong> — в матрице судьбы: хвост = прошлый опыт / откуда пришла. Голова = точка назначения / куда движешься кармически.</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Сакральный отклик (HD)</strong> — телесное «угу» или молчание/«нет», которое приходит до того, как разум успел оценить ситуацию. Самый надёжный навигатор для МГ и Генераторов.</div></div>
+      <div class="lesson"><span class="li">📖</span><div><strong>Ворота (HD)</strong> — одна из 64 позиций И-Цзин в бодиграфе. Определяют конкретные темы и качества в твоей карте. Требуют точного времени рождения для расчёта.</div></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <div style="font-size:22px;letter-spacing:10px;color:var(--rose2);margin-bottom:16px;opacity:.6">✦ ✦ ✦</div>
+  <p>Карина · 14.01.1997 · Полный портрет судьбы</p>
+  <p>Пифагор · Западная · Халдейская · Ведическая · Каббала · Матрица судьбы · Дизайн Человека · Ло Шу</p>
+  <p style="margin-top:10px;font-size:10px;color:var(--ink4)">Числа не определяют судьбу. Они описывают потенциал.</p>
+</footer>
+
+<script>
+function toggle(id){
+  document.getElementById(id).classList.toggle('open');
+}
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.07});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
