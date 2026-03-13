@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>КАРИНА • Полная Матрица Судьбы • 14.01.1997</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D0B14;
+  --bg2: #13101E;
+  --bg3: #1A1628;
+  --card: #1E1A2E;
+  --card2: #251F38;
+  --text: #EDE8F5;
+  --text2: #B0A8CC;
+  --text3: #6B6190;
+  --border: rgba(180,160,255,0.1);
+  --violet: #9B6FD0;
+  --violet-light: #C4A0FF;
+  --violet-pale: rgba(155,111,208,0.15);
+  --rose: #E05C8A;
+  --rose-light: #F590B0;
+  --rose-pale: rgba(224,92,138,0.12);
+  --gold: #D4A82A;
+  --gold-light: #F0C84A;
+  --gold-pale: rgba(212,168,42,0.12);
+  --teal: #3ABFBF;
+  --teal-pale: rgba(58,191,191,0.12);
+  --red: #E05050;
+  --red-pale: rgba(224,80,80,0.12);
+  --green: #4EC994;
+  --green-pale: rgba(78,201,148,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Stars */
+body::before {
+  content:'';
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(155,111,208,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 70%, rgba(224,92,138,0.08) 0%, transparent 50%),
+    radial-gradient(1px 1px at 8% 12%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 18%, rgba(196,160,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 68% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 82% 22%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 91% 6%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 33% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 77% 82%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 95%, rgba(196,160,255,0.7) 0%, transparent 100%);
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(13,11,20,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  overflow-x:auto; scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+nav::-webkit-scrollbar{display:none}
+.nav-inner{display:flex;gap:3px;min-width:max-content;padding:10px 0;align-items:center}
+.nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;font-style:italic;color:var(--violet-light);margin-right:14px;flex-shrink:0}
+nav a{color:var(--text3);text-decoration:none;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 11px;border-radius:20px;transition:all .25s;white-space:nowrap}
+nav a:hover{color:var(--violet-light);background:var(--violet-pale)}
+
+/* HERO */
+.hero {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:90px 24px 60px;
+}
+
+.hero-inner{position:relative;z-index:2;max-width:600px}
+
+.hero-badge{
+  display:inline-block;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--violet-light);
+  border:1px solid rgba(196,160,255,0.3);
+  padding:6px 18px;border-radius:20px;
+  margin-bottom:28px;
+  animation:fadeUp .8s ease both;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,5vw,26px);
+  font-weight:400;font-style:italic;
+  letter-spacing:6px;text-transform:uppercase;
+  color:var(--text2);
+  margin-bottom:12px;
+  animation:fadeUp .8s .1s ease both;
+}
+
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(64px,18vw,112px);
+  font-weight:900;line-height:.85;
+  letter-spacing:-3px;
+  background:linear-gradient(135deg,var(--violet-light),var(--rose-light),var(--gold-light));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:28px;
+  animation:fadeUp .8s .2s ease both;
+}
+
+.hero-subtitle{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-style:italic;
+  color:var(--text2);line-height:1.65;
+  margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;
+  animation:fadeUp .8s .35s ease both;
+}
+.hero-subtitle em{color:var(--violet-light);font-style:normal}
+
+/* Key numbers strip */
+.key-nums{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--card);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;
+  animation:fadeUp .8s .5s ease both;
+}
+.kn{padding:18px 8px;text-align:center;position:relative}
+.kn+.kn::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:1px;background:var(--border)}
+.kn-n{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1;margin-bottom:4px}
+.kn-l{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* LAYOUT */
+section{position:relative;z-index:1;padding:64px 20px}
+.container{max-width:660px;margin:0 auto}
+
+/* SECTION HEADER */
+.stag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:12px}
+.stag-v{background:var(--violet-pale);color:var(--violet-light)}
+.stag-r{background:var(--rose-pale);color:var(--rose-light)}
+.stag-g{background:var(--gold-pale);color:var(--gold-light)}
+.stag-t{background:var(--teal-pale);color:var(--teal)}
+
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,44px);font-weight:900;line-height:1.1;letter-spacing:-1px;margin-bottom:12px}
+.slead{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text2);line-height:1.7;margin-bottom:36px}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+.card-top{position:absolute;top:0;left:20%;right:20%;height:1px}
+.ct-v{background:linear-gradient(90deg,transparent,var(--violet),transparent)}
+.ct-r{background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+.ct-g{background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ct-t{background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+
+.card-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:18px}
+.cnum{font-family:'Playfair Display',serif;font-size:60px;font-weight:900;line-height:1;flex-shrink:0;min-width:52px}
+.cmeta h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.cmeta .cp{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.cbody p{font-size:14px;line-height:1.85;color:var(--text2);margin-bottom:13px}
+.cbody p:last-child{margin-bottom:0}
+.cbody strong{color:var(--text)}
+
+/* PULL QUOTE */
+.pull{border-left:2px solid var(--violet);padding:14px 18px;margin:18px 0;background:var(--violet-pale);border-radius:0 12px 12px 0;font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:var(--text2);line-height:1.65}
+.pull.rose{border-color:var(--rose);background:var(--rose-pale)}
+.pull.gold{border-color:var(--gold);background:var(--gold-pale)}
+.pull.teal{border-color:var(--teal);background:var(--teal-pale)}
+.pull.red{border-color:var(--red);background:var(--red-pale)}
+.pull.green{border-color:var(--green);background:var(--green-pale)}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px}
+.tv{background:var(--violet-pale);color:var(--violet-light)}
+.tr{background:var(--rose-pale);color:var(--rose-light)}
+.tg{background:var(--gold-pale);color:var(--gold-light)}
+.tt{background:var(--teal-pale);color:var(--teal)}
+.tred{background:var(--red-pale);color:var(--red)}
+.tgreen{background:var(--green-pale);color:var(--green)}
+
+/* DIVIDER */
+.div{display:flex;align-items:center;gap:12px;margin:40px 0;color:var(--text3);font-size:12px}
+.div::before,.div::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* INFOBOX */
+.ibox{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;display:flex;gap:14px}
+.ibox-icon{font-size:24px;flex-shrink:0;line-height:1.3}
+.ibox-title{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.ibox-text{font-size:12px;color:var(--text3);line-height:1.6}
+
+/* ══ FULL MATRIX DIAGRAM ══ */
+.matrix-full{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:28px 16px;margin-bottom:24px;
+}
+.matrix-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--violet-light);margin-bottom:24px;text-align:center}
+
+.mdiag{
+  position:relative;width:300px;height:300px;margin:0 auto 24px;
+}
+
+/* Lines */
+.mline{position:absolute;background:rgba(155,111,208,0.2);transform-origin:left center}
+
+/* Diamond border */
+.mdiamond{
+  position:absolute;top:50px;left:50px;width:200px;height:200px;
+  border:1.5px solid rgba(155,111,208,0.3);
+  transform:rotate(45deg);
+}
+
+/* Nodes */
+.mnode{
+  position:absolute;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+}
+.mn-num{font-family:'Playfair Display',serif;font-weight:900;line-height:1}
+.mn-arc{font-size:7px;line-height:1.2;margin-top:2px}
+.mn-lbl{font-size:7px;letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
+
+/* Size variants */
+.sz-lg{width:58px;height:58px}
+.sz-md{width:48px;height:48px}
+.sz-sm{width:40px;height:40px}
+
+.sz-lg .mn-num{font-size:26px}
+.sz-md .mn-num{font-size:21px}
+.sz-sm .mn-num{font-size:17px}
+
+/* Positions */
+.pos-top    {top:0;left:calc(50% - 29px)}
+.pos-right  {top:calc(50% - 24px);right:0}
+.pos-bottom {bottom:0;left:calc(50% - 29px)}
+.pos-left   {top:calc(50% - 24px);left:0}
+.pos-center {top:calc(50% - 29px);left:calc(50% - 29px)}
+
+.pos-tr{top:22px;right:22px}
+.pos-tl{top:22px;left:22px}
+.pos-br{bottom:22px;right:22px}
+.pos-bl{bottom:22px;left:22px}
+
+/* Color variants */
+.col-v{background:var(--violet-pale);border:1.5px solid var(--violet)}
+.col-v .mn-num{color:var(--violet-light)}
+.col-v .mn-arc,.col-v .mn-lbl{color:var(--violet)}
+
+.col-r{background:var(--rose-pale);border:1.5px solid var(--rose)}
+.col-r .mn-num{color:var(--rose-light)}
+.col-r .mn-arc,.col-r .mn-lbl{color:var(--rose)}
+
+.col-g{background:var(--gold-pale);border:1.5px solid var(--gold)}
+.col-g .mn-num{color:var(--gold-light)}
+.col-g .mn-arc,.col-g .mn-lbl{color:var(--gold)}
+
+.col-t{background:var(--teal-pale);border:1.5px solid var(--teal)}
+.col-t .mn-num{color:var(--teal)}
+.col-t .mn-arc,.col-t .mn-lbl{color:var(--teal)}
+
+.col-red{background:var(--red-pale);border:1.5px solid var(--red)}
+.col-red .mn-num{color:var(--red)}
+.col-red .mn-arc{color:var(--red)}
+
+.col-green{background:var(--green-pale);border:1.5px solid var(--green)}
+.col-green .mn-num{color:var(--green)}
+.col-green .mn-arc{color:var(--green)}
+
+.col-center{background:linear-gradient(135deg,rgba(155,111,208,0.25),rgba(224,92,138,0.15));border:2px solid var(--violet-light)}
+.col-center .mn-num{color:var(--violet-light)}
+.col-center .mn-arc{color:var(--violet-light)}
+
+/* Matrix legend */
+.mlegend{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}
+.mleg-item{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text2)}
+.mleg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ARCANA CARD */
+.arc-card{
+  background:var(--card2);border-radius:16px;padding:20px;
+  margin-bottom:12px;
+  border-left:3px solid var(--violet);
+  display:flex;gap:16px;
+}
+.arc-num{
+  font-family:'Playfair Display',serif;font-size:44px;font-weight:900;
+  color:var(--violet-light);line-height:1;flex-shrink:0;min-width:44px;
+}
+.arc-name{font-size:14px;font-weight:700;margin-bottom:3px;color:var(--text)}
+.arc-pos{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.arc-desc{font-size:13px;color:var(--text2);line-height:1.75}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1.5px;background:linear-gradient(180deg,transparent,var(--violet),transparent);opacity:.4}
+.tli{position:relative;margin-bottom:28px}
+.tl-dot{position:absolute;left:-21px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--violet);box-shadow:0 0 8px rgba(155,111,208,.7)}
+.tl-year{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--violet-light);font-weight:700;margin-bottom:3px}
+.tl-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin-bottom:6px}
+.tl-text{font-size:13px;color:var(--text2);line-height:1.75}
+
+/* BIG FINAL */
+.final{
+  background:linear-gradient(135deg,var(--card),var(--card2));
+  border:1px solid rgba(196,160,255,0.2);
+  border-radius:24px;padding:40px 28px;text-align:center;margin:28px 0;
+}
+.final p{font-family:'Playfair Display',serif;font-size:clamp(17px,4vw,22px);font-style:italic;line-height:1.65;color:var(--text2)}
+.final p strong{color:var(--violet-light);font-style:normal}
+.final p em{color:var(--rose-light);font-style:normal}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rev.vis{opacity:1;transform:none}
+
+/* BG variants */
+.sbg-v{background:linear-gradient(180deg,var(--bg) 0%,rgba(155,111,208,.05) 50%,var(--bg) 100%)}
+.sbg-r{background:linear-gradient(180deg,var(--bg) 0%,rgba(224,92,138,.05) 50%,var(--bg) 100%)}
+.sbg-g{background:linear-gradient(180deg,var(--bg) 0%,rgba(212,168,42,.05) 50%,var(--bg) 100%)}
+.sbg-stripe{background:var(--bg2)}
+
+footer{border-top:1px solid var(--border);padding:36px 20px 60px;text-align:center;position:relative;z-index:1}
+footer p{font-size:11px;color:var(--text3);line-height:2}
+
+@media(max-width:380px){
+  .key-nums{grid-template-columns:repeat(2,1fr)}
+  .mlegend{grid-template-columns:1fr}
+  .mdiag{width:260px;height:260px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">К</span>
+    <a href="#hero">Начало</a>
+    <a href="#schema">Схема</a>
+    <a href="#center">Центр</a>
+    <a href="#sky">Небесное Я</a>
+    <a href="#earth">Земное Я</a>
+    <a href="#social">Социум</a>
+    <a href="#ancestors">Предки</a>
+    <a href="#money">Деньги</a>
+    <a href="#karma">Карма</a>
+    <a href="#dragon">Дракон</a>
+    <a href="#age">Возрасты</a>
+    <a href="#comfort">Зона комфорта</a>
+    <a href="#mission">Миссия</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">✦ Полная Матрица Судьбы ✦</div>
+    <h1>Матрица Судьбы</h1>
+    <div class="hero-name">Карина</div>
+    <p class="hero-subtitle">
+      14 января 1997 года.<br>
+      <em>Пятёрка в центре. Двадцать два в линии денег.<br>Девятнадцать в точке реализации.</em><br>
+      Это не случайные числа — это архитектура.
+    </p>
+    <div class="key-nums">
+      <div class="kn"><div class="kn-n" style="color:var(--violet-light)">5</div><div class="kn-l">Центр матрицы</div></div>
+      <div class="kn"><div class="kn-n" style="color:var(--gold-light)">22</div><div class="kn-l">Линия денег</div></div>
+      <div class="kn"><div class="kn-n" style="color:var(--rose-light)">19</div><div class="kn-l">Точка 40 лет</div></div>
+      <div class="kn"><div class="kn-n" style="color:var(--teal)">14</div><div class="kn-l">Личность</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ СХЕМА МАТРИЦЫ ══════════ -->
+<section id="schema" class="sbg-v">
+<div class="container">
+  <div class="stag stag-v">Полная схема</div>
+  <h2 class="stitle">Твоя матрица целиком</h2>
+  <p class="slead">Матрица судьбы — это не пять точек. Это девять ключевых позиций, соединённых линиями родовых программ и кармических задач. Вот как выглядит твоя.</p>
+
+  <div class="matrix-full rev">
+    <div class="matrix-title">Матрица Карины · 14.01.1997</div>
+
+    <div class="mdiag">
+      <div class="mdiamond"></div>
+
+      <!-- Центр G=5 -->
+      <div class="mnode sz-lg col-center pos-center">
+        <div class="mn-num">5</div>
+        <div class="mn-arc">Иерофант</div>
+      </div>
+
+      <!-- Верх D=15 Небесное Я -->
+      <div class="mnode sz-md col-v pos-top">
+        <div class="mn-num">15</div>
+        <div class="mn-arc">Дьявол</div>
+        <div class="mn-lbl">Небесное Я</div>
+      </div>
+
+      <!-- Право B=1 Социум -->
+      <div class="mnode sz-md col-r pos-right">
+        <div class="mn-num">1</div>
+        <div class="mn-arc">Маг</div>
+        <div class="mn-lbl">Социум</div>
+      </div>
+
+      <!-- Низ E=9 Земное Я -->
+      <div class="mnode sz-md col-t pos-bottom">
+        <div class="mn-num">9</div>
+        <div class="mn-arc">Отшельник</div>
+        <div class="mn-lbl">Земное Я</div>
+      </div>
+
+      <!-- Лево F=22 Предки/Деньги -->
+      <div class="mnode sz-md col-g pos-left">
+        <div class="mn-num">22</div>
+        <div class="mn-arc">Шут</div>
+        <div class="mn-lbl">Деньги</div>
+      </div>
+
+      <!-- Углы — дополнительные точки -->
+      <!-- TL = A=14 личность -->
+      <div class="mnode sz-sm col-v pos-tl">
+        <div class="mn-num">14</div>
+        <div class="mn-arc">Умер.</div>
+      </div>
+
+      <!-- TR = хвост 6 -->
+      <div class="mnode sz-sm col-red pos-tr">
+        <div class="mn-num">6</div>
+        <div class="mn-arc">Влюб.</div>
+      </div>
+
+      <!-- BR = реализация 19 -->
+      <div class="mnode sz-sm col-green pos-br">
+        <div class="mn-num">19</div>
+        <div class="mn-arc">Солнце</div>
+      </div>
+
+      <!-- BL = голова дракона 10 -->
+      <div class="mnode sz-sm col-r pos-bl">
+        <div class="mn-num">10</div>
+        <div class="mn-arc">Колесо</div>
+      </div>
+    </div>
+
+    <div class="mlegend">
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--violet)"></div>5 — Центр / Иерофант</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--violet)"></div>15 — Небесное Я / Дьявол</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--rose)"></div>1 — Социум / Маг</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--teal)"></div>9 — Земное Я / Отшельник</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--gold)"></div>22 — Деньги / Шут</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--green)"></div>19 — Реализация 40 лет / Солнце</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--red)"></div>6 — Кармический хвост / Влюблённые</div>
+      <div class="mleg-item"><div class="mleg-dot" style="background:var(--rose)"></div>10 — Голова дракона / Колесо</div>
+    </div>
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">💡</div>
+    <div>
+      <div class="ibox-title">Как читать матрицу</div>
+      <div class="ibox-text">Каждая позиция — это аркан таро (число от 1 до 22). Аркан — это не «хорошо» или «плохо». Это архетип — набор качеств, испытаний и потенциалов. Один и тот же аркан в разных позициях читается по-разному. Ниже — подробный разбор каждой точки.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ЦЕНТР ══════════ -->
+<section id="center">
+<div class="container">
+  <div class="stag stag-v">Центральная энергия</div>
+  <h2 class="stitle">Аркан 5 — Иерофант</h2>
+  <p class="slead">Центр матрицы — это твоя главная жизненная тема. То, с чем ты встречаешься снова и снова, в разных формах и обстоятельствах.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-v"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--violet-light)">V</div>
+      <div class="cmeta">
+        <h3>Иерофант — Хранитель смысла</h3>
+        <div class="cp" style="color:var(--violet-light)">Центр матрицы · A+B+C = 14+1+8 = 23 → 5</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Иерофант — пятый аркан — это не священник и не догма. Это архетип человека, который <strong>знает, зачем</strong>. Знает правила достаточно глубоко, чтобы понимать — когда их стоит соблюдать, а когда нарушить. Это мудрость системы изнутри, а не снаружи.</p>
+      <p>С этим арканом в центре матрицы твоя жизнь будет постоянно ставить тебя в ситуации, где нужно найти смысл. Не поверить чужому смыслу — а выработать свой. Это может выглядеть как духовный поиск, как смена убеждений, как разочарование в системах, которым ты доверяла.</p>
+      <p>Высокая вибрация Иерофанта: ты становишься для других тем самым человеком, который помогает найти ориентиры. Не навязывает — а показывает возможность. Люди будут приходить к тебе за этим, даже если ты сама не считаешь себя «учителем».</p>
+      <p>Низкая вибрация: жёсткое следование правилам, которые уже не работают. Или наоборот — нигилизм и отрицание любых систем. Обе крайности — это непроработанный Иерофант.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tv">Поиск смысла</span>
+      <span class="tag tv">Хранитель знания</span>
+      <span class="tag tv">Мудрость системы</span>
+      <span class="tag tr">Риск догматизма</span>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    Иерофант в центре означает: твоя жизнь — это постоянный диалог между «как принято» и «как правильно именно для меня». Это напряжение не исчезнет. Оно и есть твой двигатель роста.
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">🔁</div>
+    <div>
+      <div class="ibox-title">Почему пятёрка встречается везде в твоей матрице</div>
+      <div class="ibox-text">Центр = 5. Небесное Я = 15 (1+5=6, но само по себе 15). День = 14 (1+4=5). Жизненный путь = 5. Это называется «доминантный аркан». Иерофант буквально вшит в архитектуру твоей судьбы на всех уровнях. Работать с этой темой — не выбор, а необходимость.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ НЕБЕСНОЕ Я ══════════ -->
+<section id="sky" class="sbg-v">
+<div class="container">
+  <div class="stag stag-v">Верхняя точка</div>
+  <h2 class="stitle">Аркан 15 — Небесное «Я»</h2>
+  <p class="slead">Небесное Я — это твоя высшая цель на уровне души. То, к чему ты стремишься глубже всего, даже если не всегда можешь это сформулировать.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-v"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--violet-light)">15</div>
+      <div class="cmeta">
+        <h3>Дьявол — Освобождение через принятие</h3>
+        <div class="cp" style="color:var(--violet-light)">A+B = 14+1 = 15 · Высшая цель</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Аркан 15 — «Дьявол» — самый часто неправильно понимаемый аркан. Он <strong>не означает зло</strong>. Он означает привязанность, материю, страсти — и главное, иллюзию цепей, которых на самом деле нет.</p>
+      <p>На картине Уэйта двое людей стоят прикованные к постаменту. Но цепи на их шеях свободно висят — они могут снять их сами, в любой момент. Дьявол здесь — это всё то, что держит тебя только потому, что ты сам/а решаешь держаться.</p>
+      <p>В позиции Небесного Я это означает: твоя душа пришла научиться <strong>различать настоящие ограничения и придуманные</strong>. Страхи, убеждения, токсичные паттерны — всё это «цепи Дьявола». Твоя высшая задача — осознать их и снять. Не через борьбу, а через ясность.</p>
+      <p>Высокая вибрация: ты становишься человеком, который помогает другим увидеть свои иллюзии. Это огромная сила. Люди рядом с тобой начинают видеть свои «цепи».</p>
+    </div>
+    <div class="tags">
+      <span class="tag tv">Освобождение</span>
+      <span class="tag tv">Работа с тенью</span>
+      <span class="tag tr">Иллюзии и страхи</span>
+      <span class="tag tv">Высшее осознание</span>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    Дьявол в Небесном Я — это не наказание. Это программа трансформации. Твоя душа выбрала путь, на котором нужно встретиться с собственными тенями — и выйти свободной.
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ЗЕМНОЕ Я ══════════ -->
+<section id="earth">
+<div class="container">
+  <div class="stag stag-t">Нижняя точка</div>
+  <h2 class="stitle">Аркан 9 — Земное «Я»</h2>
+  <p class="slead">Земное Я — это как ты реализуешься в мире. Твои таланты, которые видят другие. То, через что ты приносишь ценность.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-t"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--teal)">9</div>
+      <div class="cmeta">
+        <h3>Отшельник — Свет для других</h3>
+        <div class="cp" style="color:var(--teal)">B+C = 1+8 = 9 · Земная реализация</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Отшельник — аркан мудрости, накопленной в одиночестве и переданной миру. На картине — старик с фонарём на вершине горы. Он поднялся сам — и теперь освещает путь тем, кто идёт за ним.</p>
+      <p>В позиции Земного Я это говорит: твоя реализация в мире связана с <strong>глубиной</strong>. Ты не можешь быть «поверхностным специалистом» — тебе нужно понимать по-настоящему. И когда ты понимаешь — ты можешь объяснить так, что другие тоже понимают. Это ценнейший дар.</p>
+      <p>Отшельник также означает: тебе нужно регулярное уединение для восстановления. Это не замкнутость и не социофобия — это буквально твоя батарея заряжается в тишине. Без этого ты начинаешь «гореть».</p>
+      <p>Важный момент для пятёрки-Иерофанта с Отшельником в Земном Я: ты создана делиться знанием. Преподавание, менторство, контент, консультации — всё, где ты передаёшь то, что понял через собственный путь.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tt">Глубокое знание</span>
+      <span class="tag tt">Наставничество</span>
+      <span class="tag tt">Нужно уединение</span>
+      <span class="tag tv">Свет для других</span>
+    </div>
+  </div>
+
+  <div class="pull teal rev">
+    Отшельник в Земном Я + Иерофант в Центре = человек, чья профессиональная реализация связана с передачей глубокого знания. Это может быть что угодно — от преподавания до блога — но глубина обязательна.
+  </div>
+</div>
+</section>
+
+<!-- ══════════ СОЦИУМ ══════════ -->
+<section id="social" class="sbg-r">
+<div class="container">
+  <div class="stag stag-r">Правая точка</div>
+  <h2 class="stitle">Аркан 1 — Социальная линия</h2>
+  <p class="slead">Правая точка матрицы — это твоя роль в обществе. Как ты проявляешь себя в карьере, социальной жизни и среди людей.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-r"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--rose-light)">1</div>
+      <div class="cmeta">
+        <h3>Маг — Манифестация через действие</h3>
+        <div class="cp" style="color:var(--rose-light)">Месяц 01 = 1 · Социальная реализация</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Маг — первый аркан, чистая манифестация. На столе перед ним четыре инструмента: жезл (воля), кубок (чувства), меч (ум), пентакль (материя). Он умеет работать с каждым.</p>
+      <p>В социальной позиции Маг означает: в обществе ты проявляешься как человек, который умеет многое. Быстро осваиваешь новые навыки, легко переключаешься между сферами, умеешь «продать» идею. Люди видят в тебе компетентность ещё до того, как ты доказала её делами.</p>
+      <p>Маг + Иерофант в центре — это сочетание «знает зачем + умеет как». Это профиль человека, который способен не просто делать, но и вдохновлять других на действие через собственный пример.</p>
+      <p>Низкая вибрация Мага: манипуляция, использование навыков в ущерб другим, поверхностность. Высокая: творческая сила, направленная на созидание.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tr">Манифестация</span>
+      <span class="tag tr">Многогранность</span>
+      <span class="tag tr">Природная компетентность</span>
+      <span class="tag tv">Вдохновение других</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ПРЕДКИ И ДЕНЬГИ ══════════ -->
+<section id="ancestors">
+<div class="container">
+  <div class="stag stag-g">Левая точка</div>
+  <h2 class="stitle">Аркан 22 — Линия предков и денег</h2>
+  <p class="slead">Левая точка — это родовые программы и финансовый код. Откуда пришли твои паттерны с деньгами — и как их изменить.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-g"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--gold-light)">22</div>
+      <div class="cmeta">
+        <h3>Шут — Бесконечный потенциал</h3>
+        <div class="cp" style="color:var(--gold-light)">A+C = 14+8 = 22 · Предки и деньги</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Двадцать два — это <strong>Шут</strong>. Нулевой или последний аркан, в зависимости от колоды. Молодой человек на краю обрыва с котомкой и цветком, смотрящий в небо. Он делает шаг вперёд — не потому что не видит пропасти, а потому что доверяет.</p>
+      <p>Это одновременно самый «лёгкий» и самый мощный аркан. 22 в позиции денег означает: <strong>твой финансовый потенциал буквально безграничен</strong>. Шут не знает «нельзя» и «невозможно» — он просто идёт. Именно поэтому часто достигает того, чего не достигают более «умные» и осторожные.</p>
+      <p>Но есть и другая сторона: родовая программа Шута — это история о деньгах как о чём-то ненадёжном, приходящем и уходящем. В твоём роду, скорее всего, были убеждения типа «деньги — зло», «богатство не для нас», «за деньги надо страдать». Это не твои убеждения — это унаследованные. И их можно переписать.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tg">Безграничный потенциал</span>
+      <span class="tag tg">Доверие к жизни</span>
+      <span class="tag tr">Родовые ограничения</span>
+      <span class="tag tg">Новый путь с нуля</span>
+    </div>
+  </div>
+
+  <div class="pull gold rev">
+    22 в линии денег — редкость. Это означает: ты способна создать финансовую реальность, которой не было в твоём роду. Буквально стать первой, кто сломал этот паттерн. Это и есть твоя родовая миссия.
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">🧬</div>
+    <div>
+      <div class="ibox-title">Родовые программы — что это и зачем работать</div>
+      <div class="ibox-text">Матрица судьбы считает, что мы наследуем не только гены, но и психологические паттерны — страхи, убеждения, способы реагирования на деньги, близость, власть. Это не мистика: эпигенетика подтверждает, что травмы передаются через поколения. Осознать паттерн — уже значит начать его менять.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ДЕНЬГИ ДЕТАЛЬНО ══════════ -->
+<section id="money" class="sbg-g">
+<div class="container">
+  <div class="stag stag-g">Финансовый блок</div>
+  <h2 class="stitle">Полная линия денег</h2>
+  <p class="slead">В матрице деньги описываются не одной точкой, а целой линией — от родовой программы до личной реализации.</p>
+
+  <div class="arc-card rev" style="border-color:var(--gold)">
+    <div class="arc-num" style="color:var(--gold-light)">22</div>
+    <div>
+      <div class="arc-name">Шут — Точка 1 (Родовой уровень)</div>
+      <div class="arc-pos">Унаследованная программа · Левая точка матрицы</div>
+      <div class="arc-desc">Убеждение из рода: «деньги нестабильны», «всё может исчезнуть в любой момент». Шут здесь означает, что предки жили в парадигме «была бы работа, а деньги придут». Это не плохо — это просто старая карта мира.</div>
+    </div>
+  </div>
+
+  <div class="arc-card rev" style="border-color:var(--violet)">
+    <div class="arc-num" style="color:var(--violet-light)">5</div>
+    <div>
+      <div class="arc-name">Иерофант — Точка 2 (Личный уровень)</div>
+      <div class="arc-pos">Твоё отношение к деньгам · Центр матрицы</div>
+      <div class="arc-desc">Твоё личное убеждение о деньгах связано с системами, знанием и смыслом. Ты можешь зарабатывать хорошо только там, где видишь смысл в том, что делаешь. Деньги «без смысла» тебя не мотивируют — и это ключ к твоей финансовой стратегии.</div>
+    </div>
+  </div>
+
+  <div class="arc-card rev" style="border-color:var(--teal)">
+    <div class="arc-num" style="color:var(--teal)">9</div>
+    <div>
+      <div class="arc-name">Отшельник — Точка 3 (Инструмент)</div>
+      <div class="arc-pos">Как ты зарабатываешь · Земная точка</div>
+      <div class="arc-desc">Деньги приходят через глубину и экспертизу. Не через широту, не через «я умею всё», а через «я разбираюсь в этом глубже, чем большинство». Чем глубже твоя экспертиза — тем выше твой реальный финансовый потолок.</div>
+    </div>
+  </div>
+
+  <div class="pull gold rev">
+    Финансовая формула Карины: Найди область со смыслом (Иерофант) → Изучи глубоко (Отшельник) → Действуй как Маг (социальная линия) → Доверяй Шуту (не бойся прыгать). Это не теория — это буквально архитектура твоей денежной судьбы.
+  </div>
+</div>
+</section>
+
+<!-- ══════════ КАРМА ══════════ -->
+<section id="karma">
+<div class="container">
+  <div class="stag stag-r">Кармический блок</div>
+  <h2 class="stitle">Аркан 8 — Карма предков</h2>
+  <p class="slead">Кармическая задача — это то, что твой род «не доделал». То, что пришло к тебе как незакрытый вопрос.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-r"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--rose-light)">8</div>
+      <div class="cmeta">
+        <h3>Сила / Справедливость — Кармическое наследие</h3>
+        <div class="cp" style="color:var(--rose-light)">Год 1997 → 8 · Родовая карма</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Аркан 8 — «Сила» (в колоде Уэйта) или «Справедливость» (в марсельской). Оба значения важны для понимания твоей родовой программы.</p>
+      <p><strong>Сила:</strong> В твоём роду была тема власти и силы — возможно, её не хватало, или с ней обращались неправильно. Кто-то из предков жил с ощущением бессилия, или наоборот — злоупотреблял силой. Твоя задача — найти здоровый способ обращения с собственной властью.</p>
+      <p><strong>Справедливость:</strong> Тема справедливости и воздаяния. В роду могли быть истории о несправедливости, которая «не была наказана». Или наоборот — жёсткое «каждый получает своё». Ты несёшь в себе этот вопрос: что такое справедливость и как с ней жить.</p>
+      <p>Проработанная версия: ты становишься человеком, который умеет держать силу без жестокости и видеть справедливость без мести. Это редкое и ценное качество.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tr">Родовая тема силы</span>
+      <span class="tag tr">Справедливость</span>
+      <span class="tag tv">Здоровая власть</span>
+      <span class="tag tg">Закрытие кармы</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ДРАКОН ══════════ -->
+<section id="dragon" class="sbg-v">
+<div class="container">
+  <div class="stag stag-v">Узлы дракона</div>
+  <h2 class="stitle">Хвост и Голова Дракона</h2>
+  <p class="slead">Два дополнительных узла матрицы. Хвост — откуда ты пришла. Голова — куда идёшь.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-r"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--red)">6</div>
+      <div class="cmeta">
+        <h3>Хвост дракона — Аркан 6 «Влюблённые»</h3>
+        <div class="cp" style="color:var(--red)">D+E = 15+9 = 24 → 6 · Откуда ты пришла</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Хвост дракона — это опыт прошлых жизней (или, если угодно, унаследованные паттерны). Аркан «Влюблённые» здесь означает: в прошлом ты много энергии отдавала отношениям и выбору «между сердцем и разумом».</p>
+      <p>Это проявляется как: склонность жертвовать собой ради близких, трудность с выбором когда «и то и то важно», поиск идеальных отношений. Это не плохо — это просто то, с чем ты уже знакома. Это твоя зона «автопилота».</p>
+      <p>Задача — не застрять в хвосте. Знакомое притягивает, но двигаться нужно вперёд, к голове дракона.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tred">Прошлый опыт</span>
+      <span class="tag tred">Жертвенность</span>
+      <span class="tag tr">Зона комфорта</span>
+    </div>
+  </div>
+
+  <div class="card rev">
+    <div class="card-top ct-v"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--rose-light)">10</div>
+      <div class="cmeta">
+        <h3>Голова дракона — Аркан 10 «Колесо Фортуны»</h3>
+        <div class="cp" style="color:var(--rose-light)">D+F = 15+22 = 37 → 10 · Куда ты идёшь</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Голова дракона — это точка назначения. Колесо Фортуны — аркан судьбы, цикличности и поворотных моментов. Это означает: твоё будущее связано с умением <strong>принимать перемены и работать с циклами</strong>.</p>
+      <p>Люди с Колесом в Голове дракона часто живут «поворотными моментами» — их жизнь состоит из ярких переходов, новых циклов, неожиданных разворотов. Это не нестабильность — это формат судьбы. И чем лучше ты умеешь работать с переменами, тем лучше будет «крутиться» твоё колесо.</p>
+      <p>Также Колесо означает связь с синхронизмом и удачей. Люди, которые «читают» знаки судьбы — и это твоя природная способность — умеют оказываться в нужном месте в нужное время.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tv">Колесо судьбы</span>
+      <span class="tag tv">Циклы и повороты</span>
+      <span class="tag tg">Синхронизм</span>
+      <span class="tag tv">Точка назначения</span>
+    </div>
+  </div>
+
+  <div class="pull rev">
+    От Влюблённых (жертвую собой ради выбора) — к Колесу Фортуны (доверяю циклам и двигаюсь вместе с жизнью). Это и есть направление твоего личного развития в этой жизни.
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ВОЗРАСТЫ ══════════ -->
+<section id="age">
+<div class="container">
+  <div class="stag stag-t">Возрастные точки</div>
+  <h2 class="stitle">Ключевые возрасты в матрице</h2>
+  <p class="slead">Матрица судьбы описывает три ключевых «портала» — возрасты, когда происходят самые значимые трансформации.</p>
+
+  <div class="tl rev">
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">0–20 лет</div>
+      <div class="tl-title">Личностное формирование · Аркан 14</div>
+      <div class="tl-text">Период Умеренности — формирование баланса и ценностей. В это время закладывается твоё базовое отношение к жизни: умение находить середину между крайностями. Эту работу большинство людей не осознаёт, но именно она определяет всё дальнейшее.</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">20–40 лет · Сейчас</div>
+      <div class="tl-title">Социальная реализация · Арканы 1 и 5</div>
+      <div class="tl-text">Главный активный период. Маг (социальная линия) + Иерофант (центр) = время строить, пробовать, находить свой путь. Ошибки этого периода — не провалы, а обязательный материал для понимания «своего».</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot" style="background:var(--green);box-shadow:0 0 8px rgba(78,201,148,.7)"></div>
+      <div class="tl-year">40 лет · Портал реализации</div>
+      <div class="tl-title">Аркан 19 — Солнце · Точка зрелости</div>
+      <div class="tl-text">Аркан 19 «Солнце» — самая светлая карта таро. Радость, ясность, успех, дети (буквальные или метафорические). В точке 40 лет матрица говорит: всё, что ты строила — начнёт светить. Это не «потом будет хорошо». Это конкретный переход в новое качество жизни.</div>
+    </div>
+    <div class="tli">
+      <div class="tl-dot"></div>
+      <div class="tl-year">40+ лет</div>
+      <div class="tl-title">Передача знания · Аркан 9</div>
+      <div class="tl-text">Отшельник в зрелости: человек, который накопил достаточно, чтобы освещать путь другим. Вторая половина жизни — про глубину, мудрость и передачу того, что знаешь.</div>
+    </div>
+  </div>
+
+  <div class="ibox rev">
+    <div class="ibox-icon">☀️</div>
+    <div>
+      <div class="ibox-title">Аркан 19 «Солнце» в точке 40 лет — это редкость</div>
+      <div class="ibox-text">Солнце — один из самых позитивных арканов таро. Его появление в точке зрелости означает, что к 40 годам у тебя будет то, что принято называть «расцветом». Это не значит «до этого плохо» — это значит, что зрелость для тебя будет настоящим подъёмом, а не закатом.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ ЗОНА КОМФОРТА ══════════ -->
+<section id="comfort" class="sbg-r">
+<div class="container">
+  <div class="stag stag-r">Внутренний мир</div>
+  <h2 class="stitle">Аркан 14 — Зона комфорта</h2>
+  <p class="slead">Зона комфорта — это не слабость. Это твоя база, откуда ты действуешь. То состояние, где ты чувствуешь себя собой.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-r"></div>
+    <div class="card-head">
+      <div class="cnum" style="color:var(--rose-light)">14</div>
+      <div class="cmeta">
+        <h3>Умеренность — Алхимия внутри</h3>
+        <div class="cp" style="color:var(--rose-light)">День 14 · Зона комфорта и ресурс</div>
+      </div>
+    </div>
+    <div class="cbody">
+      <p>Умеренность — аркан ангела, переливающего воду из чаши в чашу. Это алхимия, смешивание противоположностей, поиск золотой середины. Твоя зона комфорта — это когда в жизни есть <strong>разнообразие в рамках структуры</strong>.</p>
+      <p>Тебе комфортно, когда есть движение — но не хаос. Когда есть план — но не жёсткость. Когда есть близость — но и личное пространство. Ты буквально устроена как алхимик: тебе нужно смешивать, балансировать, находить пропорции.</p>
+      <p>Когда зона комфорта нарушается — ты чувствуешь это как «что-то не так», даже если внешне всё нормально. Слушай это ощущение — это не каприз, это компас.</p>
+      <p>Также Умеренность в личной точке означает: ты умеешь восстанавливаться. Не быстро — но глубоко. После серьёзных потрясений ты возвращаешься в баланс. Это огромный ресурс.</p>
+    </div>
+    <div class="tags">
+      <span class="tag tr">Баланс как ресурс</span>
+      <span class="tag tr">Алхимия противоположностей</span>
+      <span class="tag tv">Глубокое восстановление</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ МИССИЯ ══════════ -->
+<section id="mission">
+<div class="container">
+  <div class="stag stag-v">Итог</div>
+  <h2 class="stitle">Миссия — всё вместе</h2>
+  <p class="slead">Теперь давай соберём всё в одну картину. Потому что отдельные арканы — это детали. А матрица — это история.</p>
+
+  <div class="card rev">
+    <div class="card-top ct-v"></div>
+    <div class="cbody" style="margin-top:4px">
+      <p><strong style="color:var(--violet-light)">Центральная тема (5 — Иерофант):</strong> Поиск и передача смысла. Всю жизнь ты будешь встречаться с вопросом «зачем» — и твоя задача находить на него ответ не в чужих системах, а в собственном опыте.</p>
+      <p><strong style="color:var(--teal)">Инструмент (9 — Отшельник):</strong> Глубина. Ты влияешь на мир через понимание, а не через громкость. Чем глубже твоё знание — тем дальше твой свет.</p>
+      <p><strong style="color:var(--gold-light)">Финансовый ключ (22 — Шут):</strong> Доверие. Шут не боится прыгать — и именно поэтому открывает двери, которые другие не видят. Твой финансовый прорыв будет выглядеть как «рискованный шаг», который оказывается правильным.</p>
+      <p><strong style="color:var(--green)">Точка расцвета (19 — Солнце в 40 лет):</strong> Всё, что ты сеешь сейчас — взойдёт. Буквально. Солнце в точке зрелости — это один из лучших арканов, которые вообще могут быть в матрице.</p>
+      <p><strong style="color:var(--violet-light)">Кармическое направление (от 6 к 10):</strong> От жертвенности в отношениях — к доверию судьбе и умению работать с циклами. Это твой личный путь освобождения.</p>
+    </div>
+  </div>
+
+  <div class="final rev">
+    <p>
+      Карина, 14 января 1997.<br><br>
+      Шут в деньгах. Солнце в сорок лет. Иерофант везде.<br><br>
+      Твоя матрица говорит: <strong>ты создана знать глубоко и светить далеко.</strong><br>
+      Не шумно — <em>далеко</em>.<br><br>
+      Деньги придут не через усилие, а через доверие к своему пути.<br>
+      Отношения вырастут из силы, а не из жертвы.<br>
+      А в сорок лет ты посмотришь назад — и всё встанет на места.
+    </p>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>✦ КАРИНА · 14.01.1997 · Полная Матрица Судьбы ✦</p>
+  <p>Центр: Иерофант 5 · Небесное Я: Дьявол 15 · Земное Я: Отшельник 9 · Социум: Маг 1 · Деньги: Шут 22 · Точка 40 лет: Солнце 19</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold: 0.08});
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
