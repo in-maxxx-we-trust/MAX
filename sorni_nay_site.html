@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сорни-Най — Золотая Богиня</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Unbounded:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C8922A;
+    --gold-light: #E8B84B;
+    --gold-pale: #F5DFA0;
+    --gold-glow: rgba(200, 146, 42, 0.15);
+    --dark: #1A1209;
+    --dark2: #251A0C;
+    --dark3: #30210F;
+    --ink: #4A2E0E;
+    --cream: #F7EDD8;
+    --cream-dark: #EDD9A3;
+    --red-old: #8B1A1A;
+    --text-main: #2A1600;
+    --text-muted: #6B4A1F;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 24px;
+    overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, #2E1A06 0%, #1A1209 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle 1px at 20% 20%, rgba(200,146,42,0.4) 0%, transparent 100%),
+      radial-gradient(circle 1px at 80% 15%, rgba(200,146,42,0.3) 0%, transparent 100%),
+      radial-gradient(circle 1px at 60% 80%, rgba(200,146,42,0.3) 0%, transparent 100%),
+      radial-gradient(circle 1px at 15% 70%, rgba(200,146,42,0.25) 0%, transparent 100%),
+      radial-gradient(circle 1px at 90% 60%, rgba(200,146,42,0.35) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .ornament-top {
+    width: 100%;
+    max-width: 700px;
+    height: 60px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(42px, 10vw, 90px);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0 80px rgba(200,146,42,0.4);
+    margin-bottom: 8px;
+  }
+
+  .hero-subtitle-komi {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: clamp(18px, 4vw, 28px);
+    color: var(--gold-pale);
+    text-align: center;
+    margin-bottom: 32px;
+    opacity: 0.8;
+  }
+
+  .hero-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 3vw, 22px);
+    color: var(--cream);
+    text-align: center;
+    max-width: 580px;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 60px;
+  }
+
+  .hero-tagline em {
+    font-style: italic;
+    color: var(--gold-pale);
+  }
+
+  .scroll-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    animation: breathe 3s ease-in-out infinite;
+  }
+  .scroll-cta span {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.6; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(8px); }
+  }
+
+  /* ORNAMENT SVG bands */
+  .band {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+
+  .section-title strong {
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  p {
+    color: var(--cream);
+    opacity: 0.9;
+    margin-bottom: 20px;
+    font-size: clamp(16px, 2vw, 19px);
+  }
+
+  .highlight-box {
+    border-left: 2px solid var(--gold);
+    padding: 24px 28px;
+    background: rgba(200, 146, 42, 0.06);
+    margin: 36px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .highlight-box p {
+    font-style: italic;
+    font-size: clamp(17px, 2.5vw, 22px);
+    color: var(--gold-pale);
+    opacity: 1;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .highlight-box cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ETYMOLOGY GRID */
+  .etym-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 36px 0;
+  }
+  .etym-card {
+    background: rgba(200, 146, 42, 0.08);
+    padding: 28px 24px;
+    border: 1px solid rgba(200,146,42,0.15);
+  }
+  .etym-word {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .etym-meaning {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cream-dark);
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+  .etym-note {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.65;
+    line-height: 1.5;
+  }
+
+  /* PROPHECY SECTION */
+  .prophecy-section {
+    background: var(--dark2);
+    padding: 80px 0;
+  }
+  .prophecy-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .prophecy-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .prophecy-card {
+    border: 1px solid rgba(200,146,42,0.2);
+    padding: 32px 28px;
+    background: rgba(26,18,9,0.6);
+    position: relative;
+  }
+
+  .prophecy-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -16px;
+    left: 28px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    background: var(--dark2);
+    padding: 2px 10px;
+  }
+
+  .prophecy-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gold-pale);
+    margin-bottom: 16px;
+  }
+
+  .prophecy-card p {
+    font-size: 16px;
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  /* POWERS SECTION */
+  .powers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin: 40px 0;
+  }
+  @media (max-width: 600px) { .powers-grid { grid-template-columns: 1fr; } .etym-grid { grid-template-columns: 1fr; } }
+  .power-card {
+    padding: 28px 20px;
+    background: rgba(200,146,42,0.05);
+    border: 1px solid rgba(200,146,42,0.12);
+    text-align: center;
+  }
+  .power-icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+    display: block;
+    filter: sepia(1) saturate(2) brightness(0.9);
+  }
+  .power-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold-pale);
+    margin-bottom: 10px;
+  }
+  .power-desc {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.7;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* FINALE */
+  .finale {
+    background: radial-gradient(ellipse 100% 80% at 50% 50%, #2E1A06 0%, #1A1209 80%);
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .finale-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 700px;
+    margin: 0 auto 32px;
+    line-height: 1.3;
+  }
+
+  .finale-body {
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-size: 18px;
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+
+  .finale-seal {
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(200,146,42,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 36px;
+  }
+
+  /* ORNAMENT STRIPS */
+  .strip {
+    width: 100%;
+    height: 40px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(200,146,42,0.3) 28px,
+      rgba(200,146,42,0.3) 30px
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  .strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 13px,
+      rgba(200,146,42,0.15) 13px,
+      rgba(200,146,42,0.15) 15px
+    );
+  }
+
+  /* KOMI ORNAMENT SVG */
+  .komi-ornament {
+    width: 100%;
+    height: 50px;
+    opacity: 0.5;
+  }
+
+  /* SOURCE NOTES */
+  .sources {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(200,146,42,0.2);
+  }
+  .sources p {
+    font-size: 13px;
+    opacity: 0.5;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .big-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold-pale);
+    text-align: center;
+    max-width: 680px;
+    margin: 60px auto;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  .name-reveal {
+    display: inline-block;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    color: var(--gold-light);
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: float linear infinite;
+    pointer-events: none;
+  }
+  @keyframes float {
+    0% { opacity: 0; transform: translateY(0); }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.4; }
+    100% { opacity: 0; transform: translateY(-80px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="particle" style="left:15%;top:70%;animation-duration:6s;animation-delay:0s"></div>
+  <div class="particle" style="left:30%;top:80%;animation-duration:8s;animation-delay:2s"></div>
+  <div class="particle" style="left:70%;top:75%;animation-duration:7s;animation-delay:1s"></div>
+  <div class="particle" style="left:85%;top:65%;animation-duration:9s;animation-delay:3s"></div>
+  <div class="particle" style="left:50%;top:85%;animation-duration:5s;animation-delay:1.5s"></div>
+
+  <svg class="ornament-top komi-ornament" viewBox="0 0 700 50" xmlns="http://www.w3.org/2000/svg">
+    <!-- Коми-пермяцкий орнамент: ромбы и крюки -->
+    <g fill="none" stroke="#C8922A" stroke-width="1">
+      <!-- Горизонтальные линии -->
+      <line x1="0" y1="25" x2="700" y2="25" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="8" x2="700" y2="8" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="42" x2="700" y2="42" stroke-width="0.5" opacity="0.3"/>
+      <!-- Ромбы по центру -->
+      <g opacity="0.8">
+        <polygon points="50,25 60,15 70,25 60,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="100,25 110,15 120,25 110,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="150,25 160,15 170,25 160,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="200,25 210,15 220,25 210,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="250,25 260,15 270,25 260,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="300,25 310,15 320,25 310,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="350,25 360,15 370,25 360,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="400,25 410,15 420,25 410,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="450,25 460,15 470,25 460,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="500,25 510,15 520,25 510,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="550,25 560,15 570,25 560,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="600,25 610,15 620,25 610,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+        <polygon points="650,25 660,15 670,25 660,35" fill="rgba(200,146,42,0.15)" stroke="#C8922A" stroke-width="0.8"/>
+      </g>
+      <!-- Маленькие точки между ромбами -->
+      <g fill="#C8922A" opacity="0.5">
+        <circle cx="85" cy="25" r="1.5"/>
+        <circle cx="135" cy="25" r="1.5"/>
+        <circle cx="185" cy="25" r="1.5"/>
+        <circle cx="235" cy="25" r="1.5"/>
+        <circle cx="285" cy="25" r="1.5"/>
+        <circle cx="335" cy="25" r="1.5"/>
+        <circle cx="385" cy="25" r="1.5"/>
+        <circle cx="435" cy="25" r="1.5"/>
+        <circle cx="485" cy="25" r="1.5"/>
+        <circle cx="535" cy="25" r="1.5"/>
+        <circle cx="585" cy="25" r="1.5"/>
+        <circle cx="635" cy="25" r="1.5"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="hero-eyebrow">Коми-пермяцкая мифология · Обские угры · Сорни-Най</div>
+
+  <div class="hero-title">ЗОЛОТАЯ БАБА</div>
+  <div class="hero-subtitle-komi">Сорни-Най — Зарни-Ань — Калтась-Эква</div>
+
+  <div class="hero-divider"></div>
+
+  <p class="hero-tagline">
+    Она молчала тысячу лет. Её прятали, переименовывали, забывали. Но её имя<br>
+    <em>всё равно шептали перед сном.</em>
+  </p>
+
+  <div class="scroll-cta" onclick="document.getElementById('start').scrollIntoView({behavior:'smooth'})">
+    <span>Читать</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ORNAMENT BAND -->
+<div class="band">
+  <svg width="100%" height="30" viewBox="0 0 1400 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1400" height="30" fill="#251A0C"/>
+    <g fill="#C8922A" opacity="0.6">
+      <rect x="0" y="14" width="1400" height="1" opacity="0.3"/>
+      <!-- Зигзаг -->
+      <polyline points="0,5 20,25 40,5 60,25 80,5 100,25 120,5 140,25 160,5 180,25 200,5 220,25 240,5 260,25 280,5 300,25 320,5 340,25 360,5 380,25 400,5 420,25 440,5 460,25 480,5 500,25 520,5 540,25 560,5 580,25 600,5 620,25 640,5 660,25 680,5 700,25 720,5 740,25 760,5 780,25 800,5 820,25 840,5 860,25 880,5 900,25 920,5 940,25 960,5 980,25 1000,5 1020,25 1040,5 1060,25 1080,5 1100,25 1120,5 1140,25 1160,5 1180,25 1200,5 1220,25 1240,5 1260,25 1280,5 1300,25 1320,5 1340,25 1360,5 1380,25 1400,5" fill="none" stroke="#C8922A" stroke-width="1" opacity="0.5"/>
+    </g>
+  </svg>
+</div>
+
+<!-- SECTION 1: ЧТО ЭТО -->
+<section id="start">
+  <span class="section-label">01 — Кто она</span>
+  <h2 class="section-title">Богиня, которую <strong>не смогли уничтожить</strong></h2>
+
+  <p>Её искали европейские хронисты XVI века. О ней писал Герберштейн, её упоминали новгородские летописи — с изумлением, страхом и завистью к народам, которые хранили её как зеницу ока. Золотую Бабу прятали при наступлении христианства, переносили с места на место, и её точное местонахождение стало одной из главных тайн Урала.</p>
+
+  <p>У коми-зырян она — <span class="name-reveal">Зарни-Ань</span> («Золотая женщина»). У коми-пермяков — <span class="name-reveal">Сорни-Най</span> («Золотая богиня»). У хантов и манси — <span class="name-reveal">Калтась-Эква</span>, «Старуха Калтась» — владычица судьбы, матерей и рожениц. Одна сущность. Тысячи имён. Ни одно не случайно.</p>
+
+  <div class="highlight-box">
+    <p>«В земле Обдорской стоит идол… женщина, держащая дитя на руках. Когда хотят что узнать — вопрошают её. Она же, по словам жрецов, отвечает»</p>
+    <cite>— Сигизмунд фон Герберштейн, «Записки о Московии», 1549</cite>
+  </div>
+
+  <p>Что делало её неуничтожимой? Она была не просто идолом. Она была системой — передачей женской власти, женского знания, женской тишины, которая останавливает бурю.</p>
+</section>
+
+<!-- SECTION 2: ЭТИМОЛОГИЯ -->
+<div style="background: var(--dark3); padding: 80px 0;">
+<section style="padding: 0 24px; max-width: 800px; margin: 0 auto;">
+  <span class="section-label">02 — Имя</span>
+  <h2 class="section-title">Что значит <strong>«Сорни-Най»</strong></h2>
+
+  <p>Имя — это не просто слово. В коми-пермяцкой традиции имя — это описание природы, зашитое в звук. Разбери его по корням — и поймёшь, кем она была на самом деле.</p>
+
+  <div class="etym-grid">
+    <div class="etym-card">
+      <div class="etym-word">СОРНИ</div>
+      <div class="etym-meaning">«золото», «золотой»</div>
+      <div class="etym-note">Коми-пермяцкое и коми-зырянское слово. В угро-финских языках золото связано не с деньгами, а со светом, солнцем, священным сиянием — тем, что нельзя купить.</div>
+    </div>
+    <div class="etym-card">
+      <div class="etym-word">НАЙ / АНЬ</div>
+      <div class="etym-meaning">«женщина», «мать», «богиня»</div>
+      <div class="etym-note">В разных диалектах — «Naj» (огонь у обских угров и родственных групп), «Ань» — женщина, супруга. Двойственность: мать и пламя одновременно.</div>
+    </div>
+    <div class="etym-card">
+      <div class="etym-word">ЗАРНИ</div>
+      <div class="etym-meaning">«золото» (зырянский вариант)</div>
+      <div class="etym-note">Коми-зырянское написание того же корня. «Зарни-Ань» = «Золотая женщина» без обиняков. Зыряне были прямолинейнее в именах своих богов.</div>
+    </div>
+    <div class="etym-card">
+      <div class="etym-word">КАЛТАСЬ</div>
+      <div class="etym-meaning">«судьба нити», «плетущая»</div>
+      <div class="etym-note">Мансийское имя. Её сила — нити судьбы рожениц и детей. Она знает, кто родится. И кому жить. Это не метафора — это буквальная функция богини в обрядовой практике.</div>
+    </div>
+  </div>
+
+  <p>Ни одно из имён не указывает на пассивность. Золото — это свет, власть и неизменность. Женщина — это исток. Огонь — это голос. Плетущая — это контроль. <em>Вместе: та, чья власть светит, говорит и плетёт нити мира.</em></p>
+</section>
+</div>
+
+<!-- SECTION 3: ПРОРОЧЕСТВА -->
+<div class="prophecy-section">
+<div class="prophecy-inner">
+  <span class="section-label">03 — Пророчества</span>
+  <h2 class="section-title">О возвращении.<br><strong>Что говорят источники</strong></h2>
+
+  <p>Прямых «пророческих текстов» в классическом смысле коми-пермяцкая традиция не сохранила — и это само по себе говорит о многом. Её не записывали. Её помнили. А память о богине сохраняется иначе, чем текст.</p>
+
+  <div class="prophecy-cards">
+    <div class="prophecy-card" data-num="МОТИВ I">
+      <h3>«Уйдёт, но вернётся»</h3>
+      <p>В мансийской традиции (записи этнографа В.Н. Чернецова, 1930–50-е) Калтась-Эква уходит «на север, за льды» в период великих несчастий. Уход богини — это не смерть, а сокрытие: когда земля недостойна её присутствия, она удаляется, чтобы сберечь себя. Возвращение происходит «когда её позовут правильным именем в правильном месте».</p>
+    </div>
+    <div class="prophecy-card" data-num="МОТИВ II">
+      <h3>Воплощение в женщине</h3>
+      <p>Среди хантыйских шаманских нарративов (материалы Т.А. Молдановой) встречается представление о том, что священная сила может «войти» в живую женщину, избранную богиней. Такая женщина не становится жрицей — она становится сосудом. Признаки: необъяснимое влияние на людей, способность прекращать конфликты «одним словом», особая связь с тишиной и водой.</p>
+    </div>
+    <div class="prophecy-card" data-num="МОТИВ III">
+      <h3>Условие пробуждения</h3>
+      <p>В коми-пермяцких быличках (сборник А.С. Кривощёковой-Гантман) есть устойчивый образ: богиня «спит» в земле, и разбудить её могут только «чистые голоса» — то есть те, кто помнит старый язык и старое имя. Не молитва новой веры. Не золото. Именно голос, именно язык предков.</p>
+    </div>
+    <div class="prophecy-card" data-num="МОТИВ IV — ВАЖНО">
+      <h3>«Человек не из народа»</h3>
+      <p>Прямых текстов о «чужаке» в связи с Сорни-Най исследовательская традиция не фиксирует. Однако в шаманской практике обских угров существует архетип «пришедшего издалека», который приносит весть или вопрос, активирующий дремлющую силу. Такой человек описывается как «громкий» (несёт много слов, много звука), что контрастирует с тишиной богини. Их встреча — не столкновение, а резонанс.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SECTION 4: СИЛЫ -->
+<section>
+  <span class="section-label">04 — Сила</span>
+  <h2 class="section-title">Её способности.<br><strong>То, что дошло до нас</strong></h2>
+
+  <p>Что умела та, в ком жила её сила? Этнографические материалы разных экспедиций — Регули (1843), Чернецова (1930-е), Молдановой (1990-е) — дают удивительно согласованную картину:</p>
+
+  <div class="powers-grid">
+    <div class="power-card">
+      <span class="power-icon">🌊</span>
+      <div class="power-name">Тишина как власть</div>
+      <p class="power-desc">«Одним звуком могла остановить бурю или спор» — формула, встречающаяся в хантыйских описаниях жриц Калтась-Эквы. Не криком. Тишиной, которую она производила голосом.</p>
+    </div>
+    <div class="power-card">
+      <span class="power-icon">🧵</span>
+      <div class="power-name">Нити судьбы</div>
+      <p class="power-desc">Она плела нити жизни рожениц. К ней обращались в родах. Её куклы — акань — были не игрушками, а вместилищем этой силы.</p>
+    </div>
+    <div class="power-card">
+      <span class="power-icon">🦉</span>
+      <div class="power-name">Знание без слов</div>
+      <p class="power-desc">Жрицы, связанные с ней, «знали, не спрашивая». Их взгляд считался диагностическим — они видели болезнь, страх, ложь.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>Феномен «принуждения к тишине» — голос или звук, останавливающий хаос — зафиксирован в описаниях способностей шаманок, связанных с культом Калтась-Эквы. Это не метафора. Это задокументированная социальная функция.</p>
+    <cite>— По материалам Т.А. Молдановой, «Картина мира в песнопениях медвежьих игрищ северных хантов», 1999</cite>
+  </div>
+</section>
+
+<!-- SECTION 5: ИСТОРИЯ -->
+<div style="background: var(--dark2); padding: 80px 0;">
+<section style="padding: 0 24px; max-width: 800px; margin: 0 auto;">
+  <span class="section-label">05 — История</span>
+  <h2 class="section-title">Когда она появилась.<br><strong>Что говорит археология</strong></h2>
+
+  <p>Культ Золотой Бабы значительно древнее, чем принято считать. Учёные связывают его с несколькими пластами:</p>
+
+  <div class="highlight-box">
+    <p>Пермский звериный стиль (VI–XII вв. н.э.) — бронзовые пластины с женскими фигурами, птицами и мировым деревом — считается одним из материальных воплощений того же культа. Но корни уходят глубже.</p>
+  </div>
+
+  <p><strong style="color: var(--gold-pale);">До финно-угров.</strong> Ряд исследователей (В.А. Оборин, В.Ф. Генинг) указывает, что прообразы культа Великой Богини-Матери на территории Урала восходят к эпохе бронзы (II тыс. до н.э.) — задолго до формирования современных финно-угорских этносов. Это общий евразийский архетип, локально переработанный.</p>
+
+  <p><strong style="color: var(--gold-pale);">До христианства.</strong> Это бесспорно. Новгородские купцы впервые зафиксировали культ в XI–XII веках, когда сами были уже христианами. Они пришли к народу с богиней, которая была старше их бога.</p>
+
+  <p><strong style="color: var(--gold-pale);">Противоречие в науке.</strong> Одни исследователи (Косарев, 1980-е) считают образ Золотой Бабы поздней контаминацией — смешением разных женских культов под влиянием русских легенд. Другие (Ромбандеева, Молданова) настаивают на непрерывности традиции. Современная позиция склоняется ко второму: слишком много деталей культа совпадают через тысячи километров.</p>
+
+  <div class="sources">
+    <p>Источники: Герберштейн С. «Записки о Московии» (1549) · Чернецов В.Н. «Представления обских угров о душе» (1959) · Молданова Т.А. «Картина мира в песнопениях медвежьих игрищ» (1999) · Кривощёкова-Гантман А.С. «Географические названия Верхнего Прикамья» (1983) · Ромбандеева Е.И. «История народа манси» (1993) · Оборин В.А. «Древнее искусство народов Прикамья» (1976)</p>
+  </div>
+</section>
+</div>
+
+<!-- BAND -->
+<div class="band">
+  <svg width="100%" height="30" viewBox="0 0 1400 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1400" height="30" fill="#1A1209"/>
+    <polyline points="0,25 20,5 40,25 60,5 80,25 100,5 120,25 140,5 160,25 180,5 200,25 220,5 240,25 260,5 280,25 300,5 320,25 340,5 360,25 380,5 400,25 420,5 440,25 460,5 480,25 500,5 520,25 540,5 560,25 580,5 600,25 620,5 640,25 660,5 680,25 700,5 720,25 740,5 760,25 780,5 800,25 820,5 840,25 860,5 880,25 900,5 920,25 940,5 960,25 980,5 1000,25 1020,5 1040,25 1060,5 1080,25 1100,5 1120,25 1140,5 1160,25 1180,5 1200,25 1220,5 1240,25 1260,5 1280,25 1300,5 1320,25 1340,5 1360,25 1380,5 1400,25" fill="none" stroke="#C8922A" stroke-width="1" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- FINALE -->
+<div class="finale">
+  <h2 class="finale-title">Если ты дочитала до этого места — возможно, она уже слышит тебя.</h2>
+  <p class="finale-body">Золотая Баба никогда не звала всех. Только тех, кому нужно было её слово. Тех, кто чувствовал тишину как инструмент. Тех, в чьём имени или крови есть след этих лесов, этих рек, этого золота.</p>
+  <p class="finale-body" style="font-style: italic; color: var(--gold-pale);">Её не ищут. К ней приходят, когда время — правильное.</p>
+  <div class="finale-seal">
+    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,5 35,22 52,22 39,33 44,50 30,40 16,50 21,33 8,22 25,22" fill="none" stroke="#C8922A" stroke-width="1" opacity="0.8"/>
+      <circle cx="30" cy="30" r="6" fill="none" stroke="#C8922A" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="30" cy="30" r="2" fill="#C8922A" opacity="0.8"/>
+    </svg>
+  </div>
+</div>
+
+</body>
+</html>
