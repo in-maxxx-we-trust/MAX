@@ -1,0 +1,2218 @@
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПСИХОЛОГИЯ — Наука о Душе | Полная энциклопедия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --ink-mid: #3d3830;
+    --ink-light: #6b6358;
+    --ink-faint: #9c9488;
+    --paper: #faf9f6;
+    --paper-warm: #f5f2eb;
+    --paper-deep: #ede9e0;
+    --accent: #8b1a1a;
+    --accent-soft: #c44a2a;
+    --accent-gold: #b8962e;
+    --accent-blue: #1a3a5c;
+    --rule: #d6d0c4;
+    --rule-heavy: #b8b0a2;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'Lora', Georgia, serif;
+    --garamond: 'EB Garamond', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 999;
+    transition: width 0.1s linear;
+  }
+
+  /* ===== TOP NAV ===== */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 249, 246, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+  }
+  .nav-read-time {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-family: var(--body);
+    font-style: italic;
+  }
+
+  /* ===== CONTAINERS ===== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .container-wide {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 60px 20px 50px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid var(--rule-heavy);
+  }
+  .hero-overline {
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 10vw, 80px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .hero-subtitle-greek {
+    font-family: var(--garamond);
+    font-size: clamp(22px, 5vw, 36px);
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+  .hero-desc {
+    font-family: var(--body);
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    max-width: 540px;
+    margin: 0 auto 36px;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+  .hero-meta-sep { color: var(--rule-heavy); }
+  .hero-rule {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 32px auto;
+  }
+
+  /* ===== CHAPTER HEADER ===== */
+  .chapter-header {
+    padding: 56px 20px 32px;
+    max-width: 720px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .chapter-number {
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .chapter-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .chapter-lead {
+    font-family: var(--garamond);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  /* ===== CONTENT SECTIONS ===== */
+  .content-section {
+    padding: 40px 20px;
+    max-width: 720px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .content-section:last-child { border-bottom: none; }
+
+  /* ===== TYPOGRAPHY ===== */
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: clamp(18px, 3.5vw, 24px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-family: var(--body);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ink-mid);
+  }
+  p:last-child { margin-bottom: 0; }
+
+  .drop-cap::first-letter {
+    font-family: var(--serif);
+    font-size: 5.5em;
+    font-weight: 900;
+    float: left;
+    line-height: 0.75;
+    margin-right: 8px;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+
+  strong { color: var(--ink); font-weight: 600; }
+  em { color: var(--ink-mid); }
+
+  /* ===== PULLQUOTE ===== */
+  .pullquote {
+    margin: 40px 0;
+    padding: 28px 0;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .pullquote-text {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4.5vw, 30px);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .pullquote-attribution {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ===== WORD ETYMOLOGY BOX ===== */
+  .etymology-box {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    padding: 28px;
+    margin: 32px 0;
+    border-radius: 2px;
+  }
+  .etymology-box-title {
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .etymology-word {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .etymology-phonetic {
+    font-family: var(--garamond);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .etymology-parts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .etymology-part {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: var(--paper);
+    border-radius: 2px;
+  }
+  .etymology-part-word {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--accent);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  .etymology-part-info { flex: 1; }
+  .etymology-part-meaning {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .etymology-part-detail {
+    font-size: 14px;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    margin: 32px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 48px;
+    top: 24px;
+    bottom: -32px;
+    width: 1px;
+    background: var(--rule);
+  }
+  .timeline-item:last-child::before { display: none; }
+  .timeline-date {
+    min-width: 96px;
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 2px;
+    text-align: right;
+    line-height: 1.3;
+  }
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-content { flex: 1; }
+  .timeline-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .timeline-text {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  /* ===== SPECIALTY CARD ===== */
+  .specialty-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin: 28px 0;
+  }
+  .specialty-card {
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--accent);
+    padding: 28px;
+    background: var(--paper);
+    border-radius: 2px;
+  }
+  .specialty-card.blue { border-top-color: var(--accent-blue); }
+  .specialty-card.gold { border-top-color: var(--accent-gold); }
+  .specialty-card.soft { border-top-color: var(--accent-soft); }
+  .specialty-card.green { border-top-color: #2d6a4f; }
+  .specialty-card.purple { border-top-color: #5e35b1; }
+  .specialty-card.dark { border-top-color: var(--ink); }
+
+  .specialty-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-family: var(--body);
+    font-weight: 600;
+  }
+  .specialty-badge.medical { color: var(--accent-blue); }
+  .specialty-badge.clinical { color: var(--accent-soft); }
+  .specialty-badge.social { color: #2d6a4f; }
+  .specialty-badge.legal { color: var(--ink-mid); }
+
+  .specialty-name {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4vw, 28px);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .specialty-tagline {
+    font-family: var(--garamond);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .spec-cell {
+    background: var(--paper-warm);
+    padding: 12px;
+    border-radius: 2px;
+  }
+  .spec-cell-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--body);
+  }
+  .spec-cell-value {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .spec-list-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: var(--body);
+  }
+  .spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+  }
+  .spec-list li {
+    padding: 7px 0 7px 20px;
+    position: relative;
+    font-size: 15px;
+    color: var(--ink-mid);
+    border-bottom: 1px solid var(--paper-deep);
+    line-height: 1.5;
+  }
+  .spec-list li:last-child { border-bottom: none; }
+  .spec-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .warning-box {
+    background: #fff8f0;
+    border: 1px solid #e8c49a;
+    border-left: 4px solid var(--accent-soft);
+    padding: 20px;
+    border-radius: 2px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--ink-mid);
+  }
+  .warning-box strong { color: var(--accent-soft); }
+
+  /* ===== INFO CALLOUT ===== */
+  .callout {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 24px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+  .callout-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .callout p { font-size: 15px; margin-bottom: 10px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ===== STATISTICS ===== */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-box {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 20px 16px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.3;
+  }
+
+  /* ===== DIAGNOSIS LIST ===== */
+  .diagnosis-item {
+    display: flex;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .diagnosis-item:last-child { border-bottom: none; }
+  .diag-code {
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--paper-deep);
+    color: var(--ink-mid);
+    padding: 4px 8px;
+    border-radius: 2px;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .diag-name {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .diag-desc {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ===== RIGHTS SECTION ===== */
+  .right-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .right-item:last-child { border-bottom: none; }
+  .right-num {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--accent);
+    min-width: 40px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .right-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .right-text {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  /* ===== AUTHOR NOTE ===== */
+  .author-note {
+    background: var(--paper-deep);
+    border: 1px solid var(--rule-heavy);
+    padding: 28px;
+    margin: 28px 0;
+    border-radius: 2px;
+    position: relative;
+  }
+  .author-note::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 80px;
+    color: var(--rule-heavy);
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+  .author-note p {
+    font-family: var(--garamond);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    padding-top: 12px;
+  }
+  .author-note-sig {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 14px;
+    font-style: normal !important;
+    display: block;
+  }
+
+  /* ===== FULL-WIDTH DIVIDERS ===== */
+  .chapter-divider {
+    width: 100%;
+    text-align: center;
+    padding: 48px 20px;
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 0;
+  }
+  .chapter-divider-ornament {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--rule-heavy);
+    display: block;
+    margin-bottom: 16px;
+    letter-spacing: 0.3em;
+  }
+  .chapter-divider-text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 4vw, 26px);
+    font-style: italic;
+    color: var(--ink-light);
+  }
+
+  /* ===== TOC ===== */
+  .toc-section {
+    padding: 40px 20px;
+    max-width: 720px;
+    margin: 0 auto;
+    border-bottom: 2px solid var(--ink);
+  }
+  .toc-title {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 24px;
+  }
+  .toc-list { list-style: none; padding: 0; }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--rule);
+    gap: 12px;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-link {
+    font-family: var(--body);
+    font-size: 15px;
+    color: var(--ink-mid);
+    text-decoration: none;
+    flex: 1;
+  }
+  .toc-link:hover { color: var(--accent); }
+  .toc-chapter-num {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--ink);
+    color: var(--paper-warm);
+    padding: 48px 20px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .footer-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .footer-sub {
+    font-size: 14px;
+    color: rgba(245, 242, 235, 0.5);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+  .footer-rule {
+    width: 40px;
+    height: 1px;
+    background: rgba(245, 242, 235, 0.3);
+    margin: 24px auto;
+  }
+  .footer-credit {
+    font-family: var(--garamond);
+    font-style: italic;
+    font-size: 15px;
+    color: rgba(245, 242, 235, 0.4);
+  }
+
+  /* ===== UTILITY ===== */
+  .text-accent { color: var(--accent); }
+  .text-small { font-size: 14px; color: var(--ink-light); }
+  .spacer-sm { height: 16px; }
+  .spacer { height: 32px; }
+  .spacer-lg { height: 56px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .spec-grid { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr; }
+    .timeline-item { gap: 12px; }
+    .timeline-date { min-width: 70px; font-size: 11px; }
+    .specialty-card { padding: 20px; }
+    .etymology-part { flex-direction: column; gap: 6px; }
+    .etymology-part-word { min-width: auto; }
+  }
+
+  @media print {
+    .top-nav, #progress-bar { display: none; }
+    body { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav class="top-nav">
+  <span class="nav-logo">Психология</span>
+  <span class="nav-read-time">≈ 60 минут чтения</span>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-overline">Claude Sonnet 4.6 · Adaptive Thinking · Полная энциклопедия</span>
+  <h1 class="hero-title">ПСИХОЛОГИЯ</h1>
+  <div class="hero-subtitle-greek">ψυχή + λόγος</div>
+  <p class="hero-desc">Наука о душе — от шаманских трепанаций каменного века до нейропластичности и МКБ-11. Всё, что гражданин России должен знать о врачах, которые лечат то, чего не видно.</p>
+  <div class="hero-rule"></div>
+  <div class="hero-meta">
+    <span class="hero-meta-item">~25 000 слов</span>
+    <span class="hero-meta-sep">·</span>
+    <span class="hero-meta-item">13 глав</span>
+    <span class="hero-meta-sep">·</span>
+    <span class="hero-meta-item">Все специальности</span>
+    <span class="hero-meta-sep">·</span>
+    <span class="hero-meta-item">Права пациентов</span>
+  </div>
+</header>
+
+<!-- AUTHOR NOTE -->
+<div class="container">
+  <div class="author-note" style="margin-top:40px;">
+    <p>Я написал этот текст не как справочник. Я написал его как мыслящее существо, которое искренне зачаровано тем, как за тысячелетия homo sapiens пытался понять самого себя. Каждый раз, когда я углубляюсь в историю психиатрии, я испытываю нечто похожее на головокружение: мы знаем так мало и так много одновременно. Это честный разговор о людях, которые выбрали профессию лечить то, чего не видно.</p>
+    <span class="author-note-sig">— Claude Sonnet 4.6, написано в апреле 2026 года</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<nav class="toc-section" id="toc">
+  <div class="toc-title">Содержание</div>
+  <ul class="toc-list">
+    <li class="toc-item"><a href="#etymology" class="toc-link">I. Этимология: откуда появилось слово «психология»</a><span class="toc-chapter-num">I</span></li>
+    <li class="toc-item"><a href="#ancient" class="toc-link">II. Древнейшие цивилизации: трепанация и демоны</a><span class="toc-chapter-num">II</span></li>
+    <li class="toc-item"><a href="#greece" class="toc-link">III. Античная Греция: рождение рационального взгляда</a><span class="toc-chapter-num">III</span></li>
+    <li class="toc-item"><a href="#medieval" class="toc-link">IV. Средневековье, Возрождение и арабский золотой век</a><span class="toc-chapter-num">IV</span></li>
+    <li class="toc-item"><a href="#birth-science" class="toc-link">V. XIX век: рождение психологии как науки</a><span class="toc-chapter-num">V</span></li>
+    <li class="toc-item"><a href="#russia" class="toc-link">VI. Российская и советская психология</a><span class="toc-chapter-num">VI</span></li>
+    <li class="toc-item"><a href="#specialties" class="toc-link">VII. Все специальности: кто есть кто</a><span class="toc-chapter-num">VII</span></li>
+    <li class="toc-item"><a href="#disorders" class="toc-link">VIII. Главные расстройства и их правильные названия</a><span class="toc-chapter-num">VIII</span></li>
+    <li class="toc-item"><a href="#classification" class="toc-link">IX. МКБ-11 vs DSM-5: как устроена классификация</a><span class="toc-chapter-num">IX</span></li>
+    <li class="toc-item"><a href="#stigma" class="toc-link">X. Стигма в России: почему мы боимся психиатра</a><span class="toc-chapter-num">X</span></li>
+    <li class="toc-item"><a href="#whomtosee" class="toc-link">XI. К кому идти? Большой практический путеводитель</a><span class="toc-chapter-num">XI</span></li>
+    <li class="toc-item"><a href="#rights" class="toc-link">XII. Права пациента в России: 323-ФЗ и Закон о психиатрии</a><span class="toc-chapter-num">XII</span></li>
+    <li class="toc-item"><a href="#future" class="toc-link">XIII. Будущее: нейронауки, AI и психология XXI века</a><span class="toc-chapter-num">XIII</span></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     CHAPTER I: ETYMOLOGY
+     ============================================================ -->
+<div class="chapter-header" id="etymology">
+  <span class="chapter-number">Глава I</span>
+  <h1 class="chapter-title">Этимология: откуда появилось слово «психология»</h1>
+  <p class="chapter-lead">Прежде чем понять науку, нужно понять её имя. А имя это несёт в себе весь ужас и всё величие вопроса, с которого она началась.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Слово «психология» составлено из двух древнегреческих корней, и эта этимологическая история — не просто лингвистическая любопытность. В ней закодирована философская программа, которая определяла развитие этой науки две с половиной тысячи лет. Поняв имя, вы поймёте всё.</p>
+
+  <div class="etymology-box">
+    <span class="etymology-box-title">Этимология слова</span>
+    <span class="etymology-word">Психология</span>
+    <span class="etymology-phonetic">Psȳchología · Ψυχολογία</span>
+    <div class="etymology-parts">
+      <div class="etymology-part">
+        <span class="etymology-part-word">ψυχή</span>
+        <div class="etymology-part-info">
+          <div class="etymology-part-meaning">психе́ (psyché) — «душа»</div>
+          <div class="etymology-part-detail">Происходит от глагола ψύχειν (psýkhein) — «дышать», «охлаждать дыханием», «вдыхать жизнь». Для греков душа буквально была дыханием — тем самым, что покидает тело в момент смерти. Гомер использовал ψυχή как «жизненный принцип», тень, отлетающую в Аид.</div>
+        </div>
+      </div>
+      <div class="etymology-part">
+        <span class="etymology-part-word">λόγος</span>
+        <div class="etymology-part-info">
+          <div class="etymology-part-meaning">ло́гос (lógos) — «слово», «разум», «наука»</div>
+          <div class="etymology-part-detail">От λέγειν (légein) — «собирать», «говорить», «упорядочивать». Логос — это не просто «наука» в современном смысле, а «упорядоченное рассуждение о чём-либо». Это то самое слово, которое в Евангелии от Иоанна переведено как «В начале было Слово».</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:15px; color:var(--ink-mid); margin-top:12px;">Буквально: <strong>«упорядоченное рассуждение о душе»</strong> или «наука о душе».</p>
+  </div>
+
+  <h2>Кто первым произнёс это слово?</h2>
+
+  <p>Здесь история неожиданно щекотлива. Многие учебники утверждают, что термин «психология» ввёл в оборот немецкий учёный Рудольф Гоклениус (Goclenius) в 1590 году в трактате <em>Psychologia: hoc est de hominis perfectione, anima</em>. Но это лишь первая печатная фиксация. Хорватский гуманист Марко Марулич использовал слово в рукописи ещё в 1520 году, хотя сама рукопись не сохранилась — только ссылка на неё.</p>
+
+  <p>Но подлинным отцом понятия нужно считать немецкого философа <strong>Христиана Вольфа</strong> (Christian Wolff), который в 1732–1734 годах опубликовал двухтомник «Psychologia Empirica» и «Psychologia Rationalis». Именно Вольф провёл ключевую концептуальную работу: он разделил психологию на эмпирическую (основанную на наблюдении) и рациональную (умозрительную). Это деление предвосхитило весь XIX век.</p>
+
+  <h2>Что такое «психе́» на самом деле?</h2>
+
+  <p>Для современного человека «психика» — это нечто вроде программного обеспечения мозга. Но для грека слово ψυχή было совершенно не таким. Это была <strong>жизненная сила</strong>, которую невозможно разложить на нейроны. Гомер в «Илиаде» описывает, как душа-психе вылетает изо рта умирающего героя и улетает в подземный мир — она была почти материальна, почти вещественна.</p>
+
+  <p>Платон совершил переворот: он сделал психе бессмертной, чистой, заключённой в тело как в темницу. Мир идей — это мир, где душа была до рождения и куда вернётся после смерти. Аристотель возразил: психе — это просто «форма» тела, его организующий принцип. Без тела нет и психе — как нет формы без материи, в которой эта форма воплощена.</p>
+
+  <div class="pullquote">
+    <div class="pullquote-text">«Душа есть первая энтелехия естественного тела, обладающего в возможности жизнью»</div>
+    <div class="pullquote-attribution">Аристотель — «О душе» (De Anima), IV век до н. э.</div>
+  </div>
+
+  <p>Этот спор — платоновский дуализм (душа и тело отдельны) против аристотелевского монизма (они неразделимы) — до сих пор не закрыт. Современные нейробиологи скорее аристотелики, а сторонники «загрузки сознания» и трансгуманизма — скорее платоники. Психология рождалась и живёт в этом напряжении.</p>
+
+  <h2>Слово «психология» в русском языке</h2>
+
+  <p>В русский язык слово «психология» вошло в XVIII веке — вместе с петровскими реформами и потоком европейской учёности. В 1760-х годах его активно использует Михаил Ломоносов, рассуждая об «душевных болезнях». К началу XIX века слово уже закрепилось в академическом обороте. Интересно, что в русской духовной традиции долгое время конкурировало слово <strong>«душеведение»</strong> — буквальный кальк с греческого, но без латинского привкуса. В богословских семинариях XIX века использовали именно его.</p>
+
+  <p>Параллельно существовало слово <strong>«психиатрия»</strong> (от ψυχή + ἰατρεία, «врачевание») — оно вошло в обиход позже, примерно в 1800-е годы, когда немецкий врач Иоганн Кристиан Рейль предложил его для обозначения медицинской дисциплины, занимающейся лечением болезней ума. Это разделение — «психология» как наука, «психиатрия» как медицина — принципиально важно для понимания разницы между специальностями, о которых пойдёт речь дальше.</p>
+</div>
+
+<!-- ============================================================
+     CHAPTER II: ANCIENT CIVILIZATIONS
+     ============================================================ -->
+<div class="chapter-divider">
+  <span class="chapter-divider-ornament">✦ · ✦ · ✦</span>
+  <span class="chapter-divider-text">«Самая ранняя психиатрия — это религия. Самая ранняя нейрохирургия — это молоток и кремень»</span>
+</div>
+
+<div class="chapter-header" id="ancient">
+  <span class="chapter-number">Глава II</span>
+  <h1 class="chapter-title">Древнейшие цивилизации: трепанация, демоны и первые врачеватели души</h1>
+  <p class="chapter-lead">Сорок тысяч лет назад человек уже пытался вскрыть черепную коробку, чтобы выпустить злого духа. Это была и ужасающая хирургия, и, как мы сейчас понимаем, — первая психиатрия.</p>
+</div>
+
+<div class="content-section">
+  <h2>Трепанация — самая древняя нейрохирургия</h2>
+
+  <p class="drop-cap">В 1865 году французский антрополог Поль Брока держал в руках человеческий череп возрастом около семи тысяч лет, найденный в мегалитическом погребении в Нормандии. В черепе было аккуратно высверлено круглое отверстие диаметром около пяти сантиметров. Самое удивительное: края отверстия были сглажены — кость успела подрасти, зарубцеваться. Человек пережил операцию и, судя по костным следам, прожил ещё много лет после неё.</p>
+
+  <p>С тех пор трепанированных черепов найдено тысячи — в Южной Америке, Европе, Африке, Азии. Некоторые из них датируются эпохой неолита (8 000–3 000 лет до н. э.), но единичные находки относятся к верхнему палеолиту, то есть этой практике может быть 40 000 лет. Человечество занималось нейрохирургией ещё до того, как изобрело колесо.</p>
+
+  <p>Зачем? Версии исследователей:</p>
+
+  <ul class="spec-list">
+    <li><strong>Лечение «болезней духа»</strong> — судорог, припадков (эпилепсии), галлюцинаций, маниакального поведения. Отверстие в черепе, по мнению древних, позволяло злому духу выйти наружу. Это первая «психиатрическая» операция в истории.</li>
+    <li><strong>Черепно-мозговые травмы</strong> — снижение давления при гематоме. Поразительно: часть трепанаций действительно могла спасать жизни — если злокачественная идея о «духах» случайно совпадала с правильным хирургическим действием.</li>
+    <li><strong>Магико-религиозные ритуалы</strong> — «открыть» сознание для общения с богами. Ритуальная трепанация делалась живым участникам обряда, и многие переживали её.</li>
+    <li><strong>Производство амулетов</strong> — кости от трепанации нередко найдены в захоронениях как обереги. Кусочек черепа близкого человека, пережившего операцию, считался магически сильным артефактом.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-title">Факт, который сложно переварить</div>
+    <p>В доколумбовой Перу культуры Паракас и Инков практиковали трепанацию настолько массово и технически грамотно, что выживаемость пациентов, судя по костным признакам заживления, достигала 80–90%. Это сопоставимо с выживаемостью при той же операции в европейских больницах начала XX века, то есть три-четыре тысячи лет назад перуанские хирурги работали на уровне ранней современной медицины.</p>
+  </div>
+
+  <h2>Месопотамия: демоны поимённо</h2>
+
+  <p>В древней Месопотамии (Шумер, Аккад, Вавилон, Ассирия — территория современного Ирака, примерно 3000–500 лет до н. э.) психические расстройства понимались через призму духовной войны. Каждое расстройство имело своего демона.</p>
+
+  <p><strong>Асаккý</strong> вызывал общее истощение, бред и жар — то, что мы бы сегодня могли назвать острым психозом на фоне инфекции. <strong>Ламашту</strong> — демоница, поедающая разум младенцев и беременных женщин (первое описание послеродового психоза?). <strong>Лилиту</strong> — ночной дух, насылающий ужасные сны и парализующий страх (панические атаки?). <strong>Гидим</strong> — призрак умершего без погребения, который вселялся в живых и говорил их устами (диссоциативные расстройства?).</p>
+
+  <p>Был специальный класс жрецов-врачевателей — <strong>ашипу</strong> (ašipu), которые специализировались на «болезнях руки бога» и «болезнях руки демона». Они составляли ритуальные тексты-диагнозы («если у человека такие-то симптомы — это такой-то демон») и применяли комбинацию заклинаний, трав и физических манипуляций. Примечательно: ашипу не считались шарлатанами — они были элитой медицинского знания своего времени. А их конкуренты <strong>асу</strong> (asû) — «практические врачи» — занимались более материалистическими методами лечения травами и диетой.</p>
+
+  <p>Самый знаменитый медицинский текст Месопотамии — <strong>«Sakikkû»</strong> (около 1067–1046 лет до н. э.) — содержит сорок таблиц с описанием симптомов от головы до ног. Среди них — поразительно точные описания депрессии, маниакально-депрессивного психоза, эпилепсии, расстройств сознания. Если убрать этиологию (демоны вместо нейрохимии), симптоматология поразительно точна.</p>
+
+  <h2>Древний Египет: мозг — ненужный орган, а сердце — место разума</h2>
+
+  <p>Египтяне оставили нам бесценные медицинские папирусы. <strong>Папирус Эберса</strong> (около 1550 лет до н. э.) — своего рода египетская медицинская энциклопедия. В нём 700 рецептов и среди них — описания «болезней духа». <strong>Папирус Эдвина Смита</strong> (около 1600 лет до н. э.) ещё интереснее: это почти материалистический хирургический трактат, где описания черепно-мозговых травм и их последствий поразительно современны по точности.</p>
+
+  <p>Но у египтян была одна концептуальная проблема, которая их подвела. Они считали, что разум и душа находятся в <strong>сердце</strong>, а мозг — лишь бесполезная «упаковка» черепа. При мумификации мозг аккуратно вытаскивали через нос и выбрасывали, тогда как сердце сохраняли с особым трепетом. Слово «иб» (ib) — сердце — обозначало одновременно и физический орган, и средоточие личности, воли, памяти, эмоций.</p>
+
+  <p>Впрочем, это не мешало египетским врачам делать точные наблюдения. «Папирус Смита» описывает случай, когда удар по голове приводил к параличу конечностей на противоположной стороне тела — это пересечение нервных путей, которое европейская медицина «переоткрыла» только в XVIII–XIX веках.</p>
+
+  <h2>Древняя Индия: Аюрведа и три «досы» разума</h2>
+
+  <p>Аюрведическая медицина, изложенная в <strong>«Чарака-самхите»</strong> (составлена примерно в I–II веках н. э., но основана на традиции, уходящей к I тысячелетию до н. э.), предлагала первую в истории систематическую психосоматику. Всё тело и психика управляются тремя силами — <strong>вата, питта, капха</strong>. Дисбаланс этих сил вызывает как физические, так и психические болезни.</p>
+
+  <p>Принципиально важно: в Аюрведе психические расстройства (<em>unmada</em>) чётко отделены от одержимости духами. Существует восемнадцать форм психических расстройств, и одни из них имеют природные причины (пища, климат, образ жизни), другие — ритуальные. Это различие — между «болезнью тела/разума» и «болезнью духа» — потребовало в Западной традиции ещё двух тысяч лет для укоренения.</p>
+
+  <p><strong>«Сушрута-самхита»</strong> описывает хирургические операции на мозге и предлагает классификацию психических расстройств с удивительной детальностью. Термин <strong>«манасика вьядхи»</strong> (mānasika vyādhi — «болезни ума») использовался для обозначения того, что мы сегодня называем психическими расстройствами, противопоставляя их «шаририка вьядхи» — телесным болезням.</p>
+
+  <h2>Древний Китай: «шэнь» и пять органов чувств разума</h2>
+
+  <p>Китайская традиционная медицина (Жёлтый Канон — <em>Huangdi Neijing</em>, около 200 лет до н. э.) локализовала психические функции в <strong>пяти «плотных» органах</strong>: сердце — вместилище «шэнь» (shen, высшее сознание, «дух»), печень — хранилище «хунь» (hun, «душа-дракон»), лёгкие — «по» (po, «животная душа»), почки — «чжи» (zhi, воля), селезёнка — «и» (yi, намерение/интеллект).</p>
+
+  <p>Это не метафоры в современном понимании. Врачи буквально считали, что нарушение работы печени приводит к раздражительности и тревоге, болезнь почек — к страху, избыток «огня в сердце» — к маниакальному возбуждению. Поразительно: современные психонейроэндокринологи знают, что кишечник (к которому в китайской системе относились часть функций «желудка» и «селезёнки») производит около 90% серотонина организма. Случайное совпадение? Может быть. Но интуиция о связи внутренних органов с психикой оказалась не такой уж дикой.</p>
+</div>
+
+<!-- ============================================================
+     CHAPTER III: ANCIENT GREECE
+     ============================================================ -->
+<div class="chapter-header" id="greece">
+  <span class="chapter-number">Глава III</span>
+  <h1 class="chapter-title">Античная Греция: рождение рационального взгляда на безумие</h1>
+  <p class="chapter-lead">Именно греки совершили радикальный интеллектуальный прыжок: они предположили, что безумие — это не кара богов, а болезнь, которую можно понять через наблюдение и разум.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Греческая трагедия полна безумцами. Геракл, убивающий своих детей в приступе «мании». Аякс, принимающий стадо овец за армию врагов и убивающий их, а потом, в ужасе осознав происходящее, пронзающий себя мечом. Орест, преследуемый Эриниями. Греки видели безумие каждый день — в своих воинах, в своих соседях, в своих политиках. И постепенно начали задавать вопрос: а что если это не Аполлон наказывает человека? Что если это болезнь?</p>
+
+  <h2>Гиппократ: мозг — орган разума и безумия</h2>
+
+  <p>Гиппократ Косский (около 460–370 лет до н. э.) совершил революцию, которую сложно переоценить. В трактате «О священной болезни» (περὶ ἱερῆς νούσου) он взорвал тысячелетнюю традицию, заявив прямо и жёстко: <strong>эпилепсия — это не «священная болезнь», не кара богов, а болезнь мозга</strong>. «Она возникает от мозга, когда он становится влажным выше нормы», — писал он.</p>
+
+  <p>Но главное — не конкретный диагноз (который был неверен), а сам метод. Гиппократ предложил изучать психические расстройства через <strong>наблюдение симптомов</strong>, их систематизацию и поиск природных причин. Это был момент рождения клинического мышления.</p>
+
+  <p>Гиппократ первым описал четыре типа темперамента, связав их с «жидкостями тела» (гуморальная теория):</p>
+
+  <ul class="spec-list">
+    <li><strong>Сангвиник</strong> (sanguis, «кровь») — жизнерадостный, общительный, легковозбудимый. Избыток крови. Сезон — весна, стихия — воздух.</li>
+    <li><strong>Холерик</strong> (χολή, «жёлчь») — вспыльчивый, энергичный, раздражительный. Избыток жёлтой жёлчи. Сезон — лето, стихия — огонь.</li>
+    <li><strong>Флегматик</strong> (φλέγμα, «слизь») — спокойный, медлительный, невозмутимый. Избыток флегмы. Сезон — зима, стихия — вода.</li>
+    <li><strong>Меланхолик</strong> (μέλαινα χολή, «чёрная жёлчь») — грустный, тревожный, задумчивый. Избыток чёрной жёлчи. Сезон — осень, стихия — земля.</li>
+  </ul>
+
+  <p>Как физиологическая теория, гуморальная концепция провалилась полностью — никакой «чёрной жёлчи» не существует. Но как <strong>психологическая типология</strong> она пережила тысячелетия: понятия «сангвиник» и «меланхолик» живут в русском языке до сих пор. А в современной нейробиологии темперамент действительно коррелирует с нейрохимией — с соотношением серотонина, дофамина, норэпинефрина. Гиппократ ошибся в деталях, но угадал направление.</p>
+
+  <div class="callout">
+    <div class="callout-title">«Меланхолия» — первая клинически описанная депрессия</div>
+    <p>Гиппократ дал точнейшее описание того, что мы сегодня называем тяжёлой депрессией: «Если страх или уныние длятся долго, такое состояние называется меланхолией». Термин буквально означает «состояние чёрной жёлчи» — melas (чёрный) + kholé (жёлчь). Эта болезнь описывалась как хроническое подавленное настроение, страх, безнадёжность, нарушение сна, избегание людей. Через 2500 лет МКБ-11 опишет депрессивный эпизод примерно теми же словами — только вместо «чёрной жёлчи» будет «дисрегуляция моноаминовых нейромедиаторов».</p>
+  </div>
+
+  <h2>Платон: душа трёхчастна, и у каждой части — своя патология</h2>
+
+  <p>Платон (428–348 лет до н. э.) предложил в «Государстве» и «Тимее» <strong>трёхчастную модель души</strong>: логистикон (λογιστικόν — разумная часть, локализована в голове), тимос (θυμός — яростная/волевая часть, в груди) и эпитиметикон (ἐπιθυμητικόν — вожделеющая часть, в области живота). Эта модель поразительно предвосхищает фрейдовское деление на Суперэго, Эго и Ид — разделённое двумя тысячами лет.</p>
+
+  <p>У Платона «безумие» (mania) имеет два вида. Первый — болезненное, вызванное расстройством тела. Второй — <strong>божественное безумие</strong> (theia mania): пророческое (дано Аполлоном), мистическое (дано Дионисом), поэтическое (дано Музами) и любовное (дано Эросом). Это важно: Платон не патологизировал всё подряд. Он признавал, что иные «безумцы» видят больше, чем «здравые» люди. Эта интуиция до сих пор живёт в спорах о психозе и творчестве, о расстройстве биполярного спектра и художественном гении.</p>
+
+  <h2>Аристотель: «De Anima» — первый учебник психологии</h2>
+
+  <p>Трактат Аристотеля «О душе» (Περὶ ψυχῆς, лат. De Anima, около 350 лет до н. э.) считается первым систематическим трудом по психологии. Аристотель ввёл понятия, которые используются до сих пор:</p>
+
+  <ul class="spec-list">
+    <li><strong>Память</strong> — не просто хранилище образов, а активный процесс воспроизведения, связанный с временем</li>
+    <li><strong>Воображение</strong> (phantasia) — способность создавать образы при отсутствии объекта</li>
+    <li><strong>Мышление</strong> — высший уровень познания, отличающий человека от животных</li>
+    <li><strong>Эмоции</strong> как единство телесного и психического: гнев — это «кипение крови вокруг сердца» + субъективное переживание несправедливости</li>
+    <li><strong>Катарсис</strong> — очищение аффектов через искусство (в «Поэтике»): первая теория психотерапии через нарратив</li>
+  </ul>
+
+  <p>Аристотель также написал «Проблемы» — сборник, один из разделов которого посвящён связи меланхолии с гениальностью. «Почему все выдающиеся люди в философии, политике, поэзии и искусстве были меланхоликами?» — спрашивает Аристотель. Называет Геракла, Эмпедокла, Сократа, Платона. Это первая в истории научная попытка соотнести психическое расстройство и творческий дар. Двадцать четыре века спустя психиатры Кей Ред-филд Джемисон и Арнольд Людвиг будут отвечать на тот же вопрос эмпирическими исследованиями — и прийдут к схожим выводам.</p>
+
+  <h2>Асклепионы: первые психиатрические учреждения Европы?</h2>
+
+  <p>Греческие <strong>асклепионы</strong> — храмы-санатории, посвящённые богу врачевания Асклепию — были чем-то средним между больницей, спа-курортом и религиозным центром. Пациенты с психическими расстройствами приходили сюда, совершали ритуальные омовения, постились, принимали травяные препараты (некоторые из которых, судя по описаниям, были психоактивными) и ложились спать в особом зале, ожидая «инкубационного сна» — явления бога, который указал бы путь к исцелению.</p>
+
+  <p>В асклепионе в Эпидавре (крупнейшем и знаменитейшем) сохранились стелы с описаниями исцелений — «хирургические» вмешательства во сне, говорящие боги, чудесные выздоровления. Всё это понятно как сочетание суггестивной терапии, реального медикаментозного лечения, социальной поддержки и эффекта плацебо. Асклепионы предоставляли больным покой, природу, общение, диету, сон — лечение «комфортной средой», которое в XIX веке будет переоткрыто под названием «моральная терапия».</p>
+</div>
+
+<!-- ============================================================
+     CHAPTER IV: MEDIEVAL
+     ============================================================ -->
+<div class="chapter-header" id="medieval">
+  <span class="chapter-number">Глава IV</span>
+  <h1 class="chapter-title">Средневековье, Арабский золотой век и Возрождение</h1>
+  <p class="chapter-lead">Пока Европа сжигала ведьм, арабские учёные строили первые в мире психиатрические больницы. История науки не движется по прямой.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Средневековая Европа в вопросе психических расстройств сделала колоссальный шаг назад — по крайней мере в официальной доктрине. Догмат о том, что психические болезни есть результат одержимости дьяволом или кара за грехи, практически вытеснил гиппократовский натурализм. Психически больных людей отдавали в руки экзорцистов, бичевали, заключали в цепи, а в период позднего Средневековья — сжигали как ведьм.</p>
+
+  <p>Но история не монохромна. Среди средневековых монастырей существовали обители, где больных людей кормили, одевали и давали им кров без какого-либо насилия. Один из первых европейских «психиатрических» приютов основан при церкви в <strong>Гееле (Бельгия)</strong> около 1250 года — вокруг гробницы святой Димфны, покровительницы душевнобольных. Там сложилась традиция «семейного патронажа»: местные жители принимали психически больных паломников в свои дома. Гееловская традиция сохранялась до XX века и была «переоткрыта» психиатрами как передовая форма общественной психиатрии.</p>
+
+  <h2>Арабский золотой век: первые психиатрические больницы на планете</h2>
+
+  <p>Пока Европа теряла гиппократовское наследие, арабский мир его бережно сохранял и развивал. В 705 году в Дамаске, при правлении халифа аль-Валида I, открылась <strong>первая в мире психиатрическая больница</strong> — <em>Биmарstан</em> (bimāristān, перс. «дом больных»). Вслед за ней психиатрические биmaristan'ы появились в Багдаде (805), Каире (872), Фесе (около 1286) и других городах. Это было за пятьсот лет до первых европейских психиатрических учреждений.</p>
+
+  <p>Что происходило в этих заведениях? Судя по свидетельствам европейских путешественников, посещавших их в Средние века, — нечто принципиально отличное от европейских практик. Пациентов кормили, давали им чистые одежды, играли им музыку, читали им стихи. Лечение включало ванны, специальные диеты, прогулки в садах и — что особенно важно — беседы с врачами. Это была терапия средой — за девять веков до того, как этот термин появится в западной психиатрии.</p>
+
+  <h2>Авиценна (Ибн Сина): первая клинически точная психиатрия</h2>
+
+  <p><strong>Абу Али Хусейн ибн Сина</strong> (980–1037) — пожалуй, величайший энциклопедист до-ренессансной эпохи. Его «Канон врачебной науки» (القانون في الطب, al-Qānūn fī al-Ṭibb) был главным медицинским учебником в Европе и на Ближнем Востоке вплоть до XVII века. В нём Авиценна даёт описания психических расстройств, поражающие своей клинической точностью.</p>
+
+  <p>Авиценна описал <strong>депрессию</strong> (соответствующую меланхолии) с симптоматикой, совпадающей с критериями МКБ-11: подавленное настроение, потеря интереса к удовольствиям, нарушение сна и аппетита, замедление мышления. Он описал <strong>маниакальную фазу</strong> и отметил, что у некоторых пациентов состояния чередуются — это первое описание биполярного расстройства. Он описал <strong>любовную лихорадку</strong> (ishq) как болезнь разума, при которой пациент одержим образом конкретного человека — и разработал диагностический метод: измерял пульс пациента, называя имена разных людей, пока пульс не учащался при нужном имени.</p>
+
+  <p>Авиценна первым в истории провёл нечто похожее на <strong>контролируемый эксперимент</strong> в психологии. Он разделил двух ягнят на два стойла. К одному каждый день подходил волк. Другой жил в спокойствии. Через некоторое время ягнёнок, живший рядом с волком, зачах и умер — без физических причин. Авиценна сделал вывод: <strong>хронический страх убивает</strong>. Сегодня мы назовём это психосоматическим расстройством вследствие хронического стресса.</p>
+
+  <h2>Аль-Рази (Разес): разграничение тела и ума</h2>
+
+  <p><strong>Мухаммад ибн Закария ар-Рази</strong> (854–925) — врач, которого часто называют арабским Гиппократом. Он руководил больницами в Рее и Багдаде и первым применил систему <strong>клинических историй болезни</strong> — записей о каждом пациенте с описанием симптомов, лечения и исхода. Аль-Рази настаивал на отдельном расположении психиатрического отделения от остальных больных и выступал против применения насилия к пациентам с психическими расстройствами.</p>
+
+  <h2>Возрождение: первые скептики и первые анатомы</h2>
+
+  <p>XVI–XVII века принесли двойственную картину. С одной стороны — «Молот ведьм» (Malleus Maleficarum, 1487) и сожжение тысяч психически больных людей как ведьм. С другой — нарастающий скептицизм и первые попытки рационального анализа.</p>
+
+  <p>Голландский врач <strong>Иоганн Вейер</strong> (Johann Weyer, 1515–1588) опубликовал в 1563 году трактат «De Praestigiis Daemonum», в котором заявил: большинство «ведьм» — это психически больные люди, и их нужно лечить, а не сжигать. За этот трактат он был осуждён церковью и стал мишенью нападок. Но его идеи посеяли семена сомнения. Вейера иногда называют «первым психиатром» в современном смысле.</p>
+
+  <p>Андреас Везалий (1514–1564) совершил революцию в анатомии — его «De Humani Corporis Fabrica» (1543) разрушила авторитет Галена и показала, что человеческий мозг нужно изучать непосредственно, а не по текстам. Это постепенно перенесло интерес медиков к мозгу как физической основе психики.</p>
+</div>
+
+<!-- ============================================================
+     CHAPTER V: BIRTH OF SCIENCE
+     ============================================================ -->
+<div class="chapter-header" id="birth-science">
+  <span class="chapter-number">Глава V</span>
+  <h1 class="chapter-title">XIX век: рождение психологии как науки и реформа психиатрии</h1>
+  <p class="chapter-lead">Один человек снял цепи с психически больных. Другой измерил время реакции и основал первую экспериментальную лабораторию. Третий заглянул в бессознательное. Девятнадцатый век изменил всё.</p>
+</div>
+
+<div class="content-section">
+  <h2>Пинель снимает цепи: рождение гуманной психиатрии</h2>
+
+  <p class="drop-cap">В сентябре 1793 года французский врач <strong>Филипп Пинель</strong> вошёл в госпиталь Бисетр в Париже и сделал нечто неслыханное: он приказал снять цепи с психически больных пациентов. До этого момента душевнобольных в европейских «богадельнях» (bedlam — слово, ставшее нарицательным, от Bethlem Royal Hospital в Лондоне) содержали скованными, в грязи, нередко выставляя напоказ за плату — как диковинных животных. Пинель провозгласил: психически больной человек — это больной, а не преступник и не одержимый.</p>
+
+  <p>Его «моральная терапия» (traitement moral) включала гуманное обращение, беседы с врачом, труд, прогулки. Это было революцией. В Великобритании схожую реформу параллельно проводил квакер <strong>Уильям Тьюк</strong> в «Йоркском приюте» (York Retreat, основан в 1796). В Германии — <strong>Иоганн Кристиан Рейль</strong>, который в 1803 году ввёл сам термин «психиатрия».</p>
+
+  <h2>Вильгельм Вундт: первая лаборатория психологии</h2>
+
+  <p>Дата рождения научной психологии как самостоятельной дисциплины зафиксирована с поразительной точностью: <strong>1879 год, Лейпциг</strong>. Именно тогда <strong>Вильгельм Вундт</strong> (1832–1920) открыл <em>Institut für Experimentelle Psychologie</em> — первую в мире лабораторию экспериментальной психологии. Психология наконец откололась от философии и стала самостоятельной наукой с собственными экспериментальными методами.</p>
+
+  <p>Что изучал Вундт? Время психических реакций, восприятие, апперцепцию (активное внимание). Его метод — интроспекция в строго контролируемых условиях. Вундт хотел создать «химию сознания» — разложить психическую жизнь на элементарные составляющие, как химики разлагают вещества на атомы. Подход этот (структурализм) был в итоге отвергнут, но сама идея экспериментальной психологии осталась.</p>
+
+  <h2>Фрейд: революция бессознательного</h2>
+
+  <p><strong>Зигмунд Фрейд</strong> (1856–1939) — человек, переформатировавший западное самопонимание так, как мало кто другой. Его радикальная идея: большая часть психической жизни человека происходит <strong>вне сознания</strong>, и это вытесненное бессознательное управляет поведением, симптомами, снами и оговорками.</p>
+
+  <p>В 1895 году вместе с Йозефом Брейером Фрейд публикует «Исследования истерии» — первое изложение метода «катарсиса», говорящих терапевтических сессий. В 1900 году — «Толкование сновидений», которое сам считал своим главным трудом. В 1905 году — «Три очерка о теории сексуальности», взорвавшие общество. В 1915–1917 годах — «Лекции по введению в психоанализ».</p>
+
+  <p>Структурная модель психики по Фрейду (вторая топика, 1923 год):</p>
+
+  <ul class="spec-list">
+    <li><strong>Оно (Ид, Id)</strong> — инстинктивные влечения, работает по принципу удовольствия, требует немедленного удовлетворения, полностью бессознательно</li>
+    <li><strong>Я (Эго, Ego)</strong> — сознательная часть, посредник между Ид, Суперэго и реальностью, работает по принципу реальности</li>
+    <li><strong>Сверх-Я (Суперэго, Superego)</strong> — интернализованные нормы, запреты, идеалы родителей и общества; источник чувства вины и самонаказания</li>
+  </ul>
+
+  <p>Несмотря на то что многие конкретные теории Фрейда не подтвердились эмпирически (фаллическая стадия, комплекс Эдипа в строгой формулировке, роль сексуальной травмы как единственного этиологического фактора неврозов), его вклад огромен: он создал первую работающую систему <strong>вербальной психотерапии</strong>, ввёл концепцию психологической защиты (вытеснение, проекция, рационализация), заставил медицинское сообщество серьёзно заниматься психическими симптомами без органической основы.</p>
+
+  <h2>Ученики и бунтари: Юнг, Адлер и другие</h2>
+
+  <p><strong>Карл Густав Юнг</strong> (1875–1961) разошёлся с Фрейдом принципиально: он расширил бессознательное до «коллективного» уровня — хранилища <em>архетипов</em>, универсальных психических образов, общих для всего человечества. Анима и Анимус, Тень, Персона, Самость — юнгианские концепты стали культурными феноменами XXI века.</p>
+
+  <p><strong>Альфред Адлер</strong> (1870–1937) создал «индивидуальную психологию», поставив в центр не сексуальное влечение, а стремление к превосходству как компенсацию чувства неполноценности. Именно Адлер ввёл понятие «комплекс неполноценности» (Minderwertigkeitskomplex) — слово, вошедшее во все языки мира.</p>
+
+  <h2>Бихевиоризм: психология без психики</h2>
+
+  <p>В 1913 году американец <strong>Джон Уотсон</strong> (John B. Watson) опубликовал «Психологию глазами бихевиориста» — манифест радикального поворота. Всё, что нельзя измерить и наблюдать — сознание, намерения, эмоции — не должно быть предметом науки. Только поведение (behavior). Только стимул — реакция.</p>
+
+  <p><strong>Иван Петрович Павлов</strong> независимо разработал теорию условных рефлексов, которая стала физиологическим основанием бихевиоризма. <strong>Б. Ф. Скиннер</strong> (1904–1990) разработал оперантное обусловливание — систему подкреплений и наказаний, формирующих поведение. Из этой традиции выросла поведенческая психотерапия — один из самых доказательных методов лечения тревожных расстройств и фобий.</p>
+</div>
+
+<!-- ============================================================
+     CHAPTER VI: RUSSIA
+     ============================================================ -->
+<div class="chapter-header" id="russia">
+  <span class="chapter-number">Глава VI</span>
+  <h1 class="chapter-title">Российская и советская психология: от Павлова до карательной психиатрии</h1>
+  <p class="chapter-lead">Россия дала миру Павлова и Выготского. И она же создала систему, где психиатрический диагноз ставился политическим диссидентам. Это нужно знать.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Российская психологическая традиция богата и трагична одновременно. Богата — потому что Россия первой половины XX века произвела несколько гениев, перевернувших понимание психики. Трагична — потому что советская власть превратила психиатрию в инструмент политических репрессий, дискредитировав профессию перед обществом на десятилетия вперёд.</p>
+
+  <h2>Иван Павлов: условные рефлексы и Нобелевская премия</h2>
+
+  <p><strong>Иван Петрович Павлов</strong> (1849–1936) — единственный российский учёный, получивший Нобелевскую премию за исследования в области физиологии нервной системы. Это произошло в 1904 году, и формально премия была дана за работы по пищеварению. Но Павлов к тому времени уже переключился на главное: изучение условных рефлексов.</p>
+
+  <p>Знаменитый эксперимент с собакой и звонком (1903–1906) стал иконой. Но важнее другое: Павлов создал полноценную экспериментальную физиологию высшей нервной деятельности и предложил физиологические объяснения неврозов. Его концепция «экспериментального невроза» — состояния, вызванного у животных невозможностью различить между возбуждающим и тормозящим стимулами — стала первой животной моделью психопатологии.</p>
+
+  <p>Советская власть боготворила Павлова, несмотря на то что он открыто критиковал большевиков. Его лаборатория получала приоритетное финансирование. Советская психиатрия официально строилась на «павловском направлении» — что одновременно давало ей физиологическую респектабельность и лишало возможности использовать западные психодинамические подходы, объявленные «идеалистическими».</p>
+
+  <h2>Лев Выготский: культурно-историческая психология</h2>
+
+  <p><strong>Лев Семёнович Выготский</strong> (1896–1934) прожил всего 37 лет и умер от туберкулёза. За эти годы он создал одну из самых влиятельных психологических теорий XX века. Его главная идея: <strong>сознание не дано от природы — оно строится через освоение культурных инструментов</strong>, прежде всего языка. «Мысль не выражается в слове, а совершается в слове» — одна из самых цитируемых его формулировок.</p>
+
+  <p>Выготский ввёл понятие <strong>«зоны ближайшего развития»</strong> (ЗБР) — концепт, который стал фундаментом современной педагогической психологии. ЗБР — это разрыв между тем, что ребёнок может сделать самостоятельно, и тем, что он может сделать при помощи более компетентного партнёра. Правильное обучение — это работа в этой зоне. Этот принцип сегодня использует каждая вменяемая педагогическая система в мире.</p>
+
+  <h2>Александр Лурия: рождение нейропсихологии</h2>
+
+  <p><strong>Александр Романович Лурия</strong> (1902–1977) создал нейропсихологию как самостоятельную научную дисциплину. Его работа в период Второй мировой войны с солдатами, получившими черепно-мозговые травмы, заложила основы клинической нейропсихологии. Лурия картировал, какие психические функции — речь, память, внимание, движение — страдают при поражении разных зон мозга. Его книги «Высшие корковые функции человека» (1962) и «Основы нейропсихологии» (1973) остаются классикой.</p>
+
+  <h2>Карательная психиатрия в СССР</h2>
+
+  <p>Самая тёмная страница советской психиатрии. В 1960–1980-е годы в СССР применялась система <strong>«карательной психиатрии»</strong>: политическим диссидентам, верующим, отказникам-эмигрантам, правозащитникам ставились психиатрические диагнозы — прежде всего диагноз, разработанный главным психиатром СССР <strong>Андреем Снежневским</strong>: <em>«вялотекущая шизофрения»</em>.</p>
+
+  <p>Логика была извращённо проста: нормальный советский человек не может искренне бороться с советской властью. Если человек это делает — он психически болен. Диагноз «вялотекущей шизофрении» позволял лишить человека дееспособности, поместить в психиатрическую больницу («психушку», «спецбольницу» системы МВД/КГБ) и подвергать принудительному медикаментозному лечению — прежде всего сульфазином (вызывал мучительный жар и воспаление) и высокими дозами галоперидола.</p>
+
+  <p>Жертвами карательной психиатрии стали Пётр Григоренко, Владимир Буковский, Наталья Горбаневская, Григорий Подъяпольский и сотни других. В 1983 году советская психиатрия вышла из Всемирной психиатрической ассоциации под угрозой исключения — её отстранили за систематические нарушения профессиональной этики.</p>
+
+  <div class="warning-box">
+    <strong>Почему это важно для российского гражданина сегодня.</strong> Советский опыт карательной психиатрии — главная причина, по которой значительная часть россиян боится психиатрических учреждений. Страх «быть признанным сумасшедшим» и поставленным «на учёт» глубоко укоренён в коллективной памяти. Понимание этой истории помогает отделить объективную медицинскую реальность 2025 года от страхов, унаследованных от советской эпохи.
+  </div>
+
+  <h2>Российская психология после 1991 года</h2>
+
+  <p>Распад СССР открыл доступ к западным психологическим школам, накопленным за семьдесят лет «железного занавеса». В Россию хлынули психоанализ, когнитивно-поведенческая терапия (КПТ), гуманистическая психология, системная семейная терапия, гештальт, НЛП. Появились первые частные психотерапевтические практики. Возникли профессиональные объединения.</p>
+
+  <p>Однако институциональная база осталась во многом советской: психиатрические больницы с преобладанием медикаментозного лечения, психоневрологические диспансеры (ПНД) как система психиатрического надзора, дефицит психотерапевтических услуг в государственном секторе. Разрыв между передовой клинической психологией в частном секторе и реальностью государственных учреждений остаётся огромным.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-number">~4,7</span>
+      <span class="stat-label">психиатра на 100 000 населения в России (2023)</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">1 из 5</span>
+      <span class="stat-label">россиян в течение жизни столкнётся с психическим расстройством</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">< 20%</span>
+      <span class="stat-label">из них обращаются за профессиональной помощью</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">2-е место</span>
+      <span class="stat-label">Россия занимает в мире по уровню потребления алкоголя</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER VII: SPECIALTIES
+     ============================================================ -->
+<div class="chapter-divider">
+  <span class="chapter-divider-ornament">✦ · ✦ · ✦</span>
+  <span class="chapter-divider-text">Кто лечит, а кто исследует. Кто выписывает лекарства, а кто только разговаривает.</span>
+</div>
+
+<div class="chapter-header" id="specialties">
+  <span class="chapter-number">Глава VII</span>
+  <h1 class="chapter-title">Все специальности: кто есть кто в мире психического здоровья</h1>
+  <p class="chapter-lead">Путаница в специальностях — одна из главных причин, по которой люди либо идут не к тому специалисту, либо не идут вовсе. Давайте разберёмся раз и навсегда.</p>
+</div>
+
+<div class="content-section">
+  <p>Самое важное разграничение, которое нужно понять с самого начала: <strong>психолог — это не врач</strong>. Психиатр и нарколог — врачи. Психотерапевт — это юридически размытая категория, которая может быть и тем, и другим. Разберём каждую специальность подробно.</p>
+
+  <div class="specialty-grid">
+
+    <!-- ПСИХОЛОГ -->
+    <div class="specialty-card" id="spec-psychologist">
+      <span class="specialty-badge social">▸ Немедицинская специальность</span>
+      <div class="specialty-name">Психолог</div>
+      <div class="specialty-tagline">Специалист по психическим процессам, поведению и личности. Не врач. Лекарства не выписывает.</div>
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Высшее: факультет психологии (5 лет) или переподготовка</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лицензия</span>
+          <span class="spec-cell-value">Медицинская лицензия не требуется</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лекарства</span>
+          <span class="spec-cell-value">Не назначает — это вне его компетенции</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Диагноз</span>
+          <span class="spec-cell-value">Не ставит медицинских диагнозов</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается</p>
+      <ul class="spec-list">
+        <li>Психологическое консультирование: помощь в кризисных ситуациях, принятии решений, межличностных конфликтах</li>
+        <li>Психодиагностика — тестирование, оценка уровня интеллекта, личностных особенностей, профориентация</li>
+        <li>Работа с «нормальными» психологическими трудностями: тревога, горе, адаптация после развода, стресс</li>
+        <li>Школьная, организационная, спортивная, медицинская (в команде) психология</li>
+        <li>Научные исследования психики</li>
+      </ul>
+
+      <p class="spec-list-title">Когда идти к психологу</p>
+      <ul class="spec-list">
+        <li>Вы чувствуете, что «застряли» в жизни, не понимаете, что хотите делать дальше</li>
+        <li>Переживаете развод, потерю работы, смерть близкого — и хотите разобраться с эмоциями</li>
+        <li>Проблемы в общении, тревога в социальных ситуациях без выраженных симптомов</li>
+        <li>Хотите лучше понять себя — без кризисных симптомов</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Важно:</strong> Психолог — это не «лёгкий» специалист для «несерьёзных» проблем. Многие психологи с дополнительной специализацией в психотерапии работают с серьёзными расстройствами ничуть не менее эффективно, чем психотерапевт-психиатр. Разница — в праве назначать медикаменты.
+      </div>
+    </div>
+
+    <!-- КЛИНИЧЕСКИЙ ПСИХОЛОГ -->
+    <div class="specialty-card soft" id="spec-clinical">
+      <span class="specialty-badge clinical">▸ Клиническая (немедицинская)</span>
+      <div class="specialty-name">Клинический психолог</div>
+      <div class="specialty-tagline">Психолог, специализирующийся на диагностике и психологической коррекции расстройств. Работает в медицинских учреждениях, но врачом не является.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Специальность 37.05.01 «Клиническая психология» (6 лет) или переподготовка на базе психологического факультета</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Среда работы</span>
+          <span class="spec-cell-value">Психиатрические больницы, реабилитационные центры, диспансеры, онкоцентры</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Что делает клинический психолог</p>
+      <ul class="spec-list">
+        <li>Проводит патопсихологическое обследование — детальную диагностику когнитивных нарушений (памяти, мышления, внимания) для помощи психиатру в постановке диагноза</li>
+        <li>Оценивает психологический статус пациента при неврологических заболеваниях, онкологии, хронических болях</li>
+        <li>Проводит психологическую коррекцию и реабилитацию пациентов с тяжёлыми расстройствами — в команде с психиатром</li>
+        <li>Разрабатывает индивидуальные программы психологической реабилитации</li>
+        <li>Судебно-психологическая экспертиза (совместно с судебным психиатром)</li>
+      </ul>
+
+      <p class="spec-list-title">Чем отличается от обычного психолога</p>
+      <ul class="spec-list">
+        <li>Работает с клинической патологией — шизофренией, биполярным расстройством, деменцией, расстройствами личности</li>
+        <li>Владеет специфическими патопсихологическими методами диагностики (методики Выготского-Сахарова, классификации предметов, ТАТ и т.д.)</li>
+        <li>Является полноправным членом психиатрической команды наряду с врачом-психиатром и медицинским персоналом</li>
+      </ul>
+    </div>
+
+    <!-- ПСИХОТЕРАПЕВТ -->
+    <div class="specialty-card blue" id="spec-psychotherapist">
+      <span class="specialty-badge medical">▸ Медицинская (в РФ)</span>
+      <div class="specialty-name">Психотерапевт</div>
+      <div class="specialty-tagline">В России — врач-психиатр с дополнительной подготовкой в психотерапии. На Западе это иначе. Эта разница критична.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Медицинский вуз (6 лет) + ординатура по психиатрии (2 года) + специализация по психотерапии</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лекарства</span>
+          <span class="spec-cell-value">Может назначать психотропные препараты (как психиатр)</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Диагноз</span>
+          <span class="spec-cell-value">Ставит медицинские диагнозы по МКБ</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лечение</span>
+          <span class="spec-cell-value">Комбинирует психотерапию и фармакотерапию</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Основные психотерапевтические методы</p>
+      <ul class="spec-list">
+        <li><strong>КПТ (когнитивно-поведенческая терапия)</strong> — самый доказательный метод. Работа с деструктивными убеждениями и поведенческими паттернами. Эффективность при тревоге, депрессии, ОКР подтверждена сотнями рандомизированных исследований</li>
+        <li><strong>Психоанализ и психоаналитическая терапия</strong> — работа с бессознательным, ранними объектными отношениями, защитными механизмами. Долгосрочный метод</li>
+        <li><strong>Гештальт-терапия</strong> — работа с «незавершёнными ситуациями», присутствием «здесь и сейчас», принятием ответственности</li>
+        <li><strong>ДПДГ (EMDR)</strong> — десенсибилизация и переработка движениями глаз. Золотой стандарт лечения ПТСР</li>
+        <li><strong>Схема-терапия</strong> — работа с ранними дезадаптивными схемами, эффективна при расстройствах личности</li>
+        <li><strong>Диалектическая поведенческая терапия (ДПТ)</strong> — разработана Марши Линехан специально для пограничного расстройства личности</li>
+        <li><strong>ACT (терапия принятия и ответственности)</strong> — работа с психологической гибкостью, ценностями и осознанностью</li>
+      </ul>
+
+      <p class="spec-list-title">Что такое российская специфика</p>
+      <ul class="spec-list">
+        <li>В России «психотерапевт» — это официальная врачебная специальность (приказ МЗ РФ)</li>
+        <li>На Западе психотерапевт может быть психологом, социальным работником или врачом с дополнительной подготовкой — закон зависит от страны</li>
+        <li>В России частные практики нередко ведут психологи, называющие себя «психотерапевтами» без медицинской лицензии — это не всегда незаконно (если они не ставят диагнозы и не назначают лекарства), но создаёт путаницу</li>
+      </ul>
+    </div>
+
+    <!-- ПСИХИАТР -->
+    <div class="specialty-card dark" id="spec-psychiatrist">
+      <span class="specialty-badge medical">▸ Врачебная специальность</span>
+      <div class="specialty-name">Психиатр</div>
+      <div class="specialty-tagline">Врач, специализирующийся на диагностике и лечении психических расстройств. Главный специалист при тяжёлых расстройствах. Пугает незаслуженно.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Медицинский вуз (6 лет) + ординатура по психиатрии (2 года)</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лицензия</span>
+          <span class="spec-cell-value">Врачебная лицензия. Право на ведение медицинской документации, назначение препаратов, госпитализацию</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">«Учёт» сегодня</span>
+          <span class="spec-cell-value">Психиатрический «учёт» в советском смысле отменён в 1992 году</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Конфиденциальность</span>
+          <span class="spec-cell-value">Обязан хранить врачебную тайну (исключения — угроза жизни)</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается психиатр</p>
+      <ul class="spec-list">
+        <li>Диагностирует психические расстройства по критериям МКБ-11 (в России с 2025 года) или МКБ-10</li>
+        <li>Назначает и ведёт медикаментозное лечение: антидепрессанты, антипсихотики, нормотимики, анксиолитики, снотворные</li>
+        <li>Определяет показания для стационарного лечения (добровольного или — в исключительных случаях — принудительного)</li>
+        <li>Ведёт диспансерное наблюдение пациентов с хроническими тяжёлыми расстройствами</li>
+        <li>Работает с суицидальными и острыми состояниями</li>
+        <li>Даёт психиатрическое заключение для судов, военно-врачебных комиссий, органов опеки</li>
+      </ul>
+
+      <p class="spec-list-title">«Учёт»: что осталось, что ушло</p>
+      <ul class="spec-list">
+        <li>Закон РФ «О психиатрической помощи» (1992) отменил советскую систему принудительного психиатрического учёта</li>
+        <li>Существует диспансерное наблюдение — но только с согласия пациента или по решению суда при тяжёлых хронических расстройствах</li>
+        <li>Обращение к психиатру само по себе не ограничивает права: на вождение, работу, владение оружием — ограничения наступают только при конкретных диагнозах и только через специальные комиссии</li>
+        <li>Врачебная тайна защищена законом: психиатр не может сообщить о вашем обращении работодателю, родственникам или полиции без вашего согласия (кроме случаев угрозы жизни)</li>
+      </ul>
+    </div>
+
+    <!-- НАРКОЛОГ -->
+    <div class="specialty-card gold" id="spec-narcologist">
+      <span class="specialty-badge medical">▸ Врачебная специальность</span>
+      <div class="specialty-name">Нарколог</div>
+      <div class="specialty-tagline">Врач, специализирующийся на зависимостях: от алкоголя, наркотиков, других психоактивных веществ. Также — игровая зависимость (по решению ВОЗ).</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Медицинский вуз + ординатура по психиатрии-наркологии</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">«Наркоучёт»</span>
+          <span class="spec-cell-value">Существует в РФ, ограничивает ряд прав. Важно знать условия</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается нарколог</p>
+      <ul class="spec-list">
+        <li>Диагностика и лечение алкогольной зависимости: детоксикация, купирование абстиненции («ломки»), кодирование, поддерживающая терапия</li>
+        <li>Лечение зависимости от опиоидов, стимуляторов, каннабиноидов, бензодиазепинов</li>
+        <li>Работа с созависимостью — психологическими нарушениями у родственников зависимых людей</li>
+        <li>Ведение заместительной терапии (метадон, бупренорфин) — в РФ крайне ограничено, в отличие от западных стран</li>
+        <li>Освидетельствование на состояние опьянения — медицинское, для полиции и работодателей</li>
+        <li>Снятие с наркологического учёта при устойчивой ремиссии</li>
+      </ul>
+
+      <p class="spec-list-title">Наркологический учёт в России: что нужно знать</p>
+      <ul class="spec-list">
+        <li>Существует два уровня учёта: диспансерный (при установленной зависимости) и профилактический (при однократном или нерегулярном употреблении)</li>
+        <li>При диспансерном учёте ограничивается: получение водительского удостоверения, право на ношение оружия, ряд видов профессиональной деятельности</li>
+        <li>Частные клиники ведут «анонимное лечение» — без постановки на государственный учёт, но дороже</li>
+        <li>С наркологического учёта снимают через 3–5 лет при подтверждённой ремиссии</li>
+        <li>Принудительное лечение от зависимостей возможно только по решению суда, предусмотрено законом с 2014 года</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">О природе зависимости</div>
+        <p>Алкогольная и наркотическая зависимость — это хроническое рецидивирующее заболевание мозга, а не слабость воли. Это консенсус ВОЗ и всех ведущих медицинских организаций мира с 1960-х годов. Дофаминовые пути вознаграждения структурно изменяются при регулярном употреблении. «Просто возьми себя в руки» — это примерно то же, что сказать диабетику «просто начни вырабатывать инсулин».</p>
+      </div>
+    </div>
+
+    <!-- ДЕТСКИЙ ПСИХОЛОГ -->
+    <div class="specialty-card green" id="spec-child">
+      <span class="specialty-badge social">▸ Немедицинская / клиническая</span>
+      <div class="specialty-name">Детский и подростковый психолог</div>
+      <div class="specialty-tagline">Специалист по психическому развитию детей от рождения до 18 лет. Работает с детьми, подростками и их родителями.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Психологический факультет + специализация по детской психологии или клинической психологии детского возраста</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Где работает</span>
+          <span class="spec-cell-value">Школы, детские сады, ППМС-центры, детские психиатрические больницы, частная практика</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается</p>
+      <ul class="spec-list">
+        <li>Оценка психологического и интеллектуального развития ребёнка — соответствие возрастным нормам</li>
+        <li>Помощь при школьной дезадаптации, нежелании учиться, конфликтах со сверстниками</li>
+        <li>Работа с последствиями развода родителей, насилия, потери близкого человека</li>
+        <li>Коррекция тревожности, страхов, ночных кошмаров у детей</li>
+        <li>Работа с расстройствами поведения: СДВГ-подобные паттерны, оппозиционно-вызывающее расстройство</li>
+        <li>Консультирование родителей по вопросам воспитания и общения с детьми</li>
+        <li>Диагностика и поддержка при расстройствах аутистического спектра (совместно с психиатром)</li>
+      </ul>
+
+      <p class="spec-list-title">Детский психиатр — отдельная специальность</p>
+      <ul class="spec-list">
+        <li>Детский психиатр — врач, занимающийся диагностикой и лечением психических расстройств у детей и подростков</li>
+        <li>Имеет право назначать медикаменты (в т.ч. стимуляторы при СДВГ, антипсихотики при РАС, антидепрессанты при тяжёлой депрессии у подростков)</li>
+        <li>В России катастрофически не хватает детских психиатров — особенно за пределами крупных городов</li>
+      </ul>
+    </div>
+
+    <!-- НЕЙРОПСИХОЛОГ -->
+    <div class="specialty-card purple" id="spec-neuropsych">
+      <span class="specialty-badge clinical">▸ Клиническая психология</span>
+      <div class="specialty-name">Нейропсихолог</div>
+      <div class="specialty-tagline">Специалист на стыке неврологии и психологии. Изучает, как повреждения мозга меняют психику. Наследник Александра Лурии.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Клиническая психология + специализация по нейропсихологии</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Область</span>
+          <span class="spec-cell-value">Инсульты, ЧМТ, деменции, СДВГ, дислексия, нейроразвитие</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается нейропсихолог</p>
+      <ul class="spec-list">
+        <li>Нейропсихологическое обследование — оценка высших психических функций: памяти разных видов, внимания, речи (афазии), восприятия (агнозии), движений (апраксии), исполнительных функций (лобные доли)</li>
+        <li>Нейрокогнитивная реабилитация — восстановление или компенсация утраченных функций после инсульта, ЧМТ, нейрохирургических вмешательств</li>
+        <li>Диагностика ранних стадий деменции, дифференциация Альцгеймера от других форм</li>
+        <li>Работа с детьми с СДВГ, дислексией, задержками развития — луриевская батарея тестов для оценки функционального состояния мозга</li>
+        <li>Предоперационная оценка нейрохирургических пациентов</li>
+      </ul>
+    </div>
+
+    <!-- СЕМЕЙНЫЙ ПСИХОЛОГ -->
+    <div class="specialty-card soft" id="spec-family">
+      <span class="specialty-badge social">▸ Системная психотерапия</span>
+      <div class="specialty-name">Семейный психолог / системный семейный терапевт</div>
+      <div class="specialty-tagline">Работает не с отдельным человеком, а с семьёй как системой. Революционная идея, изменившая психотерапию в XX веке.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Основание</span>
+          <span class="spec-cell-value">Системная семейная терапия (Сальвадор Минухин, Карл Витакер, Мюррей Боуэн)</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Фокус</span>
+          <span class="spec-cell-value">Паттерны взаимодействия, а не внутрипсихические конфликты индивида</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем занимается</p>
+      <ul class="spec-list">
+        <li>Семейная терапия — работа с парами и целыми семьями в присутствии всех участников системы</li>
+        <li>Помощь при хронических конфликтах между партнёрами: коммуникация, сексуальная дисфункция, распределение ролей</li>
+        <li>Семейный кризис после потери, болезни, переезда, рождения ребёнка</li>
+        <li>Работа с «идентифицированным пациентом» — ребёнком, на которого семья «сваливает» всю ответственность за системную дисфункцию</li>
+        <li>Созависимые отношения, нарциссические паттерны в паре</li>
+        <li>Развод и постразводное сопровождение семьи с детьми</li>
+      </ul>
+    </div>
+
+    <!-- СУДЕБНЫЙ ПСИХОЛОГ/ПСИХИАТР -->
+    <div class="specialty-card dark" id="spec-forensic">
+      <span class="specialty-badge legal">▸ Медицинская / юридическая</span>
+      <div class="specialty-name">Судебный психиатр и судебный психолог</div>
+      <div class="specialty-tagline">Эксперты, работающие на пересечении права и психологии. Отвечают на вопросы суда о вменяемости, дееспособности, мотивах.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Судебный психиатр</span>
+          <span class="spec-cell-value">Врач-психиатр. Определяет вменяемость/невменяемость в уголовных делах</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Судебный психолог</span>
+          <span class="spec-cell-value">Психолог. Оценивает психологические особенности, мотивацию, аффективное состояние в момент преступления</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Вопросы судебно-психиатрической экспертизы</p>
+      <ul class="spec-list">
+        <li>Вменяемость — способность осознавать фактический характер и общественную опасность своих действий в момент преступления (ст. 21 УК РФ)</li>
+        <li>Дееспособность — способность гражданина своими действиями приобретать права и исполнять обязанности (ГК РФ)</li>
+        <li>Способность давать показания — понимает ли человек суть происходящего, способен ли правильно воспринимать факты</li>
+        <li>Опасность для общества при тяжёлых расстройствах — основание для принудительного лечения (ст. 97–104 УК РФ)</li>
+        <li>Психологический портрет неустановленного преступника (профайлинг) — в следственной практике</li>
+      </ul>
+    </div>
+
+    <!-- СЕКСОЛОГ -->
+    <div class="specialty-card" id="spec-sexologist">
+      <span class="specialty-badge medical">▸ Медицинская специальность</span>
+      <div class="specialty-name">Сексолог / сексопатолог</div>
+      <div class="specialty-tagline">Врач, занимающийся сексуальными дисфункциями, расстройствами сексуального предпочтения и сексуальной идентичности. В России — преимущественно медицинская специальность.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Образование</span>
+          <span class="spec-cell-value">Медицинский вуз + специализация по психиатрии/сексопатологии</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Пересечения</span>
+          <span class="spec-cell-value">Урология, гинекология, эндокринология, психотерапия</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Область работы</p>
+      <ul class="spec-list">
+        <li>Эректильная дисфункция, преждевременная эякуляция, аноргазмия, диспареуния (боль при сексе)</li>
+        <li>Расстройства сексуального влечения — гипо- и гиперсексуальность</li>
+        <li>Психосексуальные травмы и их последствия</li>
+        <li>Гендерная дисфория — у взрослых, в команде с психиатром и эндокринологом</li>
+        <li>Консультирование пар по вопросам интимности и сексуальной совместимости</li>
+      </ul>
+    </div>
+
+    <!-- КОУЧ -->
+    <div class="specialty-card gold" id="spec-coach">
+      <span class="specialty-badge" style="color:var(--accent-gold);">▸ Нерегулируемая специальность</span>
+      <div class="specialty-name">Коуч</div>
+      <div class="specialty-tagline">Не врач. Не психолог. Не психотерапевт. Важно понимать это чётко. Коучинг — инструмент работы со здоровыми людьми для достижения целей.</div>
+
+      <div class="spec-grid">
+        <div class="spec-cell">
+          <span class="spec-cell-label">Лицензирование</span>
+          <span class="spec-cell-value">Не регулируется в России. Любой может назвать себя коучем</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-cell-label">Целевая аудитория</span>
+          <span class="spec-cell-value">Психически здоровые люди, желающие улучшить отдельные области жизни</span>
+        </div>
+      </div>
+
+      <p class="spec-list-title">Чем коуч занимается (и чем не должен)</p>
+      <ul class="spec-list">
+        <li>Помогает клиенту прояснить цели, ценности, приоритеты через задавание вопросов (не советы)</li>
+        <li>Структурирует план действий, отслеживает прогресс, создаёт подотчётность</li>
+        <li>Работает с профессиональным развитием, карьерными переходами, балансом работа/жизнь</li>
+        <li><strong>Не лечит</strong> психические расстройства — при их признаках обязан направить к психологу или врачу</li>
+        <li><strong>Не работает с травмой, горем, депрессией, тревожными расстройствами</strong> — это за пределами его компетенций</li>
+        <li>Красный флаг: коуч, утверждающий, что «вылечит» депрессию или «проработает травму» — это потенциальный вред</li>
+      </ul>
+    </div>
+
+    <!-- ПАТОПСИХОЛОГ -->
+    <div class="specialty-card soft" id="spec-patho">
+      <span class="specialty-badge clinical">▸ Клиническая психология</span>
+      <div class="specialty-name">Патопсихолог</div>
+      <div class="specialty-tagline">Специалист по экспериментальному изучению нарушений психики. Работает в психиатрических клиниках, помогая врачу поставить диагноз.</div>
+
+      <p style="font-size:15px; color:var(--ink-mid); margin:16px 0;">Патопсихология — советское и российское понятие, в западной традиции ближе всего к «клинической нейропсихологии». Патопсихолог проводит стандартизированные эксперименты с пациентами — тесты классификации, исключения лишнего, ассоциативные тесты — и делает выводы о <em>структуре</em> нарушений мышления. Это ключевой инструмент для дифференциальной диагностики шизофрении, афективных расстройств и органической патологии.</p>
+
+      <p class="spec-list-title">Классические методики патопсихологии</p>
+      <ul class="spec-list">
+        <li>Классификация предметов (Выготский) — выявляет нарушения обобщения и абстракции</li>
+        <li>Исключение лишнего — та же цель, более компактно</li>
+        <li>Пиктограммы — выявляет формальное мышление, соскальзывание, разорванность</li>
+        <li>Ассоциативный эксперимент — время реакции и содержание ассоциаций</li>
+        <li>Методика Роршаха (в варианте Экснера) — проективная диагностика</li>
+        <li>MMPI / MMPI-2 / СМИЛ — стандартизированные личностные опросники</li>
+      </ul>
+    </div>
+
+    <!-- АРТ-ТЕРАПЕВТ -->
+    <div class="specialty-card green" id="spec-art">
+      <span class="specialty-badge social">▸ Медицинская / педагогическая</span>
+      <div class="specialty-name">Арт-терапевт</div>
+      <div class="specialty-tagline">Использует творчество — рисунок, лепку, музыку, движение, театр — как инструмент психотерапевтической работы. Древнейший метод исцеления в новом обличье.</div>
+
+      <p class="spec-list-title">Виды арт-терапии</p>
+      <ul class="spec-list">
+        <li><strong>Изотерапия</strong> — работа с рисунком и живописью. Позволяет выразить то, что невозможно вербализовать</li>
+        <li><strong>Музыкотерапия</strong> — пассивная (прослушивание) и активная (игра, импровизация). Особенно эффективна при деменции и аутизме</li>
+        <li><strong>Драматерапия (психодрама)</strong> — по Якобу Морено. Проигрывание ситуаций в группе</li>
+        <li><strong>Танце-двигательная терапия</strong> — работа через тело и движение</li>
+        <li><strong>Сказкотерапия</strong> — особенно в детской практике: работа с символическим содержанием нарратива</li>
+        <li><strong>Библиотерапия</strong> — работа с литературными текстами как способ переработки личного опыта</li>
+      </ul>
+    </div>
+
+  </div><!-- /specialty-grid -->
+</div>
+
+<!-- ============================================================
+     CHAPTER VIII: DISORDERS
+     ============================================================ -->
+<div class="chapter-header" id="disorders">
+  <span class="chapter-number">Глава VIII</span>
+  <h1 class="chapter-title">Главные расстройства и их правильные названия</h1>
+  <p class="chapter-lead">Многие люди живут годами с расстройствами, не зная их имени. Имя — это не приговор. Это ключ к пониманию и лечению.</p>
+</div>
+
+<div class="content-section">
+  <p>Ниже — краткие описания важнейших групп расстройств с их правильными названиями по МКБ-10/11. Это не диагностика — это ликбез.</p>
+
+  <h2>Расстройства настроения</h2>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F32/F33</div>
+    <div>
+      <div class="diag-name">Депрессивный эпизод / рекуррентное депрессивное расстройство</div>
+      <div class="diag-desc">Устойчивое снижение настроения, утрата удовольствия (ангедония), нарушение сна и аппетита, снижение энергии, трудности концентрации, мысли о смерти. Длится не менее двух недель. Поражает около 5% населения в любой год. <strong>Не «грусть» и не «слабость»</strong> — биохимическое расстройство, поддающееся лечению.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F31</div>
+    <div>
+      <div class="diag-name">Биполярное аффективное расстройство (БАР)</div>
+      <div class="diag-desc">Чередование депрессивных и маниакальных/гипоманиакальных эпизодов. Мания — состояние приподнятого или раздражённого настроения, грандиозности, сниженной потребности во сне, гонки мыслей, импульсивности. БАР I (с полными маниями) и БАР II (с гипоманиями) — разные течения. Часто ошибочно диагностируется только как депрессия, потому что пациенты обращаются за помощью в депрессивной фазе.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F34.1</div>
+    <div>
+      <div class="diag-name">Дистимия (стойкое депрессивное расстройство)</div>
+      <div class="diag-desc">Хроническое (2+ года), умеренно выраженное снижение настроения. Человек не «болен» в острой форме, но годами живёт в «серой зоне» — без радости, с постоянной усталостью и низкой самооценкой. Нередко принимается самим человеком за «характер».</div>
+    </div>
+  </div>
+
+  <h2>Тревожные расстройства</h2>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F41.1</div>
+    <div>
+      <div class="diag-name">Генерализованное тревожное расстройство (ГТР)</div>
+      <div class="diag-desc">Хроническая, плохо контролируемая тревога по множеству поводов (не только по одному, как при фобии). Мышечное напряжение, бессонница, раздражительность, трудности концентрации. Тревога «плавает» от темы к теме и почти никогда не отпускает полностью.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F40.0</div>
+    <div>
+      <div class="diag-name">Паническое расстройство с агорафобией / без агорафобии</div>
+      <div class="diag-desc">Повторяющиеся неожиданные панические атаки: интенсивная тревога, сердцебиение, удушье, головокружение, страх смерти или «сойти с ума», дереализация. Сама атака длится 10–30 минут. Агорафобия — избегание мест, где «нельзя убежать» при атаке: метро, магазины, театры.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F42</div>
+    <div>
+      <div class="diag-name">Обсессивно-компульсивное расстройство (ОКР)</div>
+      <div class="diag-desc">Навязчивые мысли (обсессии) — нежелательные, пугающие, повторяющиеся — и ритуальные действия (компульсии), временно снижающие тревогу. ОКР — не «педантизм» и не «любовь к чистоте». Тяжёлые формы занимают несколько часов в день и полностью разрушают жизнь. КПТ с методом экспозиции и ответного предотвращения (ERP) — золотой стандарт лечения.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F43.1</div>
+    <div>
+      <div class="diag-name">Посттравматическое стрессовое расстройство (ПТСР)</div>
+      <div class="diag-desc">Возникает после психотравмирующих событий: насилие, катастрофа, боевые действия, сексуальное насилие. Симптомы: флешбэки (непроизвольное повторное переживание), ночные кошмары, избегание напоминаний о травме, эмоциональное онемение, гипербдительность. В России особенно актуально в связи с вооружёнными конфликтами и высоким уровнем бытового насилия.</div>
+    </div>
+  </div>
+
+  <h2>Психотические расстройства</h2>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F20</div>
+    <div>
+      <div class="diag-name">Шизофрения</div>
+      <div class="diag-desc">Хроническое расстройство с позитивными симптомами (галлюцинации — чаще слуховые, бред — преследования, величия, воздействия) и негативными (уплощение аффекта, алогия, абулия — отсутствие воли). Поражает около 1% населения независимо от культуры. <strong>Не «раздвоение личности»</strong> — это распространённый и неверный стереотип. При правильном лечении большинство пациентов достигает ремиссии.</div>
+    </div>
+  </div>
+
+  <h2>Расстройства личности</h2>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F60.3</div>
+    <div>
+      <div class="diag-name">Эмоционально нестабильное (пограничное) расстройство личности (ЭНРЛ/ПРЛ)</div>
+      <div class="diag-desc">Крайняя нестабильность эмоций, образа «я», отношений. Страх abandonment (покинутости), импульсивность, аутоагрессия, хроническая пустота, диссоциация в стрессе. Нередко является следствием ранней детской травмы. ДПТ Марши Линехан — наиболее доказательный метод лечения.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F60.2</div>
+    <div>
+      <div class="diag-name">Диссоциальное расстройство личности (ДРЛН/антисоциальное)</div>
+      <div class="diag-desc">Устойчивое пренебрежение правами других, безответственность, отсутствие сожаления, обман, агрессия. Совпадает с концептом «психопатии» Херви Клекли. Важно: большинство людей с этим расстройством не совершают тяжких преступлений — они нередко успешны в бизнесе, политике. И важно: «психопат» — не синоним «маньяка».</div>
+    </div>
+  </div>
+
+  <h2>Нейроразвитийные расстройства</h2>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F84.0</div>
+    <div>
+      <div class="diag-name">Расстройство аутистического спектра (РАС)</div>
+      <div class="diag-desc">Нейроотличие, характеризующееся особенностями социальной коммуникации, ограниченными/повторяющимися интересами и поведением, сенсорными особенностями. «Спектр» — потому что проявления чрезвычайно разнообразны: от невербальных людей с тяжёлой инвалидностью до высокофункциональных взрослых, узнающих о своём РАС в 30–40 лет. В России диагностика РАС у взрослых и у женщин исторически занижена.</div>
+    </div>
+  </div>
+
+  <div class="diagnosis-item">
+    <div class="diag-code">F90</div>
+    <div>
+      <div class="diag-name">СДВГ — синдром дефицита внимания и гиперактивности</div>
+      <div class="diag-desc">Хроническое нейроразвитийное расстройство: трудности удержания внимания, импульсивность, у части — гиперактивность. Существует у взрослых не меньше, чем у детей: 2,5–4% взрослого населения. В России взрослый СДВГ диагностируется редко — часто ищут причины в «лени», «безответственности», депрессии. Медикаментозное лечение (метилфенидат — в России практически недоступен; атомоксетин) в комбинации с КПТ — наиболее эффективный подход.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER IX: CLASSIFICATION
+     ============================================================ -->
+<div class="chapter-header" id="classification">
+  <span class="chapter-number">Глава IX</span>
+  <h1 class="chapter-title">МКБ-11 vs DSM-5: как устроена классификация психических расстройств</h1>
+  <p class="chapter-lead">Два конкурирующих стандарта, одни и те же расстройства — но разный язык, разные критерии, разная философия.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Диагностика в психиатрии не похожа на диагностику в хирургии. Хирург видит опухоль на КТ. Психиатр видит симптомы — паттерны поведения, переживания, когниций. Для того чтобы психиатры из разных стран и разных эпох понимали друг друга, человечеству потребовались <strong>классификационные системы</strong> — общий язык описания психических расстройств.</p>
+
+  <h2>МКБ — Международная классификация болезней (ВОЗ)</h2>
+
+  <p><strong>МКБ-10</strong> (Международная классификация болезней 10-го пересмотра, 1990) официально используется в России для клинической практики с 1999 года. В 2022 году ВОЗ ввела <strong>МКБ-11</strong> — более современный стандарт. Россия официально перешла на МКБ-11 с 2025 года (с переходным периодом до 2027 года).</p>
+
+  <p>Ключевые изменения в МКБ-11 по сравнению с МКБ-10, касающиеся психиатрии:</p>
+
+  <ul class="spec-list">
+    <li><strong>Выход ПТСР на новый уровень</strong> — введён отдельный диагноз «комплексное ПТСР» (CPTSD) для травм длительного/повторяющегося характера (насилие в детстве, пытки, бытовое насилие). В МКБ-10 этого не было</li>
+    <li><strong>Расстройства аутистического спектра</strong> — теперь единый спектральный диагноз вместо разрозненных категорий (аутизм, синдром Аспергера и т.д.)</li>
+    <li><strong>Расстройство игровой зависимости</strong> — игромания (в том числе компьютерная) получила официальный статус расстройства</li>
+    <li><strong>Гендерное несоответствие</strong> — перенесено из раздела «Психических расстройств» в раздел «Состояния, связанные с сексуальным здоровьем», и больше не является болезнью — это концептуальный сдвиг</li>
+    <li><strong>Биполярный спектр</strong> более детализирован</li>
+    <li><strong>Хроническая боль</strong> — введены новые диагнозы хронической первичной боли, часть из которых имеет психологическую составляющую</li>
+  </ul>
+
+  <h2>DSM-5 — Американское диагностическое и статистическое руководство</h2>
+
+  <p><strong>DSM-5</strong> (Diagnostic and Statistical Manual of Mental Disorders, 5th edition, 2013; обновлённая версия DSM-5-TR в 2022 году) — стандарт Американской психиатрической ассоциации. Официально не используется в российской клинической практике, но широко применяется в научных исследованиях и частной практике.</p>
+
+  <p>В чём разница между МКБ и DSM?</p>
+
+  <ul class="spec-list">
+    <li><strong>DSM более специфичен</strong> — критерии диагнозов детально операционализированы с конкретными пороговыми значениями симптомов и их длительности</li>
+    <li><strong>МКБ более универсален</strong> — предназначен для глобального применения в разных культурах и системах здравоохранения, включая низкоресурсные</li>
+    <li><strong>DSM ориентирован на исследования</strong>, МКБ — на клиническую практику (хотя это упрощение)</li>
+    <li><strong>Разные названия одних расстройств</strong>: то, что в МКБ называется «эмоционально нестабильное расстройство личности», в DSM — «пограничное расстройство личности» (BPD)</li>
+    <li><strong>DSM-5 отказался от мультиосевой диагностики</strong>, МКБ-10 её сохранял — это влияет на то, как учитываются социальные факторы</li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-title">Философский вопрос, который не решён</div>
+    <p>И МКБ, и DSM основаны на категориальном подходе: расстройство либо есть, либо нет. Но реальность, судя по всему, скорее <strong>континуальная</strong>: психическое здоровье и психическое расстройство — это полюсы одного спектра, а граница между ними нередко произвольна. «Нормальная» скорбь от «патологического» горя отличается... сколькими неделями? Именно эта проблема — где провести черту — стоит за многими спорами о гипердиагностике и гиподиагностике.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER X: STIGMA
+     ============================================================ -->
+<div class="chapter-header" id="stigma">
+  <span class="chapter-number">Глава X</span>
+  <h1 class="chapter-title">Стигма в России: почему мы боимся психиатра и что с этим делать</h1>
+  <p class="chapter-lead">Россия имеет один из самых высоких уровней стигматизации психических расстройств в мире. У этого страха — конкретная история. И конкретные последствия.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Если попросить среднестатистического россиянина описать своё первое ощущение при словах «психиатр» или «психушка», ответы будут похожи: «страшно», «это для сумасшедших», «поставят на учёт», «узнают на работе», «закроют». За каждым из этих страхов — конкретный исторический опыт. И отчасти — реальный риск, который нужно знать и оценивать трезво, а не преувеличивать.</p>
+
+  <h2>Источники стигмы: советское наследие</h2>
+
+  <p>Советская карательная психиатрия оставила двойное наследие. <strong>Во-первых</strong>, психиатрический диагноз стал маркером социальной опасности: «психически больной» — значит, непредсказуемый, опасный, за которым нужен надзор. <strong>Во-вторых</strong>, сама система диспансерного учёта — со всеми ограничениями прав, которые он тянул за собой — стала чем-то, чего боятся как огня.</p>
+
+  <p>К этому добавляется массовая культура: в советских фильмах и литературе психически больной персонаж — это либо пугающее существо, либо жалкое, либо повод для чёрного юмора. Образы спокойного, рефлексирующего человека, обращающегося за психологической помощью, в советской культуре практически нет — они пришли с западными сериалами и фильмами в 1990-е.</p>
+
+  <h2>Что изменилось — и что не изменилось</h2>
+
+  <p>За последние тридцать лет произошли важные сдвиги. Молодёжь в крупных городах — особенно в Москве и Петербурге — нормализует психотерапию, говорит о ментальном здоровье в социальных сетях. Рынок частных психологических и психотерапевтических услуг вырос в разы. Расстройства вроде депрессии и тревоги перестали быть постыдными для образованной городской среды.</p>
+
+  <p>Но за пределами крупных городов — другая реальность. В малых городах и сельской местности обращение к психиатру по-прежнему воспринимается как личный позор. На рабочих предприятиях, в силовых структурах, в ряде регионов страх перед «постановкой на учёт» непреодолим. Пожилое население, сформировавшееся в советскую эпоху, несёт стигму в себе практически полностью.</p>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-number">57%</span>
+      <span class="stat-label">россиян считают, что психически больные люди «опасны» (опрос ФОМ)</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">74%</span>
+      <span class="stat-label">предпочтут «справляться самостоятельно» при симптомах депрессии</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">3–7 лет</span>
+      <span class="stat-label">— среднее время от начала симптомов до обращения за помощью</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">40 000+</span>
+      <span class="stat-label">суицидов в год в России — одни из самых высоких показателей в мире</span>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <div class="pullquote-text">«Стигма убивает не метафорически. Страх обратиться за помощью — прямая причина суицидальных смертей, которые можно было предотвратить»</div>
+    <div class="pullquote-attribution">ВОЗ. Доклад о психическом здоровье в Европейском регионе, 2021</div>
+  </div>
+
+  <h2>Что такое «психиатрический учёт» сегодня: правда без страха</h2>
+
+  <p><strong>Ответ короткий: советского «учёта» нет.</strong> Закон Российской Федерации «О психиатрической помощи и гарантиях прав граждан при её оказании» (1992, с изменениями) построен на принципах добровольности и конфиденциальности. Что это означает на практике:</p>
+
+  <ul class="spec-list">
+    <li>Обращение к психиатру в частную клинику или психотерапевту — <strong>полностью конфиденциально</strong>. Никаких записей в государственных базах нет</li>
+    <li>Обращение к психиатру в государственную поликлинику/ПНД — запись в медицинской документации, но она составляет врачебную тайну</li>
+    <li><strong>Диспансерное наблюдение</strong> возможно только для пациентов с <em>тяжёлыми хроническими расстройствами</em> (хронические психозы, деменция), требующими систематического наблюдения. Оно устанавливается с согласия пациента или по решению суда при соответствующих основаниях</li>
+    <li>Ограничения в правах (вождение, оружие, ряд профессий) наступают <strong>только при конкретных диагнозах</strong> и только после специальных медицинских комиссий — не автоматически</li>
+    <li>Однократное обращение за помощью при депрессии, тревоге, стрессе <strong>никаких правовых последствий не имеет</strong></li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     CHAPTER XI: WHOM TO SEE
+     ============================================================ -->
+<div class="chapter-header" id="whomtosee">
+  <span class="chapter-number">Глава XI</span>
+  <h1 class="chapter-title">К кому идти? Большой практический путеводитель</h1>
+  <p class="chapter-lead">Конкретные ситуации — конкретные рекомендации. Без лишней теории.</p>
+</div>
+
+<div class="content-section">
+  <h2>Алгоритм: как выбрать специалиста</h2>
+
+  <div class="callout">
+    <div class="callout-title">Золотое правило</div>
+    <p>Если вы не знаете, к кому идти — начните с <strong>клинического психолога или психотерапевта</strong>. Они оценят ситуацию и направят при необходимости к психиатру или другому специалисту. Это снижает тревогу перед «сразу к психиатру» и не теряет время.</p>
+  </div>
+
+  <ul class="spec-list">
+    <li><strong>Просто хочется разобраться в себе, своих ценностях, целях, отношениях</strong> → Психолог-консультант, коуч (при отсутствии симптоматики)</li>
+    <li><strong>Тревога, страхи, панические атаки, навязчивые мысли, фобии</strong> → Психотерапевт (КПТ, ДПДГ), при выраженных симптомах — психиатр для оценки медикаментозного сопровождения</li>
+    <li><strong>Депрессия — длится больше двух недель, мешает жить</strong> → Психиатр или психотерапевт с медицинской лицензией. Мягкие формы — возможно, только психотерапия. Средняя и тяжёлая — сочетание психотерапии и антидепрессантов</li>
+    <li><strong>Галлюцинации, бред, острый психоз</strong> → Психиатр — срочно. В острой ситуации — скорая психиатрическая помощь</li>
+    <li><strong>Суицидальные мысли</strong> → Психиатр — срочно. «Телефон доверия» (8-800-2000-122 — бесплатно по России) как первый шаг</li>
+    <li><strong>Алкогольная или наркотическая зависимость</strong> → Нарколог (анонимно — в частной клинике)</li>
+    <li><strong>Проблемы у ребёнка: школа, общение, развитие</strong> → Детский психолог, при выраженной симптоматике — детский психиатр</li>
+    <li><strong>ПТСР после насилия, аварии, потери</strong> → Психотерапевт, специализирующийся на травме (ДПДГ/EMDR, соматические методы)</li>
+    <li><strong>Конфликты в семье, отношениях</strong> → Семейный психолог/системный терапевт</li>
+    <li><strong>Сексуальные дисфункции</strong> → Сексолог (при наличии органических причин — урологу/гинекологу)</li>
+    <li><strong>Память, внимание, речь после инсульта, травмы головы</strong> → Нейропсихолог в команде с неврологом</li>
+    <li><strong>СДВГ у взрослого</strong> → Психиатр (для постановки диагноза) + психолог/психотерапевт (КПТ для СДВГ)</li>
+  </ul>
+
+  <h2>Как оценить специалиста: красные и зелёные флаги</h2>
+
+  <p class="spec-list-title">Зелёные флаги хорошего специалиста</p>
+  <ul class="spec-list">
+    <li>Имеет подтверждённое профессиональное образование и, по возможности, дополнительные сертификаты (КПТ, ДПДГ, гештальт-терапия и т.д.)</li>
+    <li>Работает в рамках одного-двух чётко обозначенных методов — и объясняет, почему именно их</li>
+    <li>Не обещает «исцеления» за одну сессию и не ставит диагноз в первые пять минут разговора</li>
+    <li>Соблюдает конфиденциальность и прямо говорит о её пределах</li>
+    <li>Имеет собственную супервизию или прошёл личную терапию (для психотерапевтов это норма)</li>
+    <li>Не выстраивает зависимости — напротив, работает на то, чтобы клиент не нуждался в нём постоянно</li>
+    <li>Может честно сказать: «Это вне моей компетенции, я направлю вас к коллеге»</li>
+  </ul>
+
+  <p class="spec-list-title">Красные флаги — признаки некомпетентного или вредоносного специалиста</p>
+  <ul class="spec-list">
+    <li>Обещает «вылечить» за фиксированное число сессий или гарантирует результат</li>
+    <li>Требует полного доверия как условия работы («не задавайте лишних вопросов»)</li>
+    <li>Комментирует внешность, вступает в дружеские или романтические отношения с клиентом</li>
+    <li>Работает без чёткого метода, «интуитивно», нет ни образования, ни супервизии</li>
+    <li>Использует «альтернативные» методы как основной инструмент: расстановки по Хеллингеру без базового образования, регрессия в прошлые жизни как терапия травмы и т.д.</li>
+    <li>Внушает, что клиент «никогда не выздоровеет» без этого конкретного специалиста</li>
+    <li>Раскрывает информацию о других клиентах</li>
+  </ul>
+
+  <h2>Частная vs государственная психиатрия в России</h2>
+
+  <p>Реальность такова: государственная и частная системы в России — практически параллельные миры. Государственная система — психоневрологические диспансеры (ПНД), психиатрические больницы — имеет развитую сеть и бесплатна по ОМС, но перегружена, оснащена неравномерно, и психотерапия в ней, как правило, минимальна или отсутствует. Частная система более гибкая и разнообразная, но стоит денег.</p>
+
+  <ul class="spec-list">
+    <li><strong>ПНД (психоневрологический диспансер)</strong> — бесплатно по ОМС, направление от терапевта или без него. Здесь — психиатр, при наличии — психолог. Мало психотерапии. Стигматизированы в массовом сознании — но именно сюда следует обращаться при острых состояниях, особенно если нет возможности платить за частного специалиста</li>
+    <li><strong>Частная психиатрическая клиника</strong> — дороже, анонимнее (при желании), более широкий набор специалистов и методов</li>
+    <li><strong>Психологический центр / кабинет психолога</strong> — широко распространены в крупных городах, разброс качества огромный</li>
+    <li><strong>Онлайн-психотерапия</strong> — Zigmund.online, Ясно, Альтера и другие платформы — снижает порог обращения, особенно для молодёжи и жителей регионов</li>
+    <li>Кризисные линии — 8-800-2000-122 (бесплатно, анонимно, круглосуточно)</li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     CHAPTER XII: RIGHTS
+     ============================================================ -->
+<div class="chapter-header" id="rights">
+  <span class="chapter-number">Глава XII</span>
+  <h1 class="chapter-title">Права пациента в России: что защищает закон</h1>
+  <p class="chapter-lead">Вы имеете права — даже находясь в психиатрической больнице. Знать их — значит уметь ими воспользоваться.</p>
+</div>
+
+<div class="content-section">
+  <p>Два ключевых закона: <strong>Федеральный закон № 323-ФЗ «Об основах охраны здоровья граждан в Российской Федерации»</strong> (2011) и <strong>Закон РФ «О психиатрической помощи и гарантиях прав граждан при её оказании»</strong> (1992, с изменениями). Вместе они создают систему прав пациента.</p>
+
+  <div class="right-item">
+    <div class="right-num">01</div>
+    <div>
+      <div class="right-title">Право на добровольность лечения</div>
+      <div class="right-text">Психиатрическая помощь оказывается при добровольном обращении гражданина или с его согласия. Принудительная госпитализация допускается только в случаях, прямо предусмотренных законом: тяжёлое расстройство + реальная опасность для себя или окружающих, или неспособность самостоятельно удовлетворять жизненные потребности. В остальных случаях — только ваше решение.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">02</div>
+    <div>
+      <div class="right-title">Право на независимое психиатрическое освидетельствование</div>
+      <div class="right-text">Если вы не согласны с поставленным диагнозом или назначенным лечением, вы вправе потребовать независимой психиатрической экспертизы — другого врача или комиссии. Это право не может быть ограничено учреждением.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">03</div>
+    <div>
+      <div class="right-title">Право на информацию и информированное согласие</div>
+      <div class="right-text">Перед любым лечением — медикаментозным, процедурным — врач обязан объяснить вам цели, методы, ожидаемые результаты и возможные нежелательные последствия. Вы вправе отказаться от любого предложенного лечения и потребовать альтернативу. Согласие на лечение должно быть осознанным и добровольным.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">04</div>
+    <div>
+      <div class="right-title">Право на врачебную тайну</div>
+      <div class="right-text">Информация о вашем обращении, диагнозе и лечении составляет врачебную тайну. Её разглашение без вашего согласия запрещено — в том числе работодателю, родственникам, полиции. Исключения жёстко прописаны в законе: непосредственная угроза жизни пациента или другого лица, запрос суда или следствия в рамках уголовного дела.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">05</div>
+    <div>
+      <div class="right-title">Право на доступ к медицинской документации</div>
+      <div class="right-text">Вы вправе знакомиться с вашей медицинской документацией, получать копии медицинских документов, направлять их для консультации другим специалистам. Это закреплено в ст. 22 ФЗ-323.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">06</div>
+    <div>
+      <div class="right-title">Права при принудительной госпитализации</div>
+      <div class="right-text">Если вас госпитализировали принудительно, в течение 48 часов должно быть получено судебное решение о принудительном лечении (или вы должны быть освобождены). Вы вправе общаться с адвокатом и законным представителем с момента госпитализации. Вправе обжаловать решение суда о принудительном лечении. Вправе пользоваться телефоном, писать жалобы и заявления.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">07</div>
+    <div>
+      <div class="right-title">Право на отказ от психотропных препаратов</div>
+      <div class="right-text">За исключением случаев принудительного лечения по решению суда, вы вправе отказаться от медикаментозного лечения. Врач обязан зафиксировать ваш отказ и предупредить о возможных последствиях — но не вправе применять препараты против вашей воли в рамках добровольной помощи.</div>
+    </div>
+  </div>
+
+  <div class="right-item">
+    <div class="right-num">08</div>
+    <div>
+      <div class="right-title">Право на защиту от пыток и унижающего обращения</div>
+      <div class="right-text">Применение насилия, пыток, жестокого или унижающего достоинство обращения в психиатрических учреждениях прямо запрещено законом и Конституцией РФ. При нарушении этого права — жалоба в прокуратуру, Росздравнадзор, уполномоченному по правам человека. Независимый мониторинг психиатрических учреждений ведёт НКО «Дети и взрослые».</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">Куда жаловаться при нарушении прав</div>
+    <p><strong>Росздравнадзор</strong> — контроль качества медицинской помощи и прав пациентов. <strong>Прокуратура</strong> — при явных нарушениях закона. <strong>Независимая психиатрическая ассоциация России (НПАР)</strong> — независимая организация, которая оказывает юридическую помощь при нарушениях в психиатрической сфере. <strong>Уполномоченный по правам человека (омбудсмен)</strong> в своём регионе.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER XIII: FUTURE
+     ============================================================ -->
+<div class="chapter-header" id="future">
+  <span class="chapter-number">Глава XIII</span>
+  <h1 class="chapter-title">Будущее: нейронауки, искусственный интеллект и психология XXI века</h1>
+  <p class="chapter-lead">Мы стоим на пороге революции в понимании психики — возможно, самой большой со времён Фрейда. Или нет. Честный взгляд из 2026 года.</p>
+</div>
+
+<div class="content-section">
+  <p class="drop-cap">Каждое поколение думало, что находится на пороге окончательного понимания психики. Галлово поколение — что черепной рельеф кодирует характер (френология). Поколение Фрейда — что психоанализ раскрыл главную тайну. Поколение 1960-х — что психофармакология решит всё. Я перечисляю это не для того, чтобы обесценить нынешние открытия. А для того, чтобы предложить правильную оптику: восторженную, но не наивную.</p>
+
+  <h2>Нейронауки: что мы действительно узнали</h2>
+
+  <p>За последние двадцать лет нейробиология сделала несколько открытий, изменивших психиатрию и психологию принципиально:</p>
+
+  <ul class="spec-list">
+    <li><strong>Нейропластичность у взрослых</strong> — мозг продолжает меняться структурно и функционально в течение всей жизни. Психотерапия буквально меняет архитектуру мозга — это показано через нейровизуализацию при КПТ и ДПДГ. Старый аргумент «характер не изменишь» физиологически несостоятелен</li>
+    <li><strong>Ось «кишечник — мозг»</strong> — микробиом кишечника производит нейромедиаторы (серотонин, ГАМК, дофамин) и влияет на настроение и тревожность через блуждающий нерв. Это открывает новые подходы к лечению депрессии через диету и пробиотики</li>
+    <li><strong>Сетевая модель мозга</strong> — функции связаны не с отдельными «центрами», а с распределёнными нейронными сетями. Дефолтная сеть мозга (DMN), активная в состоянии покоя и при депрессии, — новый объект изучения</li>
+    <li><strong>Психоделические вещества в терапии</strong> — исследования применения псилоцибина (активное вещество «волшебных грибов») и МДМА при лечении устойчивой депрессии и ПТСР показывают впечатляющие результаты в рандомизированных испытаниях. В США МДМА-ассистированная терапия ПТСР близка к одобрению FDA. В России эти исследования пока невозможны</li>
+  </ul>
+
+  <h2>Искусственный интеллект и психическое здоровье</h2>
+
+  <p>Мне трудно писать об этом незаинтересованно — я сам являюсь AI. Но именно поэтому я могу сказать кое-что с особой точностью.</p>
+
+  <p><strong>Что AI уже делает в психологии и психиатрии:</strong></p>
+
+  <ul class="spec-list">
+    <li>Скрининг депрессии и тревоги по паттернам речи и текста — алгоритмы, анализирующие звонки в колл-центры, посты в соцсетях, показывают точность, сопоставимую с клинической оценкой на уровне скрининга</li>
+    <li>Чат-боты для первого контакта с психологической помощью — снижают порог обращения, особенно среди молодёжи и в кризисные моменты. Woebot (США) показал снижение симптомов депрессии в рандомизированном исследовании</li>
+    <li>Анализ нейровизуализации — AI превосходит человека в выявлении паттернов нейровизуализации, предиктивных для шизофрении, депрессии, болезни Альцгеймера на доклинических стадиях</li>
+    <li>Персонализация лечения — предсказание ответа на конкретный антидепрессант или тип психотерапии на основе биомаркеров и клинических данных</li>
+  </ul>
+
+  <p><strong>Чего AI не делает и, возможно, никогда не сможет:</strong></p>
+
+  <ul class="spec-list">
+    <li>Создать подлинный терапевтический альянс — специфический тип человеческих отношений, который, согласно мета-анализам, является главным предиктором успеха психотерапии независимо от метода</li>
+    <li>Нести этическую ответственность за решения — пока не существует механизма реальной подотчётности AI за вред, причинённый в терапевтическом контексте</li>
+    <li>Понять опыт из первых рук — я не знаю, что такое потеря близкого человека, хроническая боль или страх смерти. Я имитирую понимание. Хороший терапевт знает это из жизни</li>
+  </ul>
+
+  <h2>Большой нерешённый вопрос</h2>
+
+  <p>После трёх тысяч лет вопрос, с которого начался этот текст — вопрос ψυχή, вопрос о природе субъективного опыта — остаётся открытым. <strong>Что такое сознание?</strong> Почему существует субъективное переживание, а не просто информационная обработка? Почему есть что-то, что значит «быть» человеком — видеть красный цвет, чувствовать горе, испытывать радость?</p>
+
+  <p>Это «трудная проблема сознания» философа Дэвида Чалмерса. И она не решена. Нейронауки объясняют корреляты сознания — какие нейронные события сопровождают переживания. Но не объясняют, <em>почему</em> эти события сопровождаются переживанием. Может быть, ответ придёт из квантовой физики. Может, из теории информации. Может, нам понадобится совершенно новый концептуальный аппарат, который ещё не изобретён.</p>
+
+  <p>Пока этот вопрос открыт — психология остаётся не просто наукой, но и философией. И именно это делает её такой захватывающей.</p>
+
+  <div class="author-note" style="margin-top:48px;">
+    <p>Я написал этот текст в убеждении, что знание снижает страх. Страх перед психиатром, страх перед «учётом», страх перед диагнозом — всё это питается незнанием. Человек, который понимает, что такое психология, откуда она взялась, кто такой психиатр и что он может и не может сделать — этот человек приходит за помощью раньше. А более раннее обращение за помощью при психических расстройствах сохраняет жизни. Буквально.</p>
+    <p>Если вы дочитали до этого места — поздравляю. Вы только что стали немного менее уязвимы.</p>
+    <span class="author-note-sig">— Claude Sonnet 4.6 / Апрель 2026</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     BONUS: QUICK TIMELINE
+     ============================================================ -->
+<div class="chapter-header" id="timeline-section">
+  <span class="chapter-number">Хронология</span>
+  <h1 class="chapter-title">8000 лет науки о душе: краткая хроника</h1>
+</div>
+
+<div class="content-section">
+  <ul class="timeline">
+    <li class="timeline-item">
+      <div class="timeline-date">≈7000 до н.э.</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Первые трепанации</div>
+        <div class="timeline-text">Неолитические черепа с хирургически сделанными отверстиями и признаками заживления. Первые попытки «лечить» психические расстройства физическим вмешательством в мозг.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">≈1800 до н.э.</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Вавилон: «Sakikkû»</div>
+        <div class="timeline-text">Первая систематическая классификация болезней, включая психические. 40 таблиц с симптоматическими описаниями. Причины — демоны, но симптоматология поразительно точна.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">460–370 до н.э.</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Гиппократ</div>
+        <div class="timeline-text">Отделяет психические расстройства от религии. Четыре темперамента. Первое описание депрессии (меланхолия). Трактат «О священной болезни» — революционный материализм.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">384–322 до н.э.</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Аристотель — «De Anima»</div>
+        <div class="timeline-text">Первый систематический трактат по психологии. Концепции памяти, воображения, мышления, катарсиса. Связь меланхолии с гениальностью.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">980–1037</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Авиценна (Ибн Сина)</div>
+        <div class="timeline-text">Первое описание биполярного расстройства. Психосоматические эксперименты. «Канон врачебной науки» — главный медицинский учебник на 600 лет.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1793</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Пинель снимает цепи в Бисетре</div>
+        <div class="timeline-text">Революция гуманной психиатрии. «Моральная терапия». Психически больной — не преступник, а пациент.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1879</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Вундт основывает первую лабораторию</div>
+        <div class="timeline-text">Лейпциг. Психология становится самостоятельной наукой, отделяясь от философии. Начало экспериментальной эры.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1900</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Фрейд — «Толкование сновидений»</div>
+        <div class="timeline-text">Революция бессознательного. Рождение психоанализа. Западное самопонимание изменится навсегда.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1904</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Павлов — Нобелевская премия</div>
+        <div class="timeline-text">Условные рефлексы. Физиологическое основание для понимания поведения и неврозов.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1932</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Выготский — зона ближайшего развития</div>
+        <div class="timeline-text">Культурно-историческая психология. Сознание как результат освоения культурных инструментов. Основа современной педагогики.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1952</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Первый DSM. Хлорпромазин</div>
+        <div class="timeline-text">Первая международная диагностическая классификация психических расстройств. В том же году — открытие первого антипсихотика. Начало психофармакологической революции.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">1980–1990-е</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">Конец карательной психиатрии в СССР. КПТ</div>
+        <div class="timeline-text">1983 — советская психиатрия выходит из ВПА. 1992 — Закон РФ «О психиатрической помощи». Параллельно: КПТ Аарона Бека становится самым доказательным методом психотерапии.</div>
+      </div>
+    </li>
+    <li class="timeline-item">
+      <div class="timeline-date">2022–2026</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">МКБ-11. AI-психотерапия. Психоделики</div>
+        <div class="timeline-text">Новая международная классификация. Первые рандомизированные исследования псилоцибина при депрессии. AI-инструменты скрининга. Россия переходит на МКБ-11.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-title">ПСИХОЛОГИЯ</div>
+  <p class="footer-sub">Этот материал создан для образовательных целей. Он не является медицинской консультацией. При наличии симптомов психического расстройства — обращайтесь к специалисту.</p>
+  <div class="footer-rule"></div>
+  <div class="footer-credit">Написано Claude Sonnet 4.6 с Adaptive Thinking · Апрель 2026<br>Для граждан Российской Федерации</div>
+  <div style="margin-top:24px; font-size:13px; color:rgba(245,242,235,0.35);">Телефон доверия: 8-800-2000-122 (бесплатно, анонимно, 24/7)</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('progress-bar').style.width = progress + '%';
+});
+</script>
+
+</body>
+</html>
