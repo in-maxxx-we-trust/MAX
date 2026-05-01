@@ -1,1799 +1,1210 @@
-<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ВК ВИРАЛЬНАЯ МАШИНА — Полный гайд для поэта</title>
+<title>Машина Сочувствия — Глубокий гайд по вирусности в ВК</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@300;400;700&display=swap');
 
 :root {
-  --ink: #0d0a08;
-  --cream: #f5efe6;
-  --gold: #c8973a;
-  --gold-light: #e8c074;
-  --wine: #7a1f2e;
-  --wine-deep: #3d0f17;
-  --rose: #d4627a;
-  --slate: #1a1614;
-  --muted: #8c7d6e;
-  --border: rgba(200,151,58,0.25);
-  --glass: rgba(255,255,255,0.04);
+  --bg: #080c14;
+  --bg2: #0d1220;
+  --parchment: #e2d9c4;
+  --parchment-dim: #a8997e;
+  --amber: #c97f18;
+  --amber-light: #e8a83a;
+  --rose: #b85060;
+  --rose-dim: rgba(184,80,96,0.15);
+  --teal: #2a7a7a;
+  --teal-light: #4ab3a8;
+  --border: rgba(201,127,24,0.18);
+  --border-dim: rgba(226,217,196,0.07);
+  --glass: rgba(255,255,255,0.025);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
 
 body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px;
-  line-height: 1.7;
+  background: var(--bg);
+  color: var(--parchment);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.85;
   overflow-x: hidden;
 }
 
-/* ─── NAV ─── */
+/* ═══ GRAIN TEXTURE ═══ */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:1000;
+  opacity:0.35;
+}
+
+/* ═══ PROGRESS ═══ */
+#progress-bar {
+  position:fixed; top:0; left:0; height:2px; width:0%;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--amber) 60%, var(--teal-light) 100%);
+  z-index:999; transition:width 0.08s linear;
+}
+
+/* ═══ NAV ═══ */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 999;
-  background: rgba(13,10,8,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 1rem;
+  position:fixed; top:0; left:0; right:0; z-index:998;
+  background:rgba(8,12,20,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-dim);
+  height:48px;
 }
-.nav-inner {
-  max-width: 420px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  height: 50px;
-  overflow-x: auto;
-  scrollbar-width: none;
+.nav-scroll {
+  max-width:480px; margin:0 auto;
+  display:flex; align-items:center; gap:0;
+  height:100%; overflow-x:auto; padding:0 1rem;
+  scrollbar-width:none;
 }
-.nav-inner::-webkit-scrollbar { display: none; }
-.nav-inner a {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 4px 8px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  transition: all 0.2s;
-  flex-shrink: 0;
+.nav-scroll::-webkit-scrollbar { display:none; }
+.nav-link {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--parchment-dim);
+  text-decoration:none; white-space:nowrap;
+  padding:4px 10px; border-radius:3px;
+  flex-shrink:0; letter-spacing:0.05em;
+  transition:color 0.2s;
 }
-.nav-inner a:hover { color: var(--gold); border-color: var(--border); }
-.nav-dot {
-  color: var(--border);
-  font-size: 0.5rem;
-  flex-shrink: 0;
-}
+.nav-link:hover { color:var(--amber); }
+.nav-sep { color:var(--border); font-size:0.7rem; flex-shrink:0; }
 
-/* ─── PROGRESS BAR ─── */
-#progress {
-  position: fixed;
-  top: 50px; left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--wine), var(--gold));
-  width: 0%;
-  z-index: 1000;
-  transition: width 0.1s;
+/* ═══ COVER ═══ */
+.cover {
+  min-height:100vh; display:flex; flex-direction:column;
+  justify-content:flex-end; padding:80px 1.4rem 3.5rem;
+  max-width:480px; margin:0 auto; position:relative;
 }
-
-/* ─── SECTIONS ─── */
-section { max-width: 420px; margin: 0 auto; padding: 0 1.2rem; }
-
-/* ─── HERO ─── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 80px 1.2rem 4rem;
-  max-width: 420px;
-  margin: 0 auto;
-  position: relative;
-}
-.hero::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+.cover-ambient {
+  position:fixed; inset:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(122,31,46,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 30% at 20% 80%, rgba(200,151,58,0.12) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
+    radial-gradient(ellipse 70% 50% at 15% 30%, rgba(184,80,96,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 85% 70%, rgba(42,122,122,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,127,24,0.06) 0%, transparent 55%);
 }
-.hero > * { position: relative; z-index: 1; }
+.cover-eyebrow {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; color:var(--amber);
+  letter-spacing:0.2em; text-transform:uppercase;
+  margin-bottom:2rem;
+  opacity:0; animation:up 0.7s 0.1s forwards;
+}
+.cover h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,13vw,5.5rem);
+  font-weight:900; line-height:0.9;
+  margin-bottom:0.8rem;
+  opacity:0; animation:up 0.7s 0.25s forwards;
+}
+.cover h1 .word-em { font-style:italic; color:var(--amber); }
+.cover h1 .word-dim { color:rgba(226,217,196,0.28); }
+.cover-sub {
+  font-size:1.05rem; color:var(--parchment-dim);
+  font-style:italic; max-width:320px;
+  margin-bottom:3rem; line-height:1.6;
+  opacity:0; animation:up 0.7s 0.4s forwards;
+}
+.cover-index {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:0.5rem; margin-bottom:2.5rem;
+  opacity:0; animation:up 0.7s 0.55s forwards;
+}
+.idx-item {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--parchment-dim);
+  padding:0.5rem 0; border-top:1px solid var(--border-dim);
+  letter-spacing:0.04em;
+}
+.idx-item strong { display:block; color:var(--parchment); font-size:0.65rem; margin-bottom:0.1rem; }
+.cover-hint {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; color:var(--parchment-dim);
+  display:flex; align-items:center; gap:0.5rem;
+  opacity:0; animation:up 0.7s 0.7s forwards;
+}
+.hint-arrow { animation:bob 2s ease-in-out infinite; display:inline-block; }
 
-.hero-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.2s forwards;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 11vw, 4.5rem);
-  font-weight: 900;
-  line-height: 0.95;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.4s forwards;
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-.hero h1 span {
-  display: block;
-  color: var(--rose);
-}
-.hero-sub {
-  font-size: 1rem;
-  color: var(--muted);
-  font-style: italic;
-  max-width: 300px;
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.6s forwards;
-  font-family: 'Cormorant Garamond', serif;
-}
-.hero-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  width: 100%;
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 0.6s 0.8s forwards;
-}
-.stat-box {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem;
-}
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-}
-.stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  margin-top: 0.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.scroll-hint {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  opacity: 0;
-  animation: fadeUp 0.6s 1s forwards;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.scroll-arrow {
-  display: inline-block;
-  animation: bounce 1.5s infinite;
-}
+@keyframes up { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
+/* ═══ READING CONTAINER ═══ */
+.book { max-width:480px; margin:0 auto; padding:0 1.4rem; }
 
-/* ─── CHAPTER DIVIDERS ─── */
-.chapter-mark {
-  max-width: 420px;
-  margin: 5rem auto 0;
-  padding: 0 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+/* ═══ PART BREAK ═══ */
+.part-break {
+  max-width:480px; margin:6rem auto 0; padding:0 1.4rem;
 }
-.chapter-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem;
-  font-weight: 900;
-  color: var(--wine-deep);
-  line-height: 1;
-  flex-shrink: 0;
+.part-line { height:1px; background:linear-gradient(90deg, transparent, var(--amber), transparent); margin-bottom:2rem; }
+.part-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--amber);
+  letter-spacing:0.2em; text-transform:uppercase;
+  display:block; margin-bottom:0.4rem;
 }
-.chapter-line { flex: 1; height: 1px; background: var(--border); }
-.chapter-title-wrap { flex-shrink: 0; text-align: right; }
-.chapter-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  display: block;
+.part-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.5rem,6vw,2.2rem);
+  font-weight:900; line-height:1.1; color:var(--parchment);
+}
+.part-title em { font-style:italic; color:rgba(226,217,196,0.45); }
+
+/* ═══ CHAPTER ═══ */
+.chapter { padding-top:4rem; }
+.ch-num {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem; color:var(--rose);
+  letter-spacing:0.15em; text-transform:uppercase;
+  margin-bottom:0.6rem; display:block;
+}
+.chapter h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,7vw,2.6rem);
+  font-weight:900; line-height:1.1;
+  margin-bottom:0.4rem; color:var(--parchment);
+}
+.chapter h2 em { font-style:italic; color:var(--amber); }
+.chapter-deck {
+  font-size:0.95rem; color:var(--parchment-dim);
+  font-style:italic; margin-bottom:2rem;
+  border-left:2px solid var(--border);
+  padding-left:1rem; line-height:1.6;
+}
+.chapter h3 {
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem; font-weight:700;
+  margin:2.2rem 0 0.8rem; color:var(--parchment);
+}
+.chapter h3 .accent { color:var(--amber); }
+p { margin-bottom:1.15rem; color:#c9bfaa; }
+p strong { color:var(--parchment); }
+p em { color:var(--parchment-dim); font-style:italic; }
+
+/* ═══ PULL QUOTE ═══ */
+.pull {
+  margin:2.2rem 0; padding:1.6rem 0 1.6rem 1.4rem;
+  border-left:3px solid var(--amber);
+  background:linear-gradient(90deg, rgba(201,127,24,0.07) 0%, transparent 100%);
+}
+.pull p {
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem; font-style:italic;
+  color:var(--parchment); margin:0; line-height:1.7;
+}
+.pull-source {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--amber);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-top:0.8rem; display:block;
 }
 
-/* ─── H2 ─── */
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 7vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-  margin-top: 2rem;
+/* ═══ INSIGHT BOX ═══ */
+.insight {
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:10px; padding:1.4rem;
+  margin:1.8rem 0; position:relative;
 }
-h2 em { font-style: italic; color: var(--gold); }
-h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 0.8rem;
-  color: var(--cream);
+.insight-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.55rem; color:var(--amber);
+  text-transform:uppercase; letter-spacing:0.14em;
+  margin-bottom:0.7rem; display:block;
 }
-h3 span { color: var(--rose); }
+.insight p { color:var(--parchment-dim); margin:0; font-size:1rem; }
+.insight p strong { color:var(--parchment); }
 
-/* ─── TEXT ─── */
-p { margin-bottom: 1rem; color: #d4c9bc; }
-p strong { color: var(--cream); font-weight: 600; }
+/* ═══ DATA CALLOUT ═══ */
+.data-row {
+  display:flex; align-items:baseline; gap:1rem;
+  padding:1rem 0; border-bottom:1px solid var(--border-dim);
+}
+.data-row:first-child { border-top:1px solid var(--border-dim); }
+.data-num {
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem; font-weight:900;
+  color:var(--amber); line-height:1; flex-shrink:0;
+  min-width:80px;
+}
+.data-desc { font-size:0.9rem; color:var(--parchment-dim); line-height:1.5; }
+.data-desc strong { color:var(--parchment); display:block; margin-bottom:0.2rem; font-size:0.95rem; }
 
-/* ─── HIGHLIGHT BOX ─── */
-.highlight {
-  background: linear-gradient(135deg, rgba(122,31,46,0.2), rgba(200,151,58,0.1));
-  border: 1px solid rgba(200,151,58,0.3);
-  border-left: 3px solid var(--gold);
-  border-radius: 8px;
-  padding: 1.2rem;
-  margin: 1.5rem 0;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--cream);
-}
-.highlight-head {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-style: normal;
-  margin-bottom: 0.5rem;
-  display: block;
-}
+/* ═══ EMOTION MAP ═══ */
+.emotion-grid { display:flex; flex-direction:column; gap:0.7rem; margin:1.6rem 0; }
+.emotion-row { display:flex; align-items:center; gap:0.8rem; }
+.em-label { font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--parchment-dim); width:90px; flex-shrink:0; text-transform:uppercase; letter-spacing:0.04em; }
+.em-bar { flex:1; height:8px; background:rgba(255,255,255,0.06); border-radius:4px; overflow:hidden; }
+.em-fill { height:100%; border-radius:4px; animation:grow 1.5s ease-out forwards; transform-origin:left; transform:scaleX(0); }
+.em-hi { background:linear-gradient(90deg, var(--rose), #e07a3a); }
+.em-mid { background:linear-gradient(90deg, var(--amber), #c9bd18); }
+.em-lo { background:linear-gradient(90deg, var(--teal), var(--teal-light)); }
+.em-val { font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--amber); width:36px; text-align:right; flex-shrink:0; }
+@keyframes grow { to{transform:scaleX(1)} }
 
-/* ─── ALGORITHM BOXES ─── */
-.algo-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin: 1.5rem 0;
+/* ═══ FRAMEWORK BOX ═══ */
+.framework { margin:2rem 0; }
+.fw-item {
+  padding:1.1rem; border-left:2px solid var(--border-dim);
+  margin-bottom:0.5rem; transition:border-color 0.2s;
 }
-.algo-box {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.2rem;
-  position: relative;
-  overflow: hidden;
+.fw-item:hover { border-left-color:var(--amber); }
+.fw-letter {
+  font-family:'Playfair Display',serif;
+  font-size:2rem; font-weight:900; color:var(--amber);
+  float:left; line-height:1; margin-right:0.6rem; margin-top:0.1rem;
 }
-.algo-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px; height: 100%;
-}
-.algo-box.type-a::before { background: var(--muted); }
-.algo-box.type-b::before { background: var(--gold); }
-.algo-box.type-c::before { background: var(--rose); }
-.algo-box-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.4rem;
-}
-.algo-box.type-a .algo-box-label { color: var(--muted); }
-.algo-box.type-b .algo-box-label { color: var(--gold); }
-.algo-box.type-c .algo-box-label { color: var(--rose); }
-.algo-box-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.algo-box p { font-size: 0.9rem; margin-bottom: 0; }
+.fw-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--parchment); }
+.fw-def { font-size:0.9rem; color:var(--parchment-dim); clear:left; margin-top:0.4rem; }
+.fw-apply { font-size:0.85rem; color:var(--teal-light); font-style:italic; margin-top:0.3rem; }
 
-/* ─── SIGNAL LIST ─── */
-.signal-list { list-style: none; margin: 1rem 0; }
-.signal-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 0.95rem;
-  color: #d4c9bc;
+/* ═══ CASCADE VISUAL ═══ */
+.cascade { margin:2rem 0; }
+.cascade-tier {
+  padding:0.9rem 1.1rem; border-radius:8px;
+  margin-bottom:0.5rem; position:relative;
 }
-.signal-list li:last-child { border-bottom: none; }
-.sig-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-.sig-weight {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--gold);
-  display: block;
-  margin-top: 0.2rem;
-}
+.ct-0 { background:rgba(184,80,96,0.2); border:1px solid rgba(184,80,96,0.4); }
+.ct-1 { background:rgba(201,127,24,0.12); border:1px solid rgba(201,127,24,0.25); margin-left:1.2rem; }
+.ct-2 { background:rgba(42,122,122,0.12); border:1px solid rgba(42,122,122,0.25); margin-left:2.4rem; }
+.ct-3 { background:rgba(226,217,196,0.05); border:1px solid var(--border-dim); margin-left:3.6rem; }
+.ct-label { font-family:'JetBrains Mono',monospace; font-size:0.56rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.2rem; }
+.ct-0 .ct-label { color:var(--rose); }
+.ct-1 .ct-label { color:var(--amber); }
+.ct-2 .ct-label { color:var(--teal-light); }
+.ct-3 .ct-label { color:var(--parchment-dim); }
+.ct-text { font-size:0.88rem; color:var(--parchment); }
+.cascade-arrow { text-align:center; color:var(--border); font-size:1rem; margin:0.2rem 0; }
 
-/* ─── FORMULA ─── */
-.formula {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
+/* ═══ THEORY BOX ═══ */
+.theory {
+  background:rgba(226,217,196,0.04);
+  border:1px solid var(--border-dim);
+  border-top:2px solid var(--rose);
+  border-radius:0 0 10px 10px;
+  padding:1.4rem; margin:2rem 0;
 }
-.formula-row {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.6rem;
+.theory-head {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem; color:var(--rose);
+  letter-spacing:0.14em; text-transform:uppercase;
+  margin-bottom:0.7rem; display:block;
 }
-.formula-row:last-child { margin-bottom: 0; }
-.formula-step {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  background: var(--wine);
-  color: var(--cream);
-}
-.formula-step.gold { background: var(--gold); color: var(--ink); }
-.formula-text { font-size: 0.95rem; color: var(--cream); }
-.formula-text em { color: var(--gold); font-style: italic; }
-.formula-plus {
-  text-align: center;
-  color: var(--border);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem;
-  margin: 0.2rem 0 0.2rem 36px;
-}
-.formula-result {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  font-style: italic;
-  color: var(--gold);
-  text-align: center;
-}
+.theory p { font-size:0.95rem; color:var(--parchment-dim); margin-bottom:0.7rem; }
+.theory p:last-child { margin:0; }
+.theory strong { color:var(--parchment); }
 
-/* ─── TIMING VISUAL ─── */
-.timeline {
-  position: relative;
-  margin: 1.5rem 0;
+/* ═══ NEURO ═══ */
+.neuro-list { list-style:none; margin:1.5rem 0; }
+.neuro-list li {
+  display:flex; gap:1rem; padding:1rem 0;
+  border-bottom:1px solid var(--border-dim);
 }
-.timeline-track {
-  height: 4px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 2px;
-  position: relative;
-  margin-bottom: 0.5rem;
-}
-.timeline-fill {
-  height: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--rose), var(--gold));
-  position: relative;
-}
-.timeline-fill::after {
-  content: '';
-  position: absolute;
-  right: -4px; top: -4px;
-  width: 12px; height: 12px;
-  background: var(--gold);
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(200,151,58,0.6);
-}
-.tl-phases {
-  display: flex;
-  justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: var(--muted);
-  margin-top: 0.5rem;
-}
-.tl-phase { text-align: center; }
-.tl-phase strong { display: block; color: var(--cream); font-size: 0.65rem; }
+.neuro-list li:last-child { border-bottom:none; }
+.neuro-icon { font-size:1.4rem; flex-shrink:0; margin-top:0.2rem; }
+.neuro-body strong { display:block; color:var(--parchment); font-family:'Playfair Display',serif; font-size:1.05rem; margin-bottom:0.3rem; }
+.neuro-body p { font-size:0.88rem; margin:0; color:var(--parchment-dim); }
+.neuro-body em { color:var(--amber); font-style:normal; }
 
-/* ─── MECHANICS CARDS ─── */
-.mech-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.3rem;
-  margin: 1rem 0;
-  position: relative;
-}
-.mech-badge {
-  position: absolute;
-  top: -10px;
-  right: 1rem;
-  background: var(--wine);
-  color: var(--cream);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 3px 8px;
-  border-radius: 3px;
-}
-.mech-badge.gold { background: var(--gold); color: var(--ink); }
-.mech-badge.rose { background: var(--rose); }
-.mech-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-}
-.mech-card p { font-size: 0.92rem; margin-bottom: 0.5rem; }
+/* ═══ WOMEN TYPES ═══ */
+.wtype { margin:1.4rem 0; padding:1.3rem; background:var(--glass); border:1px solid var(--border-dim); border-radius:10px; }
+.wtype-header { display:flex; align-items:baseline; gap:0.8rem; margin-bottom:0.7rem; }
+.wtype-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--rose); line-height:1; opacity:0.6; }
+.wtype-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--parchment); }
+.wtype p { font-size:0.9rem; color:var(--parchment-dim); margin-bottom:0.5rem; }
+.wtype p:last-child { margin:0; }
+.wtype em { color:var(--teal-light); font-style:italic; }
+.wtype strong { color:var(--parchment); }
 
-/* ─── TABLE ─── */
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.85rem;
-}
-.compare-table th {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gold);
-  border-bottom: 1px solid var(--border);
-  padding: 0.6rem 0.4rem;
-  text-align: left;
-}
-.compare-table td {
-  padding: 0.7rem 0.4rem;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  color: #d4c9bc;
-  vertical-align: top;
-}
-.compare-table tr:last-child td { border-bottom: none; }
-.yes { color: #6dbb6d; }
-.no { color: #cc5555; }
-.ok { color: var(--gold); }
+/* ═══ ALGORITHM LAYERS ═══ */
+.algo-layer { margin:1.2rem 0; padding:1.2rem; border-radius:10px; }
+.al-a { background:linear-gradient(135deg, rgba(184,80,96,0.12), rgba(184,80,96,0.04)); border:1px solid rgba(184,80,96,0.3); }
+.al-b { background:linear-gradient(135deg, rgba(201,127,24,0.1), rgba(201,127,24,0.03)); border:1px solid rgba(201,127,24,0.25); }
+.al-c { background:linear-gradient(135deg, rgba(42,122,122,0.1), rgba(42,122,122,0.03)); border:1px solid rgba(42,122,122,0.25); }
+.al-tag { font-family:'JetBrains Mono',monospace; font-size:0.56rem; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.5rem; display:block; }
+.al-a .al-tag { color:var(--rose); }
+.al-b .al-tag { color:var(--amber); }
+.al-c .al-tag { color:var(--teal-light); }
+.al-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--parchment); margin-bottom:0.4rem; }
+.algo-layer p { font-size:0.9rem; color:var(--parchment-dim); margin:0; }
 
-/* ─── WARNING ─── */
-.warning {
-  background: rgba(200,80,80,0.12);
-  border: 1px solid rgba(200,80,80,0.3);
-  border-left: 3px solid #cc5555;
-  border-radius: 8px;
-  padding: 1.1rem;
-  margin: 1.2rem 0;
-}
-.warning-head {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: #cc5555;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.4rem;
-}
-.warning p { font-size: 0.9rem; margin-bottom: 0; color: #d4c9bc; }
+/* ═══ CHRONO TABLE ═══ */
+.chrono { margin:1.8rem 0; }
+.chrono-row { display:flex; gap:1rem; padding:0.9rem 0; border-bottom:1px solid var(--border-dim); align-items:flex-start; }
+.chrono-row:first-child { border-top:1px solid var(--border-dim); }
+.ch-time { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--amber); width:72px; flex-shrink:0; padding-top:0.2rem; }
+.ch-mood { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--parchment); margin-bottom:0.2rem; }
+.ch-why { font-size:0.85rem; color:var(--parchment-dim); }
+.ch-action { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--teal-light); margin-top:0.4rem; display:block; text-transform:uppercase; letter-spacing:0.06em; }
 
-/* ─── METRIC BARS ─── */
-.metric-bar-wrap { margin: 1.2rem 0; }
-.metric-row {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.8rem;
+/* ═══ SIGNAL HIERARCHY ═══ */
+.signal-h { list-style:none; margin:1.5rem 0; counter-reset:sigh; }
+.signal-h li {
+  counter-increment:sigh;
+  display:flex; gap:1rem; padding:1rem 0;
+  border-bottom:1px solid var(--border-dim); align-items:flex-start;
 }
-.metric-name {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--muted);
-  width: 80px;
-  flex-shrink: 0;
-  text-transform: uppercase;
+.signal-h li::before {
+  content:counter(sigh);
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem; font-weight:900;
+  color:rgba(201,127,24,0.25); line-height:1;
+  flex-shrink:0; width:30px;
 }
-.bar-track {
-  flex: 1;
-  height: 6px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 3px;
-  overflow: hidden;
+.sig-main strong { display:block; color:var(--parchment); font-size:1rem; margin-bottom:0.3rem; }
+.sig-main p { font-size:0.86rem; margin:0; }
+.sig-why { font-family:'JetBrains Mono',monospace; font-size:0.58rem; color:var(--rose); display:block; margin-top:0.3rem; text-transform:uppercase; letter-spacing:0.06em; }
+
+/* ═══ PRACTICAL ═══ */
+.prac { margin:1.8rem 0; }
+.prac-step { display:flex; gap:1rem; margin-bottom:1.4rem; }
+.pstep-num {
+  width:32px; height:32px; border-radius:50%;
+  background:var(--rose-dim); border:1px solid var(--rose);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono',monospace; font-size:0.7rem;
+  color:var(--rose); flex-shrink:0; margin-top:0.2rem;
 }
-.bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--wine), var(--gold));
-  animation: barGrow 1.2s ease-out forwards;
-  transform-origin: left;
-  transform: scaleX(0);
+.pstep-num.gold { background:rgba(201,127,24,0.1); border-color:var(--amber); color:var(--amber); }
+.pstep-body strong { display:block; color:var(--parchment); font-size:1rem; margin-bottom:0.4rem; font-family:'Playfair Display',serif; }
+.pstep-body p { font-size:0.9rem; color:var(--parchment-dim); margin:0; }
+
+/* ═══ ERRORS ═══ */
+.error-item { padding:1.2rem; border-radius:8px; margin:1rem 0; background:rgba(184,80,96,0.08); border:1px solid rgba(184,80,96,0.2); border-left:3px solid var(--rose); }
+.error-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--parchment); margin-bottom:0.5rem; }
+.error-item p { font-size:0.9rem; color:var(--parchment-dim); margin:0; }
+
+/* ═══ MANIFESTO ═══ */
+.manifesto {
+  padding:5rem 1.4rem 7rem; max-width:480px; margin:0 auto;
+  text-align:center;
 }
-@keyframes barGrow {
-  to { transform: scaleX(1); }
-}
-.metric-val {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--gold);
-  width: 32px;
-  text-align: right;
-  flex-shrink: 0;
+.manifesto h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,9vw,3.5rem); font-weight:900; line-height:1.05; margin-bottom:1.5rem; }
+.manifesto h2 em { font-style:italic; color:var(--amber); display:block; }
+.manifesto-body { font-style:italic; color:var(--parchment-dim); font-size:1rem; max-width:300px; margin:0 auto 3rem; line-height:1.8; }
+.mf-quote {
+  font-family:'Playfair Display',serif; font-size:1.05rem;
+  font-style:italic; color:rgba(226,217,196,0.35);
+  border-top:1px solid var(--border-dim); padding-top:2rem; line-height:1.8;
 }
 
-/* ─── CLIP ANATOMY ─── */
-.clip-anatomy {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  margin: 1.5rem 0;
+/* ═══ DIVIDER ═══ */
+.div-rule { border:none; height:1px; background:var(--border-dim); margin:3rem 0; }
+
+/* ═══ STICKY CHAPTER LABEL ═══ */
+.stick {
+  position:sticky; top:48px; z-index:50;
+  background:rgba(8,12,20,0.9); backdrop-filter:blur(10px);
+  padding:0.35rem 1.4rem; max-width:480px; margin:0 auto;
+  border-bottom:1px solid var(--border-dim);
+  display:flex; align-items:center; gap:0.8rem;
 }
-.clip-segment {
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-.clip-segment:last-child { border-bottom: none; }
-.clip-seg-time {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--gold);
-  background: rgba(200,151,58,0.12);
-  padding: 3px 7px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  white-space: nowrap;
-  align-self: flex-start;
-  margin-top: 2px;
-}
-.clip-seg-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
-.clip-seg-desc { font-size: 0.85rem; color: var(--muted); }
-.clip-seg-example {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: var(--rose);
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-  display: block;
+.stick-ch { font-family:'JetBrains Mono',monospace; font-size:0.54rem; color:var(--rose); text-transform:uppercase; letter-spacing:0.1em; flex-shrink:0; }
+.stick-title { font-family:'EB Garamond',serif; font-size:0.8rem; color:var(--parchment-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ═══ FIRST LETTER ═══ */
+.dropcap::first-letter {
+  font-family:'Playfair Display',serif;
+  font-size:4.2rem; font-weight:900;
+  float:left; line-height:0.75;
+  margin-right:0.1em; color:var(--amber);
+  margin-top:0.15em;
 }
 
-/* ─── PLATFORMS ─── */
-.platform-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.7rem;
-  margin: 1.5rem 0;
-}
-.plat-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-}
-.plat-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
-.plat-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-.plat-score {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--gold);
-}
-.plat-card p { font-size: 0.75rem; margin: 0.4rem 0 0; color: var(--muted); }
+/* ═══ FOOTNOTE ═══ */
+.footnote { font-size:0.78rem; color:var(--parchment-dim); font-style:italic; border-top:1px solid var(--border-dim); padding-top:0.8rem; margin-top:2rem; }
 
-/* ─── GIVEAWAY ─── */
-.giveaway-box {
-  background: linear-gradient(135deg, rgba(212,98,122,0.15), rgba(200,151,58,0.1));
-  border: 1px solid rgba(212,98,122,0.4);
-  border-radius: 14px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  text-align: center;
-}
-.give-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
-.give-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  font-weight: 900;
-  font-style: italic;
-  color: var(--rose);
-  margin-bottom: 0.8rem;
-}
-.give-steps { text-align: left; list-style: none; }
-.give-steps li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 0.9rem;
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-}
-.give-steps li:last-child { border-bottom: none; }
-.give-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--rose);
-  background: rgba(212,98,122,0.15);
-  padding: 2px 6px;
-  border-radius: 3px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--rose); border-radius:2px; }
 
-/* ─── CONTENT PLAN ─── */
-.week-grid { margin: 1.2rem 0; }
-.day-row {
-  display: flex;
-  gap: 0.8rem;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  align-items: flex-start;
-}
-.day-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  width: 24px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.day-content { font-size: 0.9rem; color: #d4c9bc; }
-.day-content strong { color: var(--gold); font-size: 0.8rem; }
-.day-format {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 3px;
-  margin-right: 0.3rem;
-  flex-shrink: 0;
-}
-.fmt-clip { background: rgba(212,98,122,0.2); color: var(--rose); }
-.fmt-post { background: rgba(200,151,58,0.15); color: var(--gold); }
-.fmt-story { background: rgba(100,150,220,0.15); color: #88aadd; }
-.fmt-live { background: rgba(100,200,100,0.12); color: #77cc77; }
-
-/* ─── AUDIENCE BLOCK ─── */
-.aud-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin: 1.2rem 0;
-}
-.aud-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem;
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-.aud-emoji { font-size: 1.5rem; flex-shrink: 0; }
-.aud-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
-.aud-card p { font-size: 0.85rem; margin: 0; color: var(--muted); }
-
-/* ─── CAPTION ─── */
-.caption-box {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.2rem;
-  margin: 1rem 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--cream);
-  position: relative;
-}
-.caption-box::before {
-  content: '"';
-  position: absolute;
-  top: -0.5rem;
-  left: 0.8rem;
-  font-size: 3rem;
-  color: var(--border);
-  font-family: 'Playfair Display', serif;
-  line-height: 1;
-}
-.caption-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-  font-style: normal;
-  margin-bottom: 0.3rem;
-  display: block;
-}
-
-/* ─── DIVIDER ─── */
-.divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 3rem 1.2rem;
-  max-width: 420px;
-}
-
-/* ─── FINAL ─── */
-.finale {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 4rem 1.2rem 6rem;
-  max-width: 420px;
-  margin: 0 auto;
-}
-.finale h2 {
-  font-size: clamp(2rem, 9vw, 3rem);
-  margin-bottom: 1rem;
-}
-.finale p { max-width: 280px; margin: 0 auto 1.5rem; font-style: italic; }
-.finale-manifesto {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9rem;
-  font-style: italic;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  padding-top: 1.5rem;
-  margin-top: 1.5rem;
-  max-width: 300px;
-}
-
-/* ─── NUMBER CALLOUTS ─── */
-.big-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 5rem;
-  font-weight: 900;
-  color: var(--wine-deep);
-  line-height: 1;
-  margin-bottom: -0.5rem;
-}
-.big-number em { color: var(--gold); font-style: normal; }
-
-/* ─── CHECKLIST ─── */
-.checklist { list-style: none; margin: 1rem 0; }
-.checklist li {
-  display: flex;
-  gap: 0.7rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 0.9rem;
-  color: #d4c9bc;
-}
-.checklist li:last-child { border-bottom: none; }
-.check-icon { flex-shrink: 0; }
-
-/* ─── PULSE DOT ─── */
-.live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--rose);
-  background: rgba(212,98,122,0.12);
-  padding: 3px 8px;
-  border-radius: 3px;
-  margin-bottom: 0.5rem;
-}
-.pulse {
-  width: 6px; height: 6px;
-  background: var(--rose);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-  flex-shrink: 0;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.7); }
-}
-
-/* ─── STICKY SECTION LABEL ─── */
-.sticky-label {
-  position: sticky;
-  top: 50px;
-  z-index: 10;
-  background: rgba(13,10,8,0.85);
-  backdrop-filter: blur(8px);
-  padding: 0.4rem 1.2rem;
-  border-bottom: 1px solid rgba(200,151,58,0.1);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: var(--muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-/* ─── FOOTER ─── */
-footer {
-  text-align: center;
-  padding: 2rem 1.2rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  color: rgba(140,125,110,0.4);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-top: 1px solid rgba(200,151,58,0.1);
-}
-
-/* ─── POEM QUOTE ─── */
-.poem-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: rgba(245,239,230,0.5);
-  text-align: center;
-  padding: 2rem 1.2rem;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--ink); }
-::-webkit-scrollbar-thumb { background: var(--wine); border-radius: 2px; }
+/* ═══ FOOTER ═══ */
+footer { text-align:center; padding:2rem; font-family:'JetBrains Mono',monospace; font-size:0.5rem; color:rgba(168,153,126,0.3); letter-spacing:0.1em; text-transform:uppercase; }
 
 </style>
 </head>
 <body>
 
+<div id="progress-bar"></div>
+
 <nav>
-  <div class="nav-inner">
-    <a href="#hero">Старт</a><span class="nav-dot">·</span>
-    <a href="#algo">Алгоритмы</a><span class="nav-dot">·</span>
-    <a href="#clips">Клипы</a><span class="nav-dot">·</span>
-    <a href="#anatomy">Анатомия</a><span class="nav-dot">·</span>
-    <a href="#platforms">Форматы</a><span class="nav-dot">·</span>
-    <a href="#mechanics">Механики</a><span class="nav-dot">·</span>
-    <a href="#audience">Аудитория</a><span class="nav-dot">·</span>
-    <a href="#plan">Контент</a><span class="nav-dot">·</span>
-    <a href="#caption">Подписи</a><span class="nav-dot">·</span>
-    <a href="#errors">Нельзя</a><span class="nav-dot">·</span>
-    <a href="#finale">Итог</a>
+  <div class="nav-scroll">
+    <a class="nav-link" href="#cover">Начало</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#part1">Часть I</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch1">Алгоритм</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch2">Нейро</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#part2">Часть II</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch3">5 мотивов</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch4">Женщины</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch5">Разрыв</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#part3">Часть III</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch6">Эмоции</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch7">Время</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch8">Каскад</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#part4">Часть IV</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch9">ВК</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch10">Сигналы</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#part5">Часть V</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch11">Практика</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#ch12">Ошибки</a><span class="nav-sep">·</span>
+    <a class="nav-link" href="#manifesto">Итог</a>
   </div>
 </nav>
 
-<div id="progress"></div>
-
-<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
-<div id="hero" class="hero">
-  <div class="hero-label">Версия 1.0 · 1 мая 2026 · ВКонтакте</div>
-  <h1>ВК<br><em>Виральная</em><br><span>Машина</span></h1>
-  <p class="hero-sub">Полный гайд для поэта, чьи стихи бьют в сердце. Задача одна — сделать так, чтобы они разлетались по всему ВК сами.</p>
-  <div class="hero-stats">
-    <div class="stat-box">
-      <div class="stat-num">3 млрд</div>
-      <div class="stat-label">просмотров Клипов в день (конец 2025)</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">73%</div>
-      <div class="stat-label">пользователей ВК смотрят короткие видео</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">72 ч</div>
-      <div class="stat-label">живёт пост — первые 3 дня решают всё</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">2×</div>
-      <div class="stat-label">охват Клипов vs пост с картинкой</div>
-    </div>
+<!-- ════════════════════════ ОБЛОЖКА ════════════════════════ -->
+<div id="cover" class="cover">
+  <div class="cover-ambient"></div>
+  <div class="cover-eyebrow">Книга · Май 2026 · ВКонтакте</div>
+  <h1>Машина<br><span class="word-em">Сочув&shy;ствия</span><br><span class="word-dim">Вирусность</span></h1>
+  <p class="cover-sub">Почему одни стихи разлетаются по всему ВК, а другие тонут. Глубокий разбор психологии, нейронауки и алгоритмов — без поверхности.</p>
+  <div class="cover-index">
+    <div class="idx-item"><strong>14 глав</strong>Полная система</div>
+    <div class="idx-item"><strong>5 частей</strong>От теории к практике</div>
+    <div class="idx-item"><strong>~60 мин</strong>Время чтения</div>
+    <div class="idx-item"><strong>Аудитория</strong>Девушки 16–35</div>
   </div>
-  <div class="scroll-hint">
-    <span>Листай вниз</span>
-    <span class="scroll-arrow">↓</span>
+  <div class="cover-hint">Листай вниз <span class="hint-arrow">↓</span></div>
+</div>
+
+
+<!-- ════════════════════════ ЧАСТЬ I ════════════════════════ -->
+<div id="part1" class="part-break">
+  <div class="part-line"></div>
+  <span class="part-label">Часть первая</span>
+  <div class="part-title">Что такое<br><em>виральность на самом деле</em></div>
+</div>
+
+<!-- ГЛАВА 1 -->
+<div id="ch1" class="stick"><span class="stick-ch">Гл.01</span><span class="stick-title">Алгоритм — это не счётчик лайков</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 01</span>
+    <h2>Алгоритм — это не<br>счётчик лайков.<br><em>Это машина предсказаний.</em></h2>
+    <div class="chapter-deck">Большинство SMM-советов говорят тебе «набирай лайки». Это неправильная постановка вопроса. Алгоритм ВК не считает лайки — он предсказывает поведение.</div>
+
+    <p class="dropcap">Представь, что ты менеджер кинотеатра, у которого бесконечное количество залов и бесконечная очередь фильмов. Твоя задача — в каждый момент показывать каждому человеку именно тот фильм, от которого он не встанет с места. Не тот, который «объективно хорош». Именно тот, от которого <strong>этот конкретный человек не оторвётся</strong>. Это и есть задача алгоритма ВКонтакте.</p>
+
+    <p>Алгоритм задаёт себе вопрос не «хороший ли это контент?», а «если я покажу этот пост этому человеку — что он сделает следующую секунду?» Досмотрит? Свайпнет? Поделится? Напишет комментарий? Вернётся к нему завтра? Каждое действие пользователя — это обратная связь, которая дообучает модель прямо сейчас, в реальном времени.</p>
+
+    <div class="pull">
+      <p>«ВКонтакте обязан публично описывать принципы работы своих алгоритмов с октября 2023 года. Ключевой принцип: система ранжирует контент по вероятности релевантных действий пользователя — не по абсолютному числу реакций.»</p>
+      <span class="pull-source">Правила применения рекомендательных технологий ВКонтакте, 2023</span>
+    </div>
+
+    <h3>Три слоя, из которых алгоритм строит решение</h3>
+
+    <p>Внутри ВК одновременно работают три разные предсказательные системы, которые взаимодействуют друг с другом.</p>
+
+    <div class="algo-layer al-a">
+      <span class="al-tag">Слой первый · Граф социума</span>
+      <div class="al-title">Кто ты и с кем ты</div>
+      <p>Алгоритм смотрит на твою социальную сеть. Если твои подписчики активно взаимодействуют с определённым типом контента — это прямой сигнал, что ты сам скорее всего тоже отреагируешь. Люди, которых ты лайкаешь, комментируешь, с которыми переписываешься — это ключевые узлы. Лайк от человека из ближнего круга имеет больший вес, чем лайк от незнакомца.</p>
+    </div>
+
+    <div class="algo-layer al-b">
+      <span class="al-tag">Слой второй · Граф контента</span>
+      <div class="al-title">Что ты смотришь и как долго</div>
+      <p>Система строит твой «профиль интересов» не из анкеты, а из поведения. Досмотрел видео про любовь до конца — плюс к этой теме. Репостнул стихотворение — огромный плюс. Свайпнул через 2 секунды — минус. Этот профиль обновляется в режиме реального времени. Посмотрел 5 роликов о расставании — алгоритм понял, что ты сейчас переживаешь, и начнёт показывать тебе похожее.</p>
+    </div>
+
+    <div class="algo-layer al-c">
+      <span class="al-tag">Слой третий · Скорость нарастания</span>
+      <div class="al-title">Сигнал, о котором почти никто не говорит</div>
+      <p>Алгоритм смотрит не только на абсолютное число реакций, но на <strong>скорость их появления</strong>. Пост, который за 20 минут набрал 50 лайков, интереснее алгоритму, чем пост с 500 лайками, набранными за неделю. Это сигнал «это горячее прямо сейчас». Именно поэтому первые 1–3 часа после публикации критически важны.</p>
+    </div>
+
+    <h3>Почему это меняет <span class="accent">всё</span></h3>
+
+    <p>Если алгоритм предсказывает поведение, то твоя задача как автора — создавать контент, который провоцирует <strong>конкретные предсказуемые действия</strong>. Не «хороший контент вообще», а контент, который ты точно знаешь: эта девушка досмотрит, эта девушка репостнет, эта девушка напишет в комментарии «это про меня».</p>
+
+    <p>Поэзия — один из немногих форматов, который способен спровоцировать всё это одновременно. Но только если ты понимаешь, <em>почему именно</em> это происходит в голове человека. Об этом следующая глава.</p>
+
+    <div class="insight">
+      <span class="insight-tag">Главное из главы</span>
+      <p>Алгоритм — предсказательная машина. Он не оценивает качество контента абстрактно. Он оценивает: <strong>какова вероятность, что конкретный человек совершит ценное действие, если увидит этот пост?</strong> Чем точнее ты понимаешь, какое действие и почему совершит девушка — тем лучше работает алгоритм на тебя.</p>
+    </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════ ГЛАВА 1: АЛГОРИТМЫ ══════════════════════════════ -->
-<div class="chapter-mark" id="algo">
-  <div class="chapter-num">01</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Фундамент</span>
-  </div>
-</div>
+<!-- ГЛАВА 2 -->
+<div id="ch2" class="stick"><span class="stick-ch">Гл.02</span><span class="stick-title">Нейронаука шэринга: что происходит в мозге</span></div>
 
-<div class="sticky-label">Глава 01 — Как устроен ВК изнутри</div>
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 02</span>
+    <h2>Нейронаука шэринга:<br><em>что происходит в мозге</em><br>за секунду до «поделиться»</h2>
+    <div class="chapter-deck">За миллисекунды до того, как человек нажимает кнопку «поделиться», в его голове происходят три отдельных нейрохимических события. Понять их — значит понять, как писать стихи, которые невозможно не распространить.</div>
 
-<section>
-  <h2>Три ленты ВК — три <em>разные</em> игры</h2>
-  <p>ВКонтакте юридически обязан публиковать принципы своих алгоритмов (закон с октября 2023 года). Он это сделал. Читаем между строк.</p>
-  <p>В ВК одновременно работают <strong>три разных алгоритма показа</strong>. Ты как поэт обязан понять, что именно куда попадает и как это работает на тебя.</p>
+    <p class="dropcap">Нажатие кнопки «поделиться» — это не рациональное решение. Человек не думает: «Этот контент достаточно хорош, чтобы показать его другим». Он просто чувствует <strong>импульс</strong>. Этот импульс рождается в лимбической системе — той части мозга, которая обрабатывает эмоции и социальные связи, и которая гораздо быстрее коры. Решение принято раньше, чем осознано.</p>
 
-  <div class="algo-grid">
-    <div class="algo-box type-a">
-      <div class="algo-box-label">Тип А — хронологическая</div>
-      <div class="algo-box-title">Лента подписок</div>
-      <p>Посты строго по времени от сообществ и людей, на которых подписан. Почти не смотрит охват. Пользователь сам переключается. <strong>Это для тех, кто уже тебя знает.</strong> Новых людей сюда не приведёт.</p>
-    </div>
-    <div class="algo-box type-b">
-      <div class="algo-box-label">Тип Б — умная лента ★</div>
-      <div class="algo-box-title">Персонализированный поток</div>
-      <p>Сортирует посты подписок по предполагаемому интересу. Смотрит историю взаимодействий конкретного пользователя. <strong>Лайкал похожее — покажет твоё.</strong> Это твой основной инструмент роста среди подписчиков.</p>
-    </div>
-    <div class="algo-box type-c">
-      <div class="algo-box-label">Тип В — рекомендации 🔥</div>
-      <div class="algo-box-title">«Для вас» — вирусная машина</div>
-      <p>Показывает людям, которые на тебя <strong>вообще не подписаны</strong>. Алгоритм ищет людей с похожими интересами к тем, кто уже лайкнул. Сюда попасть = взрывной рост. Именно отсюда появляются миллионные охваты с нуля.</p>
-    </div>
-  </div>
-
-  <div class="highlight">
-    <span class="highlight-head">Главный инсайт 2025–2026</span>
-    ВК сознательно сдвинул приоритет в сторону вирального охвата над подписным. Платформа хочет, чтобы хороший контент шёл к людям без подписки. LiveDune называет это «приоритет вирального охвата над подписным» — новая реальность.
-  </div>
-
-  <h3><span>⚡</span> Что алгоритм оценивает в первую очередь</h3>
-  <p>Умная лента ВК смотрит не только на текущую популярность — она смотрит на <strong>скорость нарастания интереса</strong>. Пост, который резко рванул — интереснее, чем пост, который медленно набирает.</p>
-
-  <ul class="signal-list">
-    <li>
-      <span class="sig-icon">❤️</span>
-      <div>
-        <strong>Лайки и реакции</strong>
-        <span class="sig-weight">Базовый сигнал</span>
-        Чем быстрее собираются в первые часы — тем выше шанс попасть в рекомендации. Лайки друзей пользователя работают дополнительным усилителем.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">💬</span>
-      <div>
-        <strong>Комментарии</strong>
-        <span class="sig-weight">Сильный сигнал</span>
-        Особенно первый комментарий от самого автора с вопросом или интригой — закреплённый. Дискуссия в комментах удваивает охват.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🔁</span>
-      <div>
-        <strong>Репосты</strong>
-        <span class="sig-weight">Самый мощный сигнал</span>
-        Репост = человек буквально говорит «это важно, это должны видеть другие». Алгоритм это ценит выше всего. Твои стихи — идеальный репост-контент для девушек.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">👀</span>
-      <div>
-        <strong>Досмотр видео</strong>
-        <span class="sig-weight">Критично для Клипов</span>
-        Для клипов — главный сигнал. Если досматривают до конца, алгоритм резко усиливает показы. Если свайпают через 2 секунды — режет показы.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🔖</span>
-      <div>
-        <strong>Сохранения</strong>
-        <span class="sig-weight">Скрытый золотой сигнал</span>
-        Сохранить = «вернусь к этому». Это долгосрочный сигнал интереса. Для поэзии — люди сохраняют стихи, которые задели лично.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">⏱️</span>
-      <div>
-        <strong>Время жизни поста</strong>
-        <span class="sig-weight">Особенность 2025</span>
-        С лета 2025 охваты приходят волнами — на 2-й, 3-й и даже 7-й день после публикации. Не паникуй, если пост не рванул сразу.
-      </div>
-    </li>
-  </ul>
-
-  <div class="big-number"><em>72</em></div>
-  <p style="margin-top:0.3rem;">часа — рабочее окно жизни поста. Первые 3 часа — решающие. Именно тогда алгоритм «тестирует» контент на твоей аудитории и решает, двигать ли его дальше.</p>
-
-  <div class="timeline">
-    <div class="timeline-track">
-      <div class="timeline-fill" style="width:100%"></div>
-    </div>
-    <div class="tl-phases">
-      <div class="tl-phase"><strong>0–3 ч</strong>Тест-фаза</div>
-      <div class="tl-phase"><strong>3–24 ч</strong>Ранжирование</div>
-      <div class="tl-phase"><strong>24–72 ч</strong>Виральная волна</div>
-      <div class="tl-phase"><strong>72 ч+</strong>Хвост</div>
-    </div>
-  </div>
-
-  <div class="highlight">
-    <span class="highlight-head">Ключевое правило</span>
-    Опубликовал — сразу пиши первый закреплённый комментарий. Задай вопрос, добавь интригу, продли стих. Это стартует вовлечение, а вовлечение в первые часы = сигнал алгоритму «контент живой, двигай его».
-  </div>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 2: КЛИПЫ ══════════════════════════════ -->
-<div class="chapter-mark" id="clips">
-  <div class="chapter-num">02</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Главное оружие</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 02 — VK Клипы: вирусный двигатель платформы</div>
-
-<section>
-  <h2>Клипы — это<br>не «тоже можно»,<br><em>это обязательно</em></h2>
-
-  <div class="live-badge"><span class="pulse"></span>Актуально: май 2026</div>
-
-  <p>ВК Клипы — короткие вертикальные видео — это сейчас <strong>главный формат платформы</strong>. Клипы занимают 38,5% ленты. Ежедневная аудитория — 20+ млн человек. Просмотров — 3 миллиарда в день.</p>
-  <p>Для поэта-исполнителя с бархатным голосом это идеальный формат. Ты читаешь — их слышат. Стих на экране — его видят. Эмоция — её чувствуют.</p>
-
-  <div class="metric-bar-wrap">
-    <div class="metric-row">
-      <div class="metric-name">Клипы</div>
-      <div class="bar-track"><div class="bar-fill" style="width:95%"></div></div>
-      <div class="metric-val">95%</div>
-    </div>
-    <div class="metric-row">
-      <div class="metric-name">Видео-посты</div>
-      <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
-      <div class="metric-val">60%</div>
-    </div>
-    <div class="metric-row">
-      <div class="metric-name">Фото-посты</div>
-      <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-      <div class="metric-val">40%</div>
-    </div>
-    <div class="metric-row">
-      <div class="metric-name">Текст</div>
-      <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
-      <div class="metric-val">20%</div>
-    </div>
-  </div>
-  <p style="font-size:0.8rem;color:var(--muted);">Относительный охват форматов по данным LiveDune (42 млн публикаций)</p>
-
-  <h3><span>📐</span> Технические правила Клипов (без них никак)</h3>
-
-  <ul class="checklist">
-    <li><span class="check-icon">✅</span><div><strong>Вертикальное видео 1080×1920</strong> — только так. Горизонталь убивает охват.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Длина: 15–60 секунд</strong> — оптимум. До 5 секунд не попадёт в рекомендации. Длиннее минуты — теряет аудиторию. Для стихов: 20–40 сек идеал.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Снято и залито нативно в ВК</strong> — клипы с вотермарком TikTok/Reels/других платформ алгоритм не продвигает. Снимай для ВК отдельно.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>60 FPS, Full HD</strong> — доступно, используй. Качество влияет на ранжирование.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Субтитры обязательны</strong> — 60% смотрят без звука. Субтитры = стих виден глазами. Это особенно важно для поэзии: слова должны быть красиво на экране.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Музыка только из библиотеки VK</strong> — внешний трек → проблемы с авторскими правами → нет рекомендаций.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Без внешних ссылок в описании</strong> — ВК не продвигает клипы, которые уводят с платформы. Ссылки — в профиль, не в описание клипа.</div></li>
-    <li><span class="check-icon">✅</span><div><strong>Хэштеги в описании</strong> — 3–5 штук. Помогают попасть в тематические подборки и рекомендации по интересам.</div></li>
-  </ul>
-
-  <div class="warning">
-    <div class="warning-head">⚠ Нельзя</div>
-    <p>Перезалив своего же TikTok/Reels с вотермарком — система определения уникальности в 2026 году работает быстро. Твой клип не получит рекомендаций.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 3: АНАТОМИЯ КЛИПА ══════════════════════════════ -->
-<div class="chapter-mark" id="anatomy">
-  <div class="chapter-num">03</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Структура</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 03 — Анатомия вирального поэтического клипа</div>
-
-<section>
-  <h2>Формула клипа,<br>который <em>досмотрят</em></h2>
-
-  <p>Алгоритм Клипов не знает, хорошее ли у тебя стихотворение. Он знает одно: <strong>досмотрели или свайпнули</strong>. Каждая секунда на счету. Вот структура, которая удерживает.</p>
-
-  <div class="clip-anatomy">
-    <div class="clip-segment">
-      <span class="clip-seg-time">0–2 сек</span>
-      <div>
-        <div class="clip-seg-title">ХУК — первые 2 секунды решают всё</div>
-        <div class="clip-seg-desc">Человек либо остаётся, либо свайпает. Хук должен создать вопрос, интерес, удивление или боль. Никакого вступления «привет, я поэт».</div>
-        <span class="clip-seg-example">Вариант 1: ты уже в кадре, крупный план, говоришь первую строку стиха — сразу в боль<br>Вариант 2: текст на экране «Одна строчка, которая объяснит всё» → пауза → читаешь<br>Вариант 3: результат в лоб — самая пронзительная строфа идёт первой</span>
-      </div>
-    </div>
-    <div class="clip-segment">
-      <span class="clip-seg-time">2–25 сек</span>
-      <div>
-        <div class="clip-seg-title">ТЕЛО — стихотворение</div>
-        <div class="clip-seg-desc">Ты читаешь. Голос бархатный. Стих на экране субтитрами или красивым оверлеем. Фон — атмосферный (улица, закат, интерьер с мягким светом). Монтаж — лёгкий, каждые 3–4 секунды смена ракурса или кадра.</div>
-        <span class="clip-seg-example">Субтитры крупные, читаемые. Шрифт с засечками или рукописный. Тёмный полупрозрачный фон под текстом — слова видны.</span>
-      </div>
-    </div>
-    <div class="clip-segment">
-      <span class="clip-seg-time">последние 3–5 сек</span>
-      <div>
-        <div class="clip-seg-title">БАЙТ — финальный крючок</div>
-        <div class="clip-seg-desc">Финал определяет виральность. Нужно добиться репоста, сохранения или комментария. Не «подпишись» — это слабо. Нужен эмоциональный удар, после которого хочется отправить кому-то.</div>
-        <span class="clip-seg-example">«Перешли тому, кто это должен прочитать» — прямо в кадре или в описании<br>«Кому это про тебя?» — вопрос в финале провоцирует комментарии<br>Самая острая строчка — в самом конце, как точка в сердце</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="formula">
-    <div class="formula-row">
-      <div class="formula-step">1</div>
-      <div class="formula-text"><em>Хук</em> — острая первая строка или вопрос «про неё»</div>
-    </div>
-    <div class="formula-plus">+</div>
-    <div class="formula-row">
-      <div class="formula-step">2</div>
-      <div class="formula-text"><em>Стих</em> — бархатный голос + крупный план + субтитры</div>
-    </div>
-    <div class="formula-plus">+</div>
-    <div class="formula-row">
-      <div class="formula-step">3</div>
-      <div class="formula-text"><em>Финал</em> — эмоциональный удар + призыв «перешли ему/ей»</div>
-    </div>
-    <div class="formula-plus">+</div>
-    <div class="formula-row">
-      <div class="formula-step gold">✦</div>
-      <div class="formula-text"><em>Описание</em> — 3–5 хэштегов + одна строка стиха как крючок</div>
-    </div>
-    <div class="formula-result">= Клип, который досматривают, репостят, отправляют любимым</div>
-  </div>
-
-  <h3><span>🎬</span> Типы хуков для поэта — выбирай</h3>
-
-  <div class="mech-card">
-    <div class="mech-badge gold">Самый сильный</div>
-    <div class="mech-title">Результат в лоб</div>
-    <p>Самая пронзительная строфа — сразу, в первые 2 секунды. Человек не понимает контекст, но уже хочет знать откуда это. Он досматривает.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge">Триггер</div>
-    <div class="mech-title">Текст-вопрос на экране</div>
-    <p>«Ты когда-нибудь любил(-а) так, что больно дышать?» — пауза 1.5 секунды — начинаешь читать. Этот вопрос задевает ЦА (девушек) напрямую.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Вирусный</div>
-    <div class="mech-title">Адресный хук</div>
-    <p>«Это стихотворение написано для неё» — крупный план твоих глаз, пауза. Каждая девушка думает, что это про неё. Или хочет, чтобы это было про неё. Она отправит его своему парню.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge">Удержание</div>
-    <div class="mech-title">Незавершённое начало</div>
-    <p>Начинаешь стих с середины — «…и тогда я понял, что слова бесполезны, когда ты уходишь» — обрываешь на секунду — продолжаешь. Мозг хочет закрыть гештальт.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 4: ФОРМАТЫ ══════════════════════════════ -->
-<div class="chapter-mark" id="platforms">
-  <div class="chapter-num">04</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Экосистема</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 04 — Паблик vs Страница vs Канал vs Сторис</div>
-
-<section>
-  <h2>Все форматы ВК:<br><em>что, куда,</em><br>зачем</h2>
-
-  <p>В 2026 году ВК — это не просто «лента». Это несколько разных экосистем внутри одной платформы. Умный поэт использует <strong>все точки касания</strong> одновременно.</p>
-
-  <div class="platform-grid">
-    <div class="plat-card">
-      <div class="plat-icon">📖</div>
-      <div class="plat-name">Паблик / Группа</div>
-      <div class="plat-score">★★★★☆</div>
-      <p>Официальное имя бренда. Умная лента + рекомендации. Для долгосрочного роста.</p>
-    </div>
-    <div class="plat-card">
-      <div class="plat-icon">👤</div>
-      <div class="plat-name">Личная страница</div>
-      <div class="plat-score">★★★★★</div>
-      <p>Самый человечный формат. Алгоритм любит личные страницы. Для поэта — идеал.</p>
-    </div>
-    <div class="plat-card">
-      <div class="plat-icon">📢</div>
-      <div class="plat-name">Канал ВК</div>
-      <div class="plat-score">★★★★☆</div>
-      <p>Как Telegram. Охват до 50% подписчиков. С лета 2025 новый подписчик сообщества = автоподписка на канал.</p>
-    </div>
-    <div class="plat-card">
-      <div class="plat-icon">🎬</div>
-      <div class="plat-name">VK Клипы</div>
-      <div class="plat-score">★★★★★</div>
-      <p>Главное оружие вирального роста. Показ нулям. Алгоритм продвигает активно.</p>
-    </div>
-    <div class="plat-card">
-      <div class="plat-icon">⭕</div>
-      <div class="plat-name">Сторис</div>
-      <div class="plat-score">★★★☆☆</div>
-      <p>Для удержания ядра подписчиков. Каждый день — присутствие. Лёгкий контент за кулисами.</p>
-    </div>
-    <div class="plat-card">
-      <div class="plat-icon">🔴</div>
-      <div class="plat-name">Трансляция</div>
-      <div class="plat-score">★★★★☆</div>
-      <p>Живое чтение стихов. Алгоритм трансляции входит в топ форматов. Живое — в тренде.</p>
-    </div>
-  </div>
-
-  <div class="highlight">
-    <span class="highlight-head">Рекомендация для поэта</span>
-    Начни с <strong>личной страницы</strong> — самый человечный и доверительный формат. Параллельно веди <strong>Клипы</strong> — они дадут прирост новой аудитории. Сторис — ежедневное присутствие. Канал — для доставки контента лояльным.
-  </div>
-
-  <h3><span>📊</span> Сравнение: что куда публиковать</h3>
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Контент</th>
-        <th>Клип</th>
-        <th>Пост</th>
-        <th>Сторис</th>
-        <th>Канал</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Стих (чтение)</td>
-        <td class="yes">✦ Да</td>
-        <td class="ok">~ Да</td>
-        <td class="ok">~ Да</td>
-        <td class="ok">~ Да</td>
-      </tr>
-      <tr>
-        <td>Стих (текст)</td>
-        <td class="no">—</td>
-        <td class="yes">✦ Да</td>
-        <td class="ok">Кратко</td>
-        <td class="yes">✦ Да</td>
-      </tr>
-      <tr>
-        <td>Закулисье</td>
-        <td class="ok">~ Да</td>
-        <td class="no">—</td>
-        <td class="yes">✦ Да</td>
-        <td class="no">—</td>
-      </tr>
-      <tr>
-        <td>Розыгрыш</td>
-        <td class="yes">✦ Да</td>
-        <td class="yes">✦ Да</td>
-        <td class="ok">~ Да</td>
-        <td class="no">—</td>
-      </tr>
-      <tr>
-        <td>Коллаб</td>
-        <td class="yes">✦ Да</td>
-        <td class="ok">~ Да</td>
-        <td class="no">—</td>
-        <td class="no">—</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 5: МЕХАНИКИ ══════════════════════════════ -->
-<div class="chapter-mark" id="mechanics">
-  <div class="chapter-num">05</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Виральность</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 05 — Механики, которые запускают цепную реакцию</div>
-
-<section>
-  <h2>Как стих <em>разлетается</em><br>без рекламы</h2>
-
-  <p>Виральность — это не случайность. Это управляемая цепная реакция. Ты создаёшь условия, люди делают работу сами. Вот конкретные механики для поэта.</p>
-
-  <!-- РОЗЫГРЫШ -->
-  <div id="giveaway" class="giveaway-box">
-    <div class="give-emoji">🎁</div>
-    <div class="give-title">ВНИМАНИЕ, РОЗЫГРЫШ</div>
-    <p style="font-size:0.9rem;color:#d4c9bc;margin-bottom:1rem;">Самый мощный инструмент быстрого старта и первого виральногового взрыва. Milford в ВК с помощью конкурсов поднимал виральный охват с 10% до 30–40% от подписчиков.</p>
-    <ol class="give-steps">
+    <ul class="neuro-list">
       <li>
-        <span class="give-num">01</span>
-        <div><strong>Приз с душой</strong> — не деньги, а что-то поэтическое: именное стихотворение, голосовое сообщение с личным стихом, книга с твоим автографом, «стих написанный про тебя». Это дешевле, но интимнее — и вирусней.</div>
+        <span class="neuro-icon">⚡</span>
+        <div class="neuro-body">
+          <strong>Миндалевидное тело и эмоциональный захват</strong>
+          <p>Амигдала — это система раннего предупреждения мозга. Её задача — мгновенно оценивать эмоциональную значимость стимулов. Когда контент бьёт в <em>личную эмоциональную боль</em> или <em>очень точно описывает внутреннее состояние</em>, амигдала активируется раньше, чем включается логическое мышление. Человек буквально не может не реагировать. Это называют «amygdala hijack» — захват амигдалы. Стихи способны делать это лучше, чем любой другой текстовый формат.</p>
+        </div>
       </li>
       <li>
-        <span class="give-num">02</span>
-        <div><strong>Условие: репост + подписка + тег подруги</strong> — три действия. Каждый тег = новый человек видит конкурс. Девушки тегают подруг охотнее всего.</div>
+        <span class="neuro-icon">🔄</span>
+        <div class="neuro-body">
+          <strong>Зеркальные нейроны и воплощённая эмпатия</strong>
+          <p>Зеркальные нейроны активируются, когда человек наблюдает действие или эмоцию — так, словно переживает их сам. Это нейрологическая основа эмпатии. Когда ты читаешь стих с <em>бархатным голосом на камеру</em>, у зрительницы в прямом смысле «включаются» те же нейронные паттерны, что и при переживании описываемого чувства. Она не просто понимает слова — она <em>чувствует их в теле</em>. Именно поэтому видео с живым прочтением гораздо мощнее текстового поста.</p>
+        </div>
       </li>
       <li>
-        <span class="give-num">03</span>
-        <div><strong>Дедлайн — 48 часов</strong> — создаёт срочность. Не неделя. Максимум 2 дня.</div>
+        <span class="neuro-icon">🧪</span>
+        <div class="neuro-body">
+          <strong>Окситоцин: гормон связи и доверия</strong>
+          <p>Окситоцин — нейромедиатор, который выделяется при ощущении близости, доверия и принадлежности. Исследования показывают: <em>10 минут в социальных сетях поднимают уровень окситоцина на 13%</em> — сопоставимо с тем, что происходит на свадебной церемонии. Контент, который создаёт ощущение «кто-то понимает меня так точно, как не понимает никто вокруг» — провоцирует выброс окситоцина. Девушка хочет поделиться этим ощущением с теми, кого любит.</p>
+        </div>
       </li>
       <li>
-        <span class="give-num">04</span>
-        <div><strong>Объяви победителя публично</strong> — это контент сам по себе. Снимай клип, где читаешь имя победительницы и её стих.</div>
+        <span class="neuro-icon">🎯</span>
+        <div class="neuro-body">
+          <strong>Дофамин: система вознаграждения за шэринг</strong>
+          <p>Дофамин — нейромедиатор предвкушения и вознаграждения. Лайки и репосты <em>буквально активируют те же цепи мозга, что и другие аддиктивные вещества</em>. Когда человек делится контентом и получает реакции, это дофаминовое вознаграждение. Но интереснее другое: <em>само действие шэринга</em> — акт заботы о социальных связях — тоже дофаминогенно. Девушка, которая отправляет твой стих подруге или парню, получает дофамин не за лайки, а за сам акт «я подумала о тебе».</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="pull">
+      <p>«Нейронаука подтверждает: шэринг — это не передача контента. Это акт управления социальными связями. Человек делится не тем, что ему понравилось, а тем, что укрепляет его отношения с другими.»</p>
+      <span class="pull-source">Cosme & Falk, Journal of Experimental Psychology, UPenn</span>
+    </div>
+
+    <h3>Что это значит для <span class="accent">поэта</span></h3>
+
+    <p>Стихи — идеальный нейрохимический инструмент, потому что они работают сразу на все четыре механизма. Ритм и метафора обходят рациональную критику, попадая прямо в лимбическую систему. Живое прочтение активирует зеркальные нейроны. Точность описания внутреннего состояния провоцирует выброс окситоцина. А осознание «я хочу, чтобы кто-то ещё это прочитал» запускает дофаминовую петлю шэринга.</p>
+
+    <p>Проблема большинства поэтов — они думают о красоте слов. Нужно думать о нейрохимии читателя. Красивые слова, которые не попадают ни в одну из этих систем, остаются незамеченными.</p>
+
+    <div class="insight">
+      <span class="insight-tag">Рабочая формула</span>
+      <p>Стих, который вызывает <strong>эмоциональный захват амигдалы + воплощённую эмпатию через голос + ощущение «меня наконец поняли»</strong> — это стих, который репостят не потому что «классно написано», а потому что мозг <em>требует</em> поделиться им.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════ ЧАСТЬ II ════════════════════════ -->
+<div id="part2" class="part-break">
+  <div class="part-line"></div>
+  <span class="part-label">Часть вторая</span>
+  <div class="part-title">Психология<br><em>твоей аудитории</em></div>
+</div>
+
+<!-- ГЛАВА 3 -->
+<div id="ch3" class="stick"><span class="stick-ch">Гл.03</span><span class="stick-title">Пять мотивов репоста</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 03</span>
+    <h2>Пять мотивов<br><em>репоста</em> — исследование<br>New York Times</h2>
+    <div class="chapter-deck">NYT провели трёхфазное исследование «Психология шэринга», опросив тысячи человек. Зачем люди делятся контентом? Ответ нетривиален — и полностью меняет то, как нужно писать стихи для вирусности.</div>
+
+    <p class="dropcap">Пять мотивов, которые NYT выявили в своём исследовании, — это не просто академический список. Это карта. Если твой контент не бьёт хотя бы в два из пяти — виральности не будет. Если бьёт в четыре — ты получишь каскадный репост. Самая интересная часть исследования: люди почти никогда не осознают, почему они делятся. Они просто чувствуют «надо».</p>
+
+    <div class="framework">
+      <div class="fw-item">
+        <div class="fw-letter">1</div>
+        <div class="fw-name">Принести ценность другим</div>
+        <div class="fw-def">Человек делится, потому что считает: «это важно/нужно/красиво кому-то из моего окружения». Это альтруистический мотив. Он активируется, когда контент адресован конкретной ситуации, которую человек узнаёт у другого.</div>
+        <div class="fw-apply">Для поэта → стихи о расставании, которые девушка отправляет подруге в трудный момент. Или стих, который она пересылает парню вместо того, чтобы самой объяснять чувства.</div>
+      </div>
+      <div class="fw-item">
+        <div class="fw-letter">2</div>
+        <div class="fw-name">Определить себя для других</div>
+        <div class="fw-def">Репост — это самопрезентация. «Я делюсь этим, потому что это часть того, кто я есть». Люди используют контент как зеркало, в котором другие видят их идентичность, ценности, вкус, внутренний мир.</div>
+        <div class="fw-apply">Для поэта → девушка репостит, потому что стих точно описывает её внутреннее состояние, которое она сама не могла выразить словами. Репост = «смотрите, вот кто я».</div>
+      </div>
+      <div class="fw-item">
+        <div class="fw-letter">3</div>
+        <div class="fw-name">Поддержать и укрепить отношения</div>
+        <div class="fw-def">«Я думала о тебе, когда это увидела». Шэринг — это социальный жест. Он говорит: «ты важен мне, я думаю о тебе». Это один из самых мощных онлайн-эквивалентов живой заботы.</div>
+        <div class="fw-apply">Для поэта → стих должен содержать универсальную личную боль, которую девушка узнаёт в чьей-то ситуации из своего окружения. Это активирует желание «отправить ему/ей».</div>
+      </div>
+      <div class="fw-item">
+        <div class="fw-letter">4</div>
+        <div class="fw-name">Самореализация через контент</div>
+        <div class="fw-def">Человек чувствует смысл, развлекая или информируя других. Это потребность быть «источником» ценного в своей социальной сети. Первые, кто делится новым интересным контентом, получают статус.</div>
+        <div class="fw-apply">Для поэта → твой стиль, твой голос, твоя необычная подача должны создавать ощущение «я нашла крутого нового автора и первая показываю его своим».</div>
+      </div>
+      <div class="fw-item">
+        <div class="fw-letter">5</div>
+        <div class="fw-name">Высказать позицию и поддержать</div>
+        <div class="fw-def">Репост как активизм или поддержка. «Это важно, и я хочу, чтобы это увидели». Менее актуален для лирики, но работает, когда стихи касаются универсальной эмоциональной правды.</div>
+        <div class="fw-apply">Для поэта → стих, который говорит то, что «все чувствуют, но никто не говорит вслух», работает через этот мотив. «Да! Именно так! Репощу, потому что это правда».</div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <span class="insight-tag">Практический вывод</span>
+      <p>Лучший репост-стих одновременно активирует мотивы 1, 2 и 3. Это стих, который <strong>точно описывает внутреннее состояние девушки</strong> (мотив 2) и при этом <strong>она сразу думает о конкретном человеке</strong> в своей жизни, которому его нужно переслать (мотивы 1 и 3). Писать надо так, чтобы читательница видела себя <em>и</em> думала о ком-то ещё.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ГЛАВА 4 -->
+<div id="ch4" class="stick"><span class="stick-ch">Гл.04</span><span class="stick-title">Женская психология шэринга</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 04</span>
+    <h2>Женская психология<br><em>шэринга:</em><br>четыре типа репоста</h2>
+    <div class="chapter-deck">Женщины и мужчины делятся контентом по разным психологическим причинам и в разных контекстах. Понять, как именно девушки репостят эмоциональный контент — это понять, как строить каждый стих.</div>
+
+    <p class="dropcap">Женщины статистически репостят эмоциональный и нарративный контент значительно чаще мужчин. Причина не в «сентиментальности» — причина в том, что женская социальная идентичность в большей степени строится через <strong>эмоциональный обмен</strong> в отношениях. Контент, который помогает выразить что-то сложное, становится инструментом управления отношениями. Это не слабость — это суперспособность аудитории, которую нужно понять.</p>
+
+    <div class="wtype">
+      <div class="wtype-header">
+        <div class="wtype-num">I</div>
+        <div class="wtype-name">Артикулятор</div>
+      </div>
+      <p>Это самый мощный тип для вирусности стихов. Артикулятор репостит, потому что <strong>ты сказал то, что она чувствовала, но не могла выразить словами</strong>. Внутри неё существует огромная эмоция — боль расставания, нежность, тоска, злость — но у неё нет языка для этого. Твои слова дают ей этот язык.</p>
+      <p>Когда она репостит — она не говорит «мне понравился этот поэт». Она говорит «<em>это я, это мои слова, это то, что происходит внутри</em>». Репост = самовыражение через чужой текст.</p>
+      <p><strong>Как писать под этот тип:</strong> максимальная точность внутреннего состояния. Не «мне плохо без тебя» — а «я ловлю себя на том, что всё ещё ищу тебя в каждом незнакомом лице». Конкретика чувства, а не его название.</p>
+    </div>
+
+    <div class="wtype">
+      <div class="wtype-header">
+        <div class="wtype-num">II</div>
+        <div class="wtype-name">Дарительница</div>
+      </div>
+      <p>Дарительница репостит или пересылает, потому что <strong>думает о конкретном человеке</strong>. «Это для него». «Это для подруги, которой сейчас плохо». Это акт любви и заботы, выраженный через контент. Стих становится подарком.</p>
+      <p>Важный нюанс: дарительница ищет не идеальный стих — она ищет <em>стих для конкретной ситуации</em>. Расставание, тоска по кому-то, неразделённая любовь, возвращение бывшего. Чем точнее стих попадает в жизненную ситуацию — тем выше шанс, что она отправит его кому-то.</p>
+      <p><strong>Как писать под этот тип:</strong> явно адресный, но не именной. «Ты» вместо «она». Чёткая жизненная ситуация без потери универсальности.</p>
+    </div>
+
+    <div class="wtype">
+      <div class="wtype-header">
+        <div class="wtype-num">III</div>
+        <div class="wtype-name">Хранительница</div>
+      </div>
+      <p>Хранительница не репостит — она <strong>сохраняет</strong>. Это самый интровертный тип взаимодействия с эмоциональным контентом. Она сохраняет стих «на потом», потому что чувствует: «это что-то важное, я к этому вернусь». Иногда она никогда не возвращается, но сам акт сохранения — это сигнал глубокой резонантности.</p>
+      <p>Для алгоритма ВК <em>сохранение — один из самых ценных сигналов</em>. Это «долгосрочный интерес», который алгоритм использует, чтобы показывать похожий контент снова и снова. Хранительницы не дают тебе вирусный взрыв, но они строят твою постоянную аудиторию.</p>
+      <p><strong>Как писать под этот тип:</strong> глубина, образность, что-то, что невозможно понять полностью с первого раза. Стихи с «послевкусием».</p>
+    </div>
+
+    <div class="wtype">
+      <div class="wtype-header">
+        <div class="wtype-num">IV</div>
+        <div class="wtype-name">Комментаторша</div>
+      </div>
+      <p>Комментаторша не репостит и не сохраняет — она <strong>оставляет след в комментариях</strong>. «Это про меня». «Плачу». «Как ты умудрился написать точно про мою жизнь». Это тип взаимодействия, который меньше всего даёт тебе охват, но больше всего — сигнал алгоритму, что контент живой и резонантный.</p>
+      <p>Комментарии от комментаторш создают «социальное доказательство» под стихом. Следующая девушка видит «этот стих плачут» — и хочет прочитать сама. Это эффект толпы, работающий в твою пользу.</p>
+      <p><strong>Как провоцировать этот тип:</strong> финальный вопрос или незакрытый образ. «Кто узнал себя?» — прямо в описании. Или стих, который заканчивается не точкой, а многоточием в сердце.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ГЛАВА 5 -->
+<div id="ch5" class="stick"><span class="stick-ch">Гл.05</span><span class="stick-title">Разрыв артикуляции</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 05</span>
+    <h2>Разрыв<br><em>артикуляции</em> —<br>почему стихи непобедимы</h2>
+    <div class="chapter-deck">Существует конкретный нейропсихологический механизм, который делает поэзию идеальным вирусным форматом. Он называется «разрыв артикуляции» — и понимание его полностью меняет то, как нужно писать.</div>
+
+    <p class="dropcap">Внутри каждого человека существует <strong>огромное количество эмоций, которые он не может выразить словами</strong>. Не потому что он «не умеет говорить о чувствах» — а потому что сами эмоции часто существуют в доязыковой форме. Они живут в теле, в образах, в ощущениях, в разрывах между словами. Это и есть разрыв артикуляции — пространство между тем, что человек <em>чувствует</em>, и тем, что он <em>может сказать</em>.</p>
+
+    <div class="theory">
+      <span class="theory-head">Теория разрыва артикуляции</span>
+      <p>Человек переживает интенсивное чувство. Он хочет сказать что-то близкому человеку, написать в личку, выразить в сторис — но у него <strong>нет слов</strong>. Он молчит или говорит что-то банальное. Чувство остаётся внутри, нереализованным.</p>
+      <p>Затем он видит твой стих. И происходит нечто физиологическое — узнавание. <strong>«Это же то самое. Это именно то, что я чувствую и не мог сказать»</strong>. В этот момент стих перестаёт быть чужим текстом. Он становится его собственными словами, которые он наконец нашёл.</p>
+      <p>После этого репост — это <em>не репост поэта</em>. Это девушка наконец <strong>говорит то, что хотела сказать</strong>. Ты дал ей инструмент для этого. Именно в этом — главный секрет вирусности лирической поэзии.</p>
+    </div>
+
+    <h3>Три уровня разрыва артикуляции</h3>
+
+    <p>Не все невысказанные чувства одинаково сильны. Есть три уровня, и каждый даёт разный тип вирусности.</p>
+
+    <div class="data-row">
+      <div class="data-num" style="color:var(--rose)">I</div>
+      <div class="data-desc">
+        <strong>Персональный разрыв — «это точно про меня»</strong>
+        Девушка узнаёт в стихе своё текущее состояние. Боль расставания, влюблённость, страх потерять — что-то, что она переживает прямо сейчас. Это самый немедленный репост. Она делится как артикулятор или дарительница. Вирусность — быстрая, но нишевая.
+      </div>
+    </div>
+    <div class="data-row">
+      <div class="data-num" style="color:var(--amber)">II</div>
+      <div class="data-desc">
+        <strong>Архетипический разрыв — «это про нас всех»</strong>
+        Стих описывает универсальный опыт настолько точно, что его узнают даже те, кто не переживает этого прямо сейчас — но переживал раньше или боится пережить в будущем. Это самый широкий охват. Каскадный репост, потому что каждая читательница думает: «это надо показать N»
+      </div>
+    </div>
+    <div class="data-row">
+      <div class="data-num" style="color:var(--teal-light)">III</div>
+      <div class="data-desc">
+        <strong>Реляционный разрыв — «это то, что я хочу сказать ему»</strong>
+        Стих формулирует то, что девушка давно хочет сказать конкретному человеку, но не решается или не умеет. Это самый целенаправленный репост — один человек, одному получателю. Но именно этот тип создаёт самые эмоционально насыщенные цепочки.
+      </div>
+    </div>
+
+    <div class="pull">
+      <p>«Идеальный стих для вирусности — это стих, в котором девушка узнаёт себя, видит человека из своей жизни, и понимает, что именно <em>так</em> хотела ему это сказать.»</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════ ЧАСТЬ III ════════════════════════ -->
+<div id="part3" class="part-break">
+  <div class="part-line"></div>
+  <span class="part-label">Часть третья</span>
+  <div class="part-title">Эмоциональная<br><em>архитектура вирусности</em></div>
+</div>
+
+<!-- ГЛАВА 6 -->
+<div id="ch6" class="stick"><span class="stick-ch">Гл.06</span><span class="stick-title">Карта эмоций: что распространяется</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 06</span>
+    <h2>Карта эмоций:<br><em>что распространяется,</em><br>а что тонет</h2>
+    <div class="chapter-deck">Исследование Wharton School (Berger & Milkman) проанализировало 7000 статей NYT и выяснило: вирусность контента напрямую зависит от типа эмоции. Не все эмоции одинаково «заразны».</div>
+
+    <p class="dropcap">Джона Бергер, профессор Уортонской школы бизнеса, провёл один из самых масштабных анализов вирусного контента. Его вывод — <strong>ключевой параметр вирусности это не тип эмоции, а её возбуждение (arousal)</strong>. Высоковозбуждающие эмоции — те, которые поднимают пульс и заставляют действовать — распространяются на 34% эффективнее, чем низковозбуждающие.</p>
+
+    <div class="emotion-grid">
+      <div class="emotion-row">
+        <span class="em-label">Восхищение</span>
+        <div class="em-bar"><div class="em-fill em-hi" style="width:92%"></div></div>
+        <span class="em-val">+92%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Гнев</span>
+        <div class="em-bar"><div class="em-fill em-hi" style="width:85%"></div></div>
+        <span class="em-val">+85%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Тревога</span>
+        <div class="em-bar"><div class="em-fill em-hi" style="width:72%"></div></div>
+        <span class="em-val">+72%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Радость</span>
+        <div class="em-bar"><div class="em-fill em-hi" style="width:68%"></div></div>
+        <span class="em-val">+68%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Грусть</span>
+        <div class="em-bar"><div class="em-fill em-mid" style="width:48%"></div></div>
+        <span class="em-val">+48%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Умиление</span>
+        <div class="em-bar"><div class="em-fill em-mid" style="width:42%"></div></div>
+        <span class="em-val">+42%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Удовлетворение</span>
+        <div class="em-bar"><div class="em-fill em-lo" style="width:18%"></div></div>
+        <span class="em-val">+18%</span>
+      </div>
+      <div class="emotion-row">
+        <span class="em-label">Скука/нейтраль</span>
+        <div class="em-bar"><div class="em-fill em-lo" style="width:5%"></div></div>
+        <span class="em-val">базис</span>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--parchment-dim);margin-top:0.5rem;font-style:italic;">Относительная вирусность по типу эмоции. Данные: Berger & Milkman, Wharton School</p>
+
+    <h3>Парадокс грусти: <span class="accent">почему она тоже вирусна</span></h3>
+
+    <p>Грусть — низковозбуждающая эмоция. По классификации Бергера, она должна распространяться плохо. Но поэзия нарушает это правило. Почему?</p>
+
+    <p>Грустные стихи о любви вирусны не потому что грустные — а потому что они провоцируют <strong>узнавание и идентификацию</strong>. Это механизм «разрыва артикуляции» в действии. Когда грусть сочетается с точным описанием личного опыта — активируется система самореференции мозга. Исследование UPenn показало: именно самореференция является лучшим предсказателем вирусности.</p>
+
+    <div class="insight">
+      <span class="insight-tag">Золотой принцип для поэта</span>
+      <p>Наиболее вирусная комбинация для любовной лирики: <strong>Грусть + точная самореференция + ощущение восхищения («как точно это сказано»)</strong>. Грусть создаёт глубину, самореференция запускает шэринг, восхищение мастерством слова добавляет «социальную валюту» для репоста.</p>
+    </div>
+
+    <h3>Амбивалентность — <span class="accent">секретное оружие</span></h3>
+
+    <p>Российские исследователи эмоционального контента ВКонтакте обнаружили: наиболее вирусные посты содержат <strong>амбивалентные эмоции</strong> — когда несколько чувств существуют одновременно. Грусть и нежность. Боль и благодарность. Страх потерять и радость от того, что было. Это психологически «правдивее» — и поэтому резонирует глубже.</p>
+
+    <p>Однозначно «грустный» или однозначно «радостный» стих — плоский. Стих, в котором одновременно больно и красиво — объёмный. Именно он создаёт то самое «послевкусие», которое заставляет сохранять и возвращаться.</p>
+  </div>
+</div>
+
+<!-- ГЛАВА 7 -->
+<div id="ch7" class="stick"><span class="stick-ch">Гл.07</span><span class="stick-title">Хронобиология шэринга</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 07</span>
+    <h2>Хронобиология<br><em>шэринга:</em> когда человек<br>максимально открыт</h2>
+    <div class="chapter-deck">Эмоциональная восприимчивость человека циклична. Она зависит от уровня кортизола, времени суток, социального контекста. Публиковать стихи «когда удобно» — значит терять половину потенциального охвата.</div>
+
+    <p class="dropcap">Кортизол — гормон стресса и бдительности — достигает пика ранним утром и постепенно снижается в течение дня. Вечером мозг переходит в режим «социальной обработки» — именно тогда люди склонны рефлексировать, анализировать отношения, думать о близких. Это не случайность — это биология. И это означает, что один и тот же стих, опубликованный в разное время, <strong>получит принципиально разную реакцию</strong>.</p>
+
+    <div class="chrono">
+      <div class="chrono-row">
+        <div class="ch-time">07:00–09:00</div>
+        <div>
+          <div class="ch-mood">Утренняя нежность</div>
+          <div class="ch-why">Человек только проснулся. Первые эмоции дня — мягкие, тёплые, ещё с оттенком сна. Кортизол начинает подниматься, но до рабочего пика далеко. Это время, когда люди думают о близких в позитивном ключе.</div>
+          <span class="ch-action">→ Публикуй стихи о любви, нежности, утреннем ощущении кого-то рядом</span>
+        </div>
+      </div>
+      <div class="chrono-row">
+        <div class="ch-time">12:00–14:00</div>
+        <div>
+          <div class="ch-mood">Обеденная пауза</div>
+          <div class="ch-why">Временный выход из рабочего режима. Человек берёт телефон и скроллит не целенаправленно, а просто «отдохнуть». Эмоциональная восприимчивость средняя. Хорошо заходит контент, который даёт небольшую эмоциональную разрядку.</div>
+          <span class="ch-action">→ Стихи чуть более лёгкие, но не банальные. Умиление, лёгкая тоска</span>
+        </div>
+      </div>
+      <div class="chrono-row">
+        <div class="ch-time">19:00–21:00</div>
+        <div>
+          <div class="ch-mood">Вечерняя рефлексия 🔥</div>
+          <div class="ch-why">Кортизол упал. Человек завершил дела, расслабился. Мозг переходит в режим социальной обработки — переосмысление дня, отношений, себя. Это <strong>пик эмоциональной открытости</strong>. Самый высокий охват и самый высокий процент репоста. Алгоритм ВК это знает — активность максимальна.</div>
+          <span class="ch-action">→ Главный слот. Самый сильный стих недели — сюда. Глубокие чувства, точная боль</span>
+        </div>
+      </div>
+      <div class="chrono-row">
+        <div class="ch-time">22:00–01:00</div>
+        <div>
+          <div class="ch-mood">Ночная уязвимость 🌙</div>
+          <div class="ch-why">Это особый режим. Одиночество острее, мысли глубже, защитные механизмы ниже. Люди чаще пишут сообщения, которые не отправят, чаще думают о расставаниях и потерях. Контент, опубликованный поздно ночью, попадает в максимально уязвимую аудиторию.</div>
+          <span class="ch-action">→ Стихи об одиночестве, ночных мыслях, тоске. Высокая резонантность, хранительницы</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <span class="insight-tag">Стратегия тайминга</span>
+      <p>Не «публикуй когда активна аудитория» — это поверхностно. Более точно: <strong>подбирай тему стиха под эмоциональное состояние аудитории в конкретное время суток</strong>. Вечером — боль и глубина. Утром — нежность и тепло. Ночью — одиночество и тоска. Алгоритм видит раннюю активность и масштабирует показы — но масштабирует в том же временном окне.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ГЛАВА 8 -->
+<div id="ch8" class="stick"><span class="stick-ch">Гл.08</span><span class="stick-title">Каскадная модель вирусности</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 08</span>
+    <h2>Каскадная<br><em>модель:</em> как работает<br>цепная реакция</h2>
+    <div class="chapter-deck">Вирусность — не взрыв. Это серия пороговых переходов. Социолог Марк Грановеттер описал механизм каскадов ещё в 1978-м — и он полностью применим к современным соцсетям.</div>
+
+    <p class="dropcap">Большинство людей думают о вирусности как о взрыве — один пост, который мгновенно захватывает всё. На самом деле вирусность работает как цепная реакция с порогами. У каждого человека есть <strong>порог шэринга</strong> — минимальное количество социального подтверждения, которое ему нужно увидеть, чтобы самому поделиться. Одни делятся сразу, другие — только когда видят, что это уже сделали многие. Задача — запустить первый слой, который запустит второй, который запустит третий.</p>
+
+    <div class="cascade">
+      <div class="cascade-tier ct-0">
+        <span class="ct-label">Слой 0 · Ядро · 20–50 человек</span>
+        <div class="ct-text">Твои самые лояльные подписчики. Низкий порог шэринга — они делятся почти всем. Их задача — создать первичный сигнал для алгоритма в первые 30–60 минут. <em>Ты должен их знать по именам и общаться с ними лично.</em></div>
+      </div>
+      <div class="cascade-arrow">↓</div>
+      <div class="cascade-tier ct-1">
+        <span class="ct-label">Слой 1 · Тёплая аудитория · 500–3000 человек</span>
+        <div class="ct-text">Подписчики с умеренным порогом. Они видят, что стих уже набирает реакции от ядра, видят комментарии «это про меня» — и решают поделиться сами. Алгоритм видит рост и начинает масштабировать показы за пределы подписчиков.</div>
+      </div>
+      <div class="cascade-arrow">↓</div>
+      <div class="cascade-tier ct-2">
+        <span class="ct-label">Слой 2 · Холодная аудитория · 10 000–100 000 человек</span>
+        <div class="ct-text">Незнакомые люди в «Для вас». Они видят контент с социальным доказательством — высоким числом реакций. Их порог шэринга высокий, но он преодолён, потому что они видят: <em>«это что-то особенное, раз столько людей реагирует»</em>. Это начало настоящей вирусности.</div>
+      </div>
+      <div class="cascade-arrow">↓</div>
+      <div class="cascade-tier ct-3">
+        <span class="ct-label">Слой 3 · Вирусный взрыв · 100 000+</span>
+        <div class="ct-text">Эффект снежного кома. На этом уровне контент распространяется сам — каждый новый репост открывает новый круг аудитории. Алгоритм переходит в режим «это горячо», показы ускоряются экспоненциально.</div>
+      </div>
+    </div>
+
+    <h3>Где ломается <span class="accent">большинство авторов</span></h3>
+
+    <p>Большинство авторов ломаются между слоем 0 и слоем 1. Ядро у них слабое или не активировано в первые критические часы. Алгоритм не получает достаточно сильного начального сигнала и не начинает масштабировать.</p>
+
+    <p><strong>Решение:</strong> твои 20–30 ядровых подписчиков должны знать о публикации заранее. Не через «просьбу лайкнуть» — через вовлечённость. Это люди, которые ждут твой контент, потому что ты с ними говоришь. Строй их как сообщество, а не как аудиторию.</p>
+
+    <div class="insight">
+      <span class="insight-tag">Ключевое понимание каскада</span>
+      <p>Первые 3 часа — не про охват. Они про <strong>запуск каскада</strong>. Твоя задача в первые 180 минут — любыми законными средствами активировать слой 0, чтобы их реакции дали сигнал алгоритму, что контент достоин масштабирования. После этого алгоритм сам делает работу.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════ ЧАСТЬ IV ════════════════════════ -->
+<div id="part4" class="part-break">
+  <div class="part-line"></div>
+  <span class="part-label">Часть четвёртая</span>
+  <div class="part-title">Механика ВК<br><em>изнутри</em></div>
+</div>
+
+<!-- ГЛАВА 9 -->
+<div id="ch9" class="stick"><span class="stick-ch">Гл.09</span><span class="stick-title">Три ленты ВК и граф рекомендаций</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 09</span>
+    <h2>ВК изнутри:<br><em>три системы,</em><br>одна платформа</h2>
+    <div class="chapter-deck">ВКонтакте — это не одна лента. Это три параллельные системы распространения контента, каждая из которых работает по своей логике. Профессионал использует все три.</div>
+
+    <p class="dropcap">С лета 2025 года ВКонтакте сделал принципиальный стратегический выбор: <strong>приоритет вирального охвата над подписным</strong>. Это значит, что платформа сознательно строит систему, в которой хороший контент идёт к людям без подписки. LiveDune назвал это «новой реальностью» — и это прямо меняет оптимальную стратегию для поэта.</p>
+
+    <div class="algo-layer al-a">
+      <span class="al-tag">Система 1 · Хронологическая лента</span>
+      <div class="al-title">Лента подписок в порядке времени</div>
+      <p>Классическая лента, которую пользователь переключает вручную. Показывает только подписки, строго по времени. Почти не используется активными пользователями. Для нового поэта с небольшой базой — наименее интересный канал.</p>
+    </div>
+
+    <div class="algo-layer al-b">
+      <span class="al-tag">Система 2 · Умная лента ★</span>
+      <div class="al-title">Персонализированный поток подписок</div>
+      <p>Та же база подписок, но отсортированная алгоритмом по предсказанному интересу пользователя. Новые посты не обязательно вверху — вверху то, что алгоритм считает наиболее ценным для этого человека прямо сейчас. Именно здесь начинается рост в пределах существующей аудитории.</p>
+    </div>
+
+    <div class="algo-layer al-c">
+      <span class="al-tag">Система 3 · «Для вас» 🔥</span>
+      <div class="al-title">Рекомендательная лента — главный двигатель роста</div>
+      <p>Контент для людей, которые на тебя <em>не подписаны</em>. Алгоритм анализирует «профиль интересов» пользователя и показывает ему контент похожих авторов, которых он ещё не знает. Сюда попасть = взрывной рост новой аудитории. С лета 2025 именно эта система получает приоритет в стратегии ВК.</p>
+    </div>
+
+    <h3>VK Клипы — <span class="accent">отдельная вселенная</span></h3>
+
+    <p>Лента Клипов работает принципиально иначе от всех трёх систем. В Клипах <strong>контент от подписчиков не в приоритете</strong>. Алгоритм подбирает ролики двумя способами: по темам, которые пользователь ранее смотрел, и по контенту, который понравился людям с похожим профилем.</p>
+
+    <p>Это означает: новый автор с нулём подписчиков теоретически может попасть в ленту Клипов миллиона человек на следующий день после первого видео. Единственное условие — ролик должен удерживать внимание. Алгоритм Клипов — чистая меритократия удержания.</p>
+
+    <div class="data-row">
+      <div class="data-num">3млрд</div>
+      <div class="data-desc"><strong>просмотров VK Клипов в день к концу 2025 года</strong> — рост на 42% за год. 73% пользователей ВК смотрят короткие видео. Клипы занимают 38.5% ленты у активных пользователей.</div>
+    </div>
+    <div class="data-row">
+      <div class="data-num">2×</div>
+      <div class="data-desc"><strong>охват Клипов против постов с фото</strong> по данным LiveDune (анализ 42 млн публикаций). Трансляции и Клипы — в топе форматов по охвату.</div>
+    </div>
+    <div class="data-row">
+      <div class="data-num">50%</div>
+      <div class="data-desc"><strong>охват подписчиков через VK Канал</strong> — недостижимая цифра в других форматах. С лета 2025 новый подписчик сообщества автоматически становится подписчиком канала.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ГЛАВА 10 -->
+<div id="ch10" class="stick"><span class="stick-ch">Гл.10</span><span class="stick-title">Иерархия сигналов алгоритма</span></div>
+
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 10</span>
+    <h2>Иерархия<br><em>сигналов:</em> что<br>алгоритм ценит больше всего</h2>
+    <div class="chapter-deck">Не все реакции равны. Алгоритм ВК взвешивает разные типы взаимодействия по-разному. Знать эту иерархию — значит понимать, какое действие аудитории строит твой охват быстрее всего.</div>
+
+    <p class="dropcap">Большинство авторов оптимизируют под лайки — самый видимый и самый простой сигнал. Это ошибка. Лайк — самый дешёвый сигнал для алгоритма, потому что он наименее затратен для пользователя. Алгоритм смотрит на то, что стоило усилия. Усилие = ценность.</p>
+
+    <ol class="signal-h">
+      <li>
+        <div class="sig-main">
+          <strong>Досмотр видео до конца</strong>
+          <p>Для Клипов — это самый весомый сигнал. Человек потратил <em>своё время</em> полностью на твой контент. Это нельзя сделать случайно. Алгоритм интерпретирует это как «контент настолько хорош, что удержал до конца».</p>
+          <span class="sig-why">→ Оптимизируй финал клипа так же тщательно, как начало</span>
+        </div>
       </li>
       <li>
-        <span class="give-num">05</span>
-        <div><strong>Повтори раз в 2–4 недели</strong> — формат нужно отработать. Первый конкурс разогреет, второй - взорвёт.</div>
+        <div class="sig-main">
+          <strong>Репост в личные сообщения или публичный</strong>
+          <p>Репост требует от человека активного решения: «я хочу, чтобы это увидел кто-то конкретный или моя аудитория». Это самое сильное выражение ценности контента. Для алгоритма — это сигнал «контент достоин распространения за пределы исходной аудитории».</p>
+          <span class="sig-why">→ Именно репосты запускают каскад. Оптимизируй под репост, а не под лайк</span>
+        </div>
+      </li>
+      <li>
+        <div class="sig-main">
+          <strong>Сохранение в «Сохранённое»</strong>
+          <p>«Я вернусь к этому» — мощный сигнал долгосрочной ценности. Алгоритм понимает: этот контент не просто понравился, он нужен. Для поэзии это особенно важно — стихи сохраняют, чтобы перечитывать.</p>
+          <span class="sig-why">→ Создавай стихи, к которым хочется возвращаться</span>
+        </div>
+      </li>
+      <li>
+        <div class="sig-main">
+          <strong>Комментарий (особенно длинный)</strong>
+          <p>Комментарий требует максимальных усилий из всех реакций. Написать хотя бы три слова — это вовлечённость. Длинный комментарий — это разговор. Алгоритм видит дискуссию и интерпретирует её как «здесь происходит что-то важное».</p>
+          <span class="sig-why">→ Закреплённый вопрос в первом комментарии стартует дискуссию в ключевые первые минуты</span>
+        </div>
+      </li>
+      <li>
+        <div class="sig-main">
+          <strong>Лайк и другие реакции</strong>
+          <p>Самый дешёвый для пользователя и потому наименее весомый для алгоритма сигнал. Важен как <em>порог</em> — без определённого числа лайков алгоритм не начнёт масштабирование. Но сам по себе не двигает охват так, как репосты и досмотры.</p>
+          <span class="sig-why">→ Не оптимизируй стихи под лайк. Оптимизируй под репост и досмотр</span>
+        </div>
+      </li>
+      <li>
+        <div class="sig-main">
+          <strong>Скорость первых реакций</strong>
+          <p>Не отдельный тип, но критически важный параметр. Первые 60–180 минут после публикации — «тестовое окно». Алгоритм показывает контент узкой группе и измеряет, насколько быстро растут реакции. Медленный рост = плохой сигнал. Взрывной рост = масштабирование.</p>
+          <span class="sig-why">→ Ядро должно реагировать в первые 30 минут. Это не просьба — это система</span>
+        </div>
       </li>
     </ol>
   </div>
+</div>
 
-  <div class="mech-card">
-    <div class="mech-badge rose">Виральный триггер</div>
-    <div class="mech-title">«Перешли тому, кто должен это прочитать»</div>
-    <p>Самая простая и самая работающая механика. В финале каждого клипа или поста — один призыв без альтернативы. Не «лайкни и подпишись». А — <strong>«перешли ему»</strong>.</p>
-    <p>Девушки пересылают стихи парням. Парни — своим девушкам. Алгоритм видит пересылки как сигнал ценности контента.</p>
-  </div>
 
-  <div class="mech-card">
-    <div class="mech-badge gold">Алгоритмический буст</div>
-    <div class="mech-title">Закреплённый комментарий — сразу после публикации</div>
-    <p>Опубликовал клип или пост — <strong>немедленно</strong> зайди и оставь первый комментарий сам. Задай вопрос: «Кому это напомнило что-то важное?» или «Какую строчку вы запомните?»</p>
-    <p>Это стартует дискуссию в первые минуты — именно тогда, когда алгоритм принимает решение о продвижении.</p>
-  </div>
+<!-- ════════════════════════ ЧАСТЬ V ════════════════════════ -->
+<div id="part5" class="part-break">
+  <div class="part-line"></div>
+  <span class="part-label">Часть пятая</span>
+  <div class="part-title">Практическая<br><em>система поэта</em></div>
+</div>
 
-  <div class="mech-card">
-    <div class="mech-badge">Ядро</div>
-    <div class="mech-title">20–30 «Послов» — твоё ядро вовлечённости</div>
-    <p>Найди через статистику 20–30 самых активных подписчиков. Это люди, которые лайкают и комментируют всё. Общайся с ними лично, упоминай их, отвечай на их комментарии первым.</p>
-    <p>Их активность в первые минуты после публикации — твой стартовый ракетный ускоритель для алгоритма.</p>
-  </div>
+<!-- ГЛАВА 11 -->
+<div id="ch11" class="stick"><span class="stick-ch">Гл.11</span><span class="stick-title">Практика: перевод теории в стратегию</span></div>
 
-  <div class="mech-card">
-    <div class="mech-badge rose">Взрывной рост</div>
-    <div class="mech-title">Посев в тематических пабликах</div>
-    <p>Найди паблики с девушками — про любовь, отношения, «стихи о чувствах», «красивые слова». Договорись о публикации своего клипа. Или просто попроси репост у паблика с 50–200K подписчиков.</p>
-    <p>Один репост от правильного сообщества = больше, чем неделя органического роста.</p>
-  </div>
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 11</span>
+    <h2>Практическая<br><em>система</em> поэта,<br>который побеждает</h2>
+    <div class="chapter-deck">Вся психология и алгоритмика из предыдущих глав — переведена в конкретные решения. Не советы. Система.</div>
 
-  <div class="mech-card">
-    <div class="mech-badge">Тренд</div>
-    <div class="mech-title">Шаблон — дай другим снять клип с твоим стихом</div>
-    <p>Смонтируй клип в виде шаблона ВК Клипов. Пользователи заменят кадры своими. Алгоритм видит активность вокруг оригинального клипа и продвигает его сильнее.</p>
-    <p>Стих-шаблон «Ты моя...» + инструкция «подставь своё имя» — классический ход для взрывного репоста.</p>
-  </div>
+    <h3><span class="accent">Уровень 1:</span> Клип как психологическая операция</h3>
 
-  <div class="mech-card">
-    <div class="mech-badge gold">Личный бренд</div>
-    <div class="mech-title">Серия вместо отдельных постов</div>
-    <p>«Стих #47» или «Цикл о ней» — нумерация создаёт ощущение пропущенного. Люди возвращаются. Алгоритм видит повторные визиты и включает контент в рекомендации постоянным зрителям.</p>
-  </div>
-</section>
+    <p>Каждый клип — это не «видео, где я читаю стих». Это <strong>спроектированная последовательность нейропсихологических событий</strong> в голове зрительницы. Понимая механизмы из предыдущих глав, ты проектируешь эту последовательность сознательно.</p>
 
-<!-- ══════════════════════════════ ГЛАВА 6: АУДИТОРИЯ ══════════════════════════════ -->
-<div class="chapter-mark" id="audience">
-  <div class="chapter-num">06</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">ЦА: Девушки</span>
+    <div class="prac">
+      <div class="prac-step">
+        <div class="pstep-num">1</div>
+        <div class="pstep-body">
+          <strong>Секунды 0–2: Амигдала-захват</strong>
+          <p>Твоя задача — за первые 2 секунды активировать миндалевидное тело зрительницы. Не представляться, не объяснять — <em>сразу в боль или в красоту</em>. Три рабочих метода: (a) самая острая строфа сразу — результат в лоб; (b) вопрос, который попадает в личное — «ты когда-нибудь чувствовала, что слова бессильны?»; (c) образ — крупный план твоих глаз, долгая пауза перед первым словом — интрига создаёт тревогу ожидания.</p>
+        </div>
+      </div>
+      <div class="prac-step">
+        <div class="pstep-num">2</div>
+        <div class="pstep-body">
+          <strong>Секунды 2–30: Зеркальные нейроны и воплощённая эмпатия</strong>
+          <p>Читаешь. Твой голос — главный инструмент. Зеркальные нейроны зрительницы копируют твоё эмоциональное состояние — она буквально чувствует то, что чувствуешь ты, если ты искренен. Субтитры — слова идут визуально параллельно с голосом, создавая двойной канал восприятия. Смена ракурса каждые 3–4 секунды поддерживает внимание без потери атмосферы.</p>
+        </div>
+      </div>
+      <div class="prac-step">
+        <div class="pstep-num">3</div>
+        <div class="pstep-body">
+          <strong>Финальные 3–5 секунд: Триггер шэринга</strong>
+          <p>Это самый важный момент для вирусности. Нужно спровоцировать одно конкретное действие. Не «подпишись» — это не активирует ни один из пяти мотивов NYT. Работают: «перешли тому, кому это нужно услышать» (мотив 1+3), «напиши в комментарии — кому это про тебя» (провоцирует комментаторшей), пауза и взгляд в камеру без слов — эмоциональный удар, который заставляет сохранять (мотив хранительницы).</p>
+        </div>
+      </div>
+      <div class="prac-step">
+        <div class="pstep-num gold">✦</div>
+        <div class="pstep-body">
+          <strong>Описание клипа: трёхслойная конструкция</strong>
+          <p>Слой 1 — первая строка стиха (хук в тексте, который виден до раскрытия описания). Слой 2 — одна фраза, которая закрывает разрыв артикуляции: «если тебе не хватало слов — вот они». Слой 3 — 3–5 хэштегов: один широкий (#стихи, #поэзия), один ситуативный (#расставание, #любовь), один брендовый (твой уникальный тег).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3><span class="accent">Уровень 2:</span> Строить ядро, а не аудиторию</h3>
+
+    <p>Разница между «аудиторией» и «ядром» — это разница между случайными прохожими и людьми, которые тебя ждут. Ядро — это 20–50 человек, которые реагируют на каждый пост в первые 30 минут. Они — твои рыночные маркеры, которые говорят алгоритму «это горячо».</p>
+
+    <p>Ядро строится только через личное взаимодействие. Отвечай на каждый комментарий в первые три месяца. Запоминай имена. Упоминай их. Задавай вопросы именно им. Они должны чувствовать себя не зрителями, а соавторами — людьми, ради которых ты пишешь.</p>
+
+    <h3><span class="accent">Уровень 3:</span> Контент-экосистема, а не посты</h3>
+
+    <p>Вирусность не строится отдельными постами. Она строится экосистемой, в которой каждый элемент усиливает другие. Клип создаёт охват → охват приходит на страницу → страница конвертирует в подписку → канал удерживает лояльных → сторис строят близость → трансляция создаёт сообщество → сообщество реагирует на следующий клип быстрее.</p>
+
+    <div class="insight">
+      <span class="insight-tag">Главное понимание</span>
+      <p>Ты не «публикуешь стихи». Ты строишь <strong>машину сочувствия</strong> — систему, которая находит девушек в момент их наибольшей эмоциональной открытости, даёт им слова для невысказанного, и провоцирует поделиться этими словами с теми, кому они нужны. Алгоритм ВК — это только транспорт. Психология — двигатель.</p>
+    </div>
   </div>
 </div>
 
-<div class="sticky-label">Глава 06 — Кто твоя аудитория и что её цепляет</div>
+<!-- ГЛАВА 12 -->
+<div id="ch12" class="stick"><span class="stick-ch">Гл.12</span><span class="stick-title">Ошибки, которые убивают вирусность изнутри</span></div>
 
-<section>
-  <h2>Девушки в ВК:<br><em>психология</em><br>репоста</h2>
+<div class="book">
+  <div class="chapter">
+    <span class="ch-num">Глава 12</span>
+    <h2>Ошибки, которые<br><em>убивают</em> вирусность<br>изнутри</h2>
+    <div class="chapter-deck">Это не технические ошибки — форматы и хэштеги. Это психологические и стратегические ошибки, которые разрушают вирусный потенциал даже самого сильного стиха.</div>
 
-  <p>Твоя целевая аудитория — девушки. Это значит, что нужно понять <strong>когда и почему</strong> девушка нажимает «поделиться». Поэзия — это уже идеальный контент для них. Тебе нужно только правильно упаковать.</p>
-
-  <div class="aud-grid">
-    <div class="aud-card">
-      <div class="aud-emoji">💔</div>
-      <div>
-        <div class="aud-title">«Это про меня»</div>
-        <p>Стих, который точно описывает её внутреннее состояние — расставание, тоску, любовь, ожидание. Она репостит, потому что это — её голос. Она нашла слова, которых у неё не было.</p>
-      </div>
+    <div class="error-item">
+      <div class="error-title">Ошибка 1: Оптимизация под лайк вместо репоста</div>
+      <p>Ты пишешь что-то красивое, что хочется отметить — но не что-то, что хочется кому-то переслать. Это разные задачи. Красота привлекает лайк. Точность болевой точки привлекает репост. Репост — то, что строит охват. Каждый стих должен иметь встроенный «адрес назначения» — понятный импульс «кому именно это переслать».</p>
     </div>
-    <div class="aud-card">
-      <div class="aud-emoji">📤</div>
-      <div>
-        <div class="aud-title">«Он должен это прочитать»</div>
-        <p>Стих-послание. Она отправляет его парню, другу, бывшему. Для этого контент должен быть в меру конкретным («ты» и «я») и в меру универсальным.</p>
-      </div>
+
+    <div class="error-item">
+      <div class="error-title">Ошибка 2: Слишком личное или слишком общее</div>
+      <p>Стих, который понятен только тебе самому — слишком личный. Стих, который подходит всем одинаково — слишком общий. Оба не создают разрыва артикуляции. Работает конкретная деталь, которая кажется личной, но является архетипической. «Я помню, как ты смеялась, когда думала, что никто не смотрит» — это одновременно личное и узнаваемое.</p>
     </div>
-    <div class="aud-card">
-      <div class="aud-emoji">🌙</div>
-      <div>
-        <div class="aud-title">«Это красиво — я хочу у себя»</div>
-        <p>Красивый визуал + красивые слова = сохранение. Девушки сохраняют эстетику. Сохранение — золотой сигнал алгоритму.</p>
-      </div>
+
+    <div class="error-item">
+      <div class="error-title">Ошибка 3: Хук после первых двух секунд</div>
+      <p>Начать клип с вступления, представления или медленного нарастания — это потеря 60–70% аудитории ещё до того, как они услышали первую строку. Мозг принял решение «неинтересно» за 1.5 секунды. Его не переубедить второй строфой, которую он уже не смотрит.</p>
     </div>
-    <div class="aud-card">
-      <div class="aud-emoji">🫂</div>
-      <div>
-        <div class="aud-title">«Подруга поймёт»</div>
-        <p>Стих о дружбе, верности, о том «когда больно, но ты рядом». Девушки тегают подруг. Один тег = один новый потенциальный подписчик.</p>
-      </div>
+
+    <div class="error-item">
+      <div class="error-title">Ошибка 4: Нет системы ядра</div>
+      <p>Публиковать в пустоту и ждать, что алгоритм сам «найдёт» аудиторию — это надежда на чудо. Алгоритм находит аудиторию, когда видит начальный сигнал. Без ядра, которое реагирует в первые 30 минут, сигнал слишком слаб и тест-окно алгоритма закрывается без масштабирования.</p>
     </div>
-  </div>
 
-  <div class="highlight">
-    <span class="highlight-head">Триггеры репоста — конкретные темы</span>
-    Расставание и боль потери · Ожидание, когда любишь, но не знаешь · Любовь с первого взгляда · «Я недостаточно хороша» → преодоление · Ночные мысли · «Если бы ты только знал» · Одиночество в толпе · Возвращение бывшего · Первая любовь
-  </div>
+    <div class="error-item">
+      <div class="error-title">Ошибка 5: Одна эмоция вместо амбивалентности</div>
+      <p>Стихи о «чистой» боли или «чистой» радости — плоские. Самые вирусные тексты содержат сосуществование противоположных чувств. Это психологически правдивее, а значит — резонантнее. Грусть и нежность, боль и благодарность, страх и надежда.</p>
+    </div>
 
-  <h3><span>⏰</span> Когда девушки активны в ВК</h3>
+    <div class="error-item">
+      <div class="error-title">Ошибка 6: Непоследовательность тематики</div>
+      <p>Алгоритм подобрал тебе аудиторию любителей романтической лирики. Ты вдруг публикуешь что-то совсем другое. Эта аудитория свайпает — рейтинг падает. Алгоритм перестаёт тебя продвигать. Менять тематику можно, но постепенно, давая алгоритму время перестроить подбор аудитории.</p>
+    </div>
 
-  <ul class="signal-list">
-    <li>
-      <span class="sig-icon">🌅</span>
-      <div>
-        <strong>7:00–9:00</strong> — утро, в транспорте или перед работой
-        <span class="sig-weight">Публикуй романтику, лирику на утро</span>
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">☀️</span>
-      <div>
-        <strong>13:00–15:00</strong> — обеденный перерыв
-        <span class="sig-weight">Хороший слот для длинных текстов</span>
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🌆</span>
-      <div>
-        <strong>19:00–22:00</strong> — главный прайм-тайм
-        <span class="sig-weight">Лучший слот для клипов — максимальный охват</span>
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🌙</span>
-      <div>
-        <strong>23:00–01:00</strong> — ночные мысли
-        <span class="sig-weight">Максимальная эмоциональная открытость. Стихи о одиночестве и боли — сюда.</span>
-      </div>
-    </li>
-  </ul>
-</section>
+    <div class="error-item">
+      <div class="error-title">Ошибка 7: Паника при волновых охватах</div>
+      <p>С лета 2025 охваты приходят волнами — на 2-й, 3-й, иногда 7-й день. Это не провал. Это новая норма. Авторы, которые удаляют «непопулярный» пост через 24 часа, теряют вторую и третью волну охвата. Дай посту минимум неделю.</p>
+    </div>
 
-<!-- ══════════════════════════════ ГЛАВА 7: КОНТЕНТ-ПЛАН ══════════════════════════════ -->
-<div class="chapter-mark" id="plan">
-  <div class="chapter-num">07</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Система</span>
+    <div class="footnote">Данные: LiveDune (42M публикаций), Wharton School (Berger & Milkman), NYT Customer Insight Group, University of Pennsylvania (Cosme & Falk), SMMplanner, eLama, tochkadostupa.pro, pressfeed.ru — май 2026.</div>
   </div>
 </div>
 
-<div class="sticky-label">Глава 07 — Контент-план: чем засеять поле</div>
-
-<section>
-  <h2>Недельный ритм<br>поэта-<em>машины</em></h2>
-
-  <p>Постоянство — это топливо алгоритма. Стабильные публикации сигнализируют платформе, что ты серьёзный автор. Алгоритм начинает планировать показ твоего контента заранее.</p>
-
-  <div class="week-grid">
-    <div class="day-row">
-      <div class="day-label">ПН</div>
-      <div class="day-content">
-        <span class="day-format fmt-clip">КЛИП</span>
-        <strong>Новый стих — видео</strong><br>
-        Основной контент недели. Клип с чтением. Публикуй в 19:00–21:00. Сразу закреплённый комментарий.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">ВТ</div>
-      <div class="day-content">
-        <span class="day-format fmt-story">СТОРИС</span>
-        <strong>Процесс / закулисье</strong><br>
-        Как рождался стих. Черновик. Первая строка. Это создаёт близость с аудиторией.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">СР</div>
-      <div class="day-content">
-        <span class="day-format fmt-post">ПОСТ</span>
-        <strong>Стих текстом + фото</strong><br>
-        Полный текст поэмы. Красивая вертикальная фото в качестве обложки. Хорошо индексируется в поиске.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">ЧТ</div>
-      <div class="day-content">
-        <span class="day-format fmt-story">СТОРИС</span>
-        <strong>Вопрос к аудитории</strong><br>
-        «Какая тема следующего стиха?» или «Напиши мне слово, и я напишу строчку». Это вовлекает.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">ПТ</div>
-      <div class="day-content">
-        <span class="day-format fmt-clip">КЛИП</span>
-        <strong>Тематический / трендовый клип</strong><br>
-        Следи за трендами Клипов. Адаптируй стих под популярный звук или формат. Пятница — активный день.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">СБ</div>
-      <div class="day-content">
-        <span class="day-format fmt-live">LIVE</span>
-        <strong>Живое чтение — трансляция</strong><br>
-        Читаешь подборку стихов вживую. Отвечаешь на комментарии. Алгоритм продвигает трансляции активно.
-      </div>
-    </div>
-    <div class="day-row">
-      <div class="day-label">ВС</div>
-      <div class="day-content">
-        <span class="day-format fmt-post">ПОСТ</span>
-        <strong>«Любимое» / ретроспектива</strong><br>
-        Лучший стих прошлой недели + твои мысли о нём. Или опрос — какой стих цепанул больше всего.
-      </div>
-    </div>
-  </div>
-
-  <div class="highlight">
-    <span class="highlight-head">Правило 80/20 для поэта</span>
-    80% контента — эмоциональный, личный, поэтический. 20% — интерактивный: вопросы, конкурсы, взаимодействие. Не превращай свою страницу в сухой репостинг цитат.
-  </div>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 8: ПОДПИСИ ══════════════════════════════ -->
-<div class="chapter-mark" id="caption">
-  <div class="chapter-num">08</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Текст вокруг стиха</span>
+<!-- МАНИФЕСТ -->
+<div id="manifesto" class="manifesto">
+  <h2>Ты не поэт<br>в интернете.<br><em>Ты архитектор<br>чужих слёз.</em></h2>
+  <p class="manifesto-body">Каждый стих — это психологическая конструкция. Она либо попадает в то место, где у человека нет слов, либо нет. Алгоритм только транспорт. Психология — сам стих.</p>
+  <div class="mf-quote">
+    «Виральность — это не когда тебя читают.<br>
+    Это когда твои слова становятся чужими словами.<br>
+    Когда девушка пересылает твой стих кому-то<br>
+    и думает: именно это я хотела сказать.<br>
+    Дай ей эти слова — и она сделает всё остальное сама.»
   </div>
 </div>
 
-<div class="sticky-label">Глава 08 — Подписи и описания, которые работают</div>
-
-<section>
-  <h2>Что писать<br><em>под</em> стихом</h2>
-
-  <p>Описание клипа или подпись к посту — это второй слой виральности. Правильная подпись добавляет контекст, провоцирует реакцию и помогает алгоритму понять тематику.</p>
-
-  <div class="caption-box">
-    <span class="caption-label">Формула подписи к клипу</span>
-    [Первая строка стиха как хук] + пустая строка + [Вопрос или призыв] + пустая строка + [3–5 хэштегов]
-  </div>
-
-  <div class="caption-box">
-    <span class="caption-label">Пример — подпись к клипу</span>
-    «Я написал это в 3 ночи, когда понял, что некоторых людей не возвращают словами»<br><br>
-    Кому это сейчас нужно услышать? Перешли.<br><br>
-    #стихи #любовь #поэзия #стихиолюбви #слова
-  </div>
-
-  <div class="caption-box">
-    <span class="caption-label">Пример — подпись к посту со стихом</span>
-    Написал это сегодня в 23:47. Ничего не исправлял.<br><br>
-    [стихотворение]<br><br>
-    Сохрани, чтобы перечитать когда-нибудь ночью. 🌙
-  </div>
-
-  <h3><span>🏷️</span> Хэштеги: стратегия</h3>
-  <p>3–5 хэштегов оптимально. Смешивай широкие и нишевые.</p>
-
-  <ul class="checklist">
-    <li><span class="check-icon">🔴</span><div><strong>Широкие</strong> (много конкуренции, но охват): #стихи #поэзия #любовь #стихиолюбви #красивыеслова</div></li>
-    <li><span class="check-icon">🟡</span><div><strong>Нишевые</strong> (меньше конкуренции, точная аудитория): #стихипролюбовь #лирика #словаизсердца #ночныемысли</div></li>
-    <li><span class="check-icon">🟢</span><div><strong>Форматные</strong> (алгоритмические подборки): #клипы #вкклипы #поэзиявк</div></li>
-  </ul>
-
-  <div class="warning">
-    <div class="warning-head">⚠ Не делай так</div>
-    <p>20+ хэштегов — это Instagram-мышление. В ВК это спам. Алгоритм ВК не поощряет такое. Пиши коротко — 3–5 штук, точно в тему.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════════════ ГЛАВА 9: ОШИБКИ ══════════════════════════════ -->
-<div class="chapter-mark" id="errors">
-  <div class="chapter-num">09</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Смерть охватов</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 09 — Что убивает твои охваты</div>
-
-<section>
-  <h2>Девять грехов,<br>которые <em>хоронят</em><br>контент</h2>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #1</div>
-    <div class="mech-title">Вотермарк другой платформы</div>
-    <p>TikTok лого, Reels-значок, YouTube Shorts — алгоритм ВК распознаёт это автоматически. Такой клип не попадёт в рекомендации. <strong>Снимай отдельно для ВК.</strong></p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #2</div>
-    <div class="mech-title">Ссылки на другие соцсети в описании клипа</div>
-    <p>ВК не продвигает контент, который уводит аудиторию. Ссылку на Instagram / TikTok в описании клипа = смерть охвата. Давай ссылки только в профиле.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #3</div>
-    <div class="mech-title">Нет хука в первые 2 секунды</div>
-    <p>Начинать клип с «Привет, я поэт Максим, сегодня хочу прочитать...» — потеря 70% аудитории сразу. Начинай с контента.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #4</div>
-    <div class="mech-title">Нерегулярность</div>
-    <p>Публиковал 2 недели каждый день, потом пропал на месяц — алгоритм теряет интерес к тебе как к автору. Лучше 3 раза в неделю, но стабильно.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #5</div>
-    <div class="mech-title">Резкая смена тематики</div>
-    <p>Алгоритм уже собрал тебе аудиторию любителей романтической поэзии. Если ты вдруг начнёшь постить политику или бизнес-контент — аудитория свайпнет, рейтинг аккаунта упадёт.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #6</div>
-    <div class="mech-title">Вертикальное видео в горизонтальном формате</div>
-    <p>Клипы — только вертикаль 9:16. Горизонтальное видео в формате Клипов = снижение охвата. Разрешение ниже 720p — алгоритм ранжирует ниже.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #7</div>
-    <div class="mech-title">Нет субтитров</div>
-    <p>60% просматривают видео без звука — в транспорте, на работе, ночью. Без субтитров они не поймут стих и свайпнут. Низкое удержание = алгоритм не продвигает.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #8</div>
-    <div class="mech-title">Паника из-за волновых охватов</div>
-    <p>С лета 2025 охваты приходят волнами — на 2–7 день. Это норма. Не удаляй «провальный» пост через сутки. Дай ему неделю.</p>
-  </div>
-
-  <div class="mech-card">
-    <div class="mech-badge rose">Грех #9</div>
-    <div class="mech-title">Только призыв «лайкни и подпишись»</div>
-    <p>Это самый слабый CTA. Люди к нему иммунны. Замени на эмоциональный призыв: «перешли», «сохрани», «напиши в комментарии одно слово».</p>
-  </div>
-</section>
-
-<div class="poem-quote">
-«Алгоритм не чувствует боли.<br>Но он точно знает,<br>кто заставил людей остановиться<br>и не свайпнуть дальше.»
-</div>
-
-<!-- ══════════════════════════════ ФИНАЛ ══════════════════════════════ -->
-<div class="chapter-mark" id="finale">
-  <div class="chapter-num">10</div>
-  <div class="chapter-line"></div>
-  <div class="chapter-title-wrap">
-    <span class="chapter-tag">Манифест</span>
-  </div>
-</div>
-
-<div class="sticky-label">Глава 10 — Итоговая система</div>
-
-<section>
-  <h2>Система поэта,<br>который <em>захватит</em><br>ВКонтакте</h2>
-
-  <div class="highlight">
-    <span class="highlight-head">Вся система в одном абзаце</span>
-    Снимаешь клип 20–40 секунд нативно в ВК, без вотермарков, с субтитрами. Хук — первые 2 секунды — острая строка или вопрос. Читаешь стих бархатным голосом на красивом фоне. В финале — эмоциональный призыв «перешли тому». В описании — первая строка стиха + вопрос + 3 хэштега. Публикуешь в 19:00–21:00. Сразу пишешь закреплённый комментарий с вопросом. Раз в 2 недели — розыгрыш именного стиха. Так — 7 дней в неделю, стабильно.
-  </div>
-
-  <h3><span>🗺️</span> Дорожная карта: первые 90 дней</h3>
-
-  <ul class="signal-list">
-    <li>
-      <span class="sig-icon">📅</span>
-      <div>
-        <strong>Дни 1–7: Настройка</strong>
-        <span class="sig-weight">Базовые шаги</span>
-        Оформи профиль с фото и описанием. Запиши первые 3 клипа. Публикуй каждый день. Отвечай на каждый комментарий.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🔥</span>
-      <div>
-        <strong>Дни 7–30: Первый розыгрыш</strong>
-        <span class="sig-weight">Первый взрыв</span>
-        После первой недели запусти конкурс на именное стихотворение. Посей клипы в 3–5 тематических пабликах про любовь и стихи.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">📈</span>
-      <div>
-        <strong>Дни 30–60: Анализ и масштаб</strong>
-        <span class="sig-weight">Данные решают</span>
-        Смотри статистику: какой клип дал больше всего охвата? Делай больше такого. Найди лучший временной слот именно для твоей аудитории.
-      </div>
-    </li>
-    <li>
-      <span class="sig-icon">🌊</span>
-      <div>
-        <strong>Дни 60–90: Коллаборации</strong>
-        <span class="sig-weight">Чужая аудитория</span>
-        Найди блогеров, которые читают стихи других. Предложи совместный клип. Каждый коллаб = доступ к чужой аудитории.
-      </div>
-    </li>
-  </ul>
-</section>
-
-<div class="finale">
-  <h2>Стихи —<br><em>шедевры.</em><br>Система —<br>в твоих руках.</h2>
-  <p>Алгоритм не решает, хорошее ли стихотворение. Решает — остановился ли человек. А ты знаешь, как останавливать.</p>
-  <div class="finale-manifesto">
-    Качественный контент + правильная упаковка + стабильный ритм + механики репоста = вирусность, которую не остановить.
-  </div>
-</div>
-
-<footer>
-  ВК Виральная Машина · 1 мая 2026 · Сделано для поэта · Данные: LiveDune, Pressfeed, eLama, SMMplanner, tochkadostupa.pro
-</footer>
+<footer>Машина Сочувствия · ВК Вирусность · Май 2026 · Данные: Wharton, NYT, UPenn, LiveDune, eLama, SMMplanner</footer>
 
 <script>
 // Progress bar
 window.addEventListener('scroll', () => {
-  const doc = document.documentElement;
-  const scrollTop = doc.scrollTop || document.body.scrollTop;
-  const scrollHeight = doc.scrollHeight - doc.clientHeight;
-  const progress = (scrollTop / scrollHeight) * 100;
-  document.getElementById('progress').style.width = progress + '%';
+  const s = document.documentElement, scrollTop = s.scrollTop, scrollH = s.scrollHeight - s.clientHeight;
+  document.getElementById('progress-bar').style.width = (scrollTop/scrollH*100)+'%';
 });
 
-// Animate bars when in view
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.bar-fill').forEach(bar => {
-        bar.style.animation = 'none';
-        bar.offsetHeight;
-        bar.style.animation = 'barGrow 1.2s ease-out forwards';
+// Animate emotion bars on intersection
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.em-fill').forEach(b => {
+        b.style.animation = 'none'; void b.offsetHeight;
+        b.style.animation = 'grow 1.4s ease-out forwards';
       });
     }
   });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.metric-bar-wrap').forEach(el => observer.observe(el));
+}, {threshold: 0.3});
+document.querySelectorAll('.emotion-grid').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
