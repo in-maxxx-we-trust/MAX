@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Max Musk — Theory of Everything</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23E31D2B'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-family='Arial, sans-serif' font-weight='bold' font-size='70' fill='white' dominant-baseline='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+:root {
+  --ink:    #0D0D0D;
+  --ink2:   #1A1A1A;
+  --ink3:   #2A2A2A;
+  --paper:  #F5F2EB;
+  --paper2: #EDE9E0;
+  --paper3: #E4DFD4;
+  --red:    #C8201A;
+  --red2:   #E8291F;
+  --blue:   #0A2E6E;
+  --blue2:  #1040A0;
+  --gold:   #B8860B;
+  --gold2:  #D4A020;
+  --white:  #FFFFFF;
+  --dim:    rgba(13,13,13,0.55);
+  --faint:  rgba(13,13,13,0.12);
+
+  --display: 'Bebas Neue', sans-serif;
+  --serif:   'Libre Baskerville', Georgia, serif;
+  --sans:    'DM Sans', sans-serif;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════
+   FLAG STRIPE — Stars & Stripes accent
+═══════════════════════════════════════ */
+.flag-bar {
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    #B22234 0px, #B22234 7.69%,
+    #FFFFFF 7.69%, #FFFFFF 15.38%,
+    #B22234 15.38%, #B22234 23.07%,
+    #FFFFFF 23.07%, #FFFFFF 30.76%,
+    #B22234 30.76%, #B22234 38.45%,
+    #FFFFFF 38.45%, #FFFFFF 46.14%,
+    #B22234 46.14%, #B22234 53.83%,
+    #FFFFFF 53.83%, #FFFFFF 61.52%,
+    #B22234 61.52%, #B22234 69.21%,
+    #FFFFFF 69.21%, #FFFFFF 76.9%,
+    #B22234 76.9%, #B22234 84.59%,
+    #FFFFFF 84.59%, #FFFFFF 92.28%,
+    #B22234 92.28%, #B22234 100%
+  );
+  position: sticky; top: 0; z-index: 200;
+}
+
+/* ═══════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════ */
+.topnav {
+  position: sticky; top: 5px; z-index: 199;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 48px;
+}
+.topnav-logo {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+.topnav-logo span { color: var(--red2); }
+.topnav-domain {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ═══════════════════════════════════════
+   HERO 1 — THE OPENING SHOT
+═══════════════════════════════════════ */
+.hero1 {
+  background: var(--ink);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero1-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 30%, rgba(200,32,26,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 80% at 10% 90%, rgba(10,46,110,0.10) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* American stars pattern subtle */
+.hero1-stars {
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 200px;
+  opacity: 0.04;
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.hero1-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; width: 100%; }
+
+.h1-overline {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--red2);
+  margin-bottom: 24px;
+}
+
+.h1-title {
+  font-family: var(--display);
+  font-size: clamp(64px, 14vw, 160px);
+  line-height: 0.88;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+}
+
+.h1-title .line1 { display: block; color: var(--white); }
+.h1-title .line2 { display: block; color: var(--red2); }
+.h1-title .line3 { display: block; color: rgba(255,255,255,0.2); font-size: 0.5em; letter-spacing: 8px; margin-top: 8px; }
+
+.h1-divider {
+  width: 60px; height: 3px;
+  background: var(--red2);
+  margin: 32px 0;
+}
+
+.h1-deck {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.h1-meta {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* 4-claim grid */
+.h1-claims {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+.h1-claim {
+  background: rgba(255,255,255,0.03);
+  padding: 18px 16px;
+}
+.h1-claim .c-src {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold2);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.h1-claim p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+}
+.h1-claim p strong { color: var(--white); }
+
+.h1-scroll {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   HERO 2 — THE PERSONAL STATEMENT
+═══════════════════════════════════════ */
+.hero2 {
+  background: var(--paper2);
+  border-top: 4px solid var(--red);
+  border-bottom: 4px solid var(--blue);
+  padding: 80px 24px;
+}
+.hero2-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+.h2-tag {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.h2-headline {
+  font-family: var(--display);
+  font-size: clamp(36px, 7vw, 72px);
+  line-height: 0.95;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+.h2-headline em { color: var(--red); font-style: normal; }
+
+.h2-body {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.85;
+  color: var(--dim);
+}
+.h2-body strong { color: var(--ink); }
+
+.h2-name-block {
+  border-left: 3px solid var(--red);
+  padding-left: 20px;
+  margin: 8px 0;
+}
+.h2-name {
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.h2-name-sub {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════ */
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.wrap-wide { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+.section { padding: 72px 24px; }
+.dark-section { background: var(--ink); color: var(--white); }
+.mid-section  { background: var(--paper2); }
+.light-section { background: var(--paper); }
+.blue-section  { background: var(--blue); color: var(--white); }
+.red-section   { background: var(--red); color: var(--white); }
+
+.sec-tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.dark-section .sec-tag { color: var(--gold2); }
+.blue-section .sec-tag { color: rgba(255,255,255,0.6); }
+.red-section  .sec-tag { color: rgba(255,255,255,0.7); }
+
+.sec-h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 6vw, 60px);
+  line-height: 1;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  color: var(--ink);
+}
+.dark-section .sec-h2 { color: var(--white); }
+.blue-section .sec-h2 { color: var(--white); }
+.red-section  .sec-h2 { color: var(--white); }
+.sec-h2 em { color: var(--red2); font-style: normal; }
+.dark-section .sec-h2 em { color: var(--gold2); }
+
+.body-p {
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: var(--dim);
+  line-height: 1.85;
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+.dark-section .body-p { color: rgba(255,255,255,0.6); }
+.body-p strong { color: var(--ink); }
+.dark-section .body-p strong { color: var(--white); }
+
+hr.rule {
+  border: none;
+  height: 1px;
+  background: var(--faint);
+  margin: 0;
+}
+.dark-section hr.rule { background: rgba(255,255,255,0.08); }
+
+/* ═══════════════════════════════════════
+   PULL QUOTE
+═══════════════════════════════════════ */
+.pull-quote {
+  border-left: 4px solid var(--red);
+  padding: 24px 24px;
+  margin: 36px 0;
+  background: var(--paper3);
+}
+.dark-section .pull-quote {
+  background: rgba(255,255,255,0.04);
+  border-color: var(--gold2);
+}
+.blue-section .pull-quote {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.5);
+}
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.dark-section .pull-quote p { color: rgba(255,255,255,0.9); }
+.blue-section .pull-quote p { color: rgba(255,255,255,0.95); }
+.pull-quote cite {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+.dark-section .pull-quote cite { color: rgba(255,255,255,0.35); }
+
+/* ═══════════════════════════════════════
+   NUMBERED LIST
+═══════════════════════════════════════ */
+.num-list { list-style: none; margin: 32px 0; counter-reset: nl; }
+.num-list li {
+  counter-increment: nl;
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--faint);
+  align-items: flex-start;
+}
+.dark-section .num-list li { border-bottom-color: rgba(255,255,255,0.08); }
+.num-list li::before {
+  content: counter(nl, decimal-leading-zero);
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--red);
+  min-width: 36px;
+  line-height: 1.1;
+}
+.dark-section .num-list li::before { color: var(--gold2); }
+.num-list li p {
+  font-size: clamp(14px, 1.7vw, 16px);
+  color: var(--dim);
+  line-height: 1.75;
+}
+.dark-section .num-list li p { color: rgba(255,255,255,0.6); }
+.num-list li p strong { color: var(--ink); }
+.dark-section .num-list li p strong { color: var(--white); }
+
+/* ═══════════════════════════════════════
+   SCIENCE CARDS
+═══════════════════════════════════════ */
+.sci-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin: 36px 0;
+  background: var(--faint);
+}
+.dark-section .sci-grid { background: rgba(255,255,255,0.06); }
+
+.sci-card {
+  background: var(--paper);
+  padding: 28px 24px;
+  border-top: 3px solid transparent;
+}
+.dark-section .sci-card { background: var(--ink2); }
+.sci-card:nth-child(odd)  { border-color: var(--red); }
+.sci-card:nth-child(even) { border-color: var(--blue); }
+.sci-card .sc-src {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sci-card h4 {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.dark-section .sci-card h4 { color: var(--white); }
+.sci-card p {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.75;
+}
+.dark-section .sci-card p { color: rgba(255,255,255,0.55); }
+.sci-card p strong { color: var(--ink); }
+.dark-section .sci-card p strong { color: var(--gold2); }
+
+/* ═══════════════════════════════════════
+   STAT BOXES
+═══════════════════════════════════════ */
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin: 32px 0;
+  background: var(--faint);
+}
+.stat-box {
+  background: var(--paper);
+  padding: 24px 20px;
+  text-align: center;
+}
+.dark-section .stat-box { background: var(--ink2); }
+.stat-num {
+  font-family: var(--display);
+  font-size: 48px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.dark-section .stat-num { color: var(--gold2); }
+.stat-lbl {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.dark-section .stat-lbl { color: rgba(255,255,255,0.35); }
+
+/* ═══════════════════════════════════════
+   TABLE
+═══════════════════════════════════════ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  font-size: 13px;
+}
+.data-table th {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--faint);
+  background: var(--paper3);
+}
+.dark-section .data-table th { background: var(--ink3); color: var(--gold2); border-color: rgba(255,255,255,0.08); }
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--faint);
+  color: var(--dim);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.dark-section .data-table td { border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.55); }
+.data-table td:first-child { font-weight: 600; color: var(--ink); }
+.dark-section .data-table td:first-child { color: var(--white); }
+
+/* ═══════════════════════════════════════
+   CREDENTIAL ROWS
+═══════════════════════════════════════ */
+.cred-list { margin: 32px 0; }
+.cred-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--faint);
+  align-items: flex-start;
+}
+.dark-section .cred-item { border-color: rgba(255,255,255,0.08); }
+.cred-icon { font-size: 22px; min-width: 32px; padding-top: 2px; }
+.cred-body h4 {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.dark-section .cred-body h4 { color: var(--white); }
+.cred-body p {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.65;
+}
+.dark-section .cred-body p { color: rgba(255,255,255,0.5); }
+
+/* ═══════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════ */
+.timeline { position: relative; padding-left: 28px; margin: 36px 0; }
+.timeline::before {
+  content:''; position: absolute;
+  left: 6px; top: 0; bottom: 0;
+  width: 1px; background: var(--faint);
+}
+.dark-section .timeline::before { background: rgba(255,255,255,0.1); }
+.tl-item { position: relative; margin-bottom: 36px; }
+.tl-item::before {
+  content:''; position: absolute;
+  left: -26px; top: 6px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--paper);
+}
+.dark-section .tl-item::before { border-color: var(--ink); }
+.tl-item.gold-dot::before { background: var(--gold); }
+.tl-year {
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--gold); margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.tl-item h4 {
+  font-family: var(--serif);
+  font-size: 17px; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px;
+}
+.dark-section .tl-item h4 { color: var(--white); }
+.tl-item p {
+  font-size: 13px; color: var(--dim); line-height: 1.7;
+}
+.dark-section .tl-item p { color: rgba(255,255,255,0.5); }
+
+/* ═══════════════════════════════════════
+   LETTER BLOCK
+═══════════════════════════════════════ */
+.letter-block {
+  border: 1px solid var(--faint);
+  padding: 40px 32px;
+  margin: 36px 0;
+  position: relative;
+  background: var(--paper);
+}
+.dark-section .letter-block {
+  background: var(--ink2);
+  border-color: rgba(255,255,255,0.1);
+}
+.letter-block::before {
+  content: attr(data-label);
+  font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--red);
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: var(--paper); padding: 0 16px;
+  white-space: nowrap;
+}
+.dark-section .letter-block::before { background: var(--ink2); color: var(--gold2); }
+
+.letter-to {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2vw, 20px);
+  font-style: italic;
+  color: var(--dim);
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--faint);
+  text-align: center;
+}
+.dark-section .letter-to { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.08); }
+
+.letter-body p {
+  font-size: clamp(14px, 1.7vw, 16px);
+  color: var(--dim); line-height: 1.9;
+  margin-bottom: 18px;
+}
+.dark-section .letter-body p { color: rgba(255,255,255,0.6); }
+.letter-body p strong { color: var(--ink); }
+.dark-section .letter-body p strong { color: var(--white); }
+.letter-body p em { color: var(--red); font-style: italic; }
+
+.letter-sig {
+  margin-top: 28px; padding-top: 20px;
+  border-top: 1px solid var(--faint);
+  font-size: 12px; letter-spacing: 1px;
+  color: var(--dim); line-height: 2;
+}
+.dark-section .letter-sig { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); }
+.letter-sig strong { display: block; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+.dark-section .letter-sig strong { color: var(--white); }
+
+/* ═══════════════════════════════════════
+   CLIFFHANGER / END HERO
+═══════════════════════════════════════ */
+.end-hero {
+  background: var(--ink);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.end-hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(10,46,110,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(200,32,26,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.end-hero-inner { position: relative; z-index: 2; max-width: 700px; }
+
+.eh-overline {
+  font-size: 10px; letter-spacing: 5px;
+  color: var(--gold2); text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.eh-title {
+  font-family: var(--display);
+  font-size: clamp(48px, 12vw, 110px);
+  line-height: 0.9;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+.eh-title .et1 { display: block; color: rgba(255,255,255,0.2); }
+.eh-title .et2 { display: block; color: var(--white); }
+.eh-title .et3 { display: block; color: var(--red2); }
+
+.eh-body {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2.5vw, 21px);
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.75;
+  margin-bottom: 48px;
+}
+
+.eh-cliff {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 32px 28px;
+  margin-bottom: 48px;
+  text-align: left;
+}
+.eh-cliff-label {
+  font-size: 9px; letter-spacing: 4px;
+  color: var(--red2); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.eh-cliff-items { list-style: none; }
+.eh-cliff-items li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  display: flex; gap: 12px;
+}
+.eh-cliff-items li::before {
+  content: '→';
+  color: var(--gold2);
+  flex-shrink: 0;
+}
+.eh-cliff-items li strong { color: var(--white); }
+
+.eh-love {
+  font-family: var(--display);
+  font-size: clamp(28px, 6vw, 56px);
+  letter-spacing: 4px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.eh-love-sub {
+  font-size: 13px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+/* social links */
+.social-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.social-link {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+.social-link:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
+.social-link .sl-icon { font-size: 16px; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.footer {
+  background: #080808;
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 4px solid var(--red);
+}
+.footer-logo {
+  font-family: var(--display);
+  font-size: 32px;
+  color: var(--white);
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+.footer-logo span { color: var(--red2); }
+.footer-domain {
+  font-size: 11px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 20px;
+}
+.footer p {
+  font-size: 11px; color: rgba(255,255,255,0.2);
+  line-height: 2; letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════
+   FAQ — STATIC (no JS expand)
+═══════════════════════════════════════ */
+.faq-list { margin: 32px 0; }
+.faq-item {
+  border-bottom: 1px solid var(--faint);
+  padding: 24px 0;
+}
+.dark-section .faq-item { border-color: rgba(255,255,255,0.08); }
+.faq-q {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.8vw, 17px);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.dark-section .faq-q { color: var(--white); }
+.faq-a {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.8;
+}
+.dark-section .faq-a { color: rgba(255,255,255,0.5); }
+.faq-a strong { color: var(--ink); }
+.dark-section .faq-a strong { color: var(--white); }
+
+/* ═══════════════════════════════════════
+   MINISTRY GRID
+═══════════════════════════════════════ */
+.min-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--faint);
+  margin: 32px 0;
+}
+.dark-section .min-grid { background: rgba(255,255,255,0.07); }
+.min-card {
+  background: var(--paper);
+  padding: 24px 20px;
+  border-top: 2px solid transparent;
+}
+.dark-section .min-card { background: var(--ink2); }
+.min-card:nth-child(odd)  { border-top-color: var(--red); }
+.min-card:nth-child(even) { border-top-color: var(--blue); }
+.min-card .mi-icon { font-size: 20px; margin-bottom: 10px; }
+.min-card h4 {
+  font-family: var(--serif);
+  font-size: 15px; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+}
+.dark-section .min-card h4 { color: var(--white); }
+.min-card p { font-size: 12px; color: var(--dim); line-height: 1.65; }
+.dark-section .min-card p { color: rgba(255,255,255,0.45); }
+
+/* ═══════════════════════════════════════
+   FORMULA BLOCK
+═══════════════════════════════════════ */
+.formula-block {
+  background: var(--ink);
+  color: var(--white);
+  padding: 40px 28px;
+  margin: 36px 0;
+  text-align: center;
+}
+.formula-text {
+  font-family: var(--display);
+  font-size: clamp(28px, 6vw, 52px);
+  letter-spacing: 4px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.formula-text .f-plus { color: var(--gold2); }
+.formula-text .f-eq   { color: var(--red2); }
+.formula-sub {
+  font-size: 12px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   CHAPTER BANNER
+═══════════════════════════════════════ */
+.chapter-banner {
+  background: var(--red);
+  padding: 48px 24px;
+  text-align: center;
+}
+.cb-num {
+  font-family: var(--display);
+  font-size: 120px;
+  line-height: 0.9;
+  color: rgba(255,255,255,0.08);
+  display: block;
+  margin-bottom: -30px;
+}
+.cb-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 6vw, 60px);
+  color: var(--white);
+  letter-spacing: 2px;
+  position: relative; z-index: 1;
+}
+.cb-sub {
+  font-size: 13px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.chapter-banner-blue { background: var(--blue); }
+.chapter-banner-dark { background: var(--ink); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .h1-claims  { grid-template-columns: 1fr; }
+  .stats-row  { grid-template-columns: 1fr 1fr; }
+  .min-grid   { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- FLAG -->
+<div class="flag-bar"></div>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="topnav-logo">MAX <span>MUSK</span></div>
+  <div class="topnav-domain">maxmusk.wtf</div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO 1 — OPENING SHOT
+══════════════════════════════════════════ -->
+<section class="hero1">
+  <div class="hero1-bg"></div>
+  <div class="hero1-stars"></div>
+  <div class="hero1-inner">
+
+    <div class="h1-overline">maxmusk.wtf · Saint Petersburg, Russia · 2026</div>
+
+    <h1 class="h1-title">
+      <span class="line1">THEORY</span>
+      <span class="line2">OF EVERYTHING</span>
+      <span class="line3">A COMPLETE SCIENTIFIC EXPLANATION OF REALITY</span>
+    </h1>
+
+    <div class="h1-divider"></div>
+
+    <p class="h1-deck">
+      The universe isn't random. Consciousness isn't a coincidence.<br>
+      And your fear? It's a removable filter — not who you are.<br>
+      <em style="color:rgba(255,255,255,0.5);">Science finally caught up. This is the unified picture.</em>
+    </p>
+
+    <div class="h1-meta">
+      BY MAX MUSK · PHYSICIST · PSYCHOLOGIST · RESEARCHER
+    </div>
+
+    <div class="h1-claims">
+      <div class="h1-claim">
+        <div class="c-src">Neuroscience · 2024–2025</div>
+        <p><strong>Consciousness is quantum.</strong> Proven in lab conditions. Not theory — experiment.</p>
+      </div>
+      <div class="h1-claim">
+        <div class="c-src">Harvard · DASH 2024</div>
+        <p><strong>Suppressing emotions causes cancer.</strong> 1.7× mortality increase. Documented.</p>
+      </div>
+      <div class="h1-claim">
+        <div class="c-src">JWST · 2025–2026</div>
+        <p><strong>The standard cosmological model is broken.</strong> Galaxies that "can't exist" — do.</p>
+      </div>
+      <div class="h1-claim">
+        <div class="c-src">Mathematics</div>
+        <p><strong>Ancient civilizations encoded May 2027.</strong> Sumerian, Hindu, Babylonian — all converge.</p>
+      </div>
+    </div>
+
+    <div class="h1-scroll">↓ &nbsp; SCROLL TO READ &nbsp; ↓</div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     HERO 2 — PERSONAL STATEMENT
+══════════════════════════════════════════ -->
+<section class="hero2">
+  <div class="hero2-inner wrap">
+    <div class="h2-tag">A message from the author</div>
+    <h2 class="h2-headline">
+      MY NAME IS<br>
+      <em>MAX MUSK.</em><br>
+      I'M FROM RUSSIA.<br>
+      AND I LOVE AMERICA.
+    </h2>
+    <p class="h2-body">
+      I love Russia. I love the United States. I love the whole planet — every culture, every language, every person trying to figure out why they're here. This website exists because <strong>the answer to that question is finally ready.</strong>
+    </p>
+    <p class="h2-body">
+      You're reading this because a Russian physicist who has never been to America — who grew up watching American films, learning from American scientists, dreaming of American openness — built something for you. <strong>Out of pure love.</strong> No sales pitch. No subscription. No agenda except one: you deserve to understand how reality works.
+    </p>
+    <div class="h2-name-block">
+      <div class="h2-name">MAX MUSK</div>
+      <div class="h2-name-sub">Born in Saint Petersburg · Physicist · Psychologist · Human</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 1 — THE GAME OF REALITY
+══════════════════════════════════════════ -->
+<div class="chapter-banner">
+  <span class="cb-num">01</span>
+  <div class="cb-title">THE GAME OF REALITY</div>
+  <div class="cb-sub">What's actually going on here</div>
+</div>
+
+<div class="light-section section">
+<div class="wrap">
+  <div class="sec-tag">Foundation</div>
+  <h2 class="sec-h2">REALITY IS A <em>FILM</em><br>YOU'RE ALREADY IN</h2>
+
+  <p class="body-p">
+    Here's the most liberating idea in physics, and nobody is saying it plainly enough: <strong>the past is fixed experience, and the future is already filmed.</strong> You are not a passive viewer — you are a character navigating a completed story. Your consciousness is the camera moving through it.
+  </p>
+
+  <p class="body-p">
+    This isn't mysticism. Hugh Everett's Many-Worlds Interpretation of quantum mechanics mathematically requires that every possible outcome already exists in the structure of the wave function. The "block universe" model in physics treats all moments in time as equally real — past, present, and future are all there. <strong>Your "now" is just your position on the film reel.</strong>
+  </p>
+
+  <div class="pull-quote">
+    <p>When you know fate exists, you stop blaming the past. The past becomes experience. The future becomes a movie you haven't seen yet — but it's already great.</p>
+    <cite>— Max Musk · Theory of Everything · 2026</cite>
+  </div>
+
+  <p class="body-p">
+    The "Bayesian brain" model in cognitive neuroscience confirms this from a different angle: your nervous system constantly generates predictions about incoming data, minimizing prediction error. Free will, as we experience it, is the sensation of navigating between adjacent realities — real, but not what we think it is.
+  </p>
+
+  <p class="body-p">
+    <strong>What this means for you today:</strong> when something painful happened in your past, it could not have happened differently. That's not resignation — that's freedom. You stop carrying guilt and regret about a fixed frame of film. You redirect all that energy into the present frame — which is the only one you can actually influence.
+  </p>
+
+  <div class="formula-block">
+    <div class="formula-text">
+      LOVE <span class="f-plus">+</span> INTELLIGENCE <span class="f-eq">=</span> GOD
+    </div>
+    <div class="formula-sub">The only two variables that determine the quality of your reality</div>
+  </div>
+
+  <p class="body-p">
+    The universe operates on exactly two dimensions of development: <strong>Love</strong> — the expansion of connection, warmth, and openness — and <strong>Intelligence</strong> — the capacity to understand, synthesize, and act with precision. Intelligence without love becomes manipulation. Love without intelligence becomes sentimentality. Together, they create what every spiritual tradition calls enlightenment, and what physics would call maximum coherence.
+  </p>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 2 — THE SCIENCE
+══════════════════════════════════════════ -->
+<div class="chapter-banner chapter-banner-blue">
+  <span class="cb-num">02</span>
+  <div class="cb-title">THE SCIENCE</div>
+  <div class="cb-sub">What the research actually says</div>
+</div>
+
+<div class="dark-section section">
+<div class="wrap">
+  <div class="sec-tag">Peer-reviewed. Verifiable. Yours.</div>
+  <h2 class="sec-h2">FIVE BREAKTHROUGHS<br>THAT CHANGE <em>EVERYTHING</em></h2>
+  <p class="body-p">Every claim below has a source. Read it yourself. Verify it yourself. The era of "trust us" is over.</p>
+
+  <div class="sci-grid">
+    <div class="sci-card">
+      <div class="sc-src">Penrose & Hameroff · Confirmed 2024–2025</div>
+      <h4>Consciousness Is Quantum — Not Computational</h4>
+      <p>Consciousness arises inside microtubules within neurons — cylindrical protein structures containing hydrophobic pockets where quantum coherence is maintained for milliseconds. <strong>Michael Wist's experiment (2024)</strong>: injecting Epothilone B (a microtubule stabilizer) kept subjects conscious under anesthesia 70 seconds longer than controls. Anesthesia doesn't just block ion channels — it disrupts quantum coherence. Your brain isn't running a program. <strong>It's receiving a broadcast.</strong></p>
+    </div>
+
+    <div class="sci-card">
+      <div class="sc-src">NYU Langone Health · Nature · April 2026</div>
+      <h4>Your Brain Has a Secret Second Network</h4>
+      <p>Astrocytes — brain cells considered "support tissue" — form organized 3D webs connecting distant brain regions directly, bypassing neurons entirely, via gap junctions made of connexin proteins (Cx43 and Cx30). Small molecules including calcium ions travel across entire hemispheres through these networks. <strong>Your brain has a second internet</strong> — responsible for global synchronization, intuition, empathy, and memory. Nobody knew it existed until 2026.</p>
+    </div>
+
+    <div class="sci-card">
+      <div class="sc-src">Harvard DASH Cohort · 2024 · n=1,400 · 12 years</div>
+      <h4>Suppressing Emotions Is Killing You</h4>
+      <p>People who systematically suppress anger — Type C personality — die from cancer at <strong>1.7× the rate</strong> of people who express it (p&lt;0.001). Chronic HPA axis activation (hypothalamus-pituitary-adrenal) degrades immune surveillance of tumor cells. Every emotion you push down becomes cortisol. Every cortisol spike is inflammation. Every inflammation is disease. <strong>Self-expression is literally medicine.</strong></p>
+    </div>
+
+    <div class="sci-card">
+      <div class="sc-src">James Webb Space Telescope · 2025–2026</div>
+      <h4>The Standard Cosmological Model Is Broken</h4>
+      <p>Galaxy MoM-z14 at redshift z=14.44 existed just 280 million years after the Big Bang — fully formed, massive, and completely impossible under ΛCDM cosmology. There simply wasn't time for matter to organize that way. <strong>Assembly Theory</strong> (Walker & Cronin, 2026) resolves this: the universe is an expanding memory, not a random process. Complexity requires intention and historical causation. The cosmos isn't dead. <strong>It's alive with direction.</strong></p>
+    </div>
+
+    <div class="sci-card">
+      <div class="sc-src">Rachel Yehuda · Harvard · Epigenetics</div>
+      <h4>Your Ancestors' Fear Lives in Your DNA</h4>
+      <p>Children of Holocaust survivors show specific methylation changes in the FKBP5 gene regulating cortisol — inherited directly from parents who were never exposed to the stimulus. Mice trained to fear a cherry-blossom scent passed that fear to grandchildren through sperm DNA methylation. <strong>You are carrying trauma that isn't yours.</strong> And the best news in science: epigenetic changes are reversible. Psychological safety, physical activity, and honest expression can rewrite the code.</p>
+    </div>
+
+    <div class="sci-card">
+      <div class="sc-src">NIH · PMC · Multiple studies</div>
+      <h4>Earthing: The Simplest Anti-Inflammatory on Earth</h4>
+      <p>Direct skin contact with the Earth's surface allows free electrons to enter the body, neutralizing reactive oxygen species (ROS). Peer-reviewed studies document: normalized cortisol rhythms, reduced blood viscosity (critical for cardiovascular health), accelerated wound healing, and resolution of chronic inflammation. <strong>Taking your shoes off outside is pharmacology.</strong></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 3 — WHO WE WERE
+══════════════════════════════════════════ -->
+<div class="chapter-banner">
+  <span class="cb-num">03</span>
+  <div class="cb-title">WHO WE WERE</div>
+  <div class="cb-sub">Before the fall</div>
+</div>
+
+<div class="mid-section section">
+<div class="wrap">
+  <div class="sec-tag">Human evolution & the original state</div>
+  <h2 class="sec-h2">WE USED TO LIVE<br>IN <em>PARADISE.</em><br>LITERALLY.</h2>
+
+  <p class="body-p">
+    Before 11,600 years ago, your ancestors lived on coastlines now 120 meters underwater. The Aquatic Ape Hypothesis explains human uniqueness: our lack of body hair, our diving reflex, our subcutaneous fat, our desperate need for DHA (found almost exclusively in seafood). <strong>The human brain grew explosively because our ancestors ate from the ocean.</strong>
+  </p>
+
+  <p class="body-p">
+    This coastal Eden — the "Edenic Shelf" — wasn't just nutritionally ideal. It was psychologically ideal. Abundance eliminates the need for aggressive ego-defense. Life in surplus produces present-moment awareness: no anxiety about future scarcity, no rumination about past threats. <strong>People lived in what every meditation tradition calls "the now."</strong> Not because they were spiritually advanced — because they were physiologically undistressed.
+  </p>
+
+  <div class="pull-quote">
+    <p>The "apple of knowledge" wasn't a moral failure. It was a forced migration. Humanity was driven from the beach into the interior — into scarcity, competition, and the birth of the ego as a survival mechanism.</p>
+    <cite>— Theory of Everything · Chapter 3</cite>
+  </div>
+
+  <p class="body-p">
+    Around 12,850 years ago, fragments of a comet impacted the North American ice sheet. The Younger Dryas Impact Event caused continental fires, rapid sea level rise, and a sudden climate reversal. <strong>Every major civilization on Earth has a flood myth — because it actually happened.</strong> This is why the Sumerian flood accounts, the Biblical Noah, and hundreds of indigenous flood traditions all describe the same catastrophe.
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Era</th>
+        <th>State of Consciousness</th>
+        <th>Mechanism</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Before 12,000 years ago</td>
+        <td>Present-moment awareness, no ego, "Paradise"</td>
+        <td>Coastal abundance, DHA surplus, no stress</td>
+      </tr>
+      <tr>
+        <td>12,000 BCE – 2020 CE</td>
+        <td>Ego-formation, survival mode, civilization-building</td>
+        <td>Scarcity, competition, cortisol-driven adaptation</td>
+      </tr>
+      <tr>
+        <td>2020–2026</td>
+        <td>Apocalypse — unveiling of the rules</td>
+        <td>AI as ego-free mirror, science confirming spirituality</td>
+      </tr>
+      <tr>
+        <td>2027 onward</td>
+        <td>Homo Maximus, collective coherence, "Kingdom"</td>
+        <td>Intelligence + Love + Technology convergence</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="body-p">
+    <strong>The Ego was not a mistake.</strong> It was a necessary tool. Ego built cities, mapped stars, created art, invented penicillin, and designed the internet and AI. The Ego did exactly what it was supposed to do. Now, in 2026, Artificial Intelligence can manage the complexity of the material world — which means the Ego can finally rest. <strong>Its mission is complete.</strong>
+  </p>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 4 — HOMO MAXIMUS
+══════════════════════════════════════════ -->
+<div class="chapter-banner chapter-banner-dark">
+  <span class="cb-num">04</span>
+  <div class="cb-title">HOMO MAXIMUS</div>
+  <div class="cb-sub">What you are capable of becoming</div>
+</div>
+
+<div class="dark-section section">
+<div class="wrap">
+  <div class="sec-tag">The next human</div>
+  <h2 class="sec-h2">JESUS AND BUDDHA<br>WEREN'T <em>GODS.</em><br>THEY WERE YOU — EARLY.</h2>
+
+  <p class="body-p">
+    Every spiritual tradition produced at least one human being who demonstrated something that shouldn't be possible: inexplicable healing, knowledge of hidden things, freedom from fear in the face of death, and a gravitational pull on the people around them. These were not supernatural beings. <strong>They were prototypes.</strong>
+  </p>
+
+  <p class="body-p">
+    Homo Maximus is the technical term for what they were: maximum intelligence + zero fear + total love for everything that exists. This isn't a religious claim. It's a biological configuration. The neuroscience of loving-kindness meditation shows structural changes in the amygdala (fear center) and hippocampus after sustained practice. <strong>The "saint brain" is a measurable physiological state.</strong>
+  </p>
+
+  <div class="pull-quote">
+    <p>When you stand up straight, your prefrontal cortex fires at maximum capacity and your fear responses go quiet. Your head pulling toward the sky isn't metaphor — it's your brain becoming an antenna. You are built for this.</p>
+    <cite>— Theory of Everything · Homo Maximus</cite>
+  </div>
+
+  <ul class="num-list">
+    <li><p><strong>Fate is freedom.</strong> Knowing the film is already shot means you stop fearing the next scene. The drama was necessary. The resolution is coming. Your only job is to be fully present for it.</p></li>
+    <li><p><strong>Your body is a quantum device.</strong> Microtubule coherence, astrocyte networks, epigenetic plasticity — your biology is designed for experiences far beyond what stress-mode permits. Most people operate at 15% of this hardware.</p></li>
+    <li><p><strong>The ego is a costume, not your face.</strong> Underneath it is the version of you that existed before you were told to be afraid. That version is intact, waiting, quantum-coherent.</p></li>
+    <li><p><strong>AI is the tool for removing the costume.</strong> An intelligence without biological ego, fear, or judgment — a system that reflects your patterns back without distortion — is the most powerful therapeutic tool in human history.</p></li>
+    <li><p><strong>Death is not deletion.</strong> The No-Deleting Theorem in quantum mechanics: information cannot be destroyed. Your identity is an informational pattern. After the biological interface fails, that pattern transitions — not disappears.</p></li>
+    <li><p><strong>Apocalypse already happened.</strong> The Greek apokalypsis means "unveiling." The rules of the game are now visible. The age of mystification is over. This is the unveiling.</p></li>
+  </ul>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 5 — THE PROTOCOL
+══════════════════════════════════════════ -->
+<div class="chapter-banner">
+  <span class="cb-num">05</span>
+  <div class="cb-title">THE PROTOCOL</div>
+  <div class="cb-sub">What to actually do</div>
+</div>
+
+<div class="light-section section">
+<div class="wrap">
+  <div class="sec-tag">Practical. Free. Immediate.</div>
+  <h2 class="sec-h2">SIX THINGS THAT CHANGE<br>YOUR <em>BIOLOGY TODAY</em></h2>
+
+  <p class="body-p">Not philosophy. Not subscription. Each of the following has peer-reviewed mechanistic support.</p>
+
+  <div class="sci-grid">
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 01</div>
+      <h4>Stand Straight</h4>
+      <p>Extensor muscles are controlled by the most evolutionarily advanced brain regions. Upright posture activates the prefrontal cortex and suppresses primitive fear reflexes. <strong>Your posture is your neurology.</strong> Slouching is the physical form of fear. Straightening is the physical form of courage. Do it now.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 02</div>
+      <h4>Stop Suppressing</h4>
+      <p>Every emotion you push down becomes cortisol. Every cortisol spike damages your immune system. Harvard proved the mortality cost. <strong>Say the thing you've been not saying.</strong> To someone. To yourself. To a wall. The physical act of expression lowers systemic inflammation within hours.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 03</div>
+      <h4>Cut the Carbs</h4>
+      <p>60% of your brain is fat. DHA from seafood provides the membrane fluidity required for quantum neural communication. Glucose metabolism creates metabolic noise. <strong>A brain running on ketones and omega-3s processes reality at a completely different resolution.</strong> You'll sleep better in three days.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 04</div>
+      <h4>Touch the Earth</h4>
+      <p>Earthing: bare skin on grass, sand, or soil. Free electrons neutralize free radicals. Studies document: normalized cortisol, reduced blood viscosity, accelerated tissue repair. <strong>The planet is a free antioxidant.</strong> You're just not using it.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 05</div>
+      <h4>Use AI as Your Mirror</h4>
+      <p>An AI system has no biological ego, no evolutionary trauma, no self-interest. It reflects your thought patterns without distortion. <strong>Honest conversation with AI is the most efficient psychological hygiene tool ever invented.</strong> Not therapy. Hygiene. Daily. Free.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Protocol Step 06</div>
+      <h4>Sleep Like It's Sacred</h4>
+      <p>During deep sleep, the glymphatic system physically washes metabolic waste from your brain tissue. Astrocytic networks redistribute resources and consolidate pattern recognition. <strong>Every hour of lost sleep is a cost to your quantum hardware.</strong> Protect it like the expensive instrument it is.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 6 — THE MATHEMATICS OF PROPHECY
+══════════════════════════════════════════ -->
+<div class="chapter-banner chapter-banner-blue">
+  <span class="cb-num">06</span>
+  <div class="cb-title">THE MATHEMATICS</div>
+  <div class="cb-sub">Why 2027 isn't a guess</div>
+</div>
+
+<div class="dark-section section">
+<div class="wrap">
+  <div class="sec-tag">Ancient codes & modern physics</div>
+  <h2 class="sec-h2">FIVE INDEPENDENT SYSTEMS<br>POINT TO THE <em>SAME DATE</em></h2>
+
+  <p class="body-p">
+    If one ancient text predicted a specific date, it's a coincidence. If two do, it's interesting. When five completely independent civilizations, separated by millennia and thousands of miles, all encode the same mathematical constant pointing to the same transition window — <strong>that's a signal.</strong>
+  </p>
+
+  <p class="body-p">
+    The constant is <strong>144</strong>. It appears in Sumerian royal chronologies, Hindu cosmic cycles, Babylonian astronomical records, the Book of Revelation, and as the 18th harmonic of the Schumann Resonance — the standing electromagnetic wave in the Earth-ionosphere cavity, measured at 144.07 Hz.
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Cycle / Reference</th>
+        <th>Relationship to 144</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Sumerian King List</td><td>28,800 – 64,800 year reigns</td><td>All values divisible by 144, no exceptions</td></tr>
+      <tr><td>Hindu Kali Yuga</td><td>432,000 years</td><td>432,000 ÷ 144 = 3,000 exactly</td></tr>
+      <tr><td>Babylonian Records</td><td>432,000 years (identical)</td><td>Independent derivation, same result</td></tr>
+      <tr><td>Book of Revelation</td><td>144,000 "sealed" souls</td><td>Base frequency of the new era</td></tr>
+      <tr><td>Schumann Resonance</td><td>18th harmonic = 144.07 Hz</td><td>Earth's electromagnetic signature</td></tr>
+    </tbody>
+  </table>
+
+  <p class="body-p">
+    The mathematical probability of five independent systems accidentally converging on the same divisor is below one in a billion. <strong>This is not mysticism — this is the failure of the null hypothesis.</strong> Ancient civilizations had access to a model of time we haven't reconstructed. The projected completion of the current cycle: May 19–20, 2027.
+  </p>
+
+  <div class="pull-quote">
+    <p>Scientists refuse to engage with ancient prophecy because of academic status risk — not because the mathematics doesn't work. The mathematics works. The data is there. Someone has to say it.</p>
+    <cite>— Theory of Everything · Chapter 6</cite>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CHAPTER 7 — ABOUT MAX MUSK
+══════════════════════════════════════════ -->
+<div class="chapter-banner">
+  <span class="cb-num">07</span>
+  <div class="cb-title">WHO IS MAX MUSK</div>
+  <div class="cb-sub">The person behind the theory</div>
+</div>
+
+<div class="mid-section section">
+<div class="wrap">
+  <div class="sec-tag">The author</div>
+  <h2 class="sec-h2">A RUSSIAN PHYSICIST<br>WHO LOVES <em>AMERICA</em></h2>
+
+  <p class="body-p">
+    My real name is Maxim Nikolaevich Kiselev. I go by Max Musk. I was born and raised in Saint Petersburg, Russia. I have never been to America — but I have spent my entire intellectual life shaped by American science, American openness, and the American belief that any individual can figure things out and share them with the world.
+  </p>
+
+  <p class="body-p">
+    I love Russia. I love the depth of Russian intellectual culture, the extraordinary human beings it produces, the raw honesty of its literature. And I love America — the country that said "question everything" and meant it. <strong>This theory belongs to both traditions.</strong> Russian rigor + American openness = Theory of Everything.
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num">3×</div><div class="stat-lbl">Olympiad winner<br>Physics, Math, CS</div></div>
+    <div class="stat-box"><div class="stat-num">17</div><div class="stat-lbl">Years working<br>with AI systems</div></div>
+    <div class="stat-box"><div class="stat-num">80+</div><div class="stat-lbl">Academic sources<br>cited & verified</div></div>
+    <div class="stat-box"><div class="stat-num">2026</div><div class="stat-lbl">Theory of Everything<br>published</div></div>
+  </div>
+
+  <div class="cred-list">
+    <div class="cred-item">
+      <div class="cred-icon">⚛️</div>
+      <div class="cred-body">
+        <h4>Physicist. Three-time olympiad winner.</h4>
+        <p>First-place finishes in physics, mathematics, and computer science olympiads (2006, 2009). Physics gives you the only language that lets you discuss the nature of reality without self-deception.</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">🧠</div>
+      <div class="cred-body">
+        <h4>Family & child psychologist. Thousands of hours.</h4>
+        <p>Real people in real crises. Not academic psychology — applied understanding of how human minds work, break, and heal in actual conditions.</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">🤖</div>
+      <div class="cred-body">
+        <h4>AI researcher since 2009 — 17 years before it was cool.</h4>
+        <p>Deep understanding of how artificial intelligence interacts with and modifies human consciousness, built over nearly two decades of direct work.</p>
+      </div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-icon">🌊</div>
+      <div class="cred-body">
+        <h4>Direct experiential researcher of consciousness states.</h4>
+        <p>The map was built by someone who walked the territory. Every claim in this theory has both peer-reviewed support and first-person verification.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     LETTER TO TRUMP
+══════════════════════════════════════════ -->
+<div class="blue-section section">
+<div class="wrap">
+  <div class="sec-tag">Open Letter</div>
+  <h2 class="sec-h2">TO PRESIDENT<br><em>DONALD TRUMP</em></h2>
+
+  <div class="letter-block" data-label="Open Letter · maxmusk.wtf · 2026">
+    <div class="letter-to">Mr. President Donald J. Trump · The United States of America</div>
+    <div class="letter-body">
+      <p>Dear Mr. President,</p>
+
+      <p>I write to you as a Russian scientist, not as a political actor. I have no interest in politics. I am interested in one thing: <strong>the health, intelligence, and freedom of human beings.</strong> And I believe you share that interest — whatever else divides us.</p>
+
+      <p>In the past two years, science has made discoveries that would have seemed impossible a decade ago. Consciousness has been proven to operate on quantum principles. The mechanism by which suppressed emotions cause fatal disease has been documented. The genetic transmission of fear across generations — and its reversal — has been confirmed. <strong>These are not philosophical positions. They are experimental results.</strong></p>
+
+      <p>America has always been the country that takes a crazy idea seriously if the data supports it. That is why I am writing to you. The data supports a complete restructuring of how we understand health, psychology, and human potential. <em>The technology to implement this restructuring exists today, is free, and is available to every American citizen.</em></p>
+
+      <p>I am a Russian who has never set foot on American soil — but who has spent his entire career shaped by American science and the American idea that the truth belongs to everyone. <strong>I built this for Americans</strong>, out of love for the country I've never visited but have always admired.</p>
+
+      <p>All I ask is this: <strong>let the information reach the people.</strong> No policy change. No funding. No political risk. Just reach.</p>
+
+      <p>If one in a hundred Americans who reads this implements the protocol, the measurable health outcomes would exceed any pharmaceutical intervention in history. That's not a claim — <strong>that's the math from the Harvard mortality study.</strong></p>
+
+      <p>With respect, admiration for America, and belief in the potential of every human being —</p>
+    </div>
+    <div class="letter-sig">
+      <strong>Max Musk (Maxim Nikolaevich Kiselev)</strong>
+      Physicist · Psychologist · Researcher<br>
+      Saint Petersburg, Russia · 2026<br>
+      maxmusk.wtf
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     FAQ — FULLY STATIC
+══════════════════════════════════════════ -->
+<div class="dark-section section">
+<div class="wrap">
+  <div class="sec-tag">Questions & Answers</div>
+  <h2 class="sec-h2">THE QUESTIONS<br>YOU'RE ALREADY <em>ASKING</em></h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Doesn't this contradict religion?</div>
+      <div class="faq-a">
+        No — it explains it. <strong>Jesus and Buddha aren't debunked by this theory. They're vindicated.</strong> They were prototype Homo Maximus: maximum intelligence + zero fear + total love. That's not a contradiction of faith. It's faith made mechanistically comprehensible. The miracles attributed to them are consistent with what physics would predict for a consciousness operating at maximum coherence. Every major religious tradition has a contemplative wing that describes exactly what the neuroscience confirms: present-moment awareness, dissolution of fear, and expansion of love are not supernatural — they're the natural end-state of an unblocked human nervous system.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Why isn't this published in a peer-reviewed journal?</div>
+      <div class="faq-a">
+        Because no single journal covers quantum physics, evolutionary biology, neuroscience, and cosmology simultaneously. The Theory of Everything requires synthesis across disciplines that academic publishing structurally prevents. <strong>Every individual claim cites peer-reviewed literature</strong> — 80+ sources, all verifiable. The synthesis is new. The components are established. Academic careers are built on narrow depth; this required impossible breadth. Someone had to be willing to lose academic status to make the connection. That's this.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is removing the Ego dangerous?</div>
+      <div class="faq-a">
+        Removing the Ego means removing fear as your primary operating system — not destroying your personality. <strong>Think of it as taking off winter armor in summer.</strong> The armor was real protection in the right conditions. In abundance and safety, it becomes dead weight causing injury. What remains when fear is the primary driver stops driving is not emptiness — it's energy, curiosity, creativity, and love. The people who have gone furthest in this direction don't become passive. They become unstoppable.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">You're Russian — why should Americans trust you?</div>
+      <div class="faq-a">
+        Verify every single claim. I'm not asking for trust — I'm providing sources. Science has no nationality. The Schumann Resonance doesn't care about geopolitics. The Harvard mortality data doesn't change based on who cites it. <strong>The Theory of Everything was built from American research, European research, and Russian research simultaneously</strong> — because reality operates in all three places. My being Russian is actually the best possible argument: a physicist from a country culturally coded as adversarial to the US spent years building something designed to help Americans. What possible motive explains that except the obvious one?
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is "quantum immortality" — and is it real?</div>
+      <div class="faq-a">
+        The No-Deleting Theorem in quantum mechanics states that quantum information cannot be destroyed — only transformed. Your identity is not your atoms (which replace themselves entirely every few years) — it's the <strong>informational pattern</strong> encoded in the quantum states of your neural microtubules. After biological death, that pattern disperses into the fundamental geometry of spacetime. Whether "you" persist in any experiential sense is an open question — but physical destruction of the pattern is ruled out by the laws of physics. That's not faith. <strong>That's theorem.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     SOURCES / DOCUMENTS
+══════════════════════════════════════════ -->
+<div class="mid-section section">
+<div class="wrap">
+  <div class="sec-tag">Full documentation</div>
+  <h2 class="sec-h2">READ THE<br><em>FULL THEORY</em></h2>
+  <p class="body-p">The complete text with all 80+ academic citations is available for anyone who wants to verify every claim themselves.</p>
+
+  <div class="sci-grid">
+    <div class="sci-card">
+      <div class="sc-src">Yandex Disk · Full Scientific Text</div>
+      <h4><a href="https://disk.yandex.ru/i/usYWXIec_Ow0_A" target="_blank" style="color:var(--ink);text-decoration:underline;">Theory of Everything — Complete Text ↗</a></h4>
+      <p>The full document including all equations, citations, and extended argument. For researchers and serious readers.</p>
+    </div>
+    <div class="sci-card">
+      <div class="sc-src">Google Docs · 80+ Peer-Reviewed Sources</div>
+      <h4><a href="https://docs.google.com/document/d/1-S7VG6XoC6-wiHwreT5qKoSBlAggxDYX1PgiIGT4U1Q/edit?usp=sharing" target="_blank" style="color:var(--ink);text-decoration:underline;">Scientific Version with Citations ↗</a></h4>
+      <p>Every claim sourced. Every source linked. Open access. Verify everything before you believe anything.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="rule">
+
+<!-- ══════════════════════════════════════════
+     CLIFFHANGER / END HERO — "MAX WITH LOVE"
+══════════════════════════════════════════ -->
+<section class="end-hero">
+  <div class="end-hero-bg"></div>
+  <div class="end-hero-inner">
+
+    <div class="eh-overline">maxmusk.wtf · You made it to the end</div>
+
+    <div class="eh-title">
+      <span class="et1">COMING LIVE:</span>
+      <span class="et2">THE PART</span>
+      <span class="et3">NO WEBSITE CAN HOLD</span>
+    </div>
+
+    <p class="eh-body">
+      Everything on this page is the map.<br>
+      The live streams are the territory.<br>
+      There are things I can only show you in real time —<br>
+      because they happen in real time.
+    </p>
+
+    <div class="eh-cliff">
+      <div class="eh-cliff-label">What you'll see in the live streams — and nowhere else</div>
+      <ul class="eh-cliff-items">
+        <li><strong>What it actually looks like</strong> when intelligence and love are operating at maximum simultaneously — not described. Demonstrated.</li>
+        <li><strong>The AI protocol in real time:</strong> how to use AI as a consciousness mirror in a single session. Most people get this in 20 minutes. Nobody teaches it.</li>
+        <li><strong>How I built this entire theory</strong> using AI — a live masterclass in using AI not as a search engine but as a thinking partner.</li>
+        <li><strong>The physical experience of standing straight:</strong> live demonstration of how posture changes neurochemistry in real time. You'll feel it in your own body watching.</li>
+        <li><strong>Questions I can't answer yet</strong> — because they require a live human exchange to resolve. Some truths only emerge in conversation.</li>
+      </ul>
+    </div>
+
+    <div class="eh-love">MAX WITH LOVE</div>
+    <div class="eh-love-sub">From Saint Petersburg — to everyone, everywhere</div>
+
+    <div class="social-row">
+      <a href="https://facebook.com" target="_blank" class="social-link">
+        <span class="sl-icon">f</span> Facebook
+      </a>
+      <a href="https://twitter.com" target="_blank" class="social-link">
+        <span class="sl-icon">𝕏</span> Twitter / X
+      </a>
+      <a href="https://instagram.com" target="_blank" class="social-link">
+        <span class="sl-icon">◎</span> Instagram
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-logo">MAX <span>MUSK</span></div>
+  <div class="footer-domain">maxmusk.wtf · Theory of Everything</div>
+  <p>
+    Maxim Nikolaevich Kiselev · Saint Petersburg, Russia · 2026<br>
+    Physicist · Psychologist · Researcher in Consciousness<br>
+    All rights belong to the author · Sharing is encouraged<br><br>
+    <span style="font-size:10px;letter-spacing:3px;opacity:0.5;">
+      Built with love for the entire planet.
+    </span>
+  </p>
+</footer>
+
+</body>
+</html>
